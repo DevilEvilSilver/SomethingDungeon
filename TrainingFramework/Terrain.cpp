@@ -4,8 +4,8 @@
 
 Terrain::Terrain() {}
 
-Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix worldMatrix, GLfloat textureScale)
-	: Object(modelID, shaderID, worldMatrix), m_fTextureScale(textureScale) {
+Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, GLfloat textureScale)
+	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_iModelID(modelID), m_fTextureScale(textureScale) {
 	
 }
 

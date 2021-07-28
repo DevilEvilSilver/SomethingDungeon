@@ -40,9 +40,6 @@ void SceneManager::Init() {
 		unsigned int id;
 		fscanf(dataFile, "ID %d\n", &id);
 
-		unsigned int iModel;
-		fscanf(dataFile, "MODEL %d\n", &iModel);
-
 		unsigned int iTextureCount;
 		fscanf(dataFile, "TEXTURE_COUNT %d\n", &iTextureCount);
 		unsigned int iTmpTextureCount = iTextureCount; //backup texture count
@@ -66,12 +63,11 @@ void SceneManager::Init() {
 		rotationZ.SetRotationZ(z);
 		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
 		scale.SetScale(x, y, z);
-		worldMatrix = scale * rotationZ * rotationX * rotationY * translation;
 
-		Object *object = new Object(iModel, iShader, worldMatrix);
-		for (unsigned int i = 0; i < iTmpTextureCount; i++) {
-			object->m_iTexture2DID.push_back(aiTexture[i]); 
-		}
+		Object *object = new Object(iShader, translation, rotationZ * rotationX * rotationY, scale);
+		//for (unsigned int i = 0; i < iTmpTextureCount; i++) {
+		//	object->m_iTexture2DID.push_back(aiTexture[i]); 
+		//}
 		AddObject(object);
 		delete[]aiTexture;
 	}
@@ -114,10 +110,7 @@ void SceneManager::Init() {
 		float fTextureScale;
 		fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
 
-		Object *object = new Terrain(iModel, iShader, worldMatrix, fTextureScale);
-		for (unsigned int i = 0; i < iTmpTextureCount; i++) {
-			object->m_iTexture2DID.push_back(aiTexture[i]);
-		}
+		Object *object = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, fTextureScale);
 		AddObject(object);
 		delete[]aiTexture;
 	}

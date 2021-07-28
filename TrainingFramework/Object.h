@@ -5,16 +5,22 @@
 
 class Object {
 public:
-	unsigned int m_iModelID;
-	std::vector<unsigned int> m_iTexture2DID;
 	unsigned int m_iShaderID;
+	Matrix m_TranslationMatrix;
+	Matrix m_RotationMatrix;
+	Matrix m_ScaleMatrix;
 	Matrix m_WorldMatrix;
+	bool m_isNewWorld;
 
 	Object();
-	Object(unsigned int modelID, unsigned int shaderID, Matrix worldMatrix); 
+	Object(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix);
 	~Object();
 
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);
 	Matrix GetWorldMatrix();
+	float GetPosX();
+	float GetPosY();
+	void SetPosX(float x);
+	void SetPosY(float y);
 }; 

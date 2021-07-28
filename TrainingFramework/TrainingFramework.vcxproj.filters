@@ -66,6 +66,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\SpriteObject.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\SpriteObject.h">
+      <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
