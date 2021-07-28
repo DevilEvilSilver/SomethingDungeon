@@ -112,32 +112,3 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 	}
 	shader->Unbind();
 }
-
-
-void Renderer::DrawTextureCube(Object *object, Camera *camera) {
-	Model *model = ResourceManager::GetInstance()->m_ModelList[object->m_iModelID];
-	TextureCube *texture = ResourceManager::GetInstance()->m_TextureCubeList[object->m_iTextureCubeID[0]];
-	Shaders *shader = ResourceManager::GetInstance()->m_ShaderList[object->m_iShaderID];
-
-	shader->Bind();
-	model->Bind();
-	texture->Bind();
-
-	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetSkyViewMatrix() * camera->GetProjectionMatrix();
-
-	//Set uniform
-	glUniform1i(shader->textureCubeUniform, 0);
-	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
-
-	if (shader->positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(shader->positionAttribute);
-		glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_POS);
-	}
-
-	glDrawElements(GL_TRIANGLES, model->m_IndexBuffer->m_Count, GL_UNSIGNED_INT, 0);
-
-	model->Unbind();
-	texture->Unbind();
-	shader->Unbind();
-}

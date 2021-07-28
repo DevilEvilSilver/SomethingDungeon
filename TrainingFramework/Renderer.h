@@ -13,7 +13,6 @@ public:
 	void Init();
 	void DrawTexture2D(Object *object, Camera *camera);
 	void DrawTerrain(Terrain *object, Camera *camera);
-	void DrawTextureCube(Object *object, Camera *camera);
 
 	static Renderer* GetInstance();
 	static void ResetInstance();

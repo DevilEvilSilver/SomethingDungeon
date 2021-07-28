@@ -20,8 +20,6 @@ void Object::Update(float frameTime) {
 void Object::Render(Camera *camera) {
 	if (m_iTexture2DID.size() > 0)
 		Renderer::GetInstance()->DrawTexture2D(this, camera);
-	if (m_iTextureCubeID.size() > 0)
-		Renderer::GetInstance()->DrawTextureCube(this, camera);
 }
 
 Matrix Object::GetWorldMatrix() {

@@ -42,16 +42,6 @@ ID 9
 FILE ../Resources/Textures/fire_mask.tga
 TILING GL_REPEAT
 
-#CUBE_TEXTURE_COUNT 1
-ID 0
-FILE ../Resources/SkyboxTextures/right.tga
-FILE ../Resources/SkyboxTextures/left.tga
-FILE ../Resources/SkyboxTextures/top.tga
-FILE ../Resources/SkyboxTextures/bottom.tga
-FILE ../Resources/SkyboxTextures/back.tga
-FILE ../Resources/SkyboxTextures/front.tga
-TILING GL_CLAMP_TO_EDGE
-
 #SHADER_COUNT 3
 ID 0
 VS ../Resources/Shaders/Object.vs

@@ -21,10 +21,6 @@ ResourceManager::~ResourceManager() {
 		delete object;
 	}
 	m_Texture2DList.resize(0);
-	for (auto& object : m_TextureCubeList) {
-		delete object;
-	}
-	m_TextureCubeList.resize(0);
 	for (auto& object : m_ShaderList) {
 		delete object;
 	}
@@ -78,31 +74,6 @@ void ResourceManager::Init() {
 		AddTexture2D(texture);
 	}
 
-	int iCubeTextureCount;
-	fscanf(dataFile, "#CUBE_TEXTURE_COUNT %d\n", &iCubeTextureCount);
-	while (iCubeTextureCount--) {
-		int id;
-		fscanf(dataFile, "ID %d\n", &id);
-		std::vector<std::string> strFileList;
-		for (unsigned int i = 0; i < 6; i++) {
-			char strTGAFile[100];
-			fscanf(dataFile, "FILE %s\n", &strTGAFile);
-			strFileList.push_back(strTGAFile);
-		}
-		char strTiling[30];
-		GLint iTiling = 0;
-		fscanf(dataFile, "TILING %s\n", &strTiling);
-		if (!strcmp(strTiling, "GL_REPEAT"))
-			iTiling = GL_REPEAT;
-		else if (!strcmp(strTiling, "GL_CLAMP_TO_EDGE"))
-			iTiling = GL_CLAMP_TO_EDGE;
-		else if (!strcmp(strTiling, "GL_MIRRORED_REPEAT"))
-			iTiling = GL_MIRRORED_REPEAT;
-
-		TextureCube *texture = new TextureCube(strFileList, iTiling);
-		AddTextureCube(texture);
-	}
-
 	int iShaderCount;
 	fscanf(dataFile, "#SHADER_COUNT %d\n", &iShaderCount);
 	while (iShaderCount--) {
@@ -134,10 +105,6 @@ void ResourceManager::AddModel(Model *model) {
 
 void ResourceManager::AddTexture2D(Texture2D *texture) {
 	m_Texture2DList.push_back(texture);
-}
-
-void ResourceManager::AddTextureCube(TextureCube *texture) {
-	m_TextureCubeList.push_back(texture);
 }
 
 void ResourceManager::AddShader(Shaders *shader) {
