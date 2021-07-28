@@ -45,6 +45,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
@@ -52,6 +55,9 @@
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Shaders.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
@@ -83,6 +89,9 @@
     <ClInclude Include="define.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
@@ -90,6 +99,9 @@
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
