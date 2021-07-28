@@ -10,8 +10,8 @@ Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat
 	: m_fMovingSpeed(fMovingSpeed), m_fRotaionSpped(fRotationSpeed), m_isMoveForward(false), m_isMoveBackward(false), m_isMoveLeft(false), m_isMoveRight(false),
 	m_isRotUp(false), m_isRotDown(false), m_isRotLeft(false), m_isRotRight(false), m_RotVerticalCheck(0.0f), m_isNewView(true), m_isNewSkyView(true) {
 
-	m_Position.x = 0.0f; m_Position.y = 0.0f; m_Position.z = -5.0f;
-	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Position.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
+	m_Position.x = 0.0f; m_Position.y = 0.0f; m_Position.z = 5.0f;
+	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Target.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
 	m_VectorUp.x = 0.0f; m_VectorUp.y = 1.0f; m_VectorUp.z = 0.0f; //always (0, 1, 0)
 	m_ZAxis = GetZAxis(); m_XAxis = GetXAxis(); m_YAxis = GetYAxis();
 	m_ProjectionMatrix.SetOrthographic(left, right, bottom, top, nearPlane, farPlane);
