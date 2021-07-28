@@ -21,6 +21,10 @@ ResourceManager::~ResourceManager() {
 		delete object;
 	}
 	m_Texture2DList.resize(0);
+	for (auto& object : m_AnimationList) {
+		delete object;
+	}
+	m_AnimationList.resize(0);
 	for (auto& object : m_ShaderList) {
 		delete object;
 	}
@@ -74,6 +78,18 @@ void ResourceManager::Init() {
 		AddTexture2D(texture);
 	}
 
+	int iAnimationCount;
+	fscanf(dataFile, "#ANIMATION_COUNT %d\n", &iAnimationCount);
+	while (iAnimationCount--) {
+		std::string id;
+		fscanf(dataFile, "ID %s\n", &id);
+		char strAnimationFile[100];
+		fscanf(dataFile, "FILE %s\n", &strAnimationFile);
+	
+		Animation *animation = new Animation(id, strAnimationFile);
+		AddAnamation(animation);
+	}
+
 	int iShaderCount;
 	fscanf(dataFile, "#SHADER_COUNT %d\n", &iShaderCount);
 	while (iShaderCount--) {
@@ -105,6 +121,10 @@ void ResourceManager::AddModel(Model *model) {
 
 void ResourceManager::AddTexture2D(Texture *texture) {
 	m_Texture2DList.push_back(texture);
+}
+
+void ResourceManager::AddAnamation(Animation *animation) {
+	m_AnimationList.push_back(animation);
 }
 
 void ResourceManager::AddShader(Shaders *shader) {
