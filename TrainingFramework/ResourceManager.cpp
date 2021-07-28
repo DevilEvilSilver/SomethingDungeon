@@ -70,7 +70,7 @@ void ResourceManager::Init() {
 		else if (!strcmp(strTiling, "GL_MIRRORED_REPEAT"))
 			iTiling = GL_MIRRORED_REPEAT;
 
-		Texture2D *texture = new Texture2D(strTGAFile, iTiling);
+		Texture *texture = new Texture(strTGAFile, iTiling);
 		AddTexture2D(texture);
 	}
 
@@ -103,7 +103,7 @@ void ResourceManager::AddModel(Model *model) {
 	m_ModelList.push_back(model);
 }
 
-void ResourceManager::AddTexture2D(Texture2D *texture) {
+void ResourceManager::AddTexture2D(Texture *texture) {
 	m_Texture2DList.push_back(texture);
 }
 

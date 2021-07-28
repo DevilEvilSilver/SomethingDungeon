@@ -1,12 +1,12 @@
 #include <stdafx.h>
 #include "../Utilities/TGA.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
-Texture2D::Texture2D() {
+Texture::Texture() {
 
 }
 
-Texture2D::Texture2D(const char* file, GLint tiling) {
+Texture::Texture(const char* file, GLint tiling) {
 	glGenTextures(1, &m_RendererID);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
@@ -17,7 +17,7 @@ Texture2D::Texture2D(const char* file, GLint tiling) {
 	glTexImage2D(GL_TEXTURE_2D, 0, format, m_iWidth, m_iHeight, 0, format, GL_UNSIGNED_BYTE, imageData);
 	delete[]imageData;
 
-	//Texture2D parameter
+	//Texture parameter
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tiling);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tiling);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -27,15 +27,15 @@ Texture2D::Texture2D(const char* file, GLint tiling) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Texture2D::~Texture2D() {
+Texture::~Texture() {
 	glDeleteTextures(1, &m_RendererID);
 }
 
-void Texture2D::Bind(unsigned int slot) {
+void Texture::Bind(unsigned int slot) {
 	glActiveTexture(GL_TEXTURE0 + slot);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
 }
 
-void Texture2D::Unbind() {
+void Texture::Unbind() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

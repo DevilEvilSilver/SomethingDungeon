@@ -2,7 +2,7 @@
 
 #include <GLES2/gl2.h>
 
-class Texture2D
+class Texture
 {
 public:
 	GLuint m_RendererID;
@@ -10,9 +10,9 @@ public:
 	GLint m_iHeight;
 	GLint m_iBpp;
 
-	Texture2D();
-	Texture2D(const char* file, GLint tiling);
-	~Texture2D();
+	Texture();
+	Texture(const char* file, GLint tiling);
+	~Texture();
 
 	void Bind(unsigned int slot = 0);
 	void Unbind();
