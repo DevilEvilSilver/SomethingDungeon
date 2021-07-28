@@ -130,6 +130,8 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs" />
     <None Include="..\Readme.doc" />
     <None Include="..\Resources\Shaders\Object.fs" />
     <None Include="..\Resources\Shaders\Object.vs" />

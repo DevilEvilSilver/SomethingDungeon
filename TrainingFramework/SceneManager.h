@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Terrain.h"
+#include "Object.h"
 
 class SceneManager {
 private:

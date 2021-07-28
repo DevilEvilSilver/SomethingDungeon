@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
+#include "SpriteObject.h"
+#include "Terrain.h"
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -71,6 +73,47 @@ void SceneManager::Init() {
 	//	AddObject(object);
 	//	delete[]aiTexture;
 	//}
+
+	int iSpriteCount;
+	fscanf(dataFile, "#SPRITE_COUNT %d\n", &iSpriteCount);
+
+	while (iSpriteCount--) {
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+
+		GLfloat fPosX, fPosY, fWidth, fHeight;
+		fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
+
+		unsigned int iAnimationCount;
+		fscanf(dataFile, "ANIMATION_COUNT %d\n", &iAnimationCount);
+		unsigned int iTmpAnimationCount = iAnimationCount; //backup animation count
+		std::vector<std::string> aiAnimation;
+		while (iAnimationCount--) {
+			char strAnimationID[50];
+			fscanf(dataFile, "ANIMATION %s\n", &strAnimationID);
+			aiAnimation.push_back(strAnimationID);
+		}
+
+		unsigned int iShader;
+		fscanf(dataFile, "SHADER %d\n", &iShader);
+
+		Matrix translation, rotationX, rotationY, rotationZ, scale, worldMatrix;
+		GLfloat x, y, z;
+		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
+		translation.SetTranslation(x, y, z);
+		fscanf(dataFile, "ROTATION %f, %f, %f\n", &x, &y, &z);
+		rotationX.SetRotationX(x); 
+		rotationY.SetRotationY(y);
+		rotationZ.SetRotationZ(z);
+		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
+		scale.SetScale(x, y, z);
+
+		Object *sprite = new SpriteObject(iShader, translation, rotationZ * rotationX * rotationY, scale, fWidth, fHeight);
+		//for (unsigned int i = 0; i < iTmpTextureCount; i++) {
+		//	object->m_iTexture2DID.push_back(aiTexture[i]); 
+		//}
+		AddObject(sprite);
+	}
 
 	int iTerrainCount;
 	fscanf(dataFile, "#TERRAIN_COUNT %d\n", &iTerrainCount);
