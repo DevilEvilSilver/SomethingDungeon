@@ -7,7 +7,6 @@ class Object {
 public:
 	unsigned int m_iModelID;
 	std::vector<unsigned int> m_iTexture2DID;
-	std::vector<unsigned int> m_iTextureCubeID;
 	unsigned int m_iShaderID;
 	Matrix m_WorldMatrix;
 

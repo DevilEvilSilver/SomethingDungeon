@@ -53,16 +53,6 @@ void SceneManager::Init() {
 			iTexture2DIndex++;
 		}
 
-		unsigned int iCubeTextureCount;
-		fscanf(dataFile, "CUBETEXTURE_COUNT %d\n", &iCubeTextureCount);
-		unsigned int iTmpCubeTextureCount = iCubeTextureCount; //backup cube texture count
-		unsigned int *aiCubeTexture = new unsigned int[iCubeTextureCount]; 
-		unsigned int iTextureCubeIndex = 0;
-		while (iCubeTextureCount--) {
-			fscanf(dataFile, "TEXTURE %d\n", &aiCubeTexture[iTextureCubeIndex]);
-			iTextureCubeIndex++;
-		}
-
 		unsigned int iShader;
 		fscanf(dataFile, "SHADER %d\n", &iShader);
 
@@ -82,12 +72,8 @@ void SceneManager::Init() {
 		for (unsigned int i = 0; i < iTmpTextureCount; i++) {
 			object->m_iTexture2DID.push_back(aiTexture[i]); 
 		}
-		for (unsigned int i = 0; i < iTmpCubeTextureCount; i++) {
-			object->m_iTextureCubeID.push_back(aiCubeTexture[i]);
-		}
 		AddObject(object);
 		delete[]aiTexture;
-		delete[]aiCubeTexture;
 	}
 
 	int iTerrainCount;
@@ -108,16 +94,6 @@ void SceneManager::Init() {
 		while (iTextureCount--) {
 			fscanf(dataFile, "TEXTURE %d\n", &aiTexture[iTexture2DIndex]);
 			iTexture2DIndex++;
-		}
-
-		unsigned int iCubeTextureCount;
-		fscanf(dataFile, "CUBETEXTURE_COUNT %d\n", &iCubeTextureCount);
-		unsigned int iTmpCubeTextureCount = iCubeTextureCount; //backup cube texture count
-		unsigned int *aiCubeTexture = new unsigned int[iCubeTextureCount];
-		unsigned int iTextureCubeIndex = 0;
-		while (iCubeTextureCount--) {
-			fscanf(dataFile, "TEXTURE %d\n", &aiCubeTexture[iTextureCubeIndex]);
-			iTextureCubeIndex++;
 		}
 
 		unsigned int iShader;
@@ -142,12 +118,8 @@ void SceneManager::Init() {
 		for (unsigned int i = 0; i < iTmpTextureCount; i++) {
 			object->m_iTexture2DID.push_back(aiTexture[i]);
 		}
-		for (unsigned int i = 0; i < iTmpCubeTextureCount; i++) {
-			object->m_iTextureCubeID.push_back(aiCubeTexture[i]);
-		}
 		AddObject(object);
 		delete[]aiTexture;
-		delete[]aiCubeTexture;
 	}
 
 	float fLeft, fRight, fBottom, fTop;
