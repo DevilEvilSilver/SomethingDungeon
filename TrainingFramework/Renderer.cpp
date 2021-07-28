@@ -6,6 +6,15 @@
 
 Renderer * Renderer::s_Instance = NULL;
 
+template <class T>
+T GetResource(unsigned int id, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (id == obj->m_iResourceID)
+			return obj;
+	}
+	return 0;
+}
+
 Renderer::Renderer(void) {
 	this->Init();
 }
@@ -31,8 +40,8 @@ void Renderer::Init() {
 }
 
 void Renderer::DrawTexture2D(Object *object, Camera *camera) {
-	Model *model = ResourceManager::GetInstance()->m_ModelList[object->m_iModelID];
-	Shaders *shader = ResourceManager::GetInstance()->m_ShaderList[object->m_iShaderID];
+	Model *model = GetResource(object->m_iModelID,ResourceManager::GetInstance()->m_ModelList);
+	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 
 	shader->Bind();
 	model->Bind();
@@ -70,8 +79,8 @@ void Renderer::DrawTexture2D(Object *object, Camera *camera) {
 }
 
 void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
-	Model *model = ResourceManager::GetInstance()->m_ModelList[terrain->m_iModelID];
-	Shaders *shader = ResourceManager::GetInstance()->m_ShaderList[terrain->m_iShaderID];
+	Model *model = GetResource(terrain->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
+	Shaders *shader = GetResource(terrain->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 
 	shader->Bind();
 	model->Bind();

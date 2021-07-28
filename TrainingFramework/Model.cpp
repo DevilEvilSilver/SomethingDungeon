@@ -5,8 +5,8 @@ Model::Model() {
 
 }
 
-Model::Model(const void* vertexData, unsigned int vertexSize, const void* indexData, unsigned int indexCount)
-	: m_IndexCount(indexCount) {
+Model::Model(unsigned int resourceID, const void* vertexData, unsigned int vertexSize, const void* indexData, unsigned int indexCount)
+	: m_iResourceID(resourceID), m_IndexCount(indexCount) {
 	glGenBuffers(1, &m_VertexRendererID);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VertexRendererID);
 	glBufferData(GL_ARRAY_BUFFER, vertexSize, vertexData, GL_STATIC_DRAW);

@@ -5,6 +5,7 @@
 class Shaders 
 {
 public:
+	unsigned int m_iResourceID;
 	GLuint program, vertexShader, fragmentShader;
 	char fileVS[260];
 	char fileFS[260];
@@ -15,7 +16,7 @@ public:
 	GLint textureScaleUniform;
 	GLint wvpUniform;
 
-	Shaders(char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);
+	Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);
 	int Init(char * fileVertexShader, char * fileFragmentShader);
 	~Shaders();
 

@@ -1,8 +1,8 @@
 #include <stdafx.h>
 #include "Shaders.h"
 
-Shaders::Shaders(char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend)
-	: m_isDepthTest(isDepthTest), m_isCulling(isCulling), m_isBlend(isBlend) {
+Shaders::Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend)
+	: m_iResourceID(resourceID), m_isDepthTest(isDepthTest), m_isCulling(isCulling), m_isBlend(isBlend) {
 	this->Init(fileVertexShader, fileFragmentShader);
 }
 

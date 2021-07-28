@@ -4,7 +4,7 @@
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
 
-Model* LoadModel(char* file);
+Model* LoadModel(unsigned int id, char* file);
 
 ResourceManager * ResourceManager::s_Instance = NULL;
 
@@ -50,7 +50,7 @@ void ResourceManager::Init() {
 		fscanf(dataFile, "ID %d\n", &id);
 		char strNFGFile[100];
 		fscanf(dataFile, "FILE %s\n", &strNFGFile);
-		AddModel(LoadModel(strNFGFile));
+		AddModel(LoadModel(id, strNFGFile));
 	}
 
 	int i2DTextureCount;
@@ -70,7 +70,7 @@ void ResourceManager::Init() {
 		else if (!strcmp(strTiling, "GL_MIRRORED_REPEAT"))
 			iTiling = GL_MIRRORED_REPEAT;
 
-		Texture *texture = new Texture(strTGAFile, iTiling);
+		Texture *texture = new Texture(id, strTGAFile, iTiling);
 		AddTexture2D(texture);
 	}
 
@@ -92,7 +92,7 @@ void ResourceManager::Init() {
 			fscanf(dataFile, "GL_CULL_FACE %d\n", &isCulling);
 		if (iStateCount > 2)
 			fscanf(dataFile, "GL_BLEND %d\n", &isBlend);
-		Shaders *shader = new Shaders(strVSFile, strFSFile, isDepthTest, isCulling, isBlend);
+		Shaders *shader = new Shaders(id, strVSFile, strFSFile, isDepthTest, isCulling, isBlend);
 		AddShader(shader);
 	}
 
@@ -111,7 +111,7 @@ void ResourceManager::AddShader(Shaders *shader) {
 	m_ShaderList.push_back(shader);
 }
 
-Model* LoadModel(char* file) {
+Model* LoadModel(unsigned int id, char* file) {
 	GLuint iVerticesCount, iIndicesCount;
 	FILE* dataFile = fopen(file, "r");
 	fscanf(dataFile, "NrVertices: %d\n", &iVerticesCount);
@@ -148,7 +148,7 @@ Model* LoadModel(char* file) {
 		indices[i * 3 + 2] = iVertex3;
 	}
 
-	Model *model = new Model(vertices, sizeof(Vertex) * iVerticesCount, indices, iIndicesCount);
+	Model *model = new Model(id, vertices, sizeof(Vertex) * iVerticesCount, indices, iIndicesCount);
 	delete[]vertices;
 	delete[]indices;
 
