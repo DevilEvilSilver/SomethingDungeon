@@ -133,8 +133,6 @@
     <None Include="..\Readme.doc" />
     <None Include="..\Resources\Shaders\Object.fs" />
     <None Include="..\Resources\Shaders\Object.vs" />
-    <None Include="..\Resources\Shaders\SkyBox.fs" />
-    <None Include="..\Resources\Shaders\SkyBox.vs" />
     <None Include="..\Resources\Shaders\Terrain.fs" />
     <None Include="..\Resources\Shaders\Terrain.vs" />
   </ItemGroup>

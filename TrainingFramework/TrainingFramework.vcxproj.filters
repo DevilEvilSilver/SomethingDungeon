@@ -131,12 +131,6 @@
     <None Include="..\Resources\Shaders\Object.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\SkyBox.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\SkyBox.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\Resources\Shaders\Terrain.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
