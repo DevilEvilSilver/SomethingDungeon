@@ -14,7 +14,7 @@ public:
 
 	Object();
 	Object(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix);
-	~Object();
+	virtual ~Object();
 
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);

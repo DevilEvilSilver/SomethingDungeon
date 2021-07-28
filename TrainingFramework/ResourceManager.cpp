@@ -81,7 +81,7 @@ void ResourceManager::Init() {
 	int iAnimationCount;
 	fscanf(dataFile, "#ANIMATION_COUNT %d\n", &iAnimationCount);
 	while (iAnimationCount--) {
-		std::string id;
+		char id[50];
 		fscanf(dataFile, "ID %s\n", &id);
 		char strAnimationFile[100];
 		fscanf(dataFile, "FILE %s\n", &strAnimationFile);

@@ -10,7 +10,7 @@ Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix translation
 }
 
 Terrain::~Terrain() {
-
+	m_iTexture2DID.resize(0);
 }
 
 void Terrain::Update(float frameTime) { }
