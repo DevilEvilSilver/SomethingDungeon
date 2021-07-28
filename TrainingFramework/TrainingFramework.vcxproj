@@ -139,8 +139,6 @@
     <None Include="..\Resources\Shaders\SkyBox.vs" />
     <None Include="..\Resources\Shaders\Terrain.fs" />
     <None Include="..\Resources\Shaders\Terrain.vs" />
-    <None Include="..\Resources\Shaders\UvDisplacement.fs" />
-    <None Include="..\Resources\Shaders\UvDisplacement.vs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">

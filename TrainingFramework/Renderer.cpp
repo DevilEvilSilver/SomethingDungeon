@@ -47,7 +47,6 @@ void Renderer::DrawTexture2D(Object *object, Camera *camera) {
 	glUniform1i(shader->texture2DUniform2, 1);
 	glUniform1i(shader->texture2DUniform3, 2);
 	glUniform1i(shader->texture2DUniform4, 3);
-	glUniform1f(shader->TimeUniform, object->m_fTotalTime);
 	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
 
 	if(shader->positionAttribute != -1)

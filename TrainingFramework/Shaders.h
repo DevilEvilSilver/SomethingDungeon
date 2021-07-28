@@ -16,7 +16,6 @@ public:
 	GLint fogStartUniform, fogLengthUniform, fogColorUniform;
 	GLint cameraPosUniform;
 	GLint textureCubeUniform;
-	GLint TimeUniform;
 	GLint wvpUniform;
 
 	Shaders(char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);

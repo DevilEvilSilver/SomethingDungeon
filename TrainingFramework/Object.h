@@ -9,7 +9,6 @@ public:
 	std::vector<unsigned int> m_iTexture2DID;
 	std::vector<unsigned int> m_iTextureCubeID;
 	unsigned int m_iShaderID;
-	float m_fTotalTime;
 	Matrix m_WorldMatrix;
 
 	Object();

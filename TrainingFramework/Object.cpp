@@ -5,7 +5,7 @@
 Object::Object() {}
 
 Object::Object(unsigned int modelID, unsigned int shaderID, Matrix worldMatrix)
-	: m_iModelID(modelID), m_iShaderID(shaderID), m_WorldMatrix(worldMatrix), m_fTotalTime(0.0f) {
+	: m_iModelID(modelID), m_iShaderID(shaderID), m_WorldMatrix(worldMatrix) {
 	
 }
 
@@ -14,7 +14,7 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-	m_fTotalTime += frameTime;
+
 }
 
 void Object::Render(Camera *camera) {
