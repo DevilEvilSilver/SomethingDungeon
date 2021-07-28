@@ -12,13 +12,13 @@ SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matr
 	Vertex *vertices = new Vertex[4];
 
 	vertices[0].pos.x = 0.0f; vertices[0].pos.y = -height; vertices[0].pos.z = 0.0f;
-	vertices[0].uv.x = 0.0f; vertices[0].uv.y = 1.0f;
+	vertices[0].uv.x = 0.0f; vertices[0].uv.y = 0.0f;
 	vertices[1].pos.x = 0.0f; vertices[1].pos.y = 0.0f; vertices[1].pos.z = 0.0f;
-	vertices[1].uv.x = 0.0f; vertices[1].uv.y = 0.0f;
-	vertices[2].pos.x = width; vertices[2].pos.y = 0.0f; vertices[2].pos.z = 0.0f;
-	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 0.0f;
-	vertices[3].pos.x = width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
-	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 1.0f;
+	vertices[1].uv.x = 0.0f; vertices[1].uv.y = 1.0f;
+	vertices[2].pos.x = -width; vertices[2].pos.y = 0.0f; vertices[2].pos.z = 0.0f;
+	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 1.0f;
+	vertices[3].pos.x = -width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
+	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 0.0f;
 
 	GLuint *indices = new GLuint[6];
 
