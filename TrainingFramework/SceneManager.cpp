@@ -84,15 +84,15 @@ void SceneManager::Init() {
 		GLfloat fPosX, fPosY, fWidth, fHeight;
 		fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
 
-		unsigned int iAnimationCount;
-		fscanf(dataFile, "ANIMATION_COUNT %d\n", &iAnimationCount);
-		unsigned int iTmpAnimationCount = iAnimationCount; //backup animation count
-		std::vector<std::string> aiAnimation;
-		while (iAnimationCount--) {
-			char strAnimationID[50];
-			fscanf(dataFile, "ANIMATION %s\n", &strAnimationID);
-			aiAnimation.push_back(strAnimationID);
-		}
+		//unsigned int iAnimationCount;
+		//fscanf(dataFile, "ANIMATION_COUNT %d\n", &iAnimationCount);
+		//unsigned int iTmpAnimationCount = iAnimationCount; //backup animation count
+		//std::vector<std::string> aiAnimation;
+		//while (iAnimationCount--) {
+		//	char strAnimationID[50];
+		//	fscanf(dataFile, "ANIMATION %s\n", &strAnimationID);
+		//	aiAnimation.push_back(strAnimationID);
+		//}
 
 		unsigned int iShader;
 		fscanf(dataFile, "SHADER %d\n", &iShader);
@@ -108,7 +108,7 @@ void SceneManager::Init() {
 		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
 		scale.SetScale(x, y, z);
 
-		Object *sprite = new SpriteObject(iShader, translation, rotationZ * rotationX * rotationY, scale, fWidth, fHeight, aiAnimation);
+		Object *sprite = new SpriteObject(iShader, translation, rotationZ * rotationX * rotationY, scale, fWidth, fHeight);
 		AddObject(sprite);
 	}
 

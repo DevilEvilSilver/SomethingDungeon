@@ -6,8 +6,9 @@
 SpriteObject::SpriteObject() {}
 
 SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
-	GLfloat width, GLfloat height, std::vector<std::string> animationID)
-	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_fWidth(width), m_fHeight(height) {
+	GLfloat width, GLfloat height)
+	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_fWidth(width), m_fHeight(height), 
+	m_strState("mainIdleLeft"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
 	Vertex *vertices = new Vertex[4];
 
 	vertices[0].pos.x = 0.0f; vertices[0].pos.y = -height; vertices[0].pos.z = 0.0f;
@@ -27,19 +28,16 @@ SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matr
 	m_Model = new Model(0, vertices, sizeof(Vertex) * 4, indices, 6);
 	delete[]vertices;
 	delete[]indices;
-
-	for (auto& obj : animationID) {
-		m_strAnimationID.push_back(obj);
-	}
 }
 
 SpriteObject::~SpriteObject() {
 	delete m_Model;
-	m_strAnimationID.resize(0);
 }
 
-void SpriteObject::Update(float frameTime) { }
+void SpriteObject::Update(float frameTime) { 
+	m_fCurrFrameTime += frameTime;
+}
 
 void SpriteObject::Render(Camera *camera) {
-	//Renderer::GetInstance()->DrawSprite(this, camera);
+	Renderer::GetInstance()->DrawSprite(this, camera);
 }
