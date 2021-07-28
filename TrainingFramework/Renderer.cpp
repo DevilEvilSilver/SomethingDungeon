@@ -60,7 +60,7 @@ void Renderer::DrawTexture2D(Object *object, Camera *camera) {
 		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) VERTEX_OFFSET_UV);
 	}
 
-	glDrawElements(GL_TRIANGLES, model->m_IndexBuffer->m_Count, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
 	model->Unbind();
 	for (unsigned int i = 0; i < object->m_iTexture2DID.size(); i++) {
@@ -100,7 +100,7 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_UV);
 	}
 
-	glDrawElements(GL_TRIANGLES, model->m_IndexBuffer->m_Count, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
 	model->Unbind();
 	for (unsigned int i = 0; i < terrain->m_iTexture2DID.size(); i++) {
