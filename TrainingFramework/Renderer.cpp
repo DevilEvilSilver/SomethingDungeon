@@ -86,10 +86,7 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 	glUniform1i(shader->texture2DUniform2, 1);
 	glUniform1i(shader->texture2DUniform3, 2);
 	glUniform1i(shader->texture2DUniform4, 3);
-	glUniform1f(shader->fogStartUniform, terrain->m_fFogStart);
-	glUniform1f(shader->fogLengthUniform, terrain->m_fFogLength);
-	glUniform3f(shader->fogColorUniform, terrain->m_FogColor.x, terrain->m_FogColor.y, terrain->m_FogColor.z);
-	glUniform3f(shader->cameraPosUniform, camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z);
+	glUniform1f(shader->textureScaleUniform, terrain->m_fTextureScale);
 	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
 
 	if (shader->positionAttribute != -1)

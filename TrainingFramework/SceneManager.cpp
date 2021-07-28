@@ -135,14 +135,10 @@ void SceneManager::Init() {
 		scale.SetScale(x, y, z);
 		worldMatrix = scale * rotationZ * rotationX * rotationY * translation;
 
-		float fFogStart;
-		fscanf(dataFile, "FOG_START %f\n", &fFogStart);
-		float fFogLength;
-		fscanf(dataFile, "FOG_LENGTH %f\n", &fFogLength);
-		fscanf(dataFile, "FOG_COLOR %f, %f, %f\n", &x, &y, &z);
-		Vector3 vFogColor(x, y, z);
+		float fTextureScale;
+		fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
 
-		Object *object = new Terrain(iModel, iShader, worldMatrix, fFogStart, fFogLength, vFogColor);
+		Object *object = new Terrain(iModel, iShader, worldMatrix, fTextureScale);
 		for (unsigned int i = 0; i < iTmpTextureCount; i++) {
 			object->m_iTexture2DID.push_back(aiTexture[i]);
 		}

@@ -30,10 +30,7 @@ int Shaders::Init(char * fileVertexShader, char * fileFragmentShader)
 	texture2DUniform2 = glGetUniformLocation(program, "u_texture1");
 	texture2DUniform3 = glGetUniformLocation(program, "u_texture2");
 	texture2DUniform4 = glGetUniformLocation(program, "u_texture3");
-	fogStartUniform = glGetUniformLocation(program, "u_fogStart");
-	fogLengthUniform = glGetUniformLocation(program, "u_fogLength");
-	fogColorUniform = glGetUniformLocation(program, "u_fogColor");
-	cameraPosUniform = glGetUniformLocation(program, "u_cameraPos");
+	textureScaleUniform = glGetUniformLocation(program, "u_textureScale");
 	wvpUniform = glGetUniformLocation(program, "u_wvp");
 
 	return 0;

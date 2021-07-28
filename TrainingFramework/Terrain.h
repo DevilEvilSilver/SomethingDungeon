@@ -6,12 +6,10 @@
 
 class Terrain: public Object {
 public:
-	float m_fFogStart;
-	float m_fFogLength;
-	Vector3 m_FogColor;
+	GLfloat m_fTextureScale;
 
 	Terrain();
-	Terrain(unsigned int modelID, unsigned int shaderID, Matrix worldMatrix, float fogStart, float fogLength, Vector3 fogColor); 
+	Terrain(unsigned int modelID, unsigned int shaderID, Matrix worldMatrix, GLfloat textureScale); 
 	~Terrain();
 
 	void Update(float frameTime);
