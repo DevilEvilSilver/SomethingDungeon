@@ -11,7 +11,8 @@ public:
 	GLfloat m_fWidth, m_fHeight;
 
 	SpriteObject();
-	SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, GLfloat width, GLfloat height);
+	SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+		GLfloat width, GLfloat height, std::vector<std::string> animationID);
 	~SpriteObject();
 
 	void Update(float frameTime);

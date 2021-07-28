@@ -6,11 +6,12 @@
 class Terrain: public Object {
 public:
 	unsigned int m_iModelID;
-	std::vector<unsigned int> m_iTexture2DID;
+	std::vector<unsigned int> m_iTextureID;
 	GLfloat m_fTextureScale;
 
 	Terrain();
-	Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, GLfloat textureScale);
+	Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+		std::vector<unsigned int> textureID, GLfloat textureScale);
 	~Terrain();
 
 	void Update(float frameTime);

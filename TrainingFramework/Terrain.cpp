@@ -4,13 +4,16 @@
 
 Terrain::Terrain() {}
 
-Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, GLfloat textureScale)
+Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+	std::vector<unsigned int> textureID, GLfloat textureScale)
 	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_iModelID(modelID), m_fTextureScale(textureScale) {
-	
+	for (auto& obj : textureID) {
+		m_iTextureID.push_back(obj);
+	}
 }
 
 Terrain::~Terrain() {
-	m_iTexture2DID.resize(0);
+	m_iTextureID.resize(0);
 }
 
 void Terrain::Update(float frameTime) { }

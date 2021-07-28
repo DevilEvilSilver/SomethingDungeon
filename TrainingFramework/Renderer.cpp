@@ -84,8 +84,8 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 
 	shader->Bind();
 	model->Bind();
-	for (unsigned int i = 0; i < terrain->m_iTexture2DID.size(); i++) {
-		ResourceManager::GetInstance()->m_Texture2DList[terrain->m_iTexture2DID[i]]->Bind(i);
+	for (unsigned int i = 0; i < terrain->m_iTextureID.size(); i++) {
+		GetResource(terrain->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Bind(i);
 	}
 
 	Matrix wvpMatrix = terrain->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
@@ -112,8 +112,8 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
 	model->Unbind();
-	for (unsigned int i = 0; i < terrain->m_iTexture2DID.size(); i++) {
-		ResourceManager::GetInstance()->m_Texture2DList[terrain->m_iTexture2DID[i]]->Unbind();
+	for (unsigned int i = 0; i < terrain->m_iTextureID.size(); i++) {
+		GetResource(terrain->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Unbind();
 	}
 	shader->Unbind();
 }

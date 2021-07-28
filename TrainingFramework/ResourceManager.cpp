@@ -17,10 +17,10 @@ ResourceManager::~ResourceManager() {
 		delete object;
 	}
 	m_ModelList.resize(0);
-	for (auto& object : m_Texture2DList) {
+	for (auto& object : m_TextureList) {
 		delete object;
 	}
-	m_Texture2DList.resize(0);
+	m_TextureList.resize(0);
 	for (auto& object : m_AnimationList) {
 		delete object;
 	}
@@ -57,9 +57,9 @@ void ResourceManager::Init() {
 		AddModel(LoadModel(id, strNFGFile));
 	}
 
-	int i2DTextureCount;
-	fscanf(dataFile, "#2D_TEXTURE_COUNT %d\n", &i2DTextureCount);
-	while (i2DTextureCount--) {
+	int iTextureCount;
+	fscanf(dataFile, "#2D_TEXTURE_COUNT %d\n", &iTextureCount);
+	while (iTextureCount--) {
 		int id;
 		fscanf(dataFile, "ID %d\n", &id);
 		char strTGAFile[100];
@@ -75,7 +75,7 @@ void ResourceManager::Init() {
 			iTiling = GL_MIRRORED_REPEAT;
 
 		Texture *texture = new Texture(id, strTGAFile, iTiling);
-		AddTexture2D(texture);
+		AddTexture(texture);
 	}
 
 	int iAnimationCount;
@@ -119,8 +119,8 @@ void ResourceManager::AddModel(Model *model) {
 	m_ModelList.push_back(model);
 }
 
-void ResourceManager::AddTexture2D(Texture *texture) {
-	m_Texture2DList.push_back(texture);
+void ResourceManager::AddTexture(Texture *texture) {
+	m_TextureList.push_back(texture);
 }
 
 void ResourceManager::AddAnamation(Animation *animation) {

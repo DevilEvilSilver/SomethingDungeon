@@ -5,7 +5,8 @@
 
 SpriteObject::SpriteObject() {}
 
-SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, GLfloat width, GLfloat height)
+SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+	GLfloat width, GLfloat height, std::vector<std::string> animationID)
 	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_fWidth(width), m_fHeight(height) {
 	Vertex *vertices = new Vertex[4];
 
@@ -26,6 +27,10 @@ SpriteObject::SpriteObject(unsigned int shaderID, Matrix translationMatrix, Matr
 	m_Model = new Model(0, vertices, sizeof(Vertex) * 4, indices, 6);
 	delete[]vertices;
 	delete[]indices;
+
+	for (auto& obj : animationID) {
+		m_strAnimationID.push_back(obj);
+	}
 }
 
 SpriteObject::~SpriteObject() {
