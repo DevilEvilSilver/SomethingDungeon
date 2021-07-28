@@ -27,7 +27,7 @@ public:
 	bool m_isRotUp, m_isRotDown;
 	bool m_isRotRight, m_isRotLeft;
 
-	Camera(float fFOV, float fNear, float fFar, float fMovingSpeed, float fRotationSpeed);
+	Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
 	~Camera();
 	
 	Vector3 GetPosition();

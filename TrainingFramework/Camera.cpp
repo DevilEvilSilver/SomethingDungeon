@@ -6,7 +6,7 @@ GLfloat Camera::GetRadian(GLfloat degree) {
 	return degree * PI / 180.0f;
 }
 
-Camera::Camera(float fFOV, float fNear, float fFar, float fMovingSpeed, float fRotationSpeed)
+Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
 	: m_fMovingSpeed(fMovingSpeed), m_fRotaionSpped(fRotationSpeed), m_isMoveForward(false), m_isMoveBackward(false), m_isMoveLeft(false), m_isMoveRight(false),
 	m_isRotUp(false), m_isRotDown(false), m_isRotLeft(false), m_isRotRight(false), m_RotVerticalCheck(0.0f), m_isNewView(true), m_isNewSkyView(true) {
 
@@ -14,7 +14,7 @@ Camera::Camera(float fFOV, float fNear, float fFar, float fMovingSpeed, float fR
 	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Position.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
 	m_VectorUp.x = 0.0f; m_VectorUp.y = 1.0f; m_VectorUp.z = 0.0f; //always (0, 1, 0)
 	m_ZAxis = GetZAxis(); m_XAxis = GetXAxis(); m_YAxis = GetYAxis();
-	m_ProjectionMatrix.SetPerspective(GetRadian(fFOV), SCREEN_W / SCREEN_H, fNear, fFar);
+	m_ProjectionMatrix.SetOrthographic(left, right, bottom, top, nearPlane, farPlane);
 }
 
 Camera::~Camera() {

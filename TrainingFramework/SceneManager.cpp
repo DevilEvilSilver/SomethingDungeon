@@ -150,9 +150,9 @@ void SceneManager::Init() {
 		delete[]aiCubeTexture;
 	}
 
-	float fFOV;
+	float fLeft, fRight, fBottom, fTop;
 	fscanf(dataFile, "#CAMERA\n");
-	fscanf(dataFile, "FOV %f\n", &fFOV);
+	fscanf(dataFile, "PLANES %f, %f, %f, %f\n", &fLeft, &fRight, &fBottom, &fTop);
 	float fNear;
 	fscanf(dataFile, "NEAR %f\n", &fNear);
 	float fFar;
@@ -161,7 +161,7 @@ void SceneManager::Init() {
 	fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
 	float fRotationSpeed;
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
-	m_Camera = new Camera(fFOV, fNear, fFar, fMovingSpeed, fRotationSpeed);
+	m_Camera = new Camera(fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 	
 	fclose(dataFile);
 }
