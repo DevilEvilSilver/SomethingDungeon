@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "AnimatedObject.h"
-#include "Terrain.h"
+#include "StaticObject.h"
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -35,10 +35,10 @@ void SceneManager::Init() {
 	FILE* dataFile;
 	dataFile = fopen(FILE_SM, "r");
 
-	int iSpriteCount;
-	fscanf(dataFile, "#SPRITE_COUNT %d\n", &iSpriteCount);
+	int iAnimatedCount;
+	fscanf(dataFile, "#ANIMATED_OBJECT_COUNT %d\n", &iAnimatedCount);
 
-	while (iSpriteCount--) {
+	while (iAnimatedCount--) {
 		unsigned int id;
 		fscanf(dataFile, "ID %d\n", &id);
 
@@ -77,10 +77,10 @@ void SceneManager::Init() {
 		AddObject(object);
 	}
 
-	int iTerrainCount;
-	fscanf(dataFile, "#TERRAIN_COUNT %d\n", &iTerrainCount);
+	int iStaticCount;
+	fscanf(dataFile, "#STATIC_OBJECT_COUNT %d\n", &iStaticCount);
 
-	while (iTerrainCount--) {
+	while (iStaticCount--) {
 		unsigned int id;
 		fscanf(dataFile, "ID %d\n", &id);
 
@@ -128,7 +128,7 @@ void SceneManager::Init() {
 		float fTextureScale;
 		fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
 
-		Object *object = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale,
+		Object *object = new StaticObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale,
 			iType, fPosX, fPosY, fWidth, fHeight, fRadius, aiTexture, fTextureScale);
 		AddObject(object);
 	}

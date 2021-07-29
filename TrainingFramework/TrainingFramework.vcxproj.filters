@@ -60,9 +60,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files\SceneManager</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedObject.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,9 +110,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\SceneManager</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
@@ -120,6 +117,9 @@
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedObject.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
       <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>

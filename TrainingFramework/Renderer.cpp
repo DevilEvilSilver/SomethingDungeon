@@ -48,7 +48,7 @@ void Renderer::Init() {
 	
 }
 
-void Renderer::DrawSprite(AnimatedObject *object, Camera *camera) {
+void Renderer::DrawAnimated(AnimatedObject *object, Camera *camera) {
 	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
 	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 	Animation *animation = GetResource(object->m_strState, ResourceManager::GetInstance()->m_AnimationList);
@@ -85,7 +85,7 @@ void Renderer::DrawSprite(AnimatedObject *object, Camera *camera) {
 	shader->Unbind();
 }
 
-void Renderer::DrawTerrain(Terrain *object, Camera *camera) {
+void Renderer::DrawStatic(StaticObject *object, Camera *camera) {
 	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
 	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 

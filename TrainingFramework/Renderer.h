@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Terrain.h"
+#include "StaticObject.h"
 #include "AnimatedObject.h"
 
 class Renderer {
@@ -12,8 +12,8 @@ public:
 	~Renderer();
 
 	void Init();
-	void DrawTerrain(Terrain *object, Camera *camera);
-	void DrawSprite(AnimatedObject *object, Camera *camera);
+	void DrawStatic(StaticObject *object, Camera *camera);
+	void DrawAnimated(AnimatedObject *object, Camera *camera);
 
 	static Renderer* GetInstance();
 	static void ResetInstance();

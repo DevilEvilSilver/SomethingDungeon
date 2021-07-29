@@ -21,5 +21,5 @@ void AnimatedObject::Update(float frameTime) {
 }
 
 void AnimatedObject::Render(Camera *camera) {
-	Renderer::GetInstance()->DrawSprite(this, camera);
+	Renderer::GetInstance()->DrawAnimated(this, camera);
 }
