@@ -6,7 +6,7 @@
 
 class AnimatedObject : public Object {
 public:
-	std::string m_strState;
+	std::string m_strState;			//Animation ID
 	unsigned int m_iCurrFrameIndex;
 	float m_fCurrFrameTime;
 

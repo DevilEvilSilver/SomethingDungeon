@@ -17,9 +17,9 @@ public:
 	Matrix m_WorldMatrix;
 	bool m_isNewWorld;
 
-	unsigned int m_iType;
-	float m_fWidth, m_fHeight;
-	float m_fRadius;
+	unsigned int m_iType;			//Collision Shape
+	float m_fWidth, m_fHeight;		//For RECT
+	float m_fRadius;				//For CIRCLE
 
 	Object();
 	Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
