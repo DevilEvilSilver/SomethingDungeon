@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
-#include "SpriteObject.h"
+#include "AnimatedObject.h"
 #include "Terrain.h"
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
@@ -72,9 +72,9 @@ void SceneManager::Init() {
 		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
 		scale.SetScale(x, y, z);
 
-		Object *sprite = new SpriteObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, 
+		Object *object = new AnimatedObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, 
 			iType, fPosX, fPosY, fWidth, fHeight, fRadius);
-		AddObject(sprite);
+		AddObject(object);
 	}
 
 	int iTerrainCount;
@@ -128,9 +128,9 @@ void SceneManager::Init() {
 		float fTextureScale;
 		fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
 
-		Object *terrain = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, 
+		Object *object = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale,
 			iType, fPosX, fPosY, fWidth, fHeight, fRadius, aiTexture, fTextureScale);
-		AddObject(terrain);
+		AddObject(object);
 	}
 
 	float fLeft, fRight, fBottom, fTop;

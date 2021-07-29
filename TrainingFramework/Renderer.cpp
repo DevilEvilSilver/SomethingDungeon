@@ -48,20 +48,20 @@ void Renderer::Init() {
 	
 }
 
-void Renderer::DrawSprite(SpriteObject *sprite, Camera *camera) {
-	Model *model = GetResource(sprite->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
-	Shaders *shader = GetResource(sprite->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
-	Animation *animation = GetResource(sprite->m_strState, ResourceManager::GetInstance()->m_AnimationList);
+void Renderer::DrawSprite(AnimatedObject *object, Camera *camera) {
+	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
+	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
+	Animation *animation = GetResource(object->m_strState, ResourceManager::GetInstance()->m_AnimationList);
 
 	shader->Bind();
 	model->Bind();
-	if (sprite->m_fCurrFrameTime >= animation->m_FrameList[sprite->m_iCurrFrameIndex]->m_fSPF) {
-		sprite->m_iCurrFrameIndex = (sprite->m_iCurrFrameIndex + 1) % animation->m_FrameList.size();
-		sprite->m_fCurrFrameTime = 0.0f;
+	if (object->m_fCurrFrameTime >= animation->m_FrameList[object->m_iCurrFrameIndex]->m_fSPF) {
+		object->m_iCurrFrameIndex = (object->m_iCurrFrameIndex + 1) % animation->m_FrameList.size();
+		object->m_fCurrFrameTime = 0.0f;
 	}
-	animation->m_FrameList[sprite->m_iCurrFrameIndex]->Bind();
+	animation->m_FrameList[object->m_iCurrFrameIndex]->Bind();
 
-	Matrix wvpMatrix = sprite->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
+	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	//Set uniform
 	glUniform1i(shader->texture2DUniform, 0);
@@ -81,28 +81,28 @@ void Renderer::DrawSprite(SpriteObject *sprite, Camera *camera) {
 	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
 	model->Unbind();
-	animation->m_FrameList[sprite->m_iCurrFrameIndex]->Unbind();
+	animation->m_FrameList[object->m_iCurrFrameIndex]->Unbind();
 	shader->Unbind();
 }
 
-void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
-	Model *model = GetResource(terrain->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
-	Shaders *shader = GetResource(terrain->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
+void Renderer::DrawTerrain(Terrain *object, Camera *camera) {
+	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
+	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 
 	shader->Bind();
 	model->Bind();
-	for (unsigned int i = 0; i < terrain->m_iTextureID.size(); i++) {
-		GetResource(terrain->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Bind(i);
+	for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
+		GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Bind(i);
 	}
 
-	Matrix wvpMatrix = terrain->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
+	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	//Set uniform
 	glUniform1i(shader->texture2DUniform, 0);
 	glUniform1i(shader->texture2DUniform2, 1);
 	glUniform1i(shader->texture2DUniform3, 2);
 	glUniform1i(shader->texture2DUniform4, 3);
-	glUniform1f(shader->textureScaleUniform, terrain->m_fTextureScale);
+	glUniform1f(shader->textureScaleUniform, object->m_fTextureScale);
 	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
 
 	if (shader->positionAttribute != -1)
@@ -119,8 +119,8 @@ void Renderer::DrawTerrain(Terrain *terrain, Camera *camera) {
 	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
 	model->Unbind();
-	for (unsigned int i = 0; i < terrain->m_iTextureID.size(); i++) {
-		GetResource(terrain->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Unbind();
+	for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
+		GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Unbind();
 	}
 	shader->Unbind();
 }
