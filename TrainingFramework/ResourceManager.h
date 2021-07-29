@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include "Model.h"
 #include "Animation.h"
+#include "Prefab.h"
 #include "Shaders.h"
 
 class ResourceManager {
@@ -13,6 +14,7 @@ public:
 	std::vector<Model*> m_ModelList;
 	std::vector<Texture*> m_TextureList;
 	std::vector<Animation*> m_AnimationList;
+	std::vector<Prefab*> m_PrefabList;
 	std::vector<Shaders*> m_ShaderList;
 
 	ResourceManager();
