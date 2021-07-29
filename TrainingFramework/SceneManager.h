@@ -18,6 +18,7 @@ public:
 	void Render();
 
 	void AddObject(Object *object);
+	void GetRenderOrder();
 
 	static SceneManager* GetInstance();
 	static void ResetInstance();

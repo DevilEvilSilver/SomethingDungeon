@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <algorithm> 
 #include "SceneManager.h"
 #include "AnimatedObject.h"
 #include "StaticObject.h"
@@ -150,13 +151,9 @@ void SceneManager::Init() {
 }
 
 void SceneManager::Render() {
-	for (auto& object : m_ObjectList) {
-		if (object->m_iShaderID != 3)
-		object->Render(this->m_Camera);
-	}
-	for (auto& object : m_ObjectList) {
-		if (object->m_iShaderID == 3)
-			object->Render(this->m_Camera);
+	GetRenderOrder();
+	for (auto& obj : m_ObjectList) {
+		obj->Render(this->m_Camera);
 	}
 }
 
@@ -170,4 +167,10 @@ void SceneManager::Update(float frameTime) {
 
 void SceneManager::AddObject(Object *object) {
 	m_ObjectList.push_back(object);
+}
+
+void SceneManager::GetRenderOrder() {
+	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
+		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
+	});
 }
