@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.cpp" />
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.cpp" />
     <ClCompile Include="AnimatedObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -113,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.h" />
     <ClInclude Include="AnimatedObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="define.h" />

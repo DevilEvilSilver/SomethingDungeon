@@ -72,6 +72,9 @@
     <ClCompile Include="StaticObject.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="StaticObject.h">
       <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.h">
+      <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
