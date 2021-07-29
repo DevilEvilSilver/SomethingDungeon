@@ -5,6 +5,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 Model* LoadModel(unsigned int id, char* file);
+Model* GenModel(unsigned int id, float width, float height);
 
 ResourceManager * ResourceManager::s_Instance = NULL;
 
@@ -55,6 +56,16 @@ void ResourceManager::Init() {
 		char strNFGFile[100];
 		fscanf(dataFile, "FILE %s\n", &strNFGFile);
 		AddModel(LoadModel(id, strNFGFile));
+	}
+
+	int iModelGen;
+	fscanf(dataFile, "#MODEL_GEN %d\n", &iModelGen);
+	while (iModelGen--) {
+		int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		float width, height;
+		fscanf(dataFile, "SIZE %f x %f\n", &width, & height);
+		AddModel(GenModel(id, width, height));
 	}
 
 	int iTextureCount;
@@ -169,6 +180,30 @@ Model* LoadModel(unsigned int id, char* file) {
 	}
 
 	Model *model = new Model(id, vertices, sizeof(Vertex) * iVerticesCount, indices, iIndicesCount);
+	delete[]vertices;
+	delete[]indices;
+
+	return model;
+}
+
+Model* GenModel(unsigned int id, float width, float height) {
+	Vertex *vertices = new Vertex[4];
+
+	vertices[0].pos.x = 0.0f; vertices[0].pos.y = -height; vertices[0].pos.z = 0.0f;
+	vertices[0].uv.x = 0.0f; vertices[0].uv.y = 0.0f;
+	vertices[1].pos.x = 0.0f; vertices[1].pos.y = 0.0f; vertices[1].pos.z = 0.0f;
+	vertices[1].uv.x = 0.0f; vertices[1].uv.y = 1.0f;
+	vertices[2].pos.x = width; vertices[2].pos.y = 0.0f; vertices[2].pos.z = 0.0f;
+	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 1.0f;
+	vertices[3].pos.x = width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
+	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 0.0f;
+
+	GLuint *indices = new GLuint[6];
+
+	indices[0] = 0; indices[1] = 1; indices[2] = 2;
+	indices[3] = 0; indices[4] = 2; indices[5] = 3;
+
+	Model *model = new Model(id, vertices, sizeof(Vertex) * 4, indices, 6);
 	delete[]vertices;
 	delete[]indices;
 

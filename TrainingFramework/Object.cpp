@@ -4,8 +4,8 @@
 
 Object::Object() {}
 
-Object::Object(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix)
-	: m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), m_isNewWorld(true) {
+Object::Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix)
+	: m_iModelID(modelID), m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), m_isNewWorld(true) {
 	
 }
 

@@ -48,47 +48,8 @@ void Renderer::Init() {
 	
 }
 
-//void Renderer::DrawTexture2D(Object *object, Camera *camera) {
-//	Model *model = GetResource(object->m_iModelID,ResourceManager::GetInstance()->m_ModelList);
-//	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
-//
-//	shader->Bind();
-//	model->Bind();
-//	for (unsigned int i = 0; i < object->m_iTexture2DID.size(); i++) {
-//		ResourceManager::GetInstance()->m_Texture2DList[object->m_iTexture2DID[i]]->Bind(i);
-//	}
-//	
-//	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
-//
-//	//Set uniform
-//	glUniform1i(shader->texture2DUniform, 0);
-//	glUniform1i(shader->texture2DUniform2, 1);
-//	glUniform1i(shader->texture2DUniform3, 2);
-//	glUniform1i(shader->texture2DUniform4, 3);
-//	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
-//
-//	if(shader->positionAttribute != -1)
-//	{
-//		glEnableVertexAttribArray(shader->positionAttribute);
-//		glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) VERTEX_OFFSET_POS);
-//	}
-//	if (shader->uvAttribute != -1)
-//	{
-//		glEnableVertexAttribArray(shader->uvAttribute);
-//		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*) VERTEX_OFFSET_UV);
-//	}
-//
-//	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
-//
-//	model->Unbind();
-//	for (unsigned int i = 0; i < object->m_iTexture2DID.size(); i++) {
-//		ResourceManager::GetInstance()->m_Texture2DList[object->m_iTexture2DID[i]]->Unbind();
-//	}
-//	shader->Unbind();
-//}
-
 void Renderer::DrawSprite(SpriteObject *sprite, Camera *camera) {
-	Model *model = sprite->m_Model;
+	Model *model = GetResource(sprite->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
 	Shaders *shader = GetResource(sprite->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 	Animation *animation = GetResource(sprite->m_strState, ResourceManager::GetInstance()->m_AnimationList);
 

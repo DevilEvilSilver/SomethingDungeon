@@ -12,7 +12,6 @@ public:
 	~Renderer();
 
 	void Init();
-	void DrawTexture2D(Object *object, Camera *camera);
 	void DrawTerrain(Terrain *object, Camera *camera);
 	void DrawSprite(SpriteObject *object, Camera *camera);
 

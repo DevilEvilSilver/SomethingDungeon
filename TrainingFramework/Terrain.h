@@ -5,7 +5,6 @@
 
 class Terrain: public Object {
 public:
-	unsigned int m_iModelID;
 	std::vector<unsigned int> m_iTextureID;
 	GLfloat m_fTextureScale;
 

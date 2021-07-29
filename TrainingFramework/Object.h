@@ -5,6 +5,7 @@
 
 class Object {
 public:
+	unsigned int m_iModelID;
 	unsigned int m_iShaderID;
 	Matrix m_TranslationMatrix;
 	Matrix m_RotationMatrix;
@@ -13,7 +14,7 @@ public:
 	bool m_isNewWorld;
 
 	Object();
-	Object(unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix);
+	Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix);
 	virtual ~Object();
 
 	virtual void Update(float frameTime);

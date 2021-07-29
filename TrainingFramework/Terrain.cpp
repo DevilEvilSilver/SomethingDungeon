@@ -6,7 +6,7 @@ Terrain::Terrain() {}
 
 Terrain::Terrain(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
 	std::vector<unsigned int> textureID, GLfloat textureScale)
-	: Object(shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_iModelID(modelID), m_fTextureScale(textureScale) {
+	: Object(modelID, shaderID, translationMatrix, rotationMatrix, scaleMatrix), m_fTextureScale(textureScale) {
 	for (auto& obj : textureID) {
 		m_iTextureID.push_back(obj);
 	}
