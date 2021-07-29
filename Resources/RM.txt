@@ -1,10 +1,10 @@
-#MODEL_COUNT 1
-ID 3
-FILE ../Resources/Models/Terrain.nfg
+#MODEL_COUNT 0
 
-#MODEL_GEN 1
-ID 1
+#MODEL_GEN 2
+ID 0
 SIZE 1.0 x 1.0
+ID 1
+SIZE 16.0 x 16.0
 
 #2D_TEXTURE_COUNT 4
 ID 2
@@ -31,13 +31,13 @@ FS ../Resources/Shaders/Object.fs
 STATE_COUNT 2
 GL_DEPTH_TEST 1
 GL_CULL_FACE 1
-ID 2
+ID 1
 VS ../Resources/Shaders/Terrain.vs
 FS ../Resources/Shaders/Terrain.fs
 STATE_COUNT 2
 GL_DEPTH_TEST 1
 GL_CULL_FACE 1
-ID 3
+ID 2
 VS ../Resources/Shaders/Sprite.vs
 FS ../Resources/Shaders/Sprite.fs
 STATE_COUNT 3

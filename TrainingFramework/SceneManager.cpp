@@ -48,8 +48,18 @@ void SceneManager::Init() {
 		unsigned int iShader;
 		fscanf(dataFile, "SHADER %d\n", &iShader);
 
-		GLfloat fPosX, fPosY, fWidth, fHeight;
-		fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
+		char strType[50];
+		unsigned int iType;
+		GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
+		fscanf(dataFile, "TYPE %s\n", &strType);
+		if (!strcmp(strType, "RECT")) {
+			iType = RECTANGLE;
+			fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
+		}
+		else if (!strcmp(strType, "CIRCLE")) {
+			iType = CIRCLE;
+			fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
+		}
 
 		Matrix translation, rotationX, rotationY, rotationZ, scale, worldMatrix;
 		GLfloat x, y, z;
@@ -62,7 +72,8 @@ void SceneManager::Init() {
 		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
 		scale.SetScale(x, y, z);
 
-		Object *sprite = new SpriteObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, fWidth, fHeight);
+		Object *sprite = new SpriteObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, 
+			iType, fPosX, fPosY, fWidth, fHeight, fRadius);
 		AddObject(sprite);
 	}
 
@@ -89,6 +100,19 @@ void SceneManager::Init() {
 		unsigned int iShader;
 		fscanf(dataFile, "SHADER %d\n", &iShader);
 
+		char strType[50];
+		unsigned int iType;
+		GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
+		fscanf(dataFile, "TYPE %s\n", &strType);
+		if (!strcmp(strType, "RECT")) {
+			iType = RECTANGLE;
+			fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
+		}
+		else if (!strcmp(strType, "CIRCLE")) {
+			iType = CIRCLE;
+			fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
+		}
+
 		Matrix translation, rotationX, rotationY, rotationZ, scale, worldMatrix;
 		GLfloat x, y, z;
 		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
@@ -104,8 +128,9 @@ void SceneManager::Init() {
 		float fTextureScale;
 		fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
 
-		Object *object = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, aiTexture, fTextureScale);
-		AddObject(object);
+		Object *terrain = new Terrain(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale, 
+			iType, fPosX, fPosY, fWidth, fHeight, fRadius, aiTexture, fTextureScale);
+		AddObject(terrain);
 	}
 
 	float fLeft, fRight, fBottom, fTop;

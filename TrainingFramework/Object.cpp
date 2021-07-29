@@ -4,9 +4,13 @@
 
 Object::Object() {}
 
-Object::Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix)
-	: m_iModelID(modelID), m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), m_isNewWorld(true) {
+Object::Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+	unsigned int type, float posX, float posY, float width, float height, float radius)
+	: m_iModelID(modelID), m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), 
+	m_isNewWorld(true), m_iType(type), m_fPosX(posX), m_fPosY(posY), m_fWidth(width), m_fHeight(height), m_fRadius(radius) {
 	
+	m_fDeltaX = m_fPosX - m_TranslationMatrix.m[3][0];
+	m_fDeltaY = m_fPosY - m_TranslationMatrix.m[3][1];
 }
 
 Object::~Object() {
@@ -31,19 +35,22 @@ Matrix Object::GetWorldMatrix() {
 }
 
 float Object::GetPosX() {
-	return m_TranslationMatrix.m[3][0];
+	return m_fPosX;
 }
 
 float Object::GetPosY() {
-	return m_TranslationMatrix.m[3][1];
+	return m_fPosY;
 }
 
 void Object::SetPosX(float x) {
-	m_TranslationMatrix.m[3][0] = x;
+	m_fPosX = x;
+	m_TranslationMatrix.m[3][0] = x - m_fDeltaX;
 	m_isNewWorld = true;
 }
 
 void Object::SetPosY(float y) {
-	m_TranslationMatrix.m[3][1] = y;
+	float deltaY = m_fPosY - m_TranslationMatrix.m[3][1];
+	m_fPosY = y;
+	m_TranslationMatrix.m[3][1] = y - m_fDeltaY;
 	m_isNewWorld = true;
 }

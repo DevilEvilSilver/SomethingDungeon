@@ -200,8 +200,8 @@ Model* GenModel(unsigned int id, float width, float height) {
 
 	GLuint *indices = new GLuint[6];
 
-	indices[0] = 0; indices[1] = 1; indices[2] = 2;
-	indices[3] = 0; indices[4] = 2; indices[5] = 3;
+	indices[0] = 0; indices[1] = 2; indices[2] = 1;
+	indices[3] = 0; indices[4] = 3; indices[5] = 2;
 
 	Model *model = new Model(id, vertices, sizeof(Vertex) * 4, indices, 6);
 	delete[]vertices;
