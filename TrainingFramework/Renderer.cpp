@@ -71,7 +71,7 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	//Set uniform
-	glUniform1i(shader->texture2DUniform, 0);
+	glUniform1i(shader->textureUniform, 0);
 	if (prefab->m_isScaleBySize) {
 		scaleBySize[0][0] = prefab->m_fScaleX;
 		scaleBySize[1][1] = prefab->m_fScaleY;

@@ -119,18 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.doc" />
-    <None Include="..\Resources\Shaders\Object.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Object.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Terrain.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Terrain.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs">
       <Filter>Resources\Shaders</Filter>
     </None>

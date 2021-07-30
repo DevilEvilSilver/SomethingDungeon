@@ -12,7 +12,7 @@ public:
 	bool m_isDepthTest, m_isCulling, m_isBlend;
 	GLint positionAttribute;
 	GLint uvAttribute;
-	GLint texture2DUniform, texture2DUniform2, texture2DUniform3, texture2DUniform4;
+	GLint textureUniform;
 	GLint spriteScaleUniform;
 	GLint wvpUniform;
 
