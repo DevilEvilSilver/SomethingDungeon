@@ -62,10 +62,18 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	}
 	animation->m_FrameList[object->m_iCurrFrameIndex]->Bind();
 
+	GLfloat scaleBySize[2][2];
+	scaleBySize[0][0] = 1.0f; scaleBySize[0][1] = 0.0f;
+	scaleBySize[1][0] = 0.0f; scaleBySize[1][1] = 1.0f;
 	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	//Set uniform
 	glUniform1i(shader->texture2DUniform, 0);
+	if (prefab->m_isScaleBySize) {
+		scaleBySize[0][0] = prefab->m_fScaleX;
+		scaleBySize[1][1] = prefab->m_fScaleY;
+	}
+	glUniformMatrix2fv(shader->spriteScaleUniform, 1, GL_FALSE, (const GLfloat*)scaleBySize);
 	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
 
 	if (shader->positionAttribute != -1)

@@ -13,7 +13,7 @@ public:
 	GLint positionAttribute;
 	GLint uvAttribute;
 	GLint texture2DUniform, texture2DUniform2, texture2DUniform3, texture2DUniform4;
-	GLint textureScaleUniform;
+	GLint spriteScaleUniform;
 	GLint wvpUniform;
 
 	Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);
