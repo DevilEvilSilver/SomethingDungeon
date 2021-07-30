@@ -5,6 +5,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 Model* LoadModel(unsigned int id, char* file);
+Model* GenModel(unsigned int id, float width, float height);
 
 ResourceManager * ResourceManager::s_Instance = NULL;
 
@@ -17,10 +18,14 @@ ResourceManager::~ResourceManager() {
 		delete object;
 	}
 	m_ModelList.resize(0);
-	for (auto& object : m_Texture2DList) {
+	for (auto& object : m_TextureList) {
 		delete object;
 	}
-	m_Texture2DList.resize(0);
+	m_TextureList.resize(0);
+	for (auto& object : m_AnimationList) {
+		delete object;
+	}
+	m_AnimationList.resize(0);
 	for (auto& object : m_ShaderList) {
 		delete object;
 	}
@@ -53,9 +58,19 @@ void ResourceManager::Init() {
 		AddModel(LoadModel(id, strNFGFile));
 	}
 
-	int i2DTextureCount;
-	fscanf(dataFile, "#2D_TEXTURE_COUNT %d\n", &i2DTextureCount);
-	while (i2DTextureCount--) {
+	int iModelGen;
+	fscanf(dataFile, "#MODEL_GEN %d\n", &iModelGen);
+	while (iModelGen--) {
+		int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		float width, height;
+		fscanf(dataFile, "SIZE %f x %f\n", &width, & height);
+		AddModel(GenModel(id, width, height));
+	}
+
+	int iTextureCount;
+	fscanf(dataFile, "#2D_TEXTURE_COUNT %d\n", &iTextureCount);
+	while (iTextureCount--) {
 		int id;
 		fscanf(dataFile, "ID %d\n", &id);
 		char strTGAFile[100];
@@ -71,7 +86,19 @@ void ResourceManager::Init() {
 			iTiling = GL_MIRRORED_REPEAT;
 
 		Texture *texture = new Texture(id, strTGAFile, iTiling);
-		AddTexture2D(texture);
+		AddTexture(texture);
+	}
+
+	int iAnimationCount;
+	fscanf(dataFile, "#ANIMATION_COUNT %d\n", &iAnimationCount);
+	while (iAnimationCount--) {
+		char id[50];
+		fscanf(dataFile, "ID %s\n", &id);
+		char strAnimationFile[100];
+		fscanf(dataFile, "FILE %s\n", &strAnimationFile);
+	
+		Animation *animation = new Animation(id, strAnimationFile);
+		AddAnamation(animation);
 	}
 
 	int iShaderCount;
@@ -103,8 +130,12 @@ void ResourceManager::AddModel(Model *model) {
 	m_ModelList.push_back(model);
 }
 
-void ResourceManager::AddTexture2D(Texture *texture) {
-	m_Texture2DList.push_back(texture);
+void ResourceManager::AddTexture(Texture *texture) {
+	m_TextureList.push_back(texture);
+}
+
+void ResourceManager::AddAnamation(Animation *animation) {
+	m_AnimationList.push_back(animation);
 }
 
 void ResourceManager::AddShader(Shaders *shader) {
@@ -149,6 +180,30 @@ Model* LoadModel(unsigned int id, char* file) {
 	}
 
 	Model *model = new Model(id, vertices, sizeof(Vertex) * iVerticesCount, indices, iIndicesCount);
+	delete[]vertices;
+	delete[]indices;
+
+	return model;
+}
+
+Model* GenModel(unsigned int id, float width, float height) {
+	Vertex *vertices = new Vertex[4];
+
+	vertices[0].pos.x = 0.0f; vertices[0].pos.y = -height; vertices[0].pos.z = 0.0f;
+	vertices[0].uv.x = 0.0f; vertices[0].uv.y = 0.0f;
+	vertices[1].pos.x = 0.0f; vertices[1].pos.y = 0.0f; vertices[1].pos.z = 0.0f;
+	vertices[1].uv.x = 0.0f; vertices[1].uv.y = 1.0f;
+	vertices[2].pos.x = width; vertices[2].pos.y = 0.0f; vertices[2].pos.z = 0.0f;
+	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 1.0f;
+	vertices[3].pos.x = width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
+	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 0.0f;
+
+	GLuint *indices = new GLuint[6];
+
+	indices[0] = 0; indices[1] = 2; indices[2] = 1;
+	indices[3] = 0; indices[4] = 3; indices[5] = 2;
+
+	Model *model = new Model(id, vertices, sizeof(Vertex) * 4, indices, 6);
 	delete[]vertices;
 	delete[]indices;
 

@@ -6,8 +6,8 @@ Texture::Texture() {
 
 }
 
-Texture::Texture(unsigned int resourceID, const char* file, GLint tiling)
-	: m_iResourceID(resourceID) {
+Texture::Texture(unsigned int resourceID, const char* file, GLint tiling, float SPF)
+	: m_iResourceID(resourceID), m_fSPF(SPF) {
 	glGenTextures(1, &m_RendererID);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
