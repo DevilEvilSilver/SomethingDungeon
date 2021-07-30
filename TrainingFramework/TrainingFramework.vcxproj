@@ -94,8 +94,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.cpp" />
     <ClCompile Include="AnimatedObject.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
