@@ -1,12 +1,12 @@
 #include <stdafx.h>
 #include "../Utilities/TGA.h"
-#include "Texture.h"
+#include "Frame.h"
 
-Texture::Texture() {
+Frame::Frame() {
 
 }
 
-Texture::Texture(unsigned int resourceID, const char* file, GLint tiling, float SPF)
+Frame::Frame(unsigned int resourceID, const char* file, GLint tiling, float SPF)
 	: m_iResourceID(resourceID), m_fSPF(SPF) {
 	glGenTextures(1, &m_RendererID);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
@@ -28,15 +28,15 @@ Texture::Texture(unsigned int resourceID, const char* file, GLint tiling, float 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Texture::~Texture() {
+Frame::~Frame() {
 	glDeleteTextures(1, &m_RendererID);
 }
 
-void Texture::Bind(unsigned int slot) {
+void Frame::Bind(unsigned int slot) {
 	glActiveTexture(GL_TEXTURE0 + slot);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
 }
 
-void Texture::Unbind() {
+void Frame::Unbind() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

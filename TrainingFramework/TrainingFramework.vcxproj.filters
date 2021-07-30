@@ -60,13 +60,13 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,13 +107,13 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Prefab.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
