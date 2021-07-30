@@ -54,8 +54,27 @@ void ResourceManager::Init() {
 
 		unsigned int iShader;
 		fscanf(dataFile, "SHADER %d\n", &iShader);
+		
+		char strType[50];
+		unsigned int iType;
+		GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
+		fscanf(dataFile, "TYPE %s\n", &strType);
+		if (!strcmp(strType, "RECT")) {
+			iType = RECTANGLE;
+			fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
+		}
+		else if (!strcmp(strType, "CIRCLE")) {
+			iType = CIRCLE;
+			fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
+		}
+		
+		GLfloat fScaleX, fScaleY;
+		fscanf(dataFile, "SIZE %f x %f\n", &fScaleX, &fScaleY);
 
-		Prefab *prefab = new Prefab(strPrefabID, iModel, iShader);
+		unsigned int isScaleBySize;
+		fscanf(dataFile, "SCALE_BY_SIZE %d\n", &isScaleBySize);
+
+		Prefab *prefab = new Prefab(strPrefabID, iModel, iShader, iType, fPosX, fPosY, fWidth, fHeight, fRadius, fScaleX, fScaleY, isScaleBySize);
 		
 		int iAnimationCount;
 		fscanf(dataFile, "ANIMATION_COUNT %d\n", &iAnimationCount);

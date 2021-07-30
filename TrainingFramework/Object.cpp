@@ -1,17 +1,33 @@
 #include "stdafx.h"
 #include "Object.h"
+#include "ResourceManager.h"
+#include "Prefab.h"
 #include "Renderer.h"
+
+template <class T>
+T GetResource(std::string id, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (!strcmp(id.c_str(), obj->m_strResourceID.c_str()))
+			return obj;
+	}
+	return 0;
+}
 
 Object::Object() {}
 
-Object::Object(std::string prefabID, Matrix worldmatrix,
-	unsigned int type, float posX, float posY, float width, float height, float radius)
-	: m_strPrefabID(prefabID), m_WorldMatrix(worldmatrix),
-	m_iType(type), m_fPosX(posX), m_fPosY(posY), m_fWidth(width), m_fHeight(height), m_fRadius(radius), 
-	m_strState("mainIdleLeft"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+Object::Object(std::string prefabID, Matrix translationMatrix)
+	: m_strPrefabID(prefabID), m_strState("mainIdleLeft"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+	Prefab *prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 	
-	m_fDeltaX = posX - worldmatrix.m[3][0];
-	m_fDeltaY = posY - worldmatrix.m[3][1];
+	Matrix scaleMatrix;
+	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
+	m_WorldMatrix = scaleMatrix * translationMatrix;
+
+	m_iType = prefab->m_iType; m_fDeltaX = prefab->m_fDeltaX; m_fDeltaY = prefab->m_fDeltaY;
+	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
+	 
+	m_fPosX = m_fDeltaX + m_WorldMatrix.m[3][0];
+	m_fPosY = m_fDeltaY + m_WorldMatrix.m[3][1];
 }
 
 Object::~Object() {

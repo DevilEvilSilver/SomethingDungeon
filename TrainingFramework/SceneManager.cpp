@@ -45,31 +45,12 @@ void SceneManager::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 
-		char strType[50];
-		unsigned int iType;
-		GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
-		fscanf(dataFile, "TYPE %s\n", &strType);
-		if (!strcmp(strType, "RECT")) {
-			iType = RECTANGLE;
-			fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
-		}
-		else if (!strcmp(strType, "CIRCLE")) {
-			iType = CIRCLE;
-			fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
-		}
-
-		Matrix translation, rotationX, rotationY, rotationZ, scale, worldMatrix;
+		Matrix translation;
 		GLfloat x, y, z;
 		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
 		translation.SetTranslation(x, y, z);
-		rotationX.SetRotationX(0.0f); 
-		rotationY.SetRotationY(0.0f);
-		rotationZ.SetRotationZ(0.0f);
-		fscanf(dataFile, "SIZE %f x %f\n", &x, &y);
-		scale.SetScale(x, y, 1.0f);
 
-		Object *object = new Object(strPrefab,  scale *  rotationZ * rotationX * rotationY * translation ,
-			iType, fPosX, fPosY, fWidth, fHeight, fRadius);
+		Object *object = new Object(strPrefab, translation);
 		AddObject(object);
 	}
 

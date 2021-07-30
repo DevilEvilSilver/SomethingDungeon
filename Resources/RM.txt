@@ -2,6 +2,10 @@
 ID mainChar
 MODEL 0
 SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID mainIdleLeft
 FILE ../Resources/Animation/mainIdleLeft/mainIdleLeft.txt
@@ -9,6 +13,10 @@ FILE ../Resources/Animation/mainIdleLeft/mainIdleLeft.txt
 ID terrain
 MODEL 0
 SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 16.0, 16.0
+SIZE 16.0 x 16.0
+SCALE_BY_SIZE 1
 ANIMATION_COUNT 1
 ID mainIdleLeft
 FILE ../Resources/Animation/mainIdleLeft/mainIdleLeft.txt

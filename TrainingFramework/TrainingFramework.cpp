@@ -14,9 +14,9 @@
 int Init ( ESContext *esContext )
 {
 	glClearColor ( 1.0f, 1.0f, 1.0f, 1.0f );
-
-	SceneManager::GetInstance();
+		
 	ResourceManager::GetInstance();
+	SceneManager::GetInstance();
 
 	return 0;
 }
