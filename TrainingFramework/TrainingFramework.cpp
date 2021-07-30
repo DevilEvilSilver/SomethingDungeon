@@ -11,6 +11,9 @@
 #include "Renderer.h"
 #include <conio.h>
 
+SoLoud::Soloud soloud; // Engine core
+SoLoud::Wav sample;
+
 int Init ( ESContext *esContext )
 {
 	glClearColor ( 1.0f, 1.0f, 1.0f, 1.0f );
@@ -18,6 +21,12 @@ int Init ( ESContext *esContext )
 	SceneManager::GetInstance();
 	ResourceManager::GetInstance();
 
+	
+	
+	soloud.init();
+	sample.load("../Resources/Sounds/music_bg.wav"); // Load a wave file
+	soloud.play(sample);
+	
 	return 0;
 }
 
@@ -116,7 +125,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	CleanUp();
 
 	//identifying memory leaks
-	MemoryDump();
+	//MemoryDump();
 	printf("Press any key...\n");
 	_getch();
 
