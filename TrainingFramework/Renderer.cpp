@@ -56,7 +56,10 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 
 	shader->Bind();
 	model->Bind();
-	if (object->m_fCurrFrameTime >= animation->m_FrameList[object->m_iCurrFrameIndex]->m_fSPF) {
+	if (animation->m_FrameList[object->m_iCurrFrameIndex]->m_fSPF == -1.0f) {
+		object->m_fCurrFrameTime = 0.0f;
+	}
+	else if (object->m_fCurrFrameTime >= animation->m_FrameList[object->m_iCurrFrameIndex]->m_fSPF) {
 		object->m_iCurrFrameIndex = (object->m_iCurrFrameIndex + 1) % animation->m_FrameList.size();
 		object->m_fCurrFrameTime = 0.0f;
 	}
