@@ -63,14 +63,14 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.cpp">
-      <Filter>Source Files\ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="AnimatedObject.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="StaticObject.cpp">
       <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
