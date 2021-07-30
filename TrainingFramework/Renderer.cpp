@@ -48,10 +48,11 @@ void Renderer::Init() {
 	
 }
 
-void Renderer::DrawAnimated(AnimatedObject *object, Camera *camera) {
-	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
-	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
-	Animation *animation = GetResource(object->m_strState, ResourceManager::GetInstance()->m_AnimationList);
+void Renderer::DrawAnimated(Object *object, Camera *camera) {
+	Prefab *prefab = GetResource(object->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
+	Model *model = GetResource(prefab->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
+	Shaders *shader = GetResource(prefab->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
+	Animation *animation = GetResource(object->m_strState, prefab->m_AnimationList);
 
 	shader->Bind();
 	model->Bind();
@@ -86,41 +87,41 @@ void Renderer::DrawAnimated(AnimatedObject *object, Camera *camera) {
 }
 
 void Renderer::DrawStatic(StaticObject *object, Camera *camera) {
-	Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
-	Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
+	//Model *model = GetResource(object->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
+	//Shaders *shader = GetResource(object->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 
-	shader->Bind();
-	model->Bind();
-	for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
-		GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Bind(i);
-	}
+	//shader->Bind();
+	//model->Bind();
+	//for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
+	//	GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Bind(i);
+	//}
 
-	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
+	//Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
-	//Set uniform
-	glUniform1i(shader->texture2DUniform, 0);
-	glUniform1i(shader->texture2DUniform2, 1);
-	glUniform1i(shader->texture2DUniform3, 2);
-	glUniform1i(shader->texture2DUniform4, 3);
-	glUniform1f(shader->textureScaleUniform, object->m_fTextureScale);
-	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
+	////Set uniform
+	//glUniform1i(shader->texture2DUniform, 0);
+	//glUniform1i(shader->texture2DUniform2, 1);
+	//glUniform1i(shader->texture2DUniform3, 2);
+	//glUniform1i(shader->texture2DUniform4, 3);
+	//glUniform1f(shader->textureScaleUniform, object->m_fTextureScale);
+	//glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
 
-	if (shader->positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(shader->positionAttribute);
-		glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_POS);
-	}
-	if (shader->uvAttribute != -1)
-	{
-		glEnableVertexAttribArray(shader->uvAttribute);
-		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_UV);
-	}
+	//if (shader->positionAttribute != -1)
+	//{
+	//	glEnableVertexAttribArray(shader->positionAttribute);
+	//	glVertexAttribPointer(shader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_POS);
+	//}
+	//if (shader->uvAttribute != -1)
+	//{
+	//	glEnableVertexAttribArray(shader->uvAttribute);
+	//	glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)VERTEX_OFFSET_UV);
+	//}
 
-	glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLES, model->m_IndexCount, GL_UNSIGNED_INT, 0);
 
-	model->Unbind();
-	for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
-		GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Unbind();
-	}
-	shader->Unbind();
+	//model->Unbind();
+	//for (unsigned int i = 0; i < object->m_iTextureID.size(); i++) {
+	//	GetResource(object->m_iTextureID[i], ResourceManager::GetInstance()->m_TextureList)->Unbind();
+	//}
+	//shader->Unbind();
 }

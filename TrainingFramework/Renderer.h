@@ -13,7 +13,7 @@ public:
 
 	void Init();
 	void DrawStatic(StaticObject *object, Camera *camera);
-	void DrawAnimated(AnimatedObject *object, Camera *camera);
+	void DrawAnimated(Object *object, Camera *camera);
 
 	static Renderer* GetInstance();
 	static void ResetInstance();

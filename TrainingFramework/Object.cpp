@@ -4,10 +4,11 @@
 
 Object::Object() {}
 
-Object::Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+Object::Object(std::string prefabID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix,
 	unsigned int type, float posX, float posY, float width, float height, float radius)
-	: m_iModelID(modelID), m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), 
-	m_isNewWorld(true), m_iType(type), m_fPosX(posX), m_fPosY(posY), m_fWidth(width), m_fHeight(height), m_fRadius(radius) {
+	: m_strPrefabID(prefabID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), 
+	m_isNewWorld(true), m_iType(type), m_fPosX(posX), m_fPosY(posY), m_fWidth(width), m_fHeight(height), m_fRadius(radius), 
+	m_strState("mainIdleLeft"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
 	
 	m_fDeltaX = m_fPosX - m_TranslationMatrix.m[3][0];
 	m_fDeltaY = m_fPosY - m_TranslationMatrix.m[3][1];
@@ -22,8 +23,7 @@ void Object::Update(float frameTime) {
 }
 
 void Object::Render(Camera *camera) {
-	//if (m_iTexture2DID.size() > 0)
-	//	Renderer::GetInstance()->DrawTexture2D(this, camera);
+	Renderer::GetInstance()->DrawAnimated(this, camera);
 }
 
 Matrix Object::GetWorldMatrix() {

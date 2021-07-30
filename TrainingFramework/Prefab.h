@@ -7,10 +7,12 @@ class Prefab {
 public:
 	std::string m_strResourceID;
 	unsigned int m_iModelID;
-	std::vector<Animation*> m_AnimationList;
 	unsigned int m_iShaderID;
+	std::vector<Animation*> m_AnimationList;
 
 	Prefab();
-	Prefab(std::string resourceID);
+	Prefab(std::string resourceID, unsigned int modelID, unsigned int shaderID);
 	virtual ~Prefab();
+
+	void AddAnamation(Animation *animation);
 };
