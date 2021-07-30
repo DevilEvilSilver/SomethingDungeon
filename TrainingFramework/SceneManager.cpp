@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include <algorithm> 
 #include "SceneManager.h"
-#include "AnimatedObject.h"
-#include "StaticObject.h"
+#include "Object.h"
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
 

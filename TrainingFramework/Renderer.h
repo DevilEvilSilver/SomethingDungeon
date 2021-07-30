@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
-#include "StaticObject.h"
-#include "AnimatedObject.h"
+#include "Object.h"
 
 class Renderer {
 private:
@@ -12,7 +11,6 @@ public:
 	~Renderer();
 
 	void Init();
-	void DrawStatic(StaticObject *object, Camera *camera);
 	void DrawAnimated(Object *object, Camera *camera);
 
 	static Renderer* GetInstance();
