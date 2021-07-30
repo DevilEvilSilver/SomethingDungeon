@@ -62,73 +62,16 @@ void SceneManager::Init() {
 		GLfloat x, y, z;
 		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
 		translation.SetTranslation(x, y, z);
-		fscanf(dataFile, "ROTATION %f, %f, %f\n", &x, &y, &z);
-		rotationX.SetRotationX(x); 
-		rotationY.SetRotationY(y);
-		rotationZ.SetRotationZ(z);
-		fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
-		scale.SetScale(x, y, z);
+		rotationX.SetRotationX(0.0f); 
+		rotationY.SetRotationY(0.0f);
+		rotationZ.SetRotationZ(0.0f);
+		fscanf(dataFile, "SIZE %f x %f\n", &x, &y);
+		scale.SetScale(x, y, 1.0f);
 
-		Object *object = new Object(strPrefab, translation, rotationZ * rotationX * rotationY, scale,
+		Object *object = new Object(strPrefab,  scale *  rotationZ * rotationX * rotationY * translation ,
 			iType, fPosX, fPosY, fWidth, fHeight, fRadius);
 		AddObject(object);
 	}
-
-	//int iStaticCount;
-	//fscanf(dataFile, "#STATIC_OBJECT_COUNT %d\n", &iStaticCount);
-
-	//while (iStaticCount--) {
-	//	unsigned int id;
-	//	fscanf(dataFile, "ID %d\n", &id);
-
-	//	unsigned int iModel;
-	//	fscanf(dataFile, "MODEL %d\n", &iModel);
-
-	//	unsigned int iTextureCount;
-	//	fscanf(dataFile, "TEXTURE_COUNT %d\n", &iTextureCount);
-	//	unsigned int iTmpTextureCount = iTextureCount; //backup texture count
-	//	std::vector<unsigned int> aiTexture;
-	//	while (iTextureCount--) {
-	//		unsigned int textureID;
-	//		fscanf(dataFile, "TEXTURE %d\n", &textureID);
-	//		aiTexture.push_back(textureID);
-	//	}
-
-	//	unsigned int iShader;
-	//	fscanf(dataFile, "SHADER %d\n", &iShader);
-
-	//	char strType[50];
-	//	unsigned int iType;
-	//	GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
-	//	fscanf(dataFile, "TYPE %s\n", &strType);
-	//	if (!strcmp(strType, "RECT")) {
-	//		iType = RECTANGLE;
-	//		fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
-	//	}
-	//	else if (!strcmp(strType, "CIRCLE")) {
-	//		iType = CIRCLE;
-	//		fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
-	//	}
-
-	//	Matrix translation, rotationX, rotationY, rotationZ, scale, worldMatrix;
-	//	GLfloat x, y, z;
-	//	fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
-	//	translation.SetTranslation(x, y, z);
-	//	fscanf(dataFile, "ROTATION %f, %f, %f\n", &x, &y, &z);
-	//	rotationX.SetRotationX(x);
-	//	rotationY.SetRotationY(y);
-	//	rotationZ.SetRotationZ(z);
-	//	fscanf(dataFile, "SCALE %f, %f, %f\n", &x, &y, &z);
-	//	scale.SetScale(x, y, z);
-	//	worldMatrix = scale * rotationZ * rotationX * rotationY * translation;
-
-	//	float fTextureScale;
-	//	fscanf(dataFile, "TEXTURE_SCALE %f\n", &fTextureScale);
-
-	//	Object *object = new StaticObject(iModel, iShader, translation, rotationZ * rotationX * rotationY, scale,
-	//		iType, fPosX, fPosY, fWidth, fHeight, fRadius, aiTexture, fTextureScale);
-	//	AddObject(object);
-	//}
 
 	float fLeft, fRight, fBottom, fTop;
 	fscanf(dataFile, "#CAMERA\n");

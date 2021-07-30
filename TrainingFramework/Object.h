@@ -10,11 +10,7 @@ private:
 
 public:
 	std::string m_strPrefabID;
-	Matrix m_TranslationMatrix;
-	Matrix m_RotationMatrix;
-	Matrix m_ScaleMatrix;
 	Matrix m_WorldMatrix;
-	bool m_isNewWorld;
 
 	std::string m_strState;
 	unsigned int m_iCurrFrameIndex;
@@ -25,7 +21,7 @@ public:
 	float m_fRadius;				//For CIRCLE
 
 	Object();
-	Object(std::string prefabID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix,
+	Object(std::string prefabID, Matrix worldmatrix,
 		unsigned int type, float posX, float posY, float width, float height, float radius);
 	virtual ~Object();
 
