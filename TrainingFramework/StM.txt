@@ -1,0 +1,9 @@
+ObjectInstanceNum 1
+
+#ID 0
+ObjectID 1
+pos 1.0 1.0
+
+Camera
+pos	1.0 1.0 -3.0
+target 1.0 1.0 0.0

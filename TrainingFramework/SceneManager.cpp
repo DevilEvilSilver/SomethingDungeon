@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "define.h"
+
+#include "StateManager.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 SceneManager * SceneManager::s_Instance = NULL;
+int Source = 0;
 
 SceneManager::SceneManager(void) {
 	this->Init();
@@ -31,7 +34,19 @@ void SceneManager::ResetInstance() {
 
 void SceneManager::Init() {
 	FILE* dataFile;
-	dataFile = fopen(FILE_SM, "r");
+
+	switch (StateManager::GetInstance()->state) {
+	case 1:
+		dataFile = fopen(FILE_SM1, "r");
+		break;
+	case 2:
+		dataFile = fopen(FILE_SM2, "r");
+		break;
+	case 3:
+		dataFile = fopen(FILE_SM3, "r");
+		break;
+	}
+	
 
 	int iObjectCount;
 	fscanf(dataFile, "#OBJECT_COUNT %d\n", &iObjectCount);

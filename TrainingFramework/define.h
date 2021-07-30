@@ -4,6 +4,12 @@
 #define SCREEN_H					720.0f
 
 #define FILE_SM						"../Resources/SM.txt"
+
+#define FILE_SM1					"../Resources/SM1.txt"
+#define FILE_SM2					"../Resources/SM2.txt"
+#define FILE_SM3					"../Resources/SM3.txt"
+
+
 #define FILE_RM						"../Resources/RM.txt"
 
 #define PI							3.14159265f

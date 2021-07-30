@@ -10,6 +10,8 @@ public:
 	std::vector<Object*> m_ObjectList;
 	Camera *m_Camera;
 
+	
+
 	SceneManager();
 	~SceneManager();
 
