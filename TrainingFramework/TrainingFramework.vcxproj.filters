@@ -72,6 +72,15 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="SoundInstance.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEngine.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -113,13 +122,22 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.h">
-      <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatedObject.h">
       <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="StaticObject.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundInstance.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEngine.h">
       <Filter>Header Files\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
