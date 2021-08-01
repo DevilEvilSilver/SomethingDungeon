@@ -10,9 +10,15 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include <conio.h>
+//#include "SoundInstance.h"
+#include "SoundEngine.h"
+#include<ctime>
 
-SoLoud::Soloud soloud; // Engine core
-SoLoud::Wav sample;
+//SoLoud::Soloud soloud; // Engine core
+//SoLoud::Wav sample;
+SoundInstance instance;
+//SoundInstance instance2;
+
 
 int Init ( ESContext *esContext )
 {
@@ -20,13 +26,15 @@ int Init ( ESContext *esContext )
 
 	SceneManager::GetInstance();
 	ResourceManager::GetInstance();
+	
+	
+	SoundEngine::GetInstance()->Init();
+
+
+	SoundEngine::GetInstance()->getListSI()[0]->setTimeNow(clock());
 
 	
-	
-	soloud.init();
-	sample.load("../Resources/Sounds/music_bg.wav"); // Load a wave file
-	soloud.play(sample);
-	
+
 	return 0;
 }
 
@@ -42,11 +50,14 @@ void Draw ( ESContext *esContext )
 void Update ( ESContext *esContext, float deltaTime )
 {
 	SceneManager::GetInstance()->Update(deltaTime);
+
+	//SoundEngine::GetInstance()->getListSI()[0]->PlayClock(3000, 1, true);
 }
 
 void TouchActionDown(ESContext *esContext, int x, int y)
 {
 	//SceneManager::GetInstance()->CheckTouchPosition(x, y);
+
 }
 
 void TouchActionUp(ESContext *esContext, int x, int y)
@@ -66,14 +77,18 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 	case 'W':
 	case 'w':
 		SceneManager::GetInstance()->m_Camera->m_isMoveForward = bIsPressed;
+		SoundEngine::GetInstance()->getListSI()[0]->StopMusic(1);
 		break;
 	case 'S':
 	case 's':
 		SceneManager::GetInstance()->m_Camera->m_isMoveBackward = bIsPressed;
+		SoundEngine::GetInstance()->getListSI()[0]->StopLoopMusic();
 		break;
 	case 'A':
 	case 'a':
 		SceneManager::GetInstance()->m_Camera->m_isMoveLeft = bIsPressed;
+		SoundEngine::GetInstance()->getListSI()[0]->PlayMusic(1, true);
+
 		break;
 	case 'D':
 	case 'd':
