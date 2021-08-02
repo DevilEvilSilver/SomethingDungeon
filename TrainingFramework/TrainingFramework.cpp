@@ -71,16 +71,16 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 		SceneManager::GetInstance()->m_Camera->m_isMoveRight = bIsPressed;
 		break;
 	case VK_UP:
-		SceneManager::GetInstance()->m_Camera->m_isRotUp = bIsPressed;
+		SceneManager::GetInstance()->m_pKeySignal = VK_UP;
 		break;
 	case VK_DOWN:
-		SceneManager::GetInstance()->m_Camera->m_isRotDown = bIsPressed;
+		SceneManager::GetInstance()->m_pKeySignal = VK_DOWN;
 		break;
 	case VK_LEFT:
-		SceneManager::GetInstance()->m_Camera->m_isRotLeft = bIsPressed;
+		SceneManager::GetInstance()->m_pKeySignal = VK_LEFT;
 		break;
 	case VK_RIGHT:
-		SceneManager::GetInstance()->m_Camera->m_isRotRight = bIsPressed;
+		SceneManager::GetInstance()->m_pKeySignal = VK_RIGHT;
 		break;
 	}
 }
@@ -90,6 +90,7 @@ void CleanUp()
 	SceneManager::GetInstance()->ResetInstance();
 	ResourceManager::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
+	PhysicEngine::GetInstance()->ResetInstance();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

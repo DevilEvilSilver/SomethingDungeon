@@ -31,6 +31,12 @@
     <Filter Include="Source Files\ResourceManager">
       <UniqueIdentifier>{cc99e06b-48ef-4909-a615-614c7c036249}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PhysicEngine">
+      <UniqueIdentifier>{9afce2c8-8864-47e1-aa34-a79e768b134d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PhysicEngine">
+      <UniqueIdentifier>{6dc7a5d8-a36a-4c59-9a9a-94cbe46ca7ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,11 +66,20 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files\SceneManager</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedObject.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicEngine.cpp">
+      <Filter>Source Files\PhysicEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,11 +119,20 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\SceneManager</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedObject.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>Header Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicEngine.h">
+      <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,5 +149,19 @@
     <None Include="..\Resources\Shaders\Terrain.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\RM.txt">
+      <Filter>Resources</Filter>
+    </Text>
+    <Text Include="..\Resources\SM.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>
