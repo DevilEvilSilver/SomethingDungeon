@@ -1,4 +1,4 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Animation.h"
 
 Animation::Animation() {
@@ -29,7 +29,7 @@ Animation::Animation(std::string resourceID, const char* file)
 		else if (!strcmp(strTiling, "GL_MIRRORED_REPEAT"))
 			iTiling = GL_MIRRORED_REPEAT;
 
-		Texture *texture = new Texture(id, strTGAFile, iTiling, SPF);
+		Frame *texture = new Frame(id, strTGAFile, iTiling, SPF);
 		AddFrame(texture);
 	}
 
@@ -43,6 +43,6 @@ Animation::~Animation() {
 	m_FrameList.resize(0);
 }
 
-void Animation::AddFrame(Texture *texture) {
+void Animation::AddFrame(Frame *texture) {
 	m_FrameList.push_back(texture);
 }

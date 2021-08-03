@@ -1,4 +1,4 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "define.h"
 #include "Camera.h"
 
@@ -7,8 +7,22 @@ GLfloat Camera::GetRadian(GLfloat degree) {
 }
 
 Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
-	: m_fMovingSpeed(fMovingSpeed), m_fRotaionSpped(fRotationSpeed), m_isMoveForward(false), m_isMoveBackward(false), m_isMoveLeft(false), m_isMoveRight(false),
-	m_isRotUp(false), m_isRotDown(false), m_isRotLeft(false), m_isRotRight(false), m_RotVerticalCheck(0.0f), m_isNewView(true), m_isNewSkyView(true) {
+	:m_fMovingSpeed(fMovingSpeed), 
+	m_fRotaionSpped(fRotationSpeed), 
+	/*
+	m_isMoveForward(false), 
+	m_isMoveBackward(false), 
+	m_isMoveLeft(false), 
+	m_isMoveRight(false),
+	m_isRotUp(false), 
+	m_isRotDown(false), 
+	m_isRotLeft(false), 
+	m_isRotRight(false),
+	*/
+	m_RotVerticalCheck(0.0f), 
+	
+	m_isNewView(true), 
+	m_isNewSkyView(true) {
 
 	m_Position.x = 0.0f; m_Position.y = 0.0f; m_Position.z = 5.0f;
 	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Target.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
@@ -80,6 +94,7 @@ Vector3 Camera::GetPosition() {
 }
 
 void Camera::Update(float frameTime) {
+	/*
 	if (m_isMoveForward)
 		MoveForward(frameTime);
 	if (m_isMoveBackward)
@@ -96,6 +111,7 @@ void Camera::Update(float frameTime) {
 		RotationLeft(frameTime);
 	if (m_isRotRight)
 		RotationRight(frameTime);
+	*/
 }
 
 void Camera::MoveForward(float frameTime) {
@@ -107,6 +123,22 @@ void Camera::MoveForward(float frameTime) {
 
 void Camera::MoveBackward(float frameTime) {
 	Vector3 deltaMove = GetZAxis() * frameTime * m_fMovingSpeed;
+	m_Position += deltaMove;
+	m_Target += deltaMove;
+	m_isNewView = true;
+}
+
+void Camera::MoveUp(float frameTime)
+{
+	Vector3 deltaMove = GetYAxis() * frameTime * m_fMovingSpeed;
+	m_Position += deltaMove;
+	m_Target += deltaMove;
+	m_isNewView = true;
+}
+
+void Camera::MoveDown(float frameTime)
+{
+	Vector3 deltaMove = -GetYAxis() * frameTime * m_fMovingSpeed;
 	m_Position += deltaMove;
 	m_Target += deltaMove;
 	m_isNewView = true;
