@@ -1,29 +1,29 @@
 #pragma once
-#include <vector>
+#include <string>
 #include "../Utilities/Math.h"
 #include "Camera.h"
 
 class Object {
-private:
+protected:
+	Matrix m_WorldMatrix;
 	float m_fPosX, m_fPosY;
 	float m_fDeltaX, m_fDeltaY;
 
 public:
-	unsigned int m_iModelID;
-	unsigned int m_iShaderID;
-	Matrix m_TranslationMatrix;
-	Matrix m_RotationMatrix;
-	Matrix m_ScaleMatrix;
-	Matrix m_WorldMatrix;
-	bool m_isNewWorld;
+	std::string m_strPrefabID;
 
-	unsigned int m_iType;			//Collision Shape
-	float m_fWidth, m_fHeight;		//For RECT
-	float m_fRadius;				//For CIRCLE
+	//Animation info
+	std::string m_strState;
+	unsigned int m_iCurrFrameIndex;
+	float m_fCurrFrameTime;
+
+	//Hitbox info
+	unsigned int m_iType;			
+	float m_fWidth, m_fHeight;		
+	float m_fRadius;				
 
 	Object();
-	Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
-		unsigned int type, float posX, float posY, float width, float height, float radius);
+	Object(std::string prefabID, Matrix translationMatrix);
 	virtual ~Object();
 
 	virtual void Update(float frameTime);
@@ -33,4 +33,6 @@ public:
 	float GetPosY();
 	void SetPosX(float x);
 	void SetPosY(float y);
+
+	float* GetHitBoxData();
 }; 

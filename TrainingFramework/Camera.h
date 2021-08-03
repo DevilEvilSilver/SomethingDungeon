@@ -22,10 +22,12 @@ private:
 	Vector3 GetYAxis();
 	Vector3 GetZAxis();
 public:
+	/*
 	bool m_isMoveLeft, m_isMoveRight;
 	bool m_isMoveForward, m_isMoveBackward;
 	bool m_isRotUp, m_isRotDown;
 	bool m_isRotRight, m_isRotLeft;
+	*/
 
 	Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
 	~Camera();
@@ -40,6 +42,8 @@ public:
 	void MoveRight(float frameTime);
 	void MoveForward(float frameTime);
 	void MoveBackward(float frameTime);
+	void MoveUp(float frameTime);
+	void MoveDown(float frameTime);
 	void RotationLeft(float frameTime);
 	void RotationRight(float frameTime);
 	void RotationUp(float frameTime);

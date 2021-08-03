@@ -11,15 +11,23 @@ public:
 	Camera *m_Camera;
 
 	SceneManager();
-	~SceneManager();
 
 	void Init();
 	void Update(float frameTime);
+
+	//control
+	void Control(float frameTime);
+	//game logic
+
+	//collision
+	
+	void CheckCollision();
+
 	void Render();
 
 	void AddObject(Object *object);
 	void GetRenderOrder();
 
 	static SceneManager* GetInstance();
-	static void ResetInstance();
+	void ResetInstance();
 };
