@@ -17,10 +17,15 @@ ResourceManager::~ResourceManager() {
 	for (auto& object : m_ModelList) {
 		delete object;
 	}
-	for (auto& object : m_PrefabList) {
+	m_ModelList.resize(0);
+	for (auto& object : m_TextureList) {
 		delete object;
 	}
-	m_PrefabList.resize(0);
+	m_TextureList.resize(0);
+	for (auto& object : m_AnimationList) {
+		delete object;
+	}
+	m_AnimationList.resize(0);
 	for (auto& object : m_ShaderList) {
 		delete object;
 	}
@@ -43,52 +48,14 @@ void ResourceManager::Init() {
 	FILE* dataFile;
 	dataFile = fopen(FILE_RM, "r");
 
-	int iPrefabCount;
-	fscanf(dataFile, "#PREFAB_COUNT %d\n", &iPrefabCount);
-	while (iPrefabCount--) {
-		char strPrefabID[50];
-		fscanf(dataFile, "ID %s\n", &strPrefabID);
-
-		unsigned int iModel;
-		fscanf(dataFile, "MODEL %d\n", &iModel);
-
-		unsigned int iShader;
-		fscanf(dataFile, "SHADER %d\n", &iShader);
-		
-		char strType[50];
-		unsigned int iType;
-		GLfloat fPosX, fPosY, fWidth = 0.0f, fHeight = 0.0f, fRadius = 0.0f;
-		fscanf(dataFile, "TYPE %s\n", &strType);
-		if (!strcmp(strType, "RECT")) {
-			iType = RECTANGLE;
-			fscanf(dataFile, "COORD %f, %f, %f, %f\n", &fPosX, &fPosY, &fWidth, &fHeight);
-		}
-		else if (!strcmp(strType, "CIRCLE")) {
-			iType = CIRCLE;
-			fscanf(dataFile, "COORD %f, %f, %f\n", &fPosX, &fPosY, &fRadius);
-		}
-		
-		GLfloat fScaleX, fScaleY;
-		fscanf(dataFile, "SIZE %f x %f\n", &fScaleX, &fScaleY);
-
-		unsigned int isScaleBySize;
-		fscanf(dataFile, "SCALE_BY_SIZE %d\n", &isScaleBySize);
-
-		Prefab *prefab = new Prefab(strPrefabID, iModel, iShader, iType, fPosX, fPosY, fWidth, fHeight, fRadius, fScaleX, fScaleY, isScaleBySize);
-		
-		int iAnimationCount;
-		fscanf(dataFile, "ANIMATION_COUNT %d\n", &iAnimationCount);
-		while (iAnimationCount--) {
-			char strAnimId[50];
-			fscanf(dataFile, "ID %s\n", &strAnimId);
-			char strAnimationFile[100];
-			fscanf(dataFile, "FILE %s\n", &strAnimationFile);
-	
-			Animation *animation = new Animation(strAnimId, strAnimationFile);
-			prefab->AddAnamation(animation);
-		}
-		
-		AddPrefab(prefab);
+	int iModelCount;
+	fscanf(dataFile, "#MODEL_COUNT %d\n", &iModelCount);
+	while (iModelCount--) {
+		int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		char strNFGFile[100];
+		fscanf(dataFile, "FILE %s\n", &strNFGFile);
+		AddModel(LoadModel(id, strNFGFile));
 	}
 
 	int iModelGen;
@@ -97,8 +64,41 @@ void ResourceManager::Init() {
 		int id;
 		fscanf(dataFile, "ID %d\n", &id);
 		float width, height;
-		fscanf(dataFile, "SIZE %f x %f\n", &width, &height);
+		fscanf(dataFile, "SIZE %f x %f\n", &width, & height);
 		AddModel(GenModel(id, width, height));
+	}
+
+	int iTextureCount;
+	fscanf(dataFile, "#2D_TEXTURE_COUNT %d\n", &iTextureCount);
+	while (iTextureCount--) {
+		int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		char strTGAFile[100];
+		fscanf(dataFile, "FILE %s\n", &strTGAFile);
+		char strTiling[30];
+		GLint iTiling = 0;
+		fscanf(dataFile, "TILING %s\n", &strTiling);
+		if (!strcmp(strTiling, "GL_REPEAT"))
+			iTiling = GL_REPEAT;
+		else if (!strcmp(strTiling, "GL_CLAMP_TO_EDGE"))
+			iTiling = GL_CLAMP_TO_EDGE;
+		else if (!strcmp(strTiling, "GL_MIRRORED_REPEAT"))
+			iTiling = GL_MIRRORED_REPEAT;
+
+		Texture *texture = new Texture(id, strTGAFile, iTiling);
+		AddTexture(texture);
+	}
+
+	int iAnimationCount;
+	fscanf(dataFile, "#ANIMATION_COUNT %d\n", &iAnimationCount);
+	while (iAnimationCount--) {
+		char id[50];
+		fscanf(dataFile, "ID %s\n", &id);
+		char strAnimationFile[100];
+		fscanf(dataFile, "FILE %s\n", &strAnimationFile);
+	
+		Animation *animation = new Animation(id, strAnimationFile);
+		AddAnamation(animation);
 	}
 
 	int iShaderCount;
@@ -130,8 +130,12 @@ void ResourceManager::AddModel(Model *model) {
 	m_ModelList.push_back(model);
 }
 
-void ResourceManager::AddPrefab(Prefab *prefab) {
-	m_PrefabList.push_back(prefab);
+void ResourceManager::AddTexture(Texture *texture) {
+	m_TextureList.push_back(texture);
+}
+
+void ResourceManager::AddAnamation(Animation *animation) {
+	m_AnimationList.push_back(animation);
 }
 
 void ResourceManager::AddShader(Shaders *shader) {

@@ -22,25 +22,3 @@
 //OBJECT
 #define RECTANGLE					0
 #define CIRCLE						1
-
-
-//INPUT
-#define KEY_W		1<<0
-#define KEY_A		1<<1
-#define KEY_S		1<<2
-#define KEY_D		1<<3
-#define KEY_UP		1<<4
-#define KEY_LEFT	1<<5
-#define KEY_DOWN	1<<6
-#define KEY_RIGHT	1<<7
-
-#define KEY_SPACE	1<<8
-
-//OBJECT
-#define RECTANGLE					0
-#define CIRCLE						1
-#define RECTBOUND					2
-
-//PHYSIC ENGINE
-#define Y_EPSILON			0.5
-#define X_EPSILON			0.1

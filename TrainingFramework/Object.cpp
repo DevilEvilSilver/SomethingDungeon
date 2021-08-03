@@ -1,33 +1,16 @@
 #include "stdafx.h"
 #include "Object.h"
-#include "ResourceManager.h"
-#include "Prefab.h"
 #include "Renderer.h"
-
-template <class T>
-T GetResource(std::string id, std::vector<T> objList) {
-	for (auto& obj : objList) {
-		if (!strcmp(id.c_str(), obj->m_strResourceID.c_str()))
-			return obj;
-	}
-	return 0;
-}
 
 Object::Object() {}
 
-Object::Object(std::string prefabID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_strState("init"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
-	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
-
-	Matrix scaleMatrix;
-	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
-	m_WorldMatrix = scaleMatrix * translationMatrix;
-
-	m_iType = prefab->m_iType; m_fDeltaX = prefab->m_fDeltaX; m_fDeltaY = prefab->m_fDeltaY;
-	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
-
-	m_fPosX = m_fDeltaX + m_WorldMatrix.m[3][0];
-	m_fPosY = m_fDeltaY + m_WorldMatrix.m[3][1];
+Object::Object(unsigned int modelID, unsigned int shaderID, Matrix translationMatrix, Matrix rotationMatrix, Matrix scaleMatrix, 
+	unsigned int type, float posX, float posY, float width, float height, float radius)
+	: m_iModelID(modelID), m_iShaderID(shaderID), m_TranslationMatrix(translationMatrix), m_RotationMatrix(rotationMatrix), m_ScaleMatrix(scaleMatrix), 
+	m_isNewWorld(true), m_iType(type), m_fPosX(posX), m_fPosY(posY), m_fWidth(width), m_fHeight(height), m_fRadius(radius) {
+	
+	m_fDeltaX = m_fPosX - m_TranslationMatrix.m[3][0];
+	m_fDeltaY = m_fPosY - m_TranslationMatrix.m[3][1];
 }
 
 Object::~Object() {
@@ -35,14 +18,19 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-	m_fCurrFrameTime += frameTime;
+
 }
 
-void Object::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
+void Object::Render(Camera *camera) {
+	//if (m_iTexture2DID.size() > 0)
+	//	Renderer::GetInstance()->DrawTexture2D(this, camera);
 }
 
 Matrix Object::GetWorldMatrix() {
+	if (m_isNewWorld) {
+		m_WorldMatrix = m_ScaleMatrix * m_RotationMatrix * m_TranslationMatrix;
+		m_isNewWorld = false;
+	}
 	return m_WorldMatrix;
 }
 
@@ -56,16 +44,13 @@ float Object::GetPosY() {
 
 void Object::SetPosX(float x) {
 	m_fPosX = x;
-	m_WorldMatrix.m[3][0] = x - m_fDeltaX;
+	m_TranslationMatrix.m[3][0] = x - m_fDeltaX;
+	m_isNewWorld = true;
 }
 
 void Object::SetPosY(float y) {
+	float deltaY = m_fPosY - m_TranslationMatrix.m[3][1];
 	m_fPosY = y;
-	m_WorldMatrix.m[3][1] = y - m_fDeltaY;
-}
-
-float* Object::GetHitBoxData()
-{
-	float* data = new float[5]{ m_fPosX, m_fPosY, m_fPosX + m_fWidth, m_fPosY + m_fHeight, m_fRadius };
-	return data;
+	m_TranslationMatrix.m[3][1] = y - m_fDeltaY;
+	m_isNewWorld = true;
 }

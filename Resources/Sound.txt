@@ -1,5 +1,0 @@
-SoundNum 3
-
-#ID 0 ../Resources/Sounds/music_bg.wav
-#ID 1 ../Resources/Sounds/hurt.wav
-#ID 2 ../Resources/Sounds/canary.wav
