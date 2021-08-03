@@ -22,14 +22,44 @@
     <Filter Include="Header Files\ResourceManager">
       <UniqueIdentifier>{b3beba82-15a6-4f61-be67-85ec85704173}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\SceneManager">
-      <UniqueIdentifier>{507046d3-7c38-4add-b5f7-43616e9307ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\SceneManager">
-      <UniqueIdentifier>{663341c8-b82e-4b10-b74d-7fb3b418ed7b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\ResourceManager">
       <UniqueIdentifier>{cc99e06b-48ef-4909-a615-614c7c036249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InputManager">
+      <UniqueIdentifier>{fa6e0276-e9b9-49fd-bfe4-3d7a85d5ba23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateManager">
+      <UniqueIdentifier>{9ec96b8e-a4c0-49a9-a2c4-6e2ddd32cca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GraphicEngine">
+      <UniqueIdentifier>{e18201db-e838-4474-90ab-433eb24e466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PhysicEngine">
+      <UniqueIdentifier>{96aacf55-f55e-484a-92ec-8c72493ab132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneManager~a State">
+      <UniqueIdentifier>{507046d3-7c38-4add-b5f7-43616e9307ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PhysicManager">
+      <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InputManager">
+      <UniqueIdentifier>{0232ceaf-9a66-4744-8b6e-4b10e681754f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateManager">
+      <UniqueIdentifier>{30753610-1cec-4ccb-831c-498bfe689e41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GraphicEngine">
+      <UniqueIdentifier>{955ae037-1490-4f86-829e-d13301d3abff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SoundEngine">
+      <UniqueIdentifier>{36ccaca8-9068-4e3a-a90c-7f3909bfe1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoundEngine">
+      <UniqueIdentifier>{e51379d0-5d1e-4cd6-80ad-fd4568228982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager~a State">
+      <UniqueIdentifier>{663341c8-b82e-4b10-b74d-7fb3b418ed7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,10 +70,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\SceneManager</Filter>
+      <Filter>Source Files\SceneManager~a State</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>Source Files\SceneManager</Filter>
+      <Filter>Source Files\SceneManager~a State</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\ResourceManager</Filter>
@@ -54,23 +84,41 @@
     <ClCompile Include="Shaders.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\SceneManager</Filter>
+      <Filter>Source Files\SceneManager~a State</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="Frame.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.cpp">
+    <ClCompile Include="Animation.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedObject.cpp">
-      <Filter>Source Files\SceneManager</Filter>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="StaticObject.cpp">
-      <Filter>Source Files\SceneManager</Filter>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="State3.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="State2.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="State1.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectInstance.cpp">
+      <Filter>Source Files\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicEngine.cpp">
+      <Filter>Source Files\PhysicManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\GraphicEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\InputManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,49 +147,65 @@
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files\SceneManager</Filter>
+      <Filter>Header Files\SceneManager~a State</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>Header Files\SceneManager</Filter>
+      <Filter>Header Files\SceneManager~a State</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\SceneManager</Filter>
+      <Filter>Header Files\SceneManager~a State</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State1.h">
+      <Filter>Header Files\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State2.h">
+      <Filter>Header Files\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State3.h">
+      <Filter>Header Files\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectInstance.h">
+      <Filter>Header Files\StateManager</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GraphicEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Animation.h">
-      <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedObject.h">
-      <Filter>Header Files\SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticObject.h">
-      <Filter>Header Files\SceneManager</Filter>
+    <ClInclude Include="PhysicEngine.h">
+      <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Readme.doc" />
-    <None Include="..\Resources\Shaders\Object.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Object.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Terrain.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Terrain.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\RM.txt">
+      <Filter>Resources</Filter>
+    </Text>
+    <Text Include="..\Resources\SM.txt">
+      <Filter>Resources</Filter>
+    </Text>
+    <Text Include="..\Resources\Sound.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>
