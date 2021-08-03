@@ -68,7 +68,7 @@ void SceneManager::CheckCollision()
 {
 	static bool isCollied = false;//test only
 	
-	bool testCheck=PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[]);
+	bool testCheck=PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
 	
 	
 	if (isCollied==false&&testCheck == true) {
