@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include <algorithm> 
+#include <algorithm>
+#include <time.h>
 #include "SceneManager.h"
 #include "Object.h"
 #include "define.h"
@@ -48,8 +49,10 @@ void SceneManager::Init() {
 		AddObject(object);
 	}
 
-	float fLeft, fRight, fBottom, fTop;
 	fscanf(dataFile, "#CAMERA\n");
+	float fPosX, fPosY;
+	fscanf(dataFile, "POS %f, %f\n", &fPosX, &fPosY);
+	float fLeft, fRight, fBottom, fTop;
 	fscanf(dataFile, "PLANES %f, %f, %f, %f\n", &fLeft, &fRight, &fBottom, &fTop);
 	float fNear;
 	fscanf(dataFile, "NEAR %f\n", &fNear);
@@ -59,9 +62,61 @@ void SceneManager::Init() {
 	fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
 	float fRotationSpeed;
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
-	m_Camera = new Camera(fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
+	m_Camera = new Camera(fPosX, fPosY, fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 	
 	fclose(dataFile);
+
+	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
+}
+
+void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
+	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), HOLE);
+	srand(time(NULL));
+	unsigned int currPosX = rand() % 30 + 1;
+	unsigned int currPosY = rand() % 30 + 1;
+	Vector2 directions[4] = { Vector2(1, 0), Vector2(0, 1),  Vector2(-1, 0), Vector2(0, -1) };
+	unsigned int lastDirection = 0, randDirection = 0;
+
+	while (maxTunnel--) {
+		unsigned int tunnelLength = rand() % maxLength + 1;
+
+		do {
+			randDirection = rand() % 4;
+		} while ((directions[randDirection].x == directions[lastDirection].x &&
+			directions[randDirection].y == directions[lastDirection].y) ||
+			(directions[randDirection].x == -directions[lastDirection].x &&
+				directions[randDirection].y == -directions[lastDirection].y));
+
+		while (tunnelLength--) {
+			if ((currPosX == 1) && (directions[randDirection].x == -1) ||
+				(currPosX == 30) && (directions[randDirection].x == 1) ||
+				(currPosY == 1) && (directions[randDirection].y == -1) ||
+				(currPosY == 30) && (directions[randDirection].y == 1)) {
+				break;
+			}
+			else {
+				m_Map[currPosX][currPosY] = NORMAL;
+				currPosX += directions[randDirection].x;
+				currPosY += directions[randDirection].y;
+				lastDirection = randDirection;
+			}
+		}
+	}
+
+	for (unsigned int i = 0; i < 32; i++) {
+		for (unsigned int j = 0; j < 32; j++) {
+			Matrix translation;
+			translation.SetTranslation(i * ROOM_WIDTH, j * ROOM_HEIGHT, -1.0f);
+			if (m_Map[i][j] == NORMAL) {
+				Room *room = new Room("normalRoom", translation);
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == HOLE) {
+				Room *room = new Room("holeRoom", translation);
+				AddRoom(room);
+			}
+		}
+	}
 }
 
 void SceneManager::CheckCollision()
@@ -80,14 +135,13 @@ void SceneManager::CheckCollision()
 		isCollied = false;
 	}
 	
-
-
-	
-	
 }
 
 void SceneManager::Render() {
 	//GetRenderOrder();
+	for (auto& obj : m_RoomList) {
+		obj->Render(this->m_Camera);
+	}
 	for (auto& obj : m_ObjectList) {
 		obj->Render(this->m_Camera);
 	}
@@ -103,7 +157,7 @@ void SceneManager::Update(float frameTime) {
 
 	Control(frameTime);
 	
-	CheckCollision();
+	//CheckCollision();
 }
 
 void SceneManager::Control(float frameTime)
@@ -167,6 +221,10 @@ void SceneManager::AddObject(Object *object) {
 	m_ObjectList.push_back(object);
 }
 
+void SceneManager::AddRoom(Room *room) {
+	m_RoomList.push_back(room);
+}
+
 void SceneManager::GetRenderOrder() {
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
@@ -179,8 +237,11 @@ void SceneManager::ResetInstance() {
 		delete object;
 	}
 	m_ObjectList.clear();
+	for (auto& object : m_RoomList) {
+		delete object;
+	}
+	m_RoomList.clear();
 	delete m_Camera;
-	
 
 	delete s_Instance;
 	s_Instance = NULL;

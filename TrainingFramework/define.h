@@ -23,6 +23,11 @@
 #define RECTANGLE					0
 #define CIRCLE						1
 
+//MAP
+#define MAP_MAX_TUNNEL				160
+#define TUNNEL_MAX_LENGTH			7
+#define ROOM_WIDTH					20
+#define ROOM_HEIGHT					20
 
 //INPUT
 #define KEY_W		1<<0
