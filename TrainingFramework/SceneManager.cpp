@@ -11,6 +11,15 @@
 
 #include "PhysicEngine.h"
 
+template <class T>
+T GetRoom(RoomType id, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (id == obj->m_RoomType)
+			return obj;
+	}
+	return 0;
+}
+
 SceneManager * SceneManager::s_Instance = NULL;
 
 SceneManager::SceneManager(void) {
@@ -27,6 +36,9 @@ SceneManager* SceneManager::GetInstance()
 
 
 void SceneManager::Init() {
+	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
+	Room *startRoom = GetRoom(START, m_RoomList);
+
 	FILE* dataFile;
 	dataFile = fopen(FILE_SM, "r");
 
@@ -49,6 +61,21 @@ void SceneManager::Init() {
 		AddObject(object);
 	}
 
+	//Player
+	fscanf(dataFile, "#PLAYER\n");
+	unsigned int id;
+	fscanf(dataFile, "ID %d\n", &id);
+	char strPrefab[50];
+	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+	Matrix translation;
+	GLfloat x, y, z;
+	fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
+	translation.SetTranslation(x, y, z);
+	m_Player = new Player(strPrefab, translation);
+	m_Player->SetPosX(startRoom->GetPosX() + PLAYER_START_POSX);
+	m_Player->SetPosY(startRoom->GetPosY() - startRoom->m_fHeight + PLAYER_START_POSY);
+
+	//Camera
 	fscanf(dataFile, "#CAMERA\n");
 	float fPosX, fPosY;
 	fscanf(dataFile, "POS %f, %f\n", &fPosX, &fPosY);
@@ -62,11 +89,10 @@ void SceneManager::Init() {
 	fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
 	float fRotationSpeed;
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
-	m_Camera = new Camera(fPosX, fPosY, fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
+	m_Camera = new Camera(startRoom->GetPosX() + (startRoom->m_fWidth / 2), startRoom->GetPosY() - (startRoom->m_fHeight / 2), 
+		fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 	
 	fclose(dataFile);
-
-	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 }
 
 void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -109,7 +135,7 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	for (unsigned int i = 0; i < 32; i++) {
 		for (unsigned int j = 0; j < 32; j++) {
 			Matrix translation;
-			translation.SetTranslation(i * ROOM_WIDTH, j * ROOM_HEIGHT, -1.0f);
+			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
 				Room *room = new Room(NORMAL_ROOM, translation, NORMAL);
 				AddRoom(room);
@@ -130,69 +156,50 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	}
 }
 
-void SceneManager::CheckCollision()
-{
-	static bool isCollied = false;//test only
-	
-	bool testCheck=PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
-	
-	
-	if (isCollied==false&&testCheck == true) {
-		printf("Collied!\n");
-		isCollied = true;
-	}
-	else if (isCollied == true && testCheck == false) {
-		printf("Not Collied!\n");
-		isCollied = false;
-	}
-	
-}
-
 void SceneManager::Render() {
 	//GetRenderOrder();
 	for (auto& obj : m_RoomList) {
 		obj->Render(this->m_Camera);
 	}
-	for (auto& obj : m_ObjectList) {
-		obj->Render(this->m_Camera);
+
+	m_Player->Render(this->m_Camera);
+
+	for (auto& object : m_EnemyList) {
+		object->Render(this->m_Camera);
 	}
-	
 }
 
 void SceneManager::Update(float frameTime) {
 	m_Camera->Update(frameTime);
+	m_Player->Update(frameTime);
 
-	for (auto& object : m_ObjectList) {
+	for (auto& object : m_EnemyList) {
 		object->Update(frameTime);
 	}
 
 	Control(frameTime);
-	
-	//CheckCollision();
 }
 
 void SceneManager::Control(float frameTime)
 {
-	//testing
-
 	//CHAR CONTROL
-	float fSpeed = 5.0f;
+	float fSpeed = 15.0f;
 
 	if (InputManager::GetInstance()->keyPressed & KEY_W)
 	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() + fSpeed*frameTime);
+		m_Player->SetPosY(m_Player->GetPosY() + fSpeed*frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_A)
 	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() - fSpeed * frameTime);
+		m_Player->SetPosX(m_Player->GetPosX() - fSpeed * frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_S)
 	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() - fSpeed * frameTime);
+		m_Player->SetPosY(m_Player->GetPosY() - fSpeed * frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_D)
 	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() + fSpeed * frameTime);
+		m_Player->SetPosX(m_Player->GetPosX() + fSpeed * frameTime);
 	}
 	
 	//CAMERA
@@ -236,6 +243,10 @@ void SceneManager::AddRoom(Room *room) {
 	m_RoomList.push_back(room);
 }
 
+void SceneManager::AddEnemy(Enemy *enemy) {
+	m_EnemyList.push_back(enemy);
+}
+
 void SceneManager::GetRenderOrder() {
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
@@ -252,6 +263,10 @@ void SceneManager::ResetInstance() {
 		delete object;
 	}
 	m_RoomList.clear();
+	for (auto& object : m_EnemyList) {
+		delete object;
+	}
+	m_EnemyList.clear();
 	delete m_Camera;
 
 	delete s_Instance;

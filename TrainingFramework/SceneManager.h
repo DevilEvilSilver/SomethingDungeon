@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
-#include "Object.h"
 #include "Room.h"
+#include "Player.h"
+#include "Enemy.h"
 
 class SceneManager {
 private:
@@ -10,7 +11,9 @@ private:
 public:
 	RoomType m_Map[32][32];
 	std::vector<Room*> m_RoomList;
+	std::vector<Enemy*> m_EnemyList;
 	std::vector<Object*> m_ObjectList;
+	Player *m_Player;
 	Camera *m_Camera;
 
 	SceneManager();
@@ -31,6 +34,7 @@ public:
 
 	void AddObject(Object *object);
 	void AddRoom(Room *room);
+	void AddEnemy(Enemy *enemy);
 	void GetRenderOrder();
 
 	static SceneManager* GetInstance();

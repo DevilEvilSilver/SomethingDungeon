@@ -2,12 +2,13 @@
 #include "Player.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "define.h"
 
 Player::Player() {}
 
 Player::Player(std::string prefabID, Matrix translationMatrix)
 	: Character(prefabID, translationMatrix) {
-
+	m_strState = IDLE_LEFT;
 }
 
 Player::~Player() {

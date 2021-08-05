@@ -24,6 +24,8 @@
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					20
 #define ROOM_HEIGHT					20
+#define PLAYER_START_POSX			10.0
+#define PLAYER_START_POSY			10.0
 
 //INPUT
 #define KEY_W		1<<0
@@ -52,3 +54,4 @@
 
 //ANIMATION
 #define INIT_ANIM		"init"
+#define IDLE_LEFT		"idleLeft"
