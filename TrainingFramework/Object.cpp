@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Prefab.h"
 #include "Renderer.h"
+#include "define.h"
 
 template <class T>
 T GetResource(std::string id, std::vector<T> objList) {
@@ -16,7 +17,7 @@ T GetResource(std::string id, std::vector<T> objList) {
 Object::Object() {}
 
 Object::Object(std::string prefabID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_strState("init"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+	: m_strPrefabID(prefabID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;

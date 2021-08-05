@@ -8,10 +8,6 @@ private:
 	static SceneManager* s_Instance;
 
 public:
-	enum RoomType {
-		NORMAL,
-		HOLE,
-	};
 	RoomType m_Map[32][32];
 	std::vector<Room*> m_RoomList;
 	std::vector<Object*> m_ObjectList;

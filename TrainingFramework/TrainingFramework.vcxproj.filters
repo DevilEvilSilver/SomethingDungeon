@@ -123,6 +123,15 @@
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Room.cpp">
       <Filter>Source Files\SceneManager~a State</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Character.cpp">
+      <Filter>Source Files\SceneManager~a State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Player.cpp">
+      <Filter>Source Files\SceneManager~a State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Enemy.cpp">
+      <Filter>Source Files\SceneManager~a State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -192,6 +201,15 @@
       <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Room.h">
+      <Filter>Header Files\SceneManager~a State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Character.h">
+      <Filter>Header Files\SceneManager~a State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Player.h">
+      <Filter>Header Files\SceneManager~a State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Enemy.h">
       <Filter>Header Files\SceneManager~a State</Filter>
     </ClInclude>
   </ItemGroup>

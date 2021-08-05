@@ -19,10 +19,6 @@
 #define FILE_SM						"../Resources/SM.txt"
 #define FILE_RM						"../Resources/RM.txt"
 
-//OBJECT
-#define RECTANGLE					0
-#define CIRCLE						1
-
 //MAP
 #define MAP_MAX_TUNNEL				160
 #define TUNNEL_MAX_LENGTH			7
@@ -41,11 +37,18 @@
 
 #define KEY_SPACE	1<<8
 
-//OBJECT
+//PHYSIC ENGINE
 #define RECTANGLE					0
 #define CIRCLE						1
 #define RECTBOUND					2
-
-//PHYSIC ENGINE
 #define Y_EPSILON			0.5
 #define X_EPSILON			0.1
+
+//PREFAB
+#define PLAYER			"mainChar"
+#define NORMAL_ROOM		"normalRoom"
+#define WALL_ROOM		"wallRoom"
+#define HOLE_ROOM		"holeRoom"
+
+//ANIMATION
+#define INIT_ANIM		"init"

@@ -70,10 +70,11 @@ void SceneManager::Init() {
 }
 
 void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
-	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), HOLE);
+	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
 	srand(time(NULL));
 	unsigned int currPosX = rand() % 30 + 1;
 	unsigned int currPosY = rand() % 30 + 1;
+	m_Map[currPosX][currPosY] = START;
 	Vector2 directions[4] = { Vector2(1, 0), Vector2(0, 1),  Vector2(-1, 0), Vector2(0, -1) };
 	unsigned int lastDirection = 0, randDirection = 0;
 
@@ -95,24 +96,34 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				break;
 			}
 			else {
-				m_Map[currPosX][currPosY] = NORMAL;
+				if (m_Map[currPosX][currPosY] != START) 
+					m_Map[currPosX][currPosY] = NORMAL;
 				currPosX += directions[randDirection].x;
 				currPosY += directions[randDirection].y;
 				lastDirection = randDirection;
 			}
 		}
 	}
+	m_Map[currPosX][currPosY] = END;
 
 	for (unsigned int i = 0; i < 32; i++) {
 		for (unsigned int j = 0; j < 32; j++) {
 			Matrix translation;
 			translation.SetTranslation(i * ROOM_WIDTH, j * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
-				Room *room = new Room("normalRoom", translation);
+				Room *room = new Room(NORMAL_ROOM, translation, NORMAL);
 				AddRoom(room);
 			}
-			else if (m_Map[i][j] == HOLE) {
-				Room *room = new Room("holeRoom", translation);
+			else if (m_Map[i][j] == WALL) {
+				Room *room = new Room(WALL_ROOM, translation, WALL);
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == START) {
+				Room *room = new Room(NORMAL_ROOM, translation, START);
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == END) {
+				Room *room = new Room(NORMAL_ROOM, translation, END);
 				AddRoom(room);
 			}
 		}
