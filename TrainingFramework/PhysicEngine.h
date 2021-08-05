@@ -22,6 +22,8 @@ public:
 	static bool CheckRectBoundCollision(Object* rect, Object* bound);
 	static bool CheckCirBoundCollision(Object* rect, Object* bound);
 
+	static bool CheckMouseRectangle(Vector2 mousePos,Object* rect);		//kiem tra click vao dau
+
 	static PhysicEngine* GetInstance();
 	static void ResetInstance();
 };

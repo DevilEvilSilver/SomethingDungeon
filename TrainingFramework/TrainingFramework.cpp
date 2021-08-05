@@ -29,20 +29,37 @@ void Draw(ESContext* esContext)
 void Update(ESContext* esContext, float deltaTime)
 {
 	StateManager::GetInstance()->Update(deltaTime);
+
+	//printf("key: %d\n",InputManager::GetInstance()->keyPressed);
 }
 
-void TouchActionDown(ESContext* esContext, int x, int y)
+void TouchActionRightDown(ESContext* esContext, int x, int y)
 {
-	//SceneManager::GetInstance()->CheckTouchPosition(x, y);
+	InputManager::GetInstance()->MouseMove(x, y);
+	InputManager::GetInstance()->MouseRight(true);
 }
 
-void TouchActionUp(ESContext* esContext, int x, int y)
+void TouchActionLeftDown(ESContext* esContext, int x, int y)
 {
-	//SceneManager::GetInstance()->SetAllNotHold(x, y);
+	InputManager::GetInstance()->MouseMove(x, y);
+	InputManager::GetInstance()->MouseLeft(true);
+}
+
+void TouchActionLeftUp(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseLeft(false);
+}
+
+void TouchActionRightUp(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseRight(false);
 }
 
 void TouchActionMove(ESContext* esContext, int x, int y)
 {
+	//printf("Move %d %d\n", x, y);
+	
+	InputManager::GetInstance()->MouseMove(x, y);		
 	//SceneManager::GetInstance()->TouchMove(x, y);
 }
 
@@ -71,8 +88,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	esRegisterDrawFunc(&esContext, Draw);
 	esRegisterUpdateFunc(&esContext, Update);
 	esRegisterKeyFunc(&esContext, Key);
-	esRegisterMouseDownFunc(&esContext, TouchActionDown);
-	esRegisterMouseUpFunc(&esContext, TouchActionUp);
+
+	esRegisterMouseLeftDownFunc(&esContext, TouchActionLeftDown);
+	esRegisterMouseRightDownFunc(&esContext, TouchActionRightDown);
+	
+	esRegisterMouseLeftUpFunc(&esContext, TouchActionLeftUp);
+	esRegisterMouseRightUpFunc(&esContext, TouchActionRightUp);
+
 	esRegisterMouseMoveFunc(&esContext, TouchActionMove);
 
 	esMainLoop(&esContext);

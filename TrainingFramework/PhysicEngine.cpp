@@ -151,6 +151,17 @@ bool PhysicEngine::CheckCirBoundCollision(Object* rect, Object* bound)
 {
 	return false;
 }
+bool PhysicEngine::CheckMouseRectangle(Vector2 mousePos,Object* rect)
+{
+	float deltaX = mousePos.x - rect->GetPosX();
+	float deltaY = rect->GetPosY() - mousePos.y;
+	if (deltaX >= 0 && deltaY >= 0 && 
+		deltaX <= rect->m_fWidth && 
+		deltaY <= rect->m_fHeight)
+		return true;
+
+	return false;
+}
 PhysicEngine* PhysicEngine::GetInstance()
 {
 	if (!s_Instance)

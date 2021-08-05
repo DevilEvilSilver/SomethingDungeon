@@ -48,8 +48,10 @@ public:
    void (ESCALLBACK *drawFunc) ( ESContext * );
    void (ESCALLBACK *keyFunc) ( ESContext *, unsigned char, bool );
    void (ESCALLBACK *updateFunc) ( ESContext *, float deltaTime );
-   void (ESCALLBACK *mouseDownFunc) (ESContext*, int, int);
-   void (ESCALLBACK *mouseUpFunc) (ESContext*, int, int);
+   void (ESCALLBACK *mouseLeftDownFunc) (ESContext*, int, int);
+   void (ESCALLBACK* mouseRightDownFunc) (ESContext*, int, int);
+   void (ESCALLBACK *mouseLeftUpFunc) (ESContext*, int, int);
+   void (ESCALLBACK* mouseRightUpFunc) (ESContext*, int, int);
    void (ESCALLBACK *mouseMoveFunc) (ESContext*, int, int);
 };
 
@@ -108,12 +110,17 @@ void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
 /// \Register mouse input
 /// \param mouse coordination
 //
-void ESUTIL_API esRegisterMouseDownFunc(ESContext *esContext,
+void ESUTIL_API esRegisterMouseLeftDownFunc(ESContext *esContext,
 	void (ESCALLBACK *mouseDownFunc) (ESContext*, int, int));
 
-void ESUTIL_API esRegisterMouseUpFunc(ESContext *esContext,
+void ESUTIL_API esRegisterMouseRightDownFunc(ESContext* esContext,
+	void (ESCALLBACK* mouseDownFunc) (ESContext*, int, int));
+
+void ESUTIL_API esRegisterMouseLeftUpFunc(ESContext *esContext,
 	void (ESCALLBACK *mouseUpFunc) (ESContext*, int, int));
 
+void ESUTIL_API esRegisterMouseRightUpFunc(ESContext* esContext,
+	void (ESCALLBACK* mouseUpFunc) (ESContext*, int, int));
 
 void ESUTIL_API esRegisterMouseMoveFunc(ESContext *esContext,
 	void (ESCALLBACK *mouseMoveFunc) (ESContext*, int, int));

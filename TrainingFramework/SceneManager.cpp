@@ -101,6 +101,8 @@ void SceneManager::Update(float frameTime) {
 		object->Update(frameTime);
 	}
 
+	
+
 	Control(frameTime);
 	
 	CheckCollision();
@@ -111,56 +113,108 @@ void SceneManager::Control(float frameTime)
 	//testing
 
 	//CHAR CONTROL
-	float fSpeed = 5.0f;
+	if (InputManager::GetInstance()->keyPressed > 0) {
+		float fSpeed = 5.0f;
 
-	if (InputManager::GetInstance()->keyPressed & KEY_W)
-	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() + fSpeed*frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_A)
-	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() - fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_S)
-	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() - fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_D)
-	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() + fSpeed * frameTime);
-	}
-	
-	//CAMERA
-	if (InputManager::GetInstance()->keyPressed & KEY_UP)
-	{
-		m_Camera->MoveUp(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() + fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_LEFT)
-	{
-		m_Camera->MoveLeft(frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_DOWN)
-	{
-		m_Camera->MoveDown(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() - fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_RIGHT)
-	{
-		m_Camera->MoveRight(frameTime);
-	}
+		if (InputManager::GetInstance()->keyPressed & KEY_W)
+		{
+			m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() + fSpeed * frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_A)
+		{
+			m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() - fSpeed * frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_S)
+		{
+			m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() - fSpeed * frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_D)
+		{
+			m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() + fSpeed * frameTime);
+		}
 
-
-	//STATE CHANGE
-	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
-	{
-		StateManager::GetInstance()->m_GameStateStack.pop_back();
-		StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
+		//CAMERA
+		if (InputManager::GetInstance()->keyPressed & KEY_UP)
+		{
+			m_Camera->MoveUp(frameTime);
+			//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() + fSpeed * frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_LEFT)
+		{
+			m_Camera->MoveLeft(frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_DOWN)
+		{
+			m_Camera->MoveDown(frameTime);
+			//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() - fSpeed * frameTime);
+		}
+		if (InputManager::GetInstance()->keyPressed & KEY_RIGHT)
+		{
+			m_Camera->MoveRight(frameTime);
+		}
 
 
-		//ResetInstance();
-	}
+		//STATE CHANGE
+		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
+		{
+			StateManager::GetInstance()->m_GameStateStack.pop_back();
+			StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
 
+
+			//ResetInstance();
+		}
+
+
+		//MOUSE
+		if (InputManager::GetInstance()->keyPressed & MOUSE_LEFT)
+		{
+			Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
+			//printf("Move %.2f %.2f\n", mousePosition.x,mousePosition.y);
+
+
+
+			if (PhysicEngine::GetInstance()->CheckMouseRectangle(mousePosition, m_ObjectList[2]) == true) {
+				StateManager::GetInstance()->m_GameStateStack.pop_back();
+				StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
+			}
+
+
+		}
+
+		if (InputManager::GetInstance()->keyPressed & MOUSE_RIGHT)
+		{
+			
+		}
+
+		/*
+		static Object* touched = NULL;
+
+		if (InputManager::GetInstance()->keyPressed & (MOUSE_LEFT | MOUSE_RIGHT))
+		{
+			Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
+			//printf("Move %.2f %.2f\n", mousePosition.x,mousePosition.y);
+
+			if (touched == NULL) {
+				for (auto a : m_ObjectList) {
+					if (PhysicEngine::GetInstance()->CheckMouseRectangle(mousePosition,a)==true)
+						touched = a;
+				}
+			}
+			
+
+			if (touched != NULL) {
+				touched->SetPosX(mousePosition.x); touched->SetPosY(mousePosition.y);
+			}
+
+		}
+		else
+		{
+			touched = NULL; 
+			printf("release\n");
+		}
+		*/
+		
+	}
 }
 
 void SceneManager::AddObject(Object *object) {

@@ -16,6 +16,8 @@ private:
 	float m_RotVerticalCheck;
 	bool m_isNewView, m_isNewSkyView;
 
+	float m_viewWidth, m_viewHeight;
+
 	Matrix GetWorldMatrix();
 	GLfloat GetRadian(GLfloat degree);
 	Vector3 GetXAxis();
@@ -33,6 +35,7 @@ public:
 	~Camera();
 	
 	Vector3 GetPosition();
+	Vector2 GetViewScale();
 	Matrix GetViewMatrix();
 	Matrix GetSkyViewMatrix();
 	Matrix GetProjectionMatrix();

@@ -172,16 +172,28 @@ void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
    esContext->keyFunc = keyFunc;
 }
 
-void ESUTIL_API esRegisterMouseDownFunc(ESContext *esContext,
+void ESUTIL_API esRegisterMouseLeftDownFunc(ESContext *esContext,
 										void (ESCALLBACK *mouseDownFunc) (ESContext*, int, int))
 {
-	esContext->mouseDownFunc = mouseDownFunc;
+	esContext->mouseLeftDownFunc = mouseDownFunc;
 }
 
-void ESUTIL_API esRegisterMouseUpFunc(ESContext *esContext,
+void ESUTIL_API esRegisterMouseRightDownFunc(ESContext* esContext,
+    void (ESCALLBACK* mouseDownFunc) (ESContext*, int, int))
+{
+    esContext->mouseRightDownFunc = mouseDownFunc;
+}
+
+void ESUTIL_API esRegisterMouseLeftUpFunc(ESContext *esContext,
 										void (ESCALLBACK *mouseUpFunc) (ESContext*, int, int))
 {
-	esContext->mouseUpFunc = mouseUpFunc;
+	esContext->mouseLeftUpFunc = mouseUpFunc;
+}
+
+void ESUTIL_API esRegisterMouseRightUpFunc(ESContext* esContext,
+    void (ESCALLBACK* mouseUpFunc) (ESContext*, int, int))
+{
+    esContext->mouseRightUpFunc = mouseUpFunc;
 }
 
 void ESUTIL_API esRegisterMouseMoveFunc(ESContext *esContext,

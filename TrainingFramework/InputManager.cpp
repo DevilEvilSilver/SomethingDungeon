@@ -78,6 +78,39 @@ void InputManager::Key(unsigned char key, bool bIsPressed)
 	//printf("keyPressed: %d\n", keyPressed);
 }
 
+void InputManager::MouseLeft(bool bIsPressed)
+{
+	if (bIsPressed == true)
+		keyPressed = keyPressed | MOUSE_LEFT;
+	else
+		keyPressed = keyPressed ^ MOUSE_LEFT;
+}
+
+void InputManager::MouseRight(bool bIsPressed)
+{
+	if (bIsPressed == true)
+		keyPressed = keyPressed | MOUSE_RIGHT;
+	else
+		keyPressed = keyPressed ^ MOUSE_RIGHT;
+}
+
+void InputManager::MouseMove(int x, int y)
+{
+	mouseX = x;
+	mouseY = y;
+}
+
+Vector2 InputManager::MousePosition(Camera* stateCamera)
+{
+	Vector2 camScale = stateCamera->GetViewScale();
+	float x = mouseX / SCREEN_W * camScale.x + stateCamera->GetPosition().x - 10.0f;
+	float y = mouseY / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + 10.0f;
+
+	
+
+	return Vector2(x,y);
+}
+
 InputManager* InputManager::GetInstance()
 {
 	if (!s_Instance)

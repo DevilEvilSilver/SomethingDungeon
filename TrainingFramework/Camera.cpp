@@ -29,6 +29,9 @@ Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat
 	m_VectorUp.x = 0.0f; m_VectorUp.y = 1.0f; m_VectorUp.z = 0.0f; //always (0, 1, 0)
 	m_ZAxis = GetZAxis(); m_XAxis = GetXAxis(); m_YAxis = GetYAxis();
 	m_ProjectionMatrix.SetOrthographic(left, right, bottom, top, nearPlane, farPlane);
+
+	m_viewWidth = right - left;
+	m_viewHeight = top - bottom;
 }
 
 Camera::~Camera() {
@@ -91,6 +94,11 @@ Matrix Camera::GetProjectionMatrix() {
 
 Vector3 Camera::GetPosition() {
 	return m_Position;
+}
+
+Vector2 Camera::GetViewScale()
+{
+	return Vector2(m_viewWidth,m_viewHeight);
 }
 
 void Camera::Update(float frameTime) {

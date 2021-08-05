@@ -36,6 +36,9 @@
 
 #define KEY_SPACE	1<<8
 
+#define MOUSE_LEFT	1<<29
+#define MOUSE_RIGHT	1<<30
+
 //OBJECT
 #define RECTANGLE					0
 #define CIRCLE						1
