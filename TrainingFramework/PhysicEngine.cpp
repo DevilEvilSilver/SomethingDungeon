@@ -62,29 +62,27 @@ bool PhysicEngine::CheckRectCirCollision(Object* rect, Object* cir)
 }
 bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 {
-
-	float *r1 = rect1->GetHitBoxData();
-	float *r2 = rect2->GetHitBoxData();
-	float x11 = r1[0];		float x21 = r2[0];
-	float y11 = r1[1];		float y21 = r2[1];
-	float x12 = r1[2];		float x22 = r2[2];
-	float y12 = r1[3];		float y22 = r2[3];
-	bool bSts = false;
-	if (x11 <= x21 && x21 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
-	{
-		bSts = true;
-	}
-	else if (x11 <= x22 && x22 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
-	{
-		bSts = true;
-	}
-	else
-		bSts = false;
-	delete[] r1;
-	delete[] r2;
-	return bSts;
+	//float *r1 = rect1->GetHitBoxData();
+	//float *r2 = rect2->GetHitBoxData();
+	//float x11 = r1[0];		float x21 = r2[0];
+	//float y11 = r1[1];		float y21 = r2[1];
+	//float x12 = r1[2];		float x22 = r2[2];
+	//float y12 = r1[3];		float y22 = r2[3];
+	//bool bSts = false;
+	//if (x11 <= x21 && x21 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
+	//{
+	//	bSts = true;
+	//}
+	//else if (x11 <= x22 && x22 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
+	//{
+	//	bSts = true;
+	//}
+	//else
+	//	bSts = false;
+	//delete[] r1;
+	//delete[] r2;
+	//return bSts;
 	
-	/*
 	float	x1 = rect1->GetPosX(),
 		y1 = rect1->GetPosY(),
 		w1 = rect1->m_fWidth,
@@ -97,14 +95,14 @@ bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 
 	if (x1 <= x2 + w2 &&
 		x2 <= x1 + w1 &&
-		y1 <= y2 + h2 &&
-		y2 <= y1 + h1)
+		y1 >= y2 - h2 &&
+		y2 >= y1 - h1)
 	{
 		return true;
 	}
 
 	return false;
-	*/
+	
 }
 bool PhysicEngine::CheckCirCirCollision(Object* cir1, Object* cir2)
 {
