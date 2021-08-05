@@ -22,6 +22,7 @@ StateManager * StateManager::s_Instance = NULL;
 StateManager::StateManager()
 {
 	AddState(GS_STATE_1);
+	SceneManager::GetInstance()->RoomsGenerate();
 }
 
 StateManager::~StateManager() {}

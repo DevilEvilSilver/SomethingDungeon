@@ -33,8 +33,6 @@ SceneManager* SceneManager::GetInstance()
 	return s_Instance;
 }
 
-
-
 void SceneManager::Init() {
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoom(START, m_RoomList);
@@ -153,6 +151,12 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				AddRoom(room);
 			}
 		}
+	}
+}
+
+void SceneManager::RoomsGenerate() {
+	for (auto& obj : m_RoomList) {
+		obj->RoomGenerate();
 	}
 }
 

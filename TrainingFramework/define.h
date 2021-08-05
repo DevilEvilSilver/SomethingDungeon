@@ -48,6 +48,7 @@
 
 //PREFAB
 #define PLAYER			"mainChar"
+#define ENEMY			"enemy"
 #define NORMAL_ROOM		"normalRoom"
 #define WALL_ROOM		"wallRoom"
 #define HOLE_ROOM		"holeRoom"

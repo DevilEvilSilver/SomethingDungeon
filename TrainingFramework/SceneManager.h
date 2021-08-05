@@ -20,6 +20,7 @@ public:
 
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
+	void RoomsGenerate();
 	void Update(float frameTime);
 
 	//control

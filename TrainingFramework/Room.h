@@ -16,6 +16,7 @@ public:
 	Room(std::string prefabID, Matrix translationMatrix, RoomType roomType);
 	~Room();
 
+	void RoomGenerate();
 	void Update(float frameTime);
 	void Render(Camera *camera);
 };
