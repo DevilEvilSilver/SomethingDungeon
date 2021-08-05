@@ -6,7 +6,7 @@ public:
 
 
 	Enemy();
-	Enemy(std::string prefabID, Matrix translationMatrix);
+	Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Enemy();
 
 	virtual void Update(float frameTime);

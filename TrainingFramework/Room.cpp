@@ -18,8 +18,8 @@ T GetResource(std::string id, std::vector<T> objList) {
 
 Room::Room() {}
 
-Room::Room(std::string prefabID, Matrix translationMatrix, RoomType roomType)
-	: Object(prefabID, translationMatrix), m_RoomType(roomType) {
+Room::Room(std::string prefabID, Vector2 roomID, Matrix translationMatrix, RoomType roomType)
+	: Object(prefabID, roomID, translationMatrix), m_RoomType(roomType) {
 
 }
 
@@ -45,7 +45,7 @@ void Room::RoomGenerate() {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - m_fHeight + randPosY, 0.0f);
-			Enemy *enemy = new Enemy(ENEMY, translation);
+			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
 			SceneManager::GetInstance()->AddEnemy(enemy);
 		}
 	}

@@ -16,8 +16,8 @@ T GetResource(std::string id, std::vector<T> objList) {
 
 Object::Object() {}
 
-Object::Object(std::string prefabID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;
@@ -67,6 +67,6 @@ void Object::SetPosY(float y) {
 
 float* Object::GetHitBoxData()
 {
-	float* data = new float[5]{ m_fPosX, m_fPosY, m_fPosX + m_fWidth, m_fPosY + m_fHeight, m_fRadius };
+	float* data = new float[5]{ m_fPosX, m_fPosY, m_fPosX + m_fWidth, m_fPosY - m_fHeight, m_fRadius };
 	return data;
 }

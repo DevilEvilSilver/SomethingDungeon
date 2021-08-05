@@ -12,9 +12,18 @@
 #include "PhysicEngine.h"
 
 template <class T>
-T GetRoom(RoomType id, std::vector<T> objList) {
+T GetRoomByType(RoomType id, std::vector<T> objList) {
 	for (auto&obj : objList) {
 		if (id == obj->m_RoomType)
+			return obj;
+	}
+	return 0;
+}
+
+template <class T>
+T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (roomID.x == obj->m_RoomID.x && roomID.y == obj->m_RoomID.y)
 			return obj;
 	}
 	return 0;
@@ -35,29 +44,10 @@ SceneManager* SceneManager::GetInstance()
 
 void SceneManager::Init() {
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
-	Room *startRoom = GetRoom(START, m_RoomList);
+	Room *startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_SM, "r");
-
-	int iObjectCount;
-	fscanf(dataFile, "#OBJECT_COUNT %d\n", &iObjectCount);
-
-	while (iObjectCount--) {
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
-
-		char strPrefab[50];
-		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
-
-		Matrix translation;
-		GLfloat x, y, z;
-		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
-		translation.SetTranslation(x, y, z);
-
-		Object *object = new Object(strPrefab, translation);
-		AddObject(object);
-	}
 
 	//Player
 	fscanf(dataFile, "#PLAYER\n");
@@ -66,17 +56,11 @@ void SceneManager::Init() {
 	char strPrefab[50];
 	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 	Matrix translation;
-	GLfloat x, y, z;
-	fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
-	translation.SetTranslation(x, y, z);
-	m_Player = new Player(strPrefab, translation);
-	m_Player->SetPosX(startRoom->GetPosX() + PLAYER_START_POSX);
-	m_Player->SetPosY(startRoom->GetPosY() - startRoom->m_fHeight + PLAYER_START_POSY);
+	translation.SetTranslation(startRoom->GetPosX() + PLAYER_START_POSX, startRoom->GetPosY() - startRoom->m_fHeight + PLAYER_START_POSY, 0.0f);
+	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
 
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
-	float fPosX, fPosY;
-	fscanf(dataFile, "POS %f, %f\n", &fPosX, &fPosY);
 	float fLeft, fRight, fBottom, fTop;
 	fscanf(dataFile, "PLANES %f, %f, %f, %f\n", &fLeft, &fRight, &fBottom, &fTop);
 	float fNear;
@@ -135,19 +119,19 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 			Matrix translation;
 			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
-				Room *room = new Room(NORMAL_ROOM, translation, NORMAL);
+				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, NORMAL);
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == WALL) {
-				Room *room = new Room(WALL_ROOM, translation, WALL);
+				Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == START) {
-				Room *room = new Room(NORMAL_ROOM, translation, START);
+				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, START);
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == END) {
-				Room *room = new Room(NORMAL_ROOM, translation, END);
+				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, END);
 				AddRoom(room);
 			}
 		}
@@ -162,48 +146,75 @@ void SceneManager::RoomsGenerate() {
 
 void SceneManager::Render() {
 	//GetRenderOrder();
+
 	for (auto& obj : m_RoomList) {
-		obj->Render(this->m_Camera);
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
 	}
 
 	m_Player->Render(this->m_Camera);
 
-	for (auto& object : m_EnemyList) {
-		object->Render(this->m_Camera);
+	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
 	}
 }
 
 void SceneManager::Update(float frameTime) {
+	UpdateRoomID();
+
 	m_Camera->Update(frameTime);
 	m_Player->Update(frameTime);
 
-	for (auto& object : m_EnemyList) {
-		object->Update(frameTime);
+	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
 	}
 
 	Control(frameTime);
 }
 
+void SceneManager::UpdateRoomID() {
+	if (!PhysicEngine::GetInstance()->CheckCollision(GetRoomByID(m_Player->m_RoomID, m_RoomList), m_Player)) {
+		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
+			if (i > 31)
+				continue;
+			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
+				if (j > 31)
+					continue;
+				if (PhysicEngine::GetInstance()->CheckCollision(GetRoomByID(Vector2(i, j), m_RoomList), m_Player)) {
+					m_Player->m_RoomID = Vector2(i, j);
+					printf("new currRoom (%d, %d)\n", i, j);
+				}
+			}
+		}
+	}
+}
+
 void SceneManager::Control(float frameTime)
 {
 	//CHAR CONTROL
-	float fSpeed = 15.0f;
+	float fSpeed = 5.0f;
 
 	if (InputManager::GetInstance()->keyPressed & KEY_W)
 	{
 		m_Player->SetPosY(m_Player->GetPosY() + fSpeed*frameTime);
+		m_Camera->MoveUp(frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_A)
 	{
 		m_Player->SetPosX(m_Player->GetPosX() - fSpeed * frameTime);
+		m_Camera->MoveLeft(frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_S)
 	{
 		m_Player->SetPosY(m_Player->GetPosY() - fSpeed * frameTime);
+		m_Camera->MoveDown(frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_D)
 	{
 		m_Player->SetPosX(m_Player->GetPosX() + fSpeed * frameTime);
+		m_Camera->MoveRight(frameTime);
 	}
 	
 	//CAMERA
@@ -249,6 +260,15 @@ void SceneManager::AddRoom(Room *room) {
 
 void SceneManager::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
+}
+
+bool SceneManager::CheckInRange(Vector2 roomID) {
+	Vector2 currRoom = m_Player->m_RoomID;
+	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||
+		roomID.y < currRoom.y - 1 || roomID.y > currRoom.y + 1)
+		return false;
+	else 
+		return true;
 }
 
 void SceneManager::GetRenderOrder() {

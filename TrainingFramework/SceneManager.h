@@ -21,8 +21,9 @@ public:
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
 	void RoomsGenerate();
-	void Update(float frameTime);
 
+	void Update(float frameTime);
+	void UpdateRoomID();
 	//control
 	void Control(float frameTime);
 	//game logic
@@ -30,6 +31,7 @@ public:
 	//collision
 	
 	void CheckCollision();//logic
+	bool CheckInRange(Vector2 roomID);
 
 	void Render();
 

@@ -6,8 +6,8 @@
 
 Enemy::Enemy() {}
 
-Enemy::Enemy(std::string prefabID, Matrix translationMatrix)
-	: Character(prefabID, translationMatrix) {
+Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	: Character(prefabID, roomID, translationMatrix) {
 	m_strState = IDLE_LEFT;
 }
 

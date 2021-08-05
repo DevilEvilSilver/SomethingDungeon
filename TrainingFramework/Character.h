@@ -6,7 +6,7 @@ public:
 
 
 	Character();
-	Character(std::string prefabID, Matrix translationMatrix);
+	Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Character();
 
 	virtual void Update(float frameTime);

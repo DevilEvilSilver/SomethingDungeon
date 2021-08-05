@@ -70,11 +70,11 @@ bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 	float x12 = r1[2];		float x22 = r2[2];
 	float y12 = r1[3];		float y22 = r2[3];
 	bool bSts = false;
-	if (x11 <= x21 && x21 <= x12 && ((y11 <= y21 && y21 <= y12) || (y11 <= y22 && y22 <= y12)))
+	if (x11 <= x21 && x21 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
 	{
 		bSts = true;
 	}
-	else if (x11 <= x22 && x22 <= x12 && ((y11 <= y21 && y21 <= y12) || (y11 <= y22 && y22 <= y12)))
+	else if (x11 <= x22 && x22 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
 	{
 		bSts = true;
 	}

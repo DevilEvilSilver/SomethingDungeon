@@ -13,7 +13,7 @@ public:
 	RoomType m_RoomType;
 
 	Room();
-	Room(std::string prefabID, Matrix translationMatrix, RoomType roomType);
+	Room(std::string prefabID, Vector2 roomID, Matrix translationMatrix, RoomType roomType);
 	~Room();
 
 	void RoomGenerate();
