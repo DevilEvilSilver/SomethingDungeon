@@ -7,7 +7,7 @@ public:
 
 	Character();
 	Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
-	~Character();
+	virtual ~Character();
 
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);

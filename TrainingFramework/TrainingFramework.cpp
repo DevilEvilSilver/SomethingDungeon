@@ -2,19 +2,17 @@
 //
 
 #include "stdafx.h"
+#include <conio.h>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
 #include "Globals.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-#include "Renderer.h"
-#include <conio.h>
-
-//Son
+#include "PhysicEngine.h"
 #include "InputManager.h"
 #include "StateManager.h"
-
+#include "Renderer.h"
 
 
 void Draw(ESContext* esContext)
@@ -56,7 +54,7 @@ void CleanUp()
 {
 	ResourceManager::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
-
+	PhysicEngine::GetInstance()->ResetInstance();
 	InputManager::GetInstance()->ResetInstance();
 	StateManager::GetInstance()->ResetInstance();
 }
@@ -82,6 +80,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//identifying memory leaks
 	//MemoryDump();
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
+	_CrtDumpMemoryLeaks();
+
 	printf("Press any key...\n");
 	_getch();
 

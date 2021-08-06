@@ -290,6 +290,8 @@ void SceneManager::ResetInstance() {
 		delete object;
 	}
 	m_EnemyList.clear();
+
+	delete m_Player;
 	delete m_Camera;
 
 	delete s_Instance;

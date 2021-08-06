@@ -9,6 +9,6 @@ public:
 	Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Enemy();
 
-	virtual void Update(float frameTime);
-	virtual void Render(Camera *camera);
+	void Update(float frameTime);
+	void Render(Camera *camera);
 };
