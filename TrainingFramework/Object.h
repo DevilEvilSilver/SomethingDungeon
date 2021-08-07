@@ -2,13 +2,13 @@
 #include <string>
 #include "../Utilities/Math.h"
 #include "Camera.h"
+#include <iostream>
 
 class Object {
 protected:
 	Matrix m_WorldMatrix;
-	float m_fPosX, m_fPosY;
-	float m_fDeltaX, m_fDeltaY;
-
+	float m_fCurrentPosX, m_fCurrentPosY;
+	float m_fVx, m_fVy;
 public:
 	std::string m_strPrefabID;
 
@@ -31,8 +31,10 @@ public:
 	Matrix GetWorldMatrix();
 	float GetPosX();
 	float GetPosY();
+	void SetVelocityX(float vx);
+	void SetVelocityY(float vy);
 	void SetPosX(float x);
 	void SetPosY(float y);
-
-	float* GetHitBoxData();
+	// PhysicEngine
+	float* GetHitBoxCurrentData();
 }; 

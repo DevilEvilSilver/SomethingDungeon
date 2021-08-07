@@ -1,7 +1,13 @@
 #pragma once
 #include <vector>
 #include "Object.h"
-
+#include <algorithm> 
+#include "Object.h"
+#include "define.h"
+#include "PhysicEngine.h"
+#include "InputManager.h"
+#include "StateManager.h"
+#include "CollisionManager.h"
 class SceneManager {
 private:
 	static SceneManager* s_Instance;
@@ -16,7 +22,7 @@ public:
 	void Update(float frameTime);
 
 	//control
-	void Control(float frameTime);
+	void UpdateControl(float frameTime);
 	//game logic
 
 	//collision

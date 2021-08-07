@@ -3,14 +3,9 @@
 class InputManager {
 private:
 	static InputManager* s_Instance;
-
-
-
 public:
 
 	int keyPressed = 0;
-	
-
 	InputManager();
 	~InputManager();
 

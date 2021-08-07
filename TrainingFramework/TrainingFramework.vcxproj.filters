@@ -120,6 +120,9 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\InputManager</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files\PhysicManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -186,6 +189,9 @@
       <Filter>Header Files\GraphicEngine</Filter>
     </ClInclude>
     <ClInclude Include="PhysicEngine.h">
+      <Filter>Header Files\PhysicEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
   </ItemGroup>

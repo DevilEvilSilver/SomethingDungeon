@@ -1,14 +1,6 @@
 #include "stdafx.h"
-#include <algorithm> 
 #include "SceneManager.h"
-#include "Object.h"
-#include "define.h"
-#define _CRT_SECURE_NO_WARNINGS
 
-#include "InputManager.h"
-#include "StateManager.h"
-
-#include "PhysicEngine.h"
 
 SceneManager * SceneManager::s_Instance = NULL;
 
@@ -66,22 +58,20 @@ void SceneManager::Init() {
 
 void SceneManager::CheckCollision()
 {
-	static bool isCollied = false;//test only
-	
-	bool testCheck=PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
-	
-	
-	if (isCollied==false&&testCheck == true) {
-		printf("Collied!\n");
-		isCollied = true;
-	}
-	else if (isCollied == true && testCheck == false) {
-		printf("Not Collied!\n");
-		isCollied = false;
-	}
-	
-
-
+	//static bool isCollied = false;//test only
+	//
+	//bool testCheck=PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
+	//
+	//
+	//if (isCollied==false&&testCheck == true) {
+	//	printf("Collied!\n");
+	//	isCollied = true;
+	//}
+	//else if (isCollied == true && testCheck == false) {
+	//	printf("Not Collied!\n");
+	//	isCollied = false;
+	//}
+	/*****************************TienDollars_Code********************************/
 	
 	
 }
@@ -96,45 +86,48 @@ void SceneManager::Render() {
 
 void SceneManager::Update(float frameTime) {
 	m_Camera->Update(frameTime);
-
+	UpdateControl(frameTime);
+	CollisionManager::UpdateCollision(frameTime);
 	for (auto& object : m_ObjectList) {
 		object->Update(frameTime);
 	}
-
-	Control(frameTime);
 	
-	CheckCollision();
 }
 
-void SceneManager::Control(float frameTime)
+void SceneManager::UpdateControl(float frameTime)
 {
-	//testing
-
-	//CHAR CONTROL
-	float fSpeed = 5.0f;
-
-	if (InputManager::GetInstance()->keyPressed & KEY_W)
-	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() + fSpeed*frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_A)
-	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() - fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_S)
-	{
-		m_ObjectList[1]->SetPosY(m_ObjectList[1]->GetPosY() - fSpeed * frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_D)
-	{
-		m_ObjectList[1]->SetPosX(m_ObjectList[1]->GetPosX() + fSpeed * frameTime);
-	}
 	
+	float fSpeed = 20.0f;
+	static int lastKey = 0;
+	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+	if ((newKeyPressed & KEY_W))
+	{
+		m_ObjectList[0]->SetVelocityY(fSpeed);
+	}
+	else if (newKeyPressed & KEY_S )
+	{
+		m_ObjectList[0]->SetVelocityY(-fSpeed);
+	}
+	else
+		m_ObjectList[0]->SetVelocityY(0);
+	if ((newKeyPressed & KEY_A))
+	{
+		m_ObjectList[0]->SetVelocityX(-fSpeed);
+	}
+	else if (newKeyPressed & KEY_D)
+	{
+		m_ObjectList[0]->SetVelocityX(fSpeed);
+	}
+	else
+		m_ObjectList[0]->SetVelocityX(0);
+	
+	
+	lastKey = newKeyPressed;
 	//CAMERA
 	if (InputManager::GetInstance()->keyPressed & KEY_UP)
 	{
 		m_Camera->MoveUp(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() + fSpeed * frameTime);
+		
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_LEFT)
 	{
@@ -143,7 +136,6 @@ void SceneManager::Control(float frameTime)
 	if (InputManager::GetInstance()->keyPressed & KEY_DOWN)
 	{
 		m_Camera->MoveDown(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() - fSpeed * frameTime);
 	}
 	if (InputManager::GetInstance()->keyPressed & KEY_RIGHT)
 	{
@@ -156,9 +148,6 @@ void SceneManager::Control(float frameTime)
 	{
 		StateManager::GetInstance()->m_GameStateStack.pop_back();
 		StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
-
-
-		//ResetInstance();
 	}
 
 }

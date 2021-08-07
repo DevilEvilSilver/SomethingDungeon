@@ -42,5 +42,10 @@
 #define RECTBOUND					2
 
 //PHYSIC ENGINE
-#define Y_EPSILON			0.5
-#define X_EPSILON			0.1
+#define Y_EPSILON					0.5
+#define X_EPSILON					0.1
+#define RECT_RECT_COLLISION_EPSILON		0.05
+#define TOP_EDGE			1
+#define RIGHT_EDGE			2
+#define DOWN_EGDE			3
+#define LEFT_EDGE			4
