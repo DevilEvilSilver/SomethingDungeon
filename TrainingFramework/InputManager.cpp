@@ -5,7 +5,7 @@
 #include <WinUser.h>
 #define _CRT_SECURE_NO_WARNINGS
 
-InputManager* InputManager::s_Instance = NULL;
+
 
 InputManager::InputManager()
 {
@@ -111,15 +111,3 @@ Vector2 InputManager::MousePosition(Camera* stateCamera)
 	return Vector2(x,y);
 }
 
-InputManager* InputManager::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new InputManager();
-	return s_Instance;
-}
-
-void InputManager::ResetInstance()
-{
-	delete s_Instance;
-	s_Instance = NULL;
-}

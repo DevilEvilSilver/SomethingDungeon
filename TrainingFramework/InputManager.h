@@ -1,11 +1,10 @@
 #pragma once
 #include <vector>
 #include "Camera.h"
-class InputManager {
-private:
-	static InputManager* s_Instance;
+#include "Singleton.h"
 
-
+class InputManager:public Singleton<InputManager>
+{
 
 public:
 
@@ -26,7 +25,6 @@ public:
 
 	Vector2 MousePosition(Camera* stateCamera);		//tra ve vij tri trong khong gian voi camera hien tai
 
-	static InputManager* GetInstance();
-	static void ResetInstance();
+
 };
 

@@ -18,6 +18,7 @@
 //INIT STATE
 #define FILE_SM						"../Resources/SM.txt"
 #define FILE_RM						"../Resources/RM.txt"
+#define FILE_SE						"../Resources/Sound.txt"
 
 //OBJECT
 #define RECTANGLE					0
@@ -47,3 +48,5 @@
 //PHYSIC ENGINE
 #define Y_EPSILON			0.5
 #define X_EPSILON			0.1
+
+#define LIMIT_FPS			30

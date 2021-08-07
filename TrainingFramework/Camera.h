@@ -51,4 +51,6 @@ public:
 	void RotationRight(float frameTime);
 	void RotationUp(float frameTime);
 	void RotationDown(float frameTime);
+
+	void SetPosition(Vector3 pos);
 };

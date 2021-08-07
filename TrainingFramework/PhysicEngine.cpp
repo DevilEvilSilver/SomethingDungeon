@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PhysicEngine.h"
 
-PhysicEngine* PhysicEngine::s_Instance = NULL;
+
 PhysicEngine::PhysicEngine()
 {
 }
@@ -15,7 +15,7 @@ bool PhysicEngine::GetCollisSts(int i, int j)
 	return m_collisStatus[i][j];
 }
 void PhysicEngine::UpdateCollision()
-{
+{/*
 	std::vector<Object*> objectList = SceneManager::GetInstance()->m_ObjectList;
 	for (int i = 0; i <objectList.size() ; i++)
 	{
@@ -38,6 +38,7 @@ void PhysicEngine::UpdateCollision()
 			}
 		}
 	}
+	*/
 }
 bool PhysicEngine::CheckCollision(Object* o1, Object* o2)
 {
@@ -62,7 +63,7 @@ bool PhysicEngine::CheckRectCirCollision(Object* rect, Object* cir)
 }
 bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 {
-
+	/*
 	float *r1 = rect1->GetHitBoxData();
 	float *r2 = rect2->GetHitBoxData();
 	float x11 = r1[0];		float x21 = r2[0];
@@ -83,8 +84,8 @@ bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 	delete[] r1;
 	delete[] r2;
 	return bSts;
-	
-	/*
+	*/
+
 	float	x1 = rect1->GetPosX(),
 		y1 = rect1->GetPosY(),
 		w1 = rect1->m_fWidth,
@@ -97,14 +98,14 @@ bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 
 	if (x1 <= x2 + w2 &&
 		x2 <= x1 + w1 &&
-		y1 <= y2 + h2 &&
-		y2 <= y1 + h1)
+		y1 >= y2 - h2 &&
+		y2 >= y1 - h1)
 	{
 		return true;
 	}
 
 	return false;
-	*/
+	
 }
 bool PhysicEngine::CheckCirCirCollision(Object* cir1, Object* cir2)
 {
@@ -161,15 +162,4 @@ bool PhysicEngine::CheckMouseRectangle(Vector2 mousePos,Object* rect)
 		return true;
 
 	return false;
-}
-PhysicEngine* PhysicEngine::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new PhysicEngine();
-	return s_Instance;
-}
-
-void PhysicEngine::ResetInstance() {
-	delete s_Instance;
-	s_Instance = NULL;
 }
