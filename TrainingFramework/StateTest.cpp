@@ -3,14 +3,12 @@
 #include <algorithm> 
 #include "Object.h"
 #include "define.h"
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "InputManager.h"
 #include "StateManager.h"
 #include "SoundEngine.h"
 #include "PhysicEngine.h"
 #include "StateTest.h"
-
+#define _CRT_SECURE_NO_WARNINGS
 
 
 
@@ -30,43 +28,43 @@ StateTest::~StateTest()
 
 void StateTest::Init()
 {
-	FILE* dataFile;
-	dataFile = fopen(FILE_SM, "r");
+	//FILE* dataFile;
+	//dataFile = fopen(FILE_SM, "r");
 
 
-	int iObjectCount;
-	fscanf(dataFile, "#OBJECT_COUNT %d\n", &iObjectCount);
+	//int iObjectCount;
+	//fscanf(dataFile, "#OBJECT_COUNT %d\n", &iObjectCount);
 
-	while (iObjectCount--) {
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
+	//while (iObjectCount--) {
+	//	unsigned int id;
+	//	fscanf(dataFile, "ID %d\n", &id);
 
-		char strPrefab[50];
-		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+	//	char strPrefab[50];
+	//	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 
-		Matrix translation;
-		GLfloat x, y, z;
-		fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
-		translation.SetTranslation(x, y, z);
+	//	Matrix translation;
+	//	GLfloat x, y, z;
+	//	fscanf(dataFile, "POSITION %f, %f, %f\n", &x, &y, &z);
+	//	translation.SetTranslation(x, y, z);
 
-		Object* object = new Object(strPrefab, translation);
-		AddObject(object);
-	}
+	//	Object* object = new Object(strPrefab, translation);
+	//	AddObject(object);
+	//}
 
-	float fLeft, fRight, fBottom, fTop;
-	fscanf(dataFile, "#CAMERA\n");
-	fscanf(dataFile, "PLANES %f, %f, %f, %f\n", &fLeft, &fRight, &fBottom, &fTop);
-	float fNear;
-	fscanf(dataFile, "NEAR %f\n", &fNear);
-	float fFar;
-	fscanf(dataFile, "FAR %f\n", &fFar);
-	float fMovingSpeed;
-	fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
-	float fRotationSpeed;
-	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
-	m_Camera = new Camera(fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
+	//float fLeft, fRight, fBottom, fTop;
+	//fscanf(dataFile, "#CAMERA\n");
+	//fscanf(dataFile, "PLANES %f, %f, %f, %f\n", &fLeft, &fRight, &fBottom, &fTop);
+	//float fNear;
+	//fscanf(dataFile, "NEAR %f\n", &fNear);
+	//float fFar;
+	//fscanf(dataFile, "FAR %f\n", &fFar);
+	//float fMovingSpeed;
+	//fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
+	//float fRotationSpeed;
+	//fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
+	//m_Camera = new Camera(fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 
-	fclose(dataFile);
+	//fclose(dataFile);
 }
 
 void StateTest::Update(float frameTime)

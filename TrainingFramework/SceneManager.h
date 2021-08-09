@@ -1,13 +1,12 @@
 #pragma once
 #include <vector>
+#include "StateBase.h"
 #include "Room.h"
 #include "Player.h"
 #include "Enemy.h"
 
-class SceneManager {
-private:
-	static SceneManager* s_Instance;
-
+class SceneManager :public StateBase<SceneManager>
+{
 public:
 	RoomType m_Map[32][32];
 	std::vector<Room*> m_RoomList;
@@ -17,6 +16,7 @@ public:
 	Camera *m_Camera;
 
 	SceneManager();
+	~SceneManager();
 
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
@@ -39,7 +39,4 @@ public:
 	void AddRoom(Room *room);
 	void AddEnemy(Enemy *enemy);
 	void GetRenderOrder();
-
-	static SceneManager* GetInstance();
-	void ResetInstance();
 };

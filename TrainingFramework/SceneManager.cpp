@@ -2,14 +2,13 @@
 #include <algorithm>
 #include <time.h>
 #include "SceneManager.h"
+#include "SoundEngine.h"
 #include "Object.h"
 #include "define.h"
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "InputManager.h"
 #include "StateManager.h"
-
 #include "PhysicEngine.h"
+#define _CRT_SECURE_NO_WARNINGS
 
 template <class T>
 T GetRoomByType(RoomType id, std::vector<T> objList) {
@@ -29,17 +28,26 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 	return 0;
 }
 
-SceneManager * SceneManager::s_Instance = NULL;
-
 SceneManager::SceneManager(void) {
 	this->Init();
 }
 
-SceneManager* SceneManager::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new SceneManager();
-	return s_Instance;
+SceneManager::~SceneManager() {
+	for (auto& object : m_ObjectList) {
+		delete object;
+	}
+	m_ObjectList.clear();
+	for (auto& object : m_RoomList) {
+		delete object;
+	}
+	m_RoomList.clear();
+	for (auto& object : m_EnemyList) {
+		delete object;
+	}
+	m_EnemyList.clear();
+
+	delete m_Player;
+	delete m_Camera;
 }
 
 void SceneManager::Init() {
@@ -238,13 +246,25 @@ void SceneManager::Control(float frameTime)
 
 
 	//STATE CHANGE
+	//if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
+	//{
+	//	StateManager::GetInstance()->m_GameStateStack.pop_back();
+	//	StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
+
+
+	//	//ResetInstance();
+	//}
+
+	//Play sound+STATE CHANGE
 	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 	{
-		StateManager::GetInstance()->m_GameStateStack.pop_back();
-		StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
+		static bool isSoundPlayed = false;
+		if (isSoundPlayed == false) {
 
+			SoundEngine::GetInstance()->Play(0, 0.5, 1.5, true);
+			isSoundPlayed = true;
+		}
 
-		//ResetInstance();
 	}
 
 }
@@ -274,26 +294,4 @@ void SceneManager::GetRenderOrder() {
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
 	});
-}
-
-void SceneManager::ResetInstance() {
-	
-	for (auto& object : m_ObjectList) {
-		delete object;
-	}
-	m_ObjectList.clear();
-	for (auto& object : m_RoomList) {
-		delete object;
-	}
-	m_RoomList.clear();
-	for (auto& object : m_EnemyList) {
-		delete object;
-	}
-	m_EnemyList.clear();
-
-	delete m_Player;
-	delete m_Camera;
-
-	delete s_Instance;
-	s_Instance = NULL;
 }

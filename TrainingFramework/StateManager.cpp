@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "StateManager.h"
+#include "SceneManager.h"
 #include "define.h"
 
 //include all STATEs here:
@@ -14,6 +15,7 @@ StateManager::StateManager()
 StateManager::~StateManager() {
 	//reset all state here
 	StateTest::GetInstance()->ResetInstance();
+	SceneManager::GetInstance()->ResetInstance();
 	//......
 }
 
@@ -24,7 +26,7 @@ void StateManager::Update(float frameTime) {
 	
 	switch (m_GameStateStack.back()) {
 	case GS_STATE_1:
-		StateTest::GetInstance()->Update(frameTime);
+		SceneManager::GetInstance()->Update(frameTime);
 		break;
 	case GS_STATE_2:
 		StateTest::GetInstance()->Update(frameTime);
@@ -39,7 +41,7 @@ void StateManager::Render()
 {
 	switch (m_GameStateStack.back()) {
 	case GS_STATE_1:
-		StateTest::GetInstance()->Render();
+		SceneManager::GetInstance()->Render();
 		break;
 	case GS_STATE_2:
 		StateTest::GetInstance()->Render();
