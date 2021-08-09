@@ -53,8 +53,8 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 		h2 = staticObj->m_fHeight;
 	if (x1 <= x2 + w2 &&
 		x2 <= x1 + w1 &&
-		y1 <= y2 + h2 &&
-		y2 <= y1 + h1)
+		y1 >= y2 - h2 &&
+		y2 >= y1 - h1)
 	{
 		status = true;
 	}
@@ -75,7 +75,7 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 			Vector2 tempDisC1C2 = tempC1 - C2;
 			if ((abs(tempDisC1C2.x) > ((w1 + w2) / 2) || abs(tempDisC1C2.y) > ((h1 + h2) / 2)))
 				break;
-			if (i == 100)
+			if (i == 30)
 			{
 				tempDis.x = 0;
 				tempDis.y = 0;

@@ -83,6 +83,6 @@ void Object::SetPosY(float y)
 }
 float* Object::GetHitBoxCurrentData()
 {
-	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY + m_fHeight,m_fVx,m_fVy, m_fRadius };
+	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
 	return data;
 }

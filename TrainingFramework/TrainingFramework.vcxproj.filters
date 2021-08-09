@@ -99,9 +99,6 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Source Files\StateManager</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicEngine.cpp">
-      <Filter>Source Files\PhysicEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\GraphicEngine</Filter>
     </ClCompile>
@@ -181,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\GraphicEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicEngine.h">
-      <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
     <ClInclude Include="SoundEngine.h">
       <Filter>Header Files\SoundEngine</Filter>

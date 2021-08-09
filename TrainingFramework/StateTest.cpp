@@ -6,7 +6,6 @@
 #include "InputManager.h"
 #include "StateManager.h"
 #include "SoundEngine.h"
-#include "PhysicEngine.h"
 #include "StateTest.h"
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -164,25 +163,25 @@ void StateTest::UpdateControl(float frameTime)
 
 void StateTest::DraggingObject()
 {
-	static Object* touched = NULL;
+	//static Object* touched = NULL;
 
-	if (InputManager::GetInstance()->keyPressed & (MOUSE_LEFT | MOUSE_RIGHT))
-	{
-		Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
-		if (touched == NULL) {
-			for (auto a : m_ObjectList) {
-				if (PhysicEngine::GetInstance()->CheckMouseRectangle(mousePosition, a) == true)
-					touched = a;
-			}
-		}
-		if (touched != NULL) {
-			touched->SetPosX(mousePosition.x); touched->SetPosY(mousePosition.y);
-		}
-	}
-	else
-	{
-		touched = NULL;
-	}
+	//if (InputManager::GetInstance()->keyPressed & (MOUSE_LEFT | MOUSE_RIGHT))
+	//{
+	//	Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
+	//	if (touched == NULL) {
+	//		for (auto a : m_ObjectList) {
+	//			if (PhysicEngine::GetInstance()->CheckMouseRectangle(mousePosition, a) == true)
+	//				touched = a;
+	//		}
+	//	}
+	//	if (touched != NULL) {
+	//		touched->SetPosX(mousePosition.x); touched->SetPosY(mousePosition.y);
+	//	}
+	//}
+	//else
+	//{
+	//	touched = NULL;
+	//}
 }
 
 
@@ -191,17 +190,17 @@ void StateTest::CheckCollision()
 {
 	static bool isCollied = false;//test only
 
-	bool testCheck = PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
+	//bool testCheck = PhysicEngine::GetInstance()->CheckRectRectCollision(m_ObjectList[1], m_ObjectList[2]);
 
 
-	if (isCollied == false && testCheck == true) {
-		printf("Collied!\n");
-		isCollied = true;
-	}
-	else if (isCollied == true && testCheck == false) {
-		printf("Not Collied!\n");
-		isCollied = false;
-	}
+	//if (isCollied == false && testCheck == true) {
+	//	printf("Collied!\n");
+	//	isCollied = true;
+	//}
+	//else if (isCollied == true && testCheck == false) {
+	//	printf("Not Collied!\n");
+	//	isCollied = false;
+	//}
 
 
 

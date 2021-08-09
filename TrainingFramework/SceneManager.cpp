@@ -7,7 +7,6 @@
 #include "define.h"
 #include "InputManager.h"
 #include "StateManager.h"
-#include "PhysicEngine.h"
 #include "CollisionManager.h"
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -184,14 +183,14 @@ void SceneManager::Update(float frameTime) {
 }
 
 void SceneManager::UpdateRoomID() {
-	if (!PhysicEngine::GetInstance()->CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
+	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
 			if (i > 31)
 				continue;
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
 				if (j > 31)
 					continue;
-				if (PhysicEngine::GetInstance()->CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
+				if (CollisionManager::CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
 					m_Player->m_RoomID = Vector2(i, j);
 				}
 			}

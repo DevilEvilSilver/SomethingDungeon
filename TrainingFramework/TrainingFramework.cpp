@@ -11,7 +11,6 @@
 #include "Renderer.h"
 #include "SoundEngine.h"
 #include "SceneManager.h"
-#include "PhysicEngine.h"
 #include "InputManager.h"
 #include "StateManager.h"
 
@@ -21,7 +20,6 @@ int Init(ESContext* esContext) {
 
 	ResourceManager::GetInstance();
 	Renderer::GetInstance();
-	PhysicEngine::GetInstance();
 	InputManager::GetInstance();
 	StateManager::GetInstance();
 	SoundEngine::GetInstance();
@@ -89,10 +87,8 @@ void CleanUp()
 {
 	ResourceManager::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
-	PhysicEngine::GetInstance()->ResetInstance();
 	InputManager::GetInstance()->ResetInstance();
 	StateManager::GetInstance()->ResetInstance();
-	
 	SoundEngine::GetInstance()->ResetInstance();
 }
 
