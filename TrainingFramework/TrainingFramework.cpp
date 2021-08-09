@@ -7,22 +7,47 @@
 #include "Vertex.h"
 #include "Globals.h"
 #include "ResourceManager.h"
-#include "SceneManager.h"
 #include "Renderer.h"
 #include <conio.h>
 
-//Son
+
 #include "InputManager.h"
 #include "StateManager.h"
+#include "PhysicEngine.h"
+
+#include "SoundEngine.h"
 
 
+
+int Init(ESContext* esContext) {
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	ResourceManager::GetInstance();
+	Renderer::GetInstance();
+	PhysicEngine::GetInstance();
+	InputManager::GetInstance();
+	StateManager::GetInstance();
+	SoundEngine::GetInstance();
+	return 0;
+}
 
 void Draw(ESContext* esContext)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//fps
+	DWORD start, end;
+	start = GetTickCount();
 
+	//clear + render
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	StateManager::GetInstance()->Render();
 
+	//fps
+	end = GetTickCount();
+	DWORD frameTime = end - start;
+	if (frameTime < 1000.0f/ LIMIT_FPS)
+		Sleep(1000.0f / LIMIT_FPS - frameTime);
+
+	//display
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 }
 
@@ -31,48 +56,82 @@ void Update(ESContext* esContext, float deltaTime)
 	StateManager::GetInstance()->Update(deltaTime);
 }
 
-void TouchActionDown(ESContext* esContext, int x, int y)
-{
-	//SceneManager::GetInstance()->CheckTouchPosition(x, y);
-}
-
-void TouchActionUp(ESContext* esContext, int x, int y)
-{
-	//SceneManager::GetInstance()->SetAllNotHold(x, y);
-}
-
-void TouchActionMove(ESContext* esContext, int x, int y)
-{
-	//SceneManager::GetInstance()->TouchMove(x, y);
-}
-
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 {
 	InputManager::GetInstance()->Key(key, bIsPressed);
+}
 
+void TouchActionLeftDown(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseMove(x, y);
+	InputManager::GetInstance()->MouseLeft(true);
+}
+
+void TouchActionLeftUp(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseLeft(false);
+}
+
+void TouchActionRightDown(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseMove(x, y);
+	InputManager::GetInstance()->MouseRight(true);
+}
+
+void TouchActionRightUp(ESContext* esContext, int x, int y)
+{
+	InputManager::GetInstance()->MouseRight(false);
+}
+
+void TouchActionMove(ESContext* esContext, int x, int y)
+{	
+	InputManager::GetInstance()->MouseMove(x, y);		
 }
 
 void CleanUp()
 {
 	ResourceManager::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
-
+	PhysicEngine::GetInstance()->ResetInstance();
 	InputManager::GetInstance()->ResetInstance();
 	StateManager::GetInstance()->ResetInstance();
+	
+	SoundEngine::GetInstance()->ResetInstance();
+}
+
+void CrtMemoryDump() 
+{
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
+	_CrtDumpMemoryLeaks();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	ESContext esContext;
 	esInitContext(&esContext);
-	esCreateWindow(&esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	esCreateWindow(&esContext, "EmojiDungeon", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+	
+	if (Init(&esContext) != 0) return 0;
 
+	//draw
 	esRegisterDrawFunc(&esContext, Draw);
+	
+	//update
 	esRegisterUpdateFunc(&esContext, Update);
+	
+	//key handle
 	esRegisterKeyFunc(&esContext, Key);
-	esRegisterMouseDownFunc(&esContext, TouchActionDown);
-	esRegisterMouseUpFunc(&esContext, TouchActionUp);
+	
+	//mouse handle
+	esRegisterMouseLeftDownFunc(&esContext, TouchActionLeftDown);
+	esRegisterMouseRightDownFunc(&esContext, TouchActionRightDown);
+	esRegisterMouseLeftUpFunc(&esContext, TouchActionLeftUp);
+	esRegisterMouseRightUpFunc(&esContext, TouchActionRightUp);
 	esRegisterMouseMoveFunc(&esContext, TouchActionMove);
 
 	esMainLoop(&esContext);
@@ -81,7 +140,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	CleanUp();
 
 	//identifying memory leaks
-	//MemoryDump();
+	CrtMemoryDump();
+	
+	
 	printf("Press any key...\n");
 	_getch();
 

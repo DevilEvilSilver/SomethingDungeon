@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
 #include "Object.h"
+#include "Singleton.h"
 
-class Renderer {
-private:
-	static Renderer* s_Instance;
+class Renderer:public Singleton<Renderer> {
+
 
 public:
 	Renderer();
@@ -13,6 +13,5 @@ public:
 	void Init();
 	void DrawAnimated(Object *object, Camera *camera);
 
-	static Renderer* GetInstance();
-	static void ResetInstance();
+
 };

@@ -4,7 +4,6 @@
 #include "define.h"
 #include "ResourceManager.h"
 
-Renderer * Renderer::s_Instance = NULL;
 
 template <class T>
 T GetResource(unsigned int id, std::vector<T> objList) {
@@ -32,17 +31,7 @@ Renderer::~Renderer() {
 
 }
 
-Renderer* Renderer::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new Renderer();
-	return s_Instance;
-}
 
-void Renderer::ResetInstance() {
-	delete s_Instance;
-	s_Instance = NULL;
-}
 
 void Renderer::Init() {
 	

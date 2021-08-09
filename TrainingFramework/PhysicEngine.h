@@ -1,13 +1,14 @@
 #pragma once
 #include "Object.h"
-#include "SceneManager.h"
 #include "math.h"
 #include "define.h"
 #include <iostream>
-class PhysicEngine
+#include "Singleton.h"
+
+class PhysicEngine:public Singleton<PhysicEngine>
 {
 private:
-	static PhysicEngine* s_Instance;
+	
 	bool m_collisStatus[10][10];   //ma tran trang thai va cham cua cac vat trong m_ObjectList, co the tang so luong neu can thiet
 public:
 	PhysicEngine();
@@ -22,7 +23,8 @@ public:
 	static bool CheckRectBoundCollision(Object* rect, Object* bound);
 	static bool CheckCirBoundCollision(Object* rect, Object* bound);
 
-	static PhysicEngine* GetInstance();
-	static void ResetInstance();
+	static bool CheckMouseRectangle(Vector2 mousePos,Object* rect);		//kiem tra click vao dau
+
+	
 };
 
