@@ -25,7 +25,7 @@ public:
 	void Update(float frameTime);
 	void UpdateRoomID();
 	//control
-	void Control(float frameTime);
+	void UpdateControl(float frameTime);
 	//game logic
 
 	//collision

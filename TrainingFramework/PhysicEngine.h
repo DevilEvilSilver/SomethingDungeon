@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "math.h"
 #include "define.h"
+#include "../Utilities/Math.h"
 #include <iostream>
 #include "Singleton.h"
 
@@ -14,8 +15,8 @@ public:
 	PhysicEngine();
 	~PhysicEngine();
 	void UpdateCollision();
-	bool GetCollisSts(int i, int j);
-
+	bool GetCollisSts(int i, int j);   
+	bool GetCollumCollisStatus(int j);
 	static bool CheckCollision(Object* o1, Object* o2);
 	static bool CheckRectCirCollision(Object* rect, Object* cir);
 	static bool CheckRectRectCollision(Object* rect1, Object* rect2);

@@ -8,6 +8,7 @@
 #include "InputManager.h"
 #include "StateManager.h"
 #include "PhysicEngine.h"
+#include "CollisionManager.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 template <class T>
@@ -198,48 +199,49 @@ void SceneManager::UpdateRoomID() {
 	}
 }
 
-void SceneManager::Control(float frameTime)
+void SceneManager::UpdateControl(float frameTime)
 {
-	//CHAR CONTROL
-	float fSpeed = 5.0f;
-
-	if (InputManager::GetInstance()->keyPressed & KEY_W)
-	{
-		m_Player->SetPosY(m_Player->GetPosY() + fSpeed*frameTime);
-		m_Camera->MoveUp(frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_A)
-	{
-		m_Player->SetPosX(m_Player->GetPosX() - fSpeed * frameTime);
-		m_Camera->MoveLeft(frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_S)
-	{
-		m_Player->SetPosY(m_Player->GetPosY() - fSpeed * frameTime);
-		m_Camera->MoveDown(frameTime);
-	}
-	if (InputManager::GetInstance()->keyPressed & KEY_D)
-	{
-		m_Player->SetPosX(m_Player->GetPosX() + fSpeed * frameTime);
-		m_Camera->MoveRight(frameTime);
-	}
 	
+	float fSpeed = 20.0f;
+	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+	if ((newKeyPressed & KEY_W))
+	{
+		m_Player->SetVelocityY(fSpeed);
+	}
+	else if (newKeyPressed & KEY_S )
+	{
+		m_Player->SetVelocityY(-fSpeed);
+	}
+	else
+		m_Player->SetVelocityY(0);
+
+	if ((newKeyPressed & KEY_A))
+	{
+		m_Player->SetVelocityX(-fSpeed);
+	}
+	else if (newKeyPressed & KEY_D)
+	{
+		m_Player->SetVelocityX(fSpeed);
+	}
+	else
+		m_Player->SetVelocityX(0);
+	
+
 	//CAMERA
-	if (InputManager::GetInstance()->keyPressed & KEY_UP)
+	if (newKeyPressed & KEY_UP)
 	{
 		m_Camera->MoveUp(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() + fSpeed * frameTime);
+		
 	}
-	if (InputManager::GetInstance()->keyPressed & KEY_LEFT)
+	if (newKeyPressed & KEY_LEFT)
 	{
 		m_Camera->MoveLeft(frameTime);
 	}
-	if (InputManager::GetInstance()->keyPressed & KEY_DOWN)
+	if (newKeyPressed & KEY_DOWN)
 	{
 		m_Camera->MoveDown(frameTime);
-		//m_ObjectList[0]->SetPosY(m_ObjectList[0]->GetPosY() - fSpeed * frameTime);
 	}
-	if (InputManager::GetInstance()->keyPressed & KEY_RIGHT)
+	if (newKeyPressed & KEY_RIGHT)
 	{
 		m_Camera->MoveRight(frameTime);
 	}

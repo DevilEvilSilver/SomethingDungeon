@@ -49,8 +49,8 @@
 #define RECTANGLE					0
 #define CIRCLE						1
 #define RECTBOUND					2
-#define Y_EPSILON			0.5
-#define X_EPSILON			0.1
+#define Y_EPSILON			        0.5
+#define X_EPSILON			        0.1
 
 //PREFAB
 #define PLAYER			"mainChar"
@@ -62,3 +62,4 @@
 //ANIMATION
 #define INIT_ANIM		"init"
 #define IDLE_LEFT		"idleLeft"
+

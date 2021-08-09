@@ -17,24 +17,16 @@ bool PhysicEngine::GetCollisSts(int i, int j)
 void PhysicEngine::UpdateCollision()
 {/*
 	std::vector<Object*> objectList = SceneManager::GetInstance()->m_ObjectList;
-	for (int i = 0; i <objectList.size() ; i++)
+	for (int i = 0; i <objectList.size(); i++)
 	{
+		//Reset all collisArg before check collis
+		
+
 		for (int j = 0; j < objectList.size(); j++)
 		{
 			if (i != j)
 			{
 				CheckCollision(objectList.at(i), objectList.at(j));
-				if (CheckCollision(objectList.at(i), objectList.at(j)))
-				{
-
-					m_collisStatus[i][j] = true;
-					m_collisStatus[j][i] = true;
-				}
-				else
-				{
-					m_collisStatus[i][j] = false;
-					m_collisStatus[j][i] = false;
-				}
 			}
 		}
 	}
@@ -63,26 +55,52 @@ bool PhysicEngine::CheckRectCirCollision(Object* rect, Object* cir)
 }
 bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 {
-	//float *r1 = rect1->GetHitBoxData();
-	//float *r2 = rect2->GetHitBoxData();
-	//float x11 = r1[0];		float x21 = r2[0];
-	//float y11 = r1[1];		float y21 = r2[1];
-	//float x12 = r1[2];		float x22 = r2[2];
-	//float y12 = r1[3];		float y22 = r2[3];
-	//bool bSts = false;
-	//if (x11 <= x21 && x21 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
-	//{
-	//	bSts = true;
-	//}
-	//else if (x11 <= x22 && x22 <= x12 && ((y11 >= y21 && y21 >= y12) || (y11 >= y22 && y22 >= y12)))
-	//{
-	//	bSts = true;
-	//}
-	//else
-	//	bSts = false;
-	//delete[] r1;
-	//delete[] r2;
-	//return bSts;
+	float *fr1 = rect1->GetHitBoxCurrentData();
+	float *fr2 = rect2->GetHitBoxCurrentData();
+	float fx1left = fr1[0];						float fx2left = fr2[0];
+	float fy1down = fr1[1];						float fy2down = fr2[1];
+	float fx1right = fr1[2];					float fx2right = fr2[2];
+	float fy1top = fr1[3];						float fy2top = fr2[3];
+	float fx1Center = (fx1left + fx1right) / 2;	float fx2Center = (fx2left + fx2right) / 2;
+	float fy1Center = (fy1top + fy1down) / 2;	float fy2Center = (fy2top + fy2down) / 2;
+	bool bSts = false;
+	Vector3 R1(rect1->m_fWidth / 2, rect1->m_fHeight/2, 0);
+	Vector3 R2(rect2->m_fWidth / 2, rect2->m_fHeight/2, 0);
+	float fRectRectDistanceLimit = (R1 + R2).Length();
+	Vector3 RectRectDistance(fx2Center - fx1Center, fy2Center - fy1Center, 0);
+	float fRectRectDistance = RectRectDistance.Length();
+	
+	/*if (fRectRectDistance < fRectRectDistanceLimit)
+	{
+		std::cout << "PhysicEngine::CheckRectRectCollision\n";
+		if (abs(fx1left - fx2right) < RECT_RECT_COLLISION_EPSILON)
+		{
+			rect1->SetCollisArg(LEFT_EDGE);
+			rect2->SetCollisArg(RIGHT_EDGE);
+			bSts = true;
+		}
+		else if (abs(fx1right - fx2left) < RECT_RECT_COLLISION_EPSILON)
+		{
+			rect1->SetCollisArg(RIGHT_EDGE);
+			rect2->SetCollisArg(LEFT_EDGE);
+			bSts = true;
+		}
+		else if (abs(fy1top - fy2down) < RECT_RECT_COLLISION_EPSILON)
+		{
+			rect1->SetCollisArg(TOP_EDGE);
+			rect2->SetCollisArg(DOWN_EGDE);
+			bSts = true;
+		}
+		else if (abs(fy1down - fy2top) < RECT_RECT_COLLISION_EPSILON)
+		{
+			rect1->SetCollisArg(DOWN_EGDE);
+			rect2->SetCollisArg(TOP_EDGE);
+			bSts = true;
+		}
+	}*/
+	delete[] fr1;
+	delete[] fr2;
+	return bSts;
 	
 	float	x1 = rect1->GetPosX(),
 		y1 = rect1->GetPosY(),
@@ -107,8 +125,8 @@ bool PhysicEngine::CheckRectRectCollision(Object* rect1, Object* rect2)
 }
 bool PhysicEngine::CheckCirCirCollision(Object* cir1, Object* cir2)
 {
-	float *c1 = cir1->GetHitBoxData();
-	float *c2 = cir1->GetHitBoxData();
+	float *c1 = cir1->GetHitBoxCurrentData();
+	float *c2 = cir1->GetHitBoxCurrentData();
 	float x1 = c1[0];		float x2 = c2[0];
 	float y1 = c1[1];		float y2 = c2[1];
 	float r1 = c1[4];		float r2 = c2[4];
@@ -122,8 +140,8 @@ bool PhysicEngine::CheckRectBoundCollision(Object* rect, Object* bound)
 {
 	bool bStsX = false;
 	bool bStsY = false;
-	float* data1 = rect->GetHitBoxData();
-	float* data2 = bound->GetHitBoxData();
+	float* data1 = rect->GetHitBoxCurrentData();
+	float* data2 = bound->GetHitBoxCurrentData();
 
 	float x11 = data1[0];		float x21 = data2[0];
 	float y11 = data1[1];		float y21 = data2[1];
@@ -159,5 +177,15 @@ bool PhysicEngine::CheckMouseRectangle(Vector2 mousePos,Object* rect)
 		deltaY <= rect->m_fHeight)
 		return true;
 
+	return false;
+}
+
+bool PhysicEngine::GetCollumCollisStatus(int j)
+{
+	for (int i = 0; i < SceneManager::GetInstance()->m_ObjectList.size(); i++)
+	{
+		if (m_collisStatus[i][j] == true)
+			return true;
+	}
 	return false;
 }
