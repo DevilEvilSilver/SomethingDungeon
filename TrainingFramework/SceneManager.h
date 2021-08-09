@@ -1,10 +1,14 @@
 #pragma once
 #include <vector>
 #include "Object.h"
+#include"Text.h"
 
 class SceneManager {
 private:
 	static SceneManager* s_Instance;
+	Text *scoreText ;
+	//Text levelText;
+
 
 public:
 	std::vector<Object*> m_ObjectList;

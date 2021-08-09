@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "../Utilities/Math.h"
+//#include "../Utilities/Math.h"
+#include "../Utilities/utilities.h" 
 #include<ctime>
 
 class SoundInstance

@@ -19,6 +19,19 @@
 #define FILE_SM						"../Resources/SM.txt"
 #define FILE_RM						"../Resources/RM.txt"
 
+//FONTS
+#define ARIAL						"../Resources/Fonts/arial.ttf"
+#define ARIAL_BD					"../Resources/Fonts/arialbd.ttf"
+#define ARIAL_BI					"../Resources/Fonts/arialbi.ttf"
+#define ARIAL_I						"../Resources/Fonts/ariali.ttf"
+#define ARIBLK						"../Resources/Fonts/ariblk.ttf"
+#define KENVECTOR_FUTURE			"../Resources/Fonts/kenvector_future.ttf"
+#define KENVECTOR_FUTURE_THIN		"../Resources/Fonts/kenvector_future_thin.ttf"
+#define TIMES						"../Resources/Fonts/times.ttf"
+#define TIMES_BD					"../Resources/Fonts/timesbd.ttf"
+#define TIMES_BI					"../Resources/Fonts/timesbi.ttf"
+#define TIMES_I						"../Resources/Fonts/timesi.ttf"
+
 //OBJECT
 #define RECTANGLE					0
 #define CIRCLE						1

@@ -9,6 +9,9 @@
 #include "StateManager.h"
 
 #include "PhysicEngine.h"
+#include "ResourceManager.h"
+#include"Renderer.h"
+
 
 SceneManager * SceneManager::s_Instance = NULL;
 
@@ -62,6 +65,9 @@ void SceneManager::Init() {
 	m_Camera = new Camera(fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 	
 	fclose(dataFile);
+
+	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f,"abc");
+
 }
 
 void SceneManager::CheckCollision()
@@ -92,6 +98,7 @@ void SceneManager::Render() {
 		obj->Render(this->m_Camera);
 	}
 	
+	Renderer::GetInstance()->DrawText2(scoreText);
 }
 
 void SceneManager::Update(float frameTime) {
@@ -154,10 +161,11 @@ void SceneManager::Control(float frameTime)
 	//STATE CHANGE
 	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 	{
-		StateManager::GetInstance()->m_GameStateStack.pop_back();
-		StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
+		static int num = 0;
+		std::string a = "hello " + std::to_string(num);
+		scoreText->setText(a);
 
-
+		num++;
 		//ResetInstance();
 	}
 
@@ -181,7 +189,9 @@ void SceneManager::ResetInstance() {
 	m_ObjectList.clear();
 	delete m_Camera;
 	
+	delete scoreText;
 
 	delete s_Instance;
 	s_Instance = NULL;
+
 }
