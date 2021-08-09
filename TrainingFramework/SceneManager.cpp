@@ -207,7 +207,7 @@ void SceneManager::UpdateRoomID() {
 void SceneManager::UpdateControl(float frameTime)
 {
 	
-	float fSpeed = 200.0f;
+	float fSpeed = 20.0f;
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	if ((newKeyPressed & KEY_W))
 	{
