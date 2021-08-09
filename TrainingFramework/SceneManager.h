@@ -1,12 +1,16 @@
 #pragma once
 #include <vector>
 #include "StateBase.h"
+#include "Text.h"
 #include "Room.h"
 #include "Player.h"
 #include "Enemy.h"
 
 class SceneManager :public StateBase<SceneManager>
 {
+private:
+	Text *scoreText ;
+	//Text levelText;
 public:
 	RoomType m_Map[32][32];
 	std::vector<Room*> m_RoomList;

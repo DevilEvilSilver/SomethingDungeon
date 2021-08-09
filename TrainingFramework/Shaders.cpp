@@ -1,5 +1,6 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Shaders.h"
+
 
 Shaders::Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend)
 	: m_iResourceID(resourceID), m_isDepthTest(isDepthTest), m_isCulling(isCulling), m_isBlend(isBlend) {
@@ -59,4 +60,15 @@ void Shaders::Unbind() {
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 	glUseProgram(0);
+}
+
+// Tien add
+GLuint Shaders::GetAttribLocation(const std::string& str)
+{
+	return glGetAttribLocation(program, str.c_str());
+}
+
+GLuint Shaders::GetUniformLocation(const std::string& str)
+{
+	return glGetUniformLocation(program, str.c_str());
 }

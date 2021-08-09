@@ -5,6 +5,7 @@
 #include "SoundEngine.h"
 #include "Object.h"
 #include "define.h"
+#include "Renderer.h"
 #include "InputManager.h"
 #include "StateManager.h"
 #include "CollisionManager.h"
@@ -48,6 +49,7 @@ SceneManager::~SceneManager() {
 
 	delete m_Player;
 	delete m_Camera;
+	delete scoreText;
 }
 
 void SceneManager::Init() {
@@ -83,6 +85,9 @@ void SceneManager::Init() {
 		fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 	
 	fclose(dataFile);
+
+	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f,"abc");
+
 }
 
 void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -166,6 +171,8 @@ void SceneManager::Render() {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
+	
+	Renderer::GetInstance()->DrawText2(scoreText);
 }
 
 void SceneManager::Update(float frameTime) {
@@ -265,12 +272,19 @@ void SceneManager::UpdateControl(float frameTime)
 	//Play sound+STATE CHANGE
 	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 	{
-		static bool isSoundPlayed = false;
-		if (isSoundPlayed == false) {
+		static int num = 0;
+		std::string a = "hello " + std::to_string(num);
+		scoreText->setText(a);
 
-			SoundEngine::GetInstance()->Play(0, 0.5, 1.5, true);
-			isSoundPlayed = true;
-		}
+		num++;
+		//ResetInstance();
+
+		// static bool isSoundPlayed = false;
+		// if (isSoundPlayed == false) {
+
+		// 	SoundEngine::GetInstance()->Play(0, 0.5, 1.5, true);
+		// 	isSoundPlayed = true;
+		// }
 
 	}
 

@@ -22,4 +22,9 @@ public:
 
 	void Bind();
 	void Unbind();
+
+	//Tien add
+	Shaders() {}
+	GLuint		GetAttribLocation(const std::string& str);
+	GLuint		GetUniformLocation(const std::string& str);
 };
