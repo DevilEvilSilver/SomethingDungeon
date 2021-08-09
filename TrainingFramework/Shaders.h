@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "../Utilities/utilities.h"
 #include "Camera.h"
 
@@ -25,6 +26,6 @@ public:
 
 	//Tien add
 	Shaders() {}
-	GLuint		GetAttribLocation(const std::string& str);
-	GLuint		GetUniformLocation(const std::string& str);
+	GLuint GetAttribLocation(const std::string& str);
+	GLuint GetUniformLocation(const std::string& str);
 };
