@@ -51,6 +51,7 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 		y2 = staticObj->GetPosY(),
 		w2 = staticObj->m_fWidth,
 		h2 = staticObj->m_fHeight;
+
 	if (x1 <= x2 + w2 &&
 		x2 <= x1 + w1 &&
 		y1 >= y2 - h2 &&

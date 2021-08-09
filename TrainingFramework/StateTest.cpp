@@ -22,7 +22,7 @@ StateTest::~StateTest()
 		delete a;
 	}
 	m_ObjectList.clear();
-	delete m_Camera;
+	//delete m_Camera;
 }
 
 void StateTest::Init()

@@ -120,23 +120,23 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\SceneManager.cpp">
-      <Filter>Source Files\StateManager\States</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Character.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Enemy.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Player.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Room.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files\PhysicEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,29 +197,29 @@
     <ClInclude Include="Sound.h">
       <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Character.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Enemy.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Player.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Room.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Header Files\StateManager</Filter>
     </ClInclude>
     <ClInclude Include="StateTest.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\SceneManager.h">
-      <Filter>Header Files\StateManager\States</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\PhysicEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

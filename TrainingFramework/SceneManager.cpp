@@ -170,8 +170,8 @@ void SceneManager::Render() {
 
 void SceneManager::Update(float frameTime) {
 	for (auto& obj : m_RoomList) {
-		if (CheckInRange(obj->m_RoomID))
-			CollisionManager::CheckCollision(m_Player, GetRoomByType(WALL, m_RoomList), frameTime);
+		if (CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
+			CollisionManager::CheckCollision(m_Player,obj, frameTime);
 	}
 	
 	UpdateRoomID();
@@ -192,6 +192,7 @@ void SceneManager::UpdateRoomID() {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
 			if (i > 31)
 				continue;
+			
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
 				if (j > 31)
 					continue;
@@ -206,7 +207,7 @@ void SceneManager::UpdateRoomID() {
 void SceneManager::UpdateControl(float frameTime)
 {
 	
-	float fSpeed = 20.0f;
+	float fSpeed = 200.0f;
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	if ((newKeyPressed & KEY_W))
 	{
