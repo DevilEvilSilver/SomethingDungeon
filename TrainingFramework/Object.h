@@ -2,15 +2,16 @@
 #include <string>
 #include "../Utilities/Math.h"
 #include "Camera.h"
+#include <iostream>
 
 class Object {
 protected:
 	Matrix m_WorldMatrix;
-	float m_fPosX, m_fPosY;
-	float m_fDeltaX, m_fDeltaY;
-
+	float m_fCurrentPosX, m_fCurrentPosY;
+	float m_fVx, m_fVy;
 public:
 	std::string m_strPrefabID;
+	Vector2 m_RoomID;
 
 	//Animation info
 	std::string m_strState;
@@ -23,7 +24,7 @@ public:
 	float m_fRadius;				
 
 	Object();
-	Object(std::string prefabID, Matrix translationMatrix);
+	Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	virtual ~Object();
 
 	virtual void Update(float frameTime);
@@ -31,8 +32,10 @@ public:
 	Matrix GetWorldMatrix();
 	float GetPosX();
 	float GetPosY();
+	void SetVelocityX(float vx);
+	void SetVelocityY(float vy);
 	void SetPosX(float x);
 	void SetPosY(float y);
-
-	float* GetHitBoxData();
+	// PhysicEngine
+	float* GetHitBoxCurrentData();
 }; 

@@ -7,9 +7,9 @@
 #include "Shaders.h"
 #include "Font.h"
 
-class ResourceManager {
-private:
-	static ResourceManager* s_Instance;
+#include "Singleton.h"
+
+class ResourceManager:public Singleton<ResourceManager> {
 
 public:
 	std::vector<Model*> m_ModelList;
@@ -27,6 +27,4 @@ public:
 	void AddShader(Shaders *shader);
 	void AddFont(Font* font);
 
-	static ResourceManager* GetInstance();
-	static void ResetInstance();
 };

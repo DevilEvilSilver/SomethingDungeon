@@ -6,29 +6,23 @@ GLfloat Camera::GetRadian(GLfloat degree) {
 	return degree * PI / 180.0f;
 }
 
-Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
+Camera::Camera(GLfloat posX, GLfloat posY, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
 	:m_fMovingSpeed(fMovingSpeed), 
 	m_fRotaionSpped(fRotationSpeed), 
-	/*
-	m_isMoveForward(false), 
-	m_isMoveBackward(false), 
-	m_isMoveLeft(false), 
-	m_isMoveRight(false),
-	m_isRotUp(false), 
-	m_isRotDown(false), 
-	m_isRotLeft(false), 
-	m_isRotRight(false),
-	*/
+
 	m_RotVerticalCheck(0.0f), 
 	
 	m_isNewView(true), 
 	m_isNewSkyView(true) {
 
-	m_Position.x = 0.0f; m_Position.y = 0.0f; m_Position.z = 5.0f;
+	m_Position.x = posX; m_Position.y = posY; m_Position.z = 5.0f;
 	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Target.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
 	m_VectorUp.x = 0.0f; m_VectorUp.y = 1.0f; m_VectorUp.z = 0.0f; //always (0, 1, 0)
 	m_ZAxis = GetZAxis(); m_XAxis = GetXAxis(); m_YAxis = GetYAxis();
 	m_ProjectionMatrix.SetOrthographic(left, right, bottom, top, nearPlane, farPlane);
+
+	m_viewWidth = right - left;
+	m_viewHeight = top - bottom;
 }
 
 Camera::~Camera() {
@@ -93,25 +87,13 @@ Vector3 Camera::GetPosition() {
 	return m_Position;
 }
 
+Vector2 Camera::GetViewScale()
+{
+	return Vector2(m_viewWidth,m_viewHeight);
+}
+
 void Camera::Update(float frameTime) {
-	/*
-	if (m_isMoveForward)
-		MoveForward(frameTime);
-	if (m_isMoveBackward)
-		MoveBackward(frameTime);
-	if (m_isMoveLeft)
-		MoveLeft(frameTime);
-	if (m_isMoveRight)
-		MoveRight(frameTime);
-	if (m_isRotUp)
-		RotationUp(frameTime);
-	if (m_isRotDown)
-		RotationDown(frameTime);
-	if (m_isRotLeft)
-		RotationLeft(frameTime);
-	if (m_isRotRight)
-		RotationRight(frameTime);
-	*/
+	
 }
 
 void Camera::MoveForward(float frameTime) {
@@ -186,6 +168,15 @@ void Camera::RotationDown(float frameTime) {
 		m_isNewSkyView = true;
 		m_RotVerticalCheck -= frameTime * m_fRotaionSpped;
 	}
+}
+
+void Camera::SetPosition(Vector3 pos)
+{
+
+	m_Position = Vector3(pos.x,pos.y,m_Position.z);
+	m_Target = Vector3(pos.x, pos.y, m_Target.z);
+	m_isNewView = true;
+
 }
 
 void Camera::RotationLeft(float frameTime) {

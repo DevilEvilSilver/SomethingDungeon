@@ -5,7 +5,7 @@
 #include "esUtil_win.h"
 #include "Math.h"
 #include "TGA.h"
-#include <string>
 //#include "MemoryOperators.h"
-#include "../Include/Soloud/soloud.h"
-#include "../Include/Soloud//soloud_wav.h"
+
+#include "Soloud/soloud.h"
+#include "Soloud/soloud_wav.h"

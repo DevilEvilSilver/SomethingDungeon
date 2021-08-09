@@ -1,4 +1,4 @@
-#PREFAB_COUNT 2
+#PREFAB_COUNT 4
 ID mainChar
 MODEL 0
 SHADER 0
@@ -7,19 +7,41 @@ COORD 0.0, 0.0, 1.0, 1.0
 SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
-ID init
+ID idleLeft
 FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
 
-ID terrain
+ID enemy
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 16.0, 16.0
-SIZE 16.0 x 16.0
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
+
+ID normalRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 20.0, 20.0
+SIZE 20.0 x 20.0
 SCALE_BY_SIZE 1
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/terrain/static/sprite.txt
+
+ID wallRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 20.0, 20.0
+SIZE 20.0 x 20.0
+SCALE_BY_SIZE 1
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wall/static/sprite.txt
 
 #MODEL_GEN 1
 ID 0

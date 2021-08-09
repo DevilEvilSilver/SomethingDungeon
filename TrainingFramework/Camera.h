@@ -16,6 +16,8 @@ private:
 	float m_RotVerticalCheck;
 	bool m_isNewView, m_isNewSkyView;
 
+	float m_viewWidth, m_viewHeight;
+
 	Matrix GetWorldMatrix();
 	GLfloat GetRadian(GLfloat degree);
 	Vector3 GetXAxis();
@@ -29,10 +31,11 @@ public:
 	bool m_isRotRight, m_isRotLeft;
 	*/
 
-	Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
+	Camera(GLfloat posX, GLfloat posY, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
 	~Camera();
 	
 	Vector3 GetPosition();
+	Vector2 GetViewScale();
 	Matrix GetViewMatrix();
 	Matrix GetSkyViewMatrix();
 	Matrix GetProjectionMatrix();
@@ -48,4 +51,6 @@ public:
 	void RotationRight(float frameTime);
 	void RotationUp(float frameTime);
 	void RotationDown(float frameTime);
+
+	void SetPosition(Vector3 pos);
 };

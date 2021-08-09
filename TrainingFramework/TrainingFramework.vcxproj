@@ -54,7 +54,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Include;$(SolutionDir)\freetype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -64,7 +64,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;soloud_static.lib;WinMM.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;soloud_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -96,22 +96,23 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="ObjectInstance.cpp" />
-    <ClCompile Include="PhysicEngine.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Frame.cpp" />
-    <ClCompile Include="State1.cpp" />
-    <ClCompile Include="State2.cpp" />
-    <ClCompile Include="State3.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="StateTest.cpp" />
     <ClCompile Include="TrainingFramework.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -122,28 +123,30 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="define.h" />
-    <ClInclude Include="Font.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="ObjectInstance.h" />
-    <ClInclude Include="PhysicEngine.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="State1.h" />
-    <ClInclude Include="State2.h" />
-    <ClInclude Include="State3.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEngine.h" />
+    <ClInclude Include="StateBase.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StateTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Frame.h" />
-    <ClInclude Include="Text.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>

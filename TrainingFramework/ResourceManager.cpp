@@ -7,7 +7,7 @@
 Model* LoadModel(unsigned int id, char* file);
 Model* GenModel(unsigned int id, float width, float height);
 
-ResourceManager * ResourceManager::s_Instance = NULL;
+
 
 ResourceManager::ResourceManager(void) {
 	this->Init();
@@ -31,17 +31,7 @@ ResourceManager::~ResourceManager() {
 	m_FontList.resize(0);
 }
 
-ResourceManager* ResourceManager::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new ResourceManager();
-	return s_Instance;
-}
 
-void ResourceManager::ResetInstance() {
-	delete s_Instance;
-	s_Instance = NULL;
-}
 
 void ResourceManager::Init() {
 	FILE* dataFile;
