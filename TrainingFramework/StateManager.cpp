@@ -7,7 +7,8 @@
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_1);	
+	AddState(GS_STATE_1);
+	SceneManager::GetInstance()->RoomsGenerate();
 }
 
 StateManager::~StateManager() {

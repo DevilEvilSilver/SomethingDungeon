@@ -11,6 +11,7 @@ protected:
 
 public:
 	std::string m_strPrefabID;
+	Vector2 m_RoomID;
 
 	//Animation info
 	std::string m_strState;
@@ -23,7 +24,7 @@ public:
 	float m_fRadius;				
 
 	Object();
-	Object(std::string prefabID, Matrix translationMatrix);
+	Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	virtual ~Object();
 
 	virtual void Update(float frameTime);

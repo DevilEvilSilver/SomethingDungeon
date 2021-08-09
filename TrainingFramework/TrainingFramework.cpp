@@ -2,21 +2,18 @@
 //
 
 #include "stdafx.h"
+#include <conio.h>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
 #include "Globals.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include <conio.h>
-
-
+#include "SoundEngine.h"
+#include "SceneManager.h"
+#include "PhysicEngine.h"
 #include "InputManager.h"
 #include "StateManager.h"
-#include "PhysicEngine.h"
-
-#include "SoundEngine.h"
-
 
 
 int Init(ESContext* esContext) {
@@ -141,7 +138,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//identifying memory leaks
 	CrtMemoryDump();
-	
 	
 	printf("Press any key...\n");
 	_getch();

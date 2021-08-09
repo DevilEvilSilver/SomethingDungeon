@@ -31,7 +31,7 @@ public:
 	bool m_isRotRight, m_isRotLeft;
 	*/
 
-	Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
+	Camera(GLfloat posX, GLfloat posY, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed);
 	~Camera();
 	
 	Vector3 GetPosition();
