@@ -43,11 +43,7 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-	m_fCurrFrameTime += frameTime;
-	m_fCurrentPosX += (m_fVx * frameTime);
-	m_fCurrentPosY += (m_fVy * frameTime);
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY;
+
 }
 
 void Object::Render(Camera* camera) {

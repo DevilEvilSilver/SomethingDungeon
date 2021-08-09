@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PhysicEngine.h"
+#include "SceneManager.h"
 
 
 PhysicEngine::PhysicEngine()

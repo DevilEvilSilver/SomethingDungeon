@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CollisionManager.h"
+#include "define.h"
+
 CollisionManager::CollisionManager()
 {
 

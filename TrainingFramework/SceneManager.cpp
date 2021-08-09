@@ -180,7 +180,7 @@ void SceneManager::Update(float frameTime) {
 			obj->Update(frameTime);
 	}
 
-	Control(frameTime);
+	UpdateControl(frameTime);
 }
 
 void SceneManager::UpdateRoomID() {

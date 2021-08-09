@@ -75,13 +75,13 @@ void StateTest::Update(float frameTime)
 		object->Update(frameTime);
 	}
 
-	Control(frameTime);
+	UpdateControl(frameTime);
 	CheckCollision();
 	DraggingObject();
 
 }
 
-void StateTest::Control(float frameTime)
+void StateTest::UpdateControl(float frameTime)
 {
 	//testing
 

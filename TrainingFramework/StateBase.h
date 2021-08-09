@@ -22,7 +22,7 @@ public:
 	virtual void Update(float frameTime) {};
 
 	//input Handler
-	virtual void Control(float frameTime) {};
+	virtual void UpdateControl(float frameTime) {};
 
 	//render
 	virtual void Render() {};

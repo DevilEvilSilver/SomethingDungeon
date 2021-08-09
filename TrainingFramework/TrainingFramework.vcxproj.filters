@@ -37,9 +37,6 @@
     <Filter Include="Header Files\PhysicEngine">
       <UniqueIdentifier>{96aacf55-f55e-484a-92ec-8c72493ab132}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\PhysicManager">
-      <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\InputManager">
       <UniqueIdentifier>{0232ceaf-9a66-4744-8b6e-4b10e681754f}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,9 @@
     </Filter>
     <Filter Include="Header Files\StateManager\Data">
       <UniqueIdentifier>{b42d8823-f8c4-434f-b663-82ae3d5d3c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PhysicEngine">
+      <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +100,7 @@
       <Filter>Source Files\StateManager</Filter>
     </ClCompile>
     <ClCompile Include="PhysicEngine.cpp">
-      <Filter>Source Files\PhysicManager</Filter>
+      <Filter>Source Files\PhysicEngine</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\GraphicEngine</Filter>
@@ -137,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Room.cpp">
       <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files\PhysicEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\SceneManager.h">
       <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

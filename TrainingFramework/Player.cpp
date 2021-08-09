@@ -17,6 +17,8 @@ Player::~Player() {
 
 void Player::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
+	SetPosX(GetPosX() + m_fVx * frameTime);
+	SetPosY(GetPosY() + m_fVy * frameTime);
 }
 
 void Player::Render(Camera* camera) {
