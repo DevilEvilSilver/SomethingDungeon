@@ -61,8 +61,8 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 	if (status)
 	{
 		float dx = 0, dy = 0;
-		Vector2 C1(x1Current + w1 / 2, y1Current + h1 / 2);
-		Vector2 C2(x2 + w2 / 2, y2 + h2 / 2);
+		Vector2 C1(x1Current + w1 / 2, y1Current - h1 / 2);
+		Vector2 C2(x2 + w2 / 2, y2 - h2 / 2);
 		Vector2 tempDis(x1 - x1Current, y1 - y1Current);
 		Vector2 tempC1 = C1 + tempDis;
 		Vector2 tempDisC1C2 = tempC1 - C2;

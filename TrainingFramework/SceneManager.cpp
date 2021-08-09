@@ -169,6 +169,11 @@ void SceneManager::Render() {
 }
 
 void SceneManager::Update(float frameTime) {
+	for (auto& obj : m_RoomList) {
+		if (CheckInRange(obj->m_RoomID))
+			CollisionManager::CheckCollision(m_Player, GetRoomByType(WALL, m_RoomList), frameTime);
+	}
+	
 	UpdateRoomID();
 
 	m_Camera->Update(frameTime);
