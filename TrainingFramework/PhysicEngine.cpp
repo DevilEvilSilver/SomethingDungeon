@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PhysicEngine.h"
 
-PhysicEngine* PhysicEngine::s_Instance = NULL;
+
 PhysicEngine::PhysicEngine()
 {
 }
@@ -15,7 +15,7 @@ bool PhysicEngine::GetCollisSts(int i, int j)
 	return m_collisStatus[i][j];
 }
 void PhysicEngine::UpdateCollision()
-{
+{/*
 	std::vector<Object*> objectList = SceneManager::GetInstance()->m_ObjectList;
 	for (int i = 0; i <objectList.size() ; i++)
 	{
@@ -38,6 +38,7 @@ void PhysicEngine::UpdateCollision()
 			}
 		}
 	}
+	*/
 }
 bool PhysicEngine::CheckCollision(Object* o1, Object* o2)
 {
@@ -149,14 +150,14 @@ bool PhysicEngine::CheckCirBoundCollision(Object* rect, Object* bound)
 {
 	return false;
 }
-PhysicEngine* PhysicEngine::GetInstance()
+bool PhysicEngine::CheckMouseRectangle(Vector2 mousePos,Object* rect)
 {
-	if (!s_Instance)
-		s_Instance = new PhysicEngine();
-	return s_Instance;
-}
+	float deltaX = mousePos.x - rect->GetPosX();
+	float deltaY = rect->GetPosY() - mousePos.y;
+	if (deltaX >= 0 && deltaY >= 0 && 
+		deltaX <= rect->m_fWidth && 
+		deltaY <= rect->m_fHeight)
+		return true;
 
-void PhysicEngine::ResetInstance() {
-	delete s_Instance;
-	s_Instance = NULL;
+	return false;
 }

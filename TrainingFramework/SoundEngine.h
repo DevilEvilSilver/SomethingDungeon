@@ -1,31 +1,31 @@
 #pragma once
 #include "../Utilities/utilities.h"
-#include"Sound.h"
-#include"SoundInstance.h"
 #include<vector>
 #include "Singleton.h"
+#include "Sound.h"
 
-class SoundEngine : public CSingleton<SoundEngine>
+class SoundEngine : public Singleton<SoundEngine>
 {
 private:
-	std::vector<Sound*> listSound;
-	std::vector<SoundInstance*> listSI;
-
-public:
-	int soundID;
-	SoLoud::Wav wav;
 	
+public:
+	SoLoud::Soloud m_soloud;
+	std::vector<Sound*> m_SoundList;
+
 
 	SoundEngine();
-	//SoundEngine(int soundID, const char* file);
 	~SoundEngine();
 
 	void Init();
-	void AddSoundInstance(SoundInstance* si);
+	
+	int PlayOnly(int soundID);
+	int PlayVolume(int soundID, float volume);
+	int PlaySpeed(int soundID, float speed);
+	int PlayInTSec(int soundID, int t);
+	int PlayFirstTSec(int soundID, int t);
+	int PlayLoop(int soundID);
+
+	int Play(int soundID, float volume, float speed, bool isLoop);
 
 
-	std::vector<Sound*> getListSound();
-	std::vector<SoundInstance*> getListSI();
-
-	Sound* getSoundById(int id);
 };

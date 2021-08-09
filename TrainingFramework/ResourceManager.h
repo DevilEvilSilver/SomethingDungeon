@@ -6,9 +6,9 @@
 #include "Prefab.h"
 #include "Shaders.h"
 
-class ResourceManager {
-private:
-	static ResourceManager* s_Instance;
+#include "Singleton.h"
+
+class ResourceManager:public Singleton<ResourceManager> {
 
 public:
 	std::vector<Model*> m_ModelList;
@@ -24,6 +24,4 @@ public:
 	void AddPrefab(Prefab *prefab);
 	void AddShader(Shaders *shader);
 
-	static ResourceManager* GetInstance();
-	static void ResetInstance();
 };

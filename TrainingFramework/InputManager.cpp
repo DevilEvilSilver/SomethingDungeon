@@ -5,7 +5,7 @@
 #include <WinUser.h>
 #define _CRT_SECURE_NO_WARNINGS
 
-InputManager* InputManager::s_Instance = NULL;
+
 
 InputManager::InputManager()
 {
@@ -78,15 +78,36 @@ void InputManager::Key(unsigned char key, bool bIsPressed)
 	//printf("keyPressed: %d\n", keyPressed);
 }
 
-InputManager* InputManager::GetInstance()
+void InputManager::MouseLeft(bool bIsPressed)
 {
-	if (!s_Instance)
-		s_Instance = new InputManager();
-	return s_Instance;
+	if (bIsPressed == true)
+		keyPressed = keyPressed | MOUSE_LEFT;
+	else
+		keyPressed = keyPressed ^ MOUSE_LEFT;
 }
 
-void InputManager::ResetInstance()
+void InputManager::MouseRight(bool bIsPressed)
 {
-	delete s_Instance;
-	s_Instance = NULL;
+	if (bIsPressed == true)
+		keyPressed = keyPressed | MOUSE_RIGHT;
+	else
+		keyPressed = keyPressed ^ MOUSE_RIGHT;
 }
+
+void InputManager::MouseMove(int x, int y)
+{
+	mouseX = x;
+	mouseY = y;
+}
+
+Vector2 InputManager::MousePosition(Camera* stateCamera)
+{
+	Vector2 camScale = stateCamera->GetViewScale();
+	float x = mouseX / SCREEN_W * camScale.x + stateCamera->GetPosition().x - 10.0f;
+	float y = mouseY / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + 10.0f;
+
+	
+
+	return Vector2(x,y);
+}
+

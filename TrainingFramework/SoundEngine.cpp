@@ -1,22 +1,35 @@
 #pragma once
 #include "stdafx.h"
+#include "define.h"
 #include "SoundEngine.h"
 
 SoundEngine::SoundEngine() {
+	Init();
+	
 }
 
+
 SoundEngine::~SoundEngine() {
+	//m_soloud.~Soloud();
+	for (Sound* s : m_SoundList) {
+		delete s;
+	}
+	m_SoundList.clear();
+
+	m_soloud.deinit();
+	
 }
 
 void SoundEngine::Init() 
 {
+	//READ FROM FILE
 	FILE* fp;
 	int soundNum, soundID;
 	char filePath[40];
 	Sound *sound;
-	SoundInstance* si;
 
-	fp = fopen("../Resources/Sound.txt", "r");
+
+	fp = fopen(FILE_SE, "r");
 	if (fp == NULL) {
 		printf("can not open file");
 	}
@@ -25,36 +38,119 @@ void SoundEngine::Init()
 	for (int i = 0; i < soundNum; i++) {
 		fscanf(fp, "#ID %d %s\n", &soundID, filePath );
 		sound = new Sound(soundID, filePath);
-		listSound.push_back(sound);
-		si = new SoundInstance(soundID);
-		listSI.push_back(si);
+		m_SoundList.push_back(sound);
+
+
 	}
 
 	printf("Done reading file Sound.txt\n");
 	fclose(fp);
+
+
+	//INIT SOLOUD
+	m_soloud.init();
 }
 
-void SoundEngine::AddSoundInstance(SoundInstance* si)
+int SoundEngine::PlayOnly(int soundID)
 {
-	listSI.push_back(si);
-}
-
-
-std::vector<Sound*> SoundEngine::getListSound() {
-	return this->listSound;
-}
-
-std::vector<SoundInstance*> SoundEngine::getListSI() {
-	return this->listSI;
-}
-
-Sound* SoundEngine::getSoundById(int id) {
-	for (Sound* sound : listSound) {
-		if (sound->m_isoundID == id) {
-			printf("found out!!\n");
-			return sound;
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			return handle;
+			break;
 		}
 	}
-	printf("can not find out sound with Id = %d\n", id);
-	return new Sound();
+	return NULL;
 }
+int SoundEngine::PlayVolume(int soundID, float volume)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			m_soloud.setVolume(handle,volume);
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+int SoundEngine::PlaySpeed(int soundID, float speed)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			m_soloud.setRelativePlaySpeed(handle,speed);
+
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+int SoundEngine::PlayInTSec(int soundID, int t)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			if (t != 0) {
+				float speed = s->m_wav.getLength() / t;
+				m_soloud.setRelativePlaySpeed(handle, speed);
+			}
+
+
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+int SoundEngine::PlayLoop(int soundID)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			m_soloud.setLooping(handle, true);
+
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+
+int SoundEngine::PlayFirstTSec(int soundID, int t)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+			m_soloud.scheduleStop(handle, t);
+
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+
+int SoundEngine::Play(int soundID, float volume, float speed,bool isLoop)
+{
+	for (auto s : m_SoundList) {
+		if (s->m_isoundID == soundID) {
+			int handle = m_soloud.play(s->m_wav);
+
+			m_soloud.setVolume(handle,volume);
+
+			m_soloud.setRelativePlaySpeed(handle, speed);
+			
+			m_soloud.setLooping(handle,isLoop);
+
+
+
+			return handle;
+			break;
+		}
+	}
+	return NULL;
+}
+
+

@@ -4,6 +4,8 @@
 #define SCREEN_W					960.0f
 #define SCREEN_H					720.0f
 
+#define LIMIT_FPS			30
+
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
 
@@ -18,6 +20,7 @@
 //INIT STATE
 #define FILE_SM						"../Resources/SM.txt"
 #define FILE_RM						"../Resources/RM.txt"
+#define FILE_SE						"../Resources/Sound.txt"
 
 //MAP
 #define MAP_MAX_TUNNEL				160
@@ -38,6 +41,9 @@
 #define KEY_RIGHT	1<<7
 
 #define KEY_SPACE	1<<8
+
+#define MOUSE_LEFT	1<<29
+#define MOUSE_RIGHT	1<<30
 
 //PHYSIC ENGINE
 #define RECTANGLE					0
