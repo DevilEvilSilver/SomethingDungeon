@@ -3,15 +3,13 @@
 #include "Sound.h"
 
 
-Sound::Sound() 
-{
-}
 
-Sound::~Sound() 
-{
-}
+
 
 Sound::Sound(int soundID, const char* file) {
-	this->m_isoundID = soundID;
-	this->m_wav.load(file);
+	m_isoundID = soundID;
+	m_wav.load(file);
+
+
 }
+

@@ -6,3 +6,6 @@
 #include "Math.h"
 #include "TGA.h"
 //#include "MemoryOperators.h"
+
+#include "Soloud/soloud.h"
+#include "Soloud/soloud_wav.h"

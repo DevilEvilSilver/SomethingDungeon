@@ -37,12 +37,6 @@
     <Filter Include="Header Files\PhysicEngine">
       <UniqueIdentifier>{96aacf55-f55e-484a-92ec-8c72493ab132}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\SceneManager~a State">
-      <UniqueIdentifier>{507046d3-7c38-4add-b5f7-43616e9307ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\PhysicManager">
-      <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\InputManager">
       <UniqueIdentifier>{0232ceaf-9a66-4744-8b6e-4b10e681754f}</UniqueIdentifier>
     </Filter>
@@ -58,8 +52,23 @@
     <Filter Include="Source Files\SoundEngine">
       <UniqueIdentifier>{e51379d0-5d1e-4cd6-80ad-fd4568228982}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\SceneManager~a State">
+    <Filter Include="Header Files\_template">
+      <UniqueIdentifier>{0cd3f463-02b2-4d55-94c2-0b2d89185b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateManager\States">
+      <UniqueIdentifier>{507046d3-7c38-4add-b5f7-43616e9307ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateManager\States">
       <UniqueIdentifier>{663341c8-b82e-4b10-b74d-7fb3b418ed7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateManager\Data">
+      <UniqueIdentifier>{9507b93b-548c-40cf-83b7-68611096c43c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateManager\Data">
+      <UniqueIdentifier>{b42d8823-f8c4-434f-b663-82ae3d5d3c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PhysicEngine">
+      <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,12 +78,6 @@
     <ClCompile Include="TrainingFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\SceneManager~a State</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\SceneManager~a State</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
@@ -83,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="Shaders.cpp">
       <Filter>Source Files\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\SceneManager~a State</Filter>
     </ClCompile>
     <ClCompile Include="Frame.cpp">
       <Filter>Source Files\ResourceManager</Filter>
@@ -99,29 +99,50 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Source Files\StateManager</Filter>
     </ClCompile>
-    <ClCompile Include="State3.cpp">
-      <Filter>Source Files\StateManager</Filter>
-    </ClCompile>
-    <ClCompile Include="State2.cpp">
-      <Filter>Source Files\StateManager</Filter>
-    </ClCompile>
-    <ClCompile Include="State1.cpp">
-      <Filter>Source Files\StateManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectInstance.cpp">
-      <Filter>Source Files\StateManager</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicEngine.cpp">
-      <Filter>Source Files\PhysicManager</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\GraphicEngine</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\InputManager</Filter>
     </ClCompile>
+    <ClCompile Include="SoundEngine.cpp">
+      <Filter>Source Files\SoundEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTest.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\SoundEngine</Filter>
+    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files\PhysicManager</Filter>
+      <Filter>Source Files\PhysicEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,15 +170,6 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\SceneManager~a State</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\SceneManager~a State</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\SceneManager~a State</Filter>
-    </ClInclude>
     <ClInclude Include="Frame.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
@@ -170,29 +182,56 @@
     <ClInclude Include="InputManager.h">
       <Filter>Header Files\InputManager</Filter>
     </ClInclude>
-    <ClInclude Include="State1.h">
-      <Filter>Header Files\StateManager</Filter>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\GraphicEngine</Filter>
     </ClInclude>
-    <ClInclude Include="State2.h">
-      <Filter>Header Files\StateManager</Filter>
+    <ClInclude Include="SoundEngine.h">
+      <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
-    <ClInclude Include="State3.h">
-      <Filter>Header Files\StateManager</Filter>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files\_template</Filter>
+    </ClInclude>
+    <ClInclude Include="StateBase.h">
+      <Filter>Header Files\_template</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\SoundEngine</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Header Files\StateManager</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectInstance.h">
-      <Filter>Header Files\StateManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files\GraphicEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicEngine.h">
-      <Filter>Header Files\PhysicEngine</Filter>
+    <ClInclude Include="StateTest.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\PhysicEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

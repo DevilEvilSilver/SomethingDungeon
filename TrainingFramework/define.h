@@ -4,6 +4,8 @@
 #define SCREEN_W					960.0f
 #define SCREEN_H					720.0f
 
+#define LIMIT_FPS					120
+
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
 
@@ -18,11 +20,15 @@
 //INIT STATE
 #define FILE_SM						"../Resources/SM.txt"
 #define FILE_RM						"../Resources/RM.txt"
+#define FILE_SE						"../Resources/Sound.txt"
 
-//OBJECT
-#define RECTANGLE					0
-#define CIRCLE						1
-
+//MAP
+#define MAP_MAX_TUNNEL				160
+#define TUNNEL_MAX_LENGTH			7
+#define ROOM_WIDTH					20
+#define ROOM_HEIGHT					20
+#define PLAYER_START_POSX			10.0
+#define PLAYER_START_POSY			10.0
 
 //INPUT
 #define KEY_W		1<<0
@@ -36,16 +42,24 @@
 
 #define KEY_SPACE	1<<8
 
-//OBJECT
+#define MOUSE_LEFT	1<<29
+#define MOUSE_RIGHT	1<<30
+
+//PHYSIC ENGINE
 #define RECTANGLE					0
 #define CIRCLE						1
 #define RECTBOUND					2
+#define Y_EPSILON			        0.5
+#define X_EPSILON			        0.1
 
-//PHYSIC ENGINE
-#define Y_EPSILON					0.5
-#define X_EPSILON					0.1
-#define RECT_RECT_COLLISION_EPSILON		0.05
-#define TOP_EDGE			1
-#define RIGHT_EDGE			2
-#define DOWN_EGDE			3
-#define LEFT_EDGE			4
+//PREFAB
+#define PLAYER			"mainChar"
+#define ENEMY			"enemy"
+#define NORMAL_ROOM		"normalRoom"
+#define WALL_ROOM		"wallRoom"
+#define HOLE_ROOM		"holeRoom"
+
+//ANIMATION
+#define INIT_ANIM		"init"
+#define IDLE_LEFT		"idleLeft"
+

@@ -7,7 +7,7 @@
 Model* LoadModel(unsigned int id, char* file);
 Model* GenModel(unsigned int id, float width, float height);
 
-ResourceManager * ResourceManager::s_Instance = NULL;
+
 
 ResourceManager::ResourceManager(void) {
 	this->Init();
@@ -25,19 +25,13 @@ ResourceManager::~ResourceManager() {
 		delete object;
 	}
 	m_ShaderList.resize(0);
+	for (auto& object : m_FontList) {
+		delete object;
+	}
+	m_FontList.resize(0);
 }
 
-ResourceManager* ResourceManager::GetInstance()
-{
-	if (!s_Instance)
-		s_Instance = new ResourceManager();
-	return s_Instance;
-}
 
-void ResourceManager::ResetInstance() {
-	delete s_Instance;
-	s_Instance = NULL;
-}
 
 void ResourceManager::Init() {
 	FILE* dataFile;
@@ -122,6 +116,17 @@ void ResourceManager::Init() {
 		Shaders *shader = new Shaders(id, strVSFile, strFSFile, isDepthTest, isCulling, isBlend);
 		AddShader(shader);
 	}
+	
+	int fontCount;
+	fscanf(dataFile, "#FONT_COUNT %d\n", &fontCount);
+	while (fontCount--) {
+		int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		char fontFile[100];
+		fscanf(dataFile, "FILE %s\n", &fontFile);
+		Font* font = new Font(id, fontFile);
+		AddFont(font);
+	}
 
 	fclose(dataFile);
 }
@@ -136,6 +141,10 @@ void ResourceManager::AddPrefab(Prefab *prefab) {
 
 void ResourceManager::AddShader(Shaders *shader) {
 	m_ShaderList.push_back(shader);
+}
+
+void ResourceManager::AddFont(Font* font) {
+	m_FontList.push_back(font);
 }
 
 Model* LoadModel(unsigned int id, char* file) {

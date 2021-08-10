@@ -47,6 +47,64 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		  }
 		  break;
          
+      case WM_LBUTTONDOWN:
+      {
+          POINTS      point;
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          point = MAKEPOINTS(lParam);
+          if (esContext && esContext->mouseLeftDownFunc)
+              esContext->mouseLeftDownFunc(esContext, (int)point.x, (int)point.y);
+      }
+      break;
+
+
+      case WM_RBUTTONDOWN:
+      {
+          POINTS      point;
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          point = MAKEPOINTS(lParam);
+          if (esContext && esContext->mouseRightDownFunc)
+              esContext->mouseRightDownFunc(esContext, (int)point.x, (int)point.y);
+      }
+      break;
+
+      case WM_MOUSEMOVE:
+          if (wParam & MK_LBUTTON)
+          {
+              POINTS      point;
+              ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+              point = MAKEPOINTS(lParam);
+              if (esContext && esContext->mouseMoveFunc)
+                  esContext->mouseMoveFunc(esContext, (int)point.x, (int)point.y);
+          }
+          break;
+      case WM_LBUTTONUP:
+      {
+          POINTS     point;
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          point = MAKEPOINTS(lParam);
+
+          if (esContext && esContext->mouseLeftUpFunc)
+              esContext->mouseLeftUpFunc(esContext, (int)point.x, (int)point.y);
+      }
+      break;
+      case WM_RBUTTONUP:
+      {
+          POINTS     point;
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          point = MAKEPOINTS(lParam);
+
+          if (esContext && esContext->mouseRightUpFunc)
+              esContext->mouseRightUpFunc(esContext, (int)point.x, (int)point.y);
+      }
+      break;
+
+
       default: 
          lRet = DefWindowProc (hWnd, uMsg, wParam, lParam); 
          break; 

@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Prefab.h"
 #include "Renderer.h"
+#include "define.h"
 
 template <class T>
 T GetResource(std::string id, std::vector<T> objList) {
@@ -17,8 +18,8 @@ Object::Object()
 {
 }
 
-Object::Object(std::string prefabID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_strState("init"), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;
@@ -42,11 +43,7 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-	m_fCurrFrameTime += frameTime;
-	m_fCurrentPosX += (m_fVx * frameTime);
-	m_fCurrentPosY += (m_fVy * frameTime);
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY;
+
 }
 
 void Object::Render(Camera* camera) {
@@ -86,6 +83,6 @@ void Object::SetPosY(float y)
 }
 float* Object::GetHitBoxCurrentData()
 {
-	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY + m_fHeight,m_fVx,m_fVy, m_fRadius };
+	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
 	return data;
 }

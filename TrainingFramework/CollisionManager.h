@@ -12,7 +12,7 @@ public:
 	CollisionManager();
 	~CollisionManager();
 	static void UpdateCollision(float frameTime);
-	static bool CheckCollision(Object* o1, Object* o2, float frameTime);
+	static bool CheckCollision(Object* o1, Object* o2, float frameTime = 0.0f);
 	static bool CheckRectRectCollision(Object* dynamicObj, Object* staticObj, float frameTime);
 };
 
