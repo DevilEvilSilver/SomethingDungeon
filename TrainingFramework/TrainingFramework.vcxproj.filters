@@ -138,10 +138,10 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.cpp">
+    <ClCompile Include="Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.cpp">
+    <ClCompile Include="Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,20 +227,12 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.h">
+    <ClInclude Include="Font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.h">
+    <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\RM.txt">
