@@ -1,7 +1,7 @@
 #pragma once
 
 //SYSTEM
-#define SCREEN_W					960.0f
+#define SCREEN_W					1080.0f
 #define SCREEN_H					720.0f
 
 #define LIMIT_FPS					120
@@ -18,9 +18,11 @@
 #define VERTEX_OFFSET_UV			(4 * sizeof(Vector3))
 
 //INIT STATE
-#define FILE_SM						"../Resources/SM.txt"
-#define FILE_RM						"../Resources/RM.txt"
-#define FILE_SE						"../Resources/Sound.txt"
+#define FILE_S_WELCOME					"../Resources/States/S_WELCOME.txt"
+#define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
+#define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
+#define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
+#define FILE_SE							"../Resources/Sound.txt"
 
 //MAP
 #define MAP_MAX_TUNNEL				160

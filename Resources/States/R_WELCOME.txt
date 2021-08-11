@@ -1,0 +1,26 @@
+#PREFAB_COUNT 1
+ID background
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 20.0, 20.0
+SIZE 30.0 x 20.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/background/static/sprite.txt
+
+#MODEL_GEN 1
+ID 0
+SIZE 1.0 x 1.0
+
+#SHADER_COUNT 1
+ID 0
+VS ../Resources/Shaders/Sprite.vs
+FS ../Resources/Shaders/Sprite.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+#FONT_COUNT 0

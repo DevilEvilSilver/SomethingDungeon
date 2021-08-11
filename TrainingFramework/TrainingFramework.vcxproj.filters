@@ -144,6 +144,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

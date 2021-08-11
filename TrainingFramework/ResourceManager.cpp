@@ -10,7 +10,7 @@ Model* GenModel(unsigned int id, float width, float height);
 
 
 ResourceManager::ResourceManager(void) {
-	this->Init();
+
 }
 
 ResourceManager::~ResourceManager() {
@@ -33,9 +33,9 @@ ResourceManager::~ResourceManager() {
 
 
 
-void ResourceManager::Init() {
+void ResourceManager::Init(std::string resourceFile) {
 	FILE* dataFile;
-	dataFile = fopen(FILE_RM, "r");
+	dataFile = fopen(resourceFile.c_str(), "r");
 
 	int iPrefabCount;
 	fscanf(dataFile, "#PREFAB_COUNT %d\n", &iPrefabCount);

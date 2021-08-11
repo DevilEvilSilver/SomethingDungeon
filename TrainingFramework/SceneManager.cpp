@@ -57,7 +57,7 @@ void SceneManager::Init() {
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
-	dataFile = fopen(FILE_SM, "r");
+	dataFile = fopen(FILE_S_PLAY, "r");
 
 	//Player
 	fscanf(dataFile, "#PLAYER\n");
@@ -214,7 +214,7 @@ void SceneManager::UpdateRoomID() {
 void SceneManager::UpdateControl(float frameTime)
 {
 	
-	float fSpeed = 20.0f;
+	float fSpeed = 5.0f;
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	if ((newKeyPressed & KEY_W))
 	{

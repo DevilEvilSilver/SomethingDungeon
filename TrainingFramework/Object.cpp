@@ -19,23 +19,17 @@ Object::Object()
 }
 
 Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0), m_fVx(0.0f), m_fVy(0.0f) {
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;
-	// Long Chu y bo thuoc tinh m_fDeltaX,m_fDeltaY trong Prefab !!!
-	float nothingx, nothingy;
-
-
 	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
 	m_WorldMatrix = scaleMatrix * translationMatrix;
 
-	m_iType = prefab->m_iType; nothingx = prefab->m_fDeltaX; nothingy = prefab->m_fDeltaY;
+	m_iType = prefab->m_iType; 
 	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
-	m_fVx = 0;
-	m_fVy = 0;
-	m_fCurrentPosX =  m_WorldMatrix.m[3][0];
-	m_fCurrentPosY =  m_WorldMatrix.m[3][1];
+	m_fCurrentPosX =  m_WorldMatrix.m[3][0] + prefab->m_fDeltaX;
+	m_fCurrentPosY =  m_WorldMatrix.m[3][1] + prefab->m_fDeltaY;
 }
 
 Object::~Object() {
@@ -43,7 +37,7 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-
+	m_fCurrFrameTime += frameTime;
 }
 
 void Object::Render(Camera* camera) {

@@ -17,7 +17,6 @@ public:
 	std::vector<Enemy*> m_EnemyList;
 	std::vector<Object*> m_ObjectList;
 	Player *m_Player;
-	Camera *m_Camera;
 
 	SceneManager();
 	~SceneManager();

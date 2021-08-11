@@ -138,7 +138,7 @@ void StateTest::UpdateControl(float frameTime)
 				isSoundPlayed = true;
 			}
 
-			StateManager::GetInstance()->ClosenAddState(StateManager::GetInstance()->GS_STATE_2);
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
 			
 		}
 

@@ -2,15 +2,16 @@
 #include <vector>
 #include "Singleton.h"
 
+enum GameState {
+		GS_STATE_LOGO,
+		GS_STATE_WELCOME,
+		GS_STATE_PLAY
+};
+
 class StateManager:public Singleton<StateManager> 
 {
 
 public:
-	enum GameState {
-		GS_STATE_1,
-		GS_STATE_2,
-		GS_STATE_3
-	};
 	std::vector<GameState> m_GameStateStack;	
 
 	StateManager();
