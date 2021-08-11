@@ -103,8 +103,8 @@ void InputManager::MouseMove(int x, int y)
 Vector2 InputManager::MousePosition(Camera* stateCamera)
 {
 	Vector2 camScale = stateCamera->GetViewScale();
-	float x = mouseX / SCREEN_W * camScale.x + stateCamera->GetPosition().x - 10.0f;
-	float y = mouseY / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + 10.0f;
+	float x = mouseX / SCREEN_W * camScale.x + stateCamera->GetPosition().x - camScale.x/2;
+	float y = mouseY / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + camScale.y/2;
 
 	
 

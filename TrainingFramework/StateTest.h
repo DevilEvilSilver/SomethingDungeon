@@ -13,7 +13,7 @@ public:
 	void Init();	
 	void Update(float frameTime);	
 
-	void Control(float frameTime);	//test only
+	void UpdateControl(float frameTime);	//test only
 
 	void DraggingObject();			//test only
 

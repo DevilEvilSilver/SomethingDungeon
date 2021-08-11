@@ -6,7 +6,7 @@ GLfloat Camera::GetRadian(GLfloat degree) {
 	return degree * PI / 180.0f;
 }
 
-Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
+Camera::Camera(GLfloat posX, GLfloat posY, GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane, float fMovingSpeed, float fRotationSpeed)
 	:m_fMovingSpeed(fMovingSpeed), 
 	m_fRotaionSpped(fRotationSpeed), 
 
@@ -15,7 +15,7 @@ Camera::Camera(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat
 	m_isNewView(true), 
 	m_isNewSkyView(true) {
 
-	m_Position.x = 0.0f; m_Position.y = 0.0f; m_Position.z = 5.0f;
+	m_Position.x = posX; m_Position.y = posY; m_Position.z = 5.0f;
 	m_Target.x = m_Position.x; m_Target.y = m_Position.y; m_Target.z = m_Position.z - 1.0f; //always start with horizontal view (easier to lock rotation view)
 	m_VectorUp.x = 0.0f; m_VectorUp.y = 1.0f; m_VectorUp.z = 0.0f; //always (0, 1, 0)
 	m_ZAxis = GetZAxis(); m_XAxis = GetXAxis(); m_YAxis = GetYAxis();

@@ -2,21 +2,17 @@
 //
 
 #include "stdafx.h"
+#include <conio.h>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
 #include "Globals.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include <conio.h>
-
-
+#include "SoundEngine.h"
+#include "SceneManager.h"
 #include "InputManager.h"
 #include "StateManager.h"
-#include "PhysicEngine.h"
-
-#include "SoundEngine.h"
-
 
 
 int Init(ESContext* esContext) {
@@ -24,7 +20,6 @@ int Init(ESContext* esContext) {
 
 	ResourceManager::GetInstance();
 	Renderer::GetInstance();
-	PhysicEngine::GetInstance();
 	InputManager::GetInstance();
 	StateManager::GetInstance();
 	SoundEngine::GetInstance();
@@ -92,10 +87,8 @@ void CleanUp()
 {
 	ResourceManager::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
-	PhysicEngine::GetInstance()->ResetInstance();
 	InputManager::GetInstance()->ResetInstance();
 	StateManager::GetInstance()->ResetInstance();
-	
 	SoundEngine::GetInstance()->ResetInstance();
 }
 
@@ -108,6 +101,16 @@ void CrtMemoryDump()
 	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
 	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
 	_CrtDumpMemoryLeaks();
+}
+void memoryDumpLeak() {
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);
+	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
+	_CrtDumpMemoryLeaks();
+
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -140,9 +143,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	CleanUp();
 
 	//identifying memory leaks
-	CrtMemoryDump();
-	
-	
+	//MemoryDump();
+	memoryDumpLeak();
+
 	printf("Press any key...\n");
 	_getch();
 
