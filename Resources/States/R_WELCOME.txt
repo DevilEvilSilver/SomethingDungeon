@@ -1,5 +1,5 @@
 #PREFAB_COUNT 2
-ID background
+ID backgroundMenu
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -8,7 +8,7 @@ SIZE 30.0 x 20.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/background/static/sprite.txt
+FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
 
 ID buttonStart
 MODEL 0

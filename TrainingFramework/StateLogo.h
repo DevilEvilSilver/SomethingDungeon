@@ -3,14 +3,14 @@
 #include "Button.h"
 #include "Room.h"
 
-class StateWelcome :public StateBase<StateWelcome>
+class StateLogo :public StateBase<StateLogo>
 {
 public:
 	Widget *m_Background;
-	Button *m_ButtonStart;
+	Widget *m_Logo;
 
-	StateWelcome();
-	~StateWelcome();
+	StateLogo();
+	~StateLogo();
 
 	void Init();
 

@@ -153,6 +153,9 @@
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.cpp">
       <Filter>Source Files\StateManager\Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.h">
       <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

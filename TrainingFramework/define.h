@@ -18,6 +18,8 @@
 #define VERTEX_OFFSET_UV			(4 * sizeof(Vector3))
 
 //INIT STATE
+#define FILE_S_LOGO						"../Resources/States/S_LOGO.txt"
+#define FILE_R_LOGO						"../Resources/States/R_LOGO.txt"
 #define FILE_S_WELCOME					"../Resources/States/S_WELCOME.txt"
 #define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"

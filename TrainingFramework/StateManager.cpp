@@ -5,18 +5,20 @@
 
 //include all STATEs here:
 #include "StateTest.h"
+#include "StateLogo.h"
 #include "StateWelcome.h"
 #include "SceneManager.h"
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_WELCOME);
-	ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
+	AddState(GS_STATE_LOGO);
+	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 }
 
 StateManager::~StateManager() {
 	//reset all state here
 	StateTest::GetInstance()->ResetInstance();
+	StateLogo::GetInstance()->ResetInstance();
 	StateWelcome::GetInstance()->ResetInstance();
 	SceneManager::GetInstance()->ResetInstance();
 	//......
@@ -29,7 +31,7 @@ void StateManager::Update(float frameTime) {
 	
 	switch (m_GameStateStack.back()) {
 	case GS_STATE_LOGO:
-		StateTest::GetInstance()->Update(frameTime);
+		StateLogo::GetInstance()->Update(frameTime);
 		break;
 	case GS_STATE_WELCOME:
 		StateWelcome::GetInstance()->Update(frameTime);
@@ -44,7 +46,7 @@ void StateManager::Render()
 {
 	switch (m_GameStateStack.back()) {
 	case GS_STATE_LOGO:
-		StateTest::GetInstance()->Render();
+		StateLogo::GetInstance()->Render();
 		break;
 	case GS_STATE_WELCOME:
 		StateWelcome::GetInstance()->Render();

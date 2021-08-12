@@ -8,9 +8,9 @@ ROTATION SPEED 90.0
 #BACKGROUND
 ID 0
 POS -15.0, 10.0
-PREFAB backgroundMenu
+PREFAB backgroundLogo
 
-#BUTTON_START
+#LOGO
 ID 0
-POS -3.0, 0.0
-PREFAB buttonStart
+POS -3.0, 4.0
+PREFAB logo
