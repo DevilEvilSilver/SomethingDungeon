@@ -36,7 +36,7 @@ bool Button::isPressed(Camera* camera) {
 
 	if ((keyPressed & MOUSE_LEFT) &&
 		(mousePos.x >= m_fCurrentPosX) && (mousePos.x <= m_fCurrentPosX + m_fWidth) &&
-		(mousePos.y <= m_fCurrentPosY) && (mousePos.y >= m_fCurrentPosX + m_fHeight) &&
+		(mousePos.y <= m_fCurrentPosY) && (mousePos.y >= m_fCurrentPosY - m_fHeight) &&
 		m_isAvailble) {
 
 		m_strState = B_PRESSED;
