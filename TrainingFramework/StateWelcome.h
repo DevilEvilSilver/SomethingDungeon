@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 #include "StateBase.h"
-#include "Text.h"
+#include "Button.h"
 #include "Room.h"
 
 class StateWelcome :public StateBase<StateWelcome>
 {
 public:
-	Object *m_Background;
-	Camera *m_Camera;
+	Widget *m_Background;
+	Button *m_ButtonStart;
 
 	StateWelcome();
 	~StateWelcome();

@@ -63,5 +63,10 @@
 
 //ANIMATION
 #define INIT_ANIM		"init"
+	//CHARACTER
 #define IDLE_LEFT		"idleLeft"
-
+	//BUTTON
+#define B_NORMAL			"normal"
+#define B_PRESSED			"pressed"
+#define B_HOVER				"hover"
+#define B_UNAVAILABLE		"unavailable"

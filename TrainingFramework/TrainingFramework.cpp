@@ -58,24 +58,22 @@ void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
 
 void TouchActionLeftDown(ESContext* esContext, int x, int y)
 {
-	InputManager::GetInstance()->MouseMove(x, y);
-	InputManager::GetInstance()->MouseLeft(true);
+	InputManager::GetInstance()->MouseLeft(true, x, y);
 }
 
 void TouchActionLeftUp(ESContext* esContext, int x, int y)
 {
-	InputManager::GetInstance()->MouseLeft(false);
+	InputManager::GetInstance()->MouseLeft(false, x, y);
 }
 
 void TouchActionRightDown(ESContext* esContext, int x, int y)
 {
-	InputManager::GetInstance()->MouseMove(x, y);
-	InputManager::GetInstance()->MouseRight(true);
+	InputManager::GetInstance()->MouseRight(true, x, y);
 }
 
 void TouchActionRightUp(ESContext* esContext, int x, int y)
 {
-	InputManager::GetInstance()->MouseRight(false);
+	InputManager::GetInstance()->MouseRight(false, x, y);
 }
 
 void TouchActionMove(ESContext* esContext, int x, int y)
@@ -92,16 +90,6 @@ void CleanUp()
 	SoundEngine::GetInstance()->ResetInstance();
 }
 
-void CrtMemoryDump() 
-{
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
-	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
-	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
-	_CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDOUT);
-	_CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
-	_CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDOUT);
-	_CrtDumpMemoryLeaks();
-}
 void memoryDumpLeak() {
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
 	_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
@@ -143,7 +131,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	CleanUp();
 
 	//identifying memory leaks
-	//MemoryDump();
 	memoryDumpLeak();
 
 	printf("Press any key...\n");

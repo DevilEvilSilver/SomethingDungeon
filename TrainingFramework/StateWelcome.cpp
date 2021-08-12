@@ -18,6 +18,7 @@ StateWelcome::StateWelcome(void) {
 
 StateWelcome::~StateWelcome() {
 	delete m_Background;
+	delete m_ButtonStart;
 	delete m_Camera;
 }
 
@@ -25,18 +26,6 @@ void StateWelcome::Init() {
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_WELCOME, "r");
-
-	//Background
-	fscanf(dataFile, "#BACKGROUND\n");
-	unsigned int id;
-	fscanf(dataFile, "ID %d\n", &id);
-	GLfloat x, y;
-	fscanf(dataFile, "POS %f, %f\n", &x, &y);
-	char strPrefab[50];
-	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
-	Matrix translation;
-	translation.SetTranslation(x, y, 0.0f);
-	m_Background = new Object(strPrefab, Vector2(0.0f, 0.0f), translation);
 
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
@@ -52,6 +41,34 @@ void StateWelcome::Init() {
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
 	m_Camera = new Camera(0.0f, 0.0f, fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 
+	//Background
+	{
+		fscanf(dataFile, "#BACKGROUND\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Start Button
+	{
+		fscanf(dataFile, "#BUTTON_START\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonStart = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
 
 }
@@ -60,11 +77,12 @@ void StateWelcome::Render() {
 	//GetRenderOrder();
 	
 	m_Background->Render(this->m_Camera);
-
+	m_ButtonStart->Render(this->m_Camera);
 }
 
 void StateWelcome::Update(float frameTime) {
 	m_Background->Update(frameTime);
+	m_ButtonStart->Update(frameTime);
 
 	m_Camera->Update(frameTime);
 
@@ -73,15 +91,24 @@ void StateWelcome::Update(float frameTime) {
 
 void StateWelcome::UpdateControl(float frameTime)
 {
-	//STATE CHANGE
-	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
-	{
-		StateManager::GetInstance()->m_GameStateStack.pop_back();
-		ResourceManager::GetInstance()->ResetInstance();
-		ResourceManager::GetInstance()->Init(FILE_R_PLAY);
-		StateManager::GetInstance()->AddState(GS_STATE_PLAY);
+	static bool isPLayState = false;
+	static float fNextStateFrame = 0.5;
 
-		//ResetInstance();
+	//Button Start
+	if (m_ButtonStart->isPressed(this->m_Camera)) {
+		isPLayState = true;
+	}
+
+	//Play State
+	if (isPLayState) {
+		fNextStateFrame -= frameTime;
+
+		if (fNextStateFrame < 0) {
+			StateManager::GetInstance()->m_GameStateStack.pop_back();
+			ResourceManager::GetInstance()->ResetInstance();
+			ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+			StateManager::GetInstance()->AddState(GS_STATE_PLAY);
+		}
 	}
 }
 

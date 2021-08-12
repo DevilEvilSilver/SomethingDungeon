@@ -94,7 +94,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.cpp" />
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -124,7 +126,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
@@ -165,6 +169,12 @@
     <Text Include="..\Resources\RM.txt" />
     <Text Include="..\Resources\SM.txt" />
     <Text Include="..\Resources\Sound.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
