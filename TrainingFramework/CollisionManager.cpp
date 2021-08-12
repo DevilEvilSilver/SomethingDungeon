@@ -47,8 +47,10 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 		w1 = dynamicObj->m_fWidth,
 		h1 = dynamicObj->m_fHeight;
 
-	float	x2 = staticObj->GetPosX(),
-		y2 = staticObj->GetPosY(),
+	float* fCurrent2 = staticObj->GetHitBoxCurrentData();//new
+
+	float	x2 = fCurrent2[0],//staticObj->GetPosX(),
+		y2 = fCurrent2[1],//staticObj->GetPosY(),
 		w2 = staticObj->m_fWidth,
 		h2 = staticObj->m_fHeight;
 
@@ -99,5 +101,7 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 		}
 	}
 	delete[] fCurrent;
+	delete[] fCurrent2;
+
 	return status;
 }

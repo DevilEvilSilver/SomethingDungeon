@@ -44,6 +44,7 @@ void Draw(ESContext* esContext)
 
 	//display
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+
 }
 
 void Update(ESContext* esContext, float deltaTime)

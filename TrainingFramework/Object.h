@@ -23,6 +23,8 @@ public:
 	float m_fWidth, m_fHeight;		
 	float m_fRadius;				
 
+	float m_nothingx, m_nothingy;
+
 	Object();
 	Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	virtual ~Object();
@@ -30,6 +32,7 @@ public:
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);
 	Matrix GetWorldMatrix();
+	
 	float GetPosX();
 	float GetPosY();
 	void SetVelocityX(float vx);
@@ -38,4 +41,8 @@ public:
 	void SetPosY(float y);
 	// PhysicEngine
 	float* GetHitBoxCurrentData();
+
+
+	//new
+	Vector2 GetPos();
 }; 

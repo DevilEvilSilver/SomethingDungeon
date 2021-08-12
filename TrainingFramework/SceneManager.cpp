@@ -11,6 +11,8 @@
 #include "CollisionManager.h"
 #define _CRT_SECURE_NO_WARNINGS
 
+
+
 template <class T>
 T GetRoomByType(RoomType id, std::vector<T> objList) {
 	for (auto&obj : objList) {
@@ -153,45 +155,61 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 
 void SceneManager::RoomsGenerate() {
 	for (auto& obj : m_RoomList) {
+		
 		obj->RoomGenerate();
 	}
 }
 
 void SceneManager::Render() {
-	//GetRenderOrder();
+	GetRenderOrder();
 
 	for (auto& obj : m_RoomList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
+
+	/*
 
 	m_Player->Render(this->m_Camera);
 
 	for (auto& obj : m_EnemyList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
-	}
+	}*/
 	
+	for (auto& obj : m_ObjectList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+
+
 	Renderer::GetInstance()->DrawText2(scoreText);
+
+	m_ObjectList.clear();
 }
 
 void SceneManager::Update(float frameTime) {
-	for (auto& obj : m_RoomList) {
-		if (CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
-			CollisionManager::CheckCollision(m_Player,obj, frameTime);
-	}
 	
 	UpdateRoomID();
 
-	m_Camera->Update(frameTime);
 	m_Player->Update(frameTime);
-
+	
 	for (auto& obj : m_EnemyList) {
 		if (CheckInRange(obj->m_RoomID))
+		{
 			obj->Update(frameTime);
+			obj->UsingAI();
+		}
+		else obj->m_AIstart = 0.0l;
+			
 	}
 
 	UpdateControl(frameTime);
+
+	//follow camera
+	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+	
+	m_Camera->Update(frameTime);
 }
 
 void SceneManager::UpdateRoomID() {
@@ -199,45 +217,67 @@ void SceneManager::UpdateRoomID() {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
 			if (i > 31)
 				continue;
-			
+
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
 				if (j > 31)
 					continue;
 				if (CollisionManager::CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
 					m_Player->m_RoomID = Vector2(i, j);
+					break;
 				}
+
 			}
 		}
+	}
+
+	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID))
+		{
+			for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
+				if (i > 31)
+					continue;
+
+				for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
+					if (j > 31)
+						continue;
+					if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
+						obj->m_RoomID = Vector2(i, j);
+						break;
+					}
+
+				}
+			}
+
+
+		}
+
 	}
 }
 
 void SceneManager::UpdateControl(float frameTime)
 {
 	
-	float fSpeed = 20.0f;
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+	
 	if ((newKeyPressed & KEY_W))
 	{
-		m_Player->SetVelocityY(fSpeed);
+		m_Player->UpdateMoveDirection(m_Player->UP);
 	}
 	else if (newKeyPressed & KEY_S )
 	{
-		m_Player->SetVelocityY(-fSpeed);
+		m_Player->UpdateMoveDirection(m_Player->DOWN);
 	}
-	else
-		m_Player->SetVelocityY(0);
 
 	if ((newKeyPressed & KEY_A))
 	{
-		m_Player->SetVelocityX(-fSpeed);
+		m_Player->UpdateMoveDirection(m_Player->LEFT);
 	}
 	else if (newKeyPressed & KEY_D)
 	{
-		m_Player->SetVelocityX(fSpeed);
+		m_Player->UpdateMoveDirection(m_Player->RIGHT);
 	}
-	else
-		m_Player->SetVelocityX(0);
 	
+
 
 	//CAMERA
 	if (newKeyPressed & KEY_UP)
@@ -277,7 +317,7 @@ void SceneManager::UpdateControl(float frameTime)
 		scoreText->setText(a);
 
 		num++;
-		//ResetInstance();
+		ResetInstance();
 
 		// static bool isSoundPlayed = false;
 		// if (isSoundPlayed == false) {
@@ -303,6 +343,7 @@ void SceneManager::AddEnemy(Enemy *enemy) {
 }
 
 bool SceneManager::CheckInRange(Vector2 roomID) {
+
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||
 		roomID.y < currRoom.y - 1 || roomID.y > currRoom.y + 1)
@@ -312,7 +353,14 @@ bool SceneManager::CheckInRange(Vector2 roomID) {
 }
 
 void SceneManager::GetRenderOrder() {
+	for (auto a : m_EnemyList) {
+		m_ObjectList.push_back(a);
+	}
+	m_ObjectList.push_back(m_Player);
+
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
-		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
+		return ((a->GetPosY() - a->m_fHeight) > (b->GetPosY() - b->m_fHeight));
 	});
+
+	
 }

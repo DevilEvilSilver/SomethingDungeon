@@ -24,13 +24,13 @@ Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	Matrix scaleMatrix;
 	// Long Chu y bo thuoc tinh m_fDeltaX,m_fDeltaY trong Prefab !!!
-	float nothingx, nothingy;
+	
 
 
 	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
 	m_WorldMatrix = scaleMatrix * translationMatrix;
 
-	m_iType = prefab->m_iType; nothingx = prefab->m_fDeltaX; nothingy = prefab->m_fDeltaY;
+	m_iType = prefab->m_iType; m_nothingx = prefab->m_fDeltaX; m_nothingy = prefab->m_fDeltaY;
 	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
 	m_fVx = 0;
 	m_fVy = 0;
@@ -83,6 +83,13 @@ void Object::SetPosY(float y)
 }
 float* Object::GetHitBoxCurrentData()
 {
-	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
+	//float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
+	float* data = new float[7]{ m_fCurrentPosX+m_nothingx, m_fCurrentPosY-m_nothingy, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
 	return data;
+}
+
+Vector2 Object::GetPos()
+{
+
+	return Vector2(m_fCurrentPosX,m_fCurrentPosY);
 }

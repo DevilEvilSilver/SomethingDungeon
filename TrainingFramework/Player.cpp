@@ -4,6 +4,11 @@
 #include "Renderer.h"
 #include "define.h"
 
+#include "define.h"
+#include "SceneManager.h"
+#include "CollisionManager.h"
+
+
 Player::Player() {}
 
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
@@ -15,10 +20,19 @@ Player::~Player() {
 
 }
 
-void Player::Update(float frameTime) {
+//void Player::Update(float frameTime) {
+//	m_fCurrFrameTime += frameTime;
+//	SetPosX(GetPosX() + m_fVx * frameTime);
+//	SetPosY(GetPosY() + m_fVy * frameTime);
+//}
+
+void Player::Update(float frameTime)
+{
 	m_fCurrFrameTime += frameTime;
-	SetPosX(GetPosX() + m_fVx * frameTime);
-	SetPosY(GetPosY() + m_fVy * frameTime);
+
+
+	Go(frameTime,true,false,true);
+
 }
 
 void Player::Render(Camera* camera) {

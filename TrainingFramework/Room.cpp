@@ -33,15 +33,15 @@ void Room::RoomGenerate() {
 	if (m_RoomType == NORMAL) {
 		unsigned int random = rand() % 100 + 1;
 		Matrix translation;
-		unsigned int iLoop = 0;
+		unsigned int enemyNum = 0;
 		if (random >= 80)
-			iLoop = 3;
+			enemyNum = 3;
 		else if (random >= 50)
-			iLoop = 2;
+			enemyNum = 2;
 		else if (random >= 10)
-			iLoop = 1;
+			enemyNum = 1;
 
-		while (iLoop--) {
+		while (enemyNum--) {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - m_fHeight + randPosY, 0.0f);
