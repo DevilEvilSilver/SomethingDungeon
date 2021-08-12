@@ -98,6 +98,7 @@ void StateWelcome::UpdateControl(float frameTime)
 	if (m_ButtonStart->isPressed(this->m_Camera)) {
 		isPLayState = true;
 	}
+	m_ButtonStart->isHover(this->m_Camera);
 
 	//Play State
 	if (isPLayState) {
