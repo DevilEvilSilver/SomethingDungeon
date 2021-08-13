@@ -156,6 +156,9 @@
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.cpp">
+      <Filter>Source Files\StateManager\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -257,14 +260,11 @@
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.h">
+      <Filter>Header Files\StateManager\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\RM.txt">
-      <Filter>Resources</Filter>
-    </Text>
-    <Text Include="..\Resources\SM.txt">
-      <Filter>Resources</Filter>
-    </Text>
     <Text Include="..\Resources\Sound.txt">
       <Filter>Resources</Filter>
     </Text>
@@ -280,6 +280,12 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

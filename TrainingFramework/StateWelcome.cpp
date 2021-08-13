@@ -19,6 +19,7 @@ StateWelcome::StateWelcome(void) {
 StateWelcome::~StateWelcome() {
 	delete m_Background;
 	delete m_ButtonStart;
+	delete m_TransitionScreen;
 	delete m_Camera;
 }
 
@@ -71,6 +72,7 @@ void StateWelcome::Init() {
 
 	fclose(dataFile);
 
+	m_TransitionScreen = NULL;
 }
 
 void StateWelcome::Render() {
@@ -78,11 +80,17 @@ void StateWelcome::Render() {
 	
 	m_Background->Render(this->m_Camera);
 	m_ButtonStart->Render(this->m_Camera);
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Render(this->m_Camera);
 }
 
 void StateWelcome::Update(float frameTime) {
 	m_Background->Update(frameTime);
 	m_ButtonStart->Update(frameTime);
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 
 	m_Camera->Update(frameTime);
 
@@ -92,7 +100,7 @@ void StateWelcome::Update(float frameTime) {
 void StateWelcome::UpdateControl(float frameTime)
 {
 	static bool isPLayState = false;
-	static float fNextStateFrame = 0.5;
+	static float fNextStateFrame = 1.0f;
 
 	//Button Start
 	if (m_ButtonStart->isPressed(this->m_Camera)) {
@@ -103,6 +111,12 @@ void StateWelcome::UpdateControl(float frameTime)
 	//Play State
 	if (isPLayState) {
 		fNextStateFrame -= frameTime;
+
+		if (fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+		}
 
 		if (fNextStateFrame < 0) {
 			StateManager::GetInstance()->m_GameStateStack.pop_back();

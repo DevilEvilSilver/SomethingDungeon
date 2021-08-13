@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <GLES2/gl2.h>
 #include "Renderer.h"
+#include "Fader.h"
 #include "define.h"
 #include "ResourceManager.h"
 
@@ -53,20 +54,32 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 		object->m_fCurrFrameTime = 0.0f;
 	}
 	animation->m_FrameList[object->m_iCurrFrameIndex]->Bind();
+	
+	//Set uniform
+	glUniform1i(shader->textureUniform, 0);
 
 	GLfloat scaleBySize[2][2];
 	scaleBySize[0][0] = 1.0f; scaleBySize[0][1] = 0.0f;
 	scaleBySize[1][0] = 0.0f; scaleBySize[1][1] = 1.0f;
-	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
-
-	//Set uniform
-	glUniform1i(shader->textureUniform, 0);
 	if (prefab->m_isScaleBySize) {
 		scaleBySize[0][0] = prefab->m_fScaleX;
 		scaleBySize[1][1] = prefab->m_fScaleY;
 	}
 	glUniformMatrix2fv(shader->spriteScaleUniform, 1, GL_FALSE, (const GLfloat*)scaleBySize);
-	glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
+
+	if (auto* widget = dynamic_cast<Widget*>(object)) {
+		Matrix wvpMatrix = widget->GetWorldMatrix(camera) * camera->GetViewMatrix() * camera->GetProjectionMatrix();
+		glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
+	} 
+	else {
+		Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
+		glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
+	}
+
+	if (auto* fader = dynamic_cast<Fader*>(object)) {
+		glUniform1f(shader->timeUniform, fader->m_fCurrTime);
+		glUniform1f(shader->fadeUniform, fader->m_fFadeTime);
+	}
 
 	if (shader->positionAttribute != -1)
 	{
@@ -85,7 +98,6 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	animation->m_FrameList[object->m_iCurrFrameIndex]->Unbind();
 	shader->Unbind();
 }
-
 
 
 void Renderer::DrawText2(Text* text) {

@@ -57,6 +57,7 @@
 #define X_EPSILON			        0.1
 
 //PREFAB
+#define TRANSISTION		"transition"
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
 #define NORMAL_ROOM		"normalRoom"

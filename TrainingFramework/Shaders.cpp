@@ -29,6 +29,8 @@ int Shaders::Init(char * fileVertexShader, char * fileFragmentShader)
 	uvAttribute = glGetAttribLocation(program, "a_uv");
 	textureUniform = glGetUniformLocation(program, "u_texture");
 	spriteScaleUniform = glGetUniformLocation(program, "u_spriteScale");
+	timeUniform = glGetUniformLocation(program, "u_time");
+	fadeUniform = glGetUniformLocation(program, "u_fade");
 	wvpUniform = glGetUniformLocation(program, "u_wvp");
 
 	return 0;

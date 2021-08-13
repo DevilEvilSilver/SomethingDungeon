@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.cpp" />
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.cpp" />
@@ -128,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.h" />
@@ -168,11 +170,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\RM.txt" />
-    <Text Include="..\Resources\SM.txt" />
     <Text Include="..\Resources\Sound.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.vs" />
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs" />
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs" />
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.fs" />

@@ -1,0 +1,5 @@
+#FRAME_COUNT 1
+ID 0
+SPF -1.0
+FILE ../Resources/Animation/transition/static/trans.tga
+TILING GL_REPEAT

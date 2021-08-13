@@ -14,3 +14,5 @@ PREFAB backgroundLogo
 ID 0
 POS -3.0, 4.0
 PREFAB logo
+FADE_TIME 1.0
+IS_FADE_IN 1.0

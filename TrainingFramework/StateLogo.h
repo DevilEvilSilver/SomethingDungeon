@@ -1,13 +1,14 @@
 #pragma once
 #include "StateBase.h"
-#include "Button.h"
-#include "Room.h"
+#include "Widget.h"
+#include "Fader.h"
 
 class StateLogo :public StateBase<StateLogo>
 {
 public:
 	Widget *m_Background;
-	Widget *m_Logo;
+	Fader *m_Logo;
+	Fader *m_TransitionScreen;
 
 	StateLogo();
 	~StateLogo();

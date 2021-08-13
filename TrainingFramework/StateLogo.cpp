@@ -19,6 +19,7 @@ StateLogo::StateLogo(void) {
 StateLogo::~StateLogo() {
 	delete m_Background;
 	delete m_Logo;
+	delete m_TransitionScreen;
 	delete m_Camera;
 }
 
@@ -64,13 +65,18 @@ void StateLogo::Init() {
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		float fadeTime;
+		fscanf(dataFile, "FADE_TIME %f\n", &fadeTime);
+		unsigned int isFadeIn;
+		fscanf(dataFile, "IS_FADE_IN %d\n", &isFadeIn);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_Logo = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		m_Logo = new Fader(strPrefab, Vector2(0.0f, 0.0f), translation, fadeTime, isFadeIn);
 	}
 
 	fclose(dataFile);
 
+	m_TransitionScreen = NULL;
 }
 
 void StateLogo::Render() {
@@ -78,11 +84,17 @@ void StateLogo::Render() {
 
 	m_Background->Render(this->m_Camera);
 	m_Logo->Render(this->m_Camera);
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Render(this->m_Camera);
 }
 
 void StateLogo::Update(float frameTime) {
 	m_Background->Update(frameTime);
 	m_Logo->Update(frameTime);
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 
 	m_Camera->Update(frameTime);
 
@@ -92,13 +104,19 @@ void StateLogo::Update(float frameTime) {
 void StateLogo::UpdateControl(float frameTime)
 {
 	static bool isWelcomeState = true;
-	static float fNextStateFrame = 2.0;
+	static float fNextStateFrame = 4.0f;
 
 	//Play State
 	if (isWelcomeState) {
 		fNextStateFrame -= frameTime;
 
-		if (fNextStateFrame < 0) {
+		if (fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+		}
+
+		if (fNextStateFrame < 0.0f) {
 			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
 			ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
