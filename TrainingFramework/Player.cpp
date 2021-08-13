@@ -1,9 +1,11 @@
 #include "stdafx.h"
-#include "Player.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "define.h"
-
+#include "Skill.h"
+#include "AoeSkill.h"
+//#include "AoeSkill.h"
+#include "SceneManager.h"
 Player::Player() {}
 
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
@@ -14,7 +16,14 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 Player::~Player() {
 
 }
-
+void Player::Attack(int x, int y)
+{
+	Matrix m;
+	m.SetTranslation(x, y, 0.0f);
+	float damage = m_atk;
+	Skill* Skill1 = new AoeSkill( this,SKILL,this->m_RoomID, m);
+	SceneManager::GetInstance()->AddSkill(Skill1);
+}
 void Player::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 	SetPosX(GetPosX() + m_fVx * frameTime);

@@ -70,6 +70,12 @@
     <Filter Include="Source Files\PhysicEngine">
       <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StateManager\Data\Skills">
+      <UniqueIdentifier>{678d9ae2-5575-491a-8b91-39640bd912a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateManager\Data\Skills">
+      <UniqueIdentifier>{7c03264f-5b99-4931-9e3e-5f52840be176}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -138,11 +144,17 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.cpp">
+    <ClCompile Include="Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.cpp">
+    <ClCompile Include="Text.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Source Files\StateManager\Data\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="AoeSkill.cpp">
+      <Filter>Source Files\StateManager\Data\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,20 +239,18 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Font.h">
+    <ClInclude Include="Font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Text.h">
+    <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
+    <ClInclude Include="Skill.h">
+      <Filter>Header Files\StateManager\Data\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="AoeSkill.h">
+      <Filter>Header Files\StateManager\Data\Skills</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\RM.txt">

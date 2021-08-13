@@ -38,6 +38,10 @@ SceneManager::~SceneManager() {
 		delete object;
 	}
 	m_ObjectList.clear();
+	for (auto& object : m_SkillList) {
+		delete object;
+	}
+	m_SkillList.clear();
 	for (auto& object : m_RoomList) {
 		delete object;
 	}
@@ -172,6 +176,10 @@ void SceneManager::Render() {
 			obj->Render(this->m_Camera);
 	}
 	
+	for (auto& obj : m_SkillList)
+	{
+		obj->Render(this->m_Camera);
+	}
 	Renderer::GetInstance()->DrawText2(scoreText);
 }
 
@@ -190,7 +198,10 @@ void SceneManager::Update(float frameTime) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
-
+	for (auto& obj : m_SkillList) {
+		//if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
 	UpdateControl(frameTime);
 }
 
@@ -258,7 +269,21 @@ void SceneManager::UpdateControl(float frameTime)
 		m_Camera->MoveRight(frameTime);
 	}
 
-
+	static bool mousePress = true;
+	if (newKeyPressed & MOUSE_LEFT)
+	{
+		if (mousePress)
+		{
+			Vector2 mousePos = InputManager::GetInstance()->MousePosition(m_Camera);
+			m_Player->Attack(mousePos.x,mousePos.y);
+			mousePress = false;
+			//std::cout << "newKeyPressed & MOUSE_LEFT\n";
+		}
+	}
+	else
+	{
+		mousePress = true;
+	}
 	//STATE CHANGE
 	//if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 	//{
@@ -301,7 +326,10 @@ void SceneManager::AddRoom(Room *room) {
 void SceneManager::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
 }
-
+void SceneManager::AddSkill(Skill* skill)
+{
+	m_SkillList.push_back(skill);
+}
 bool SceneManager::CheckInRange(Vector2 roomID) {
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||

@@ -1,10 +1,10 @@
-#PREFAB_COUNT 4
+#PREFAB_COUNT 5
 ID mainChar
 MODEL 0
 SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 1.0, 1.0
-SIZE 1.0 x 1.0
+SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
@@ -15,11 +15,22 @@ MODEL 0
 SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 1.0, 1.0
-SIZE 1.0 x 1.0
+SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
 FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
+
+ID skill
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/skill/idleLeft/sprite.txt
 
 ID normalRoom
 MODEL 0
@@ -27,7 +38,7 @@ SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 20.0, 20.0
 SIZE 20.0 x 20.0
-SCALE_BY_SIZE 1
+SCALE_BY_SIZE 2
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/terrain/static/sprite.txt
