@@ -5,6 +5,9 @@
 #include "Room.h"
 #include "Player.h"
 #include "Enemy.h"
+#include"Gold.h"
+#include "HPPotion.h"
+#include "MPPotion.h"
 
 class SceneManager :public StateBase<SceneManager>
 {
@@ -15,6 +18,9 @@ public:
 	RoomType m_Map[32][32];
 	std::vector<Room*> m_RoomList;
 	std::vector<Enemy*> m_EnemyList;
+	std::vector<Gold*> m_GoldList;
+	std::vector<HPPotion*> m_hpPotionList;
+	std::vector<MPPotion*> m_mpPotionList;
 	std::vector<Object*> m_ObjectList;
 	Player *m_Player;
 	Camera *m_Camera;
@@ -43,4 +49,13 @@ public:
 	void AddRoom(Room *room);
 	void AddEnemy(Enemy *enemy);
 	void GetRenderOrder();
+
+	//tien add
+	void AddGold(Gold* gold);
+	void removeGold(Gold* gold);
+	void removeEnemy(Enemy* enemy);
+	void AddHPPotion(HPPotion* hpPo);
+	void removeHPPotion(HPPotion* hpPo);
+	void AddMPPotion(MPPotion* mpPo);
+	void removeMPPotion(MPPotion* mpPo);
 };

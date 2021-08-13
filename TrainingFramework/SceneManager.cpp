@@ -46,6 +46,24 @@ SceneManager::~SceneManager() {
 		delete object;
 	}
 	m_EnemyList.clear();
+	for (auto& object : m_GoldList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_GoldList.clear();
+	for (auto& object : m_hpPotionList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_hpPotionList.clear();
+	for (auto& object : m_mpPotionList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_mpPotionList.clear();
 
 	delete m_Player;
 	delete m_Camera;
@@ -86,7 +104,7 @@ void SceneManager::Init() {
 	
 	fclose(dataFile);
 
-	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f,"abc");
+	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f);
 
 }
 
@@ -168,6 +186,20 @@ void SceneManager::Render() {
 	m_Player->Render(this->m_Camera);
 
 	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID)) {
+			if (obj->isDead == false)				obj->Render(this->m_Camera);
+		}
+	}
+
+	for (auto& obj : m_GoldList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+	for (auto& obj : m_hpPotionList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+	for (auto& obj : m_mpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
@@ -180,6 +212,41 @@ void SceneManager::Update(float frameTime) {
 		if (CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
 			CollisionManager::CheckCollision(m_Player,obj, frameTime);
 	}
+
+	//check colli with enemy
+	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID))
+			if (CollisionManager::CheckCollision(m_Player, obj, frameTime)) 
+			{ 
+				obj->isDead = true;
+				//release gold - create gold
+					obj->createGoldObject();
+					AddGold(obj->getGold());
+				removeEnemy(obj);
+			}	
+	}
+	
+	// check collide  get gold
+	for (auto& obj : m_GoldList) {
+		if (CheckInRange(obj->m_RoomID))
+			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
+			{
+				m_Player->increaseGold(obj->getValue());
+				m_Player->numGoldText->setText("Gold: " + std::to_string(m_Player->m_inumGold));
+				removeGold(obj);
+			}
+	}
+
+	// check collide  get hp potion
+	for (auto& obj : m_hpPotionList) {
+		if (CheckInRange(obj->m_RoomID))
+			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
+			{
+				m_Player->increaseHP(obj->getValue());
+				m_Player->numHPText->setText("HP: " + std::to_string(m_Player->m_iCurHP));
+				removeHPPotion(obj);
+			}
+	}
 	
 	UpdateRoomID();
 
@@ -187,6 +254,16 @@ void SceneManager::Update(float frameTime) {
 	m_Player->Update(frameTime);
 
 	for (auto& obj : m_EnemyList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
+
+	for (auto& obj : m_GoldList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
+
+	for (auto& obj : m_hpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
@@ -302,6 +379,10 @@ void SceneManager::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
 }
 
+void SceneManager::AddGold(Gold* gold) {
+	m_GoldList.push_back(gold);
+}
+
 bool SceneManager::CheckInRange(Vector2 roomID) {
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||
@@ -315,4 +396,57 @@ void SceneManager::GetRenderOrder() {
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) < (b->GetPosY() - b->m_fHeight));
 	});
+}
+
+
+void SceneManager::removeGold(Gold* gold) {
+	int id;
+	for (int i = 0; i < m_GoldList.size(); i++) {
+		if (m_GoldList[i] == gold)  id = i;
+	}
+
+	delete m_GoldList[id];
+	m_GoldList[id] = m_GoldList[m_GoldList.size() - 1];
+	//delete m_GoldList[m_GoldList.size() - 1];
+	m_GoldList.resize(m_GoldList.size() -1);
+}
+
+void SceneManager::removeEnemy(Enemy* enemy) {
+	//enemy->getGold()->m_isDisplay = true;
+	int id;
+	for (int i = 0; i < m_EnemyList.size(); i++) {
+		if (m_EnemyList[i] == enemy)  id = i;
+	}
+
+	delete m_EnemyList[id];
+	m_EnemyList[id] = m_EnemyList[m_EnemyList.size() - 1];
+	m_EnemyList.resize(m_EnemyList.size() - 1);
+}
+
+void SceneManager::AddHPPotion(HPPotion* hpPo) {
+	m_hpPotionList.push_back(hpPo);
+}
+void SceneManager::removeHPPotion(HPPotion* hpPo) {
+	int id;
+	for (int i = 0; i < m_hpPotionList.size(); i++) {
+		if (m_hpPotionList[i] == hpPo)  id = i;
+	}
+
+	delete m_hpPotionList[id];
+	m_hpPotionList[id] = m_hpPotionList[m_hpPotionList.size() - 1];
+	m_hpPotionList.resize(m_hpPotionList.size() - 1);
+}
+
+void SceneManager::AddMPPotion(MPPotion* mpPo) {
+	m_mpPotionList.push_back(mpPo);
+}
+void SceneManager::removeMPPotion(MPPotion* mpPo) {
+	int id;
+	for (int i = 0; i < m_mpPotionList.size(); i++) {
+		if (m_mpPotionList[i] == mpPo)  id = i;
+	}
+
+	delete m_mpPotionList[id];
+	m_mpPotionList[id] = m_mpPotionList[m_mpPotionList.size() - 1];
+	m_mpPotionList.resize(m_mpPotionList.size() - 1);
 }
