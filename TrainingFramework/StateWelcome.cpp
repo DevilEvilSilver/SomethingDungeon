@@ -73,6 +73,8 @@ void StateWelcome::Init() {
 	fclose(dataFile);
 
 	m_TransitionScreen = NULL;
+
+	m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 1.0f, 1.0f, true);
 }
 
 void StateWelcome::Render() {
@@ -104,7 +106,9 @@ void StateWelcome::UpdateControl(float frameTime)
 
 	//Button Start
 	if (m_ButtonStart->isPressed(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		isPLayState = true;
+		m_ButtonStart->m_isAvailble = false;
 	}
 	m_ButtonStart->isHover(this->m_Camera);
 
@@ -116,9 +120,13 @@ void StateWelcome::UpdateControl(float frameTime)
 			Matrix translation;
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM ,false, fNextStateFrame);
 		}
 
 		if (fNextStateFrame < 0) {
+			SoundEngine::GetInstance()->StopAll();
+
 			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
 			ResourceManager::GetInstance()->Init(FILE_R_PLAY);

@@ -10,6 +10,8 @@ public:
 	Button *m_ButtonStart;
 	Fader *m_TransitionScreen;
 
+	int m_iHandleBGM;
+
 	StateWelcome();
 	~StateWelcome();
 

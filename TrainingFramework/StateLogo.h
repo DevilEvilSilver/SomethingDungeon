@@ -10,6 +10,8 @@ public:
 	Fader *m_Logo;
 	Fader *m_TransitionScreen;
 
+	int m_iHandleLogoSFX;
+
 	StateLogo();
 	~StateLogo();
 

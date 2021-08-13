@@ -77,6 +77,8 @@ void StateLogo::Init() {
 	fclose(dataFile);
 
 	m_TransitionScreen = NULL;
+
+	m_iHandleLogoSFX = SoundEngine::GetInstance()->Play(LOGO_SFX, 1.0f, 1.0f, false);
 }
 
 void StateLogo::Render() {
@@ -104,7 +106,7 @@ void StateLogo::Update(float frameTime) {
 void StateLogo::UpdateControl(float frameTime)
 {
 	static bool isWelcomeState = true;
-	static float fNextStateFrame = 4.0f;
+	static float fNextStateFrame = 3.0f;
 
 	//Play State
 	if (isWelcomeState) {
@@ -114,9 +116,13 @@ void StateLogo::UpdateControl(float frameTime)
 			Matrix translation;
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleLogoSFX, false, 1.0f);
 		}
 
 		if (fNextStateFrame < 0.0f) {
+			SoundEngine::GetInstance()->StopAll();
+
 			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
 			ResourceManager::GetInstance()->Init(FILE_R_WELCOME);

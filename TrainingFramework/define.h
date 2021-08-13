@@ -73,3 +73,8 @@
 #define B_PRESSED			"pressed"
 #define B_HOVER				"hover"
 #define B_UNAVAILABLE		"unavailable"
+
+//SOUND
+#define WELCOME_BGM			0
+#define LOGO_SFX			1
+#define BUTTON_SFX			2

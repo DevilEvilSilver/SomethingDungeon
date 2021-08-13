@@ -25,6 +25,13 @@ public:
 	int PlayFirstTSec(int soundID, int t);
 	int PlayLoop(int soundID);
 
+	void Stop(int handle);
+	void StopAll();
+	void SetPause(int handle, bool isPause);
+	void SetPauseAll(bool isPause);
+	void Fader(int handle, bool isFadeIn, float time);
+	void FaderAll(bool isFadeIn, float time);			//Only use when quitting game
+
 	int Play(int soundID, float volume, float speed, bool isLoop);
 
 
