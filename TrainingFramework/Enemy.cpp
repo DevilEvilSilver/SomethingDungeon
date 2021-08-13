@@ -37,19 +37,22 @@ void Enemy::UsingAI()
 
 
 	//move behavior
-	if (distance < 7.0f&&distance > 2.0f) Chase(delta);
+	if (distance < 10.0f && distance > 5.0f) Chase(delta);
+	else m_cState = CS_IDLE;
 }
 
 void Enemy::Chase(Vector2 delta)
 {
 	UpdateMoveDirection(delta);
+	m_cState = CS_MOVE;
 }
 void Enemy::KeepDistance(Vector2 delta)
 {
 	UpdateMoveDirection(-delta);
+	m_cState = CS_MOVE;
 }
 
-void Enemy::Update(float frameTime)
+void Enemy::UpdateEnemy(float frameTime)
 {
 	m_fCurrFrameTime += frameTime;
 
@@ -59,10 +62,21 @@ void Enemy::Update(float frameTime)
 		UpdatePosition(m_MOVESPEED, frameTime);
 	}
 
-	
+	//Update(frameTime);
 }
 
 void Enemy::Render(Camera* camera) 
 {
+	if (m_lastCState != m_cState) {
+		m_fCurrFrameTime = 0.0f;
+		m_iCurrFrameIndex = 0;
+
+		m_strState = IDLE_LEFT;
+		if (m_cState == CS_MOVE) m_strState = MOVE;
+		else if (m_cState == CS_DASH) m_strState = DASH;
+
+		m_lastCState = m_cState;
+	}
+
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }

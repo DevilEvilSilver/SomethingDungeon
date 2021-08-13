@@ -10,28 +10,7 @@
 
 
 
-void Player::PlayerMoveDirection(MoveDir dir)
-{
-	if (m_cState == CS_MOVE||m_cState==CS_IDLE)
-	{
-		m_cState = CS_MOVE;
-		switch (dir) {
-		case UP:
-			m_moveDir.y++;
-			break;
-		case DOWN:
-			m_moveDir.y--;
-			break;
-		case LEFT:
-			m_moveDir.x--;
-			break;
-		case RIGHT:
-			m_moveDir.x++;
-			break;
-		}
-	}
 
-}
 
 bool Player::CoolMove(float frameTime)
 {
@@ -135,47 +114,45 @@ Player::~Player() {
 
 }
 
-void Player::Update(float frameTime)//call func and animation
+void Player::UpdatePlayer(float frameTime)//call func and animation
 {
 
 	//LOGIC STATE
-	{
-		switch (m_cState)
-		{
-		case CS_IDLE:
-			printf("idle\n");
-			break;
-		case CS_MOVE:
-			printf("move\n");
-			if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
-			{
-				m_lastMoveDir = m_moveDir;
-				UpdatePosition(m_MOVESPEED, frameTime);
-			}
-			else m_cState = CS_IDLE;
+	//{
+	//	switch (m_cState)
+	//	{
+	//	case CS_IDLE:
+	//		break;
+	//	case CS_MOVE:
+	//		if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
+	//		{
+	//			m_lastMoveDir = m_moveDir;
+	//			UpdatePosition(m_MOVESPEED, frameTime);
+	//		}
+	//		else m_cState = CS_IDLE;
 
 
-			break;
-		case CS_GOTHIT:
+	//		break;
+	//	case CS_GOTHIT:
 
-			if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
+	//		if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
 
-			break;
-		case CS_DASH:
-			printf("dash\n");
-			if (Dash(frameTime) == true) m_cState = CS_IDLE;
+	//		break;
+	//	case CS_DASH:
+	//		if (Dash(frameTime) == true) m_cState = CS_IDLE;
 
-			break;
-		}
+	//		break;
+	//	}
 
-	}
+	//}
 
-	//COOLDOWN
-	if (currDashCD > 0.0f) currDashCD -= frameTime;
-	else currDashCD = 0.0f;
-	
-	//ANIMATION
-	m_fCurrFrameTime += frameTime;
+	////COOLDOWN
+	//if (currDashCD > 0.0f) currDashCD -= frameTime;
+	//else currDashCD = 0.0f;
+	//
+	////ANIMATION
+	//m_fCurrFrameTime += frameTime;
+	Update(frameTime);
 }
 
 

@@ -4,8 +4,10 @@
 class Player : public Character {
 public:
 
-	enum MoveDir {
-		UP, DOWN, LEFT, RIGHT
+	enum PlayerState
+	{
+		P_DASH,
+		P_SKILL
 	};
 
 	Player();
@@ -15,11 +17,14 @@ public:
 	float DashCoolDown = 5.0f;
 	float currDashCD = 0.0f;
 
-	void PlayerMoveDirection(MoveDir dir);
-	bool CoolMove(float frameTime);
-	bool Dash(float frameTime);
 	
 
-	void Update(float frameTime);
+	bool Dash(float frameTime);
+	//skill
+	bool CoolMove(float frameTime);
+	
+	
+
+	void UpdatePlayer(float frameTime);
 	void Render(Camera *camera);
 };

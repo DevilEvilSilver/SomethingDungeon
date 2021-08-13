@@ -17,6 +17,6 @@ public:
 	void KeepDistance(Vector2 delta);
 
 	
-	void Update(float frameTime);
+	void UpdateEnemy(float frameTime);
 	void Render(Camera *camera);
 };

@@ -16,14 +16,64 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 
 void Character::Update(float frameTime)
 {
+	switch (m_cState)
+	{
+	case CS_IDLE:
+		break;
+	case CS_MOVE:
+		if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
+		{
+			m_lastMoveDir = m_moveDir;
+			UpdatePosition(m_MOVESPEED, frameTime);
+		}
+		else m_cState = CS_IDLE;
 
+
+		break;
+	case CS_GOTHIT:
+
+		//if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
+
+		break;
+	case CS_DASH:
+		//if (Dash(frameTime) == true) m_cState = CS_IDLE;
+
+		break;
+	}
+	//ANIMATION
+	m_fCurrFrameTime += frameTime;
 }
+
 
 void Character::UpdateMoveDirection(Vector2 dir)
 {
 		m_moveDir = dir;
 }
+void Character::UpdateMoveDirection(MoveDir dir)
+{
+	
+	
+		if (m_cState == CS_MOVE || m_cState == CS_IDLE)
+		{
+			m_cState = CS_MOVE;
+			switch (dir) {
+			case UP:
+				m_moveDir.y++;
+				break;
+			case DOWN:
+				m_moveDir.y--;
+				break;
+			case LEFT:
+				m_moveDir.x--;
+				break;
+			case RIGHT:
+				m_moveDir.x++;
+				break;
+			}
+		}
 
+	
+}
 void Character::UpdatePosition(float speed, float frameTime)
 {
 	if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
@@ -52,7 +102,6 @@ void Character::UpdatePosition(float speed, float frameTime)
 		else m_isFacingLeft = false;
 	}
 }
-
 void Character::WallCollision(float frameTime)
 {
 	for (auto& obj : SceneManager::GetInstance()->m_RoomList) {
@@ -73,10 +122,6 @@ void Character::EnemyCollision(float frameTime)
 	}
 }
 
-void Character::IsAttacked(float incomingDamage)
-{	
-	m_cState = CS_GOTHIT;
-}
 
 
 
@@ -105,6 +150,16 @@ Character::~Character() {
 }
 void Character::Render(Camera* camera) 
 {
-	m_strState = IDLE_LEFT;
+	if (m_lastCState != m_cState) {
+		m_fCurrFrameTime = 0.0f;
+		m_iCurrFrameIndex = 0;
+
+		m_strState = IDLE_LEFT;
+		if (m_cState == CS_MOVE) m_strState = MOVE;
+		else if (m_cState == CS_DASH) m_strState = DASH;
+
+		m_lastCState = m_cState;
+	}
+
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }
