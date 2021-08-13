@@ -68,7 +68,7 @@ void SceneManager::Init() {
 	char strPrefab[50];
 	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 	Matrix translation;
-	translation.SetTranslation(startRoom->GetPosX() + PLAYER_START_POSX, startRoom->GetPosY() - startRoom->m_fHeight + PLAYER_START_POSY, 0.0f);
+	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH/2.0f, startRoom->GetPosY() - ROOM_HEIGHT/2, 0.0f);
 	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
 
 	//Camera
@@ -261,22 +261,23 @@ void SceneManager::UpdateControl(float frameTime)
 	
 	if ((newKeyPressed & KEY_W))
 	{
-		m_Player->UpdateMoveDirection(m_Player->UP);
+		m_Player->PlayerMoveDirection(m_Player->UP);
 	}
 	else if (newKeyPressed & KEY_S )
 	{
-		m_Player->UpdateMoveDirection(m_Player->DOWN);
+		m_Player->PlayerMoveDirection(m_Player->DOWN);
 	}
 
 	if ((newKeyPressed & KEY_A))
 	{
-		m_Player->UpdateMoveDirection(m_Player->LEFT);
+		m_Player->PlayerMoveDirection(m_Player->LEFT);
 	}
 	else if (newKeyPressed & KEY_D)
 	{
-		m_Player->UpdateMoveDirection(m_Player->RIGHT);
+		m_Player->PlayerMoveDirection(m_Player->RIGHT);
 	}
 	
+
 
 
 	//CAMERA
@@ -317,8 +318,12 @@ void SceneManager::UpdateControl(float frameTime)
 		scoreText->setText(a);
 
 		num++;
-		ResetInstance();
+		//ResetInstance();
+		//temp = !temp;
+		m_Player->m_cState = m_Player->CS_DASH;
 
+		//m_Player->IsAttacked(10.0f);
+		
 		// static bool isSoundPlayed = false;
 		// if (isSoundPlayed == false) {
 

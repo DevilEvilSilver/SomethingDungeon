@@ -23,29 +23,40 @@ Enemy::~Enemy() {
 
 void Enemy::UsingAI()
 {
-	Vector2 plyPos = SceneManager::GetInstance()->m_Player->GetPos();
+	Player* plyr = SceneManager::GetInstance()->m_Player;
+	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
 
-	float distance = (plyPos - enmyPos).Length();
+	Vector2 delta = plyPos - enmyPos;
+	float distance = delta.Length();
 
-	if (distance < 10.0f) {
-
-		if (distance < 5.0f && distance>2.0f) {
-			//float random = rand() % 10;
-			if (plyPos.x > enmyPos.x) UpdateMoveDirection(RIGHT);
-			if (plyPos.x < enmyPos.x) UpdateMoveDirection(LEFT);
-
-			if (plyPos.y > enmyPos.y) UpdateMoveDirection(UP);
-			if (plyPos.y < enmyPos.y) UpdateMoveDirection(DOWN);
+	if (distance < 7.0f) {
+		
+		if (SceneManager::GetInstance()->temp) {
+			if (distance > 2.0f)
+				Chase(delta);
 		}
+		else  KeepDistance(delta);
 	}
+	
+	
+}
+
+void Enemy::Chase(Vector2 delta)
+{
+	UpdateMoveDirection(delta);
+}
+
+void Enemy::KeepDistance(Vector2 delta)
+{
+	UpdateMoveDirection(-delta);
 }
 
 void Enemy::Update(float frameTime)
 {
 	m_fCurrFrameTime += frameTime;
 
-	Go(frameTime, true, true, true);
+	UpdatePosition(m_MOVESPEED, true, true, true, frameTime);
 }
 
 void Enemy::Render(Camera* camera) {

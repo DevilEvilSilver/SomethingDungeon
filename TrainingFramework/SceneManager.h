@@ -19,6 +19,8 @@ public:
 	Player *m_Player;
 	Camera *m_Camera;
 
+	bool temp = true;//TEST AI
+
 	SceneManager();
 	~SceneManager();
 

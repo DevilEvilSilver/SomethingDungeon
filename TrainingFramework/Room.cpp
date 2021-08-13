@@ -44,7 +44,7 @@ void Room::RoomGenerate() {
 		while (enemyNum--) {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - m_fHeight + randPosY, 0.0f);
+			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - ROOM_HEIGHT + randPosY, 0.0f);
 			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
 			SceneManager::GetInstance()->AddEnemy(enemy);
 		}

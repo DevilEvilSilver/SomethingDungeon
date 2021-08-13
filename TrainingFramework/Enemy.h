@@ -13,6 +13,8 @@ public:
 	~Enemy();
 
 	void UsingAI();
+	void Chase(Vector2 delta);
+	void KeepDistance(Vector2 delta);
 
 	
 	void Update(float frameTime);
