@@ -2,6 +2,7 @@
 #include <time.h>
 #include "Room.h"
 #include "Enemy.h"
+#include "Gold.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
@@ -47,6 +48,20 @@ void Room::RoomGenerate() {
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - m_fHeight + randPosY, 0.0f);
 			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
 			SceneManager::GetInstance()->AddEnemy(enemy);
+
+			//tien add
+			/*translation.SetTranslation(GetPosX() + randPosX +2, GetPosY() - m_fHeight + randPosY +2, 0.0f);
+			Gold* gold = new Gold(GOLD, m_RoomID, translation, rand()%4 +1, false);
+			enemy->setGold(gold);
+			SceneManager::GetInstance()->AddGold(gold)*/; 
+
+			translation.SetTranslation(GetPosX() + randPosX + 4, GetPosY() - m_fHeight + randPosY + 4, 0.0f);
+			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation, rand() % 50 + 1);
+			SceneManager::GetInstance()->AddHPPotion(hp);
+
+			translation.SetTranslation(GetPosX() + randPosX + 3, GetPosY() - m_fHeight + randPosY + 3, 0.0f);
+			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation, rand() % 50 + 1);
+			SceneManager::GetInstance()->AddMPPotion(mp);
 		}
 	}
 }
