@@ -8,7 +8,7 @@ private:
 public:
 
 	HPPotion();
-	HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value, bool isDisplay);
+	HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value);
 	~HPPotion();
 
 	void Update(float frameTime);

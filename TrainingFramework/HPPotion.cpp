@@ -10,11 +10,10 @@ HPPotion::~HPPotion()
 {
 }
 
-HPPotion::HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value, bool isDisplay)
+HPPotion::HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value)
 	: Drop(prefabID, roomID, translationMatrix) {
 	m_strState = HP_POTION;
 	m_iValue = value;
-	//m_isDisplay = isDisplay;
 }
 
 void HPPotion::Render(Camera* camera) {
