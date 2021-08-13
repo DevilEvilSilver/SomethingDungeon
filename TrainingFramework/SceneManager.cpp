@@ -163,28 +163,27 @@ void SceneManager::RoomsGenerate() {
 void SceneManager::Render() {
 	GetRenderOrder();
 
-	for (auto& obj : m_RoomList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
+	//RENDER ROOM
+	{
+		for (auto& obj : m_RoomList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}
 	}
 
-	/*
+	//RENDER OBJECT
+	{
+		for (auto& obj : m_ObjectList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}
+	}
 
-	m_Player->Render(this->m_Camera);
-
-	for (auto& obj : m_EnemyList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}*/
+	//RENDER TEXT
+	{
+		Renderer::GetInstance()->DrawText2(scoreText);
+	}
 	
-	for (auto& obj : m_ObjectList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-
-
-	Renderer::GetInstance()->DrawText2(scoreText);
-
 	m_ObjectList.clear();
 }
 
@@ -208,7 +207,6 @@ void SceneManager::Update(float frameTime) {
 
 	//follow camera
 	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-	
 	m_Camera->Update(frameTime);
 }
 
@@ -256,83 +254,63 @@ void SceneManager::UpdateRoomID() {
 
 void SceneManager::UpdateControl(float frameTime)
 {
-	
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	
-	if ((newKeyPressed & KEY_W))
+	//PLAYER
 	{
-		m_Player->PlayerMoveDirection(m_Player->UP);
-	}
-	else if (newKeyPressed & KEY_S )
-	{
-		m_Player->PlayerMoveDirection(m_Player->DOWN);
-	}
+		if ((newKeyPressed & KEY_W))
+		{
+			m_Player->PlayerMoveDirection(m_Player->UP);
+		}
+		else if (newKeyPressed & KEY_S)
+		{
+			m_Player->PlayerMoveDirection(m_Player->DOWN);
+		}
 
-	if ((newKeyPressed & KEY_A))
-	{
-		m_Player->PlayerMoveDirection(m_Player->LEFT);
-	}
-	else if (newKeyPressed & KEY_D)
-	{
-		m_Player->PlayerMoveDirection(m_Player->RIGHT);
+		if ((newKeyPressed & KEY_A))
+		{
+			m_Player->PlayerMoveDirection(m_Player->LEFT);
+		}
+		else if (newKeyPressed & KEY_D)
+		{
+			m_Player->PlayerMoveDirection(m_Player->RIGHT);
+		}
+
 	}
 	
 
-
-
 	//CAMERA
-	if (newKeyPressed & KEY_UP)
 	{
-		m_Camera->MoveUp(frameTime);
+		if (newKeyPressed & KEY_UP)
+		{
+			m_Camera->MoveUp(frameTime);
+		}
+		if (newKeyPressed & KEY_LEFT)
+		{
+			m_Camera->MoveLeft(frameTime);
+		}
+		if (newKeyPressed & KEY_DOWN)
+		{
+			m_Camera->MoveDown(frameTime);
+		}
+		if (newKeyPressed & KEY_RIGHT)
+		{
+			m_Camera->MoveRight(frameTime);
+		}
+	}
+	
+	//USING SPACE	~	TEST
+	{
+		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
+		{
+			/*m_Player->m_cState = m_Player->CS_DASH;*/
+			m_Player->Dash(frameTime);
+		}
 		
-	}
-	if (newKeyPressed & KEY_LEFT)
-	{
-		m_Camera->MoveLeft(frameTime);
-	}
-	if (newKeyPressed & KEY_DOWN)
-	{
-		m_Camera->MoveDown(frameTime);
-	}
-	if (newKeyPressed & KEY_RIGHT)
-	{
-		m_Camera->MoveRight(frameTime);
-	}
-
-
-	//STATE CHANGE
-	//if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
-	//{
-	//	StateManager::GetInstance()->m_GameStateStack.pop_back();
-	//	StateManager::GetInstance()->AddState(StateManager::GetInstance()->GS_STATE_2);
-
-
-	//	//ResetInstance();
-	//}
-
-	//Play sound+STATE CHANGE
-	if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
-	{
-		static int num = 0;
-		std::string a = "hello " + std::to_string(num);
+		std::string a = "DASH CD: " + std::to_string(m_Player->currDashCD);
+		
 		scoreText->setText(a);
-
-		num++;
-		//ResetInstance();
-		//temp = !temp;
-		m_Player->m_cState = m_Player->CS_DASH;
-
-		//m_Player->IsAttacked(10.0f);
-		
-		// static bool isSoundPlayed = false;
-		// if (isSoundPlayed == false) {
-
-		// 	SoundEngine::GetInstance()->Play(0, 0.5, 1.5, true);
-		// 	isSoundPlayed = true;
-		// }
-
 	}
-
 }
 
 void SceneManager::AddObject(Object *object) {
@@ -366,6 +344,4 @@ void SceneManager::GetRenderOrder() {
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) > (b->GetPosY() - b->m_fHeight));
 	});
-
-	
 }

@@ -19,7 +19,7 @@ public:
 	Player *m_Player;
 	Camera *m_Camera;
 
-	bool temp = true;//TEST AI
+
 
 	SceneManager();
 	~SceneManager();
@@ -28,19 +28,14 @@ public:
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
 	void RoomsGenerate();
 
+
 	void Update(float frameTime);
 	void UpdateRoomID();
-	//control
 	void UpdateControl(float frameTime);
-	//game logic
-
-	//collision
-	
-	void CheckCollision();//logic
 	bool CheckInRange(Vector2 roomID);
 
-	void Render();
 
+	void Render();
 	void AddObject(Object *object);
 	void AddRoom(Room *room);
 	void AddEnemy(Enemy *enemy);

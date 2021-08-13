@@ -17,12 +17,12 @@ public:
 	std::string m_strState;
 	unsigned int m_iCurrFrameIndex;
 	float m_fCurrFrameTime;
+	bool m_isFacingLeft=true;
 
 	//Hitbox info
 	unsigned int m_iType;			
 	float m_fWidth, m_fHeight;		
 	float m_fRadius;				
-
 	float m_nothingx, m_nothingy;
 
 	Object();

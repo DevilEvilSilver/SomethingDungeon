@@ -24,13 +24,10 @@ void Character::UpdateMoveDirection(Vector2 dir)
 		m_moveDir = dir;
 }
 
-void Character::UpdatePosition(float speed, bool isWallCollision, bool isPlayerCollision, bool isEnemyCollision, float frameTime)
+void Character::UpdatePosition(float speed, float frameTime)
 {
-	
-
 	if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
-	{
-		
+	{	
 		//Get velocity from move direction 
 		m_moveDir.Normalize();
 		SetVelocityY(speed * m_moveDir.y);
@@ -42,23 +39,18 @@ void Character::UpdatePosition(float speed, bool isWallCollision, bool isPlayerC
 		if (isEnemyCollision == true) EnemyCollision(frameTime);
 
 		//change position
+		SetPosX(GetPosX() + m_fVx * frameTime);
+		SetPosY(GetPosY() + m_fVy * frameTime);
 		
-			SetPosX(GetPosX() + m_fVx * frameTime);
-			SetPosY(GetPosY() + m_fVy * frameTime);
-		
-			
-
-
 		//reset speed+direction
 		m_moveDir = Vector2(0.0f, 0.0f);
 		SetVelocityX(0.0f);
 		SetVelocityY(0.0f);
 
-		
+		//update face direction
+		if (m_lastMoveDir.x < 0) m_isFacingLeft = true;
+		else m_isFacingLeft = false;
 	}
-
-	
-	
 }
 
 void Character::WallCollision(float frameTime)
@@ -90,7 +82,6 @@ void Character::IsAttacked(float incomingDamage)
 
 bool Character::FixedMove(Vector2 dir,float distance , float time, float frameTime)
 {
-
 	static float currTime = 0.0f;
 	float speed = distance / time;
 	currTime += frameTime;
@@ -98,8 +89,7 @@ bool Character::FixedMove(Vector2 dir,float distance , float time, float frameTi
 	if (currTime < time)
 	{
 		UpdateMoveDirection(dir);
-
-		UpdatePosition(speed, true, false, true, frameTime);
+		UpdatePosition(speed, frameTime);
 		return false;
 	}
 	else
@@ -110,21 +100,11 @@ bool Character::FixedMove(Vector2 dir,float distance , float time, float frameTi
 	
 }
 
-
-
-
-
-
-
 Character::~Character() {
 
 }
-void Character::Render(Camera* camera) {
-
-	
+void Character::Render(Camera* camera) 
+{
 	m_strState = IDLE_LEFT;
-
-	
-
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }

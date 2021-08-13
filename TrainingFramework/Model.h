@@ -7,6 +7,8 @@ class Model
 public:
 	unsigned int m_iResourceID;
 	GLuint m_VertexRendererID;
+
+
 	GLuint m_IndexRendererID;
 	GLuint m_IndexCount;
 

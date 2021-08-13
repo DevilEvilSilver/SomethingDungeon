@@ -42,7 +42,7 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	Model *model = GetResource(prefab->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
 	Shaders *shader = GetResource(prefab->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
 	Animation *animation = GetResource(object->m_strState, prefab->m_AnimationList);
-
+	
 	shader->Bind();
 	model->Bind();
 	if (animation->m_FrameList[object->m_iCurrFrameIndex]->m_fSPF == -1.0f) {
@@ -57,8 +57,12 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	GLfloat scaleBySize[2][2];
 	scaleBySize[0][0] = 1.0f; scaleBySize[0][1] = 0.0f;
 	scaleBySize[1][0] = 0.0f; scaleBySize[1][1] = 1.0f;
+
+	if (object->m_isFacingLeft==false) scaleBySize[0][0] = -1.0f;
+
 	Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
+	
 	//Set uniform
 	glUniform1i(shader->textureUniform, 0);
 	if (prefab->m_isScaleBySize) {

@@ -61,4 +61,6 @@
 //ANIMATION
 #define INIT_ANIM		"init"
 #define IDLE_LEFT		"idleLeft"
+#define MOVE			"move"
+#define DASH			"dash"
 

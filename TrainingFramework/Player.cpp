@@ -12,7 +12,7 @@
 
 void Player::PlayerMoveDirection(MoveDir dir)
 {
-	if (m_cState != CS_GOTHIT)
+	if (m_cState == CS_MOVE||m_cState==CS_IDLE)
 	{
 		m_cState = CS_MOVE;
 		switch (dir) {
@@ -108,15 +108,26 @@ bool Player::CoolMove(float frameTime)
 
 bool Player::Dash(float frameTime)
 {
-	printf("dash\n");
-	if (FixedMove(m_lastMoveDir, m_MOVESPEED/2.0f, 0.35f, frameTime) == false) return false;
+	if (currDashCD == 0.0f)
+	{ 
+		m_cState = CS_DASH;
+		currDashCD = DashCoolDown;
+	}
+
+	if (m_cState == CS_DASH) 
+	{
+		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.35f, frameTime) == false) return false;
+	}
 	return true;
 }
 
-Player::Player(){}
+Player::Player(){
+	
+}
 
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
+	isWallCollision = true;
 	m_strState = IDLE_LEFT;
 }
 
@@ -124,51 +135,63 @@ Player::~Player() {
 
 }
 
-//void Player::Update(float frameTime) {
-//	m_fCurrFrameTime += frameTime;
-//	SetPosX(GetPosX() + m_fVx * frameTime);
-//	SetPosY(GetPosY() + m_fVy * frameTime);
-//}
-
-
-
 void Player::Update(float frameTime)//call func and animation
 {
 
-
-	switch (m_cState)
+	//LOGIC STATE
 	{
-	case CS_IDLE:
-		
-		break;
-	case CS_MOVE:
-		
-		if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
+		switch (m_cState)
 		{
-			m_lastMoveDir = m_moveDir;
-			UpdatePosition(m_MOVESPEED, true, false, true, frameTime);
-		}else m_cState = CS_IDLE;
+		case CS_IDLE:
+			printf("idle\n");
+			break;
+		case CS_MOVE:
+			printf("move\n");
+			if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
+			{
+				m_lastMoveDir = m_moveDir;
+				UpdatePosition(m_MOVESPEED, frameTime);
+			}
+			else m_cState = CS_IDLE;
 
-		
-		break;
-	case CS_GOTHIT:
-		
-		if (CoolMove(frameTime)==true) m_cState = CS_IDLE;
 
-		break;
-	case CS_DASH:
+			break;
+		case CS_GOTHIT:
 
-		if (Dash(frameTime) == true) m_cState = CS_IDLE;
+			if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
 
-		break;
+			break;
+		case CS_DASH:
+			printf("dash\n");
+			if (Dash(frameTime) == true) m_cState = CS_IDLE;
+
+			break;
+		}
+
 	}
-	
-	m_fCurrFrameTime += frameTime;
 
+	//COOLDOWN
+	if (currDashCD > 0.0f) currDashCD -= frameTime;
+	else currDashCD = 0.0f;
+	
+	//ANIMATION
+	m_fCurrFrameTime += frameTime;
 }
 
 
 
 void Player::Render(Camera* camera) {
+	
+	if (m_lastCState != m_cState) {
+		m_fCurrFrameTime = 0.0f;
+		m_iCurrFrameIndex = 0;
+
+		m_strState = IDLE_LEFT;
+		if (m_cState == CS_MOVE) m_strState = MOVE;
+		else if (m_cState == CS_DASH) m_strState = DASH;
+
+		m_lastCState = m_cState;
+	}
+	
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }
