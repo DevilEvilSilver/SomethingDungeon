@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 #include "Renderer.h"
 #include "define.h"
 
@@ -28,6 +29,20 @@ void Player::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 	SetPosX(GetPosX() + m_fVx * frameTime);
 	SetPosY(GetPosY() + m_fVy * frameTime);
+}
+
+void Player::UpdateCollideGold(float frameTime, Gold* gold) {
+	m_fCurrFrameTime += frameTime;
+	increaseGold(gold->getValue());
+	numGoldText->setText("Gold: " + std::to_string(m_inumGold));
+	SceneManager::GetInstance()->removeGold(gold);
+}
+
+void Player::UpdateCollideHP(float frameTime, HPPotion* hp) {
+	m_fCurrFrameTime += frameTime;
+	increaseHP(hp->getValue());
+	numHPText->setText("HP: " + std::to_string(m_iCurHP));
+	SceneManager::GetInstance()->removeHPPotion(hp);
 }
 
 void Player::Render(Camera* camera) {

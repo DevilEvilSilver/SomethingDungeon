@@ -195,14 +195,14 @@ void SceneManager::Render() {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
-	for (auto& obj : m_hpPotionList) {
+	/*for (auto& obj : m_hpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
 	for (auto& obj : m_mpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
-	}
+	}*/
 	
 	Renderer::GetInstance()->DrawText2(scoreText);
 }
@@ -230,11 +230,7 @@ void SceneManager::Update(float frameTime) {
 	for (auto& obj : m_GoldList) {
 		if (CheckInRange(obj->m_RoomID))
 			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
-			{
-				m_Player->increaseGold(obj->getValue());
-				m_Player->numGoldText->setText("Gold: " + std::to_string(m_Player->m_inumGold));
-				removeGold(obj);
-			}
+				m_Player->UpdateCollideGold(frameTime, obj);
 	}
 
 	// check collide  get hp potion
@@ -242,9 +238,7 @@ void SceneManager::Update(float frameTime) {
 		if (CheckInRange(obj->m_RoomID))
 			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
 			{
-				m_Player->increaseHP(obj->getValue());
-				m_Player->numHPText->setText("HP: " + std::to_string(m_Player->m_iCurHP));
-				removeHPPotion(obj);
+				m_Player->UpdateCollideHP(frameTime, obj);
 			}
 	}
 	
