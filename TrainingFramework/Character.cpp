@@ -25,3 +25,7 @@ void Character::Update(float frameTime) {
 void Character::Render(Camera* camera) {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }
+float Character::GetAtk()
+{
+	return m_atk;
+}

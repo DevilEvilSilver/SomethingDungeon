@@ -9,6 +9,7 @@ protected:
 	Matrix m_WorldMatrix;
 	float m_fCurrentPosX, m_fCurrentPosY;
 	float m_fVx, m_fVy;
+	float m_fDeltaX, m_fDeltaY;
 public:
 	std::string m_strPrefabID;
 	Vector2 m_RoomID;

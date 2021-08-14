@@ -30,7 +30,7 @@ Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
 	m_WorldMatrix = scaleMatrix * translationMatrix;
 
-	m_iType = prefab->m_iType; nothingx = prefab->m_fDeltaX; nothingy = prefab->m_fDeltaY;
+	m_iType = prefab->m_iType; m_fDeltaX = prefab->m_fDeltaX; m_fDeltaY = prefab->m_fDeltaY;
 	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
 	m_fVx = 0;
 	m_fVy = 0;

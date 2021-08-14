@@ -13,7 +13,7 @@ enum SkillMPCost {
 enum SkillExistingTime {
     // Milli second
     BULLET_EXISTINGTIME = 5000,
-    AOE_EXISTINGTIME = 200
+    AOE_EXISTINGTIME = 400
 };
 enum SkillDamage {
     // Don vi %
@@ -29,16 +29,19 @@ protected:
     bool m_isPlayer;
     float m_currExistingTime;
     SkillExistingTime m_totalExsitingTime;
-    SkillMPCost m_MPCost;
+    SkillDamage m_percentDamage;
 public:
-    Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
+    SkillMPCost mp_MPCost;
+    Skill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
     virtual ~Skill();
-    virtual void Update(float frameTime);
-    virtual void UpdateHit(float frameTime);
-    virtual void UpdateMove(float frameTime);
-    void UpdateExistingTime(float frameTime);
+    virtual void UpdateHit(float frameTime);    // Hit-> Collison and Self Destruct
+    virtual void Init(Vector2 mousePos);
+    void UpdateExistingTime(float frameTime);   // Self Destruct
+    void UpdateMove(float frameTime);         //Init Position and velocity
+    void Update(float frameTime);
     void Render(Camera* camera);
     void Remove();
+    
 
 };
 

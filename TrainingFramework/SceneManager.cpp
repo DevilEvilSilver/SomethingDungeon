@@ -225,7 +225,7 @@ void SceneManager::UpdateRoomID() {
 void SceneManager::UpdateControl(float frameTime)
 {
 	
-	float fSpeed = 20.0f;
+	float fSpeed = 10.0f;
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	if ((newKeyPressed & KEY_W))
 	{
@@ -268,22 +268,22 @@ void SceneManager::UpdateControl(float frameTime)
 	{
 		m_Camera->MoveRight(frameTime);
 	}
-
-	static bool mousePress = true;
-	if (newKeyPressed & MOUSE_LEFT)
-	{
-		if (mousePress)
-		{
-			Vector2 mousePos = InputManager::GetInstance()->MousePosition(m_Camera);
-			m_Player->Attack(mousePos.x,mousePos.y);
-			mousePress = false;
-			//std::cout << "newKeyPressed & MOUSE_LEFT\n";
-		}
-	}
-	else
-	{
-		mousePress = true;
-	}
+	m_Player->Attack(1,2);
+	//static bool mousePress = true;
+	//if (newKeyPressed & MOUSE_LEFT)
+	//{
+	//	if (mousePress)
+	//	{
+	//		Vector2 mousePos = InputManager::GetInstance()->MousePosition(m_Camera);
+	//		m_Player->Attack(mousePos.x,mousePos.y);
+	//		mousePress = false;
+	//		//std::cout << "newKeyPressed & MOUSE_LEFT\n";
+	//	}
+	//}
+	//else
+	//{
+	//	mousePress = true;
+	//}
 	//STATE CHANGE
 	//if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 	//{

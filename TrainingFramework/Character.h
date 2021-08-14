@@ -18,4 +18,5 @@ public:
 	virtual void Attack(int x, int y);
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);
+	float GetAtk();
 };

@@ -156,6 +156,9 @@
     <ClCompile Include="AoeSkill.cpp">
       <Filter>Source Files\StateManager\Data\Skills</Filter>
     </ClCompile>
+    <ClCompile Include="BulletSkill.cpp">
+      <Filter>Source Files\StateManager\Data\Skills</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -249,6 +252,9 @@
       <Filter>Header Files\StateManager\Data\Skills</Filter>
     </ClInclude>
     <ClInclude Include="AoeSkill.h">
+      <Filter>Header Files\StateManager\Data\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletSkill.h">
       <Filter>Header Files\StateManager\Data\Skills</Filter>
     </ClInclude>
   </ItemGroup>

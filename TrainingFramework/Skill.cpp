@@ -6,7 +6,7 @@
 #include "define.h"
 #include "SceneManager.h"
 
-Skill::Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+Skill::Skill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Object(prefabID, roomID, translationMatrix)
 {
 	if (owner == SceneManager::GetInstance()->m_Player)
@@ -17,19 +17,26 @@ Skill::Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix tran
 	m_owner = owner;
 	m_currExistingTime = 0;
 }
+
 Skill::~Skill()
 {
 }
 void Skill::Update(float frameTime)
 {
-	
+	UpdateHit(frameTime);
+	UpdateMove(frameTime);
+	UpdateExistingTime(frameTime);
 }
 void Skill::UpdateMove(float frameTime)
 {
-
+	m_fCurrentPosX += m_fVx * frameTime;
+	m_fCurrentPosY += m_fVy * frameTime;
+	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX - m_WorldMatrix.m[0][0]/2;
+	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY + m_WorldMatrix.m[1][1] / 2;
 }
 void Skill::UpdateHit(float frameTime)
 {
+	
 	//character->isAttacked(m_damage)
 }
 void Skill::Render(Camera* camera)
@@ -52,7 +59,12 @@ void Skill::Remove()
 		if (this == skillList[i])
 		{
 			delete this;
+			SceneManager::GetInstance()->m_SkillList[i] = NULL;
 			SceneManager::GetInstance()->m_SkillList.erase(SceneManager::GetInstance()->m_SkillList.begin() + i);
 		}
 	}
+}
+void Skill::Init(Vector2 mousePos)
+{
+
 }
