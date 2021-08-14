@@ -45,9 +45,9 @@ public:
 	//STATE
 	void Idle(float frameTime);
 	void Move(float frameTime);
-	void Attack(float frameTime);
-	void GotHit(float frameTime);
-	void Death(float frameTime);
+	virtual void Attack(float frameTime);
+	virtual void GotHit(float frameTime);
+	virtual void Death(float frameTime);
 
 	//UNIQUE STM :v
 	virtual void UniqueUpdate(float frameTime);

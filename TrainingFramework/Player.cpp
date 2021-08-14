@@ -19,7 +19,6 @@ void Player::UniqueUpdate(float frameTime)
 		Dash(frameTime);
 		break;
 	case P_SKILL:
-		Move(frameTime);
 		break;
 	}
 
