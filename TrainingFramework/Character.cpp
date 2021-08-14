@@ -19,60 +19,85 @@ void Character::Update(float frameTime)
 	switch (m_cState)
 	{
 	case CS_IDLE:
+		Idle(frameTime);
 		break;
 	case CS_MOVE:
-		if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
-		{
-			m_lastMoveDir = m_moveDir;
-			UpdatePosition(m_MOVESPEED, frameTime);
-		}
-		else m_cState = CS_IDLE;
-
-
+		Move(frameTime);
 		break;
+	case CS_ATTACK:
+		Attack(frameTime);
 	case CS_GOTHIT:
-
-		//if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
-
+		GotHit(frameTime);
 		break;
-	case CS_DASH:
-		//if (Dash(frameTime) == true) m_cState = CS_IDLE;
-
+	case CS_DEATH:
+		Death(frameTime);
 		break;
 	}
+
+	UniqueUpdate(frameTime);
+
 	//ANIMATION
 	m_fCurrFrameTime += frameTime;
 }
 
+void Character::Idle(float frameTime)
+{
+	m_strState = IDLE_LEFT;
+}
+
+void Character::Move(float frameTime)
+{
+	m_strState = MOVE;
+
+
+	if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
+	{
+		m_lastMoveDir = m_moveDir;
+		UpdatePosition(m_MOVESPEED, frameTime);
+	}
+	else SetCS(CS_IDLE);
+}
+
+void Character::Attack(float frameTime)
+{
+}
+
+void Character::GotHit(float frameTime)
+{
+}
+
+void Character::Death(float frameTime)
+{
+}
+
+void Character::UniqueUpdate(float frameTime)
+{
+}
 
 void Character::UpdateMoveDirection(Vector2 dir)
 {
 		m_moveDir = dir;
 }
-void Character::UpdateMoveDirection(MoveDir dir)
-{
-	
-	
-		if (m_cState == CS_MOVE || m_cState == CS_IDLE)
-		{
-			m_cState = CS_MOVE;
-			switch (dir) {
-			case UP:
-				m_moveDir.y++;
-				break;
-			case DOWN:
-				m_moveDir.y--;
-				break;
-			case LEFT:
-				m_moveDir.x--;
-				break;
-			case RIGHT:
-				m_moveDir.x++;
-				break;
-			}
-		}
 
-	
+bool Character::FixedMove(Vector2 dir, float distance, float time, float frameTime)
+{
+	static float currTime = 0.0f;
+	float speed = distance / time;
+	currTime += frameTime;
+	currTime += frameTime;
+
+	if (currTime < time)
+	{
+		UpdateMoveDirection(dir);
+		UpdatePosition(speed, frameTime);
+		return false;
+	}
+	else
+	{
+		currTime = 0.0f;
+		return true;
+	}
+
 }
 void Character::UpdatePosition(float speed, float frameTime)
 {
@@ -122,44 +147,22 @@ void Character::EnemyCollision(float frameTime)
 	}
 }
 
-
-
-
-bool Character::FixedMove(Vector2 dir,float distance , float time, float frameTime)
-{
-	static float currTime = 0.0f;
-	float speed = distance / time;
-	currTime += frameTime;
-
-	if (currTime < time)
-	{
-		UpdateMoveDirection(dir);
-		UpdatePosition(speed, frameTime);
-		return false;
-	}
-	else
-	{
-		currTime = 0.0f;
-		return true;
-	}
-	
-}
-
 Character::~Character() {
 
 }
-void Character::Render(Camera* camera) 
+
+void Character::SetCS(CharacterState newState)
 {
-	if (m_lastCState != m_cState) {
-		m_fCurrFrameTime = 0.0f;
-		m_iCurrFrameIndex = 0;
+	m_cState = newState;
+	ResetAnimation();
+}
+void Character::ResetAnimation()
+{
+	m_fCurrFrameTime = 0.0f;
+	m_iCurrFrameIndex = 0;
+}
 
-		m_strState = IDLE_LEFT;
-		if (m_cState == CS_MOVE) m_strState = MOVE;
-		else if (m_cState == CS_DASH) m_strState = DASH;
-
-		m_lastCState = m_cState;
-	}
-
+void Character::Render(Camera* camera)
+{
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 }

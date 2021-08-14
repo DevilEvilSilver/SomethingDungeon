@@ -9,16 +9,50 @@
 #include "CollisionManager.h"
 
 
+void Player::UniqueUpdate(float frameTime)
+{
+	switch (m_pState)
+	{
+	case P_CS:
+		break;
+	case P_DASH:
+		Dash(frameTime);
+		break;
+	case P_SKILL:
+		Move(frameTime);
+		break;
+	}
 
+	//COOLDOWN
+	if (currDashCD > 0.0f) currDashCD -= frameTime;
+	else currDashCD = 0.0f;
+}
 
+bool Player::Dash(float frameTime)
+{
+	if (currDashCD == 0.0f)
+	{ 
+		SetPS(P_DASH);
+		currDashCD = DashCoolDown;
+	}
+	
+	if (m_pState == P_DASH)
+	{
+		m_strState = DASH;
+		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.35f, frameTime) == false) return false;
+		SetCS(CS_IDLE);
+		SetPS(P_CS);
+	}
 
+	return true;
+}
 bool Player::CoolMove(float frameTime)
 {
 	static int i = 0;
-	switch(i)
+	switch (i)
 	{
 	case 0:
-		if (FixedMove(Vector2(1.0f,2.0f),5.0f,0.2f,frameTime)==false) return false;
+		if (FixedMove(Vector2(1.0f, 2.0f), 5.0f, 0.2f, frameTime) == false) return false;
 		else i++;
 		break;
 	case 1:
@@ -77,7 +111,7 @@ bool Player::CoolMove(float frameTime)
 		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
 		else i++;
 		break;
-	case 15: 
+	case 15:
 		i = 0;
 		return true;
 	}
@@ -85,90 +119,38 @@ bool Player::CoolMove(float frameTime)
 	return false;
 }
 
-bool Player::Dash(float frameTime)
+void Player::PlayerMove(MoveDir dir)
 {
-	if (currDashCD == 0.0f)
-	{ 
-		m_cState = CS_DASH;
-		currDashCD = DashCoolDown;
-	}
+	if (m_cState != CS_MOVE) SetCS(CS_MOVE);
 
-	if (m_cState == CS_DASH) 
-	{
-		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.35f, frameTime) == false) return false;
+	switch (dir) {
+	case UP:
+		m_moveDir.y++;
+		break;
+	case DOWN:
+		m_moveDir.y--;
+		break;
+	case LEFT:
+		m_moveDir.x--;
+		break;
+	case RIGHT:
+		m_moveDir.x++;
+		break;
 	}
-	return true;
+}
+void Player::SetPS(PlayerState newPS) {
+	m_pState = newPS;
+	ResetAnimation();
 }
 
-Player::Player(){
-	
-}
 
+Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
 }
-
 Player::~Player() {
 
 }
 
-void Player::UpdatePlayer(float frameTime)//call func and animation
-{
-
-	//LOGIC STATE
-	//{
-	//	switch (m_cState)
-	//	{
-	//	case CS_IDLE:
-	//		break;
-	//	case CS_MOVE:
-	//		if (!(m_moveDir.x == 0.0f && m_moveDir.y == 0.0f))
-	//		{
-	//			m_lastMoveDir = m_moveDir;
-	//			UpdatePosition(m_MOVESPEED, frameTime);
-	//		}
-	//		else m_cState = CS_IDLE;
-
-
-	//		break;
-	//	case CS_GOTHIT:
-
-	//		if (CoolMove(frameTime) == true) m_cState = CS_IDLE;
-
-	//		break;
-	//	case CS_DASH:
-	//		if (Dash(frameTime) == true) m_cState = CS_IDLE;
-
-	//		break;
-	//	}
-
-	//}
-
-	////COOLDOWN
-	//if (currDashCD > 0.0f) currDashCD -= frameTime;
-	//else currDashCD = 0.0f;
-	//
-	////ANIMATION
-	//m_fCurrFrameTime += frameTime;
-	Update(frameTime);
-}
-
-
-
-void Player::Render(Camera* camera) {
-	
-	if (m_lastCState != m_cState) {
-		m_fCurrFrameTime = 0.0f;
-		m_iCurrFrameIndex = 0;
-
-		m_strState = IDLE_LEFT;
-		if (m_cState == CS_MOVE) m_strState = MOVE;
-		else if (m_cState == CS_DASH) m_strState = DASH;
-
-		m_lastCState = m_cState;
-	}
-	
-	Renderer::GetInstance()->DrawAnimated(this, camera);
-}

@@ -191,16 +191,13 @@ void SceneManager::Update(float frameTime) {
 	
 	UpdateRoomID();
 
-	m_Player->UpdatePlayer(frameTime);
+	m_Player->Update(frameTime);
 	
 	for (auto& obj : m_EnemyList) {
 		if (CheckInRange(obj->m_RoomID))
 		{
-			obj->UpdateEnemy(frameTime);
-			obj->UsingAI();
-		}
-		else obj->m_AIstart = 0.0l;
-			
+			obj->Update(frameTime);
+		}	
 	}
 
 	UpdateControl(frameTime);
@@ -260,20 +257,20 @@ void SceneManager::UpdateControl(float frameTime)
 	{
 		if ((newKeyPressed & KEY_W))
 		{
-			m_Player->UpdateMoveDirection(m_Player->UP);
+			m_Player->PlayerMove(m_Player->UP);
 		}
 		else if (newKeyPressed & KEY_S)
 		{
-			m_Player->UpdateMoveDirection(m_Player->DOWN);
+			m_Player->PlayerMove(m_Player->DOWN);
 		}
 
 		if ((newKeyPressed & KEY_A))
 		{
-			m_Player->UpdateMoveDirection(m_Player->LEFT);
+			m_Player->PlayerMove(m_Player->LEFT);
 		}
 		else if (newKeyPressed & KEY_D)
 		{
-			m_Player->UpdateMoveDirection(m_Player->RIGHT);
+			m_Player->PlayerMove(m_Player->RIGHT);
 		}
 
 	}
@@ -304,6 +301,7 @@ void SceneManager::UpdateControl(float frameTime)
 		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 		{
 			/*m_Player->m_cState = m_Player->CS_DASH;*/
+			
 			m_Player->Dash(frameTime);
 		}
 		

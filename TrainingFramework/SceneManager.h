@@ -10,34 +10,40 @@ class SceneManager :public StateBase<SceneManager>
 {
 private:
 	Text *scoreText ;
-	//Text levelText;
 public:
+	
 	RoomType m_Map[32][32];
+	
+	//DATA
+	std::vector<Object*> m_ObjectList;
 	std::vector<Room*> m_RoomList;
 	std::vector<Enemy*> m_EnemyList;
-	std::vector<Object*> m_ObjectList;
 	Player *m_Player;
 	Camera *m_Camera;
 
-
-
-	SceneManager();
-	~SceneManager();
-
+	//INIT
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
 	void RoomsGenerate();
+	void AddObject(Object* object);
+	void AddRoom(Room* room);
+	void AddEnemy(Enemy* enemy);
 
+	//////////////////////////////////////////////////////////
 
 	void Update(float frameTime);
-	void UpdateRoomID();
-	void UpdateControl(float frameTime);
-	bool CheckInRange(Vector2 roomID);
+	
+	bool CheckInRange(Vector2 roomID);		//ONLY UPDATE NEAR
+	void UpdateRoomID();					//UPDATE ROOM_ID FOR CHARACTER
+	void UpdateControl(float frameTime);	//CONTROL PLAYER
+	
+	/////////////////////////////////////////////////////////
 
+	//OTHER
+	SceneManager();
+	~SceneManager();
 
-	void Render();
-	void AddObject(Object *object);
-	void AddRoom(Room *room);
-	void AddEnemy(Enemy *enemy);
+	//RENDER
 	void GetRenderOrder();
+	void Render();
 };
