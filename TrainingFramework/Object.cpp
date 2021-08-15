@@ -74,12 +74,12 @@ void Object::SetVelocityY(float vy)
 void Object::SetPosX(float x)
 {
 	m_fCurrentPosX = x;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX;
+	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX;
 }
 void Object::SetPosY(float y)
 {
 	m_fCurrentPosY = y;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY;
+	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 }
 float* Object::GetHitBoxCurrentData()
 {

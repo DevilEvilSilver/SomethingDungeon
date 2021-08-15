@@ -67,6 +67,6 @@
 #define IDLE_LEFT		"idleLeft"
 
 //SKILL
-#define	BULLET_SPEED	3
+#define	BULLET_SPEED	50
 
 

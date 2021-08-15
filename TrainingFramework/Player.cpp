@@ -5,7 +5,7 @@
 #include "Skill.h"
 #include "AoeSkill.h"
 #include "InputManager.h"
-//#include "AoeSkill.h"
+#include "BulletSkill.h"
 #include "SceneManager.h"
 Player::Player() {}
 
@@ -33,9 +33,15 @@ void Player::Attack(int x, int y)
 			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
 			SceneManager::GetInstance()->AddSkill(skill);
 			bSwitch = false;
-			std::cout << "newKeyPressed & MOUSE_LEFT\n";
+			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
 		}
-		
+		else if (bSwitch && iSwithSkill == 2)
+		{
+			BulletSkill* bskill = new BulletSkill(mousePos, this, SKILL, this->m_RoomID, m);
+			SceneManager::GetInstance()->AddSkill(bskill);
+			bSwitch = false;
+			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
+		}
 	}
 	else if ((newKeyPressed & MOUSE_RIGHT))
 	{

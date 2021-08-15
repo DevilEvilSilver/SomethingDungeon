@@ -190,7 +190,7 @@ void SceneManager::Update(float frameTime) {
 	}
 	
 	UpdateRoomID();
-
+	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
 	m_Camera->Update(frameTime);
 	m_Player->Update(frameTime);
 

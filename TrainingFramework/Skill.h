@@ -1,21 +1,21 @@
 #pragma once
 #include "Object.h"
 #include "Character.h"
-enum SkillCoolDownTime {
+enum class SkillCoolDownTime {
     // Milli second
     BULLET_COOLDOWN = 0,
     AOE_COOLDOWN = 1000
 };
-enum SkillMPCost {
+enum class SkillMPCost {
     BULLET_MPCOST = 0,
     AOE_MPCOST = 1
 };
-enum SkillExistingTime {
+enum class SkillExistingTime {
     // Milli second
     BULLET_EXISTINGTIME = 5000,
-    AOE_EXISTINGTIME = 400
+    AOE_EXISTINGTIME = 1100
 };
-enum SkillDamage {
+enum class SkillDamage {
     // Don vi %
     BULLET_DAMAGE = 100,
     AOE_DAMAGE = 150
