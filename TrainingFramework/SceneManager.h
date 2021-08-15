@@ -3,8 +3,10 @@
 #include "StateBase.h"
 #include "Text.h"
 #include "Room.h"
+#include "Skill.h"
 #include "Player.h"
 #include "Enemy.h"
+
 
 class SceneManager :public StateBase<SceneManager>
 {
@@ -18,6 +20,9 @@ public:
 	std::vector<Object*> m_ObjectList;
 	std::vector<Room*> m_RoomList;
 	std::vector<Enemy*> m_EnemyList;
+
+	std::vector<Skill*> m_SkillList;
+
 	Player *m_Player;
 	Camera *m_Camera;
 
@@ -28,6 +33,8 @@ public:
 	void AddObject(Object* object);
 	void AddRoom(Room* room);
 	void AddEnemy(Enemy* enemy);
+
+	void AddSkill(Skill* skill);
 
 	//////////////////////////////////////////////////////////
 

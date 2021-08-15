@@ -1,0 +1,16 @@
+#FRAME_COUNT 4
+ID 0
+SPF 0.25
+FILE ../Resources/Animation/aoeskill/idleLeft/0.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.25
+FILE ../Resources/Animation/aoeskill/idleLeft/1.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.25
+FILE ../Resources/Animation/aoeskill/idleLeft/2.tga
+TILING GL_REPEAT
+ID 3
+SPF -1
+FILE ../Resources/Animation/aoeskill/idleLeft/3.tga

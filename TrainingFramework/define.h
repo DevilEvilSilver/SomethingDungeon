@@ -54,6 +54,9 @@
 //PREFAB
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
+#define SKILL			"skill"
+#define BULLET_SKILL	"skill"
+#define AOE_SKILL		"aoeskill"
 #define NORMAL_ROOM		"normalRoom"
 #define WALL_ROOM		"wallRoom"
 #define HOLE_ROOM		"holeRoom"
@@ -63,4 +66,8 @@
 #define IDLE_LEFT		"idleLeft"
 #define MOVE			"move"
 #define DASH			"dash"
+
+//SKILL
+#define	BULLET_SPEED	50
+
 

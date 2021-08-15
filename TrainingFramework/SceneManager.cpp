@@ -40,6 +40,10 @@ SceneManager::~SceneManager() {
 		delete object;
 	}
 	m_ObjectList.clear();
+	for (auto& object : m_SkillList) {
+		delete object;
+	}
+	m_SkillList.clear();
 	for (auto& object : m_RoomList) {
 		delete object;
 	}
@@ -185,12 +189,16 @@ void SceneManager::Render() {
 	}
 	
 	m_ObjectList.clear();
+	for (auto& obj : m_SkillList)
+	{
+		obj->Render(this->m_Camera);
+	}
+	Renderer::GetInstance()->DrawText2(scoreText);
 }
 
 void SceneManager::Update(float frameTime) {
 	
 	UpdateRoomID();
-
 	m_Player->Update(frameTime);
 	
 	for (auto& obj : m_EnemyList) {
@@ -199,7 +207,10 @@ void SceneManager::Update(float frameTime) {
 			obj->Update(frameTime);
 		}	
 	}
-
+	for (auto& obj : m_SkillList) {
+		//if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
 	UpdateControl(frameTime);
 
 	//follow camera
@@ -297,6 +308,8 @@ void SceneManager::UpdateControl(float frameTime)
 	}
 	
 	//USING SPACE	~	TEST
+	m_Player->Attack(1,2);
+
 	{
 		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 		{
@@ -322,7 +335,10 @@ void SceneManager::AddRoom(Room *room) {
 void SceneManager::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
 }
-
+void SceneManager::AddSkill(Skill* skill)
+{
+	m_SkillList.push_back(skill);
+}
 bool SceneManager::CheckInRange(Vector2 roomID) {
 
 	Vector2 currRoom = m_Player->m_RoomID;

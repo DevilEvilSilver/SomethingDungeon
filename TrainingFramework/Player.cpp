@@ -1,12 +1,17 @@
 #include "stdafx.h"
-#include "Player.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "define.h"
 
-#include "define.h"
+
 #include "SceneManager.h"
 #include "CollisionManager.h"
+
+#include "Skill.h"
+#include "AoeSkill.h"
+#include "InputManager.h"
+#include "BulletSkill.h"
+
 
 
 void Player::UniqueUpdate(float frameTime)
@@ -143,6 +148,8 @@ void Player::SetPS(PlayerState newPS) {
 }
 
 
+
+
 Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
@@ -152,4 +159,50 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 Player::~Player() {
 
 }
+
+void Player::Attack(int x, int y)
+{
+	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+	Vector2 mousePos = InputManager::GetInstance()->MousePosition(SceneManager::GetInstance()->m_Camera);
+	Vector2 playerPos(m_fCurrentPosX, m_fCurrentPosY);
+	static int iSwithSkill = 1;
+	static bool bSwitch = true;
+	Matrix m;
+	m.SetTranslation(mousePos.x, mousePos.y,0);
+	if ((newKeyPressed & MOUSE_LEFT)  )//
+	{
+		if (bSwitch && iSwithSkill == 1)
+		{
+			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
+			SceneManager::GetInstance()->AddSkill(skill);
+			bSwitch = false;
+			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
+		}
+		else if (bSwitch && iSwithSkill == 2)
+		{
+			BulletSkill* bskill = new BulletSkill(mousePos, this, SKILL, this->m_RoomID, m);
+			SceneManager::GetInstance()->AddSkill(bskill);
+			bSwitch = false;
+			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
+		}
+	}
+	else if ((newKeyPressed & MOUSE_RIGHT))
+	{
+		if (bSwitch)
+		{
+			iSwithSkill++;
+			if (iSwithSkill == 3)
+				iSwithSkill = 1;
+			bSwitch = false;
+			std::cout << "newKeyPressed & MOUSE_RIGHT\n";
+		}
+	}
+	else
+	{
+		bSwitch = true;
+	}
+	
+}
+
+
 

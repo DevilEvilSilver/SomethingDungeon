@@ -11,7 +11,7 @@ Character::Character() {}
 
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Object(prefabID, roomID, translationMatrix) {
-
+	m_atk = 100;
 }
 
 void Character::Update(float frameTime)
@@ -150,6 +150,8 @@ void Character::EnemyCollision(float frameTime)
 Character::~Character() {
 
 }
+void Character::Attack(int x, int y)
+{
 
 void Character::SetCS(CharacterState newState)
 {
@@ -165,4 +167,8 @@ void Character::ResetAnimation()
 void Character::Render(Camera* camera)
 {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
+}
+float Character::GetAtk()
+{
+	return m_atk;
 }

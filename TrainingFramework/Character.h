@@ -1,12 +1,17 @@
 #pragma once
 #include "Object.h"
+#include "vector"
 
-
-
-
+struct SkillID {
+	std::string prefabID;
+	int  iCoolDownTime;
+	float fcurrCoolDownTime = 0;
+};
 class Character : public Object {
+protected:
+	float m_atk;
+	std::vector<SkillID*> m_SkillIDList;
 public:
-	
 	//ENUM
 	enum CharacterState 
 	{
@@ -73,4 +78,8 @@ public:
 
 	//RENDER
 	void Render(Camera *camera);
+
+	//SKILL
+	virtual void Attack(int x, int y);
+	float GetAtk();
 };
