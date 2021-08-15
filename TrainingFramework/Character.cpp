@@ -147,11 +147,11 @@ void Character::EnemyCollision(float frameTime)
 	}
 }
 
-Character::~Character() {
+Character::~Character() {}
 
-}
+
 void Character::Attack(int x, int y)
-{
+{}
 
 void Character::SetCS(CharacterState newState)
 {
