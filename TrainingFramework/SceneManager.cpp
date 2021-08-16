@@ -9,7 +9,6 @@
 #include "InputManager.h"
 #include "StateManager.h"
 #include "CollisionManager.h"
-#include "ResourceManager.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 template <class T>
@@ -54,8 +53,6 @@ SceneManager::~SceneManager() {
 }
 
 void SceneManager::Init() {
-	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
-
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 

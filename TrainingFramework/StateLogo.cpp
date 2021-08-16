@@ -24,7 +24,6 @@ StateLogo::~StateLogo() {
 }
 
 void StateLogo::Init() {
-	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOGO, "r");
@@ -57,7 +56,7 @@ void StateLogo::Init() {
 		m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
-	//Logo
+	//Start Button
 	{
 		fscanf(dataFile, "#LOGO\n");
 		unsigned int id;
@@ -123,8 +122,10 @@ void StateLogo::UpdateControl(float frameTime)
 
 		if (fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
-			ResourceManager::GetInstance()->ResetInstance();
 
+			StateManager::GetInstance()->m_GameStateStack.pop_back();
+			ResourceManager::GetInstance()->ResetInstance();
+			ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
 			StateManager::GetInstance()->AddState(GS_STATE_WELCOME);
 		}
 	}
