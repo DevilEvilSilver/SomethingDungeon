@@ -1,20 +1,25 @@
 #include "stdafx.h"
 #include "StateManager.h"
-#include "SceneManager.h"
+#include "ResourceManager.h"
 #include "define.h"
 
 //include all STATEs here:
 #include "StateTest.h"
+#include "StateLogo.h"
+#include "StateWelcome.h"
+#include "SceneManager.h"
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_1);
-	SceneManager::GetInstance()->RoomsGenerate();
+	AddState(GS_STATE_LOGO);
+	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 }
 
 StateManager::~StateManager() {
 	//reset all state here
 	StateTest::GetInstance()->ResetInstance();
+	StateLogo::GetInstance()->ResetInstance();
+	StateWelcome::GetInstance()->ResetInstance();
 	SceneManager::GetInstance()->ResetInstance();
 	//......
 }
@@ -25,14 +30,14 @@ void StateManager::Update(float frameTime) {
 
 	
 	switch (m_GameStateStack.back()) {
-	case GS_STATE_1:
+	case GS_STATE_LOGO:
+		StateLogo::GetInstance()->Update(frameTime);
+		break;
+	case GS_STATE_WELCOME:
+		StateWelcome::GetInstance()->Update(frameTime);
+		break;
+	case GS_STATE_PLAY:
 		SceneManager::GetInstance()->Update(frameTime);
-		break;
-	case GS_STATE_2:
-		StateTest::GetInstance()->Update(frameTime);
-		break;
-	case GS_STATE_3:
-		StateTest::GetInstance()->Update(frameTime);
 		break;
 	}
 }
@@ -40,14 +45,14 @@ void StateManager::Update(float frameTime) {
 void StateManager::Render()
 {
 	switch (m_GameStateStack.back()) {
-	case GS_STATE_1:
+	case GS_STATE_LOGO:
+		StateLogo::GetInstance()->Render();
+		break;
+	case GS_STATE_WELCOME:
+		StateWelcome::GetInstance()->Render();
+		break;
+	case GS_STATE_PLAY:
 		SceneManager::GetInstance()->Render();
-		break;
-	case GS_STATE_2:
-		StateTest::GetInstance()->Render();
-		break;
-	case GS_STATE_3:
-		StateTest::GetInstance()->Render();
 		break;
 	}
 }

@@ -35,7 +35,6 @@ public:
 	std::vector<BombTrap*> m_bombTrapList;
 
 	Player *m_Player;
-	Camera *m_Camera;
 
 	//INIT
 	void Init();

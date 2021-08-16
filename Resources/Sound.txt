@@ -1,5 +1,5 @@
 SoundNum 3
 
-#ID 0 ../Resources/Sounds/music_bg.wav
-#ID 1 ../Resources/Sounds/hurt.wav
-#ID 2 ../Resources/Sounds/canary.wav
+#ID 0 ../Resources/Sounds/welcome_bgm.wav
+#ID 1 ../Resources/Sounds/logo_sfx.wav
+#ID 2 ../Resources/Sounds/button_sfx.wav

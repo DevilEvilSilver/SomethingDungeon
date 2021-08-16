@@ -20,7 +20,7 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	void Init();
+	void Init(std::string resourceFile);
 
 	void AddModel(Model *model);
 	void AddPrefab(Prefab *prefab);

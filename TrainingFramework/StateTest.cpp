@@ -138,7 +138,7 @@ void StateTest::UpdateControl(float frameTime)
 				isSoundPlayed = true;
 			}
 
-			StateManager::GetInstance()->ClosenAddState(StateManager::GetInstance()->GS_STATE_2);
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
 			
 		}
 
@@ -146,8 +146,8 @@ void StateTest::UpdateControl(float frameTime)
 		//MOUSE
 		if (InputManager::GetInstance()->keyPressed & MOUSE_LEFT)
 		{
-			Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
-			printf("move %.2f %.2f\n", mousePosition.x, mousePosition.y);
+			//Vector2 mousePosition = InputManager::GetInstance()->MousePosition(m_Camera);
+			//printf("move %.2f %.2f\n", mousePosition.x, mousePosition.y);
 		}
 		if (InputManager::GetInstance()->keyPressed & MOUSE_RIGHT)
 		{

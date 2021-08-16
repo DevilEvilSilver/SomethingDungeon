@@ -19,11 +19,10 @@ Object::Object()
 }
 
 Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0) {
+	: m_strPrefabID(prefabID), m_RoomID(roomID), m_strState(INIT_ANIM), m_fCurrFrameTime(0.0f), m_iCurrFrameIndex(0), m_fVx(0.0f), m_fVy(0.0f) {
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;
-	// Long Chu y bo thuoc tinh m_fDeltaX,m_fDeltaY trong Prefab !!!
 	
 
 
@@ -49,7 +48,7 @@ Object::~Object() {
 }
 
 void Object::Update(float frameTime) {
-
+	m_fCurrFrameTime += frameTime;
 }
 
 void Object::Render(Camera* camera) {
@@ -79,13 +78,15 @@ void Object::SetVelocityY(float vy)
 
 void Object::SetPosX(float x)
 {
+	float fDeltaX = m_fCurrentPosX - m_WorldMatrix.m[3][0];
 	m_fCurrentPosX = x;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX;
+	m_WorldMatrix.m[3][0] = x - fDeltaX;
 }
 void Object::SetPosY(float y)
 {
+	float fDeltaY = m_fCurrentPosY - m_WorldMatrix.m[3][1];
 	m_fCurrentPosY = y;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
+	m_WorldMatrix.m[3][1] = y - fDeltaY;
 }
 float* Object::GetHitBoxCurrentData()
 {

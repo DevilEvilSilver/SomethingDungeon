@@ -15,6 +15,8 @@ public:
 	GLint uvAttribute;
 	GLint textureUniform;
 	GLint spriteScaleUniform;
+	GLint timeUniform;
+	GLint fadeUniform;
 	GLint wvpUniform;
 
 	Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);

@@ -153,4 +153,32 @@ int SoundEngine::Play(int soundID, float volume, float speed,bool isLoop)
 	return NULL;
 }
 
+void SoundEngine::Stop(int handle)
+{
+	m_soloud.stop(handle);
+}
 
+void SoundEngine::StopAll()
+{
+	m_soloud.stopAll();
+}
+
+void SoundEngine::SetPause(int handle, bool isPause)
+{
+	m_soloud.setPause(handle, isPause);
+}
+
+void SoundEngine::SetPauseAll(bool isPause)
+{
+	m_soloud.setPauseAll(isPause);
+}
+
+void SoundEngine::Fader(int handle, bool isFadeIn, float time)
+{
+	m_soloud.fadeVolume(handle, isFadeIn, time);
+}
+
+void SoundEngine::FaderAll(bool isFadeIn, float time)
+{
+	m_soloud.fadeGlobalVolume(isFadeIn, time);
+}

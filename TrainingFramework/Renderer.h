@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Object.h"
-#include"Text.h"
+#include "Text.h"
 #include "Singleton.h"
 
 class Renderer:public Singleton<Renderer> {

@@ -93,7 +93,7 @@ void SceneManager::Init() {
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
-	dataFile = fopen(FILE_SM, "r");
+	dataFile = fopen(FILE_S_PLAY, "r");
 
 	//Player
 	fscanf(dataFile, "#PLAYER\n");

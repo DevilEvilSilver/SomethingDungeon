@@ -32,8 +32,7 @@ public:
 
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);
-	Matrix GetWorldMatrix();
-	
+	virtual Matrix GetWorldMatrix();
 	float GetPosX();
 	float GetPosY();
 	void SetVelocityX(float vx);

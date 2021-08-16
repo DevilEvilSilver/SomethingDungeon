@@ -78,20 +78,26 @@ void InputManager::Key(unsigned char key, bool bIsPressed)
 	//printf("keyPressed: %d\n", keyPressed);
 }
 
-void InputManager::MouseLeft(bool bIsPressed)
+void InputManager::MouseLeft(bool bIsPressed, int x, int y)
 {
 	if (bIsPressed == true)
 		keyPressed = keyPressed | MOUSE_LEFT;
 	else
 		keyPressed = keyPressed ^ MOUSE_LEFT;
+
+	mouseLX = x;
+	mouseLY = y;
 }
 
-void InputManager::MouseRight(bool bIsPressed)
+void InputManager::MouseRight(bool bIsPressed, int x, int y)
 {
 	if (bIsPressed == true)
 		keyPressed = keyPressed | MOUSE_RIGHT;
 	else
 		keyPressed = keyPressed ^ MOUSE_RIGHT;
+
+	mouseRX = x;
+	mouseRY = y;
 }
 
 void InputManager::MouseMove(int x, int y)
@@ -100,14 +106,14 @@ void InputManager::MouseMove(int x, int y)
 	mouseY = y;
 }
 
-Vector2 InputManager::MousePosition(Camera* stateCamera)
+Vector2 InputManager::GetMousePosition(Camera* stateCamera, int x, int y)
 {
 	Vector2 camScale = stateCamera->GetViewScale();
-	float x = mouseX / SCREEN_W * camScale.x + stateCamera->GetPosition().x - camScale.x/2;
-	float y = mouseY / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + camScale.y/2;
+	float posX = x / SCREEN_W * camScale.x + stateCamera->GetPosition().x - camScale.x/2;
+	float posY = y / SCREEN_H * camScale.y * -1 + stateCamera->GetPosition().y + camScale.y/2;
 
 	
 
-	return Vector2(x,y);
+	return Vector2(posX, posY);
 }
 

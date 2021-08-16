@@ -53,6 +53,7 @@ public:
    void (ESCALLBACK *mouseLeftUpFunc) (ESContext*, int, int);
    void (ESCALLBACK* mouseRightUpFunc) (ESContext*, int, int);
    void (ESCALLBACK *mouseMoveFunc) (ESContext*, int, int);
+   void (ESCALLBACK *mouseHoverFunc) (ESContext*, int, int);
 };
 
 
@@ -124,6 +125,8 @@ void ESUTIL_API esRegisterMouseRightUpFunc(ESContext* esContext,
 
 void ESUTIL_API esRegisterMouseMoveFunc(ESContext *esContext,
 	void (ESCALLBACK *mouseMoveFunc) (ESContext*, int, int));
+void ESUTIL_API esRegisterMouseHoverFunc(ESContext *esContext,
+	void (ESCALLBACK *mouseHoverFunc) (ESContext*, int, int));
 //
 /// \brief Log a message to the debug output for the platform
 /// \param formatStr Format string for error log.  
