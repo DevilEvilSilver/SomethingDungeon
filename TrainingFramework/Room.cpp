@@ -29,51 +29,68 @@ Room::~Room() {
 }
 
 void Room::RoomGenerate() {
-	Prefab* prefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
+	Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
+	Prefab* hpPrefab = GetResource(HP_PO, ResourceManager::GetInstance()->m_PrefabList);
+	Prefab* mpPrefab = GetResource(MP_PO, ResourceManager::GetInstance()->m_PrefabList);
+	Prefab* bombPrefab = GetResource(BOMB_TRAP, ResourceManager::GetInstance()->m_PrefabList);
 
 	if (m_RoomType == NORMAL) {
 		unsigned int random = rand() % 100 + 1;
 		Matrix translation;
-		unsigned int enemyNum = 0;
+		unsigned int enemyNum = 0, hpNum=0,mpNum=0,bombNum=0;
 		if (random >= 80)
+		{
 			enemyNum = 3;
+			hpNum = 1;
+			mpNum = 1;
+		}
+			
 		else if (random >= 50)
+		{
+			bombNum = 1;
 			enemyNum = 2;
+		}
+			
 		else if (random >= 10)
+		{
 			enemyNum = 1;
-
+			mpNum = 1;
+		}
+			
 		while (enemyNum--) {
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
 			StatePlay::GetInstance()->AddEnemy(enemy);
+		}
 
-			//tien add
-			/*translation.SetTranslation(GetPosX() + randPosX +2, GetPosY() - m_fHeight + randPosY +2, 0.0f);
-			Gold* gold = new Gold(GOLD, m_RoomID, translation, rand()%4 +1, false);
-			enemy->setGold(gold);
-			StatePlay::GetInstance()->AddGold(gold)*/; 
 
-			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
-			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
+		while (hpNum--) {
+			
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - hpPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - hpPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation, rand() % 50 + 1);
 			StatePlay::GetInstance()->AddHPPotion(hp);
 
-			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
-			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() -  randPosY, 0.0f);
+		}
+
+		while (mpNum--) {
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - mpPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - mpPrefab->m_fHeight);
 			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation, rand() % 50 + 1);
 			StatePlay::GetInstance()->AddMPPotion(mp);
 
-			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
-			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
+		}
+
+		while (bombNum--) {
+
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation, 2);
 			StatePlay::GetInstance()->AddBombTrap(bomb);
-
-
 		}
 	}
 }

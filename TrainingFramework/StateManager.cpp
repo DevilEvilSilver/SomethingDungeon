@@ -27,9 +27,12 @@ StateManager::~StateManager() {
 		StateLogo::GetInstance()->ResetInstance();
 		break;
 	case GS_STATE_WELCOME:
+		StateLogo::GetInstance()->ResetInstance();
 		StateWelcome::GetInstance()->ResetInstance();
 		break;
 	case GS_STATE_PLAY:
+		StateLogo::GetInstance()->ResetInstance();
+		StateWelcome::GetInstance()->ResetInstance();
 		StatePlay::GetInstance()->ResetInstance();
 		break;
 	}
