@@ -38,6 +38,8 @@ void Character::Update(float frameTime)
 
 	//ANIMATION
 	m_fCurrFrameTime += frameTime;
+
+	//COOLDOWN
 }
 
 void Character::Idle(float frameTime)
@@ -62,8 +64,43 @@ void Character::Attack(float frameTime)
 {
 }
 
-void Character::GotHit(float frameTime)
+bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
+	Vector2 knockBackDir=Vector2(0.0f,0.0f);
+
+	if (m_cState!=CS_GOTHIT)
+	{
+		m_HP -= m_iDmgTaken;
+		knockBackDir = -(m_sourcePos - GetPos());
+		SetCS(CS_GOTHIT);
+	}
+
+	if (m_cState == CS_GOTHIT&&m_isKnockBack==true)
+	{
+		m_strState = IDLE_LEFT;
+
+		static int i = 0;
+		switch (i)
+		{
+		case 0:
+			if (FixedMove(knockBackDir, 2.5f, 0.25f, frameTime)==false) return false;
+			else i++;
+			break;
+		case 1:
+			if (FixedMove(Vector2(1.0f, 0.0f), 0.0f, 0.75f, frameTime)==false) return false;
+			else i++;
+			break;
+		case 2:
+			i = 0;
+			SetCS(CS_IDLE);
+			return true;
+			break;
+		}
+		
+	}
+
+	return true;
+	
 }
 
 void Character::Death(float frameTime)
@@ -147,6 +184,16 @@ void Character::EnemyCollision(float frameTime)
 	}
 }
 
+void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float frameTime)
+{
+	m_iDmgTaken = damage;
+	m_isKnockBack = true;
+	m_sourcePos = pos;
+	GotHit(frameTime);
+}
+
+
+
 Character::~Character() {}
 
 
@@ -167,8 +214,4 @@ void Character::ResetAnimation()
 void Character::Render(Camera* camera)
 {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
-}
-float Character::GetAtk()
-{
-	return m_atk;
 }

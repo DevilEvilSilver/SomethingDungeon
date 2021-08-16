@@ -215,8 +215,8 @@ void StatePlay::Render() {
 
 	//RENDER TEXT
 	{
-		//Renderer::GetInstance()->DrawText2(scoreText);
-		Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
+		Renderer::GetInstance()->DrawText2(scoreText);
+		//Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
  		Renderer::GetInstance()->DrawText2(m_Player->numHPText);
 	}
 

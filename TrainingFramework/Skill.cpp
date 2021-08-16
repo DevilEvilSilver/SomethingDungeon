@@ -6,15 +6,18 @@
 #include "define.h"
 #include "StatePlay.h"
 
-Skill::Skill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+Skill::Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Object(prefabID, roomID, translationMatrix)
 {
 	if (owner == StatePlay::GetInstance()->m_Player)
 		m_isPlayer = true;
 	else
 		m_isPlayer = false;
+
 	m_strState = IDLE_LEFT;
+
 	m_owner = owner;
+	
 	m_currExistingTime = 0;
 }
 

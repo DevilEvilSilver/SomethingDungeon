@@ -23,16 +23,12 @@ Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	Prefab* prefab = GetResource(this->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 
 	Matrix scaleMatrix;
-	
-
 
 	scaleMatrix.SetScale(prefab->m_fScaleX, prefab->m_fScaleY, 1.0f);
 	m_WorldMatrix = scaleMatrix * translationMatrix;
 
 	//CHECK!!!!!!!!!!!!!!!!!!!!
 	m_iType = prefab->m_iType; 
-	m_nothingx = prefab->m_fDeltaX; 
-	m_nothingy = prefab->m_fDeltaY;
 	m_fDeltaX = prefab->m_fDeltaX; m_fDeltaY = prefab->m_fDeltaY;
 	//CHECK!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -59,14 +55,34 @@ Matrix Object::GetWorldMatrix() {
 	return m_WorldMatrix;
 }
 
-float Object::GetPosX() {
-	return m_fCurrentPosX;
-}
+//POSITION
+	//GET 
+	float Object::GetPosX() {
+		return m_fCurrentPosX;
+	}
+	float Object::GetPosY() {
+		return m_fCurrentPosY;
+	}
+	Vector2 Object::GetPos()
+	{
 
-float Object::GetPosY() {
-	return m_fCurrentPosY;
-}
+		return Vector2(m_fCurrentPosX, m_fCurrentPosY);
+	}
+	//SET
+	void Object::SetPosX(float x)
+	{
 
+		m_fCurrentPosX = x;
+		m_WorldMatrix.m[3][0] = x - m_fDeltaX;
+	}
+	void Object::SetPosY(float y)
+	{
+		float fDeltaY = m_fCurrentPosY - m_WorldMatrix.m[3][1];
+		m_fCurrentPosY = y;
+		m_WorldMatrix.m[3][1] = y + m_fDeltaY;
+	}
+
+//SET VELOCITY
 void Object::SetVelocityX(float vx)
 {
 	m_fVx = vx;
@@ -76,27 +92,9 @@ void Object::SetVelocityY(float vy)
 	m_fVy = vy;
 }
 
-void Object::SetPosX(float x)
-{
-	
-	m_fCurrentPosX = x;
-	m_WorldMatrix.m[3][0] = x - m_fDeltaX;
-}
-void Object::SetPosY(float y)
-{
-	float fDeltaY = m_fCurrentPosY - m_WorldMatrix.m[3][1];
-	m_fCurrentPosY = y;
-	m_WorldMatrix.m[3][1] = y + m_fDeltaY;
-}
 float* Object::GetHitBoxCurrentData()
 {
 	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
-	//float* data = new float[7]{ m_fCurrentPosX+m_nothingx, m_fCurrentPosY-m_nothingy, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
 	return data;
 }
 
-Vector2 Object::GetPos()
-{
-
-	return Vector2(m_fCurrentPosX,m_fCurrentPosY);
-}

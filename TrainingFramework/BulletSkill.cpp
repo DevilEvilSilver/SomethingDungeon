@@ -6,13 +6,15 @@
 #include "Room.h"
 #include "define.h"
 BulletSkill::BulletSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	:Skill(mousePos,owner,prefabID,roomID,translationMatrix)
+	:Skill(owner,prefabID,roomID,translationMatrix)
 {
-	m_percentDamage = SkillDamage::BULLET_DAMAGE;
-	m_totalExsitingTime = SkillExistingTime::BULLET_EXISTINGTIME;
-	mp_MPCost = SkillMPCost::BULLET_MPCOST;
+	m_percentDamage = 100;
+	m_totalExsitingTime = 10000;
+	mp_MPCost = 1;
 	Init(mousePos);
-	m_damage = owner->GetAtk() * (float)m_percentDamage / 100;
+	m_damage = owner->m_ATK * (float)m_percentDamage / 100;
+
+	if (m_fVx <= 0) m_isFacingLeft = false;
 }
 BulletSkill::~BulletSkill()
 {
@@ -25,9 +27,11 @@ void BulletSkill::UpdateHit(float frameTime)
 		std::vector<Enemy*> enemyList = StatePlay::GetInstance()->m_EnemyList;
 		for (auto& enemy : enemyList)
 		{
+			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
 			if (CollisionManager::CheckCollision(this, enemy))
 			{
 				//enemy->isAttacked
+				enemy->UpdateGotHit(2, true, Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY), frameTime);
 
 			}
 
@@ -37,7 +41,7 @@ void BulletSkill::UpdateHit(float frameTime)
 	{
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
-			//StatePlay::GetInstance()->m_Player->isAttacked();
+			StatePlay::GetInstance()->m_Player->UpdateGotHit(2, true, Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY), frameTime);
 
 		}
 	}

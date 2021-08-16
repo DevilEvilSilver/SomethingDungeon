@@ -12,34 +12,43 @@ protected:
 	float m_atk;
 	std::vector<SkillID*> m_SkillIDList;
 public:
-	//ENUM
-	enum CharacterState 
-	{
-		CS_IDLE,
-		CS_MOVE,
-		CS_ATTACK,
-		CS_GOTHIT,
-		CS_DEATH,
-	};
+
+	//STATE
+		//enum
+		enum CharacterState 
+		{
+			CS_IDLE,
+			CS_MOVE,
+			CS_ATTACK,
+			CS_GOTHIT,
+			CS_DEATH,
+		};
+		//currState
+		CharacterState m_cState = CS_IDLE;
 	
 	//STATS
-	unsigned int
+		unsigned int
 		m_HP,
 		m_ATK,
 		m_DEF;
-	float m_MOVESPEED=10.0f;
 	
-	//STATE
-	CharacterState m_cState=CS_IDLE;
-
 	//MOVE
-	Vector2 m_moveDir=Vector2(0.0f,0.0f);
-	Vector2 m_lastMoveDir = Vector2(-1.0f, 0.0f);
+		//speed
+		float m_MOVESPEED = 10.0f;
+		//dir
+		Vector2 m_moveDir=Vector2(0.0f,0.0f);
+		Vector2 m_lastMoveDir = Vector2(-1.0f, 0.0f);
+		//collision
+		bool isWallCollision = false;
+		bool isPlayerCollision = false;
+		bool isEnemyCollision = false;
 
-	//COLLISION
-	bool isWallCollision = false;
-	bool isPlayerCollision = false;
-	bool isEnemyCollision = false;
+	//GOTHIT
+		//source causing knockback
+		bool m_isKnockBack = false;
+		Vector2 m_sourcePos= Vector2(0.0f, 0.0f);
+		//dmg
+		int m_iDmgTaken = 0;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	
@@ -50,7 +59,7 @@ public:
 	void Idle(float frameTime);
 	void Move(float frameTime);
 	virtual void Attack(float frameTime);
-	virtual void GotHit(float frameTime);
+	virtual bool GotHit(float frameTime);
 	virtual void Death(float frameTime);
 
 	//UNIQUE STM :v
@@ -65,6 +74,9 @@ public:
 	void WallCollision(float frameTime);
 	void PlayerCollision(float frameTime);
 	void EnemyCollision(float frameTime);
+
+	//FUNCT GOT HIT
+	void UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float frameTime);
 	
 	//CHANGE STATE
 	void SetCS(CharacterState newState);
@@ -80,5 +92,5 @@ public:
 
 	//SKILL
 	virtual void Attack(int x, int y);
-	float GetAtk();
+
 };

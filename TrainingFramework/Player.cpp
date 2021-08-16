@@ -126,7 +126,7 @@ bool Player::CoolMove(float frameTime)
 
 void Player::PlayerMove(MoveDir dir)
 {
-	if (m_cState != CS_MOVE) SetCS(CS_MOVE);
+	if (m_cState!=CS_MOVE&&m_cState != CS_GOTHIT&&m_cState!=CS_DEATH) SetCS(CS_MOVE);
 
 	switch (dir) {
 	case UP:
