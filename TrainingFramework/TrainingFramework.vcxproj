@@ -96,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.cpp" />
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLoad.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.cpp" />
@@ -130,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Button.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Fader.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLoad.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateLogo.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateWelcome.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Widget.h" />

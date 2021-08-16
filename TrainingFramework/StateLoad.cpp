@@ -1,33 +1,33 @@
 #include "stdafx.h"
 #include <algorithm>
 #include <time.h>
-#include "StateLogo.h"
-#include "SoundEngine.h"
+#include <thread>
+#include "StateLoad.h"
 #include "ResourceManager.h"
-#include "Object.h"
-#include "Renderer.h"
-#include "InputManager.h"
+#include "SoundEngine.h"
 #include "StateManager.h"
-#include "CollisionManager.h"
+#include "StateLogo.h"
+#include "StateWelcome.h"
+#include "SceneManager.h"
 #include "define.h"
 #define _CRT_SECURE_NO_WARNINGS
 
-StateLogo::StateLogo(void) {
+StateLoad::StateLoad(void) {
 	this->Init();
 }
 
-StateLogo::~StateLogo() {
+StateLoad::~StateLoad() {
 	delete m_Background;
-	delete m_Logo;
+	delete m_LoadingIcon;
 	delete m_TransitionScreen;
 	delete m_Camera;
 }
 
-void StateLogo::Init() {
-	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
+void StateLoad::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_LOAD);
 
 	FILE* dataFile;
-	dataFile = fopen(FILE_S_LOGO, "r");
+	dataFile = fopen(FILE_S_LOAD, "r");
 
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
@@ -57,44 +57,40 @@ void StateLogo::Init() {
 		m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
-	//Logo
+	//Loading icon
 	{
-		fscanf(dataFile, "#LOGO\n");
+		fscanf(dataFile, "#LOAD_ICON\n");
 		unsigned int id;
 		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
-		float fadeTime;
-		fscanf(dataFile, "FADE_TIME %f\n", &fadeTime);
-		unsigned int isFadeIn;
-		fscanf(dataFile, "IS_FADE_IN %d\n", &isFadeIn);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_Logo = new Fader(strPrefab, Vector2(0.0f, 0.0f), translation, fadeTime, isFadeIn);
+		m_LoadingIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
 	fclose(dataFile);
 
 	m_TransitionScreen = NULL;
 
-	m_iHandleLogoSFX = SoundEngine::GetInstance()->Play(LOGO_SFX, 1.0f, 1.0f, false);
+	m_isNextState = false;
 }
 
-void StateLogo::Render() {
+void StateLoad::Render() {
 	//GetRenderOrder();
 
 	m_Background->Render(this->m_Camera);
-	m_Logo->Render(this->m_Camera);
+	m_LoadingIcon->Render(this->m_Camera);
 
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Render(this->m_Camera);
 }
 
-void StateLogo::Update(float frameTime) {
+void StateLoad::Update(float frameTime) {
 	m_Background->Update(frameTime);
-	m_Logo->Update(frameTime);
+	m_LoadingIcon->Update(frameTime);
 
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Update(frameTime);
@@ -104,30 +100,47 @@ void StateLogo::Update(float frameTime) {
 	UpdateControl(frameTime);
 }
 
-void StateLogo::UpdateControl(float frameTime)
+void StateLoad::UpdateControl(float frameTime)
 {
-	static bool isWelcomeState = true;
-	static float fNextStateFrame = 3.0f;
+	static float fNextStateFrame = 1.0f;
 
-	//Play State
-	if (isWelcomeState) {
+	//Next State
+	if (m_isNextState) {
 		fNextStateFrame -= frameTime;
 
 		if (fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
 			Matrix translation;
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
-
-			SoundEngine::GetInstance()->Fader(m_iHandleLogoSFX, false, 1.0f);
 		}
 
 		if (fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
-			ResourceManager::GetInstance()->ResetInstance();
 
-			StateManager::GetInstance()->AddState(GS_STATE_WELCOME);
+			StateManager::GetInstance()->CloseState();
 		}
 	}
 }
 
-void StateLogo::GetRenderOrder() {}
+void StateLoad::GetRenderOrder() {}
+
+void StateLoad::LoadNewState(GameState newState) {
+	switch (newState) {
+	case GS_STATE_LOGO:
+		StateLogo::GetInstance();
+		//ResourceManager::GetInstance()->Init(FILE_R_LOGO);
+		break;
+	case GS_STATE_WELCOME:
+		StateWelcome::GetInstance();
+		//ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
+		break;
+	case GS_STATE_PLAY:
+		SceneManager::GetInstance();
+		//ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+		break;
+	}
+
+	//Sleep(5000);
+
+	StateLoad::GetInstance()->m_isNextState = true;
+}

@@ -24,6 +24,7 @@ StateWelcome::~StateWelcome() {
 }
 
 void StateWelcome::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_WELCOME, "r");
@@ -126,10 +127,8 @@ void StateWelcome::UpdateControl(float frameTime)
 
 		if (fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
-
-			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
-			ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+
 			StateManager::GetInstance()->AddState(GS_STATE_PLAY);
 		}
 	}
