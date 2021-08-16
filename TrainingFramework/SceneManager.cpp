@@ -216,36 +216,37 @@ void SceneManager::Render() {
 	//RENDER TEXT
 	{
 		Renderer::GetInstance()->DrawText2(scoreText);
-	
-	for (auto& obj : m_GoldList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-	for (auto& obj : m_hpPotionList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}/*
-	for (auto& obj : m_mpPotionList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}*/
-	for (auto& obj : m_spikeTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-	for (auto& obj : m_bombTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-	
-	m_ObjectList.clear();
-	for (auto& obj : m_SkillList)
-	{
-		obj->Render(this->m_Camera);
-	}
-	Renderer::GetInstance()->DrawText2(scoreText);
-}
 
+		for (auto& obj : m_GoldList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}
+		for (auto& obj : m_hpPotionList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}/*
+		for (auto& obj : m_mpPotionList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}*/
+		for (auto& obj : m_spikeTrapList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}
+		for (auto& obj : m_bombTrapList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Render(this->m_Camera);
+		}
+
+		m_ObjectList.clear();
+		for (auto& obj : m_SkillList)
+		{
+			obj->Render(this->m_Camera);
+		}
+		Renderer::GetInstance()->DrawText2(scoreText);
+	}
+
+}
 void SceneManager::Update(float frameTime) {
 
 

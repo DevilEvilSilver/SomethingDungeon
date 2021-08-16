@@ -77,3 +77,11 @@
 #define GOLD_SPIN		"goldspin"
 #define HP_POTION		"hpPotion"
 #define MP_POTION		"mpPotion"
+
+#define SPIKE_TRAP		"spikeTrap"
+#define BOMB_TRAP		"bombTrap"
+
+#define BOMB_INIT		"bombInit"
+#define BOOMED			"boomed"
+
+#define SPIKE			"spike"

@@ -53,7 +53,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_translationMatrix = translationMatrix;
 	isDead = false;
 }
-Enemy::~Enemy() {
+Enemy::~Enemy() {}
 
 
 void Enemy::createGoldObject() {

@@ -31,15 +31,17 @@ Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_WorldMatrix = scaleMatrix * translationMatrix;
 
 	//CHECK!!!!!!!!!!!!!!!!!!!!
-	m_iType = prefab->m_iType; m_nothingx = prefab->m_fDeltaX; m_nothingy = prefab->m_fDeltaY;
+	m_iType = prefab->m_iType; 
+	m_nothingx = prefab->m_fDeltaX; 
+	m_nothingy = prefab->m_fDeltaY;
 	m_fDeltaX = prefab->m_fDeltaX; m_fDeltaY = prefab->m_fDeltaY;
 	//CHECK!!!!!!!!!!!!!!!!!!!!!!!
 
 	m_fWidth = prefab->m_fWidth; m_fHeight = prefab->m_fHeight; m_fRadius = prefab->m_fRadius;
 	m_fVx = 0;
 	m_fVy = 0;
-	m_fCurrentPosX =  m_WorldMatrix.m[3][0];
-	m_fCurrentPosY =  m_WorldMatrix.m[3][1];
+	m_fCurrentPosX =  m_WorldMatrix.m[3][0]+ prefab->m_fDeltaX;
+	m_fCurrentPosY =  m_WorldMatrix.m[3][1]+ prefab->m_fDeltaY;
 }
 
 Object::~Object() {
