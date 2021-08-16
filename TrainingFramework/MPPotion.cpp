@@ -4,24 +4,29 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-MPPotion::MPPotion() {}
+#include "StatePlay.h"
+
 MPPotion::~MPPotion()
 {
 }
 
-MPPotion::MPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value)
+void MPPotion::OnCollision()
+{
+	Player* player = StatePlay::GetInstance()->m_Player;
+
+	player->m_currMP = (player->m_currMP + this->getValue());
+	if (player->m_currMP>player->m_maxMP) player->m_currMP=player->m_maxMP;
+	player->numMPText->setText("MP: " + std::to_string(player->m_currMP));
+
+	StatePlay::GetInstance()->RemoveDrop(this);
+}
+
+MPPotion::MPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Drop(prefabID, roomID, translationMatrix) {
 	m_strState = MP_POTION;
-	m_iValue = value;
 }
 
-void MPPotion::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
-}
 
-void MPPotion::Update(float frameTime) {
-	m_fCurrFrameTime += frameTime;
-}
 
 int MPPotion::getValue() {
 	return m_iValue;

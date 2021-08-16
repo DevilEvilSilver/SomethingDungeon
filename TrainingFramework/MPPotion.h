@@ -3,16 +3,15 @@
 
 class MPPotion : public Drop {
 private:
-	int m_iValue; // number of mp of this potion
+	int m_iValue=10; // number of mp of this potion
 
 public:
 
-	MPPotion();
-	MPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value);
+
+	MPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~MPPotion();
 
-	void Update(float frameTime);
-	void Render(Camera* camera);
+	void OnCollision();
 
 	int getValue();
 };

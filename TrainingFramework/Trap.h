@@ -10,6 +10,6 @@ public:
 	virtual ~Trap();
 
 	virtual void Update(float frameTime);
-	virtual void Render(Camera* camera);
+
 
 };

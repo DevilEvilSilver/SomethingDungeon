@@ -3,16 +3,15 @@
 
 class HPPotion : public Drop {
 private:
-	int m_iValue;
+	int m_iValue=3;
 
 public:
 
-	HPPotion();
-	HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value);
+
+	HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~HPPotion();
 
-	void Update(float frameTime);
-	void Render(Camera* camera);
+	void OnCollision();
 
 	int getValue();
 };

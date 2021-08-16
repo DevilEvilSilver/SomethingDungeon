@@ -18,6 +18,5 @@ void Trap::Update(float frameTime) {
 
 }
 
-void Trap::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
-}
+
+

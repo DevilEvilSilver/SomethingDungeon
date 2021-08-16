@@ -39,10 +39,20 @@ void Enemy::KeepDistance(Vector2 delta)
 
 //----------------------------------------
 
+void Enemy::Death(float frameTIme)
+{
+	this->createGoldObject();
+	StatePlay::GetInstance()->AddDrop(getGold());
+	StatePlay::GetInstance()->RemoveEnemy(this);
+}
+
 //OTHER
 Enemy::Enemy(){}
 Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
+
+	m_maxHP = 5;
+
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
 	isPlayerCollision = true;

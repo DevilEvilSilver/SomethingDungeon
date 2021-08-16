@@ -5,24 +5,29 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-HPPotion::HPPotion() {}
+#include "StatePlay.h"
 HPPotion::~HPPotion() 
 {
 }
 
-HPPotion::HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value)
+void HPPotion::OnCollision()
+{
+	Player* player = StatePlay::GetInstance()->m_Player;
+
+	player->m_currHP = (player->m_currHP + this->getValue());
+	if (player->m_currHP > player->m_maxHP) player->m_currHP = player->m_maxHP;
+	player->numHPText->setText("HP: " + std::to_string(player->m_currHP));
+
+	StatePlay::GetInstance()->RemoveDrop(this);
+}
+
+HPPotion::HPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Drop(prefabID, roomID, translationMatrix) {
 	m_strState = HP_POTION;
-	m_iValue = value;
+	
 }
 
-void HPPotion::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
-}
 
-void HPPotion::Update(float frameTime) {
-	m_fCurrFrameTime += frameTime;
-}
 
 int HPPotion::getValue() {
 	return m_iValue;

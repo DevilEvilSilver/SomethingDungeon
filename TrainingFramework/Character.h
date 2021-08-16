@@ -28,9 +28,12 @@ public:
 	
 	//STATS
 		unsigned int
-		m_HP,
-		m_ATK,
-		m_DEF;
+			m_maxHP,
+			m_currHP,
+			m_ATK,
+			m_DEF;
+
+
 	
 	//MOVE
 		//speed

@@ -154,20 +154,31 @@ void Player::SetPS(PlayerState newPS) {
 Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
+
+	m_maxHP = 20;
+	m_maxMP = 20;
+	m_ATK = 3;
+	m_DEF = 3;
+
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
 
-	m_inumGold = 0;
-	std::string goldText = "Gold: " + std::to_string(m_inumGold);
-	numGoldText = new Text(goldText, 1, 1, TEXT_COLOR::GREEN, 20, 40, 1.0f);
+	m_GOLD = 0;
+	std::string goldText = "Gold: " + std::to_string(m_GOLD);
+	numGoldText = new Text(goldText, 1, 1, TEXT_COLOR::YELLOW, 20, 40, 1.0f);
 
-	m_iCurHP = 100;
-	std::string Hptext = "HP: " + std::to_string(m_iCurHP);
+	m_currHP = m_maxHP;
+	std::string Hptext = "HP: " + std::to_string(m_currHP);
 	numHPText = new Text(Hptext, 1, 1, TEXT_COLOR::RED, 20, 60, 1.0f);
+
+	m_currMP = m_maxMP;
+	std::string Mptext = "MP: " + std::to_string(m_currHP);
+	numMPText = new Text(Mptext, 1, 1, TEXT_COLOR::BLUE, 20, 80, 1.0f);
 }
 Player::~Player() {
 	delete numGoldText;
 	delete numHPText;
+	delete numMPText;
 }
 
 void Player::Attack(int x, int y)
@@ -187,7 +198,8 @@ void Player::Attack(int x, int y)
 			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
 			StatePlay::GetInstance()->AddSkill(skill);
 			bSwitch = false;
-
+			m_currMP -= 1;
+			numMPText->setText("MP: " + std::to_string(m_currMP));
 		}
 		else if (bSwitch && iSwithSkill == 2)
 		{
@@ -215,34 +227,8 @@ void Player::Attack(int x, int y)
 	
 }
 
-void Player::UpdateCollideGold(float frameTime, Gold* gold) {
-	
-	increaseGold(gold->getValue());
-	numGoldText->setText("Gold: " + std::to_string(m_inumGold));
-	StatePlay::GetInstance()->removeGold(gold);
-}
-
-void Player::UpdateCollideHP(float frameTime, HPPotion* hp) {
-	
-	increaseHP(hp->getValue());
-	numHPText->setText("HP: " + std::to_string(m_iCurHP));
-	StatePlay::GetInstance()->removeHPPotion(hp);
-}
-
-// void Player::Render(Camera* camera) {
-// 	Renderer::GetInstance()->DrawAnimated(this, camera);
-
-// }
 
 
-void Player::increaseGold(Gold* gold) {
-	m_inumGold += gold->getValue();
-}
 
-void Player::increaseGold(int value) {
-	m_inumGold += value;
-}
 
-void Player::increaseHP(int numHP) {
-	m_iCurHP += numHP;
-}
+

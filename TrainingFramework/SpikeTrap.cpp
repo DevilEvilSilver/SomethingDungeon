@@ -25,12 +25,12 @@ void SpikeTrap::Update(float frameTime) {
 }
 
 void SpikeTrap::UpdateCollideSpikeTrap(float frameTime, Player* m_Player) {
-	if (m_fCoolDownTime <= 0.0f) {
+	/*if (m_fCoolDownTime <= 0.0f) {
 		m_Player->increaseHP(-m_iAttack);
 		m_Player->numHPText->setText("HP: " + std::to_string(m_Player->m_iCurHP));
 	}
 	m_fCoolDownTime = 4.0f;
-	m_fCurrFrameTime += frameTime;
+	m_fCurrFrameTime += frameTime;*/
 }
 
 int SpikeTrap::getValueAttack() {

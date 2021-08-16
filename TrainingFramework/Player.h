@@ -12,9 +12,8 @@ private:
 	
 public:
 	Text* numGoldText;
-	int m_inumGold;
 	Text* numHPText;
-	int m_iCurHP;
+	Text* numMPText;
 
 	//ENUM
 	enum MoveDir {
@@ -31,7 +30,8 @@ public:
 	};
 
 	//STATS
-	int m_MP,
+	unsigned int m_maxMP,
+		m_currMP,
 		m_GOLD;
 
 	//STATE
@@ -75,8 +75,5 @@ public:
 	void UpdateCollideHP(float frameTime, HPPotion* hp);
 	// void Render(Camera *camera);
 
-	//tien add
-	void increaseGold(Gold* gold);
-	void increaseGold(int value);
-	void increaseHP(int numHP);
+	
 };

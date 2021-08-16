@@ -52,40 +52,28 @@ StatePlay::~StatePlay() {
 		delete object;
 	}
 	m_EnemyList.clear();
-	for (auto& object : m_GoldList) {
+
+	
+
+
+	for (auto& object : m_DropList) {
 		if (object != NULL) {
 			delete object;
 		}
 	}
-	m_GoldList.clear();
-	for (auto& object : m_hpPotionList) {
+	m_DropList.clear();
+
+	for (auto& object : m_TrapList) {
 		if (object != NULL) {
 			delete object;
 		}
 	}
-	m_hpPotionList.clear();
-	for (auto& object : m_mpPotionList) {
-		if (object != NULL) {
-			delete object;
-		}
-	}
-	m_mpPotionList.clear();
-	for (auto& object : m_spikeTrapList) {
-		if (object != NULL) {
-			delete object;
-		}
-	}
-	m_spikeTrapList.clear();
-	for (auto& object : m_bombTrapList) {
-		if (object != NULL) {
-			delete object;
-		}
-	}
-	m_bombTrapList.clear();
+	m_TrapList.clear();
 
 	delete m_Player;
 	delete m_Camera;
 	delete scoreText;
+	
 }
 
 void StatePlay::Init() {
@@ -205,6 +193,12 @@ void StatePlay::Render() {
 		}
 	}
 
+	//RENDER TRAP
+	for (auto& obj : m_TrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+
 	//RENDER OBJECT
 	{
 		for (auto& obj : m_ObjectList) {
@@ -215,28 +209,17 @@ void StatePlay::Render() {
 
 	//RENDER TEXT
 	{
-		Renderer::GetInstance()->DrawText2(scoreText);
-		//Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
+	//	Renderer::GetInstance()->DrawText2(scoreText);
+		Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
  		Renderer::GetInstance()->DrawText2(m_Player->numHPText);
+		Renderer::GetInstance()->DrawText2(m_Player->numMPText);
+
 	}
 
-	for (auto& obj : m_GoldList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-	for (auto& obj : m_hpPotionList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}/*
-	for (auto& obj : m_mpPotionList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}*/
-	for (auto& obj : m_spikeTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-	for (auto& obj : m_bombTrapList) {
+	
+
+	//RENDER DROP
+	for (auto& obj : m_DropList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
@@ -248,56 +231,47 @@ void StatePlay::Render() {
 	}
 
 }
+void StatePlay::AddDrop(Drop* drop)
+{
+	m_DropList.push_back(drop);
+}
+void StatePlay::AddTrap(Trap* trap)
+{
+	m_TrapList.push_back(trap);
+}
+void StatePlay::RemoveDrop(Drop* drop)
+{
+	int id;
+	for (int i = 0; i < m_DropList.size(); i++) {
+		if (m_DropList[i] == drop)  id = i;
+	}
+
+	delete m_DropList[id];
+	m_DropList[id] = m_DropList[m_DropList.size() - 1];
+	
+	m_DropList.resize(m_DropList.size() - 1);
+}
+void StatePlay::RemoveTrap(Trap* trap)
+{
+	int id;
+	for (int i = 0; i < m_TrapList.size(); i++) {
+		if (m_TrapList[i] == trap)  id = i;
+	}
+
+	delete m_TrapList[id];
+	m_TrapList[id] = m_TrapList[m_TrapList.size() - 1];
+
+	m_TrapList.resize(m_TrapList.size() - 1);
+}
 void StatePlay::Update(float frameTime) {
 
 
-	//check colli with enemy
-	for (auto& obj : m_EnemyList) {
-		if (CheckInRange(obj->m_RoomID))
-			if (CollisionManager::CheckCollision(m_Player, obj, frameTime)) 
-			{ 
-				obj->isDead = true;
-				//release gold - create gold
-					obj->createGoldObject();
-					AddGold(obj->getGold());
-				removeEnemy(obj);
-			}	
-	}
-	
-	// check collide  get gold
-	for (auto& obj : m_GoldList) {
-		if (CheckInRange(obj->m_RoomID))
-			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
-				m_Player->UpdateCollideGold(frameTime, obj);
-	}
 
-	// check collide  get hp potion
-	for (auto& obj : m_hpPotionList) {
-		if (CheckInRange(obj->m_RoomID))
-			if (CollisionManager::CheckCollision(m_Player, obj, frameTime))
-			{
-				m_Player->UpdateCollideHP(frameTime, obj);
-			}
-	}
-	for (auto& obj : m_spikeTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			if (CollisionManager::CheckCollision(m_Player, obj))
-			{
-				//m_Player->UpdateCollideSpikeTrap(frameTime, obj);
-				obj->UpdateCollideSpikeTrap(frameTime, m_Player);
-			}
-	}
-	for (auto& obj : m_bombTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			if (CollisionManager::CheckCollision(m_Player, obj))
-			{
-				obj->UpdateCollideBombTrap(frameTime, m_Player);
-			}
-	}
+
 	
+
 	UpdateRoomID();
 	m_Player->Update(frameTime);
-	
 	for (auto& obj : m_EnemyList) {
 		if (CheckInRange(obj->m_RoomID))
 		{
@@ -305,26 +279,14 @@ void StatePlay::Update(float frameTime) {
 		}	
 	}
 	for (auto& obj : m_SkillList) {
-		//if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
-
-	for (auto& obj : m_GoldList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
-
-	for (auto& obj : m_hpPotionList) {
+	for (auto& obj : m_TrapList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
-
-	for (auto& obj : m_spikeTrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
-
-	for (auto& obj : m_bombTrapList) {
+	for (auto& obj : m_DropList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
@@ -458,9 +420,6 @@ void StatePlay::AddSkill(Skill* skill)
 	m_SkillList.push_back(skill);
 }
 
-void StatePlay::AddGold(Gold* gold) {
-	m_GoldList.push_back(gold);
-}
 
 bool StatePlay::CheckInRange(Vector2 roomID) {
 
@@ -484,19 +443,8 @@ void StatePlay::GetRenderOrder() {
 }
 
 
-void StatePlay::removeGold(Gold* gold) {
-	int id;
-	for (int i = 0; i < m_GoldList.size(); i++) {
-		if (m_GoldList[i] == gold)  id = i;
-	}
 
-	delete m_GoldList[id];
-	m_GoldList[id] = m_GoldList[m_GoldList.size() - 1];
-	//delete m_GoldList[m_GoldList.size() - 1];
-	m_GoldList.resize(m_GoldList.size() -1);
-}
-
-void StatePlay::removeEnemy(Enemy* enemy) {
+void StatePlay::RemoveEnemy(Enemy* enemy) {
 	//enemy->getGold()->m_isDisplay = true;
 	int id;
 	for (int i = 0; i < m_EnemyList.size(); i++) {
@@ -506,50 +454,4 @@ void StatePlay::removeEnemy(Enemy* enemy) {
 	delete m_EnemyList[id];
 	m_EnemyList[id] = m_EnemyList[m_EnemyList.size() - 1];
 	m_EnemyList.resize(m_EnemyList.size() - 1);
-}
-
-void StatePlay::AddHPPotion(HPPotion* hpPo) {
-	m_hpPotionList.push_back(hpPo);
-}
-void StatePlay::removeHPPotion(HPPotion* hpPo) {
-	int id;
-	for (int i = 0; i < m_hpPotionList.size(); i++) {
-		if (m_hpPotionList[i] == hpPo)  id = i;
-	}
-
-	delete m_hpPotionList[id];
-	m_hpPotionList[id] = m_hpPotionList[m_hpPotionList.size() - 1];
-	m_hpPotionList.resize(m_hpPotionList.size() - 1);
-}
-
-void StatePlay::AddMPPotion(MPPotion* mpPo) {
-	m_mpPotionList.push_back(mpPo);
-}
-void StatePlay::removeMPPotion(MPPotion* mpPo) {
-	int id;
-	for (int i = 0; i < m_mpPotionList.size(); i++) {
-		if (m_mpPotionList[i] == mpPo)  id = i;
-	}
-
-	delete m_mpPotionList[id];
-	m_mpPotionList[id] = m_mpPotionList[m_mpPotionList.size() - 1];
-	m_mpPotionList.resize(m_mpPotionList.size() - 1);
-}
-
-void StatePlay::AddSpikeTrap(SpikeTrap* trap) {
-	m_spikeTrapList.push_back(trap);
-}
-
-void StatePlay::AddBombTrap(BombTrap* trap) {
-	m_bombTrapList.push_back(trap);
-}
-void StatePlay::removeBombTrap(BombTrap* trap) {
-	int id;
-	for (int i = 0; i < m_bombTrapList.size(); i++) {
-		if (m_bombTrapList[i] == trap)  id = i;
-	}
-
-	delete m_bombTrapList[id];
-	m_bombTrapList[id] = m_bombTrapList[m_bombTrapList.size() - 1];
-	m_bombTrapList.resize(m_bombTrapList.size() - 1);
 }
