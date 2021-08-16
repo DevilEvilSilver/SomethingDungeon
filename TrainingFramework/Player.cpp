@@ -187,7 +187,7 @@ void Player::Attack(int x, int y)
 			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
 			StatePlay::GetInstance()->AddSkill(skill);
 			bSwitch = false;
-			//std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
+
 		}
 		else if (bSwitch && iSwithSkill == 2)
 		{

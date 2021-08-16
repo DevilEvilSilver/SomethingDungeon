@@ -91,11 +91,11 @@ void TouchActionHover(ESContext* esContext, int x, int y)
 
 void CleanUp()
 {
-	ResourceManager::GetInstance()->ResetInstance();
-	Renderer::GetInstance()->ResetInstance();
-	InputManager::GetInstance()->ResetInstance();
 	StateManager::GetInstance()->ResetInstance();
+	InputManager::GetInstance()->ResetInstance();
 	SoundEngine::GetInstance()->ResetInstance();
+	Renderer::GetInstance()->ResetInstance();
+	ResourceManager::GetInstance()->ResetInstance();
 }
 
 void memoryDumpLeak() {

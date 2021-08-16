@@ -18,9 +18,22 @@ StateManager::StateManager()
 StateManager::~StateManager() {
 	//reset all state here
 	
-	StateLogo::GetInstance()->ResetInstance();
+	/*StateLogo::GetInstance()->ResetInstance();
 	StateWelcome::GetInstance()->ResetInstance();
-	StatePlay::GetInstance()->ResetInstance();
+	StatePlay::GetInstance()->ResetInstance();*/
+
+	switch (m_GameStateStack.back()) {
+	case GS_STATE_LOGO:
+		StateLogo::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_WELCOME:
+		StateWelcome::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_PLAY:
+		StatePlay::GetInstance()->ResetInstance();
+		break;
+	}
+
 	//......
 }
 
