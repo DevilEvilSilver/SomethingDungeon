@@ -13,7 +13,7 @@ enum class SkillMPCost {
 enum class SkillExistingTime {
     // Milli second
     BULLET_EXISTINGTIME = 5000,
-    AOE_EXISTINGTIME = 100
+    AOE_EXISTINGTIME = 200
 };
 enum class SkillDamage {
     // Don vi %

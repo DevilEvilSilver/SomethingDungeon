@@ -100,6 +100,9 @@
     <Filter Include="Source Files\Objects\UI">
       <UniqueIdentifier>{b62fffcd-457f-40f7-8d86-7693be068460}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\States">
+      <UniqueIdentifier>{22297199-d165-44f5-9e4a-46dcecd55317}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -351,6 +354,24 @@
   <ItemGroup>
     <Text Include="..\Resources\Sound.txt">
       <Filter>Resources</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_LOGO.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_PLAY.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_WELCOME.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_LOGO.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_PLAY.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_WELCOME.txt">
+      <Filter>Resources\States</Filter>
     </Text>
   </ItemGroup>
 </Project>

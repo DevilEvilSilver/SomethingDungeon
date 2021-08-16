@@ -25,7 +25,7 @@ void AoeSkill::UpdateHit(float frameTime)
 			if (CollisionManager::CheckCollision(this, enemy))
 			{
 				//enemy->isAttacked
-				std::cout << "AoeSkill::Hit		eneny->isAttacked()\n";
+				//std::cout << "AoeSkill::Hit		eneny->isAttacked()\n";
 			}
 		}
 	}
@@ -34,7 +34,7 @@ void AoeSkill::UpdateHit(float frameTime)
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
 			//StatePlay::GetInstance()->m_Player->isAttacked
-			std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
+			//std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
 		}
 	}
 }
@@ -46,8 +46,8 @@ void AoeSkill::Init(Vector2 mousePos)
 		mousePos = c1 + (mousePos - c1).Normalize() * mp_fAoeRadius;
 	m_fCurrentPosX = mousePos.x - m_fWidth / 2;
 	m_fCurrentPosY = mousePos.y + m_fHeight / 2;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX - m_WorldMatrix.m[0][0] / 2;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY + m_WorldMatrix.m[1][1] / 2;
+	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX;
+	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 	m_fVx = 0;
 	m_fVy = 0;
 	delete[] data1;

@@ -187,14 +187,14 @@ void Player::Attack(int x, int y)
 			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
 			StatePlay::GetInstance()->AddSkill(skill);
 			bSwitch = false;
-			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
+			//std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
 		}
 		else if (bSwitch && iSwithSkill == 2)
 		{
 			BulletSkill* bskill = new BulletSkill(mousePos, this, SKILL, this->m_RoomID, m);
 			StatePlay::GetInstance()->AddSkill(bskill);
 			bSwitch = false;
-			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
+			//std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
 		}
 	}
 	else if ((newKeyPressed & MOUSE_RIGHT))
@@ -205,7 +205,7 @@ void Player::Attack(int x, int y)
 			if (iSwithSkill == 3)
 				iSwithSkill = 1;
 			bSwitch = false;
-			std::cout << "newKeyPressed & MOUSE_RIGHT\n";
+			//std::cout << "newKeyPressed & MOUSE_RIGHT\n";
 		}
 	}
 	else

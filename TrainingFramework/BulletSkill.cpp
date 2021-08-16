@@ -29,7 +29,7 @@ void BulletSkill::UpdateHit(float frameTime)
 			{
 				//enemy->isAttacked
 				//this->Remove();
-				std::cout << "AoeSkill::Hit		eneny->isAttacked()\n";
+				//std::cout << "AoeSkill::Hit		eneny->isAttacked()\n";
 			}
 
 		}
@@ -39,7 +39,7 @@ void BulletSkill::UpdateHit(float frameTime)
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
 			//StatePlay::GetInstance()->m_Player->isAttacked();
-			std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
+			//std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
 		}
 	}
 	std::vector<Room*> roomList = StatePlay::GetInstance()->m_RoomList;
@@ -63,8 +63,8 @@ void BulletSkill::Init(Vector2 mousePos)
 	Vector2 startPos = c1 + mp_dir * fminDis;
 	m_fCurrentPosX = startPos.x - m_fWidth / 2;
 	m_fCurrentPosY = startPos.y + m_fHeight / 2;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX - m_WorldMatrix.m[0][0] / 2;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY + m_WorldMatrix.m[1][1] / 2;
+	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX ;
+	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY ;
 	m_fVx = mp_dir.x * BULLET_SPEED;
 	m_fVy = mp_dir.y * BULLET_SPEED;
 	delete[] ownerData;

@@ -78,20 +78,20 @@ void Object::SetVelocityY(float vy)
 
 void Object::SetPosX(float x)
 {
-	float fDeltaX = m_fCurrentPosX - m_WorldMatrix.m[3][0];
+	
 	m_fCurrentPosX = x;
-	m_WorldMatrix.m[3][0] = x - fDeltaX;
+	m_WorldMatrix.m[3][0] = x - m_fDeltaX;
 }
 void Object::SetPosY(float y)
 {
 	float fDeltaY = m_fCurrentPosY - m_WorldMatrix.m[3][1];
 	m_fCurrentPosY = y;
-	m_WorldMatrix.m[3][1] = y - fDeltaY;
+	m_WorldMatrix.m[3][1] = y + m_fDeltaY;
 }
 float* Object::GetHitBoxCurrentData()
 {
-	//float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
-	float* data = new float[7]{ m_fCurrentPosX+m_nothingx, m_fCurrentPosY-m_nothingy, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
+	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
+	//float* data = new float[7]{ m_fCurrentPosX+m_nothingx, m_fCurrentPosY-m_nothingy, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
 	return data;
 }
 

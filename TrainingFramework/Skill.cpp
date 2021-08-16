@@ -35,8 +35,8 @@ void Skill::UpdateMove(float frameTime)
 	{
 		m_fCurrentPosX += m_fVx * frameTime;
 	m_fCurrentPosY += m_fVy * frameTime;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX - m_WorldMatrix.m[0][0]/2;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY + m_WorldMatrix.m[1][1] / 2;
+	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX ;
+	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY ;
 	}
 }
 void Skill::UpdateHit(float frameTime)

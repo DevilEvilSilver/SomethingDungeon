@@ -14,7 +14,7 @@
     <ProjectGuid>{FC024EC8-32F4-4657-A2CB-14D2B3A931F8}</ProjectGuid>
     <RootNamespace>TrainingFramework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -189,6 +189,12 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\Sound.txt" />
+    <Text Include="..\Resources\States\R_LOGO.txt" />
+    <Text Include="..\Resources\States\R_PLAY.txt" />
+    <Text Include="..\Resources\States\R_WELCOME.txt" />
+    <Text Include="..\Resources\States\S_LOGO.txt" />
+    <Text Include="..\Resources\States\S_PLAY.txt" />
+    <Text Include="..\Resources\States\S_WELCOME.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
