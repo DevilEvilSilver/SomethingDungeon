@@ -25,7 +25,7 @@ void AoeSkill::UpdateHit(float frameTime)
 			if (CollisionManager::CheckCollision(this, enemy))
 			{
 				//enemy->isAttacked
-				std::cout << "AoeSkill::Hit		eneny->isAttacked()\n";
+			
 			}
 		}
 	}
@@ -34,7 +34,7 @@ void AoeSkill::UpdateHit(float frameTime)
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
 			//StatePlay::GetInstance()->m_Player->isAttacked
-			std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
+
 		}
 	}
 }
