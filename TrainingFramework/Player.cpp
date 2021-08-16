@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 #include "Renderer.h"
 #include "define.h"
 
@@ -155,9 +156,18 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
+
+	m_inumGold = 0;
+	std::string goldText = "Gold: " + std::to_string(m_inumGold);
+	numGoldText = new Text(goldText, 1, 1, TEXT_COLOR::GREEN, 20, 40, 1.0f);
+
+	m_iCurHP = 100;
+	std::string Hptext = "HP: " + std::to_string(m_iCurHP);
+	numHPText = new Text(Hptext, 1, 1, TEXT_COLOR::RED, 20, 60, 1.0f);
 }
 Player::~Player() {
-
+	delete numGoldText;
+	delete numHPText;
 }
 
 void Player::Attack(int x, int y)
@@ -204,5 +214,35 @@ void Player::Attack(int x, int y)
 	
 }
 
+void Player::UpdateCollideGold(float frameTime, Gold* gold) {
+	
+	increaseGold(gold->getValue());
+	numGoldText->setText("Gold: " + std::to_string(m_inumGold));
+	SceneManager::GetInstance()->removeGold(gold);
+}
+
+void Player::UpdateCollideHP(float frameTime, HPPotion* hp) {
+	
+	increaseHP(hp->getValue());
+	numHPText->setText("HP: " + std::to_string(m_iCurHP));
+	SceneManager::GetInstance()->removeHPPotion(hp);
+}
+
+// void Player::Render(Camera* camera) {
+// 	Renderer::GetInstance()->DrawAnimated(this, camera);
+// 	Renderer::GetInstance()->DrawText2(numGoldText);
+// 	Renderer::GetInstance()->DrawText2(numHPText);
+// }
 
 
+void Player::increaseGold(Gold* gold) {
+	m_inumGold += gold->getValue();
+}
+
+void Player::increaseGold(int value) {
+	m_inumGold += value;
+}
+
+void Player::increaseHP(int numHP) {
+	m_iCurHP += numHP;
+}

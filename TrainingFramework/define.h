@@ -60,6 +60,9 @@
 #define NORMAL_ROOM		"normalRoom"
 #define WALL_ROOM		"wallRoom"
 #define HOLE_ROOM		"holeRoom"
+#define GOLD			"gold"
+#define HP_PO			"hpPo"
+#define MP_PO			"mpPo"
 
 //ANIMATION
 #define INIT_ANIM		"init"
@@ -71,3 +74,6 @@
 #define	BULLET_SPEED	50
 
 
+#define GOLD_SPIN		"goldspin"
+#define HP_POTION		"hpPotion"
+#define MP_POTION		"mpPotion"

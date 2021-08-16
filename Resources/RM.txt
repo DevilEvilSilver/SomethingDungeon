@@ -1,4 +1,4 @@
-#PREFAB_COUNT 6
+#PREFAB_COUNT 11
 ID mainChar
 MODEL 0
 SHADER 0
@@ -72,6 +72,63 @@ SCALE_BY_SIZE 1
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/wall/static/sprite.txt
+
+ID gold
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID goldspin
+FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID hpPo
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID hpPotion
+FILE ../Resources/Animation/hp/static/sprite.txt
+
+ID mpPo
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID mpPotion
+FILE ../Resources/Animation/mp/static/sprite.txt
+
+ID spikeTrap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID spike
+FILE ../Resources/Animation/spikeTrap/dynamic/sprite.txt
+
+ID bombTrap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 2
+ID bombInit
+FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
+ID boomed
+FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
 
 #MODEL_GEN 1
 ID 0

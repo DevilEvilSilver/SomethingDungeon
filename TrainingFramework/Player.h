@@ -1,10 +1,20 @@
 #pragma once
+#include "Character.h"
+#include "Text.h"
+#include"Gold.h"
+#include "HPPotion.h"
 
 #include "Player.h"
 
 //#include "Skill.h"
 class Player : public Character {
+private:
+	
 public:
+	Text* numGoldText;
+	int m_inumGold;
+	Text* numHPText;
+	int m_iCurHP;
 
 	//ENUM
 	enum MoveDir {
@@ -60,4 +70,13 @@ public:
 	
 	virtual void Attack(int x, int y);
 
+
+	void UpdateCollideGold(float frameTime, Gold * gold);
+	void UpdateCollideHP(float frameTime, HPPotion* hp);
+	// void Render(Camera *camera);
+
+	//tien add
+	void increaseGold(Gold* gold);
+	void increaseGold(int value);
+	void increaseHP(int numHP);
 };
