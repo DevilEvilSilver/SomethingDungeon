@@ -45,6 +45,13 @@ void Player::UpdateCollideHP(float frameTime, HPPotion* hp) {
 	SceneManager::GetInstance()->removeHPPotion(hp);
 }
 
+//void Player::UpdateCollideSpikeTrap(float frameTime, SpikeTrap* trap) {
+//	m_fCurrFrameTime += frameTime;
+//	increaseHP(-trap->getValueAttack());
+//	numHPText->setText("HP: " + std::to_string(m_iCurHP));
+//}
+
+
 void Player::Render(Camera* camera) {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
 	Renderer::GetInstance()->DrawText2(numGoldText);

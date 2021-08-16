@@ -4,6 +4,7 @@
 #include"Gold.h"
 #include "HPPotion.h"
 
+
 class Player : public Character {
 private:
 	
@@ -21,6 +22,7 @@ public:
 	void Update(float frameTime);
 	void UpdateCollideGold(float frameTime, Gold * gold);
 	void UpdateCollideHP(float frameTime, HPPotion* hp);
+	//void UpdateCollideSpikeTrap(float frameTime, SpikeTrap* trap);
 	void Render(Camera *camera);
 
 	//tien add
