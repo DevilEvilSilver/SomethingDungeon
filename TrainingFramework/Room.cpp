@@ -3,7 +3,7 @@
 #include "Room.h"
 #include "Enemy.h"
 #include "Gold.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "define.h"
@@ -47,31 +47,31 @@ void Room::RoomGenerate() {
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
-			SceneManager::GetInstance()->AddEnemy(enemy);
+			StatePlay::GetInstance()->AddEnemy(enemy);
 
 			//tien add
 			/*translation.SetTranslation(GetPosX() + randPosX +2, GetPosY() - m_fHeight + randPosY +2, 0.0f);
 			Gold* gold = new Gold(GOLD, m_RoomID, translation, rand()%4 +1, false);
 			enemy->setGold(gold);
-			SceneManager::GetInstance()->AddGold(gold)*/; 
+			StatePlay::GetInstance()->AddGold(gold)*/; 
 
 			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation, rand() % 50 + 1);
-			SceneManager::GetInstance()->AddHPPotion(hp);
+			StatePlay::GetInstance()->AddHPPotion(hp);
 
 			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() -  randPosY, 0.0f);
 			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation, rand() % 50 + 1);
-			SceneManager::GetInstance()->AddMPPotion(mp);
+			StatePlay::GetInstance()->AddMPPotion(mp);
 
 			randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - prefab->m_fWidth);
 			randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - prefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation, 2);
-			SceneManager::GetInstance()->AddBombTrap(bomb);
+			StatePlay::GetInstance()->AddBombTrap(bomb);
 
 
 		}

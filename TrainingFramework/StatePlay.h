@@ -13,7 +13,7 @@
 #include "BombTrap.h"
 
 
-class SceneManager :public StateBase<SceneManager>
+class StatePlay :public StateBase<StatePlay>
 {
 private:
 	Text *scoreText ;
@@ -57,8 +57,8 @@ public:
 	/////////////////////////////////////////////////////////
 
 	//OTHER
-	SceneManager();
-	~SceneManager();
+	StatePlay();
+	~StatePlay();
 
 	//RENDER
 	void GetRenderOrder();

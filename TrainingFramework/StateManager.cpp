@@ -4,10 +4,10 @@
 #include "define.h"
 
 //include all STATEs here:
-#include "StateTest.h"
+
 #include "StateLogo.h"
 #include "StateWelcome.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 
 StateManager::StateManager()
 {
@@ -17,10 +17,10 @@ StateManager::StateManager()
 
 StateManager::~StateManager() {
 	//reset all state here
-	StateTest::GetInstance()->ResetInstance();
+	
 	StateLogo::GetInstance()->ResetInstance();
 	StateWelcome::GetInstance()->ResetInstance();
-	SceneManager::GetInstance()->ResetInstance();
+	StatePlay::GetInstance()->ResetInstance();
 	//......
 }
 
@@ -37,7 +37,7 @@ void StateManager::Update(float frameTime) {
 		StateWelcome::GetInstance()->Update(frameTime);
 		break;
 	case GS_STATE_PLAY:
-		SceneManager::GetInstance()->Update(frameTime);
+		StatePlay::GetInstance()->Update(frameTime);
 		break;
 	}
 }
@@ -52,7 +52,7 @@ void StateManager::Render()
 		StateWelcome::GetInstance()->Render();
 		break;
 	case GS_STATE_PLAY:
-		SceneManager::GetInstance()->Render();
+		StatePlay::GetInstance()->Render();
 		break;
 	}
 }
@@ -60,6 +60,8 @@ void StateManager::Render()
 void StateManager::AddState(GameState addedState)
 {
 	m_GameStateStack.push_back(addedState);
+
+	if (addedState == GS_STATE_PLAY) StatePlay::GetInstance()->RoomsGenerate();
 }
 
 void StateManager::CloseState()

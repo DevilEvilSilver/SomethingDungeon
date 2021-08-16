@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <algorithm>
 #include <time.h>
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "SoundEngine.h"
 #include "Object.h"
 #include "define.h"
@@ -31,11 +31,11 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 	return 0;
 }
 
-SceneManager::SceneManager(void) {
+StatePlay::StatePlay(void) {
 	this->Init();
 }
 
-SceneManager::~SceneManager() {
+StatePlay::~StatePlay() {
 	for (auto& object : m_ObjectList) {
 		delete object;
 	}
@@ -88,7 +88,7 @@ SceneManager::~SceneManager() {
 	delete scoreText;
 }
 
-void SceneManager::Init() {
+void StatePlay::Init() {
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 
@@ -126,7 +126,7 @@ void SceneManager::Init() {
 
 }
 
-void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
+void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
 	srand(time(NULL));
 	unsigned int currPosX = rand() % 30 + 1;
@@ -187,14 +187,14 @@ void SceneManager::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	}
 }
 
-void SceneManager::RoomsGenerate() {
+void StatePlay::RoomsGenerate() {
 	for (auto& obj : m_RoomList) {
 		
 		obj->RoomGenerate();
 	}
 }
 
-void SceneManager::Render() {
+void StatePlay::Render() {
 	GetRenderOrder();
 
 	//RENDER ROOM
@@ -215,39 +215,40 @@ void SceneManager::Render() {
 
 	//RENDER TEXT
 	{
-		Renderer::GetInstance()->DrawText2(scoreText);
+		//Renderer::GetInstance()->DrawText2(scoreText);
+		Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
+ 		Renderer::GetInstance()->DrawText2(m_Player->numHPText);
+	}
 
-		for (auto& obj : m_GoldList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Render(this->m_Camera);
-		}
-		for (auto& obj : m_hpPotionList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Render(this->m_Camera);
-		}/*
-		for (auto& obj : m_mpPotionList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Render(this->m_Camera);
-		}*/
-		for (auto& obj : m_spikeTrapList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Render(this->m_Camera);
-		}
-		for (auto& obj : m_bombTrapList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Render(this->m_Camera);
-		}
-
-		m_ObjectList.clear();
-		for (auto& obj : m_SkillList)
-		{
+	for (auto& obj : m_GoldList) {
+		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
-		}
-		Renderer::GetInstance()->DrawText2(scoreText);
+	}
+	for (auto& obj : m_hpPotionList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}/*
+	for (auto& obj : m_mpPotionList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}*/
+	for (auto& obj : m_spikeTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+	for (auto& obj : m_bombTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+
+	m_ObjectList.clear();
+	for (auto& obj : m_SkillList)
+	{
+		obj->Render(this->m_Camera);
 	}
 
 }
-void SceneManager::Update(float frameTime) {
+void StatePlay::Update(float frameTime) {
 
 
 	//check colli with enemy
@@ -335,7 +336,7 @@ void SceneManager::Update(float frameTime) {
 	m_Camera->Update(frameTime);
 }
 
-void SceneManager::UpdateRoomID() {
+void StatePlay::UpdateRoomID() {
 	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
 			if (i > 31)
@@ -377,7 +378,7 @@ void SceneManager::UpdateRoomID() {
 	}
 }
 
-void SceneManager::UpdateControl(float frameTime)
+void StatePlay::UpdateControl(float frameTime)
 {
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 	
@@ -441,27 +442,27 @@ void SceneManager::UpdateControl(float frameTime)
 	}
 }
 
-void SceneManager::AddObject(Object *object) {
+void StatePlay::AddObject(Object *object) {
 	m_ObjectList.push_back(object);
 }
 
-void SceneManager::AddRoom(Room *room) {
+void StatePlay::AddRoom(Room *room) {
 	m_RoomList.push_back(room);
 }
 
-void SceneManager::AddEnemy(Enemy *enemy) {
+void StatePlay::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
 }
-void SceneManager::AddSkill(Skill* skill)
+void StatePlay::AddSkill(Skill* skill)
 {
 	m_SkillList.push_back(skill);
 }
 
-void SceneManager::AddGold(Gold* gold) {
+void StatePlay::AddGold(Gold* gold) {
 	m_GoldList.push_back(gold);
 }
 
-bool SceneManager::CheckInRange(Vector2 roomID) {
+bool StatePlay::CheckInRange(Vector2 roomID) {
 
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||
@@ -471,7 +472,7 @@ bool SceneManager::CheckInRange(Vector2 roomID) {
 		return true;
 }
 
-void SceneManager::GetRenderOrder() {
+void StatePlay::GetRenderOrder() {
 	for (auto a : m_EnemyList) {
 		m_ObjectList.push_back(a);
 	}
@@ -483,7 +484,7 @@ void SceneManager::GetRenderOrder() {
 }
 
 
-void SceneManager::removeGold(Gold* gold) {
+void StatePlay::removeGold(Gold* gold) {
 	int id;
 	for (int i = 0; i < m_GoldList.size(); i++) {
 		if (m_GoldList[i] == gold)  id = i;
@@ -495,7 +496,7 @@ void SceneManager::removeGold(Gold* gold) {
 	m_GoldList.resize(m_GoldList.size() -1);
 }
 
-void SceneManager::removeEnemy(Enemy* enemy) {
+void StatePlay::removeEnemy(Enemy* enemy) {
 	//enemy->getGold()->m_isDisplay = true;
 	int id;
 	for (int i = 0; i < m_EnemyList.size(); i++) {
@@ -507,10 +508,10 @@ void SceneManager::removeEnemy(Enemy* enemy) {
 	m_EnemyList.resize(m_EnemyList.size() - 1);
 }
 
-void SceneManager::AddHPPotion(HPPotion* hpPo) {
+void StatePlay::AddHPPotion(HPPotion* hpPo) {
 	m_hpPotionList.push_back(hpPo);
 }
-void SceneManager::removeHPPotion(HPPotion* hpPo) {
+void StatePlay::removeHPPotion(HPPotion* hpPo) {
 	int id;
 	for (int i = 0; i < m_hpPotionList.size(); i++) {
 		if (m_hpPotionList[i] == hpPo)  id = i;
@@ -521,10 +522,10 @@ void SceneManager::removeHPPotion(HPPotion* hpPo) {
 	m_hpPotionList.resize(m_hpPotionList.size() - 1);
 }
 
-void SceneManager::AddMPPotion(MPPotion* mpPo) {
+void StatePlay::AddMPPotion(MPPotion* mpPo) {
 	m_mpPotionList.push_back(mpPo);
 }
-void SceneManager::removeMPPotion(MPPotion* mpPo) {
+void StatePlay::removeMPPotion(MPPotion* mpPo) {
 	int id;
 	for (int i = 0; i < m_mpPotionList.size(); i++) {
 		if (m_mpPotionList[i] == mpPo)  id = i;
@@ -535,14 +536,14 @@ void SceneManager::removeMPPotion(MPPotion* mpPo) {
 	m_mpPotionList.resize(m_mpPotionList.size() - 1);
 }
 
-void SceneManager::AddSpikeTrap(SpikeTrap* trap) {
+void StatePlay::AddSpikeTrap(SpikeTrap* trap) {
 	m_spikeTrapList.push_back(trap);
 }
 
-void SceneManager::AddBombTrap(BombTrap* trap) {
+void StatePlay::AddBombTrap(BombTrap* trap) {
 	m_bombTrapList.push_back(trap);
 }
-void SceneManager::removeBombTrap(BombTrap* trap) {
+void StatePlay::removeBombTrap(BombTrap* trap) {
 	int id;
 	for (int i = 0; i < m_bombTrapList.size(); i++) {
 		if (m_bombTrapList[i] == trap)  id = i;

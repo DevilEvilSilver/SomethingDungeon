@@ -12,7 +12,7 @@ CollisionManager::~CollisionManager()
 }
 void CollisionManager::UpdateCollision(float frameTime)
 {
-	std::vector<Object*> objectList = SceneManager::GetInstance()->m_ObjectList;
+	std::vector<Object*> objectList = StatePlay::GetInstance()->m_ObjectList;
 	for (int i = 0; i < objectList.size(); i++)
 	{
 		for (int j = 0; j < objectList.size(); j++)

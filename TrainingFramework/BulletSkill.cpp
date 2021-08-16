@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BulletSkill.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "InputManager.h"
 #include "CollisionManager.h"
 #include "Room.h"
@@ -22,7 +22,7 @@ void BulletSkill::UpdateHit(float frameTime)
 {
 	if (m_isPlayer)
 	{
-		std::vector<Enemy*> enemyList = SceneManager::GetInstance()->m_EnemyList;
+		std::vector<Enemy*> enemyList = StatePlay::GetInstance()->m_EnemyList;
 		for (auto& enemy : enemyList)
 		{
 			if (CollisionManager::CheckCollision(this, enemy))
@@ -36,13 +36,13 @@ void BulletSkill::UpdateHit(float frameTime)
 	}
 	else
 	{
-		if (CollisionManager::CheckCollision(this, SceneManager::GetInstance()->m_Player))
+		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
-			//SceneManager::GetInstance()->m_Player->isAttacked();
-			std::cout << "AoeSkill::Hit	SceneManager::GetInstance()->m_Player->isAttacked()\n";
+			//StatePlay::GetInstance()->m_Player->isAttacked();
+			std::cout << "AoeSkill::Hit	StatePlay::GetInstance()->m_Player->isAttacked()\n";
 		}
 	}
-	std::vector<Room*> roomList = SceneManager::GetInstance()->m_RoomList;
+	std::vector<Room*> roomList = StatePlay::GetInstance()->m_RoomList;
 	for (auto& obj : roomList) {
 		if (obj->m_RoomType == WALL)
 		{

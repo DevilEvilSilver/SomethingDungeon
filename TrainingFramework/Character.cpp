@@ -4,7 +4,7 @@
 #include "Renderer.h"
 
 #include "define.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "CollisionManager.h"
 
 Character::Character() {}
@@ -129,19 +129,19 @@ void Character::UpdatePosition(float speed, float frameTime)
 }
 void Character::WallCollision(float frameTime)
 {
-	for (auto& obj : SceneManager::GetInstance()->m_RoomList) {
-		if (SceneManager::GetInstance()->CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
+	for (auto& obj : StatePlay::GetInstance()->m_RoomList) {
+		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
 			CollisionManager::CheckCollision(this, obj, frameTime);
 	}
 }
 void Character::PlayerCollision(float frameTime)
 {
-	CollisionManager::CheckCollision(this, SceneManager::GetInstance()->m_Player, frameTime);
+	CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player, frameTime);
 }
 void Character::EnemyCollision(float frameTime)
 {
-	for (auto& obj : SceneManager::GetInstance()->m_EnemyList) {
-		if (SceneManager::GetInstance()->CheckInRange(obj->m_RoomID))
+	for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {
+		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID))
 			if (this != obj)
 				CollisionManager::CheckCollision(this, obj, frameTime);
 	}

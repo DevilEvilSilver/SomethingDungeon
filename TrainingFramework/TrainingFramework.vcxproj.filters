@@ -61,20 +61,44 @@
     <Filter Include="Source Files\StateManager\States">
       <UniqueIdentifier>{663341c8-b82e-4b10-b74d-7fb3b418ed7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StateManager\Data">
-      <UniqueIdentifier>{9507b93b-548c-40cf-83b7-68611096c43c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\StateManager\Data">
-      <UniqueIdentifier>{b42d8823-f8c4-434f-b663-82ae3d5d3c28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\PhysicEngine">
       <UniqueIdentifier>{593a9d46-3e4c-4076-9dd6-a49f3693ce9e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StateManager\Data\Skills">
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{b42d8823-f8c4-434f-b663-82ae3d5d3c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\UI">
+      <UniqueIdentifier>{65cb8dd4-25a8-4e0c-802a-7f2a5d36e3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Skills">
+      <UniqueIdentifier>{7c03264f-5b99-4931-9e3e-5f52840be176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{9507b93b-548c-40cf-83b7-68611096c43c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Skills">
       <UniqueIdentifier>{678d9ae2-5575-491a-8b91-39640bd912a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\StateManager\Data\Skills">
-      <UniqueIdentifier>{7c03264f-5b99-4931-9e3e-5f52840be176}</UniqueIdentifier>
+    <Filter Include="Source Files\Objects\Character">
+      <UniqueIdentifier>{41393521-8bcc-46fb-89aa-10d992b1e1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Characters">
+      <UniqueIdentifier>{f38ea6df-833d-45d2-8032-64dc36f9b2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Drops">
+      <UniqueIdentifier>{ac68464f-18bc-4e6c-ae6a-86c7b296dced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Traps">
+      <UniqueIdentifier>{1358ecea-3837-4632-b44a-b13fe6aa5f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Drops">
+      <UniqueIdentifier>{33d6bc42-85c3-4616-a50b-11545106e552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Traps">
+      <UniqueIdentifier>{5b21f7d6-e5dd-4a4f-bf90-faa526631ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\UI">
+      <UniqueIdentifier>{b62fffcd-457f-40f7-8d86-7693be068460}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,14 +138,11 @@
     <ClCompile Include="SoundEngine.cpp">
       <Filter>Source Files\SoundEngine</Filter>
     </ClCompile>
-    <ClCompile Include="StateTest.cpp">
-      <Filter>Source Files\StateManager\States</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\SoundEngine</Filter>
@@ -129,56 +150,71 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files\PhysicEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
-    </ClCompile>
     <ClCompile Include="Room.cpp">
-      <Filter>Source Files\StateManager\Data</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="StatePlay.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Skill.cpp">
-      <Filter>Source Files\StateManager\Data\Skills</Filter>
+      <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
     <ClCompile Include="AoeSkill.cpp">
-      <Filter>Source Files\StateManager\Data\Skills</Filter>
+      <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
     <ClCompile Include="BulletSkill.cpp">
-      <Filter>Source Files\StateManager\Data\Skills</Filter>
+      <Filter>Source Files\Objects\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="BombTrap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Drop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Gold.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HPPotion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MPPotion.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Traps</Filter>
     </ClCompile>
     <ClCompile Include="SpikeTrap.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Drop.cpp">
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="Gold.cpp">
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="HPPotion.cpp">
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="MPPotion.cpp">
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="Fader.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StateLogo.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateWelcome.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
     <ClCompile Include="Trap.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,11 +266,8 @@
     <ClInclude Include="StateBase.h">
       <Filter>Header Files\_template</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>Header Files\StateManager\Data</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Header Files\SoundEngine</Filter>
@@ -242,71 +275,80 @@
     <ClInclude Include="StateManager.h">
       <Filter>Header Files\StateManager</Filter>
     </ClInclude>
-    <ClInclude Include="StateTest.h">
-      <Filter>Header Files\StateManager\States</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\PhysicEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>Header Files\StateManager\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
+    <ClInclude Include="StatePlay.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Header Files\StateManager\Data\Skills</Filter>
+      <Filter>Header Files\Objects\Skills</Filter>
     </ClInclude>
     <ClInclude Include="AoeSkill.h">
-      <Filter>Header Files\StateManager\Data\Skills</Filter>
+      <Filter>Header Files\Objects\Skills</Filter>
     </ClInclude>
     <ClInclude Include="BulletSkill.h">
-      <Filter>Header Files\StateManager\Data\Skills</Filter>
+      <Filter>Header Files\Objects\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Fader.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
     <ClInclude Include="BombTrap.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Traps</Filter>
     </ClInclude>
     <ClInclude Include="Drop.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
     <ClInclude Include="Gold.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
     <ClInclude Include="HPPotion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
     <ClInclude Include="MPPotion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
-    <ClInclude Include="SpikeTrap.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StateLogo.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateWelcome.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
     <ClInclude Include="Trap.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="SpikeTrap.h">
+      <Filter>Header Files\Objects\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\RM.txt">
-      <Filter>Resources</Filter>
-    </Text>
-    <Text Include="..\Resources\SM.txt">
-      <Filter>Resources</Filter>
-    </Text>
     <Text Include="..\Resources\Sound.txt">
       <Filter>Resources</Filter>
     </Text>

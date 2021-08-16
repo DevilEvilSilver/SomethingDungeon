@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "Renderer.h"
 #include "define.h"
 
 
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "CollisionManager.h"
 
 #include "Skill.h"
@@ -172,8 +172,9 @@ Player::~Player() {
 
 void Player::Attack(int x, int y)
 {
+
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
-	Vector2 mousePos = InputManager::GetInstance()->MousePosition(SceneManager::GetInstance()->m_Camera);
+	Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera,InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
 	Vector2 playerPos(m_fCurrentPosX, m_fCurrentPosY);
 	static int iSwithSkill = 1;
 	static bool bSwitch = true;
@@ -184,14 +185,14 @@ void Player::Attack(int x, int y)
 		if (bSwitch && iSwithSkill == 1)
 		{
 			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
-			SceneManager::GetInstance()->AddSkill(skill);
+			StatePlay::GetInstance()->AddSkill(skill);
 			bSwitch = false;
 			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\tAoeSkill\n";
 		}
 		else if (bSwitch && iSwithSkill == 2)
 		{
 			BulletSkill* bskill = new BulletSkill(mousePos, this, SKILL, this->m_RoomID, m);
-			SceneManager::GetInstance()->AddSkill(bskill);
+			StatePlay::GetInstance()->AddSkill(bskill);
 			bSwitch = false;
 			std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
 		}
@@ -218,20 +219,19 @@ void Player::UpdateCollideGold(float frameTime, Gold* gold) {
 	
 	increaseGold(gold->getValue());
 	numGoldText->setText("Gold: " + std::to_string(m_inumGold));
-	SceneManager::GetInstance()->removeGold(gold);
+	StatePlay::GetInstance()->removeGold(gold);
 }
 
 void Player::UpdateCollideHP(float frameTime, HPPotion* hp) {
 	
 	increaseHP(hp->getValue());
 	numHPText->setText("HP: " + std::to_string(m_iCurHP));
-	SceneManager::GetInstance()->removeHPPotion(hp);
+	StatePlay::GetInstance()->removeHPPotion(hp);
 }
 
 // void Player::Render(Camera* camera) {
 // 	Renderer::GetInstance()->DrawAnimated(this, camera);
-// 	Renderer::GetInstance()->DrawText2(numGoldText);
-// 	Renderer::GetInstance()->DrawText2(numHPText);
+
 // }
 
 

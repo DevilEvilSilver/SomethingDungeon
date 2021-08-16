@@ -98,11 +98,13 @@
     <ClCompile Include="AoeSkill.cpp" />
     <ClCompile Include="BombTrap.cpp" />
     <ClCompile Include="BulletSkill.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Drop.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fader.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="HPPotion.cpp" />
@@ -116,13 +118,14 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="StatePlay.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="SpikeTrap.cpp" />
+    <ClCompile Include="StateLogo.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="StateTest.cpp" />
+    <ClCompile Include="StateWelcome.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TrainingFramework.cpp" />
     <ClCompile Include="Shaders.cpp" />
@@ -131,18 +134,21 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AoeSkill.h" />
     <ClInclude Include="BombTrap.h" />
     <ClInclude Include="BulletSkill.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Drop.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fader.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Gold.h" />
@@ -156,7 +162,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="StatePlay.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skill.h" />
@@ -164,14 +170,16 @@
     <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="SpikeTrap.h" />
     <ClInclude Include="StateBase.h" />
+    <ClInclude Include="StateLogo.h" />
     <ClInclude Include="StateManager.h" />
-    <ClInclude Include="StateTest.h" />
+    <ClInclude Include="StateWelcome.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">
@@ -180,8 +188,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\RM.txt" />
-    <Text Include="..\Resources\SM.txt" />
     <Text Include="..\Resources\Sound.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

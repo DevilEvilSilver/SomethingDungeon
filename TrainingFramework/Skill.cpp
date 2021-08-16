@@ -4,12 +4,12 @@
 #include "Camera.h"
 #include "Renderer.h"
 #include "define.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 
 Skill::Skill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Object(prefabID, roomID, translationMatrix)
 {
-	if (owner == SceneManager::GetInstance()->m_Player)
+	if (owner == StatePlay::GetInstance()->m_Player)
 		m_isPlayer = true;
 	else
 		m_isPlayer = false;
@@ -58,16 +58,19 @@ void Skill::UpdateExistingTime(float frameTime)
 }
 void Skill::Remove()
 {
-	std::vector<Skill*> skillList = SceneManager::GetInstance()->m_SkillList;
+	std::vector<Skill*> skillList = StatePlay::GetInstance()->m_SkillList;
 	for (int i = 0; i<skillList.size(); i++ )
 	{
 		if (this == skillList[i])
 		{
-			delete this;
-			SceneManager::GetInstance()->m_SkillList[i] = NULL;
-			SceneManager::GetInstance()->m_SkillList.erase(SceneManager::GetInstance()->m_SkillList.begin() + i);
+			delete StatePlay::GetInstance()->m_SkillList[i];
+			StatePlay::GetInstance()->m_SkillList[i] = StatePlay::GetInstance()->m_SkillList[skillList.size() - 1];
+			StatePlay::GetInstance()->m_SkillList.resize(skillList.size() - 1);
 		}
 	}
+
+
+
 }
 void Skill::Init(Vector2 mousePos)
 {

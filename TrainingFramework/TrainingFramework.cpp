@@ -10,7 +10,7 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "SoundEngine.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "InputManager.h"
 #include "StateManager.h"
 

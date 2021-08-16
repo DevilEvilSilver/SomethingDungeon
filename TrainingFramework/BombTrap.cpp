@@ -3,7 +3,7 @@
 #include "BombTrap.h"
 #include "define.h"
 #include "ResourceManager.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "Renderer.h"
 
 BombTrap::BombTrap() {}
@@ -27,7 +27,7 @@ void BombTrap::Update(float frameTime) {
 		timeTillDelete -= frameTime;
 	}
 	if (timeTillDelete <= 0)
-		SceneManager::GetInstance()->removeBombTrap(this);
+		StatePlay::GetInstance()->removeBombTrap(this);
 }
 
 void BombTrap::UpdateCollideBombTrap(float frameTime, Player* m_Player) {

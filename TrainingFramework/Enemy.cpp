@@ -4,13 +4,13 @@
 #include "Renderer.h"
 
 #include "define.h"
-#include "SceneManager.h"
+#include "StatePlay.h"
 #include "CollisionManager.h"
 
 
 void Enemy::UniqueUpdate(float frameTime)
 {
-	Player* plyr = SceneManager::GetInstance()->m_Player;
+	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
 
