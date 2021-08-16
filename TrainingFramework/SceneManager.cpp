@@ -64,6 +64,18 @@ SceneManager::~SceneManager() {
 		}
 	}
 	m_mpPotionList.clear();
+	for (auto& object : m_spikeTrapList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_spikeTrapList.clear();
+	for (auto& object : m_bombTrapList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_bombTrapList.clear();
 
 	delete m_Player;
 	delete m_Camera;
@@ -195,14 +207,22 @@ void SceneManager::Render() {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
-	/*for (auto& obj : m_hpPotionList) {
+	for (auto& obj : m_hpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
-	}
+	}/*
 	for (auto& obj : m_mpPotionList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}*/
+	for (auto& obj : m_spikeTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+	for (auto& obj : m_bombTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
 	
 	Renderer::GetInstance()->DrawText2(scoreText);
 }
@@ -241,6 +261,21 @@ void SceneManager::Update(float frameTime) {
 				m_Player->UpdateCollideHP(frameTime, obj);
 			}
 	}
+	for (auto& obj : m_spikeTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			if (CollisionManager::CheckCollision(m_Player, obj))
+			{
+				//m_Player->UpdateCollideSpikeTrap(frameTime, obj);
+				obj->UpdateCollideSpikeTrap(frameTime, m_Player);
+			}
+	}
+	for (auto& obj : m_bombTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			if (CollisionManager::CheckCollision(m_Player, obj))
+			{
+				obj->UpdateCollideBombTrap(frameTime, m_Player);
+			}
+	}
 	
 	UpdateRoomID();
 
@@ -258,6 +293,16 @@ void SceneManager::Update(float frameTime) {
 	}
 
 	for (auto& obj : m_hpPotionList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
+
+	for (auto& obj : m_spikeTrapList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Update(frameTime);
+	}
+
+	for (auto& obj : m_bombTrapList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
@@ -443,4 +488,22 @@ void SceneManager::removeMPPotion(MPPotion* mpPo) {
 	delete m_mpPotionList[id];
 	m_mpPotionList[id] = m_mpPotionList[m_mpPotionList.size() - 1];
 	m_mpPotionList.resize(m_mpPotionList.size() - 1);
+}
+
+void SceneManager::AddSpikeTrap(SpikeTrap* trap) {
+	m_spikeTrapList.push_back(trap);
+}
+
+void SceneManager::AddBombTrap(BombTrap* trap) {
+	m_bombTrapList.push_back(trap);
+}
+void SceneManager::removeBombTrap(BombTrap* trap) {
+	int id;
+	for (int i = 0; i < m_bombTrapList.size(); i++) {
+		if (m_bombTrapList[i] == trap)  id = i;
+	}
+
+	delete m_bombTrapList[id];
+	m_bombTrapList[id] = m_bombTrapList[m_bombTrapList.size() - 1];
+	m_bombTrapList.resize(m_bombTrapList.size() - 1);
 }

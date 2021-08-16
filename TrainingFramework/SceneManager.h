@@ -8,6 +8,8 @@
 #include"Gold.h"
 #include "HPPotion.h"
 #include "MPPotion.h"
+#include "SpikeTrap.h"
+#include "BombTrap.h"
 
 class SceneManager :public StateBase<SceneManager>
 {
@@ -21,6 +23,8 @@ public:
 	std::vector<Gold*> m_GoldList;
 	std::vector<HPPotion*> m_hpPotionList;
 	std::vector<MPPotion*> m_mpPotionList;
+	std::vector<SpikeTrap*> m_spikeTrapList;
+	std::vector<BombTrap*> m_bombTrapList;
 	std::vector<Object*> m_ObjectList;
 	Player *m_Player;
 	Camera *m_Camera;
@@ -58,4 +62,7 @@ public:
 	void removeHPPotion(HPPotion* hpPo);
 	void AddMPPotion(MPPotion* mpPo);
 	void removeMPPotion(MPPotion* mpPo);
+	void AddSpikeTrap(SpikeTrap* trap);
+	void AddBombTrap(BombTrap* trap);
+	void removeBombTrap(BombTrap* trap);
 };
