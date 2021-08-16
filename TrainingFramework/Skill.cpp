@@ -26,6 +26,8 @@ void Skill::Update(float frameTime)
 	UpdateHit(frameTime);
 	UpdateMove(frameTime);
 	UpdateExistingTime(frameTime);
+
+	m_fCurrFrameTime += frameTime;
 }
 void Skill::UpdateMove(float frameTime)
 {

@@ -31,7 +31,6 @@ public:
 	
 	//STATE
 	CharacterState m_cState=CS_IDLE;
-	CharacterState m_lastCState = CS_IDLE;
 
 	//MOVE
 	Vector2 m_moveDir=Vector2(0.0f,0.0f);
