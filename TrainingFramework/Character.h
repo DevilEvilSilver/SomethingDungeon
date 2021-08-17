@@ -21,7 +21,7 @@ public:
 			CS_MOVE,
 			CS_ATTACK,
 			CS_GOTHIT,
-			CS_DEATH,
+			CS_DEATH
 		};
 		//currState
 		CharacterState m_cState = CS_IDLE;

@@ -72,7 +72,7 @@
 #define BOMB_TRAP		"bombTrap"
 
 //SKILL
-#define	BULLET_SPEED	9
+#define	BULLET_SPEED	12
 
 //ANIMATION
 #define INIT_ANIM		"init"

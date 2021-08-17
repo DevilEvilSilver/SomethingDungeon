@@ -33,9 +33,14 @@ void Player::UniqueUpdate(float frameTime)
 	else currDashCD = 0.0f;
 }
 
+void Player::Attack(float frameTime)
+{
+
+}
+
 bool Player::Dash(float frameTime)
 {
-	if (currDashCD == 0.0f)
+	if (currDashCD == 0.0f&&m_cState!=CS_DEATH)
 	{ 
 		SetPS(P_DASH);
 		currDashCD = DashCoolDown;
@@ -51,78 +56,7 @@ bool Player::Dash(float frameTime)
 
 	return true;
 }
-bool Player::CoolMove(float frameTime)
-{
-	static int i = 0;
-	switch (i)
-	{
-	case 0:
-		if (FixedMove(Vector2(1.0f, 2.0f), 5.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 1:
-		if (FixedMove(Vector2(1.0f, -2.0f), 5.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 2:
-		if (FixedMove(Vector2(-2.0f, 1.0f), 5.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 3:
-		if (FixedMove(Vector2(5.0f, 0.0f), 5.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 4:
-		if (FixedMove(Vector2(-2.0f, -1.0f), 5.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 5:
-		if (FixedMove(Vector2(5.0f, 0.0f), 10.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 6:
-		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 7:
-		if (FixedMove(Vector2(5.0f, 0.0f), 10.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 8:
-		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.2f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 9:
-		if (FixedMove(Vector2(5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 10:
-		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 11:
-		if (FixedMove(Vector2(5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 12:
-		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 13:
-		if (FixedMove(Vector2(5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 14:
-		if (FixedMove(Vector2(-5.0f, 0.0f), 10.0f, 0.1f, frameTime) == false) return false;
-		else i++;
-		break;
-	case 15:
-		i = 0;
-		return true;
-	}
 
-	return false;
-}
 
 void Player::PlayerMove(MoveDir dir)
 {

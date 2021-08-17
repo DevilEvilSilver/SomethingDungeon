@@ -49,10 +49,10 @@ public:
 
 	void UniqueUpdate(float frameTime);
 
+	void Attack(float frameTime);
 	//PLAYER SKILL
 	//---------------skill here---------------
 	bool Dash(float frameTime);
-	bool CoolMove(float frameTime);
 	//----------------------------------------
 
 	///////////////////////////////////////////////////////////////////////
