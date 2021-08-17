@@ -13,6 +13,7 @@ AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vec
 
 	if (m_fVx > 0) m_isFacingLeft = false;
 	m_damage = owner->m_ATK * (float)m_percentDamage / 100;
+	printf("dmg:%f\n", m_damage);
 }
 AoeSkill::~AoeSkill()
 {
@@ -27,13 +28,21 @@ void AoeSkill::UpdateHit(float frameTime)
 		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
 		{
 			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
-				if (CollisionManager::CheckCollision(this, enemy))
-					enemy->UpdateGotHit(m_damage, m_isKnockBack,curPos, frameTime);
+				if (CollisionManager::CheckCollision(this, enemy)) 
+				{
+					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+					printf("enemy hp:%d\n", enemy->m_currHP);
+				}
+					
 		}
 	}
 	else
-		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
+		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player)) 
+		{
 			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+			StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+		}
+			
 
 
 }

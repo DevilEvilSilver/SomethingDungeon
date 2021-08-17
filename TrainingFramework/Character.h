@@ -27,8 +27,7 @@ public:
 		CharacterState m_cState = CS_IDLE;
 	
 	//STATS
-		unsigned int
-			m_maxHP,
+		int	m_maxHP,
 			m_currHP,
 			m_ATK,
 			m_DEF;

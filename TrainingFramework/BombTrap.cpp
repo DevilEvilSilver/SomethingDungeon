@@ -25,7 +25,7 @@ void BombTrap::Update(float frameTime) {
 
 	if (isCollide==false&&CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player, frameTime))
 	{
-		m_fCurrFrameTime += frameTime;
+		//m_fCurrFrameTime += frameTime;
 		m_strState = BOOMED;
 		if (!isCollide)
 				// -hp only once
@@ -36,14 +36,31 @@ void BombTrap::Update(float frameTime) {
 	if (isCollide) {
 		timeTillDelete -= frameTime;
 	}
-	if (timeTillDelete <= 0) {
+	if (timeTillDelete <= 0) 
+	{
 		Player* player = StatePlay::GetInstance()->m_Player;
 		Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
 
-		player->UpdateGotHit(m_iAttack,true,curPos,frameTime);
-		StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+
+		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+		{
+			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
+				if (CollisionManager::CheckCollision(this, enemy))
+				{
+					enemy->UpdateGotHit(m_iAttack, true, curPos, frameTime);
+					printf("enemy hp:%d\n", enemy->m_currHP);
+				}
+
+		}
+		
+		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
+		{
+			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_iAttack, true, curPos, frameTime);
+			StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+		}
 
 
+		
 		StatePlay::GetInstance()->RemoveTrap(this);
 
 
@@ -51,9 +68,7 @@ void BombTrap::Update(float frameTime) {
 		
 }
 
-void BombTrap::UpdateCollideBombTrap(float frameTime, Player* m_Player) {
-	
-}
+
 
 int BombTrap::getValueAttack() {
 	return m_iAttack;

@@ -5,33 +5,55 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
+#include "CollisionManager.h"
+
 SpikeTrap::SpikeTrap() {}
 SpikeTrap::~SpikeTrap() {}
 
-SpikeTrap::SpikeTrap(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int attack)
+SpikeTrap::SpikeTrap(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Trap(prefabID, roomID, translationMatrix) {
 	m_strState = SPIKE;
-	m_iAttack = attack;
-	//m_fCoolDownTime = 0;
+	m_fTotalCoolDownTime = 2.0f;//theo animation
+	m_fCurrFrameTime = 0.0f;
+	
 }
 
-void SpikeTrap::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
-}
 
 void SpikeTrap::Update(float frameTime) {
+	
+	
+
+	if (m_fCurrFrameTime == 0.0f) {
+
+		Player* player = StatePlay::GetInstance()->m_Player;
+		Vector2 curPos = Vector2(0.0f,0.0f);
+
+
+		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+		{
+			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
+				if (CollisionManager::CheckCollision(this, enemy))
+				{
+					enemy->UpdateGotHit(m_iAttack, false, curPos, frameTime);
+					printf("enemy hp:%d\n", enemy->m_currHP);
+				}
+
+		}
+
+		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
+		{
+			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_iAttack, false, curPos, frameTime);
+			StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+		}
+
+		
+	}
+	
 	m_fCurrFrameTime += frameTime;
-	m_fCoolDownTime -= frameTime;
+	
 }
 
-void SpikeTrap::UpdateCollideSpikeTrap(float frameTime, Player* m_Player) {
-	/*if (m_fCoolDownTime <= 0.0f) {
-		m_Player->increaseHP(-m_iAttack);
-		m_Player->numHPText->setText("HP: " + std::to_string(m_Player->m_iCurHP));
-	}
-	m_fCoolDownTime = 4.0f;
-	m_fCurrFrameTime += frameTime;*/
-}
+
 
 int SpikeTrap::getValueAttack() {
 	return m_iAttack;

@@ -15,7 +15,7 @@ public:
 	~BombTrap();
 
 	void Update(float frameTime);
-	void UpdateCollideBombTrap(float frameTime,Player* m_Player);
+
 
 
 

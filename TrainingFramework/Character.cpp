@@ -30,6 +30,7 @@ void Character::Update(float frameTime)
 		GotHit(frameTime);
 		break;
 	case CS_DEATH:
+		
 		Death(frameTime);
 		break;
 	}
@@ -71,7 +72,12 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 	if (m_cState!=CS_GOTHIT)
 	{
 		m_currHP -= m_iDmgTaken;
-		if (m_currHP<=0) SetCS(CS_DEATH);
+		if (m_currHP <= 0)
+		{
+			
+			SetCS(CS_DEATH);
+		}
+			
 		knockBackDir = -(m_sourcePos - GetPos());
 		SetCS(CS_GOTHIT);
 	}
@@ -84,7 +90,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(knockBackDir, 2.5f, 0.25f, frameTime)==false) return false;
+			if (FixedMove(knockBackDir, 5.5f, 0.25f, frameTime)==false) return false;
 			else i++;
 			break;
 		case 1:

@@ -3,7 +3,7 @@
 
 class HPPotion : public Drop {
 private:
-	int m_iValue=3;
+	int m_iValue=5;
 
 public:
 

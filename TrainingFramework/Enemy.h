@@ -27,7 +27,7 @@ public:
 
     //----------------------------------------
 	
-	void Death(float frameTIme);
+	void Death(float frameiIme);
 	////////////////////////////////////////////////
 	
 

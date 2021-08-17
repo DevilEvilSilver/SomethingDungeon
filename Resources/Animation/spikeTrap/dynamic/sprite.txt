@@ -1,6 +1,6 @@
 #FRAME_COUNT 3
 ID 0
-SPF 0.2
+SPF 1.6
 FILE ../Resources/Animation/spikeTrap/dynamic/trap3.tga
 TILING GL_REPEAT
 ID 1

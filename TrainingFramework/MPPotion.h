@@ -3,7 +3,7 @@
 
 class MPPotion : public Drop {
 private:
-	int m_iValue=10; // number of mp of this potion
+	int m_iValue=5; // number of mp of this potion
 
 public:
 

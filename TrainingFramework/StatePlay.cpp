@@ -52,10 +52,6 @@ StatePlay::~StatePlay() {
 		delete object;
 	}
 	m_EnemyList.clear();
-
-	
-
-
 	for (auto& object : m_DropList) {
 		if (object != NULL) {
 			delete object;

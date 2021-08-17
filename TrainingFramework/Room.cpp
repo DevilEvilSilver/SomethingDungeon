@@ -33,6 +33,7 @@ void Room::RoomGenerate() {
 	Prefab* hpPrefab = GetResource(HP_PO, ResourceManager::GetInstance()->m_PrefabList);
 	Prefab* mpPrefab = GetResource(MP_PO, ResourceManager::GetInstance()->m_PrefabList);
 	Prefab* bombPrefab = GetResource(BOMB_TRAP, ResourceManager::GetInstance()->m_PrefabList);
+	Prefab* spikePrefab = GetResource(SPIKE_TRAP, ResourceManager::GetInstance()->m_PrefabList);
 
 	if (m_RoomType == NORMAL) {
 			
@@ -95,8 +96,11 @@ void Room::RoomGenerate() {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation);
+			/*BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation);
+			StatePlay::GetInstance()->AddTrap(bomb);*/
+			SpikeTrap* bomb = new SpikeTrap(SPIKE_TRAP, m_RoomID, translation);
 			StatePlay::GetInstance()->AddTrap(bomb);
+
 		}
 	}
 }

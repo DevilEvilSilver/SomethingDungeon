@@ -25,12 +25,12 @@ void Enemy::UniqueUpdate(float frameTime)
 //ACTION
 void Enemy::Chase(Vector2 delta)
 {
-	if (m_cState!=CS_MOVE) SetCS(CS_MOVE);
+	if (m_cState != CS_MOVE && m_cState != CS_GOTHIT && m_cState != CS_DEATH) SetCS(CS_MOVE);
 	UpdateMoveDirection(delta);
 }
 void Enemy::KeepDistance(Vector2 delta)
 {
-	if (m_cState != CS_MOVE) SetCS(CS_MOVE);
+	if (m_cState != CS_MOVE && m_cState != CS_GOTHIT && m_cState != CS_DEATH) SetCS(CS_MOVE);
 	UpdateMoveDirection(-delta);
 }
 
@@ -39,8 +39,9 @@ void Enemy::KeepDistance(Vector2 delta)
 
 //----------------------------------------
 
-void Enemy::Death(float frameTIme)
+void Enemy::Death(float frameTime)
 {
+	printf("dead\n");
 	this->createGoldObject();
 	StatePlay::GetInstance()->AddDrop(getGold());
 	StatePlay::GetInstance()->RemoveEnemy(this);
@@ -51,7 +52,11 @@ Enemy::Enemy(){}
 Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 5;
+	m_maxHP = 10;
+	m_currHP = 10;
+	
+	m_ATK = 3;
+	m_DEF = 3;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;

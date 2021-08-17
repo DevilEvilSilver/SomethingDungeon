@@ -30,7 +30,7 @@ public:
 	};
 
 	//STATS
-	unsigned int m_maxMP,
+	 int m_maxMP,
 		m_currMP,
 		m_GOLD;
 

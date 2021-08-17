@@ -17,6 +17,8 @@ class StatePlay :public StateBase<StatePlay>
 {
 private:
 	Text *scoreText ;
+
+
 public:
 	
 	RoomType m_Map[32][32];
