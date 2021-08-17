@@ -30,7 +30,7 @@ void Player::UniqueUpdate(float frameTime)
 
 	//COOLDOWN
 	if (currDashCD > 0.0f) currDashCD -= frameTime;
-	else currDashCD = 0.0f;
+	
 }
 
 void Player::Attack(float frameTime)
@@ -40,7 +40,7 @@ void Player::Attack(float frameTime)
 
 bool Player::Dash(float frameTime)
 {
-	if (currDashCD == 0.0f&&m_cState!=CS_DEATH)
+	if (currDashCD <= 0.0f&&m_cState!=CS_DEATH)
 	{ 
 		SetPS(P_DASH);
 		currDashCD = DashCoolDown;
@@ -49,7 +49,7 @@ bool Player::Dash(float frameTime)
 	if (m_pState == P_DASH)
 	{
 		m_strState = DASH;
-		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.35f, frameTime) == false) return false;
+		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.55f, frameTime) == false) return false;
 		SetCS(CS_IDLE);
 		SetPS(P_CS);
 	}

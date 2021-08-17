@@ -387,18 +387,18 @@ void StatePlay::UpdateControl(float frameTime)
 	
 	//USING SPACE	~	TEST
 	m_Player->Attack(1,2);
-	{
+	
 		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 		{
-			/*m_Player->m_cState = m_Player->CS_DASH;*/
 			
+			printf("dash\n");
 			m_Player->Dash(frameTime);
 		}
 		
 		std::string a = "DASH CD: " + std::to_string(m_Player->currDashCD);
 		
 		scoreText->setText(a);
-	}
+	
 }
 
 void StatePlay::AddObject(Object *object) {

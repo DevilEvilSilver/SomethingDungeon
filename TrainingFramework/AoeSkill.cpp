@@ -33,7 +33,7 @@ void AoeSkill::UpdateHit(float frameTime)
 					if (CollisionManager::CheckCollision(this, enemy))
 					{
 						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
-						printf("enemy hp:%d\n", enemy->m_currHP);
+						
 						currCD = totalCD;
 					}
 			}

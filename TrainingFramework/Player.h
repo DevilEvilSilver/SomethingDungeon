@@ -39,7 +39,7 @@ public:
 
 	//PLAYER SKILL
 	//---------------skill here---------------
-	float DashCoolDown = 2.0f;
+	float DashCoolDown = 1.5f;
 	float currDashCD = 0.0f;
 
 

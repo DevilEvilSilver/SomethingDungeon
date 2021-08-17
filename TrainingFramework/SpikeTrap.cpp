@@ -35,7 +35,7 @@ void SpikeTrap::Update(float frameTime) {
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
 					enemy->UpdateGotHit(m_iAttack, false, curPos, frameTime);
-					printf("enemy hp:%d\n", enemy->m_currHP);
+					
 				}
 
 		}

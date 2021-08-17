@@ -36,7 +36,7 @@ void BulletSkill::UpdateHit(float frameTime)
 					{
 						//enemy->isAttacked
 						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
-						printf("enemy hp:%d\n", enemy->m_currHP);
+						
 						currCD = totalCD;
 					}
 

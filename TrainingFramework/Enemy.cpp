@@ -49,7 +49,7 @@ void Enemy::KeepDistance(Vector2 delta)
 
 bool Enemy::MoveRandom(float frameTime)
 {
-	
+	if (m_cState != CS_MOVE && m_cState != CS_GOTHIT && m_cState != CS_DEATH) SetCS(CS_MOVE);
 
 	if (start == false)
 	{
