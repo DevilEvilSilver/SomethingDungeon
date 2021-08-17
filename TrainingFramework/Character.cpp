@@ -16,6 +16,11 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 
 void Character::Update(float frameTime)
 {
+	if (m_currHP <= 0)
+	{
+		SetCS(CS_DEATH);
+	}
+
 	switch (m_cState)
 	{
 	case CS_IDLE:
@@ -67,26 +72,30 @@ void Character::Attack(float frameTime)
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
+	
+
 	Vector2 knockBackDir=Vector2(0.0f,0.0f);
 
-	if (m_cState!=CS_GOTHIT)
+	if (m_cState != CS_GOTHIT)
 	{
 		m_currHP -= m_iDmgTaken;
-		if (m_currHP <= 0)
-		{
-			
-			SetCS(CS_DEATH);
-		}
-			
+
 		knockBackDir = -(m_sourcePos - GetPos());
 		SetCS(CS_GOTHIT);
+
+		
+
 	}
+		
+	
 
 	if (m_cState == CS_GOTHIT&&m_isKnockBack==true)
 	{
-		m_strState = IDLE_LEFT;
-
 		static int i = 0;
+		m_strState = IDLE_LEFT; //hit animation
+		
+		
+		
 		switch (i)
 		{
 		case 0:
@@ -105,13 +114,13 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		}
 		
 	}
-
 	return true;
 	
 }
 
 void Character::Death(float frameTime)
 {
+
 }
 
 void Character::UniqueUpdate(float frameTime)
@@ -194,7 +203,7 @@ void Character::EnemyCollision(float frameTime)
 void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float frameTime)
 {
 	m_iDmgTaken = damage;
-	m_isKnockBack = true;
+	m_isKnockBack = isKnockBack;
 	m_sourcePos = pos;
 	GotHit(frameTime);
 }

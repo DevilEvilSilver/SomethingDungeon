@@ -42,11 +42,8 @@ void Skill::UpdateMove(float frameTime)
 	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY ;
 	}
 }
-void Skill::UpdateHit(float frameTime)
-{
-	
-	//character->isAttacked(m_damage)
-}
+void Skill::UpdateHit(float frameTime){}
+
 void Skill::Render(Camera* camera)
 {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
@@ -71,9 +68,6 @@ void Skill::Remove()
 			StatePlay::GetInstance()->m_SkillList.resize(skillList.size() - 1);
 		}
 	}
-
-
-
 }
 void Skill::Init(Vector2 mousePos)
 {

@@ -195,6 +195,13 @@ void StatePlay::Render() {
 			obj->Render(this->m_Camera);
 	}
 
+	//RENDER DROP
+	for (auto& obj : m_DropList) {
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
+
+
 	//RENDER OBJECT
 	{
 		for (auto& obj : m_ObjectList) {
@@ -202,6 +209,7 @@ void StatePlay::Render() {
 				obj->Render(this->m_Camera);
 		}
 	}
+	m_ObjectList.clear();
 
 	//RENDER TEXT
 	{
@@ -212,15 +220,7 @@ void StatePlay::Render() {
 
 	}
 
-	
-
-	//RENDER DROP
-	for (auto& obj : m_DropList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Render(this->m_Camera);
-	}
-
-	m_ObjectList.clear();
+	//RENDER SKILL
 	for (auto& obj : m_SkillList)
 	{
 		obj->Render(this->m_Camera);
@@ -259,12 +259,8 @@ void StatePlay::RemoveTrap(Trap* trap)
 
 	m_TrapList.resize(m_TrapList.size() - 1);
 }
+
 void StatePlay::Update(float frameTime) {
-
-
-
-
-	
 
 	UpdateRoomID();
 	m_Player->Update(frameTime);
@@ -275,7 +271,6 @@ void StatePlay::Update(float frameTime) {
 		}	
 	}
 	for (auto& obj : m_SkillList) {
-		if (CheckInRange(obj->m_RoomID))
 			obj->Update(frameTime);
 	}
 	for (auto& obj : m_TrapList) {
@@ -288,6 +283,14 @@ void StatePlay::Update(float frameTime) {
 	}
 
 	UpdateControl(frameTime);
+
+	//Kill dead
+	for (auto& obj : m_EnemyList) {
+		if (obj->isDead==true)
+		{
+			RemoveEnemy(obj);
+		}
+	}
 
 	//follow camera
 	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
@@ -315,6 +318,7 @@ void StatePlay::UpdateRoomID() {
 	for (auto& obj : m_EnemyList) {
 		if (CheckInRange(obj->m_RoomID))
 		{
+			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
 			for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
 				if (i > 31)
 					continue;
@@ -326,14 +330,13 @@ void StatePlay::UpdateRoomID() {
 						obj->m_RoomID = Vector2(i, j);
 						break;
 					}
-
 				}
 			}
-
-
 		}
-
 	}
+
+
+
 }
 
 void StatePlay::UpdateControl(float frameTime)
@@ -359,7 +362,6 @@ void StatePlay::UpdateControl(float frameTime)
 		{
 			m_Player->PlayerMove(m_Player->RIGHT);
 		}
-
 	}
 	
 
@@ -385,7 +387,6 @@ void StatePlay::UpdateControl(float frameTime)
 	
 	//USING SPACE	~	TEST
 	m_Player->Attack(1,2);
-
 	{
 		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 		{
@@ -403,11 +404,9 @@ void StatePlay::UpdateControl(float frameTime)
 void StatePlay::AddObject(Object *object) {
 	m_ObjectList.push_back(object);
 }
-
 void StatePlay::AddRoom(Room *room) {
 	m_RoomList.push_back(room);
 }
-
 void StatePlay::AddEnemy(Enemy *enemy) {
 	m_EnemyList.push_back(enemy);
 }
@@ -415,7 +414,6 @@ void StatePlay::AddSkill(Skill* skill)
 {
 	m_SkillList.push_back(skill);
 }
-
 
 bool StatePlay::CheckInRange(Vector2 roomID) {
 
@@ -426,7 +424,6 @@ bool StatePlay::CheckInRange(Vector2 roomID) {
 	else 
 		return true;
 }
-
 void StatePlay::GetRenderOrder() {
 	for (auto a : m_EnemyList) {
 		m_ObjectList.push_back(a);
@@ -438,9 +435,10 @@ void StatePlay::GetRenderOrder() {
 	});
 }
 
-
-
 void StatePlay::RemoveEnemy(Enemy* enemy) {
+
+
+
 	//enemy->getGold()->m_isDisplay = true;
 	int id;
 	for (int i = 0; i < m_EnemyList.size(); i++) {

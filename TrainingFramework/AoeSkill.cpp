@@ -20,28 +20,37 @@ AoeSkill::~AoeSkill()
 }
 void AoeSkill::UpdateHit(float frameTime)
 {
-	Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
-	if (m_isPlayer)
+	if (currCD == 0.0f)
 	{
-		
+		Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
+		if (m_isPlayer)
+		{
 
-		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
-		{
-			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
-				if (CollisionManager::CheckCollision(this, enemy)) 
-				{
-					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
-					printf("enemy hp:%d\n", enemy->m_currHP);
-				}
-					
+
+			for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+			{
+				if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
+					if (CollisionManager::CheckCollision(this, enemy))
+					{
+						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+						printf("enemy hp:%d\n", enemy->m_currHP);
+						currCD = totalCD;
+					}
+			}
 		}
+		else
+			if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
+			{
+				currCD = totalCD;
+				StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+				StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+			}
 	}
-	else
-		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player)) 
-		{
-			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
-			StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
-		}
+	else 
+	{
+		currCD -= frameTime;
+		if (currCD < 0.0f)currCD = 0.0f;
+	}
 			
 
 

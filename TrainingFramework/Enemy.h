@@ -6,7 +6,7 @@ class Enemy : public Character {
 private:
 	Gold* m_gold;
 	int m_inumGold;	
-	Matrix m_translationMatrix;
+
 	
 public:
 
@@ -40,6 +40,5 @@ public:
 
 	void setGold(Gold* gold) { m_gold = gold; }
 	Gold* getGold() {return m_gold;}
-	Matrix getTranslationMatrix() { return m_translationMatrix; }
 	void createGoldObject();
 };

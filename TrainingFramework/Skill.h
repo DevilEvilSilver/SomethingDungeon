@@ -24,6 +24,11 @@ protected:
     //KNOCKBACK
     bool m_isKnockBack = false;
     
+    //HIT CD
+    float totalCD = 1.0f;
+    float currCD = 0.0f;
+
+
 public:
     //MP COST
     int mp_MPCost;

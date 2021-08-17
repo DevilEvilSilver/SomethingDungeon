@@ -13,6 +13,7 @@ BulletSkill::BulletSkill(Vector2 mousePos, Character* owner, std::string prefabI
 	mp_MPCost = 1;
 	Init(mousePos);
 	m_damage = owner->m_ATK * (float)m_percentDamage / 100;
+	m_isKnockBack = true;
 
 	if (m_fVx <= 0) m_isFacingLeft = false;
 }
@@ -22,31 +23,44 @@ BulletSkill::~BulletSkill()
 
 void BulletSkill::UpdateHit(float frameTime)
 {
-	if (m_isPlayer)
+	if (currCD == 0.0f)
 	{
-		std::vector<Enemy*> enemyList = StatePlay::GetInstance()->m_EnemyList;
-		for (auto& enemy : enemyList)
+		Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
+		if (m_isPlayer)
 		{
-			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
-			if (CollisionManager::CheckCollision(this, enemy))
+			
+			for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
 			{
-				//enemy->isAttacked
-				enemy->UpdateGotHit(2, true, Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY), frameTime);
+				if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID)==true)
+					if (CollisionManager::CheckCollision(this, enemy))
+					{
+						//enemy->isAttacked
+						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+						printf("enemy hp:%d\n", enemy->m_currHP);
+						currCD = totalCD;
+					}
 
 			}
-
+		}
+		else
+		{
+			if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
+			{
+				currCD = totalCD;
+				StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+				StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
+			}
 		}
 	}
 	else
 	{
-		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
-		{
-			StatePlay::GetInstance()->m_Player->UpdateGotHit(2, true, Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY), frameTime);
-
-		}
+		currCD -= frameTime;
+		if (currCD < 0.0f)currCD = 0.0f;
 	}
+	
 	std::vector<Room*> roomList = StatePlay::GetInstance()->m_RoomList;
 	for (auto& obj : roomList) {
+		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID))
 		if (obj->m_RoomType == WALL)
 		{
 			if (CollisionManager::CheckCollision(this, obj))

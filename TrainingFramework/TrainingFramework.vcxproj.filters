@@ -219,6 +219,9 @@
     <ClCompile Include="Font.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSkill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSkill.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

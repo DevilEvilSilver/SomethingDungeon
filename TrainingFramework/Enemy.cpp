@@ -41,10 +41,12 @@ void Enemy::KeepDistance(Vector2 delta)
 
 void Enemy::Death(float frameTime)
 {
+	m_strState = DASH;
 	printf("dead\n");
 	this->createGoldObject();
 	StatePlay::GetInstance()->AddDrop(getGold());
-	StatePlay::GetInstance()->RemoveEnemy(this);
+	isDead = true;
+	//StatePlay::GetInstance()->RemoveEnemy(this);
 }
 
 //OTHER
@@ -65,14 +67,15 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_MOVESPEED = 10.0f;
 
-	m_translationMatrix = translationMatrix;
+	
 	isDead = false;
 }
 Enemy::~Enemy() {}
 
 
 void Enemy::createGoldObject() {
-	Matrix translation = getTranslationMatrix();
-	translation.SetTranslation(translation.m[3][0] + 2, translation.m[3][1] + 2, translation.m[3][2]);
-	m_gold = new Gold(GOLD, m_RoomID, translation, rand() % 100 + 1, false);
+
+	Matrix translation;
+	translation.SetTranslation(GetPosX(), GetPosY(), 0.0f);
+	m_gold = new Gold(GOLD, m_RoomID, translation, 5, false);
 }
