@@ -44,6 +44,8 @@ public:
 		bool isWallCollision = false;
 		bool isPlayerCollision = false;
 		bool isEnemyCollision = false;
+		//FixedMove
+		float currTime = 0.0f;
 
 	//GOTHIT
 		//source causing knockback
@@ -51,7 +53,7 @@ public:
 		Vector2 m_sourcePos= Vector2(0.0f, 0.0f);
 		//dmg
 		int m_iDmgTaken = 0;
-
+		int i = 0;
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	//STM :v

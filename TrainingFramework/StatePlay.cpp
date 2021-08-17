@@ -390,8 +390,6 @@ void StatePlay::UpdateControl(float frameTime)
 	
 		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
 		{
-			
-			printf("dash\n");
 			m_Player->Dash(frameTime);
 		}
 		

@@ -27,9 +27,7 @@ public:
 	std::vector<Object*> m_ObjectList;
 	std::vector<Room*> m_RoomList;
 	std::vector<Enemy*> m_EnemyList;
-
 	std::vector<Skill*> m_SkillList;
-
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
 

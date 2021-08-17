@@ -11,7 +11,7 @@ Character::Character() {}
 
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Object(prefabID, roomID, translationMatrix) {
-	m_atk = 100;
+
 }
 
 void Character::Update(float frameTime)
@@ -76,7 +76,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 
 	Vector2 knockBackDir=Vector2(0.0f,0.0f);
 
-	if (m_cState != CS_GOTHIT)
+	if (m_cState != CS_GOTHIT&&m_cState!=CS_DEATH)
 	{
 		m_currHP -= m_iDmgTaken;
 
@@ -91,7 +91,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 
 	if (m_cState == CS_GOTHIT&&m_isKnockBack==true)
 	{
-		static int i = 0;
+		
 		m_strState = IDLE_LEFT; //hit animation
 		
 		
@@ -134,7 +134,7 @@ void Character::UpdateMoveDirection(Vector2 dir)
 
 bool Character::FixedMove(Vector2 dir, float distance, float time, float frameTime)
 {
-	static float currTime = 0.0f;
+	
 	float speed = distance / time;
 	currTime += frameTime;
 	currTime += frameTime;

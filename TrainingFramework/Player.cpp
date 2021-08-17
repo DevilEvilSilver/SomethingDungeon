@@ -15,6 +15,24 @@
 
 
 
+void Player::ShootChicken(Vector2 target)
+{
+	if (currChickenCD <= 0.0f&&m_currMP>=ChickenMPCost) {
+		currChickenCD = ChickenCoolDown;
+
+		Matrix m;
+		m.SetTranslation(target.x, target.y, 0);
+
+		BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
+		StatePlay::GetInstance()->AddSkill(bskill);
+
+		m_currMP -= ChickenMPCost;
+		numMPText->setText("MP: " + std::to_string(m_currMP));
+	}
+
+	
+}
+
 void Player::UniqueUpdate(float frameTime)
 {
 	switch (m_pState)
@@ -30,6 +48,7 @@ void Player::UniqueUpdate(float frameTime)
 
 	//COOLDOWN
 	if (currDashCD > 0.0f) currDashCD -= frameTime;
+	if (currChickenCD>0.0f)currChickenCD -= frameTime;
 	
 }
 
@@ -96,6 +115,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_ATK = 3;
 	m_DEF = 3;
 
+	m_MOVESPEED = 10.0f;
+
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
 
@@ -129,21 +150,12 @@ void Player::Attack(int x, int y)
 	m.SetTranslation(mousePos.x, mousePos.y,0);
 	if ((newKeyPressed & MOUSE_LEFT)  )//
 	{
-		if (bSwitch && iSwithSkill == 1)
-		{
-			AoeSkill* skill = new AoeSkill(mousePos,this, AOE_SKILL, this->m_RoomID, m);
-			StatePlay::GetInstance()->AddSkill(skill);
-			bSwitch = false;
-			m_currMP -= 1;
-			numMPText->setText("MP: " + std::to_string(m_currMP));
-		}
-		else if (bSwitch && iSwithSkill == 2)
-		{
-			BulletSkill* bskill = new BulletSkill(mousePos, this, SKILL, this->m_RoomID, m);
-			StatePlay::GetInstance()->AddSkill(bskill);
-			bSwitch = false;
-			//std::cout << "Player::Attack:\tnewKeyPressed & MOUSE_LEFT:\BulletSkill\n";
-		}
+		ShootChicken(mousePos);
+	
+		
+			
+			
+		
 	}
 	else if ((newKeyPressed & MOUSE_RIGHT))
 	{

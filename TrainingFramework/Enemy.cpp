@@ -58,6 +58,7 @@ bool Enemy::MoveRandom(float frameTime)
 		if (rand() % 2 == 0) ranDir.x *= -1;
 		if (rand() % 2 == 0) ranDir.y *= -1;
 		start = true;
+	
 	}
 	if (start == true)
 	{
@@ -112,7 +113,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	isPlayerCollision = true;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 5.0f;
+	m_MOVESPEED = 3.0f;
 
 	
 	isDead = false;

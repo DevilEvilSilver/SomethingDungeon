@@ -13,7 +13,7 @@ AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vec
 
 	if (m_fVx > 0) m_isFacingLeft = false;
 	m_damage = owner->m_ATK * (float)m_percentDamage / 100;
-	printf("dmg:%f\n", m_damage);
+	
 }
 AoeSkill::~AoeSkill()
 {

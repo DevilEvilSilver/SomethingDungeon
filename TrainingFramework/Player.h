@@ -42,7 +42,10 @@ public:
 	float DashCoolDown = 1.5f;
 	float currDashCD = 0.0f;
 
-
+	float ChickenCoolDown = 0.2f;
+	float currChickenCD = 0.0f;
+	float ChickenMPCost = 1;
+	void ShootChicken(Vector2 target);
 	//----------------------------------------
 
 	////////////////////////////////////////////////////////////////////////
@@ -54,7 +57,7 @@ public:
 	//---------------skill here---------------
 	bool Dash(float frameTime);
 	//----------------------------------------
-
+	
 	///////////////////////////////////////////////////////////////////////
 
 	//FUNCT TO MOVE
@@ -71,9 +74,4 @@ public:
 	virtual void Attack(int x, int y);
 
 
-	void UpdateCollideGold(float frameTime, Gold * gold);
-	void UpdateCollideHP(float frameTime, HPPotion* hp);
-	// void Render(Camera *camera);
-
-	
-};
+}; 
