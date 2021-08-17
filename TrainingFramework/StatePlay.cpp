@@ -163,8 +163,15 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == WALL) {
-				Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
-				AddRoom(room);
+				if (m_Map[i][j - 1] == WALL) {
+					Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
+					AddRoom(room);
+				} 
+				else {
+					Room *room = new Room(BORDER_ROOM, Vector2(i, j), translation, WALL);
+					AddRoom(room);
+				}
+				
 			}
 			else if (m_Map[i][j] == START) {
 				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, START);

@@ -1,4 +1,4 @@
-#PREFAB_COUNT 11
+#PREFAB_COUNT 12
 ID mainChar
 MODEL 0
 SHADER 0
@@ -72,6 +72,17 @@ SCALE_BY_SIZE 1
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/wall/static/sprite.txt
+
+ID borderRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 10.0
+SIZE 10.0 x 10.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/sprite.txt
 
 ID gold
 MODEL 0

@@ -64,7 +64,7 @@
 #define AOE_SKILL		"aoeskill"
 #define NORMAL_ROOM		"normalRoom"
 #define WALL_ROOM		"wallRoom"
-#define HOLE_ROOM		"holeRoom"
+#define BORDER_ROOM		"borderRoom"
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"
