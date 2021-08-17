@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Singleton.h"
+#include "StateBase.h"
 
 enum GameState {
 		GS_STATE_LOGO,
@@ -21,8 +22,8 @@ public:
 	void Render();
 
 	void AddState(GameState addedState);
-	void CloseState();
-	void ClosenAddState(GameState addedState);
+	void CloseState(GameState closedState);
+	void ClosenAddState(GameState closedState, GameState addedState);
 
 };
 

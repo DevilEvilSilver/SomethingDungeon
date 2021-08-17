@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <time.h>
 #include "StatePlay.h"
+#include "ResourceManager.h"
 #include "SoundEngine.h"
 #include "Object.h"
 #include "define.h"
@@ -77,6 +78,8 @@ StatePlay::~StatePlay() {
 }
 
 void StatePlay::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 

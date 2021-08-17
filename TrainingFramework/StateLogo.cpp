@@ -24,6 +24,7 @@ StateLogo::~StateLogo() {
 }
 
 void StateLogo::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOGO, "r");
@@ -122,11 +123,9 @@ void StateLogo::UpdateControl(float frameTime)
 
 		if (fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
-
-			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
-			ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
-			StateManager::GetInstance()->AddState(GS_STATE_WELCOME);
+
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_LOGO, GS_STATE_WELCOME);
 		}
 	}
 }

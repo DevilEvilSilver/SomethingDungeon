@@ -11,35 +11,30 @@
 
 StateManager::StateManager()
 {
-	/*AddState(GS_STATE_LOGO);
-	ResourceManager::GetInstance()->Init(FILE_R_LOGO);*/
-
-	
-	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
-	AddState(GS_STATE_PLAY);
+	AddState(GS_STATE_LOGO);
 }
 
 StateManager::~StateManager() {
 	//reset all state here
 	
-	/*StateLogo::GetInstance()->ResetInstance();
-	StateWelcome::GetInstance()->ResetInstance();
-	StatePlay::GetInstance()->ResetInstance();*/
-
-	switch (m_GameStateStack.back()) {
-	case GS_STATE_LOGO:
-		StateLogo::GetInstance()->ResetInstance();
-		break;
-	case GS_STATE_WELCOME:
-		StateLogo::GetInstance()->ResetInstance();
-		StateWelcome::GetInstance()->ResetInstance();
-		break;
-	case GS_STATE_PLAY:
-		/*StateLogo::GetInstance()->ResetInstance();
-		StateWelcome::GetInstance()->ResetInstance();*/
-		StatePlay::GetInstance()->ResetInstance();
-		break;
+	while (m_GameStateStack.size() > 0) {
+		CloseState(m_GameStateStack.back());
 	}
+
+	//switch (m_GameStateStack.back()) {
+	//case GS_STATE_LOGO:
+	//	StateLogo::GetInstance()->ResetInstance();
+	//	break;
+	//case GS_STATE_WELCOME:
+	//	StateLogo::GetInstance()->ResetInstance();
+	//	StateWelcome::GetInstance()->ResetInstance();
+	//	break;
+	//case GS_STATE_PLAY:
+	//	/*StateLogo::GetInstance()->ResetInstance();
+	//	StateWelcome::GetInstance()->ResetInstance();*/
+	//	StatePlay::GetInstance()->ResetInstance();
+	//	break;
+	//}
 
 	//......
 }
@@ -84,14 +79,25 @@ void StateManager::AddState(GameState addedState)
 	if (addedState == GS_STATE_PLAY) StatePlay::GetInstance()->RoomsGenerate();
 }
 
-void StateManager::CloseState()
+void StateManager::CloseState(GameState closedState)
 {
+	switch (closedState) {
+	case GS_STATE_LOGO:
+		StateLogo::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_WELCOME:
+		StateWelcome::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_PLAY:
+		StatePlay::GetInstance()->ResetInstance();
+		break;
+	}
 	m_GameStateStack.pop_back();
 }
 
-void StateManager::ClosenAddState(GameState addedState)
+void StateManager::ClosenAddState(GameState closedState, GameState addedState)
 {
-	CloseState();
+	CloseState(closedState);
 	AddState(addedState);
 }
 
