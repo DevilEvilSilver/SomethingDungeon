@@ -146,7 +146,7 @@ void StatePlay::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
-		m_HpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		m_HpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxHP, m_Player->m_currHP);
 	}
 
 	//MP Holder
@@ -170,7 +170,7 @@ void StatePlay::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
-		m_MpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		m_MpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxMP, m_Player->m_currMP);
 	}
 
 	//Gold Icon
@@ -457,10 +457,12 @@ void StatePlay::Update(float frameTime) {
 
 		m_HpHolder->Update(frameTime);
 		m_HpBar->Update(frameTime);
+		m_HpBar->Resize(m_Player->m_currHP);
 		m_HpText->setText(m_Player->GetHP());
 
 		m_MpHolder->Update(frameTime);
 		m_MpBar->Update(frameTime);
+		m_MpBar->Resize(m_Player->m_currMP);
 		m_MpText->setText(m_Player->GetMP());
 
 		m_GoldIcon->Update(frameTime);

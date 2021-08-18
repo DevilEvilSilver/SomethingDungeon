@@ -2,6 +2,7 @@
 #include <vector>
 #include "StateBase.h"
 #include "Button.h"
+#include "Bar.h"
 #include "Fader.h"
 #include "Text.h"
 #include "Room.h"
@@ -40,10 +41,10 @@ public:
 	Button *m_ButtonQuit;
 
 	Widget *m_HpHolder;
-	Widget *m_HpBar;
+	Bar *m_HpBar;
 	Text *m_HpText;
 	Widget *m_MpHolder;
-	Widget *m_MpBar;
+	Bar *m_MpBar;
 	Text *m_MpText;
 	Widget *m_GoldIcon;
 	Text *m_GoldText;
