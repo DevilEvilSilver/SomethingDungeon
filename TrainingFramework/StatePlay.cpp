@@ -497,11 +497,12 @@ void StatePlay::UpdateControl(float frameTime)
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
 
 	//BUTTON PAUSE
-	if (m_ButtonPause->isPressed(this->m_Camera)) {
+	if (m_ButtonPause->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = true;
 		return;
 	}
+	m_ButtonPause->isPressed(this->m_Camera);
 	m_ButtonPause->isHover(this->m_Camera);
 	
 	//PLAYER
@@ -564,19 +565,23 @@ void StatePlay::UpdateControl(float frameTime)
 
 void StatePlay::UpdateControlPause(float frameTime) {
 	//Button Resume
-	if (m_ButtonResume->isPressed(this->m_Camera)) {
+	if (m_ButtonResume->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = false;
 		return;
 	}
+	m_ButtonResume->isPressed(this->m_Camera);
 	m_ButtonResume->isHover(this->m_Camera);
 
 	//Button Quit
-	if (m_ButtonQuit->isPressed(this->m_Camera)) {
+	if (m_ButtonQuit->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isQuit = true;
 		m_ButtonResume->m_isAvailble = false;
 		m_ButtonQuit->m_isAvailble = false;
+	}
+	if (m_ButtonQuit->isPressed(this->m_Camera)) {
+		return;
 	}
 	m_ButtonQuit->isHover(this->m_Camera);
 

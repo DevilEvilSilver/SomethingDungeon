@@ -107,11 +107,12 @@ void StateWelcome::Update(float frameTime) {
 void StateWelcome::UpdateControl(float frameTime)
 {
 	//Button Start
-	if (m_ButtonStart->isPressed(this->m_Camera)) {
+	if (m_ButtonStart->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPLayState = true;
 		m_ButtonStart->m_isAvailble = false;
 	}
+	m_ButtonStart->isPressed(this->m_Camera);
 	m_ButtonStart->isHover(this->m_Camera);
 
 	//Play State
