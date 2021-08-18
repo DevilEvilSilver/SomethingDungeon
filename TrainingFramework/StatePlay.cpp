@@ -52,7 +52,10 @@ StatePlay::~StatePlay() {
 		delete object;
 	}
 	m_EnemyList.clear();
-
+	for (auto& object : m_DecorationList) {
+		delete object;
+	}
+	m_DecorationList.clear();
 	
 
 
@@ -216,20 +219,26 @@ void StatePlay::Render() {
 
 	}
 
-	
+	for (auto& obj : m_DecorationList)
+	{
+		if (CheckInRange(obj->m_RoomID))
+			obj->Render(this->m_Camera);
+	}
 
 	//RENDER DROP
 	for (auto& obj : m_DropList) {
 		if (CheckInRange(obj->m_RoomID))
 			obj->Render(this->m_Camera);
 	}
-
 	m_ObjectList.clear();
+	//RENDER SKILL
 	for (auto& obj : m_SkillList)
 	{
+		if (CheckInRange(obj->m_RoomID))
 		obj->Render(this->m_Camera);
 	}
-
+	//RENDER DECORATION
+	
 }
 void StatePlay::AddDrop(Drop* drop)
 {
@@ -238,6 +247,10 @@ void StatePlay::AddDrop(Drop* drop)
 void StatePlay::AddTrap(Trap* trap)
 {
 	m_TrapList.push_back(trap);
+}
+void StatePlay::AddDecor(Object* decor)
+{
+	m_DecorationList.push_back(decor);
 }
 void StatePlay::RemoveDrop(Drop* drop)
 {
@@ -277,6 +290,12 @@ void StatePlay::Update(float frameTime) {
 		{
 			obj->Update(frameTime);
 		}	
+	}
+	for (auto& obj : m_DecorationList) {
+		if (CheckInRange(obj->m_RoomID))
+		{
+			obj->Update(frameTime);
+		}
 	}
 	for (auto& obj : m_SkillList) {
 		if (CheckInRange(obj->m_RoomID))

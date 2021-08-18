@@ -103,3 +103,16 @@
 #define WELCOME_BGM			0
 #define LOGO_SFX			1
 #define BUTTON_SFX			2
+
+//DECORATION
+#define ROCK_1			"rock1"
+#define ROCK_2			"rock2"
+#define GRASS			"grass"
+#define TREE1			"tree1"
+#define TREE2			"tree2"
+#define TREE3			"tree3"
+#define TREE4			"tree4"
+#define TREE5			"tree5"
+#define TREE6			"tree6"
+#define TREE7			"tree7"
+#define TREE8			"tree8"

@@ -30,7 +30,7 @@ public:
 
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
-
+	std::vector<Object*> m_DecorationList;
 
 
 	Player *m_Player;
@@ -42,10 +42,10 @@ public:
 	void AddObject(Object* object);
 	void AddRoom(Room* room);
 	void AddEnemy(Enemy* enemy);
-
 	void AddDrop(Drop* drop);
 	void AddTrap(Trap* trap);
 	void AddSkill(Skill* skill);
+	void AddDecor(Object* decor);
 
 	//////////////////////////////////////////////////////////
 
