@@ -4,7 +4,7 @@
 #include "define.h"
 
 //include all STATEs here:
-
+#include "StateLoad.h"
 #include "StateLogo.h"
 #include "StateWelcome.h"
 #include "StatePlay.h"
@@ -25,11 +25,10 @@ StateManager::~StateManager() {
 }
 
 void StateManager::Update(float frameTime) {
-
-
-
-	
 	switch (m_GameStateStack.back()) {
+	case GS_STATE_LOAD:
+		StateLoad::GetInstance()->Update(frameTime);
+		break;
 	case GS_STATE_LOGO:
 		StateLogo::GetInstance()->Update(frameTime);
 		break;
@@ -45,6 +44,9 @@ void StateManager::Update(float frameTime) {
 void StateManager::Render()
 {
 	switch (m_GameStateStack.back()) {
+	case GS_STATE_LOAD:
+		StateLoad::GetInstance()->Render();
+		break;
 	case GS_STATE_LOGO:
 		StateLogo::GetInstance()->Render();
 		break;
@@ -68,6 +70,16 @@ void StateManager::AddState(GameState addedState)
 		StatePlay::GetInstance()->RoomsGenerate();
 }
 
+void StateManager::AddLoadState(GameState addedState) {
+	if (m_GameStateStack.size() > 0) {
+		ResetState(m_GameStateStack.back());
+	}
+	m_GameStateStack.push_back(addedState);
+	m_GameStateStack.push_back(GS_STATE_LOAD);
+
+	StateLoad::GetInstance()->m_isNextState = addedState;
+}
+
 void StateManager::CloseState()
 {
 	ResetState(m_GameStateStack.back());
@@ -77,11 +89,17 @@ void StateManager::CloseState()
 void StateManager::ClosenAddState(GameState addedState)
 {
 	CloseState();
-	AddState(addedState);
+	m_GameStateStack.push_back(addedState);
+
+	if (addedState == GS_STATE_PLAY)
+		StatePlay::GetInstance()->RoomsGenerate();
 }
 
 void StateManager::ResetState(GameState state) {
 	switch (state) {
+	case GS_STATE_LOAD:
+		StateLoad::GetInstance()->ResetInstance();
+		break;
 	case GS_STATE_LOGO:
 		StateLogo::GetInstance()->ResetInstance();
 		break;

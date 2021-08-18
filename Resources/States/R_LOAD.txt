@@ -1,0 +1,56 @@
+#PREFAB_COUNT 3
+ID backgroundLogo
+MODEL 10
+SHADER 10
+TYPE RECT
+COORD 0.0, 0.0, 30.0, 20.0
+SIZE 30.0 x 20.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+
+ID loadIcon
+MODEL 10
+SHADER 10
+TYPE RECT
+COORD 0.0, 0.0, 5.0, 1.0
+SIZE 5.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/loadIcon/static/sprite.txt
+
+ID transition
+MODEL 10
+SHADER 11
+TYPE RECT
+COORD 0.0, 0.0, 30.0, 20.0
+SIZE 30.0 x 20.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/transition/static/sprite.txt
+
+#MODEL_GEN 1
+ID 10
+SIZE 1.0 x 1.0
+
+#SHADER_COUNT 2
+ID 10
+VS ../Resources/Shaders/Sprite.vs
+FS ../Resources/Shaders/Sprite.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+ID 11
+VS ../Resources/Shaders/Logo.vs
+FS ../Resources/Shaders/Logo.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 1
+GL_CULL_FACE 0
+GL_BLEND 1
+
+#FONT_COUNT 0

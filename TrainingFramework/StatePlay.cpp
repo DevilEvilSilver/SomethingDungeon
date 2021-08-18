@@ -358,9 +358,6 @@ void StatePlay::Render() {
 
 	//RENDER UI
 	{
-		//Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
-		//Renderer::GetInstance()->DrawText2(m_Player->numHPText);
-		//Renderer::GetInstance()->DrawText2(m_Player->numMPText);
 		m_HpHolder->Render(m_Camera);
 		m_HpBar->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_HpText);
