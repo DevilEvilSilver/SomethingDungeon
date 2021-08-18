@@ -236,3 +236,6 @@ std::string Player::GetMP() {
 	return std::to_string(m_currMP) + "/" + std::to_string(m_maxMP);
 }
 
+std::string Player::GetGold() {
+	return std::to_string(m_GOLD);
+}

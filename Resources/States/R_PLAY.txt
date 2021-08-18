@@ -1,4 +1,4 @@
-#PREFAB_COUNT 21
+#PREFAB_COUNT 22
 ID mainChar
 MODEL 0
 SHADER 0
@@ -184,6 +184,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID goldIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gold/static/sprite.txt
 
 ID buttonPause
 MODEL 0

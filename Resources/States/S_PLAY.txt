@@ -24,6 +24,10 @@ PREFAB mpHolder
 POS -7.2875, -5.075
 PREFAB mpBar
 
+#GOLD_ICON
+POS 8.25, -5.25
+PREFAB goldIcon
+
 #PAUSE_BOX
 POS -2.5, 2.5
 PREFAB pauseBox

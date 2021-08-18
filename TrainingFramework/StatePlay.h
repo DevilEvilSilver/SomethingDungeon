@@ -45,6 +45,8 @@ public:
 	Widget *m_MpHolder;
 	Widget *m_MpBar;
 	Text *m_MpText;
+	Widget *m_GoldIcon;
+	Text *m_GoldText;
 
 	Fader *m_TransitionScreen;
 

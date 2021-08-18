@@ -86,6 +86,8 @@ StatePlay::~StatePlay() {
 	delete m_MpHolder;
 	delete m_MpBar;
 	delete m_MpText;
+	delete m_GoldIcon;
+	delete m_GoldText;
 
 	if (m_TransitionScreen != NULL)
 		delete m_TransitionScreen;
@@ -171,6 +173,18 @@ void StatePlay::Init() {
 		m_MpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Gold Icon
+	{
+		fscanf(dataFile, "#GOLD_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_GoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Pause Box
 	{
 		fscanf(dataFile, "#PAUSE_BOX\n");
@@ -227,6 +241,7 @@ void StatePlay::Init() {
 
 	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
 	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_GoldText = new Text(m_Player->GetGold(), 1, 1, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -354,6 +369,9 @@ void StatePlay::Render() {
 		m_MpBar->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_MpText);
 
+		m_GoldIcon->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_GoldText);
+
 		m_ButtonPause->Render(m_Camera);
 		if (m_isPause) {
 			m_PauseBox->Render(m_Camera);
@@ -444,6 +462,9 @@ void StatePlay::Update(float frameTime) {
 		m_MpHolder->Update(frameTime);
 		m_MpBar->Update(frameTime);
 		m_MpText->setText(m_Player->GetMP());
+
+		m_GoldIcon->Update(frameTime);
+		m_GoldText->setText(m_Player->GetGold());
 	}
 
 	if (m_TransitionScreen != NULL)
@@ -502,7 +523,9 @@ void StatePlay::UpdateControl(float frameTime)
 		m_isPause = true;
 		return;
 	}
-	m_ButtonPause->isPressed(this->m_Camera);
+	if (m_ButtonPause->isPressed(this->m_Camera)) {
+		return;
+	}
 	m_ButtonPause->isHover(this->m_Camera);
 	
 	//PLAYER
@@ -580,9 +603,7 @@ void StatePlay::UpdateControlPause(float frameTime) {
 		m_ButtonResume->m_isAvailble = false;
 		m_ButtonQuit->m_isAvailble = false;
 	}
-	if (m_ButtonQuit->isPressed(this->m_Camera)) {
-		return;
-	}
+	m_ButtonQuit->isPressed(this->m_Camera);
 	m_ButtonQuit->isHover(this->m_Camera);
 
 	//Play State
