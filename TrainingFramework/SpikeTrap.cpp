@@ -34,7 +34,7 @@ void SpikeTrap::Update(float frameTime) {
 			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
-					enemy->UpdateGotHit(m_iAttack, false, curPos, frameTime);
+					enemy->UpdateGotHit(m_iAttack, true, curPos, frameTime);
 					
 				}
 

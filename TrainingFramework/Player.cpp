@@ -83,10 +83,8 @@ bool Player::Dash(float frameTime)
 	
 	if (m_pState == P_DASH)
 	{
-		Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
-		
 		m_strState = DASH;
-		if (FixedMove(mousePos, m_MOVESPEED, 0.5f, frameTime) == false) return false;
+		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.5f, frameTime) == false) return false;
 		SetCS(CS_IDLE);
 		SetPS(P_CS);
 	}

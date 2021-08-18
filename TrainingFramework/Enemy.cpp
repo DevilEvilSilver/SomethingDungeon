@@ -10,6 +10,8 @@
 #include "BulletSkill.h"
 #include "AoeSkill.h"
 
+#include "SoundEngine.h"
+
 void Enemy::UniqueUpdate(float frameTime)
 {
 	Player* plyr = StatePlay::GetInstance()->m_Player;
@@ -108,6 +110,7 @@ void Enemy::Death(float frameTime)
 	this->createGoldObject();
 	StatePlay::GetInstance()->AddDrop(getGold());
 	isDead = true;
+	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 	//StatePlay::GetInstance()->RemoveEnemy(this);
 }
 
@@ -124,7 +127,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
-	isPlayerCollision = true;
+	isPlayerCollision = false;
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 3.0f;

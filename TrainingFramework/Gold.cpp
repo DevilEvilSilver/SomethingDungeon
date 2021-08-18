@@ -17,10 +17,10 @@ void Gold::OnCollision()
 	player->m_GOLD+= this->getValue();
 	player->numGoldText->setText("Gold: " + std::to_string(player->m_GOLD));
 
-
+	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 	StatePlay::GetInstance()->RemoveDrop(this);
 
-	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
+	
 }
 
 Gold::Gold(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value, bool isDisplay)

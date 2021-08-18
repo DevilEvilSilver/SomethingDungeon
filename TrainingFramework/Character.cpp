@@ -87,6 +87,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 
 		if (auto* player = dynamic_cast<Player*>(this))
 		SoundEngine::GetInstance()->PlayInTSec(HIT, 0.25f);
+		else SoundEngine::GetInstance()->Play(PEWPEW, 1.0f, 0.5f, false);
 	}
 		
 	

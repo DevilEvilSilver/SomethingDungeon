@@ -2,6 +2,9 @@
 #include "AoeSkill.h"
 #include "StatePlay.h"
 #include "CollisionManager.h"
+
+
+#include "define.h"
 AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
 {
