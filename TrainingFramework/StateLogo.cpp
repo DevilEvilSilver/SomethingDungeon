@@ -129,6 +129,7 @@ void StateLogo::UpdateControl(float frameTime)
 			ResourceManager::GetInstance()->ResetInstance();
 
 			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
+			return;
 		}
 	}
 }

@@ -27,6 +27,8 @@ public:
 	void MouseRight(bool bIsPressed, int x, int y);
 	void MouseMove(int x,int y);					////chi moi luu lai vi tri tren man hinh chu chua phai vi tri trong khong gian
 
+	void ResetInput();
+
 	Vector2 GetMousePosition(Camera* stateCamera, int x, int y);		//tra ve vij tri trong khong gian voi camera hien tai
 
 

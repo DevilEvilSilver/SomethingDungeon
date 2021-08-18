@@ -106,6 +106,16 @@ void InputManager::MouseMove(int x, int y)
 	mouseY = y;
 }
 
+void InputManager::ResetInput() {
+	keyPressed = 0;
+	mouseLX = 0; 
+	mouseLY = 0;
+	mouseRX = 0; 
+	mouseRY = 0;
+	mouseX = 0;
+	mouseY = 0;
+}
+
 Vector2 InputManager::GetMousePosition(Camera* stateCamera, int x, int y)
 {
 	Vector2 camScale = stateCamera->GetViewScale();

@@ -567,6 +567,7 @@ void StatePlay::UpdateControlPause(float frameTime) {
 	if (m_ButtonResume->isPressed(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = false;
+		return;
 	}
 	m_ButtonResume->isHover(this->m_Camera);
 
@@ -594,8 +595,10 @@ void StatePlay::UpdateControlPause(float frameTime) {
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->CloseState();
+			return;
 		}
 	}
 }

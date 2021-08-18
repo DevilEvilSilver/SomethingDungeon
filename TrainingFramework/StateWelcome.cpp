@@ -129,8 +129,10 @@ void StateWelcome::UpdateControl(float frameTime)
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->AddState(GS_STATE_PLAY);
+			return;
 		}
 	}
 }
