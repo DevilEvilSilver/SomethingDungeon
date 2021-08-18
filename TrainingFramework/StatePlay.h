@@ -2,6 +2,7 @@
 #include <vector>
 #include "StateBase.h"
 #include "Button.h"
+#include "Fader.h"
 #include "Text.h"
 #include "Room.h"
 #include "Skill.h"
@@ -32,13 +33,24 @@ public:
 
 	Player *m_Player;
 
-	Button *m_buttonPause;
+	//UI
+	Button *m_ButtonPause;
+	Widget *m_PauseBox;
+	Button *m_ButtonResume;
+	Button *m_ButtonQuit;
+
 	Widget *m_HpHolder;
 	Widget *m_HpBar;
 	Text *m_HpText;
 	Widget *m_MpHolder;
 	Widget *m_MpBar;
 	Text *m_MpText;
+
+	Fader *m_TransitionScreen;
+
+	//LOGIC
+	bool m_isQuit;
+	float m_fNextStateFrame;
 
 	//INIT
 	void Init();
@@ -56,10 +68,11 @@ public:
 
 	void Update(float frameTime);
 	
-	bool CheckInRange(Vector2 roomID);		//ONLY UPDATE NEAR
-	void UpdateRoomID();					//UPDATE ROOM_ID FOR CHARACTER
-	void UpdateControl(float frameTime);	//CONTROL PLAYER
-	
+	bool CheckInRange(Vector2 roomID);			//ONLY UPDATE NEAR
+	void UpdateRoomID();						//UPDATE ROOM_ID FOR CHARACTER
+	void UpdateControl(float frameTime);		//CONTROL PLAYER
+	void UpdateControlPause(float frameTime);	//HANDLE INPUT WHILE PAUSE
+
 	/////////////////////////////////////////////////////////
 
 	//OTHER

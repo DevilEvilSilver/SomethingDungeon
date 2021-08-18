@@ -19,8 +19,10 @@ StateWelcome::StateWelcome(void) {
 StateWelcome::~StateWelcome() {
 	delete m_Background;
 	delete m_ButtonStart;
-	delete m_TransitionScreen;
 	delete m_Camera;
+
+	if (m_TransitionScreen != NULL)
+		delete m_TransitionScreen;
 }
 
 void StateWelcome::Init() {
@@ -73,6 +75,8 @@ void StateWelcome::Init() {
 
 	fclose(dataFile);
 
+	m_isPLayState = false;
+	m_fNextStateFrame = 1.0f;
 	m_TransitionScreen = NULL;
 
 	m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 1.0f, 1.0f, true);
@@ -102,30 +106,27 @@ void StateWelcome::Update(float frameTime) {
 
 void StateWelcome::UpdateControl(float frameTime)
 {
-	static bool isPLayState = false;
-	static float fNextStateFrame = 1.0f;
-
 	//Button Start
 	if (m_ButtonStart->isPressed(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
-		isPLayState = true;
+		m_isPLayState = true;
 		m_ButtonStart->m_isAvailble = false;
 	}
 	m_ButtonStart->isHover(this->m_Camera);
 
 	//Play State
-	if (isPLayState) {
-		fNextStateFrame -= frameTime;
+	if (m_isPLayState) {
+		m_fNextStateFrame -= frameTime;
 
-		if (fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
 			Matrix translation;
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
 
-			SoundEngine::GetInstance()->Fader(m_iHandleBGM ,false, fNextStateFrame);
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM ,false, m_fNextStateFrame);
 		}
 
-		if (fNextStateFrame < 0) {
+		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 

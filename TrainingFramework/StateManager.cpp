@@ -11,14 +11,14 @@
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_PLAY);
+	AddState(GS_STATE_LOGO);
 }
 
 StateManager::~StateManager() {
 	//reset all state here
 	
 	while (m_GameStateStack.size() > 0) {
-		CloseState(m_GameStateStack.back());
+		CloseState();
 	}
 
 	//......
@@ -59,14 +59,29 @@ void StateManager::Render()
 
 void StateManager::AddState(GameState addedState)
 {
+	if (m_GameStateStack.size() > 0) {
+		ResetState(m_GameStateStack.back());
+	}
 	m_GameStateStack.push_back(addedState);
 
-	if (addedState == GS_STATE_PLAY) StatePlay::GetInstance()->RoomsGenerate();
+	if (addedState == GS_STATE_PLAY) 
+		StatePlay::GetInstance()->RoomsGenerate();
 }
 
-void StateManager::CloseState(GameState closedState)
+void StateManager::CloseState()
 {
-	switch (closedState) {
+	ResetState(m_GameStateStack.back());
+	m_GameStateStack.pop_back();
+}
+
+void StateManager::ClosenAddState(GameState addedState)
+{
+	CloseState();
+	AddState(addedState);
+}
+
+void StateManager::ResetState(GameState state) {
+	switch (state) {
 	case GS_STATE_LOGO:
 		StateLogo::GetInstance()->ResetInstance();
 		break;
@@ -77,16 +92,7 @@ void StateManager::CloseState(GameState closedState)
 		StatePlay::GetInstance()->ResetInstance();
 		break;
 	}
-	m_GameStateStack.pop_back();
 }
-
-void StateManager::ClosenAddState(GameState closedState, GameState addedState)
-{
-	CloseState(closedState);
-	AddState(addedState);
-}
-
-
 
 
 

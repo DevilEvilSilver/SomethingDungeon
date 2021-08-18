@@ -22,8 +22,9 @@ public:
 	void Render();
 
 	void AddState(GameState addedState);
-	void CloseState(GameState closedState);
-	void ClosenAddState(GameState closedState, GameState addedState);
+	void CloseState();
+	void ClosenAddState(GameState addedState);
+	void ResetState(GameState addedState);
 
 };
 

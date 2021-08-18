@@ -75,12 +75,20 @@ StatePlay::~StatePlay() {
 	delete m_Camera;
 
 	//UI
+	delete m_ButtonPause;
+	delete m_PauseBox;
+	delete m_ButtonResume;
+	delete m_ButtonQuit;
+
 	delete m_HpHolder;
 	delete m_HpBar;
 	delete m_HpText;
 	delete m_MpHolder;
 	delete m_MpBar;
 	delete m_MpText;
+
+	if (m_TransitionScreen != NULL)
+		delete m_TransitionScreen;
 }
 
 void StatePlay::Init() {
@@ -94,8 +102,6 @@ void StatePlay::Init() {
 
 	//Player
 	fscanf(dataFile, "#PLAYER\n");
-	unsigned int id;
-	fscanf(dataFile, "ID %d\n", &id);
 	char strPrefab[50];
 	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 	Matrix translation;
@@ -120,8 +126,6 @@ void StatePlay::Init() {
 	//HP Holder
 	{
 		fscanf(dataFile, "#HP_HOLDER\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -134,8 +138,6 @@ void StatePlay::Init() {
 	//HP Bar
 	{
 		fscanf(dataFile, "#HP_BAR\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -148,8 +150,6 @@ void StatePlay::Init() {
 	//MP Holder
 	{
 		fscanf(dataFile, "#MP_HOLDER\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -162,8 +162,6 @@ void StatePlay::Init() {
 	//MP Bar
 	{
 		fscanf(dataFile, "#MP_BAR\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -173,7 +171,59 @@ void StatePlay::Init() {
 		m_MpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Pause Box
+	{
+		fscanf(dataFile, "#PAUSE_BOX\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_PauseBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Pause
+	{
+		fscanf(dataFile, "#BUTTON_PAUSE\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonPause = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Resume
+	{
+		fscanf(dataFile, "#BUTTON_RESUME\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonResume = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Quit
+	{
+		fscanf(dataFile, "#BUTTON_QUIT\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
+
+	m_isQuit = false;
+	m_fNextStateFrame = 1.0f;
+	m_TransitionScreen = NULL;
 
 	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
 	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
@@ -303,6 +353,16 @@ void StatePlay::Render() {
 		m_MpHolder->Render(m_Camera);
 		m_MpBar->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_MpText);
+
+		m_ButtonPause->Render(m_Camera);
+		if (m_isPause) {
+			m_PauseBox->Render(m_Camera);
+			m_ButtonResume->Render(m_Camera);
+			m_ButtonQuit->Render(m_Camera);
+		}
+
+		if (m_TransitionScreen != NULL)
+			m_TransitionScreen->Render(this->m_Camera);
 	}
 }
 void StatePlay::AddDrop(Drop* drop)
@@ -339,41 +399,55 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
-	UpdateRoomID();
-	m_Player->Update(frameTime);
-	for (auto& obj : m_EnemyList) {
-		if (CheckInRange(obj->m_RoomID))
-		{
-			obj->Update(frameTime);
-		}	
+	if (m_isPause) {
+		m_PauseBox->Update(frameTime);
+		m_ButtonResume->Update(frameTime);
+		m_ButtonQuit->Update(frameTime);
+
+		UpdateControlPause(frameTime);
 	}
-	for (auto& obj : m_SkillList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
-	for (auto& obj : m_TrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
-	for (auto& obj : m_DropList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
+	else {
+		UpdateRoomID();
+		m_Player->Update(frameTime);
+		for (auto& obj : m_EnemyList) {
+			if (CheckInRange(obj->m_RoomID))
+			{
+				obj->Update(frameTime);
+			}
+		}
+		for (auto& obj : m_SkillList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+		for (auto& obj : m_TrapList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+		for (auto& obj : m_DropList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+
+		UpdateControl(frameTime);
+
+		//follow camera
+		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+		m_Camera->Update(frameTime);
+
+		//Update UI
+		m_ButtonPause->Update(frameTime);
+
+		m_HpHolder->Update(frameTime);
+		m_HpBar->Update(frameTime);
+		m_HpText->setText(m_Player->GetHP());
+
+		m_MpHolder->Update(frameTime);
+		m_MpBar->Update(frameTime);
+		m_MpText->setText(m_Player->GetMP());
 	}
 
-	UpdateControl(frameTime);
-
-	//follow camera
-	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-	m_Camera->Update(frameTime);
-
-	//Update UI
-	m_HpHolder->Update(frameTime);
-	m_HpBar->Update(frameTime);
-	m_HpText->setText(m_Player->GetHP());
-
-	m_MpHolder->Update(frameTime);
-	m_MpBar->Update(frameTime);
-	m_MpText->setText(m_Player->GetMP());
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 }
 
 void StatePlay::UpdateRoomID() {
@@ -421,6 +495,14 @@ void StatePlay::UpdateRoomID() {
 void StatePlay::UpdateControl(float frameTime)
 {
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+
+	//BUTTON PAUSE
+	if (m_ButtonPause->isPressed(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = true;
+		return;
+	}
+	m_ButtonPause->isHover(this->m_Camera);
 	
 	//PLAYER
 	{
@@ -477,6 +559,44 @@ void StatePlay::UpdateControl(float frameTime)
 		}
 		
 		std::string a = "DASH CD: " + std::to_string(m_Player->currDashCD);
+	}
+}
+
+void StatePlay::UpdateControlPause(float frameTime) {
+	//Button Resume
+	if (m_ButtonResume->isPressed(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = false;
+	}
+	m_ButtonResume->isHover(this->m_Camera);
+
+	//Button Quit
+	if (m_ButtonQuit->isPressed(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isQuit = true;
+		m_ButtonResume->m_isAvailble = false;
+		m_ButtonQuit->m_isAvailble = false;
+	}
+	m_ButtonQuit->isHover(this->m_Camera);
+
+	//Play State
+	if (m_isQuit) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			//SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+
+			StateManager::GetInstance()->CloseState();
+		}
 	}
 }
 

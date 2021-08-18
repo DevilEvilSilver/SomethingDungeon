@@ -19,8 +19,10 @@ StateLogo::StateLogo(void) {
 StateLogo::~StateLogo() {
 	delete m_Background;
 	delete m_Logo;
-	delete m_TransitionScreen;
 	delete m_Camera;
+
+	if (m_TransitionScreen != NULL)
+		delete m_TransitionScreen;
 }
 
 void StateLogo::Init() {
@@ -122,10 +124,11 @@ void StateLogo::UpdateControl(float frameTime)
 		}
 
 		if (fNextStateFrame < 0.0f) {
+			isWelcomeState = true;
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 
-			StateManager::GetInstance()->ClosenAddState(GS_STATE_LOGO, GS_STATE_WELCOME);
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
 		}
 	}
 }
