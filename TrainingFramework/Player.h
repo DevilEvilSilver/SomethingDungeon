@@ -42,12 +42,12 @@ public:
 	float DashCoolDown = 1.0f;
 	float currDashCD = 0.0f;
 
-	float ChickenCoolDown = 0.2f;
+	float ChickenCoolDown = 0.5f;
 	float currChickenCD = 0.0f;
 	int ChickenMPCost = 1;
 	void ShootChicken(Vector2 target);
 
-	float MeleeCoolDown = 0.2f;
+	float MeleeCoolDown = 1.0f;
 	float currMeleeCD = 0.0f;
 	void Melee(Vector2 target);
 	//----------------------------------------

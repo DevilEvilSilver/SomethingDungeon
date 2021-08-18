@@ -24,10 +24,16 @@ void Enemy::UniqueUpdate(float frameTime)
 	float totalCD = 4.0f;
 	
 	//move behavior
-	
-	if (distance < 4.0f /*&& distance > 5.0f*/) KeepDistance(delta);
+	m_MOVESPEED = 3.0f;
+	if (distance < 4.0f /*&& distance > 5.0f*/)
+	{
+		KeepDistance(delta);
+		m_MOVESPEED = 10.0f;
+	}
+		
 	else if (distance < 10.0f)
 	{
+		
 		if (currCD <= 0.0f) {
 			currCD = totalCD;
 			ShootChicken(plyPos);
