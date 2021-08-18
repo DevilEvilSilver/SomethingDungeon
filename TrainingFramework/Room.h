@@ -19,4 +19,5 @@ public:
 	void RoomGenerate();
 	void Update(float frameTime);
 	void Render(Camera *camera);
+	void GenObj(std::string prefabId, int num);
 };

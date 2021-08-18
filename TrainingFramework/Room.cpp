@@ -29,92 +29,30 @@ Room::~Room() {
 }
 
 void Room::RoomGenerate() {
-	Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
-	Prefab* hpPrefab = GetResource(HP_PO, ResourceManager::GetInstance()->m_PrefabList);
-	Prefab* mpPrefab = GetResource(MP_PO, ResourceManager::GetInstance()->m_PrefabList);
-	Prefab* bombPrefab = GetResource(BOMB_TRAP, ResourceManager::GetInstance()->m_PrefabList);
-	Prefab* spikePrefab = GetResource(SPIKE_TRAP, ResourceManager::GetInstance()->m_PrefabList);
 
 	if (m_RoomType == NORMAL) {
-			
-		Matrix translation;
-		unsigned int 
-			enemyNum = 0, 
-			hpNum=0,
-			mpNum=0,
-			bombNum=0,
-			spikeNum=0;
 		unsigned int random = rand() % 100 + 1;
 
-		if (random >= 80)
+		if (random >= 70 && random <= 100)
 		{
-			enemyNum = 3;
-			hpNum = 1;
-			mpNum = 1;
+			GenObj(ENEMY, 4);
 		}
-		else if (random >= 50)
+		else if (random >= 60 && random < 70)
 		{
-			bombNum = 1;
-			enemyNum = 2;
-			hpNum = 1;
-			spikeNum = 2;
-
+			GenObj(HP_PO, 1);
 		}
-		else if (random >= 10)
+		else if (random >= 40 && random < 60)
 		{
-			hpNum = 1;
-			enemyNum = 1;
-			mpNum = 1;
+			GenObj(MP_PO, 1);
 		}
-			
-		while (enemyNum--) {
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			Enemy *enemy = new Enemy(ENEMY, m_RoomID, translation);
-			StatePlay::GetInstance()->AddEnemy(enemy);
+		else if (random >= 20 && random < 40)
+		{
+			GenObj(BOMB_TRAP, 4);
 		}
-
-
-		while (hpNum--) {
-			
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - hpPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - hpPrefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
-			StatePlay::GetInstance()->AddDrop(hp);
-
+		else if (random >= 0 && random < 20)
+		{
+			GenObj(SPIKE_TRAP, 8);
 		}
-
-		while (mpNum--) {
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - mpPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - mpPrefab->m_fHeight);
-			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
-			StatePlay::GetInstance()->AddDrop(mp);
-
-		}
-
-		while (bombNum--) {
-
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation);
-			StatePlay::GetInstance()->AddTrap(bomb);
-
-
-		}
-		while (spikeNum--) {
-
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-		
-			SpikeTrap* bomb = new SpikeTrap(SPIKE_TRAP, m_RoomID, translation);
-			StatePlay::GetInstance()->AddTrap(bomb);
-
-		}
-
 	}
 }
 
@@ -124,4 +62,58 @@ void Room::Update(float frameTime) {
 
 void Room::Render(Camera* camera) {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
+}
+
+void Room::GenObj(std::string prefabId, int num)
+{
+	Prefab* ObjPrefab = GetResource(prefabId, ResourceManager::GetInstance()->m_PrefabList);
+	unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - 2*ObjPrefab->m_fWidth)+ (unsigned int)ObjPrefab->m_fWidth;
+	unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - 2*ObjPrefab->m_fHeight) + (unsigned int)ObjPrefab->m_fHeight;
+	Matrix translation;
+	
+	unsigned int random = rand() % 100 + 1;
+	while (num--)
+	{
+		unsigned int random = rand() % 100 + 1;
+		if (random > 50)
+		{
+			if ((randPosX + 1) <= ( ROOM_WIDTH - ObjPrefab->m_fWidth) && (randPosX + 1) >= ( ObjPrefab->m_fWidth))
+				randPosX++;
+		}
+		else
+		{
+			if ((randPosY + 1) <= (+ ROOM_HEIGHT - ObjPrefab->m_fHeight) && (randPosY + 1) >= (  ObjPrefab->m_fHeight))
+				randPosY++;
+		}
+
+		
+		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+		if (prefabId == SPIKE_TRAP)
+		{
+			SpikeTrap* spikeTrap = new SpikeTrap(SPIKE_TRAP, m_RoomID, translation);
+			StatePlay::GetInstance()->AddTrap(spikeTrap);
+		}
+		else if (prefabId == BOMB_TRAP)
+		{
+			BombTrap* bombTrap = new BombTrap(BOMB_TRAP, m_RoomID, translation);
+			StatePlay::GetInstance()->AddTrap(bombTrap);
+		}
+		else if (prefabId == ENEMY)
+		{
+			Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
+			StatePlay::GetInstance()->AddEnemy(enemy);
+		}
+		else if (prefabId == HP_PO)
+		{
+			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
+			StatePlay::GetInstance()->AddDrop(hp);
+		}
+		else if (prefabId == MP_PO)
+		{
+			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
+			StatePlay::GetInstance()->AddDrop(mp);
+		}
+	}
+
+	//
 }
