@@ -1,12 +1,13 @@
 #pragma once
 #include <vector>
 #include "StateBase.h"
+#include "Button.h"
 #include "Text.h"
 #include "Room.h"
 #include "Skill.h"
 #include "Player.h"
 #include "Enemy.h"
-#include"Gold.h"
+#include "Gold.h"
 #include "HPPotion.h"
 #include "MPPotion.h"
 #include "SpikeTrap.h"
@@ -15,8 +16,6 @@
 
 class StatePlay :public StateBase<StatePlay>
 {
-private:
-	Text *scoreText ;
 public:
 	
 	RoomType m_Map[32][32];
@@ -31,9 +30,15 @@ public:
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
 
-
-
 	Player *m_Player;
+
+	Button *m_buttonPause;
+	Widget *m_HpHolder;
+	Widget *m_HpBar;
+	Text *m_HpText;
+	Widget *m_MpHolder;
+	Widget *m_MpBar;
+	Text *m_MpText;
 
 	//INIT
 	void Init();

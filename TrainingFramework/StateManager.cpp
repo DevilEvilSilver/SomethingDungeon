@@ -11,7 +11,7 @@
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_LOGO);
+	AddState(GS_STATE_PLAY);
 }
 
 StateManager::~StateManager() {
@@ -20,21 +20,6 @@ StateManager::~StateManager() {
 	while (m_GameStateStack.size() > 0) {
 		CloseState(m_GameStateStack.back());
 	}
-
-	//switch (m_GameStateStack.back()) {
-	//case GS_STATE_LOGO:
-	//	StateLogo::GetInstance()->ResetInstance();
-	//	break;
-	//case GS_STATE_WELCOME:
-	//	StateLogo::GetInstance()->ResetInstance();
-	//	StateWelcome::GetInstance()->ResetInstance();
-	//	break;
-	//case GS_STATE_PLAY:
-	//	/*StateLogo::GetInstance()->ResetInstance();
-	//	StateWelcome::GetInstance()->ResetInstance();*/
-	//	StatePlay::GetInstance()->ResetInstance();
-	//	break;
-	//}
 
 	//......
 }

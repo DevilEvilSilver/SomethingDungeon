@@ -8,6 +8,8 @@ Widget::Widget() {}
 Widget::Widget(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Object(prefabID, roomID, translationMatrix) {
 
+	m_fCameraPosX = translationMatrix.m[3][0];
+	m_fCameraPosY = translationMatrix.m[3][1];
 }
 
 Widget::~Widget() {
@@ -23,7 +25,7 @@ void Widget::Render(Camera* camera) {
 }
 
 Matrix Widget::GetWorldMatrix(Camera *camera) {
-	SetPosX(m_fCurrentPosX + camera->GetPosition().x);
-	SetPosY(m_fCurrentPosY + camera->GetPosition().y);
+	SetPosX(m_fCameraPosX + camera->GetPosition().x);
+	SetPosY(m_fCameraPosY + camera->GetPosition().y);
 	return m_WorldMatrix;
 }

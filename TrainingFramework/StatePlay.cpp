@@ -73,8 +73,14 @@ StatePlay::~StatePlay() {
 
 	delete m_Player;
 	delete m_Camera;
-	delete scoreText;
-	
+
+	//UI
+	delete m_HpHolder;
+	delete m_HpBar;
+	delete m_HpText;
+	delete m_MpHolder;
+	delete m_MpBar;
+	delete m_MpText;
 }
 
 void StatePlay::Init() {
@@ -110,11 +116,67 @@ void StatePlay::Init() {
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
 	m_Camera = new Camera(startRoom->GetPosX() + (startRoom->m_fWidth / 2), startRoom->GetPosY() - (startRoom->m_fHeight / 2), 
 		fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
-	
+
+	//HP Holder
+	{
+		fscanf(dataFile, "#HP_HOLDER\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_HpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//HP Bar
+	{
+		fscanf(dataFile, "#HP_BAR\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_HpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//MP Holder
+	{
+		fscanf(dataFile, "#MP_HOLDER\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_MpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//MP Bar
+	{
+		fscanf(dataFile, "#MP_BAR\n");
+		unsigned int id;
+		fscanf(dataFile, "ID %d\n", &id);
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_MpBar = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
 
-	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f);
-
+	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -217,17 +279,6 @@ void StatePlay::Render() {
 		}
 	}
 
-	//RENDER TEXT
-	{
-	//	Renderer::GetInstance()->DrawText2(scoreText);
-		Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
- 		Renderer::GetInstance()->DrawText2(m_Player->numHPText);
-		Renderer::GetInstance()->DrawText2(m_Player->numMPText);
-
-	}
-
-	
-
 	//RENDER DROP
 	for (auto& obj : m_DropList) {
 		if (CheckInRange(obj->m_RoomID))
@@ -240,6 +291,19 @@ void StatePlay::Render() {
 		obj->Render(this->m_Camera);
 	}
 
+	//RENDER UI
+	{
+		//Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
+		//Renderer::GetInstance()->DrawText2(m_Player->numHPText);
+		//Renderer::GetInstance()->DrawText2(m_Player->numMPText);
+		m_HpHolder->Render(m_Camera);
+		m_HpBar->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_HpText);
+
+		m_MpHolder->Render(m_Camera);
+		m_MpBar->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_MpText);
+	}
 }
 void StatePlay::AddDrop(Drop* drop)
 {
@@ -273,13 +337,8 @@ void StatePlay::RemoveTrap(Trap* trap)
 
 	m_TrapList.resize(m_TrapList.size() - 1);
 }
+
 void StatePlay::Update(float frameTime) {
-
-
-
-
-	
-
 	UpdateRoomID();
 	m_Player->Update(frameTime);
 	for (auto& obj : m_EnemyList) {
@@ -306,6 +365,15 @@ void StatePlay::Update(float frameTime) {
 	//follow camera
 	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
 	m_Camera->Update(frameTime);
+
+	//Update UI
+	m_HpHolder->Update(frameTime);
+	m_HpBar->Update(frameTime);
+	m_HpText->setText(m_Player->GetHP());
+
+	m_MpHolder->Update(frameTime);
+	m_MpBar->Update(frameTime);
+	m_MpText->setText(m_Player->GetMP());
 }
 
 void StatePlay::UpdateRoomID() {
@@ -409,8 +477,6 @@ void StatePlay::UpdateControl(float frameTime)
 		}
 		
 		std::string a = "DASH CD: " + std::to_string(m_Player->currDashCD);
-		
-		scoreText->setText(a);
 	}
 }
 

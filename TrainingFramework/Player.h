@@ -75,5 +75,8 @@ public:
 	void UpdateCollideHP(float frameTime, HPPotion* hp);
 	// void Render(Camera *camera);
 
-	
+	//UI
+	std::string GetHP();
+	std::string GetMP();
+	std::string GetGold();
 };

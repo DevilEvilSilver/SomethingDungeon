@@ -1,4 +1,4 @@
-#PREFAB_COUNT 12
+#PREFAB_COUNT 16
 ID mainChar
 MODEL 0
 SHADER 0
@@ -140,6 +140,50 @@ ID bombInit
 FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
 ID boomed
 FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
+
+ID hpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.625, 0.75
+SIZE 5.625 x 0.75
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpHolder/static/sprite.txt
+
+ID hpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0875, 0.6
+SIZE 4.0875 x 0.6
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpBar/static/sprite.txt
+
+ID mpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.625, 0.75
+SIZE 5.625 x 0.75
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpHolder/static/sprite.txt
+
+ID mpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0875, 0.6
+SIZE 4.0875 x 0.6
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpBar/static/sprite.txt
 
 #MODEL_GEN 1
 ID 0
