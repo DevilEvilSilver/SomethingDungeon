@@ -31,7 +31,7 @@ public:
 	//--------------skill here----------------
 	float currCD = 0.0f;
 	void ShootChicken(Vector2 target);
-
+	void Melee(Vector2 target);
     //----------------------------------------
 	
 	void Death(float frameiIme);

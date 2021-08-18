@@ -72,7 +72,7 @@
 #define BOMB_TRAP		"bombTrap"
 
 //SKILL
-#define	BULLET_SPEED	9
+#define	BULLET_SPEED	12
 
 //ANIMATION
 #define INIT_ANIM		"init"
@@ -103,3 +103,12 @@
 #define WELCOME_BGM			0
 #define LOGO_SFX			1
 #define BUTTON_SFX			2
+
+#define COIN				3
+#define LOSE				4
+#define PEWPEW				5
+#define REGEN				6
+#define WIN					7
+#define HIT					8
+#define BOMB				9
+

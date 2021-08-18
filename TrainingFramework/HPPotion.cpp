@@ -6,6 +6,8 @@
 #include "Renderer.h"
 
 #include "StatePlay.h"
+
+#include "SoundEngine.h"
 HPPotion::~HPPotion() 
 {
 }
@@ -17,7 +19,7 @@ void HPPotion::OnCollision()
 	player->m_currHP = (player->m_currHP + this->getValue());
 	if (player->m_currHP > player->m_maxHP) player->m_currHP = player->m_maxHP;
 	player->numHPText->setText("HP: " + std::to_string(player->m_currHP));
-
+	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
 	StatePlay::GetInstance()->RemoveDrop(this);
 }
 

@@ -7,6 +7,8 @@
 #include "StatePlay.h"
 #include "CollisionManager.h"
 
+#include "SoundEngine.h"
+
 Character::Character() {}
 
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
@@ -83,8 +85,8 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		knockBackDir = -(m_sourcePos - GetPos());
 		SetCS(CS_GOTHIT);
 
-		
-
+		if (auto* player = dynamic_cast<Player*>(this))
+		SoundEngine::GetInstance()->PlayInTSec(HIT, 0.25f);
 	}
 		
 	

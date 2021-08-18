@@ -13,7 +13,7 @@
 #include "InputManager.h"
 #include "BulletSkill.h"
 
-
+#include "SoundEngine.h"
 
 void Player::ShootChicken(Vector2 target)
 {
@@ -28,10 +28,26 @@ void Player::ShootChicken(Vector2 target)
 
 		m_currMP -= ChickenMPCost;
 		numMPText->setText("MP: " + std::to_string(m_currMP));
+
+		SoundEngine::GetInstance()->Play(PEWPEW, 1.0f, 1.0f, false);
 	}
 
 	
 }
+
+void Player::Melee(Vector2 target)
+{
+	if (currMeleeCD <= 0.0f) {
+		currMeleeCD = MeleeCoolDown;
+
+		Matrix m;
+		m.SetTranslation(target.x, target.y, 0);
+
+		AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
+		StatePlay::GetInstance()->AddSkill(bskill);
+	}
+}
+
 
 void Player::UniqueUpdate(float frameTime)
 {
@@ -49,7 +65,7 @@ void Player::UniqueUpdate(float frameTime)
 	//COOLDOWN
 	if (currDashCD > 0.0f) currDashCD -= frameTime;
 	if (currChickenCD>0.0f)currChickenCD -= frameTime;
-	
+	if (currMeleeCD > 0.0f) currMeleeCD -= frameTime;
 }
 
 void Player::Attack(float frameTime)
@@ -67,8 +83,10 @@ bool Player::Dash(float frameTime)
 	
 	if (m_pState == P_DASH)
 	{
+		Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
+		
 		m_strState = DASH;
-		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.55f, frameTime) == false) return false;
+		if (FixedMove(mousePos, m_MOVESPEED, 0.5f, frameTime) == false) return false;
 		SetCS(CS_IDLE);
 		SetPS(P_CS);
 	}
@@ -108,8 +126,8 @@ Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 20;
-	m_currHP = 20;
+	m_maxHP = 20000;
+	m_currHP = 20000;
 	m_maxMP = 20;
 	m_currMP = 20;
 	m_ATK = 3;
@@ -140,38 +158,24 @@ Player::~Player() {
 
 void Player::Attack(int x, int y)
 {
+	if (m_cState != CS_GOTHIT && m_cState != CS_DEATH)
+	{
+		int newKeyPressed = InputManager::GetInstance()->keyPressed;
+		Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
+		Vector2 playerPos(m_fCurrentPosX, m_fCurrentPosY);
 
-	int newKeyPressed = InputManager::GetInstance()->keyPressed;
-	Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera,InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
-	Vector2 playerPos(m_fCurrentPosX, m_fCurrentPosY);
-	static int iSwithSkill = 1;
-	static bool bSwitch = true;
-	Matrix m;
-	m.SetTranslation(mousePos.x, mousePos.y,0);
-	if ((newKeyPressed & MOUSE_LEFT)  )//
-	{
-		ShootChicken(mousePos);
-	
-		
-			
-			
-		
-	}
-	else if ((newKeyPressed & MOUSE_RIGHT))
-	{
-		if (bSwitch)
+		if ((newKeyPressed & MOUSE_LEFT))//
 		{
-			iSwithSkill++;
-			if (iSwithSkill == 3)
-				iSwithSkill = 1;
-			bSwitch = false;
-			//std::cout << "newKeyPressed & MOUSE_RIGHT\n";
+			Melee(mousePos);
+		}
+		if ((newKeyPressed & MOUSE_RIGHT))
+		{
+			ShootChicken(mousePos);
 		}
 	}
-	else
-	{
-		bSwitch = true;
-	}
+
+	
+
 	
 }
 

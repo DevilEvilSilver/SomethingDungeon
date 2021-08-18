@@ -8,6 +8,8 @@
 
 #include "CollisionManager.h"
 
+#include "SoundEngine.h"
+
 BombTrap::~BombTrap() {}
 
 BombTrap::BombTrap(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
@@ -16,6 +18,8 @@ BombTrap::BombTrap(std::string prefabID, Vector2 roomID, Matrix translationMatri
 
 	timeTillDelete = 0.8f;
 	isCollide = false;
+
+	
 }
 
 
@@ -27,9 +31,12 @@ void BombTrap::Update(float frameTime) {
 	{
 		//m_fCurrFrameTime += frameTime;
 		m_strState = BOOMED;
-		if (!isCollide)
+		if (!isCollide) {
+			isCollide = true;
+			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 1.0f, false);
+		}
 				// -hp only once
-		isCollide = true;
+		
 		
 	}
 	else

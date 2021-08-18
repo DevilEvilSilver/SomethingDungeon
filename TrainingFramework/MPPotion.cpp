@@ -6,6 +6,7 @@
 
 #include "StatePlay.h"
 
+#include "SoundEngine.h"
 MPPotion::~MPPotion()
 {
 }
@@ -18,6 +19,7 @@ void MPPotion::OnCollision()
 	if (player->m_currMP>player->m_maxMP) player->m_currMP=player->m_maxMP;
 	player->numMPText->setText("MP: " + std::to_string(player->m_currMP));
 
+	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
 	StatePlay::GetInstance()->RemoveDrop(this);
 }
 

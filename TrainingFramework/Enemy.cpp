@@ -8,6 +8,7 @@
 #include "CollisionManager.h"
 
 #include "BulletSkill.h"
+#include "AoeSkill.h"
 
 void Enemy::UniqueUpdate(float frameTime)
 {
@@ -21,6 +22,7 @@ void Enemy::UniqueUpdate(float frameTime)
 	float totalCD = 4.0f;
 	
 	//move behavior
+	
 	if (distance < 4.0f /*&& distance > 5.0f*/) KeepDistance(delta);
 	else if (distance < 10.0f)
 	{
@@ -32,7 +34,9 @@ void Enemy::UniqueUpdate(float frameTime)
 			MoveRandom(frameTime);
 			currCD -= frameTime;
 		}
-	}else SetCS(CS_IDLE);
+	}
+	else SetCS(CS_IDLE);
+
 }
 
 //ACTION
@@ -79,6 +83,16 @@ void Enemy::ShootChicken(Vector2 target)
 	m.SetTranslation(target.x, target.y, 0);
 
 	BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
+	StatePlay::GetInstance()->AddSkill(bskill);
+}
+
+void Enemy::Melee(Vector2 target)
+{
+
+	Matrix m;
+	m.SetTranslation(target.x, target.y, 0);
+
+	AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
 	StatePlay::GetInstance()->AddSkill(bskill);
 }
 

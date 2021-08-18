@@ -42,7 +42,8 @@ void Room::RoomGenerate() {
 			enemyNum = 0, 
 			hpNum=0,
 			mpNum=0,
-			bombNum=0;
+			bombNum=0,
+			spikeNum=0;
 		unsigned int random = rand() % 100 + 1;
 
 		if (random >= 80)
@@ -56,6 +57,8 @@ void Room::RoomGenerate() {
 			bombNum = 1;
 			enemyNum = 2;
 			hpNum = 1;
+			spikeNum = 2;
+
 		}
 		else if (random >= 10)
 		{
@@ -96,12 +99,22 @@ void Room::RoomGenerate() {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			/*BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation);
-			StatePlay::GetInstance()->AddTrap(bomb);*/
+			BombTrap* bomb = new BombTrap(BOMB_TRAP, m_RoomID, translation);
+			StatePlay::GetInstance()->AddTrap(bomb);
+
+
+		}
+		while (spikeNum--) {
+
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - bombPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - bombPrefab->m_fHeight);
+			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+		
 			SpikeTrap* bomb = new SpikeTrap(SPIKE_TRAP, m_RoomID, translation);
 			StatePlay::GetInstance()->AddTrap(bomb);
 
 		}
+
 	}
 }
 

@@ -7,6 +7,7 @@
 
 #include "StatePlay.h"
 
+#include "SoundEngine.h"
 Gold::~Gold() {}
 
 void Gold::OnCollision()
@@ -19,7 +20,7 @@ void Gold::OnCollision()
 
 	StatePlay::GetInstance()->RemoveDrop(this);
 
-	
+	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 }
 
 Gold::Gold(std::string prefabID, Vector2 roomID, Matrix translationMatrix, int value, bool isDisplay)

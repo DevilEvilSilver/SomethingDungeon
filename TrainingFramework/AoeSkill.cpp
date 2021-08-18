@@ -5,22 +5,25 @@
 AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
 {
-	mp_fAoeRadius = 10;
+	mp_fAoeRadius = 2.0f;
 	m_percentDamage = 150.0f;
 	m_totalExsitingTime = 200.0f;//ms
-	mp_MPCost = 1;
+
 	Init(mousePos);
 
 	if (m_fVx > 0) m_isFacingLeft = false;
 	m_damage = owner->m_ATK * (float)m_percentDamage / 100;
 	
+	m_isKnockBack = true;
+	totalCD = 5.0f;
+	if (m_fVx <= 0) m_isFacingLeft = false;
 }
 AoeSkill::~AoeSkill()
 {
 }
 void AoeSkill::UpdateHit(float frameTime)
 {
-	if (currCD == 0.0f)
+	if (currCD <= 0.0f)
 	{
 		Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
 		if (m_isPlayer)
@@ -34,6 +37,7 @@ void AoeSkill::UpdateHit(float frameTime)
 					{
 						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 						
+
 						currCD = totalCD;
 					}
 			}
@@ -49,7 +53,7 @@ void AoeSkill::UpdateHit(float frameTime)
 	else 
 	{
 		currCD -= frameTime;
-		if (currCD < 0.0f)currCD = 0.0f;
+		
 	}
 			
 
@@ -58,7 +62,7 @@ void AoeSkill::UpdateHit(float frameTime)
 void AoeSkill::Init(Vector2 mousePos)
 {
 	float* data1 = m_owner->GetHitBoxCurrentData();
-	Vector2 c1(data1[0] + m_owner->m_fWidth / 2, data1[1] - m_owner->m_fHeight / 2);
+	Vector2 c1(data1[0]+ m_owner->m_fWidth / 2, data1[1]- m_owner->m_fHeight / 2);
 	if ((mousePos - c1).Length() > mp_fAoeRadius)
 		mousePos = c1 + (mousePos - c1).Normalize() * mp_fAoeRadius;
 	m_fCurrentPosX = mousePos.x - m_fWidth / 2;

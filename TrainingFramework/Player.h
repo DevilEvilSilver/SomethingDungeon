@@ -39,14 +39,20 @@ public:
 
 	//PLAYER SKILL
 	//---------------skill here---------------
-	float DashCoolDown = 1.5f;
+	float DashCoolDown = 1.0f;
 	float currDashCD = 0.0f;
 
 	float ChickenCoolDown = 0.2f;
 	float currChickenCD = 0.0f;
-	float ChickenMPCost = 1;
+	int ChickenMPCost = 1;
 	void ShootChicken(Vector2 target);
+
+	float MeleeCoolDown = 0.2f;
+	float currMeleeCD = 0.0f;
+	void Melee(Vector2 target);
 	//----------------------------------------
+
+
 
 	////////////////////////////////////////////////////////////////////////
 
