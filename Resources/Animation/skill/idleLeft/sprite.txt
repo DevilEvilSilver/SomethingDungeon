@@ -1,3 +1,9 @@
+#FRAME_COUNT 1
+ID 0
+SPF -1
+FILE ../Resources/Animation/skill/idleLeft/7.tga
+TILING GL_REPEAT
+
 #FRAME_COUNT 8
 ID 0
 SPF 0.06

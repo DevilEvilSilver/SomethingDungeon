@@ -10,7 +10,7 @@ AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vec
 {
 	mp_fAoeRadius = 2.0f;
 	m_percentDamage = 150.0f;
-	m_totalExsitingTime = 200.0f;//ms
+	m_totalExsitingTime = 500.0f;//ms
 
 	Init(mousePos);
 
@@ -19,7 +19,8 @@ AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vec
 	
 	m_isKnockBack = true;
 	totalCD = 5.0f;
-	if (m_fVx <= 0) m_isFacingLeft = false;
+	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
+	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = false;
 }
 AoeSkill::~AoeSkill()
 {

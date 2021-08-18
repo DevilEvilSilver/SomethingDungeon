@@ -79,6 +79,7 @@ bool Player::Dash(float frameTime)
 	{ 
 		SetPS(P_DASH);
 		currDashCD = DashCoolDown;
+		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
 	}
 	
 	if (m_pState == P_DASH)
@@ -131,7 +132,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_ATK = 3;
 	m_DEF = 3;
 
-	m_MOVESPEED = 10.0f;
+	m_MOVESPEED = 6.0f;
 
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
@@ -145,7 +146,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	numHPText = new Text(Hptext, 1, 1, TEXT_COLOR::RED, 20, 60, 1.0f);
 
 	m_currMP = m_maxMP;
-	std::string Mptext = "MP: " + std::to_string(m_currHP);
+	std::string Mptext = "MP: " + std::to_string(m_currMP);
 	numMPText = new Text(Mptext, 1, 1, TEXT_COLOR::BLUE, 20, 80, 1.0f);
 }
 Player::~Player() {

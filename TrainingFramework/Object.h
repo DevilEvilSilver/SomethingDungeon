@@ -22,6 +22,7 @@ public:
 	unsigned int m_iCurrFrameIndex;
 	float m_fCurrFrameTime;
 	bool m_isFacingLeft=true;
+	bool m_isFacingUp = true;
 
 	//HITBOX
 	unsigned int m_iType;			
