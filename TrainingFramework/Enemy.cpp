@@ -28,7 +28,7 @@ void Enemy::UniqueUpdate(float frameTime)
 	if (distance < 4.0f /*&& distance > 5.0f*/)
 	{
 		KeepDistance(delta);
-		m_MOVESPEED = 10.0f;
+		m_MOVESPEED = 4.0f;
 	}
 		
 	else if (distance < 10.0f)
@@ -133,7 +133,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
-	isPlayerCollision = false;
+	isPlayerCollision = true;
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 3.0f;

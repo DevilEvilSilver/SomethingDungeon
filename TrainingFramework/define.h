@@ -111,4 +111,5 @@
 #define WIN					7
 #define HIT					8
 #define BOMB				9
+#define WHOOSH				10
 
