@@ -11,12 +11,12 @@
 
 StateManager::StateManager()
 {
-	/*AddState(GS_STATE_LOGO);
-	ResourceManager::GetInstance()->Init(FILE_R_LOGO);*/
+	AddState(GS_STATE_LOGO);
+	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 
 	
-	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
-	AddState(GS_STATE_PLAY);
+	/*ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+	AddState(GS_STATE_PLAY);*/
 }
 
 StateManager::~StateManager() {
@@ -35,8 +35,8 @@ StateManager::~StateManager() {
 		StateWelcome::GetInstance()->ResetInstance();
 		break;
 	case GS_STATE_PLAY:
-		/*StateLogo::GetInstance()->ResetInstance();
-		StateWelcome::GetInstance()->ResetInstance();*/
+		StateLogo::GetInstance()->ResetInstance();
+		StateWelcome::GetInstance()->ResetInstance();
 		StatePlay::GetInstance()->ResetInstance();
 		break;
 	}
