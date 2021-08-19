@@ -35,7 +35,7 @@ void Room::RoomGenerate() {
 
 		if (random >= 70 && random <= 100)
 		{
-			GenObj(ENEMY, 4);
+			GenObj(ENEMY, ((int)random- 70)/5);
 		}
 		else if (random >= 60 && random < 70)
 		{
@@ -47,11 +47,11 @@ void Room::RoomGenerate() {
 		}
 		else if (random >= 20 && random < 40)
 		{
-			GenObj(BOMB_TRAP, 4);
+			GenObj(BOMB_TRAP, ((int)random-20)/10);
 		}
 		else if (random >= 0 && random < 20)
 		{
-			GenObj(SPIKE_TRAP, 8);
+			GenObj(SPIKE_TRAP, (int)random/2);
 		}
 	}
 }
