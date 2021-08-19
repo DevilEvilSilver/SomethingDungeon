@@ -7,6 +7,10 @@
 #include "StatePlay.h"
 
 
+Drop::Drop()
+{
+}
+
 Drop::Drop(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Object(prefabID, roomID, translationMatrix) {
 

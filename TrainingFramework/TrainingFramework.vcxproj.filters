@@ -219,8 +219,11 @@
     <ClCompile Include="Font.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerSkill.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Bar.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StateLoad.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,8 +356,11 @@
     <ClInclude Include="Font.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerSkill.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Bar.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLoad.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

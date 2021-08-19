@@ -97,7 +97,8 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		
 		m_strState = IDLE_LEFT; //hit animation
 		
-		
+		if (auto* player = dynamic_cast<Enemy*>(this))
+			m_strState = GOTHIT;
 		
 		switch (i)
 		{

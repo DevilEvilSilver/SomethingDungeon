@@ -33,11 +33,7 @@ void Room::RoomGenerate() {
 	if (m_RoomType == NORMAL) {
 		unsigned int random = rand() % 100 + 1;
 
-		if (random >= 70 && random <= 100)
-		{
-			GenObj(ENEMY, ((int)random- 70)/5);
-		}
-		else if (random >= 60 && random < 70)
+		if (random >= 60 && random < 70)
 		{
 			GenObj(HP_PO, 1);
 		}
@@ -52,6 +48,22 @@ void Room::RoomGenerate() {
 		else if (random >= 0 && random < 20)
 		{
 			GenObj(SPIKE_TRAP, (int)random/2);
+		}
+
+		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
+		Matrix translation;
+		unsigned int enemyNum = 0;
+
+		if (random >= 80) enemyNum = 2;
+		else if (random >= 50)	enemyNum = 1;
+		else enemyNum = 0;
+
+		while (enemyNum--) {
+			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
+			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
+			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+			Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
+			StatePlay::GetInstance()->AddEnemy(enemy);
 		}
 	}
 }

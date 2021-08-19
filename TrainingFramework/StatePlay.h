@@ -32,6 +32,9 @@ public:
 
 	Player *m_Player;
 
+	//SOUND
+	int m_iHandleBGM;
+
 	//UI
 	Button *m_ButtonPause;
 	Widget *m_PauseBox;

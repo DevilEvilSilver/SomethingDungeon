@@ -48,4 +48,6 @@ public:
 	void setGold(Gold* gold) { m_gold = gold; }
 	Gold* getGold() {return m_gold;}
 	void createGoldObject();
+
+	void createDrop();
 };

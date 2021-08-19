@@ -21,20 +21,22 @@ TYPE RECT
 COORD 0.0, 0.0, 1.0, 1.0
 SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 3
+ANIMATION_COUNT 4
 ID idleLeft
 FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
 ID move
 FILE ../Resources/Animation/enemy/move/sprite.txt
 ID dash
 FILE ../Resources/Animation/enemy/dash/sprite.txt
+ID gothit
+FILE ../Resources/Animation/enemy/gothit/sprite.txt
 
 ID skill
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 1.0, 1.0
-SIZE 1.0 x 1.0
+COORD 0.0, 0.0, 0.35, 0.35
+SIZE 0.35 x 0.35
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft

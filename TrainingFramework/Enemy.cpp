@@ -113,10 +113,14 @@ void Enemy::Death(float frameTime)
 {
 	m_strState = DASH;
 	printf("dead\n");
-	this->createGoldObject();
-	StatePlay::GetInstance()->AddDrop(getGold());
+	
 	isDead = true;
 	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
+
+	createDrop();
+	/*this->createGoldObject();
+	StatePlay::GetInstance()->AddDrop(getGold());*/
+
 	//StatePlay::GetInstance()->RemoveEnemy(this);
 }
 
@@ -149,4 +153,30 @@ void Enemy::createGoldObject() {
 	Matrix translation;
 	translation.SetTranslation(GetPosX(), GetPosY(), 0.0f);
 	m_gold = new Gold(GOLD, m_RoomID, translation, 5, false);
+}
+
+void Enemy::createDrop()
+{
+	unsigned int random = rand() % 100 + 1;
+
+	Matrix translation;
+	translation.SetTranslation(GetPosX(), GetPosY(), 0.0f);
+
+	
+	if (random >= 75)
+	{
+		HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(hp);
+	}
+	else if (random >= 50)
+	{
+		MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(mp);
+	}
+	else
+	{
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 5, false);
+		StatePlay::GetInstance()->AddDrop(gold);
+	}
+		
 }

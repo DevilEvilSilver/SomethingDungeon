@@ -83,6 +83,7 @@
 #define IDLE_LEFT		"idleLeft"
 #define MOVE			"move"
 #define DASH			"dash"
+#define GOTHIT			"gothit"
 
 	//BUTTON
 #define B_NORMAL			"normal"

@@ -34,7 +34,7 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 
 StatePlay::StatePlay(void) {
 	this->Init();
-	SoundEngine::GetInstance()->Play(11, 0.05f, 1.0f, true);
+
 }
 
 StatePlay::~StatePlay() {
@@ -426,7 +426,7 @@ void StatePlay::Update(float frameTime) {
 	else {
 		if (!m_isStartUp) {
 			RoomsGenerate();
-
+			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.05f, 1.0f, true);
 			m_isStartUp = true;
 		}
 			 
@@ -439,7 +439,7 @@ void StatePlay::Update(float frameTime) {
 			}
 		}
 		for (auto& obj : m_SkillList) {
-			if (CheckInRange(obj->m_RoomID))
+		
 				obj->Update(frameTime);
 		}
 		for (auto& obj : m_TrapList) {
@@ -599,7 +599,7 @@ void StatePlay::UpdateControl(float frameTime)
 		
 		
 	}
-}
+
 
 void StatePlay::UpdateControlPause(float frameTime) {
 	//Button Resume
@@ -630,13 +630,13 @@ void StatePlay::UpdateControlPause(float frameTime) {
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
 
-			//SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, fNextStateFrame);
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
 		}
 
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
-
+			InputManager::GetInstance()->ResetInput();
 			StateManager::GetInstance()->CloseState();
 			return;
 		}
