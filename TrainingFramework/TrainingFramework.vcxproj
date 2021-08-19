@@ -100,6 +100,7 @@
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AoeSkill.cpp" />
     <ClCompile Include="Bar.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AoeSkill.h" />
     <ClInclude Include="Bar.h" />
@@ -205,6 +207,14 @@
     <Text Include="..\Resources\States\S_LOGO.txt" />
     <Text Include="..\Resources\States\S_PLAY.txt" />
     <Text Include="..\Resources\States\S_WELCOME.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Logo.vs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.fs" />
+    <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

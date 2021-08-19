@@ -141,9 +141,6 @@ void StateWelcome::UpdateControl(float frameTime)
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
 
 			SoundEngine::GetInstance()->Fader(m_iHandleBGM ,false, m_fNextStateFrame);
-
-
-
 		}
 
 		if (m_fNextStateFrame < 0) {

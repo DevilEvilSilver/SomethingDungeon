@@ -7,6 +7,7 @@ varying vec2 v_uv;
 void main()
 {	
 	vec4 color = texture2D(u_texture, u_spriteScale * v_uv);
-	color.a = min(u_time / u_fade, 1.0);
-	gl_FragColor = color;
+	vec4 fader = color;
+	fader.a = min(u_time / u_fade, color.a);
+	gl_FragColor = fader;
 }

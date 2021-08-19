@@ -51,9 +51,12 @@ public:
 	Text *m_GoldText;
 
 	Fader *m_TransitionScreen;
+	Fader *m_DeathBanner;
 
 	//LOGIC
 	bool m_isStartUp;
+	bool m_isNextState;
+	bool m_isDead;
 	bool m_isQuit;
 	float m_fNextStateFrame;
 
@@ -73,10 +76,12 @@ public:
 
 	void Update(float frameTime);
 	
-	bool CheckInRange(Vector2 roomID);			//ONLY UPDATE NEAR
-	void UpdateRoomID();						//UPDATE ROOM_ID FOR CHARACTER
-	void UpdateControl(float frameTime);		//CONTROL PLAYER
-	void UpdateControlPause(float frameTime);	//HANDLE INPUT WHILE PAUSE
+	bool CheckInRange(Vector2 roomID);				//ONLY UPDATE NEAR
+	void UpdateRoomID();							//UPDATE ROOM_ID FOR CHARACTER
+	void UpdateControl(float frameTime);			//CONTROL PLAYER
+	void UpdatePause(float frameTime);				//HANDLE INPUT WHILE PAUSE
+	void UpdateResult(float frameTime);				//UPDATE NEXT STATE 
+	void SetRecord(bool isWin, unsigned int score);	//SAVE PLAY RECORD
 
 	/////////////////////////////////////////////////////////
 

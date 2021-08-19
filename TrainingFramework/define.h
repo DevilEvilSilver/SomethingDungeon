@@ -26,7 +26,11 @@
 #define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
 #define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
+#define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
+#define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SE							"../Resources/Sound.txt"
+
+#define FILE_RESULT						"../Resources/result.txt"
 
 //MAP
 #define MAP_MAX_TUNNEL				160
@@ -58,6 +62,7 @@
 #define X_EPSILON			        0.1
 
 //PREFAB
+#define DEATH_BANNER	"deathBanner"
 #define TRANSISTION		"transition"
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
@@ -101,6 +106,11 @@
 #define BOOMED			"boomed"
 #define SPIKE			"spike"
 
+	//RESULT
+#define WIN_BG			"winBG"
+#define WIN_TITLE		"winTitle"
+#define LOSE_BG			"loseBG"
+#define LOSE_TITLE		"loseTitle"
 
 //SOUND
 #define WELCOME_BGM			0
@@ -116,3 +126,5 @@
 #define BOMB				9
 #define WHOOSH				10
 
+#define WIN_BGM				11
+#define LOSE_BGM			12

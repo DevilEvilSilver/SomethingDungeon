@@ -32,6 +32,15 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 	return 0;
 }
 
+template <class T>
+T GetResource(std::string id, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (!strcmp(id.c_str(), obj->m_strResourceID.c_str()))
+			return obj;
+	}
+	return 0;
+}
+
 StatePlay::StatePlay(void) {
 	this->Init();
 
@@ -88,6 +97,9 @@ StatePlay::~StatePlay() {
 
 	if (m_TransitionScreen != NULL)
 		delete m_TransitionScreen;
+
+	if (m_DeathBanner != NULL)
+		delete m_DeathBanner;
 }
 
 void StatePlay::Init() {
@@ -232,9 +244,12 @@ void StatePlay::Init() {
 
 	fclose(dataFile);
 
+	m_isNextState = false;
+	m_isDead = false;
 	m_isQuit = false;
 	m_isStartUp = false;
 	m_fNextStateFrame = 1.0f;
+	m_DeathBanner = NULL;
 	m_TransitionScreen = NULL;
 
 	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
@@ -378,6 +393,8 @@ void StatePlay::Render() {
 			m_ButtonQuit->Render(m_Camera);
 		}
 
+		if (m_DeathBanner != NULL)
+			m_DeathBanner->Render(this->m_Camera);
 		if (m_TransitionScreen != NULL)
 			m_TransitionScreen->Render(this->m_Camera);
 	}
@@ -416,76 +433,87 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
-	if (m_isPause) {
-		m_PauseBox->Update(frameTime);
-		m_ButtonResume->Update(frameTime);
-		m_ButtonQuit->Update(frameTime);
+	if (!m_isDead && !m_isNextState) {
+		if (m_isPause) {
+			m_PauseBox->Update(frameTime);
+			m_ButtonResume->Update(frameTime);
+			m_ButtonQuit->Update(frameTime);
 
-		UpdateControlPause(frameTime);
+			UpdatePause(frameTime);
+		}
+		else {
+			if (!m_isStartUp) {
+				RoomsGenerate();
+				m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
+				m_isStartUp = true;
+			}
+
+			//CHECK IF PLAYER DEAD 
+			if (m_Player->m_currHP <= 0) {
+				m_isDead = true;
+			}
+
+			//CHECK IF PLAYER ENTER GATE
+
+			UpdateRoomID();
+			m_Player->Update(frameTime);
+			for (auto& obj : m_EnemyList) {
+				if (CheckInRange(obj->m_RoomID))
+				{
+					obj->Update(frameTime);
+				}
+			}
+			for (auto& obj : m_SkillList) {
+
+				obj->Update(frameTime);
+			}
+			for (auto& obj : m_TrapList) {
+				if (CheckInRange(obj->m_RoomID))
+					obj->Update(frameTime);
+			}
+			for (auto& obj : m_DropList) {
+				if (CheckInRange(obj->m_RoomID))
+					obj->Update(frameTime);
+			}
+
+			//Kill dead
+			for (auto& obj : m_EnemyList) {
+				if (obj->isDead == true)
+				{
+					RemoveEnemy(obj);
+				}
+			}
+
+
+			UpdateControl(frameTime);
+
+			//follow camera
+			m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+			m_Camera->Update(frameTime);
+
+			//Update UI
+			m_ButtonPause->Update(frameTime);
+
+			m_HpHolder->Update(frameTime);
+			m_HpBar->Update(frameTime);
+			m_HpBar->Resize(m_Player->m_currHP);
+			m_HpText->setText(m_Player->GetHP());
+
+			m_MpHolder->Update(frameTime);
+			m_MpBar->Update(frameTime);
+			m_MpBar->Resize(m_Player->m_currMP);
+			m_MpText->setText(m_Player->GetMP());
+
+			m_GoldIcon->Update(frameTime);
+			m_GoldText->setText(m_Player->GetGold());
+		}
 	}
 	else {
-		if (!m_isStartUp) {
-			RoomsGenerate();
-			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
-			m_isStartUp = true;
-		}
-			 
-		UpdateRoomID();
-		m_Player->Update(frameTime);
-		for (auto& obj : m_EnemyList) {
-			if (CheckInRange(obj->m_RoomID))
-			{
-				obj->Update(frameTime);
-			}
-		}
-		for (auto& obj : m_SkillList) {
-		
-				obj->Update(frameTime);
-		}
-		for (auto& obj : m_TrapList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Update(frameTime);
-		}
-		for (auto& obj : m_DropList) {
-			if (CheckInRange(obj->m_RoomID))
-				obj->Update(frameTime);
-		}
-
-//Kill dead
-		for (auto& obj : m_EnemyList) {
-			if (obj->isDead==true)
-			{
-				RemoveEnemy(obj);
-			}
-		}
-
-
-		UpdateControl(frameTime);
-
-		//follow camera
-		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-		m_Camera->Update(frameTime);
-
-		//Update UI
-		m_ButtonPause->Update(frameTime);
-
-		m_HpHolder->Update(frameTime);
-		m_HpBar->Update(frameTime);
-		m_HpBar->Resize(m_Player->m_currHP);
-		m_HpText->setText(m_Player->GetHP());
-
-		m_MpHolder->Update(frameTime);
-		m_MpBar->Update(frameTime);
-		m_MpBar->Resize(m_Player->m_currMP);
-		m_MpText->setText(m_Player->GetMP());
-
-	
-
-	
-		m_GoldIcon->Update(frameTime);
-		m_GoldText->setText(m_Player->GetGold());
+		UpdateResult(frameTime);
 	}
 
+	if (m_DeathBanner != NULL)
+		m_DeathBanner->Update(frameTime);
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Update(frameTime);
 }
@@ -527,9 +555,6 @@ void StatePlay::UpdateRoomID() {
 			}
 		}
 	}
-
-
-
 }
 
 void StatePlay::UpdateControl(float frameTime)
@@ -601,7 +626,7 @@ void StatePlay::UpdateControl(float frameTime)
 	}
 
 
-void StatePlay::UpdateControlPause(float frameTime) {
+void StatePlay::UpdatePause(float frameTime) {
 	//Button Resume
 	if (m_ButtonResume->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
@@ -641,6 +666,81 @@ void StatePlay::UpdateControlPause(float frameTime) {
 			return;
 		}
 	}
+}
+
+void StatePlay::UpdateResult(float frameTime) {
+	//Death
+	if (m_isDead) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 4.0f && m_DeathBanner == NULL) {
+			Matrix translation;
+			float fTransY = GetResource(DEATH_BANNER, ResourceManager::GetInstance()->m_PrefabList)->m_fHeight / 2;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, fTransY, 2.0f);
+			m_DeathBanner = new Fader(DEATH_BANNER, Vector2(0.0f, 0.0f), translation, 3.0f, 1.5f);
+
+			m_fNextStateFrame += 3.0f;
+			//Add death sfx !!!!!!!!!!!!!
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 2.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SetRecord(false, m_Player->m_GOLD);
+
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
+			
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);
+			return;
+		}
+	}
+	else {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 2.0f);
+
+			//Add teleport sfx !!!!!!!!!
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SetRecord(true, m_Player->m_GOLD);
+
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
+
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);
+			return;
+		}
+	}
+}
+
+void StatePlay::SetRecord(bool isWin, unsigned int score) {
+	FILE* resultFile;
+	resultFile = fopen(FILE_RESULT, "w");
+
+	if (isWin) {
+		fprintf(resultFile, "WIN\n");
+	}
+	else {
+		fprintf(resultFile, "LOSE\n");
+	}
+	fprintf(resultFile, "SCORE: %d\n", score);
+
+	fclose(resultFile);
 }
 
 void StatePlay::AddObject(Object *object) {
