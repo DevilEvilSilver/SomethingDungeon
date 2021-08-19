@@ -75,11 +75,10 @@ void StateWelcome::Init() {
 
 	fclose(dataFile);
 
+	m_isStartUp = false;
 	m_isPLayState = false;
 	m_fNextStateFrame = 1.0f;
 	m_TransitionScreen = NULL;
-
-	m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 1.0f, 1.0f, true);
 }
 
 void StateWelcome::Render() {
@@ -93,6 +92,12 @@ void StateWelcome::Render() {
 }
 
 void StateWelcome::Update(float frameTime) {
+	if (!m_isStartUp) {
+		m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 1.0f, 1.0f, true);
+
+		m_isStartUp = true;
+	}
+
 	m_Background->Update(frameTime);
 	m_ButtonStart->Update(frameTime);
 
@@ -130,7 +135,6 @@ void StateWelcome::UpdateControl(float frameTime)
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
-			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
 			return;

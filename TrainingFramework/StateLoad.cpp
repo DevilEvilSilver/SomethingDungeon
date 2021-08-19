@@ -164,8 +164,6 @@ void StateLoad::LoadState() {
 		break;
 	}
 
-	StatePlay::GetInstance()->RoomsGenerate();
-
 	m_isNextState = true;
 }
 

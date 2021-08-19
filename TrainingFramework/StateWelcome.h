@@ -15,6 +15,7 @@ public:
 	int m_iHandleBGM;
 	
 	//LOGIC
+	bool m_isStartUp;
 	bool m_isPLayState;
 	float m_fNextStateFrame;
 

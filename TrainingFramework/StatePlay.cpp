@@ -236,6 +236,7 @@ void StatePlay::Init() {
 	fclose(dataFile);
 
 	m_isQuit = false;
+	m_isStartUp = false;
 	m_fNextStateFrame = 1.0f;
 	m_TransitionScreen = NULL;
 
@@ -422,6 +423,12 @@ void StatePlay::Update(float frameTime) {
 		UpdateControlPause(frameTime);
 	}
 	else {
+		if (!m_isStartUp) {
+			RoomsGenerate();
+
+			m_isStartUp = true;
+		}
+			 
 		UpdateRoomID();
 		m_Player->Update(frameTime);
 		for (auto& obj : m_EnemyList) {
@@ -620,7 +627,6 @@ void StatePlay::UpdateControlPause(float frameTime) {
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
-			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->CloseState();
 			return;

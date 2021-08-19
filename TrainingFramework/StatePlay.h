@@ -52,6 +52,7 @@ public:
 	Fader *m_TransitionScreen;
 
 	//LOGIC
+	bool m_isStartUp;
 	bool m_isQuit;
 	float m_fNextStateFrame;
 
