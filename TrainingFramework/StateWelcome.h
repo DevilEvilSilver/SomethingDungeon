@@ -8,6 +8,7 @@ class StateWelcome :public StateBase<StateWelcome>
 public:
 	//UI
 	Widget *m_Background;
+	Widget *m_Title;
 	Button *m_ButtonStart;
 	Fader *m_TransitionScreen;
 

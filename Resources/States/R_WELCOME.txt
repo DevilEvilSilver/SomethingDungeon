@@ -1,4 +1,4 @@
-#PREFAB_COUNT 3
+#PREFAB_COUNT 4
 ID backgroundMenu
 MODEL 0
 SHADER 0
@@ -9,6 +9,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
+
+ID title
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 26.5, 4.0
+SIZE 26.5 x 4.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/title/static/sprite.txt
 
 ID buttonStart
 MODEL 0

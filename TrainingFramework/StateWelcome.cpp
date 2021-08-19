@@ -18,6 +18,7 @@ StateWelcome::StateWelcome(void) {
 
 StateWelcome::~StateWelcome() {
 	delete m_Background;
+	delete m_Title;
 	delete m_ButtonStart;
 	delete m_Camera;
 
@@ -48,8 +49,6 @@ void StateWelcome::Init() {
 	//Background
 	{
 		fscanf(dataFile, "#BACKGROUND\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -59,11 +58,21 @@ void StateWelcome::Init() {
 		m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Title
+	{
+		fscanf(dataFile, "#TITLE\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_Title = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Start Button
 	{
 		fscanf(dataFile, "#BUTTON_START\n");
-		unsigned int id;
-		fscanf(dataFile, "ID %d\n", &id);
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		char strPrefab[50];
@@ -85,6 +94,7 @@ void StateWelcome::Render() {
 	//GetRenderOrder();
 	
 	m_Background->Render(this->m_Camera);
+	m_Title->Render(this->m_Camera);
 	m_ButtonStart->Render(this->m_Camera);
 
 	if (m_TransitionScreen != NULL)
@@ -99,6 +109,7 @@ void StateWelcome::Update(float frameTime) {
 	}
 
 	m_Background->Update(frameTime);
+	m_Title->Update(frameTime);
 	m_ButtonStart->Update(frameTime);
 
 	if (m_TransitionScreen != NULL)
