@@ -33,6 +33,7 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 
 StatePlay::StatePlay(void) {
 	this->Init();
+	SoundEngine::GetInstance()->Play(11, 0.05f, 1.0f, true);
 }
 
 StatePlay::~StatePlay() {
