@@ -14,4 +14,5 @@ public:
 
 	bool isPressed(Camera* camera);
 	bool isHover(Camera* camera);
+	bool isReleased(Camera* camera);
 };

@@ -18,6 +18,8 @@
 #define VERTEX_OFFSET_UV			(4 * sizeof(Vector3))
 
 //INIT STATE
+#define FILE_S_LOAD						"../Resources/States/S_LOAD.txt"
+#define FILE_R_LOAD						"../Resources/States/R_LOAD.txt"
 #define FILE_S_LOGO						"../Resources/States/S_LOGO.txt"
 #define FILE_R_LOGO						"../Resources/States/R_LOGO.txt"
 #define FILE_S_WELCOME					"../Resources/States/S_WELCOME.txt"
@@ -64,7 +66,7 @@
 #define AOE_SKILL		"aoeskill"
 #define NORMAL_ROOM		"normalRoom"
 #define WALL_ROOM		"wallRoom"
-#define HOLE_ROOM		"holeRoom"
+#define BORDER_ROOM		"borderRoom"
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"

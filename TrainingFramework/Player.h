@@ -80,4 +80,10 @@ public:
 	virtual void Attack(int x, int y);
 
 
-}; 
+
+
+	//UI
+	std::string GetHP();
+	std::string GetMP();
+	std::string GetGold();
+};

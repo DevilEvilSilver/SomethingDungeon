@@ -19,11 +19,14 @@ StateLogo::StateLogo(void) {
 StateLogo::~StateLogo() {
 	delete m_Background;
 	delete m_Logo;
-	delete m_TransitionScreen;
 	delete m_Camera;
+
+	if (m_TransitionScreen != NULL)
+		delete m_TransitionScreen;
 }
 
 void StateLogo::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOGO, "r");
@@ -121,12 +124,12 @@ void StateLogo::UpdateControl(float frameTime)
 		}
 
 		if (fNextStateFrame < 0.0f) {
+			isWelcomeState = true;
 			SoundEngine::GetInstance()->StopAll();
-
-			StateManager::GetInstance()->m_GameStateStack.pop_back();
 			ResourceManager::GetInstance()->ResetInstance();
-			ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
-			StateManager::GetInstance()->AddState(GS_STATE_WELCOME);
+
+			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
+			return;
 		}
 	}
 }

@@ -1,12 +1,15 @@
 #pragma once
 #include <vector>
 #include "StateBase.h"
+#include "Button.h"
+#include "Bar.h"
+#include "Fader.h"
 #include "Text.h"
 #include "Room.h"
 #include "Skill.h"
 #include "Player.h"
 #include "Enemy.h"
-#include"Gold.h"
+#include "Gold.h"
 #include "HPPotion.h"
 #include "MPPotion.h"
 #include "SpikeTrap.h"
@@ -15,10 +18,6 @@
 
 class StatePlay :public StateBase<StatePlay>
 {
-private:
-	Text *scoreText ;
-
-
 public:
 	
 	RoomType m_Map[32][32];
@@ -31,9 +30,29 @@ public:
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
 
-
-
 	Player *m_Player;
+
+	//UI
+	Button *m_ButtonPause;
+	Widget *m_PauseBox;
+	Button *m_ButtonResume;
+	Button *m_ButtonQuit;
+
+	Widget *m_HpHolder;
+	Bar *m_HpBar;
+	Text *m_HpText;
+	Widget *m_MpHolder;
+	Bar *m_MpBar;
+	Text *m_MpText;
+	Widget *m_GoldIcon;
+	Text *m_GoldText;
+
+	Fader *m_TransitionScreen;
+
+	//LOGIC
+	bool m_isStartUp;
+	bool m_isQuit;
+	float m_fNextStateFrame;
 
 	//INIT
 	void Init();
@@ -51,10 +70,11 @@ public:
 
 	void Update(float frameTime);
 	
-	bool CheckInRange(Vector2 roomID);		//ONLY UPDATE NEAR
-	void UpdateRoomID();					//UPDATE ROOM_ID FOR CHARACTER
-	void UpdateControl(float frameTime);	//CONTROL PLAYER
-	
+	bool CheckInRange(Vector2 roomID);			//ONLY UPDATE NEAR
+	void UpdateRoomID();						//UPDATE ROOM_ID FOR CHARACTER
+	void UpdateControl(float frameTime);		//CONTROL PLAYER
+	void UpdateControlPause(float frameTime);	//HANDLE INPUT WHILE PAUSE
+
 	/////////////////////////////////////////////////////////
 
 	//OTHER

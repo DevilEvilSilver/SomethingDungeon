@@ -9,6 +9,8 @@ template <class T>
 class StateBase:public Singleton<T> {
 
 public:
+	bool m_isPause = false;
+
 	//data list + camera here
 	Camera* m_Camera;
 

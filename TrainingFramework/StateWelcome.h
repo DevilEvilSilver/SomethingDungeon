@@ -6,11 +6,19 @@
 class StateWelcome :public StateBase<StateWelcome>
 {
 public:
+	//UI
 	Widget *m_Background;
+	Widget *m_Title;
 	Button *m_ButtonStart;
 	Fader *m_TransitionScreen;
 
+	//SOUND
 	int m_iHandleBGM;
+	
+	//LOGIC
+	bool m_isStartUp;
+	bool m_isPLayState;
+	float m_fNextStateFrame;
 
 	StateWelcome();
 	~StateWelcome();

@@ -1,4 +1,4 @@
-#PREFAB_COUNT 11
+#PREFAB_COUNT 22
 ID mainChar
 MODEL 0
 SHADER 0
@@ -73,6 +73,17 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/wall/static/sprite.txt
 
+ID borderRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 10.0
+SIZE 10.0 x 10.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/sprite.txt
+
 ID gold
 MODEL 0
 SHADER 0
@@ -130,11 +141,139 @@ FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
 ID boomed
 FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
 
+ID hpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.625, 0.75
+SIZE 5.625 x 0.75
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpHolder/static/sprite.txt
+
+ID hpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0875, 0.6
+SIZE 4.0875 x 0.6
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpBar/static/sprite.txt
+
+ID mpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.625, 0.75
+SIZE 5.625 x 0.75
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpHolder/static/sprite.txt
+
+ID mpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0875, 0.6
+SIZE 4.0875 x 0.6
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID goldIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID buttonPause
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+
+ID buttonResume
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 3.0, 1.0
+SIZE 3.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+
+ID buttonQuit
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 3.0, 1.0
+SIZE 3.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+
+ID pauseBox
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.0, 5.0
+SIZE 5.0 x 5.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+
+ID transition
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 30.0, 20.0
+SIZE 30.0 x 20.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/transition/static/sprite.txt
+
 #MODEL_GEN 1
 ID 0
 SIZE 1.0 x 1.0
 
-#SHADER_COUNT 2
+#SHADER_COUNT 3
 ID 0
 VS ../Resources/Shaders/Sprite.vs
 FS ../Resources/Shaders/Sprite.fs
@@ -148,6 +287,14 @@ VS ../Resources/Shaders/TextShader.vs
 FS ../Resources/Shaders/TextShader.fs
 STATE_COUNT 3
 GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+ID 2
+VS ../Resources/Shaders/Logo.vs
+FS ../Resources/Shaders/Logo.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 1
 GL_CULL_FACE 0
 GL_BLEND 1
 

@@ -66,6 +66,7 @@ void TouchActionLeftDown(ESContext* esContext, int x, int y)
 void TouchActionLeftUp(ESContext* esContext, int x, int y)
 {
 	InputManager::GetInstance()->MouseLeft(false, x, y);
+	InputManager::GetInstance()->MouseMove(x, y);
 }
 
 void TouchActionRightDown(ESContext* esContext, int x, int y)
@@ -77,6 +78,7 @@ void TouchActionRightDown(ESContext* esContext, int x, int y)
 void TouchActionRightUp(ESContext* esContext, int x, int y)
 {
 	InputManager::GetInstance()->MouseRight(false, x, y);
+	InputManager::GetInstance()->MouseMove(x, y);
 }
 
 void TouchActionMove(ESContext* esContext, int x, int y)

@@ -76,3 +76,19 @@ bool Button::isHover(Camera* camera) {
 		return false;
 	}
 }
+
+bool Button::isReleased(Camera* camera) {
+	int keyPressed = InputManager::GetInstance()->keyPressed;
+	Vector2 mousePos = InputManager::GetInstance()->
+		GetMousePosition(camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+
+	if (!(keyPressed & MOUSE_LEFT) &&
+		(mousePos.x >= m_fCurrentPosX) && (mousePos.x <= m_fCurrentPosX + m_fWidth) &&
+		(mousePos.y <= m_fCurrentPosY) && (mousePos.y >= m_fCurrentPosY - m_fHeight) &&
+		m_isAvailble) {
+
+		return true;
+	}
+	else
+		return false;
+}

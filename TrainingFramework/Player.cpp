@@ -179,7 +179,14 @@ void Player::Attack(int x, int y)
 }
 
 
+std::string Player::GetHP() {
+	return std::to_string(m_currHP) + "/" + std::to_string(m_maxHP);		
+}
 
+std::string Player::GetMP() {
+	return std::to_string(m_currMP) + "/" + std::to_string(m_maxMP);
+}
 
-
-
+std::string Player::GetGold() {
+	return std::to_string(m_GOLD);
+}

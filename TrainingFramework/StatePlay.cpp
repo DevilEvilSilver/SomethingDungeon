@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <time.h>
 #include "StatePlay.h"
+#include "ResourceManager.h"
 #include "SoundEngine.h"
 #include "Object.h"
 #include "define.h"
@@ -69,11 +70,29 @@ StatePlay::~StatePlay() {
 
 	delete m_Player;
 	delete m_Camera;
-	delete scoreText;
-	
+
+	//UI
+	delete m_ButtonPause;
+	delete m_PauseBox;
+	delete m_ButtonResume;
+	delete m_ButtonQuit;
+
+	delete m_HpHolder;
+	delete m_HpBar;
+	delete m_HpText;
+	delete m_MpHolder;
+	delete m_MpBar;
+	delete m_MpText;
+	delete m_GoldIcon;
+	delete m_GoldText;
+
+	if (m_TransitionScreen != NULL)
+		delete m_TransitionScreen;
 }
 
 void StatePlay::Init() {
+	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 
@@ -82,8 +101,6 @@ void StatePlay::Init() {
 
 	//Player
 	fscanf(dataFile, "#PLAYER\n");
-	unsigned int id;
-	fscanf(dataFile, "ID %d\n", &id);
 	char strPrefab[50];
 	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 	Matrix translation;
@@ -104,11 +121,125 @@ void StatePlay::Init() {
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
 	m_Camera = new Camera(startRoom->GetPosX() + (startRoom->m_fWidth / 2), startRoom->GetPosY() - (startRoom->m_fHeight / 2), 
 		fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
-	
+
+	//HP Holder
+	{
+		fscanf(dataFile, "#HP_HOLDER\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_HpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//HP Bar
+	{
+		fscanf(dataFile, "#HP_BAR\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_HpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxHP, m_Player->m_currHP);
+	}
+
+	//MP Holder
+	{
+		fscanf(dataFile, "#MP_HOLDER\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_MpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//MP Bar
+	{
+		fscanf(dataFile, "#MP_BAR\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_MpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxMP, m_Player->m_currMP);
+	}
+
+	//Gold Icon
+	{
+		fscanf(dataFile, "#GOLD_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_GoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Pause Box
+	{
+		fscanf(dataFile, "#PAUSE_BOX\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_PauseBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Pause
+	{
+		fscanf(dataFile, "#BUTTON_PAUSE\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonPause = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Resume
+	{
+		fscanf(dataFile, "#BUTTON_RESUME\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonResume = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Quit
+	{
+		fscanf(dataFile, "#BUTTON_QUIT\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
 
-	scoreText = new Text("Score: 000000", 1, 1, TEXT_COLOR::RED, 20, 20, 1.0f);
+	m_isQuit = false;
+	m_isStartUp = false;
+	m_fNextStateFrame = 1.0f;
+	m_TransitionScreen = NULL;
 
+	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_GoldText = new Text(m_Player->GetGold(), 1, 1, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -157,8 +288,15 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == WALL) {
-				Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
-				AddRoom(room);
+				if (m_Map[i][j - 1] == WALL) {
+					Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
+					AddRoom(room);
+				} 
+				else {
+					Room *room = new Room(BORDER_ROOM, Vector2(i, j), translation, WALL);
+					AddRoom(room);
+				}
+				
 			}
 			else if (m_Map[i][j] == START) {
 				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, START);
@@ -212,14 +350,7 @@ void StatePlay::Render() {
 	}
 	m_ObjectList.clear();
 
-	//RENDER TEXT
-	{
-	//	Renderer::GetInstance()->DrawText2(scoreText);
-		Renderer::GetInstance()->DrawText2(m_Player->numGoldText);
- 		Renderer::GetInstance()->DrawText2(m_Player->numHPText);
-		Renderer::GetInstance()->DrawText2(m_Player->numMPText);
 
-	}
 
 	//RENDER SKILL
 	for (auto& obj : m_SkillList)
@@ -227,6 +358,29 @@ void StatePlay::Render() {
 		obj->Render(this->m_Camera);
 	}
 
+	//RENDER UI
+	{
+		m_HpHolder->Render(m_Camera);
+		m_HpBar->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_HpText);
+
+		m_MpHolder->Render(m_Camera);
+		m_MpBar->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_MpText);
+
+		m_GoldIcon->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_GoldText);
+
+		m_ButtonPause->Render(m_Camera);
+		if (m_isPause) {
+			m_PauseBox->Render(m_Camera);
+			m_ButtonResume->Render(m_Camera);
+			m_ButtonQuit->Render(m_Camera);
+		}
+
+		if (m_TransitionScreen != NULL)
+			m_TransitionScreen->Render(this->m_Camera);
+	}
 }
 void StatePlay::AddDrop(Drop* drop)
 {
@@ -262,40 +416,78 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
+	if (m_isPause) {
+		m_PauseBox->Update(frameTime);
+		m_ButtonResume->Update(frameTime);
+		m_ButtonQuit->Update(frameTime);
 
-	UpdateRoomID();
-	m_Player->Update(frameTime);
-	for (auto& obj : m_EnemyList) {
-		if (CheckInRange(obj->m_RoomID))
-		{
-			obj->Update(frameTime);
-		}	
+		UpdateControlPause(frameTime);
 	}
-	for (auto& obj : m_SkillList) {
-			obj->Update(frameTime);
-	}
-	for (auto& obj : m_TrapList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
-	for (auto& obj : m_DropList) {
-		if (CheckInRange(obj->m_RoomID))
-			obj->Update(frameTime);
-	}
+	else {
+		if (!m_isStartUp) {
+			RoomsGenerate();
 
-	UpdateControl(frameTime);
-
-	//Kill dead
-	for (auto& obj : m_EnemyList) {
-		if (obj->isDead==true)
-		{
-			RemoveEnemy(obj);
+			m_isStartUp = true;
 		}
+			 
+		UpdateRoomID();
+		m_Player->Update(frameTime);
+		for (auto& obj : m_EnemyList) {
+			if (CheckInRange(obj->m_RoomID))
+			{
+				obj->Update(frameTime);
+			}
+		}
+		for (auto& obj : m_SkillList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+		for (auto& obj : m_TrapList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+		for (auto& obj : m_DropList) {
+			if (CheckInRange(obj->m_RoomID))
+				obj->Update(frameTime);
+		}
+
+//Kill dead
+		for (auto& obj : m_EnemyList) {
+			if (obj->isDead==true)
+			{
+				RemoveEnemy(obj);
+			}
+		}
+
+
+		UpdateControl(frameTime);
+
+		//follow camera
+		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+		m_Camera->Update(frameTime);
+
+		//Update UI
+		m_ButtonPause->Update(frameTime);
+
+		m_HpHolder->Update(frameTime);
+		m_HpBar->Update(frameTime);
+		m_HpBar->Resize(m_Player->m_currHP);
+		m_HpText->setText(m_Player->GetHP());
+
+		m_MpHolder->Update(frameTime);
+		m_MpBar->Update(frameTime);
+		m_MpBar->Resize(m_Player->m_currMP);
+		m_MpText->setText(m_Player->GetMP());
+
+	
+
+	
+		m_GoldIcon->Update(frameTime);
+		m_GoldText->setText(m_Player->GetGold());
 	}
 
-	//follow camera
-	m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-	m_Camera->Update(frameTime);
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 }
 
 void StatePlay::UpdateRoomID() {
@@ -343,6 +535,17 @@ void StatePlay::UpdateRoomID() {
 void StatePlay::UpdateControl(float frameTime)
 {
 	int newKeyPressed = InputManager::GetInstance()->keyPressed;
+
+	//BUTTON PAUSE
+	if (m_ButtonPause->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = true;
+		return;
+	}
+	if (m_ButtonPause->isPressed(this->m_Camera)) {
+		return;
+	}
+	m_ButtonPause->isHover(this->m_Camera);
 	
 	//PLAYER
 	{
@@ -394,10 +597,50 @@ void StatePlay::UpdateControl(float frameTime)
 			m_Player->Dash(frameTime);
 		}
 		
-		std::string a = "DASH CD: " + std::to_string(m_Player->currDashCD);
 		
-		scoreText->setText(a);
-	
+	}
+}
+
+void StatePlay::UpdateControlPause(float frameTime) {
+	//Button Resume
+	if (m_ButtonResume->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = false;
+		return;
+	}
+	m_ButtonResume->isPressed(this->m_Camera);
+	m_ButtonResume->isHover(this->m_Camera);
+
+	//Button Quit
+	if (m_ButtonQuit->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isQuit = true;
+		m_ButtonResume->m_isAvailble = false;
+		m_ButtonQuit->m_isAvailble = false;
+	}
+	m_ButtonQuit->isPressed(this->m_Camera);
+	m_ButtonQuit->isHover(this->m_Camera);
+
+	//Play State
+	if (m_isQuit) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			//SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+
+			StateManager::GetInstance()->CloseState();
+			return;
+		}
+	}
 }
 
 void StatePlay::AddObject(Object *object) {
