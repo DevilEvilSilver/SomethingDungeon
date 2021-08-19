@@ -23,7 +23,8 @@ void SpikeTrap::Update(float frameTime) {
 	
 	
 
-	if (m_fCurrFrameTime == 0.0f) {
+	if (m_fCurrCD <= 0.0f) {
+		m_fCurrCD = m_fTotalCoolDownTime;
 
 		Player* player = StatePlay::GetInstance()->m_Player;
 		Vector2 curPos = Vector2(0.0f,0.0f);
@@ -48,8 +49,14 @@ void SpikeTrap::Update(float frameTime) {
 
 		
 	}
+	else 
+	{
+		m_fCurrCD -= frameTime;
+		m_fCurrFrameTime += frameTime;
+
+	}
 	
-	m_fCurrFrameTime += frameTime;
+	
 	
 }
 

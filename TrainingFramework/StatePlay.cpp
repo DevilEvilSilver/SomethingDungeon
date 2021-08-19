@@ -426,7 +426,7 @@ void StatePlay::Update(float frameTime) {
 	else {
 		if (!m_isStartUp) {
 			RoomsGenerate();
-			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.05f, 1.0f, true);
+			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
 			m_isStartUp = true;
 		}
 			 

@@ -7,8 +7,8 @@ private:
 	int m_iAttack=3;
 
 public:
-	float m_fTotalCoolDownTime;
-
+	float m_fTotalCoolDownTime=2.0f;
+	float m_fCurrCD = 0.0f;
 
 	SpikeTrap();
 	SpikeTrap(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
