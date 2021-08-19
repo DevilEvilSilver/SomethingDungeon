@@ -29,6 +29,22 @@ StateResult::~StateResult() {
 void StateResult::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_RESULT);
 
+	// read file record
+		FILE* resultFile;
+	resultFile = fopen(FILE_RESULT, "r");
+
+	char strisWin[50];
+	fscanf(resultFile, "%s\n", &strisWin);
+	if (!strcmp(strisWin, "WIN"))
+		m_isWin = true;
+	else
+		m_isWin = false;
+
+	unsigned int score;
+	fscanf(resultFile, "SCORE: %d\n", &score);
+
+	fclose(resultFile);
+
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_RESULT, "r");
 
@@ -55,7 +71,10 @@ void StateResult::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
-		m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		if (m_isWin) 
+			m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation, WIN_BG);
+		else 
+			m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation, LOSE_BG);
 	}
 
 	//Title
@@ -67,7 +86,10 @@ void StateResult::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
-		m_Title = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		if (m_isWin)
+			m_Title = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation, WIN_TITLE);
+		else 
+			m_Title = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation, LOSE_TITLE);
 	}
 
 	//Quit Button
@@ -81,11 +103,6 @@ void StateResult::Init() {
 		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
-
-	fclose(dataFile);
-
-	//read file record
-	m_isWin = true;
 
 	m_isStartUp = false;
 	m_isWelcomeState = false;
@@ -107,13 +124,9 @@ void StateResult::Render() {
 void StateResult::Update(float frameTime) {
 	if (!m_isStartUp) {
 		if (m_isWin) {
-			m_Background->m_strState = WIN_BG;
-			m_Title->m_strState = WIN_TITLE;
 			m_iHandleBGM = SoundEngine::GetInstance()->Play(WIN_BGM, 1.0f, 1.0f, true);
 		}
 		else {
-			m_Background->m_strState = LOSE_BG;
-			m_Title->m_strState = LOSE_TITLE;
 			m_iHandleBGM = SoundEngine::GetInstance()->Play(LOSE_BGM, 1.0f, 1.0f, true);
 		}
 

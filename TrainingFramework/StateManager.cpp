@@ -12,7 +12,7 @@
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_PLAY);
+	AddState(GS_STATE_LOGO);
 }
 
 StateManager::~StateManager() {

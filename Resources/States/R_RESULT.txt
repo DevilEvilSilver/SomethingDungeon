@@ -6,9 +6,7 @@ TYPE RECT
 COORD 0.0, 0.0, 20.0, 20.0
 SIZE 30.0 x 20.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 3
-ID init
-FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
+ANIMATION_COUNT 2
 ID winBG
 FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
 ID loseBG
@@ -21,13 +19,11 @@ TYPE RECT
 COORD 0.0, 0.0, 26.5, 4.0
 SIZE 26.5 x 4.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 3
-ID init
-FILE ../Resources/Animation/title/static/sprite.txt
+ANIMATION_COUNT 2
 ID winTitle
-FILE ../Resources/Animation/title/static/sprite.txt
+FILE ../Resources/Animation/titleResult/win/sprite.txt
 ID loseTitle
-FILE ../Resources/Animation/title/static/sprite.txt
+FILE ../Resources/Animation/titleResult/lose/sprite.txt
 
 ID buttonQuit
 MODEL 0

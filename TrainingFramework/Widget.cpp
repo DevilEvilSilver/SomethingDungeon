@@ -5,8 +5,11 @@
 
 Widget::Widget() {}
 
-Widget::Widget(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+Widget::Widget(std::string prefabID, Vector2 roomID, Matrix translationMatrix, std::string state)
 	: Object(prefabID, roomID, translationMatrix) {
+
+	if (strcmp(state.c_str(), ""))
+		m_strState = state;
 
 	m_fCameraPosX = translationMatrix.m[3][0];
 	m_fCameraPosY = translationMatrix.m[3][1];
