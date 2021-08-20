@@ -225,6 +225,12 @@
     <ClCompile Include="StateLoad.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniRoom.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -361,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="StateLoad.h">
       <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniRoom.h">
+      <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

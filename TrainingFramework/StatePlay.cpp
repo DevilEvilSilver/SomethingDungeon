@@ -85,6 +85,7 @@ StatePlay::~StatePlay() {
 	delete m_MpText;
 	delete m_GoldIcon;
 	delete m_GoldText;
+	delete m_MiniMap;
 
 	if (m_TransitionScreen != NULL)
 		delete m_TransitionScreen;
@@ -228,6 +229,15 @@ void StatePlay::Init() {
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
 		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+	//MiniMap
+	{
+		fscanf(dataFile, "#MINIMAP\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_MiniMap = new MiniMap(translation,(RoomType*)m_Map,m_Camera);
 	}
 
 	fclose(dataFile);
@@ -380,6 +390,8 @@ void StatePlay::Render() {
 
 		if (m_TransitionScreen != NULL)
 			m_TransitionScreen->Render(this->m_Camera);
+		//MiniMap
+		m_MiniMap->Render(m_Camera);
 	}
 }
 void StatePlay::AddDrop(Drop* drop)
@@ -478,9 +490,8 @@ void StatePlay::Update(float frameTime) {
 		m_MpBar->Update(frameTime);
 		m_MpBar->Resize(m_Player->m_currMP);
 		m_MpText->setText(m_Player->GetMP());
-
-	
-
+		
+		m_MiniMap->Update(frameTime);
 	
 		m_GoldIcon->Update(frameTime);
 		m_GoldText->setText(m_Player->GetGold());

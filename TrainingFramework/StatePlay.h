@@ -14,6 +14,7 @@
 #include "MPPotion.h"
 #include "SpikeTrap.h"
 #include "BombTrap.h"
+#include "MiniMap.h"
 
 
 class StatePlay :public StateBase<StatePlay>
@@ -40,6 +41,7 @@ public:
 	Widget *m_PauseBox;
 	Button *m_ButtonResume;
 	Button *m_ButtonQuit;
+	MiniMap* m_MiniMap;
 
 	Widget *m_HpHolder;
 	Bar *m_HpBar;

@@ -116,3 +116,5 @@
 #define BOMB				9
 #define WHOOSH				10
 
+//MINIMAP
+#define MINIMAP_SCALE		1
