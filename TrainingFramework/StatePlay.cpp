@@ -95,6 +95,12 @@ void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
 
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
+	/*Room* Room1 = GetRoomByID(Vector2(1, 2), m_RoomList);
+	int x1 = Room1->GetPosX(),
+		y1 = Room1->GetPosY();
+	Room* Room2 = GetRoomByID(Vector2(2, 2), m_RoomList);
+	int x2 = Room2->GetPosX(),
+		y2 = Room2->GetPosY();*/
 	Room *startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
@@ -107,7 +113,7 @@ void StatePlay::Init() {
 	Matrix translation;
 	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH/2.0f, startRoom->GetPosY() - ROOM_HEIGHT/2, 0.0f);
 	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
-
+	translation.SetTranslation(m_Player->GetPosX() + 1, m_Player->GetPosY() + 1, 0);
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
 	float fLeft, fRight, fBottom, fTop;
@@ -255,7 +261,7 @@ void StatePlay::Init() {
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
-	srand(time(NULL));
+	//srand(time(NULL));
 	unsigned int currPosX = rand() % 30 + 1;
 	unsigned int currPosY = rand() % 30 + 1;
 	m_Map[currPosX][currPosY] = START;
@@ -360,7 +366,6 @@ void StatePlay::Render() {
 		}
 	}
 	m_ObjectList.clear();
-
 
 
 	//RENDER SKILL
@@ -478,7 +483,7 @@ void StatePlay::Update(float frameTime) {
 		//follow camera
 		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
 		m_Camera->Update(frameTime);
-
+		
 		//Update UI
 		m_ButtonPause->Update(frameTime);
 

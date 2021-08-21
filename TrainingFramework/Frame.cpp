@@ -49,13 +49,64 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 		iH = iPixelsPerHeightRoom * (int)size.y;
 	int iBpp = 24;
 	char* imageData = new char[iW*iH*(iBpp/8)];
-	for (int i = 0; i < size.x; i++)
+	/*for (int i = 0; i < size.x; i++)
 	{
 		for (int j = 0; j < size.y; j++)
 		{
-			/*if (roomType[(int)size.x * i + j] == WALL)
+			if (roomType[j * (int)size.x + i] == WALL)
 			{
-				imageData[(i * iW + j) * 3 + 0] = 0;
+				for (int m = 0; m < iPixelsPerWidthRoom; m++)
+				{
+					for (int n = 0; n < iPixelsPerHeightRoom; n++)
+					{
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 0] = 0;
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 1] = 0;
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 2] = 0;
+					}
+				}
+			}
+			else
+			{
+				for (int m = 0; m < iPixelsPerWidthRoom; m++)
+				{
+					for (int n = 0; n < iPixelsPerHeightRoom; n++)
+					{
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 0] = 0;
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 1] = 125;
+						imageData[((iH - 1 - (j * iPixelsPerHeightRoom + n)) * iW + i * iPixelsPerWidthRoom + m) * 3 + 2] = 0;
+					}
+				}
+			}
+		}
+	}*/
+	for (int i = 0; i < iW; i++)
+	{
+		for (int j = 0; j < iH; j++)
+		{
+			if (roomType[ (j / iPixelsPerHeightRoom) *(int)size.x  + i / iPixelsPerWidthRoom] == WALL)
+			{
+				imageData[(j * iW + i) * 3 + 0] = 0;
+				imageData[(j * iW + i) * 3 + 1] = 0;
+				imageData[(j * iW + i) * 3 + 2] = 0;
+			}
+			else
+			{
+				imageData[(j * iW + i) * 3 + 0] = 0;
+				imageData[(j * iW + i) * 3 + 1] = 125;
+				imageData[(j * iW + i) * 3 + 2] = 0;
+			}
+			
+		}
+	}
+	
+	/*for (int i = 0; i < size.x; i++)
+	{
+		for (int j = 0; j < size.y; j++)
+		{
+			
+			if (roomType[(int)size.x*i +  j] == WALL)
+			{
+				imageData[(i * iW + j)*3 + 0] = 0;
 				imageData[(i * iW + j) * 3 + 1] = 0;
 				imageData[(i * iW + j) * 3 + 2] = 0;
 			}
@@ -64,37 +115,13 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 				imageData[(i * iW + j) * 3 + 0] = 0;
 				imageData[(i * iW + j) * 3 + 1] = 125;
 				imageData[(i * iW + j) * 3 + 2] = 0;
-			}*/
-			if (roomType[(int)size.x*i + j] == WALL)
-			{
-				for (int m = 0; m < iPixelsPerWidthRoom; m++)
-				{
-					for (int n = 0; n < iPixelsPerHeightRoom; n++)
-					{
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 0] = 0;
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 1] = 0;
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 2] = 0;
-					}
-				}
-			}
-			else
-			{
-				for (int m = 0; m < iPixelsPerWidthRoom; m++)
-				{
-					for (int n = 0; n < iPixelsPerHeightRoom; n++)
-					{
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 0] = 0;
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 1] = 125;
-						imageData[((i * iPixelsPerWidthRoom + m) * iW + j * iPixelsPerHeightRoom + n) * 3 + 2] = 0;
-					}
-				}
 			}
 			
 		}
-	}
+	}*/
 	glGenTextures(1, &m_RendererID);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_iWidth, m_iHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 96, 96, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
 	delete[]imageData;
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

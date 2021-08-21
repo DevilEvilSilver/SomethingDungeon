@@ -228,9 +228,6 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>Source Files\Objects\UI</Filter>
     </ClCompile>
-    <ClCompile Include="MiniRoom.cpp">
-      <Filter>Source Files\Objects\UI</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
