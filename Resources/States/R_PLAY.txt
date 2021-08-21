@@ -1,4 +1,4 @@
-#PREFAB_COUNT 26
+#PREFAB_COUNT 25
 ID mainChar
 MODEL 0
 SHADER 0
@@ -198,45 +198,34 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/gold/static/sprite.txt
 
+ID minimap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1, 0.6
+SIZE 2.5 x 2.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/minimap/minimap/sprite.txt
+
 ID minimapBound
 MODEL 0
 SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 1, 0.6
-SIZE 3.0 x 3.0
+SIZE 2.5 x 2.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/minimap/bound/sprite.txt
 
-ID minimapRoom
-MODEL 0
-SHADER 0
-TYPE RECT
-COORD 0.0, 0.0, 1, 0.6
-SIZE 3.0 x 3.0
-SCALE_BY_SIZE 0
-ANIMATION_COUNT 1
-ID init
-FILE ../Resources/Animation/minimap/room/sprite.txt
-
-ID minimapWall
-MODEL 0
-SHADER 0
-TYPE RECT
-COORD 0.0, 0.0, 1, 0.6
-SIZE 3.0 x 3.0
-SCALE_BY_SIZE 0
-ANIMATION_COUNT 1
-ID init
-FILE ../Resources/Animation/minimap/wall/sprite.txt
-
 ID minimapPlayer
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 1, 0.6
-SIZE 0.2 x 0.2
+COORD 0.0, 0.0, 0.1, 0.1
+SIZE 0.1 x 0.1
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init

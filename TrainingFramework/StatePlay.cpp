@@ -237,7 +237,8 @@ void StatePlay::Init() {
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
-		m_MiniMap = new MiniMap(translation,(RoomType*)m_Map,m_Camera);
+
+		m_MiniMap = new MiniMap(translation,(RoomType*)m_Map,m_Camera, m_Player);
 	}
 
 	fclose(dataFile);

@@ -371,9 +371,6 @@
     <ClInclude Include="MiniMap.h">
       <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MiniRoom.h">
-      <Filter>Header Files\Objects\UI</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\Sound.txt">

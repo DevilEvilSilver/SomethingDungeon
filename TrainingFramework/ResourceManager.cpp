@@ -202,7 +202,7 @@ Model* GenModel(unsigned int id, float width, float height) {
 	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 1.0f;
 	vertices[3].pos.x = width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
 	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 0.0f;
-
+	
 	GLuint *indices = new GLuint[6];
 
 	indices[0] = 0; indices[1] = 2; indices[2] = 1;
@@ -214,3 +214,4 @@ Model* GenModel(unsigned int id, float width, float height) {
 
 	return model;
 }
+
