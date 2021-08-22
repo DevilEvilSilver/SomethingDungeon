@@ -322,21 +322,19 @@ void StatePlay::Render() {
 
 	//RENDER ROOM
 	{
-		for (auto& obj : m_RoomList) {
-			if (CheckInRange(obj->m_RoomID))
+		for (auto& obj : m_InRangeRoom) {
 				obj->Render(this->m_Camera);
 		}
 	}
 
 	//RENDER TRAP
-	for (auto& obj : m_TrapList) {
-		if (CheckInRange(obj->m_RoomID))
+	for (auto& obj : m_InRangeTrap) {
+		
 			obj->Render(this->m_Camera);
 	}
 
 	//RENDER DROP
-	for (auto& obj : m_DropList) {
-		if (CheckInRange(obj->m_RoomID))
+	for (auto& obj : m_InRangeDrop) {
 			obj->Render(this->m_Camera);
 	}
 
@@ -344,7 +342,6 @@ void StatePlay::Render() {
 	//RENDER OBJECT
 	{
 		for (auto& obj : m_ObjectList) {
-			if (CheckInRange(obj->m_RoomID))
 				obj->Render(this->m_Camera);
 		}
 	}
@@ -353,7 +350,7 @@ void StatePlay::Render() {
 
 
 	//RENDER SKILL
-	for (auto& obj : m_SkillList)
+	for (auto& obj : m_InRangeSkill)
 	{
 		obj->Render(this->m_Camera);
 	}
@@ -389,6 +386,44 @@ void StatePlay::AddDrop(Drop* drop)
 void StatePlay::AddTrap(Trap* trap)
 {
 	m_TrapList.push_back(trap);
+}
+void StatePlay::Remove()
+{
+	//Kill enemy
+	for (auto& obj : m_EnemyList) {
+		if (obj->isDead == true)
+		{
+			RemoveEnemy(obj);
+		}
+	}
+
+	//Delete drop
+	for (auto& obj : m_DropList)
+	{
+		if (obj->isPicked == true)
+		{
+			RemoveDrop(obj);
+		}
+	}
+
+	//Delete trap
+	for (auto& obj : m_TrapList)
+	{
+		if (obj->isExploded == true)
+		{
+			RemoveTrap(obj);
+		}
+	}
+
+	//delete skill
+	for (auto& obj : m_SkillList)
+	{
+		if (obj->isFinished == true)
+		{
+			RemoveSkill(obj);
+		}
+	}
+
 }
 void StatePlay::RemoveDrop(Drop* drop)
 {
@@ -429,35 +464,29 @@ void StatePlay::Update(float frameTime) {
 			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
 			m_isStartUp = true;
 		}
-			 
+		
+		Remove();
+
+		UpdateInRange();
+		
+
 		UpdateRoomID();
 		m_Player->Update(frameTime);
-		for (auto& obj : m_EnemyList) {
-			if (CheckInRange(obj->m_RoomID))
-			{
+		for (auto& obj : m_InRangeEnemy) {
+
 				obj->Update(frameTime);
-			}
+
 		}
-		for (auto& obj : m_SkillList) {
-		
+		for (auto& obj : m_InRangeSkill) {
 				obj->Update(frameTime);
 		}
-		for (auto& obj : m_TrapList) {
-			if (CheckInRange(obj->m_RoomID))
+		for (auto& obj : m_InRangeTrap) {
 				obj->Update(frameTime);
 		}
-		for (auto& obj : m_DropList) {
-			if (CheckInRange(obj->m_RoomID))
+		for (auto& obj : m_InRangeDrop) {
 				obj->Update(frameTime);
 		}
 
-//Kill dead
-		for (auto& obj : m_EnemyList) {
-			if (obj->isDead==true)
-			{
-				RemoveEnemy(obj);
-			}
-		}
 
 
 		UpdateControl(frameTime);
@@ -490,6 +519,26 @@ void StatePlay::Update(float frameTime) {
 		m_TransitionScreen->Update(frameTime);
 }
 
+void StatePlay::UpdateInRange()
+{
+	ClearInRange();
+
+	for (auto& obj : m_RoomList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeRoom.push_back(obj);
+	for (auto& obj : m_EnemyList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEnemy.push_back(obj);
+	for (auto& obj : m_DropList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDrop.push_back(obj);
+	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeTrap.push_back(obj);
+	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
+}
+
+void StatePlay::ClearInRange()
+{
+	m_InRangeRoom.clear();
+	m_InRangeDrop.clear();
+	m_InRangeEnemy.clear();
+	m_InRangeSkill.clear();
+	m_InRangeTrap.clear();
+}
+
 void StatePlay::UpdateRoomID() {
 	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
@@ -508,8 +557,8 @@ void StatePlay::UpdateRoomID() {
 		}
 	}
 
-	for (auto& obj : m_EnemyList) {
-		if (CheckInRange(obj->m_RoomID))
+	for (auto& obj : m_InRangeEnemy) {
+
 		{
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
 			for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
@@ -667,7 +716,7 @@ bool StatePlay::CheckInRange(Vector2 roomID) {
 		return true;
 }
 void StatePlay::GetRenderOrder() {
-	for (auto a : m_EnemyList) {
+	for (auto a : m_InRangeEnemy) {
 		m_ObjectList.push_back(a);
 	}
 	m_ObjectList.push_back(m_Player);
@@ -690,4 +739,16 @@ void StatePlay::RemoveEnemy(Enemy* enemy) {
 	delete m_EnemyList[id];
 	m_EnemyList[id] = m_EnemyList[m_EnemyList.size() - 1];
 	m_EnemyList.resize(m_EnemyList.size() - 1);
+}
+
+void StatePlay::RemoveSkill(Skill* skill)
+{
+	int id;
+	for (int i = 0; i < m_SkillList.size(); i++) {
+		if (m_SkillList[i] == skill)  id = i;
+	}
+
+	delete m_SkillList[id];
+	m_SkillList[id] = m_SkillList[m_SkillList.size() - 1];
+	m_SkillList.resize(m_SkillList.size() - 1);
 }

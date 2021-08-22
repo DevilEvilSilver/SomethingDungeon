@@ -5,6 +5,8 @@ class Drop :public Object {
 private:
 
 public:
+	bool isPicked = false;
+
 	Drop();
 	Drop(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	virtual ~Drop();

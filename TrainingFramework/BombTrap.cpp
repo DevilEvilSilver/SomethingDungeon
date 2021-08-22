@@ -49,15 +49,13 @@ void BombTrap::Update(float frameTime) {
 		Vector2 curPos = Vector2(m_fCurrentPosX + m_fDeltaX, m_fCurrentPosY - m_fDeltaY);
 
 
-		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+		for (auto& enemy : StatePlay::GetInstance()->m_InRangeEnemy)
 		{
-			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
 					enemy->UpdateGotHit(m_iAttack, true, curPos, frameTime);
 					printf("enemy hp:%d\n", enemy->m_currHP);
 				}
-
 		}
 		
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
@@ -67,8 +65,8 @@ void BombTrap::Update(float frameTime) {
 		}
 
 
-		
-		StatePlay::GetInstance()->RemoveTrap(this);
+		isExploded = true;
+
 
 
 	}

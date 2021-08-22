@@ -30,6 +30,14 @@ public:
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
 
+	//FOR UPDATE
+	std::vector<Room*> m_InRangeRoom;
+	std::vector<Enemy*> m_InRangeEnemy;
+	std::vector<Skill*> m_InRangeSkill;
+	std::vector<Drop*> m_InRangeDrop;
+	std::vector<Trap*> m_InRangeTrap;
+
+
 	Player *m_Player;
 
 	//SOUND
@@ -61,6 +69,7 @@ public:
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
 	void RoomsGenerate();
+
 	void AddObject(Object* object);
 	void AddRoom(Room* room);
 	void AddEnemy(Enemy* enemy);
@@ -73,6 +82,8 @@ public:
 
 	void Update(float frameTime);
 	
+	void UpdateInRange();
+	void ClearInRange();
 	bool CheckInRange(Vector2 roomID);			//ONLY UPDATE NEAR
 	void UpdateRoomID();						//UPDATE ROOM_ID FOR CHARACTER
 	void UpdateControl(float frameTime);		//CONTROL PLAYER
@@ -90,10 +101,10 @@ public:
 
 	//tien add
 
-
+	void Remove();
 	void RemoveDrop(Drop* drop);
 	void RemoveTrap(Trap* trap);
-
 	void RemoveEnemy(Enemy* enemy);
+	void RemoveSkill(Skill* skill);
 	
 };

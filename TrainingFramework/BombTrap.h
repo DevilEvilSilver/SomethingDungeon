@@ -9,16 +9,13 @@ private:
 public:
 	float timeTillDelete;
 	bool isCollide;
+	
 
 	BombTrap();
 	BombTrap(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~BombTrap();
 
 	void Update(float frameTime);
-
-
-
-
 
 	int getValueAttack();
 };

@@ -53,22 +53,11 @@ void Skill::UpdateExistingTime(float frameTime)
 	m_currExistingTime += frameTime;
 	if (m_currExistingTime > (float)m_totalExsitingTime / 1000)
 	{
-		Remove();
+		isFinished = true;
+		
 	}
 }
-void Skill::Remove()
-{
-	std::vector<Skill*> skillList = StatePlay::GetInstance()->m_SkillList;
-	for (int i = 0; i<skillList.size(); i++ )
-	{
-		if (this == skillList[i])
-		{
-			delete StatePlay::GetInstance()->m_SkillList[i];
-			StatePlay::GetInstance()->m_SkillList[i] = StatePlay::GetInstance()->m_SkillList[skillList.size() - 1];
-			StatePlay::GetInstance()->m_SkillList.resize(skillList.size() - 1);
-		}
-	}
-}
+
 void Skill::Init(Vector2 mousePos)
 {
 
