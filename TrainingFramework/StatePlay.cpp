@@ -261,7 +261,7 @@ void StatePlay::Init() {
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
-	//srand(time(NULL));
+	srand(time(NULL));
 	unsigned int currPosX = rand() % 30 + 1;
 	unsigned int currPosY = rand() % 30 + 1;
 	m_Map[currPosX][currPosY] = START;

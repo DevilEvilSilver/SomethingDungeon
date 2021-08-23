@@ -9,8 +9,8 @@ class MiniMap
 private:
     Camera* m_camera;
     float m_fCameraPosX, m_fCameraPosY;
-    int m_numRoomWeight;
-    int m_numRoomHeight;
+    int m_mapWidth;
+    int m_mapHeight;
     Player* m_player;
     Matrix  m_Translation;
     Widget* m_MiniMapWidget;
@@ -21,7 +21,7 @@ public:
     ~MiniMap();
 
     void Update(float framTime);
-    void UpdatePlayerPos(float frameTime);
+    void UpdatePlayerWidgetPos(float frameTime);
     void Render(Camera *camera);
 };
 

@@ -73,6 +73,10 @@
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
 
+#define MINIMAP_MAP		"minimap"
+#define MINIMAP_PLAYER	"minimapPlayer"
+#define MINIMAP_BOUND	"minimapBound"
+
 //SKILL
 #define	BULLET_SPEED	12
 
@@ -116,5 +120,6 @@
 #define BOMB				9
 #define WHOOSH				10
 
-//MINIMAP
-#define MINIMAP_SCALE		1
+//MAP
+#define MAP_WIDTH			32
+#define MAP_HEIGHT			32
