@@ -8,6 +8,10 @@
 #include "Renderer.h"
 #include "define.h"
 
+#include "Witch.h"
+#include "Goblin.h"
+#include "Skeleton.h"
+
 template <class T>
 T GetResource(std::string id, std::vector<T> objList) {
 	for (auto& obj : objList) {
@@ -62,7 +66,11 @@ void Room::RoomGenerate() {
 			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
+			//Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
+			Witch* enemy = new Witch(ENEMY, m_RoomID, translation);
+			
+			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
+
 			StatePlay::GetInstance()->AddEnemy(enemy);
 		}
 	}

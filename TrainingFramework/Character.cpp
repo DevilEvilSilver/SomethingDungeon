@@ -33,6 +33,7 @@ void Character::Update(float frameTime)
 		break;
 	case CS_ATTACK:
 		Attack(frameTime);
+		break;
 	case CS_GOTHIT:
 		GotHit(frameTime);
 		break;
@@ -70,6 +71,8 @@ void Character::Move(float frameTime)
 
 void Character::Attack(float frameTime)
 {
+	m_strState = IDLE_LEFT;
+	if (FixedMove(Vector2(0, 0), 0.0f, 1.5f, frameTime) == true) SetCS(CS_IDLE);
 }
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)

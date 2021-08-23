@@ -25,25 +25,33 @@ void Enemy::UniqueUpdate(float frameTime)
 	
 	//move behavior
 	m_MOVESPEED = 3.0f;
-	if (distance < 4.0f /*&& distance > 5.0f*/)
+	
+	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	{
-		KeepDistance(delta);
-		m_MOVESPEED = 4.0f;
-	}
-		
-	else if (distance < 10.0f)
-	{
-		
-		if (currCD <= 0.0f) {
-			currCD = totalCD;
-			ShootChicken(plyPos);
+		if (distance < 10.0f)
+		{
+			if (distance < 4.0f && start == false)
+			{
+				KeepDistance(delta);
+				m_MOVESPEED = 4.0f;
+			}
+			else
+				if (currCD <= 0.0f) {
+					currCD = totalCD;
+					Shoot(plyPos);
+
+
+				}
+				else {
+
+					MoveRandom(frameTime);
+					currCD -= frameTime;
+				}
 		}
-		else {
-			MoveRandom(frameTime);
-			currCD -= frameTime;
-		}
+		else SetCS(CS_IDLE);
 	}
-	else SetCS(CS_IDLE);
+
+	
 
 }
 
@@ -61,7 +69,7 @@ void Enemy::KeepDistance(Vector2 delta)
 
 bool Enemy::MoveRandom(float frameTime)
 {
-	if (m_cState != CS_MOVE && m_cState != CS_GOTHIT && m_cState != CS_DEATH) SetCS(CS_MOVE);
+	
 
 	if (start == false)
 	{
@@ -70,12 +78,18 @@ bool Enemy::MoveRandom(float frameTime)
 		if (rand() % 2 == 0) ranDir.x *= -1;
 		if (rand() % 2 == 0) ranDir.y *= -1;
 		start = true;
+
+		//if (m_cState != CS_MOVE && m_cState != CS_GOTHIT && m_cState != CS_DEATH) SetCS(CS_MOVE);
+		ResetAnimation();
+		
 	
 	}
 	if (start == true)
 	{
+		m_strState = MOVE;
 		if (FixedMove(ranDir, m_MOVESPEED, 1.0f, frameTime) == false) return false;
 		start = false;
+		ResetAnimation();
 		return true;
 			
 		
@@ -85,8 +99,10 @@ bool Enemy::MoveRandom(float frameTime)
 	return false;
 }
 
-void Enemy::ShootChicken(Vector2 target)
+void Enemy::Shoot(Vector2 target)
 {
+	SetCS(CS_ATTACK);
+
 	Matrix m;
 	m.SetTranslation(target.x, target.y, 0);
 
@@ -96,6 +112,7 @@ void Enemy::ShootChicken(Vector2 target)
 
 void Enemy::Melee(Vector2 target)
 {
+	SetCS(CS_ATTACK);
 
 	Matrix m;
 	m.SetTranslation(target.x, target.y, 0);
@@ -125,18 +142,18 @@ Enemy::Enemy(){}
 Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 10;
-	m_currHP = 10;
-	
-	m_ATK = 3;
-	m_DEF = 3;
+	//m_maxHP = 10;
+	//m_currHP = 10;
+	//
+	//m_ATK = 3;
+	//m_DEF = 3;
 
-	m_strState = IDLE_LEFT;
-	isWallCollision = true;
-	isPlayerCollision = false;
-	isEnemyCollision = true;
+	//m_strState = IDLE_LEFT;
+	//isWallCollision = true;
+	//isPlayerCollision = false;
+	//isEnemyCollision = true;
 
-	m_MOVESPEED = 3.0f;
+	//m_MOVESPEED = 3.0f;
 
 	
 	isDead = false;
@@ -144,12 +161,6 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 Enemy::~Enemy() {}
 
 
-void Enemy::createGoldObject() {
-
-	Matrix translation;
-	translation.SetTranslation(GetPosX(), GetPosY(), 0.0f);
-	m_gold = new Gold(GOLD, m_RoomID, translation, 5, false);
-}
 
 void Enemy::createDrop()
 {

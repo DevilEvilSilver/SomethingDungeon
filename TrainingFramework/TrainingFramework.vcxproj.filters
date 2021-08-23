@@ -228,6 +228,15 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>Source Files\Objects\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Witch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -367,6 +376,15 @@
     </ClInclude>
     <ClInclude Include="MiniMap.h">
       <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Witch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Goblin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,16 +4,13 @@
 
 class Enemy : public Character {
 private:
-	Gold* m_gold;
-	int m_inumGold;	
 
-	
 public:
 
 	/////////////////////////////////////////////////
 	
 	//AI
-	void UniqueUpdate(float frameTime);
+	virtual void UniqueUpdate(float frameTime);
 
 	//DROP
 	bool isDead ;
@@ -30,8 +27,8 @@ public:
 	//SKILL
 	//--------------skill here----------------
 	float currCD = 0.0f;
-	void ShootChicken(Vector2 target);
-	void Melee(Vector2 target);
+	virtual void Shoot(Vector2 target);
+	virtual void Melee(Vector2 target);
     //----------------------------------------
 	
 	void Death(float frameiIme);
@@ -45,9 +42,7 @@ public:
 
 
 
-	void setGold(Gold* gold) { m_gold = gold; }
-	Gold* getGold() {return m_gold;}
-	void createGoldObject();
 
-	void createDrop();
+
+	virtual void createDrop();
 };

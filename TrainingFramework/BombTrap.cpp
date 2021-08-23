@@ -26,16 +26,25 @@ BombTrap::BombTrap(std::string prefabID, Vector2 roomID, Matrix translationMatri
 
 void BombTrap::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
-
-	if (isCollide==false&&CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player, frameTime))
+	
+	if (isCollide==false)
 	{
-		//m_fCurrFrameTime += frameTime;
-		m_strState = BOOMED;
-		if (!isCollide) {
-			isCollide = true;
+	
+
+			if (isCollide == false)
+			{
+				for (auto& obj : StatePlay::GetInstance()->m_InRangeSkill)
+					if (CollisionManager::CheckCollision(this, obj, frameTime)) isCollide = true;
+			}
+		
+		
+
+
+		if (isCollide==true) {
+			m_strState = BOOMED;
 			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 1.0f, false);
 		}
-				// -hp only once
+
 		
 		
 	}

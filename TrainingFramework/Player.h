@@ -39,7 +39,7 @@ public:
 
 	//PLAYER SKILL
 	//---------------skill here---------------
-	float DashCoolDown = 2.0f;
+	float DashCoolDown = 1.0f;
 	float currDashCD = 0.0f;
 
 	float ChickenCoolDown = 0.5f;
@@ -58,7 +58,7 @@ public:
 
 	void UniqueUpdate(float frameTime);
 
-	void Attack(float frameTime);
+	
 	//PLAYER SKILL
 	//---------------skill here---------------
 	bool Dash(float frameTime);
@@ -77,7 +77,7 @@ public:
 	Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Player();
 	
-	virtual void Attack(int x, int y);
+	virtual void UseAttack();
 
 
 

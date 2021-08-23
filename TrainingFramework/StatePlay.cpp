@@ -656,9 +656,9 @@ void StatePlay::UpdateControl(float frameTime)
 	}
 	
 	//USING SPACE	~	TEST
-	m_Player->Attack(1,2);
+	m_Player->UseAttack();
 	
-		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
+		if (newKeyPressed & KEY_SPACE)
 		{
 			m_Player->Dash(frameTime);
 		}
@@ -725,9 +725,10 @@ void StatePlay::AddSkill(Skill* skill)
 
 bool StatePlay::CheckInRange(Vector2 roomID) {
 
+	int delta = 2;
 	Vector2 currRoom = m_Player->m_RoomID;
-	if (roomID.x < currRoom.x - 1 || roomID.x > currRoom.x + 1 ||
-		roomID.y < currRoom.y - 1 || roomID.y > currRoom.y + 1)
+	if (roomID.x < currRoom.x - delta || roomID.x > currRoom.x + delta ||
+		roomID.y < currRoom.y - delta|| roomID.y > currRoom.y + delta)
 		return false;
 	else 
 		return true;

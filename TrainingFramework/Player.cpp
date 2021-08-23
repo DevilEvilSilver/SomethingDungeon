@@ -18,6 +18,7 @@
 void Player::ShootChicken(Vector2 target)
 {
 	if (currChickenCD <= 0.0f&&m_currMP>=ChickenMPCost) {
+		
 		currChickenCD = ChickenCoolDown;
 
 		Matrix m;
@@ -38,8 +39,9 @@ void Player::ShootChicken(Vector2 target)
 void Player::Melee(Vector2 target)
 {
 	if (currMeleeCD <= 0.0f) {
+		SetCS(CS_ATTACK);
 		currMeleeCD = MeleeCoolDown;
-
+	
 		Matrix m;
 		m.SetTranslation(target.x, target.y, 0);
 
@@ -68,16 +70,14 @@ void Player::UniqueUpdate(float frameTime)
 	if (currMeleeCD > 0.0f) currMeleeCD -= frameTime;
 }
 
-void Player::Attack(float frameTime)
-{
 
-}
 
 bool Player::Dash(float frameTime)
 {
 	if (currDashCD <= 0.0f&&m_cState!=CS_DEATH)
 	{ 
 		SetPS(P_DASH);
+		currTime = 0.0f;
 		currDashCD = DashCoolDown;
 		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
 	}
@@ -96,7 +96,7 @@ bool Player::Dash(float frameTime)
 
 void Player::PlayerMove(MoveDir dir)
 {
-	if (m_cState!=CS_MOVE&&m_cState != CS_GOTHIT&&m_cState!=CS_DEATH) SetCS(CS_MOVE);
+	if (m_cState!=CS_MOVE&&m_cState != CS_GOTHIT&&m_cState!=CS_DEATH&&m_cState!=CS_ATTACK) SetCS(CS_MOVE);
 
 	switch (dir) {
 	case UP:
@@ -155,7 +155,7 @@ Player::~Player() {
 	delete numMPText;
 }
 
-void Player::Attack(int x, int y)
+void Player::UseAttack()
 {
 	if (m_cState != CS_GOTHIT && m_cState != CS_DEATH)
 	{
@@ -163,7 +163,7 @@ void Player::Attack(int x, int y)
 		Vector2 mousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
 		Vector2 playerPos(m_fCurrentPosX, m_fCurrentPosY);
 
-		if ((newKeyPressed & MOUSE_LEFT))//
+		if ((newKeyPressed & MOUSE_LEFT))
 		{
 			Melee(mousePos);
 		}

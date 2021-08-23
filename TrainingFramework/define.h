@@ -31,8 +31,8 @@
 //MAP
 #define MAP_MAX_TUNNEL				160
 #define TUNNEL_MAX_LENGTH			7
-#define ROOM_WIDTH					10
-#define ROOM_HEIGHT					10
+#define ROOM_WIDTH					9
+#define ROOM_HEIGHT					6
 #define PLAYER_START_POSX			10.0
 #define PLAYER_START_POSY			10.0
 
