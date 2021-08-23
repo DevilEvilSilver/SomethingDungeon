@@ -112,16 +112,12 @@ void Enemy::Melee(Vector2 target)
 void Enemy::Death(float frameTime)
 {
 	m_strState = DASH;
-	printf("dead\n");
 	
 	isDead = true;
 	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 
 	createDrop();
-	/*this->createGoldObject();
-	StatePlay::GetInstance()->AddDrop(getGold());*/
 
-	//StatePlay::GetInstance()->RemoveEnemy(this);
 }
 
 //OTHER
@@ -137,7 +133,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
-	isPlayerCollision = true;
+	isPlayerCollision = false;
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 3.0f;

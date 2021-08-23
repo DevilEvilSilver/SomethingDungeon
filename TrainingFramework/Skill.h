@@ -28,9 +28,10 @@ protected:
     float totalCD = 1.0f;
     float currCD = 0.0f;
 
-
+   
 public:
     //MP COST
+    bool isFinished = false;
     int mp_MPCost;
   
     Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
@@ -45,7 +46,7 @@ public:
     
    
     void Render(Camera* camera);
-    void Remove();
+
     
 
 };

@@ -30,9 +30,9 @@ void SpikeTrap::Update(float frameTime) {
 		Vector2 curPos = Vector2(0.0f,0.0f);
 
 
-		for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+		for (auto& enemy : StatePlay::GetInstance()->m_InRangeEnemy)
 		{
-			if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
+
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
 					enemy->UpdateGotHit(m_iAttack, true, curPos, frameTime);
