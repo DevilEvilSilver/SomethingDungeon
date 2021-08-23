@@ -2,7 +2,6 @@
 #include "MiniMap.h"
 #include "StatePlay.h"
 #include "Room.h"
-#include "MiniRoom.h"
 #include "define.h"
 #include "Prefab.h"
 #include "Animation.h"
