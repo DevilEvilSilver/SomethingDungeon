@@ -75,13 +75,14 @@
 
 //ENEMY
 #define WITCH			"violetWitch"
+#define B_ROBOTKNIGHT	"robotKnight"
 
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
 
 //SKILL
-#define	BULLET_SPEED	12
+#define	BULLET_SPEED	6.0f
 
 //ANIMATION
 #define INIT_ANIM		"init"

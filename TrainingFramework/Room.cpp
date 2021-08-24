@@ -12,6 +12,8 @@
 #include "Goblin.h"
 #include "Skeleton.h"
 
+#include "RobotKnight.h"
+
 template <class T>
 T GetResource(std::string id, std::vector<T> objList) {
 	for (auto& obj : objList) {
@@ -47,11 +49,11 @@ void Room::RoomGenerate() {
 		}
 		else if (random >= 20 && random < 40)
 		{
-			GenObj(BOMB_TRAP, ((int)random-20)/10);
+			GenObj(BOMB_TRAP, ((int)random - 20) / 10);
 		}
 		else if (random >= 0 && random < 20)
 		{
-			GenObj(SPIKE_TRAP, (int)random/2);
+			GenObj(SPIKE_TRAP, (int)random / 2);
 		}
 
 		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
@@ -67,12 +69,27 @@ void Room::RoomGenerate() {
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			//Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
-			Witch* enemy = new Witch(WITCH, m_RoomID, translation);
-			
+
+			//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
+
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
-			StatePlay::GetInstance()->AddEnemy(enemy);
+			//StatePlay::GetInstance()->AddEnemy(enemy);
 		}
+	}
+	else if (m_RoomType == START)
+	{
+		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
+		Matrix translation;
+
+		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
+		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - 2.0f * enemyPrefab->m_fHeight);
+		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+
+		//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
+		RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
+
+		StatePlay::GetInstance()->AddEnemy(enemy);
 	}
 }
 

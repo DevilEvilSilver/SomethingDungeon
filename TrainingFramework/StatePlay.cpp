@@ -328,6 +328,7 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 }
 
 void StatePlay::RoomsGenerate() {
+	//static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
 	for (auto& obj : m_RoomList) {
 		
 		obj->RoomGenerate();
@@ -363,6 +364,8 @@ void StatePlay::Render() {
 		}
 	}
 	m_ObjectList.clear();
+
+	//m_Player->Render(this->m_Camera);
 
 
 	//RENDER SKILL

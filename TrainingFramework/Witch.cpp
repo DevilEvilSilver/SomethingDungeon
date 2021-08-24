@@ -28,7 +28,7 @@ Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Ene
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 3.0f;
+	m_MOVESPEED = 2.0f;
 
 	atkDuration = 2.5f;
 }

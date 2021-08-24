@@ -1,0 +1,7 @@
+#FRAME_COUNT 3
+ID 0
+SPF -1
+FILE ../Resources/Animation/robot_knight/walk/1.tga
+TILING GL_REPEAT
+
+

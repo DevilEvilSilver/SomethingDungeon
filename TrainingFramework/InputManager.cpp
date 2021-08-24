@@ -43,30 +43,30 @@ void InputManager::Key(unsigned char key, bool bIsPressed)
 			keyPressed = keyPressed ^ KEY_D;
 		break;
 
-	case VK_UP:
-		if (bIsPressed == true)
-			keyPressed = keyPressed | KEY_UP;
-		else
-			keyPressed = keyPressed ^ KEY_UP;
-		break;
-	case VK_DOWN:
-		if (bIsPressed == true)
-			keyPressed = keyPressed | KEY_DOWN;
-		else
-			keyPressed = keyPressed ^ KEY_DOWN;
-		break;
-	case VK_LEFT:
-		if (bIsPressed == true)
-			keyPressed = keyPressed | KEY_LEFT;
-		else
-			keyPressed = keyPressed ^ KEY_LEFT;
-		break;
-	case VK_RIGHT:
-		if (bIsPressed == true)
-			keyPressed = keyPressed | KEY_RIGHT;
-		else
-			keyPressed = keyPressed ^ KEY_RIGHT;
-		break;
+	//case VK_UP:
+	//	if (bIsPressed == true)
+	//		keyPressed = keyPressed | KEY_UP;
+	//	else
+	//		keyPressed = keyPressed ^ KEY_UP;
+	//	break;
+	//case VK_DOWN:
+	//	if (bIsPressed == true)
+	//		keyPressed = keyPressed | KEY_DOWN;
+	//	else
+	//		keyPressed = keyPressed ^ KEY_DOWN;
+	//	break;
+	//case VK_LEFT:
+	//	if (bIsPressed == true)
+	//		keyPressed = keyPressed | KEY_LEFT;
+	//	else
+	//		keyPressed = keyPressed ^ KEY_LEFT;
+	//	break;
+	//case VK_RIGHT:
+	//	if (bIsPressed == true)
+	//		keyPressed = keyPressed | KEY_RIGHT;
+	//	else
+	//		keyPressed = keyPressed ^ KEY_RIGHT;
+	//	break;
 	case ' ':
 		if (bIsPressed == true)
 			keyPressed = keyPressed | KEY_SPACE;

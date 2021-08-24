@@ -23,7 +23,7 @@ TYPE RECT
 COORD 0.0, 0.0, 1.0, 1.0
 SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 4
+ANIMATION_COUNT 6
 ID idleLeft
 FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
 ID move
@@ -32,6 +32,56 @@ ID dash
 FILE ../Resources/Animation/enemy/dash/sprite.txt
 ID gothit
 FILE ../Resources/Animation/enemy/gothit/sprite.txt
+ID death
+FILE ../Resources/Animation/enemy/gothit/sprite.txt
+ID attack
+FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
+
+ID robotKnight
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 0.5, 2.5, 3.0
+SIZE 3.5 x 3.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 8
+ID guard
+FILE ../Resources/Animation/robot_knight/guard/sprite.txt
+ID charge
+FILE ../Resources/Animation/robot_knight/charge/sprite.txt
+ID idleLeft
+FILE ../Resources/Animation/robot_knight/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/robot_knight/walk/sprite.txt
+ID gothit
+FILE ../Resources/Animation/robot_knight/walk/sprite.txt
+ID attack
+FILE ../Resources/Animation/robot_knight/attack/sprite.txt
+ID attack2
+FILE ../Resources/Animation/robot_knight/attack2/sprite.txt
+ID death
+FILE ../Resources/Animation/robot_knight/die/sprite.txt
+
+ID violetWitch
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.3, 0.5, 0.9, 1.0
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 6
+ID idleLeft
+FILE ../Resources/Animation/violet_witch/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/violet_witch/walk/sprite.txt
+ID attack
+FILE ../Resources/Animation/violet_witch/attack/sprite.txt
+ID gothit
+FILE ../Resources/Animation/violet_witch/gotHit/sprite.txt
+ID death
+FILE ../Resources/Animation/violet_witch/die/sprite.txt
+ID dash
+FILE ../Resources/Animation/violet_witch/fly/sprite.txt
 
 ID skill
 MODEL 0
@@ -305,42 +355,6 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/transition/static/sprite.txt
-
-ID robotKnight
-MODEL 0
-SHADER 0
-TYPE RECT
-COORD 0.0, 0.0, 1.0, 1.0
-SIZE 1.0 x 1.0
-SCALE_BY_SIZE 0
-ANIMATION_COUNT 3
-ID rk_walk
-FILE ../Resources/Animation/robot_knight/walk/sprite.txt
-ID rk_attack
-FILE ../Resources/Animation/robot_knight/attack/sprite.txt
-ID rk_die
-FILE ../Resources/Animation/robot_knight/die/sprite.txt
-
-ID violetWitch
-MODEL 0
-SHADER 0
-TYPE RECT
-COORD 0.3, 0.5, 0.9, 1.0
-SIZE 1.5 x 1.5
-SCALE_BY_SIZE 0
-ANIMATION_COUNT 6
-ID idleLeft
-FILE ../Resources/Animation/violet_witch/idle/sprite.txt
-ID move
-FILE ../Resources/Animation/violet_witch/walk/sprite.txt
-ID attack
-FILE ../Resources/Animation/violet_witch/attack/sprite.txt
-ID gothit
-FILE ../Resources/Animation/violet_witch/gotHit/sprite.txt
-ID death
-FILE ../Resources/Animation/violet_witch/die/sprite.txt
-ID dash
-FILE ../Resources/Animation/violet_witch/fly/sprite.txt
 
 #MODEL_GEN 1
 ID 0

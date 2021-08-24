@@ -49,6 +49,8 @@ public:
 
 	//GOTHIT
 		//source causing knockback
+		bool m_isInvincible = false;
+		bool m_isInvulnerable = false;
 		bool m_isKnockBack = false;
 		Vector2 m_sourcePos= Vector2(0.0f, 0.0f);
 		//dmg

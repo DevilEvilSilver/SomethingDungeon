@@ -18,10 +18,7 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 
 void Character::Update(float frameTime)
 {
-	if (m_currHP <= 0&&m_cState!=CS_DEATH)
-	{
-		SetCS(CS_DEATH);
-	}
+	
 
 	switch (m_cState)
 	{
@@ -41,9 +38,15 @@ void Character::Update(float frameTime)
 		
 		Death(frameTime);
 		break;
+
 	}
 
-	UniqueUpdate(frameTime);
+	if (m_currHP <= 0)
+	{
+		if (m_cState != CS_DEATH)
+		SetCS(CS_DEATH);
+	}
+	else UniqueUpdate(frameTime);
 
 	//ANIMATION
 	m_fCurrFrameTime += frameTime;
@@ -77,7 +80,12 @@ void Character::Attack(float frameTime)
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
-	
+	if (m_isInvincible == true) {
+		return true;
+	}
+
+	if (auto* player = dynamic_cast<Player*>(this))
+		if (player->m_pState == PS_DASH) return false;
 
 	Vector2 knockBackDir=Vector2(0.0f,0.0f);
 
@@ -95,22 +103,22 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		
 	
 
-	if (m_cState == CS_GOTHIT&&m_isKnockBack==true)
+	if (m_cState == CS_GOTHIT && m_isKnockBack == true&&m_isInvulnerable==false)
 	{
-		
+
 		m_strState = IDLE_LEFT; //hit animation
-		
+
 		if (auto* player = dynamic_cast<Enemy*>(this))
 			m_strState = GOTHIT;
-		
+
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(knockBackDir, 5.5f, 0.25f, frameTime)==false) return false;
+			if (FixedMove(knockBackDir, 5.5f, 0.25f, frameTime) == false) return false;
 			else i++;
 			break;
 		case 1:
-			if (FixedMove(Vector2(1.0f, 0.0f), 0.0f, 0.75f, frameTime)==false) return false;
+			if (FixedMove(Vector2(1.0f, 0.0f), 0.0f, 0.75f, frameTime) == false) return false;
 			else i++;
 			break;
 		case 2:
@@ -119,8 +127,9 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 			return true;
 			break;
 		}
-		
+
 	}
+	else SetCS(CS_IDLE);
 	return true;
 	
 }
@@ -144,8 +153,7 @@ bool Character::FixedMove(Vector2 dir, float distance, float time, float frameTi
 	
 	float speed = distance / time;
 	currTime += frameTime;
-	currTime += frameTime;
-
+	currTime += frameTime;//OHNOOO
 	if (currTime < time)
 	{
 		UpdateMoveDirection(dir);

@@ -125,16 +125,17 @@ Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 30000;
+	m_maxHP = 30;
 	m_currHP = 30;
 	m_maxMP = 20;
 	m_currMP = 20;
 	m_ATK = 3;
 	m_DEF = 3;
 
-	m_MOVESPEED = 6.0f;
+	m_MOVESPEED = 3.0f;
 
 	isWallCollision = true;
+
 	m_strState = IDLE_LEFT;
 
 	m_GOLD = 0;
