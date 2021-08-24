@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-
+#include "InputManager.h"
 #include "define.h"
 #include "StatePlay.h"
 #include "CollisionManager.h"
@@ -27,9 +27,9 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 3.0f;
-
-
 	isDead = false;
+	AddSkill(BULLET_SKILL);
+	m_currentSkillId = BULLET_SKILL;
 }
 Enemy::~Enemy() {}
 void Enemy::UniqueUpdate(float frameTime)
@@ -52,12 +52,8 @@ void Enemy::UniqueUpdate(float frameTime)
 	else if (distance < 10.0f)
 	{
 		
-		//if (currCD <= 0.0f) {
-		//	currCD = totalCD;
-		//	//ShootChicken(plyPos);
-		//}
-		//else {
-		//	MoveRandom(frameTime);
+		UseSkill(frameTime);
+		MoveRandom(frameTime);
 
 		//	//currCD -= frameTime;
 		//}
@@ -99,8 +95,6 @@ bool Enemy::MoveRandom(float frameTime)
 			
 		
 	}
-	
-
 	return false;
 }
 
@@ -155,4 +149,42 @@ void Enemy::createDrop()
 		StatePlay::GetInstance()->AddDrop(gold);
 	}
 		
+}
+void Enemy::UseSkill(float frameTime)
+{
+	
+	Vector2 MousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+	SkillID* skillID1;
+	Skill* NewSkill1;
+	Matrix T;
+	T.SetIdentity();
+	for (auto& obj : m_SkillList)
+	{
+		if (m_currentSkillId == obj->m_prefabID)
+			skillID1 = obj;
+	}
+	if ((float)skillID1->m_MPCost < this->m_currMP)
+	{
+		if ((float)skillID1->m_fCurrCoolDownTime <= 0)
+		{
+			if (skillID1->m_prefabID == AOE_SKILL)
+			{
+				NewSkill1 = new AoeSkill(MousePos, this, AOE_SKILL, this->m_RoomID, T);
+				StatePlay::GetInstance()->AddSkill(NewSkill1);
+				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
+				//Sound
+				// Character animation 
+				// Character action
+			}
+			else if (skillID1->m_prefabID == BULLET_SKILL)
+			{
+				NewSkill1 = new BulletSkill(MousePos, this, BULLET_SKILL, this->m_RoomID, T);
+				StatePlay::GetInstance()->AddSkill(NewSkill1);
+				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
+				//Sound
+				// Character animation 
+				// Character action
+			}
+		}
+	}
 }

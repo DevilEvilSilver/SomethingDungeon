@@ -45,7 +45,6 @@
 #define KEY_LEFT	1<<5
 #define KEY_DOWN	1<<6
 #define KEY_RIGHT	1<<7
-
 #define KEY_SPACE	1<<8
 #define MOUSE_LEFT	1<<29
 #define MOUSE_RIGHT	1<<30

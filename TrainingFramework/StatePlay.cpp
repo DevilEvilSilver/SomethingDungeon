@@ -655,11 +655,6 @@ void StatePlay::UpdateControl(float frameTime)
 		}
 	}
 	
-	//USING SPACE	~	TEST
-	
-	
-		
-		
 	}
 
 

@@ -126,6 +126,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SkillID.cpp" />
     <ClCompile Include="StateLoad.cpp" />
     <ClCompile Include="StatePlay.cpp" />
     <ClCompile Include="Skill.cpp" />
@@ -173,6 +174,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="SkillId.h" />
+    <ClInclude Include="SkillFeatures.h" />
     <ClInclude Include="StateLoad.h" />
     <ClInclude Include="StatePlay.h" />
     <ClInclude Include="Shaders.h" />

@@ -28,11 +28,9 @@ public:
 
 
 	//SKILL
-	//--------------skill here----------------
-    //----------------------------------------
+	virtual void UseSkill(float frameTime);
 	
-	void Death(float frameiIme);
-	////////////////////////////////////////////////
+	virtual void Death(float frameiIme);
 	
 
 	//OTHER

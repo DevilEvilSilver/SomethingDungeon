@@ -2,11 +2,13 @@
 #include "Character.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-
+#include "InputManager.h"
 #include "define.h"
 #include "StatePlay.h"
 #include "CollisionManager.h"
-
+#include "Skill.h"
+#include "AoeSkill.h"
+#include "BulletSkill.h"
 #include "SoundEngine.h"
 
 Character::Character() {}
@@ -14,6 +16,8 @@ Character::Character() {}
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Object(prefabID, roomID, translationMatrix) 
 {
+	m_maxMP = 10000;
+	m_currMP = 10000;
 	//speed
 	m_MOVESPEED = 10.0f;
 	//dir
@@ -52,16 +56,19 @@ void Character::Update(float frameTime)
 		Move(frameTime);
 		break;
 	case CS_ATTACK:
-		Attack(frameTime);
+		//Attack(frameTime);
+		break;
 	case CS_GOTHIT:
 		GotHit(frameTime);
 		break;
 	case CS_DEATH:
-		
 		Death(frameTime);
 		break;
+	case CS_USESKILL:
+		UseSkill(frameTime);
+			break;
 	}
-
+	UseSkill(frameTime);
 	UniqueUpdate(frameTime);
 
 	//ANIMATION
@@ -88,9 +95,7 @@ void Character::Move(float frameTime)
 	else SetCS(CS_IDLE);
 }
 
-void Character::Attack(float frameTime)
-{
-}
+
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
@@ -233,8 +238,14 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 
 
 
-Character::~Character() 
+Character::~Character()
 {
+	for (auto& obj : m_SkillList)
+	{
+		delete obj;
+		obj = NULL;
+	}
+	m_SkillList.clear();
 }
 void Character::SetCS(CharacterState newState)
 {
@@ -250,4 +261,35 @@ void Character::ResetAnimation()
 void Character::Render(Camera* camera)
 {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
+}
+void Character::AddSkill(std::string prefabId)
+{
+	SkillID* skillID;
+	if (prefabId == AOE_SKILL)
+	{
+		skillID = new SkillID(AOE_SKILL, SkillCoolDownTime::AOE_CDTIME, SkillMPCost::AOE_MPCOST);
+		m_SkillList.push_back(skillID);
+	}
+	else if (prefabId == BULLET_SKILL)
+	{
+		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_CDTIME, SkillMPCost::BULLET_MPCOST);
+		m_SkillList.push_back(skillID);
+	}
+	
+	//more skill here
+}
+void Character::UpdateChangeSkill(float frameTime) // change current skill
+{
+
+}
+void Character::UseSkill(float frameTime)
+{
+	
+}
+void Character::UpdateCurrentCDTime(float frameTime)
+{
+	for (auto& obj : m_SkillList)
+	{
+		obj->m_fCurrCoolDownTime -= frameTime;
+	}
 }

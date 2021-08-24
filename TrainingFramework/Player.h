@@ -9,7 +9,7 @@
 //#include "Skill.h"
 class Player : public Character {
 private:
-	
+	std::vector<SkillID*> m_UniqueSkillList;
 public:
 	Text* numGoldText;
 	Text* numHPText;
@@ -28,44 +28,20 @@ public:
 		P_DASH,
 		P_SKILL//HERE
 	};
-
 	//STATS
-	 int m_maxMP,
-		m_currMP,
-		m_GOLD;
+	int m_GOLD;
 
 	//STATE
 	PlayerState m_pState;
 
-	//PLAYER SKILL
-	//---------------skill here---------------
-	float DashCoolDown = 2.0f;
-	float currDashCD = 0.0f;
-
-	float ChickenCoolDown = 0.5f;
-	float currChickenCD = 0.0f;
-	int ChickenMPCost = 1;
-	void ShootChicken(Vector2 target);
-
-	float MeleeCoolDown = 1.0f;
-	float currMeleeCD = 0.0f;
-	void Melee(Vector2 target);
-	//----------------------------------------
-
-
-
-	////////////////////////////////////////////////////////////////////////
-
 	void UniqueUpdate(float frameTime);
-
 	void Attack(float frameTime);
 	//PLAYER SKILL
-	//---------------skill here---------------
-	bool Dash(float frameTime);
-	//----------------------------------------
-	
-	///////////////////////////////////////////////////////////////////////
-
+	virtual void UseSkill(float frameTime);
+	virtual void AddSkill(std::string prefabId);
+	virtual void UpdateChangeSkill(float frameTime); // change current skill\
+	//Update CoolDownTime
+	virtual void UpdateCurrentCDTime(float frameTime);
 	//FUNCT TO MOVE
 	void PlayerMove(MoveDir dir);
 
