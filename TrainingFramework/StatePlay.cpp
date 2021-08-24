@@ -77,6 +77,7 @@ StatePlay::~StatePlay() {
 	}
 	m_TrapList.clear();
 
+	delete m_Gate;
 	delete m_Player;
 	delete m_Camera;
 
@@ -244,6 +245,14 @@ void StatePlay::Init() {
 
 	fclose(dataFile);
 
+	//GATE
+	Room *endRoom = GetRoomByType(END, m_RoomList);
+	Prefab *gatePrefab = GetResource(GATE, ResourceManager::GetInstance()->m_PrefabList);
+	translation.SetTranslation(endRoom->GetPosX() + ROOM_WIDTH / 2.0f - gatePrefab->m_fWidth / 2, 
+		endRoom->GetPosY() - ROOM_HEIGHT / 2 + gatePrefab->m_fHeight / 2, 0.0f);
+	m_Gate = new Object(GATE, endRoom->m_RoomID, translation);
+
+	//INIT LOGIC
 	m_isNextState = false;
 	m_isDead = false;
 	m_isQuit = false;
@@ -252,6 +261,7 @@ void StatePlay::Init() {
 	m_DeathBanner = NULL;
 	m_TransitionScreen = NULL;
 
+	//INIT TEXT
 	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
 	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
 	m_GoldText = new Text(m_Player->GetGold(), 1, 1, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
@@ -365,7 +375,9 @@ void StatePlay::Render() {
 	}
 	m_ObjectList.clear();
 
-
+	if (CheckInRange(m_Gate->m_RoomID)) {
+		m_Gate->Render(this->m_Camera);
+	}
 
 	//RENDER SKILL
 	for (auto& obj : m_SkillList)
@@ -454,6 +466,13 @@ void StatePlay::Update(float frameTime) {
 				}
 
 				//CHECK IF PLAYER ENTER GATE
+				if (CheckInRange(m_Gate->m_RoomID)) {
+					m_Gate->Update(frameTime);
+
+					if (CollisionManager::CheckCollision(m_Player, m_Gate)) {
+						m_isNextState = true;
+					}
+				}
 
 				UpdateRoomID();
 				m_Player->Update(frameTime);
@@ -731,7 +750,7 @@ void StatePlay::UpdateResult(float frameTime) {
 
 void StatePlay::SetRecord(bool isWin, unsigned int score) {
 	FILE* resultFile;
-	resultFile = fopen(FILE_RESULT, "w");
+	resultFile = fopen(FILE_RECORD, "w");
 
 	if (isWin) {
 		fprintf(resultFile, "WIN\n");

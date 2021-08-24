@@ -1,4 +1,4 @@
-#PREFAB_COUNT 23
+#PREFAB_COUNT 24
 ID mainChar
 MODEL 0
 SHADER 0
@@ -142,6 +142,17 @@ ID bombInit
 FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
 ID boomed
 FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
+
+ID gate
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 6.0, 3.5
+SIZE 6.0 x 3.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gate/static/sprite.txt
 
 ID hpHolder
 MODEL 0

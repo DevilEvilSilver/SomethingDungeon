@@ -31,6 +31,7 @@ public:
 	std::vector<Trap*> m_TrapList;
 
 	Player *m_Player;
+	Object *m_Gate;
 
 	//SOUND
 	int m_iHandleBGM;

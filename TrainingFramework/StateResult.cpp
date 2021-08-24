@@ -31,7 +31,7 @@ void StateResult::Init() {
 
 	// read file record
 		FILE* resultFile;
-	resultFile = fopen(FILE_RESULT, "r");
+	resultFile = fopen(FILE_RECORD, "r");
 
 	char strisWin[50];
 	fscanf(resultFile, "%s\n", &strisWin);

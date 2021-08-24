@@ -30,7 +30,7 @@
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SE							"../Resources/Sound.txt"
 
-#define FILE_RESULT						"../Resources/result.txt"
+#define FILE_RECORD						"../Resources/record.txt"
 
 //MAP
 #define MAP_MAX_TUNNEL				160
@@ -64,6 +64,7 @@
 //PREFAB
 #define DEATH_BANNER	"deathBanner"
 #define TRANSISTION		"transition"
+#define GATE			"gate"
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
 #define SKILL			"skill"
