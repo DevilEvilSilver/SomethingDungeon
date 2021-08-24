@@ -29,6 +29,8 @@ Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Ene
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 3.0f;
+
+	atkDuration = 2.5f;
 }
 
 void Witch::UniqueUpdate(float frameTime)
@@ -54,6 +56,7 @@ void Witch::UniqueUpdate(float frameTime)
 			}
 			else
 				if (currCD <= 0.0f) {
+
 					currCD = totalCD;
 					Shoot(plyPos);
 
@@ -67,7 +70,7 @@ void Witch::UniqueUpdate(float frameTime)
 		}
 		else SetCS(CS_IDLE);
 
-		if (start == true) m_strState = MOVE;
+		if (start == true) m_strState = DASH;
 	}
 	
 	
@@ -82,13 +85,6 @@ void Witch::Shoot(Vector2 target)
 
 	BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
 	StatePlay::GetInstance()->AddSkill(bskill);
-
-	bskill = new BulletSkill(target+Vector2(1.0f,1.0f), this, SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill);
-
-	bskill = new BulletSkill(target + Vector2(-1.0f, -1.0f), this, SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill);
-
 }
 
 void Witch::Melee(Vector2 target)

@@ -128,13 +128,13 @@ void Enemy::Melee(Vector2 target)
 
 void Enemy::Death(float frameTime)
 {
-	m_strState = DASH;
+	m_strState = DEATH;
 	
-	isDead = true;
-	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
-
-	createDrop();
-
+	if (FixedMove(Vector2(0,0),0.0f,2.0f, frameTime) == true) {
+		SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
+		isDead = true;
+		createDrop();
+	}
 }
 
 //OTHER

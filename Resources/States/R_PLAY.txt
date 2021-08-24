@@ -6,13 +6,15 @@ TYPE RECT
 COORD 0.3, 0.5, 0.7, 0.5
 SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 3
+ANIMATION_COUNT 4
 ID idleLeft
 FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
 ID move
 FILE ../Resources/Animation/mainChar/move/sprite.txt
 ID dash
 FILE ../Resources/Animation/mainChar/dash/sprite.txt
+ID attack
+FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
 
 ID enemy
 MODEL 0
@@ -306,7 +308,7 @@ FILE ../Resources/Animation/transition/static/sprite.txt
 
 ID robotKnight
 MODEL 0
-SHADER 2
+SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 1.0, 1.0
 SIZE 1.0 x 1.0
@@ -321,23 +323,23 @@ FILE ../Resources/Animation/robot_knight/die/sprite.txt
 
 ID violetWitch
 MODEL 0
-SHADER 2
+SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 1.0, 1.0
-SIZE 1.0 x 1.0
+COORD 0.3, 0.5, 0.9, 1.0
+SIZE 1.5 x 1.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 6
-ID vw_idle
+ID idleLeft
 FILE ../Resources/Animation/violet_witch/idle/sprite.txt
-ID vw_walk
+ID move
 FILE ../Resources/Animation/violet_witch/walk/sprite.txt
-ID vw_attack
+ID attack
 FILE ../Resources/Animation/violet_witch/attack/sprite.txt
-ID vw_gotHit
+ID gothit
 FILE ../Resources/Animation/violet_witch/gotHit/sprite.txt
-ID vw_die
+ID death
 FILE ../Resources/Animation/violet_witch/die/sprite.txt
-ID vw_fly
+ID dash
 FILE ../Resources/Animation/violet_witch/fly/sprite.txt
 
 #MODEL_GEN 1

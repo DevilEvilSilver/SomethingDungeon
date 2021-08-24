@@ -73,6 +73,9 @@
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
 
+//ENEMY
+#define WITCH			"violetWitch"
+
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
@@ -88,6 +91,8 @@
 #define MOVE			"move"
 #define DASH			"dash"
 #define GOTHIT			"gothit"
+#define ATTACK			"attack"
+#define DEATH			"death"
 
 	//BUTTON
 #define B_NORMAL			"normal"

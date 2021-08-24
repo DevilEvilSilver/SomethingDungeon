@@ -67,7 +67,7 @@ void Room::RoomGenerate() {
 			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 			//Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
-			Witch* enemy = new Witch(ENEMY, m_RoomID, translation);
+			Witch* enemy = new Witch(WITCH, m_RoomID, translation);
 			
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 

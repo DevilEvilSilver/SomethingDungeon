@@ -54,6 +54,11 @@ public:
 		//dmg
 		int m_iDmgTaken = 0;
 		int i = 0;
+
+	//ATTACK
+		float atkDuration = 1.5f;
+
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	//STM :v
@@ -93,8 +98,5 @@ public:
 
 	//RENDER
 	void Render(Camera *camera);
-
-	//SKILL
-	virtual void Attack(int x, int y);
 
 };

@@ -492,7 +492,7 @@ void StatePlay::Update(float frameTime) {
 		m_Player->Update(frameTime);
 		for (auto& obj : m_InRangeEnemy) {
 
-				obj->Update(frameTime);
+			obj->Update(frameTime);
 
 		}
 		for (auto& obj : m_InRangeSkill) {

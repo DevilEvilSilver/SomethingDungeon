@@ -18,7 +18,7 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 
 void Character::Update(float frameTime)
 {
-	if (m_currHP <= 0)
+	if (m_currHP <= 0&&m_cState!=CS_DEATH)
 	{
 		SetCS(CS_DEATH);
 	}
@@ -71,8 +71,8 @@ void Character::Move(float frameTime)
 
 void Character::Attack(float frameTime)
 {
-	m_strState = IDLE_LEFT;
-	if (FixedMove(Vector2(0, 0), 0.0f, 1.5f, frameTime) == true) SetCS(CS_IDLE);
+	m_strState = ATTACK;
+	if (FixedMove(Vector2(0, 0), 0.0f, atkDuration, frameTime) == true) SetCS(CS_IDLE);
 }
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
@@ -219,8 +219,7 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 Character::~Character() {}
 
 
-void Character::Attack(int x, int y)
-{}
+
 
 void Character::SetCS(CharacterState newState)
 {
