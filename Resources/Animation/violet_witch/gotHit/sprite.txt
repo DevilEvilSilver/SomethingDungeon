@@ -1,0 +1,17 @@
+#FRAME_COUNT 4
+ID 0
+SPF 0.15
+FILE ../Resources/Animation/violet_witch/gotHit/15.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.15
+FILE ../Resources/Animation/violet_witch/gotHit/16.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.15
+FILE ../Resources/Animation/violet_witch/gotHit/17.tga
+TILING GL_REPEAT
+ID 3
+SPF 0.15
+FILE ../Resources/Animation/violet_witch/gotHit/18.tga
+TILING GL_REPEAT
