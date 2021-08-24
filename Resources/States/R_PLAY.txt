@@ -1,4 +1,4 @@
-#PREFAB_COUNT 25
+#PREFAB_COUNT 27
 ID mainChar
 MODEL 0
 SHADER 0
@@ -303,6 +303,42 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/transition/static/sprite.txt
+
+ID robotKnight
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 3
+ID rk_walk
+FILE ../Resources/Animation/robot_knight/walk/sprite.txt
+ID rk_attack
+FILE ../Resources/Animation/robot_knight/attack/sprite.txt
+ID rk_die
+FILE ../Resources/Animation/robot_knight/die/sprite.txt
+
+ID violetWitch
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 6
+ID vw_idle
+FILE ../Resources/Animation/violet_witch/idle/sprite.txt
+ID vw_walk
+FILE ../Resources/Animation/violet_witch/walk/sprite.txt
+ID vw_attack
+FILE ../Resources/Animation/violet_witch/attack/sprite.txt
+ID vw_gotHit
+FILE ../Resources/Animation/violet_witch/gotHit/sprite.txt
+ID vw_die
+FILE ../Resources/Animation/violet_witch/die/sprite.txt
+ID vw_fly
+FILE ../Resources/Animation/violet_witch/fly/sprite.txt
 
 #MODEL_GEN 1
 ID 0
