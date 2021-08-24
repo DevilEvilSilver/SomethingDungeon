@@ -31,29 +31,25 @@ public:
 			m_currHP,
 			m_ATK,
 			m_DEF;
-
-
-	
 	//MOVE
 		//speed
-		float m_MOVESPEED = 10.0f;
+		float m_MOVESPEED;
 		//dir
-		Vector2 m_moveDir=Vector2(0.0f,0.0f);
-		Vector2 m_lastMoveDir = Vector2(-1.0f, 0.0f);
+		Vector2 m_moveDir;
+		Vector2 m_lastMoveDir ;
 		//collision
-		bool isWallCollision = false;
-		bool isPlayerCollision = false;
-		bool isEnemyCollision = false;
+		bool isWallCollision;
+		bool isPlayerCollision ;
+		bool isEnemyCollision;
 		//FixedMove
-		float currTime = 0.0f;
-
+		float currTime;
 	//GOTHIT
 		//source causing knockback
-		bool m_isKnockBack = false;
-		Vector2 m_sourcePos= Vector2(0.0f, 0.0f);
+		bool m_isKnockBack;
+		Vector2 m_sourcePos;
 		//dmg
-		int m_iDmgTaken = 0;
-		int i = 0;
+		int m_iDmgTaken;
+		int i;
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	//STM :v
@@ -95,6 +91,5 @@ public:
 	void Render(Camera *camera);
 
 	//SKILL
-	virtual void Attack(int x, int y);
 
 };

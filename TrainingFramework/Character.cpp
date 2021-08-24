@@ -12,7 +12,27 @@
 Character::Character() {}
 
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: Object(prefabID, roomID, translationMatrix) {
+	: Object(prefabID, roomID, translationMatrix) 
+{
+	//speed
+	m_MOVESPEED = 10.0f;
+	//dir
+	m_moveDir = Vector2(0.0f, 0.0f);
+	m_lastMoveDir = Vector2(-1.0f, 0.0f);
+	//collision
+	isWallCollision = false;
+	isPlayerCollision = false;
+	isEnemyCollision = false;
+	//FixedMove
+	currTime = 0.0f;
+
+	//GOTHIT
+		//source causing knockback
+	 m_isKnockBack = false;
+	m_sourcePos = Vector2(0.0f, 0.0f);
+	//dmg
+	m_iDmgTaken = 0;
+	i = 0;
 
 }
 
@@ -213,12 +233,9 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 
 
 
-Character::~Character() {}
-
-
-void Character::Attack(int x, int y)
-{}
-
+Character::~Character() 
+{
+}
 void Character::SetCS(CharacterState newState)
 {
 	m_cState = newState;

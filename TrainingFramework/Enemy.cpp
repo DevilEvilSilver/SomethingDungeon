@@ -11,7 +11,27 @@
 #include "AoeSkill.h"
 
 #include "SoundEngine.h"
+Enemy::Enemy() {}
+Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	: Character(prefabID, roomID, translationMatrix) {
 
+	m_maxHP = 10;
+	m_currHP = 10;
+
+	m_ATK = 3;
+	m_DEF = 3;
+
+	m_strState = IDLE_LEFT;
+	isWallCollision = true;
+	isPlayerCollision = false;
+	isEnemyCollision = true;
+
+	m_MOVESPEED = 3.0f;
+
+
+	isDead = false;
+}
+Enemy::~Enemy() {}
 void Enemy::UniqueUpdate(float frameTime)
 {
 	Player* plyr = StatePlay::GetInstance()->m_Player;
@@ -20,8 +40,6 @@ void Enemy::UniqueUpdate(float frameTime)
 
 	Vector2 delta = plyPos - enmyPos;
 	float distance = delta.Length();
-
-	float totalCD = 4.0f;
 	
 	//move behavior
 	m_MOVESPEED = 3.0f;
@@ -34,14 +52,15 @@ void Enemy::UniqueUpdate(float frameTime)
 	else if (distance < 10.0f)
 	{
 		
-		if (currCD <= 0.0f) {
-			currCD = totalCD;
-			ShootChicken(plyPos);
-		}
-		else {
-			MoveRandom(frameTime);
-			currCD -= frameTime;
-		}
+		//if (currCD <= 0.0f) {
+		//	currCD = totalCD;
+		//	//ShootChicken(plyPos);
+		//}
+		//else {
+		//	MoveRandom(frameTime);
+
+		//	//currCD -= frameTime;
+		//}
 	}
 	else SetCS(CS_IDLE);
 
@@ -85,25 +104,6 @@ bool Enemy::MoveRandom(float frameTime)
 	return false;
 }
 
-void Enemy::ShootChicken(Vector2 target)
-{
-	Matrix m;
-	m.SetTranslation(target.x, target.y, 0);
-
-	BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill);
-}
-
-void Enemy::Melee(Vector2 target)
-{
-
-	Matrix m;
-	m.SetTranslation(target.x, target.y, 0);
-
-	AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill);
-}
-
 //SKILL
 //----------------------------------------
 
@@ -121,27 +121,7 @@ void Enemy::Death(float frameTime)
 }
 
 //OTHER
-Enemy::Enemy(){}
-Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 10;
-	m_currHP = 10;
-	
-	m_ATK = 3;
-	m_DEF = 3;
-
-	m_strState = IDLE_LEFT;
-	isWallCollision = true;
-	isPlayerCollision = false;
-	isEnemyCollision = true;
-
-	m_MOVESPEED = 3.0f;
-
-	
-	isDead = false;
-}
-Enemy::~Enemy() {}
 
 
 void Enemy::createGoldObject() {

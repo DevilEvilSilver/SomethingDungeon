@@ -70,18 +70,12 @@ public:
 	void PlayerMove(MoveDir dir);
 
 	//CHANGE STATE
-	void SetPS(PlayerState newPS);
 
 	//OTHER
 	Player();
 	Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Player();
 	
-	virtual void Attack(int x, int y);
-
-
-
-
 	//UI
 	std::string GetHP();
 	std::string GetMP();

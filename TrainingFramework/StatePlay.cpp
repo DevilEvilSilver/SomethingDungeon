@@ -656,12 +656,8 @@ void StatePlay::UpdateControl(float frameTime)
 	}
 	
 	//USING SPACE	~	TEST
-	m_Player->Attack(1,2);
 	
-		if (InputManager::GetInstance()->keyPressed & KEY_SPACE)
-		{
-			m_Player->Dash(frameTime);
-		}
+	
 		
 		
 	}

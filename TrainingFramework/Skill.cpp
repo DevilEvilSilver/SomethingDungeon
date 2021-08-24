@@ -15,10 +15,11 @@ Skill::Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix tran
 		m_isPlayer = false;
 
 	m_strState = IDLE_LEFT;
-
 	m_owner = owner;
-	
 	m_currExistingTime = 0;
+	m_isKnockBack = false;
+	m_bHit = true;
+	isFinished = false;
 }
 
 Skill::~Skill()
@@ -37,12 +38,12 @@ void Skill::UpdateMove(float frameTime)
 	if (m_fVx || m_fVy)
 	{
 		m_fCurrentPosX += m_fVx * frameTime;
-	m_fCurrentPosY += m_fVy * frameTime;
-	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX ;
-	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY ;
+		m_fCurrentPosY += m_fVy * frameTime;
+		m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX;
+		m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 	}
 }
-void Skill::UpdateHit(float frameTime){}
+void Skill::UpdateHit(float frameTime) {}
 
 void Skill::Render(Camera* camera)
 {
@@ -51,10 +52,9 @@ void Skill::Render(Camera* camera)
 void Skill::UpdateExistingTime(float frameTime)
 {
 	m_currExistingTime += frameTime;
-	if (m_currExistingTime > (float)m_totalExsitingTime / 1000)
+	if (m_currExistingTime > (float)m_ExsitingTime / 1000)
 	{
 		isFinished = true;
-		
 	}
 }
 
