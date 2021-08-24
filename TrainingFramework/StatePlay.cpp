@@ -434,78 +434,79 @@ void StatePlay::RemoveTrap(Trap* trap)
 
 void StatePlay::Update(float frameTime) {
 	if (!m_isDead && !m_isNextState) {
-		if (m_isPause) {
-			m_PauseBox->Update(frameTime);
-			m_ButtonResume->Update(frameTime);
-			m_ButtonQuit->Update(frameTime);
-
-			UpdatePause(frameTime);
+		if (!m_isStartUp) {
+			RoomsGenerate();
+			m_iHandleBGM = SoundEngine::GetInstance()->Play(PLAY_BGM, 0.25f, 1.0f, true);
+			m_isStartUp = true;
 		}
 		else {
-			if (!m_isStartUp) {
-				RoomsGenerate();
-				m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
-				m_isStartUp = true;
+			if (m_isPause) {
+				m_PauseBox->Update(frameTime);
+				m_ButtonResume->Update(frameTime);
+				m_ButtonQuit->Update(frameTime);
+
+				UpdatePause(frameTime);
 			}
+			else {
+				//CHECK IF PLAYER DEAD 
+				if (m_Player->m_currHP <= 0) {
+					m_isDead = true;
+				}
 
-			//CHECK IF PLAYER DEAD 
-			if (m_Player->m_currHP <= 0) {
-				m_isDead = true;
-			}
+				//CHECK IF PLAYER ENTER GATE
 
-			//CHECK IF PLAYER ENTER GATE
+				UpdateRoomID();
+				m_Player->Update(frameTime);
+				for (auto& obj : m_EnemyList) {
+					if (CheckInRange(obj->m_RoomID))
+					{
+						obj->Update(frameTime);
+					}
+				}
+				for (auto& obj : m_SkillList) {
 
-			UpdateRoomID();
-			m_Player->Update(frameTime);
-			for (auto& obj : m_EnemyList) {
-				if (CheckInRange(obj->m_RoomID))
-				{
 					obj->Update(frameTime);
 				}
-			}
-			for (auto& obj : m_SkillList) {
-
-				obj->Update(frameTime);
-			}
-			for (auto& obj : m_TrapList) {
-				if (CheckInRange(obj->m_RoomID))
-					obj->Update(frameTime);
-			}
-			for (auto& obj : m_DropList) {
-				if (CheckInRange(obj->m_RoomID))
-					obj->Update(frameTime);
-			}
-
-			//Kill dead
-			for (auto& obj : m_EnemyList) {
-				if (obj->isDead == true)
-				{
-					RemoveEnemy(obj);
+				for (auto& obj : m_TrapList) {
+					if (CheckInRange(obj->m_RoomID))
+						obj->Update(frameTime);
 				}
+				for (auto& obj : m_DropList) {
+					if (CheckInRange(obj->m_RoomID))
+						obj->Update(frameTime);
+				}
+
+				//Kill dead
+				for (auto& obj : m_EnemyList) {
+					if (obj->isDead == true)
+					{
+						RemoveEnemy(obj);
+					}
+				}
+
+
+				UpdateControl(frameTime);
+
+				//follow camera
+				m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+				m_Camera->Update(frameTime);
+
+				//Update UI
+				m_ButtonPause->Update(frameTime);
+
+				m_HpHolder->Update(frameTime);
+				m_HpBar->Update(frameTime);
+				m_HpBar->Resize(m_Player->m_currHP);
+				m_HpText->setText(m_Player->GetHP());
+
+				m_MpHolder->Update(frameTime);
+				m_MpBar->Update(frameTime);
+				m_MpBar->Resize(m_Player->m_currMP);
+				m_MpText->setText(m_Player->GetMP());
+
+				m_GoldIcon->Update(frameTime);
+				m_GoldText->setText(m_Player->GetGold());
 			}
-
-
-			UpdateControl(frameTime);
-
-			//follow camera
-			m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-			m_Camera->Update(frameTime);
-
-			//Update UI
-			m_ButtonPause->Update(frameTime);
-
-			m_HpHolder->Update(frameTime);
-			m_HpBar->Update(frameTime);
-			m_HpBar->Resize(m_Player->m_currHP);
-			m_HpText->setText(m_Player->GetHP());
-
-			m_MpHolder->Update(frameTime);
-			m_MpBar->Update(frameTime);
-			m_MpBar->Resize(m_Player->m_currMP);
-			m_MpText->setText(m_Player->GetMP());
-
-			m_GoldIcon->Update(frameTime);
-			m_GoldText->setText(m_Player->GetGold());
 		}
 	}
 	else {
@@ -540,11 +541,11 @@ void StatePlay::UpdateRoomID() {
 		if (CheckInRange(obj->m_RoomID))
 		{
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
-			for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
+			for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
 				if (i > 31)
 					continue;
 
-				for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
+				for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
 					if (j > 31)
 						continue;
 					if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
@@ -673,14 +674,14 @@ void StatePlay::UpdateResult(float frameTime) {
 	if (m_isDead) {
 		m_fNextStateFrame -= frameTime;
 
-		if (m_fNextStateFrame < 4.0f && m_DeathBanner == NULL) {
+		if (m_fNextStateFrame < 6.0f && m_DeathBanner == NULL) {
 			Matrix translation;
 			float fTransY = GetResource(DEATH_BANNER, ResourceManager::GetInstance()->m_PrefabList)->m_fHeight / 2;
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, fTransY, 2.0f);
 			m_DeathBanner = new Fader(DEATH_BANNER, Vector2(0.0f, 0.0f), translation, 3.0f, 1.5f);
 
-			m_fNextStateFrame += 3.0f;
-			//Add death sfx !!!!!!!!!!!!!
+			m_fNextStateFrame += 5.0f;
+			SoundEngine::GetInstance()->Play(DEATH_SFX, 3.0f, 1.0f, true);
 			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
 		}
 

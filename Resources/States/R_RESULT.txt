@@ -10,7 +10,7 @@ ANIMATION_COUNT 2
 ID winBG
 FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
 ID loseBG
-FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
+FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
 
 ID title
 MODEL 0

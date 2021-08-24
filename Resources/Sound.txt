@@ -1,4 +1,4 @@
-SoundNum 12
+SoundNum 13
 
 #ID 0 ../Resources/Sounds/welcome_bgm.wav
 #ID 1 ../Resources/Sounds/logo_sfx.wav
@@ -16,3 +16,5 @@ SoundNum 12
 #ID 10 ../Resources/Sounds/dash.wav
 
 #ID 11 ../Resources/Sounds/bgm.wav
+
+#ID 12 ../Resources/Sounds/death_sfx.wav

@@ -117,6 +117,7 @@
 #define LOGO_SFX			1
 #define BUTTON_SFX			2
 
+#define PLAY_BGM			11
 #define COIN				3
 #define LOSE				4
 #define PEWPEW				5
@@ -125,6 +126,8 @@
 #define HIT					8
 #define BOMB				9
 #define WHOOSH				10
+#define DEATH_SFX			12
+#define TELEPORT_SFX		13
 
-#define WIN_BGM				11
-#define LOSE_BGM			12
+#define WIN_BGM				14
+#define LOSE_BGM			15
