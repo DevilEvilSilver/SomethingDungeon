@@ -44,7 +44,11 @@ void Character::Update(float frameTime)
 	if (m_currHP <= 0)
 	{
 		if (m_cState != CS_DEATH)
-		SetCS(CS_DEATH);
+		{
+			ResetAnimation();
+			SetCS(CS_DEATH);
+		}
+		
 	}
 	else UniqueUpdate(frameTime);
 

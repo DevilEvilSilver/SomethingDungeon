@@ -24,6 +24,6 @@ SPF 0.15
 FILE ../Resources/Animation/violet_witch/die/24.tga
 TILING GL_REPEAT
 ID 6
-SPF 0.15
+SPF -1
 FILE ../Resources/Animation/violet_witch/die/25.tga
 TILING GL_REPEAT

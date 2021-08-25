@@ -30,7 +30,7 @@ Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Ene
 
 	m_MOVESPEED = 2.0f;
 
-	atkDuration = 2.5f;
+	atkDuration = 1.0f;
 }
 
 void Witch::UniqueUpdate(float frameTime)

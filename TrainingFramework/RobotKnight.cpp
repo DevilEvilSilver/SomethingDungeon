@@ -53,7 +53,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 		SetBS(BS_ATTACK2);*/
 
 	
-	
+	printf("robot hp:%d\n", m_currHP);
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -174,9 +174,9 @@ void RobotKnight::Attack1(float frameTime)
 			Vector2 skillWidth = ranDir - GetPos();
 			skillWidth.Normalize();
 			skillWidth = Vector2(skillWidth.y, -skillWidth.x);
-			float widthRange = 1.5f;
+			float widthRange = 1.75f;
 			int pelletRank = 4;
-			int bulletWave = 4;
+			int bulletWave = 3;
 			
 
 			if (i < bulletWave)
