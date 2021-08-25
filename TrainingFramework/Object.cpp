@@ -68,6 +68,10 @@ Matrix Object::GetWorldMatrix() {
 
 		return Vector2(m_fCurrentPosX, m_fCurrentPosY);
 	}
+	Vector2 Object::GetCenterPos()
+	{
+		return Vector2(m_fCurrentPosX + m_fWidth/2, m_fCurrentPosY - m_fHeight/2);
+	}
 	//SET
 	void Object::SetPosX(float x)
 	{
@@ -94,7 +98,10 @@ void Object::SetVelocityY(float vy)
 
 float* Object::GetHitBoxCurrentData()
 {
-	float* data = new float[7]{ m_fCurrentPosX, m_fCurrentPosY, m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,m_fVx,m_fVy, m_fRadius };
+	float* data = new float[8]{ m_fCurrentPosX, m_fCurrentPosY,
+								m_fCurrentPosX + m_fWidth, m_fCurrentPosY - m_fHeight,
+								m_fVx,m_fVy, 
+								m_fCurrentPosX + m_fWidth/2, m_fCurrentPosY - m_fHeight/2 };// center positon
 	return data;
 }
 

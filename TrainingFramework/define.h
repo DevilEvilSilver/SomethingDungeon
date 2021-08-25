@@ -71,10 +71,22 @@
 #define MP_PO			"mpPo"
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
-
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
+
+//EFFECT
+#define EFFECT_SKILL_FREEZE1 "skillEffectFreeze1"
+#define EFFECT_SKILL_FREEZE2 "skillEffectFreeze2"
+#define EFFECT_SKILL_FREEZE3 "skillEffectFreeze3"
+#define EFFECT_SKILL_FIRE1 "skillEffectFire1"
+#define EFFECT_SKILL_FIRE2 "skillEffectFire2"
+#define EFFECT_SKILL_FIRE3 "skillEffectFire3"
+#define EFFECT_SKILL_WIND1 "skillEffectWind1"
+#define EFFECT_SKILL_WIND2 "skillEffectWind2"
+#define EFFECT_SKILL_WIND3 "skillEffectWinf3"
+#define EFFECT_SKILL_WIND4 "skillEffectWind4"
+
 
 //SKILL
 #define	BULLET_SPEED	12
@@ -122,3 +134,4 @@
 //MAP
 #define MAP_WIDTH			32
 #define MAP_HEIGHT			32
+

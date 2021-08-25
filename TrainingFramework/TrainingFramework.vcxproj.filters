@@ -103,6 +103,12 @@
     <Filter Include="Resources\States">
       <UniqueIdentifier>{22297199-d165-44f5-9e4a-46dcecd55317}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\Effect">
+      <UniqueIdentifier>{d049cefd-dc7b-4b54-853e-51729df19b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Effect">
+      <UniqueIdentifier>{32ba355f-d329-419c-b1b6-e321ab44864d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -230,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="SkillID.cpp">
       <Filter>Source Files\Objects\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Objects\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="SkillFeatures.h">
       <Filter>Header Files\Objects\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Objects\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

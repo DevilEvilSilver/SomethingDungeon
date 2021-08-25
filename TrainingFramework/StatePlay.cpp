@@ -68,6 +68,13 @@ StatePlay::~StatePlay() {
 	}
 	m_TrapList.clear();
 
+	for (auto& object : m_EffectList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_EffectList.clear();
+
 	delete m_Player;
 	delete m_Camera;
 
@@ -371,6 +378,11 @@ void StatePlay::Render() {
 		obj->Render(this->m_Camera);
 	}
 
+	//RENDER EFFECT
+	for (auto& obj : m_InRangeEffect)
+	{
+		obj->Render(this->m_Camera);
+	}
 	//RENDER UI
 	{
 		m_HpHolder->Render(m_Camera);
@@ -404,6 +416,10 @@ void StatePlay::AddDrop(Drop* drop)
 void StatePlay::AddTrap(Trap* trap)
 {
 	m_TrapList.push_back(trap);
+}
+void StatePlay::AddEffect(Effect* effect)
+{
+	m_EffectList.push_back(effect);
 }
 void StatePlay::Remove()
 {
@@ -441,6 +457,14 @@ void StatePlay::Remove()
 			RemoveSkill(obj);
 		}
 	}
+	//delete effect
+	for (auto& obj : m_EffectList)
+	{
+		if (obj->mp_isFisnished == true)
+		{
+			RemoveEffect(obj);
+		}
+	}
 
 }
 void StatePlay::RemoveDrop(Drop* drop)
@@ -476,7 +500,8 @@ void StatePlay::Update(float frameTime) {
 
 		UpdateControlPause(frameTime);
 	}
-	else {
+	else 
+	{
 		if (!m_isStartUp) {
 			RoomsGenerate();
 			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
@@ -504,7 +529,9 @@ void StatePlay::Update(float frameTime) {
 		for (auto& obj : m_InRangeDrop) {
 				obj->Update(frameTime);
 		}
-
+		for (auto& obj : m_InRangeEffect) {
+			obj->Update(frameTime);
+		}
 
 
 		UpdateControl(frameTime);
@@ -545,6 +572,7 @@ void StatePlay::UpdateInRange()
 	for (auto& obj : m_DropList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDrop.push_back(obj);
 	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeTrap.push_back(obj);
 	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
+	for (auto& obj : m_EffectList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEffect.push_back(obj);
 }
 
 void StatePlay::ClearInRange()
@@ -554,6 +582,7 @@ void StatePlay::ClearInRange()
 	m_InRangeEnemy.clear();
 	m_InRangeSkill.clear();
 	m_InRangeTrap.clear();
+	m_InRangeEffect.clear();
 }
 
 void StatePlay::UpdateRoomID() {
@@ -745,6 +774,7 @@ void StatePlay::RemoveEnemy(Enemy* enemy) {
 	}
 
 	delete m_EnemyList[id];
+	m_EnemyList[id] = NULL;
 	m_EnemyList[id] = m_EnemyList[m_EnemyList.size() - 1];
 	m_EnemyList.resize(m_EnemyList.size() - 1);
 }
@@ -759,4 +789,15 @@ void StatePlay::RemoveSkill(Skill* skill)
 	delete m_SkillList[id];
 	m_SkillList[id] = m_SkillList[m_SkillList.size() - 1];
 	m_SkillList.resize(m_SkillList.size() - 1);
+}
+void StatePlay::RemoveEffect(Effect* effect)
+{
+	int id;
+	for (int i = 0; i < m_EffectList.size(); i++) {
+		if (m_EffectList[i] == effect)  id = i;
+	}
+
+	delete m_EffectList[id];
+	m_EffectList[id] = m_EffectList[m_EffectList.size() - 1];
+	m_EffectList.resize(m_EffectList.size() - 1);
 }

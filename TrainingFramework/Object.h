@@ -21,8 +21,8 @@ public:
 	std::string m_strState;
 	unsigned int m_iCurrFrameIndex;
 	float m_fCurrFrameTime;
-	bool m_isFacingLeft=true;
-	bool m_isFacingUp = true;
+	bool m_isFacingLeft=false;
+	bool m_isFacingUp = false;
 
 	//HITBOX
 	unsigned int m_iType;			
@@ -47,6 +47,7 @@ public:
 	float GetPosX();
 	float GetPosY();
 	Vector2 GetPos();
+	Vector2 GetCenterPos();
 	void SetPosX(float x);
 	void SetPosY(float y);
 

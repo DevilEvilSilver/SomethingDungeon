@@ -1,4 +1,4 @@
-#PREFAB_COUNT 25
+#PREFAB_COUNT 29
 ID mainChar
 MODEL 0
 SHADER 0
@@ -52,6 +52,50 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
 FILE ../Resources/Animation/aoeskill/freeze/sprite.txt
+
+ID skillEffectFreeze3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.48, 1.0, 1.0
+SIZE 2.0 x 2.48
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv3/sprite.txt
+
+ID skillEffectWind4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 3.3, 1.0, 1.0
+SIZE 2.0 x 4.3
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/windlv4/sprite.txt
+
+ID skillEffectFreeze2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.0, 1.0, 1.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv2/sprite.txt
+
+ID skillEffectFire3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 2.68, 1.0, 1.0
+SIZE 2.0 x 3.68
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/firelv3/sprite.txt
 
 ID normalRoom
 MODEL 0
