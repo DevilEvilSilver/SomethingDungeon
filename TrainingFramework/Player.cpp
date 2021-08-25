@@ -59,6 +59,13 @@ Player::~Player() {
 
 void Player::UniqueUpdate(float frameTime)
 {
+	switch (m_cState)
+	{
+		case CS_DASH:
+			Dash(frameTime);
+		default:
+			break;
+	}
 	UpdateChangeSkill(frameTime);
 }
 
@@ -67,25 +74,16 @@ void Player::Attack(float frameTime)
 
 }
 
-//bool Player::Dash(float frameTime)
-//{
-//	/*if (currDashCD <= 0.0f&&m_cState!=CS_DEATH)
-//	{ 
-//		SetPS(P_DASH);
-//		currDashCD = DashCoolDown;
-//		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
-//	}
-//	
-//	if (m_pState == P_DASH)
-//	{
-//		m_strState = DASH;
-//		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.5f, frameTime) == false) return false;
-//		SetCS(CS_IDLE);
-//		SetPS(P_CS);
-//	}*/
-//
-//	return true;
-//}
+bool Player::Dash(float frameTime)
+{
+	if (m_cState == CS_DASH)
+	{
+		m_strState = DASH;
+		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.5f, frameTime) == false) return false;
+		SetCS(CS_IDLE);
+	}
+	return true;
+}
 
 
 void Player::PlayerMove(MoveDir dir)
@@ -129,7 +127,7 @@ void Player::AddSkill(std::string prefabId)
 	}
 	else if (prefabId == BULLET_SKILL)
 	{
-		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_CDTIME, SkillMPCost::BULLET_MPCOST);
+		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_PLAYER_CDTIME, SkillMPCost::BULLET_MPCOST);
 		m_SkillList.push_back(skillID);
 
 	}
@@ -158,7 +156,7 @@ void Player::UpdateChangeSkill(float frameTime) // change current skill
 					}
 					else
 						m_currentSkillId = m_SkillList[i + 1]->m_prefabID;
-
+					break;
 				}
 			}
 		}
@@ -191,16 +189,16 @@ void Player::UseSkill(float frameTime)
 			{
 				if (skillID1->m_prefabID == AOE_SKILL)
 				{
-					NewSkill1 = new AoeSkill(MousePos, this, AOE_SKILL, this->m_RoomID, T);
+					NewSkill1 = new AoeSkill( this, AOE_SKILL, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill1);
 					skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
 					//Sound
-					// Character animation 
-					// Character action
+					//
+					// Character action state
 				}
 				else if (skillID1->m_prefabID == BULLET_SKILL)
 				{
-					NewSkill1 = new BulletSkill(MousePos, this, BULLET_SKILL, this->m_RoomID, T);
+					NewSkill1 = new BulletSkill(this, BULLET_SKILL, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill1);
 					skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
 					//Sound
@@ -214,7 +212,7 @@ void Player::UseSkill(float frameTime)
 	Skill* NewSkill2;
 	if (keyPressed & KEY_SPACE)
 	{
-		for (auto& obj : m_SkillList)
+		for (auto& obj : m_UniqueSkillList)
 		{
 			if (DASH == obj->m_prefabID)
 				skillID2 = obj;
@@ -225,7 +223,7 @@ void Player::UseSkill(float frameTime)
 			{
 				//Dash Skill Obj
 				SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
-				//Character Action
+				SetCS(CS_DASH); //Character Action
 				//Character Animation
 			}
 		}
@@ -235,10 +233,10 @@ void Player::UpdateCurrentCDTime(float frameTime)
 {
 	for (auto& obj : m_SkillList)
 	{
-		obj->m_fCurrCoolDownTime -= frameTime;
+		obj->m_fCurrCoolDownTime -= (frameTime*1000); // ms
 	}
 	for (auto& obj : m_UniqueSkillList)
 	{
-		obj->m_fCurrCoolDownTime -= frameTime;
+		obj->m_fCurrCoolDownTime -= (frameTime * 1000);
 	}
 }

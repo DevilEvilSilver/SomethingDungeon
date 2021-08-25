@@ -11,8 +11,8 @@
 
 StateManager::StateManager()
 {
-	AddState(GS_STATE_LOGO);
-
+	//AddState(GS_STATE_LOGO);
+	AddState(GS_STATE_PLAY);
 }
 
 StateManager::~StateManager() {

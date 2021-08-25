@@ -49,7 +49,7 @@ void Enemy::UniqueUpdate(float frameTime)
 		m_MOVESPEED = 4.0f;
 	}
 		
-	else if (distance < 10.0f)
+	else if (distance < 6.0f)
 	{
 		
 		UseSkill(frameTime);
@@ -169,7 +169,7 @@ void Enemy::UseSkill(float frameTime)
 		{
 			if (skillID1->m_prefabID == AOE_SKILL)
 			{
-				NewSkill1 = new AoeSkill(MousePos, this, AOE_SKILL, this->m_RoomID, T);
+				NewSkill1 = new AoeSkill( this, AOE_SKILL, this->m_RoomID, T);
 				StatePlay::GetInstance()->AddSkill(NewSkill1);
 				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
 				//Sound
@@ -178,7 +178,7 @@ void Enemy::UseSkill(float frameTime)
 			}
 			else if (skillID1->m_prefabID == BULLET_SKILL)
 			{
-				NewSkill1 = new BulletSkill(MousePos, this, BULLET_SKILL, this->m_RoomID, T);
+				NewSkill1 = new BulletSkill(this, BULLET_SKILL, this->m_RoomID, T);
 				StatePlay::GetInstance()->AddSkill(NewSkill1);
 				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
 				//Sound

@@ -1,9 +1,10 @@
 #pragma once
 enum class SkillCoolDownTime {
     //ms
-    BULLET_CDTIME = 100,
-    AOE_CDTIME = 50,
-    DASH_CDTIME = 500
+    BULLET_PLAYER_CDTIME = 1000,
+    BULLET_ENEMY_CDTIME = 5000,
+    AOE_CDTIME = 360,
+    DASH_CDTIME = 1000
 };
 enum class SkillMPCost {
     //
@@ -14,7 +15,7 @@ enum class SkillMPCost {
 enum class SkillExistingTime {
     //ms
     BULLET_EXISTINGTIME = 3000,
-    AOE_EXISTINGTIME = 800,
+    AOE_EXISTINGTIME = 360,
 };
 enum class SkillDamage {
     //percent

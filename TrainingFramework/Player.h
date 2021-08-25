@@ -22,24 +22,19 @@ public:
 		LEFT,
 		RIGHT
 	};
-	enum PlayerState
-	{
-		P_CS,
-		P_DASH,
-		P_SKILL//HERE
-	};
 	//STATS
 	int m_GOLD;
 
 	//STATE
-	PlayerState m_pState;
+	CharacterState m_pState;
 
 	void UniqueUpdate(float frameTime);
 	void Attack(float frameTime);
 	//PLAYER SKILL
 	virtual void UseSkill(float frameTime);
 	virtual void AddSkill(std::string prefabId);
-	virtual void UpdateChangeSkill(float frameTime); // change current skill\
+	virtual void UpdateChangeSkill(float frameTime); // change current skill
+	bool Dash(float frameTime);
 	//Update CoolDownTime
 	virtual void UpdateCurrentCDTime(float frameTime);
 	//FUNCT TO MOVE

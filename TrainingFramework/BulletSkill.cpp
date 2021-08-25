@@ -5,16 +5,17 @@
 #include "CollisionManager.h"
 #include "Room.h"
 #include "define.h"
-BulletSkill::BulletSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+#include "AoeSkill.h"
+BulletSkill::BulletSkill( Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
 {
 	m_SkillDamage = SkillDamage::BULLET_DAMAGE;
 	m_ExsitingTime = SkillExistingTime::BULLET_EXISTINGTIME;
-	Init(mousePos);
+	Init();
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 	m_isKnockBack = true;
-
-	if (m_fVx <= 0) m_isFacingLeft = false;
+	m_isFacingUp = true;
+	//if (m_fVx <= 0) m_isFacingLeft = false;
 }
 BulletSkill::~BulletSkill()
 {
@@ -36,6 +37,10 @@ void BulletSkill::UpdateHit(float frameTime)
 					//enemy->isAttacked
 					m_bHit = false;
 					isFinished = true;
+					Matrix t; t.SetIdentity();
+					Vector2  pos = { enemy->GetPosX(),enemy->GetPosY() };
+					AoeSkill  *newEffect = new AoeSkill(this->m_owner, AOE_SKILL, this->m_RoomID, t, pos);
+					StatePlay::GetInstance()->AddSkill(newEffect);
 					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 				}
 
@@ -65,13 +70,21 @@ void BulletSkill::UpdateHit(float frameTime)
 	}
 
 }
-void BulletSkill::Init(Vector2 mousePos)
+void BulletSkill::Init()
 {
-
+	Vector2 target;
+	if (m_isPlayer)
+		target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+	else
+	{
+		Player* player = StatePlay::GetInstance()->m_Player;
+		target.x = player->GetPosX() + player->m_fWidth / 2;
+		target.y = player->GetPosY() - player->m_fHeight / 2;
+	}
 	float fminDis = 0.5f;
 	float* ownerData = m_owner->GetHitBoxCurrentData();
 	Vector2 c1(ownerData[0] / 2.0f + ownerData[2] / 2.0f, ownerData[1] / 2.0f + ownerData[3] / 2.0f);
-	mp_dir = (mousePos - c1).Normalize();
+	mp_dir = (target - c1).Normalize();
 	Vector2 startPos = c1 + mp_dir * fminDis;
 	m_fCurrentPosX = startPos.x - m_fWidth / 2.0f;
 	m_fCurrentPosY = startPos.y + m_fHeight / 2.0f;

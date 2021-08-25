@@ -70,7 +70,7 @@ void Character::Update(float frameTime)
 	}
 	UseSkill(frameTime);
 	UniqueUpdate(frameTime);
-
+	UpdateCurrentCDTime(frameTime);
 	//ANIMATION
 	m_fCurrFrameTime += frameTime;
 
@@ -272,7 +272,7 @@ void Character::AddSkill(std::string prefabId)
 	}
 	else if (prefabId == BULLET_SKILL)
 	{
-		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_CDTIME, SkillMPCost::BULLET_MPCOST);
+		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_ENEMY_CDTIME, SkillMPCost::BULLET_MPCOST);
 		m_SkillList.push_back(skillID);
 	}
 	
@@ -290,6 +290,6 @@ void Character::UpdateCurrentCDTime(float frameTime)
 {
 	for (auto& obj : m_SkillList)
 	{
-		obj->m_fCurrCoolDownTime -= frameTime;
+		obj->m_fCurrCoolDownTime -= (frameTime * 1000);
 	}
 }
