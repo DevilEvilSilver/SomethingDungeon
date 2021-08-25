@@ -288,8 +288,8 @@ void StatePlay::Init() {
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
 	srand(time(NULL));
-	unsigned int currPosX = rand() % 30 + 1;
-	unsigned int currPosY = rand() % 30 + 1;
+	unsigned int currPosX = rand() % (MAP_WIDTH - 2) + 1;
+	unsigned int currPosY = rand() % (MAP_HEIGHT - 2) + 1;
 	m_Map[currPosX][currPosY] = START;
 	Vector2 directions[4] = { Vector2(1, 0), Vector2(0, 1),  Vector2(-1, 0), Vector2(0, -1) };
 	unsigned int lastDirection = 0, randDirection = 0;
@@ -306,9 +306,9 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 
 		while (tunnelLength--) {
 			if ((currPosX == 1) && (directions[randDirection].x == -1) ||
-				(currPosX == 30) && (directions[randDirection].x == 1) ||
+				(currPosX == (MAP_WIDTH - 2)) && (directions[randDirection].x == 1) ||
 				(currPosY == 1) && (directions[randDirection].y == -1) ||
-				(currPosY == 30) && (directions[randDirection].y == 1)) {
+				(currPosY == (MAP_HEIGHT - 2)) && (directions[randDirection].y == 1)) {
 				break;
 			}
 			else {
@@ -322,8 +322,8 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	}
 	m_Map[currPosX][currPosY] = END;
 
-	for (unsigned int i = 0; i < 32; i++) {
-		for (unsigned int j = 0; j < 32; j++) {
+	for (unsigned int i = 0; i < MAP_WIDTH; i++) {
+		for (unsigned int j = 0; j < MAP_HEIGHT; j++) {
 			Matrix translation;
 			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
@@ -608,11 +608,11 @@ void StatePlay::ClearInRange()
 void StatePlay::UpdateRoomID() {
 	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
-			if (i > 31)
+			if (i > MAP_WIDTH - 1)
 				continue;
 
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
-				if (j > 31)
+				if (j > MAP_HEIGHT - 1)
 					continue;
 				if (CollisionManager::CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
 					m_Player->m_RoomID = Vector2(i, j);
@@ -628,11 +628,11 @@ void StatePlay::UpdateRoomID() {
 		{
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
 			for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
-				if (i > 31)
+				if (i > MAP_WIDTH - 1)
 					continue;
 
 				for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
-					if (j > 31)
+					if (j > MAP_HEIGHT - 1)
 						continue;
 					if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
 						obj->m_RoomID = Vector2(i, j);

@@ -21,7 +21,7 @@ class StatePlay :public StateBase<StatePlay>
 {
 public:
 	
-	RoomType m_Map[32][32];
+	RoomType m_Map[22][22];
 	
 	//DATA
 	std::vector<Object*> m_ObjectList;

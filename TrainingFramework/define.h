@@ -40,9 +40,9 @@
 #define FILE_RECORD						"../Resources/record.txt"
 
 //MAP
-#define MAP_WIDTH					32
-#define MAP_HEIGHT					32
-#define MAP_MAX_TUNNEL				160
+#define MAP_WIDTH					22
+#define MAP_HEIGHT					22
+#define MAP_MAX_TUNNEL				50
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					10
 #define ROOM_HEIGHT					10
