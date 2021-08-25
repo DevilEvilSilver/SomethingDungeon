@@ -87,7 +87,7 @@ bool Enemy::MoveRandom(float frameTime)
 	if (start == true)
 	{
 		m_strState = MOVE;
-		if (FixedMove(ranDir, m_MOVESPEED, 1.0f, frameTime) == false) return false;
+		if (FixedMove(ranDir, m_MOVESPEED*0.5f, 0.5f, frameTime) == false) return false;
 		start = false;
 		ResetAnimation();
 		return true;

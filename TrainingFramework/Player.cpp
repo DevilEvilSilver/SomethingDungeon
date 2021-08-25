@@ -76,18 +76,34 @@ bool Player::Dash(float frameTime)
 {
 	if (currDashCD <= 0.0f&&m_cState!=CS_DEATH)
 	{ 
+		SetCS(CS_IDLE);
 		SetPS(P_DASH);
 		currTime = 0.0f;
 		currDashCD = DashCoolDown;
 		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
+		i = 0;
 	}
 	
 	if (m_pState == P_DASH)
 	{
+		
 		m_strState = DASH;
-		if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.5f, frameTime) == false) return false;
-		SetCS(CS_IDLE);
-		SetPS(P_CS);
+
+		switch (i)
+		{
+		case 0:
+			if (FixedMove(m_lastMoveDir, 0.0f, 0.1f, frameTime) == false) return false;
+			m_isInvincible = true;
+			i++;
+			break;
+		case 1:
+			if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.25f, frameTime) == false) return false;
+			m_isInvincible = false;
+			SetCS(CS_IDLE);
+			SetPS(P_CS);
+			break;
+		}
+
 	}
 
 	return true;

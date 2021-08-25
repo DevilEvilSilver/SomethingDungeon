@@ -39,7 +39,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 
 void RobotKnight::UniqueUpdate(float frameTime)
 {
-	printf("boss hp:%d\n", m_currHP);
+	//printf("boss hp:%d\n", m_currHP);
 
 	switch (m_bState)
 	{
@@ -49,7 +49,11 @@ void RobotKnight::UniqueUpdate(float frameTime)
 	case BS_ATTACK2:Attack2(frameTime); break;
 	case BS_GUARD:Guard(frameTime); break;
 	}
+	/*if (m_bState != BS_ATTACK2)
+		SetBS(BS_ATTACK2);*/
 
+	
+	
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -76,14 +80,14 @@ void RobotKnight::Normal(float frameTime)
 		{
 			if (distance > 7.0f)
 			{
-				if (rand() % 2 == 0)
+				if (rand() % 100 <=35)
 					SetBS(BS_CHARGE);
 				else SetBS(BS_ATTACK1);
 
 			}
 			else
 			{
-				if (rand() % 2 == 0)
+				if (rand() % 100 <= 35)
 					SetBS(BS_GUARD);
 				else SetBS(BS_ATTACK2);
 			}
@@ -204,14 +208,14 @@ void RobotKnight::Attack1(float frameTime)
 
 void RobotKnight::Attack2(float frameTime)
 {
-	float duration = 3.0f;
+	float duration = 2.0f;
 	m_strState = A_ATTACK2;
 	if (start == false)
 	{
 		start = true;
 		i = 0;
 		ranDir = StatePlay::GetInstance()->m_Player->GetPos();
-
+		
 	}
 
 	if (start == true)
@@ -225,31 +229,32 @@ void RobotKnight::Attack2(float frameTime)
 		}
 		else
 		{
-			if (i == 0&&currTime>0.5f)
+			if (i == 0&&currTime>=1.0f)
 			{
 				i++;
 
 				Matrix m;
 				m.SetTranslation(ranDir.x, ranDir.y, 0);
 
-				Vector2 skillWidth = ranDir - GetPos();
-				skillWidth.Normalize();
-				skillWidth = Vector2(skillWidth.y, -skillWidth.x);
-				float widthRange = 2.5f;
-				int pelletRank = 5;
-				int bulletWave = 4;
+				int bulletNum = 50;
 
+				Vector2 dir=Vector2(1, 0);
 
+				Vector2 startPos = Vector2(GetPosX() + m_fWidth / 2, GetPosY() - m_fWidth / 2);
 
-				while (pelletRank >= 0)
+				int currNum = bulletNum;
+				while (currNum > 0)
 				{
-					BulletSkill* bskill = new BulletSkill(ranDir + skillWidth * widthRange * pelletRank, this, SKILL, this->m_RoomID, m);
+					
+					dir.x = 1.0f * cos(currNum*360.0f/bulletNum);
+					dir.y = 1.0f * sin(currNum*360.0f/bulletNum);
+
+					
+
+					BulletSkill* bskill = new BulletSkill(startPos+dir, this, SKILL, this->m_RoomID, m);
 					StatePlay::GetInstance()->AddSkill(bskill);
 
-					bskill = new BulletSkill(ranDir - skillWidth * widthRange * pelletRank, this, SKILL, this->m_RoomID, m);
-					StatePlay::GetInstance()->AddSkill(bskill);
-
-					pelletRank--;
+					currNum--;
 				}
 			}
 		}

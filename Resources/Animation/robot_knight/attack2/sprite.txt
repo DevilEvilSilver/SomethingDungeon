@@ -1,10 +1,10 @@
 #FRAME_COUNT 3
 ID 0
-SPF 0.15
-FILE ../Resources/Animation/robot_knight/guard/4.tga
+SPF 0.85
+FILE ../Resources/Animation/robot_knight/attack/6.tga
 TILING GL_REPEAT
 ID 1
-SPF 0.15
+SPF 0.05
 FILE ../Resources/Animation/robot_knight/walk/1.tga
 TILING GL_REPEAT
 ID 2

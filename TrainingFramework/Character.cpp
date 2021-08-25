@@ -80,13 +80,6 @@ void Character::Attack(float frameTime)
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
-	if (m_isInvincible == true) {
-		return true;
-	}
-
-	if (auto* player = dynamic_cast<Player*>(this))
-		if (player->m_pState == PS_DASH) return false;
-
 	Vector2 knockBackDir=Vector2(0.0f,0.0f);
 
 	if (m_cState != CS_GOTHIT&&m_cState!=CS_DEATH)
@@ -153,7 +146,6 @@ bool Character::FixedMove(Vector2 dir, float distance, float time, float frameTi
 	
 	float speed = distance / time;
 	currTime += frameTime;
-	currTime += frameTime;//OHNOOO
 	if (currTime < time)
 	{
 		UpdateMoveDirection(dir);
@@ -219,6 +211,7 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 	m_iDmgTaken = damage;
 	m_isKnockBack = isKnockBack;
 	m_sourcePos = pos;
+	if (m_isInvincible == false)
 	GotHit(frameTime);
 }
 
@@ -232,6 +225,7 @@ Character::~Character() {}
 void Character::SetCS(CharacterState newState)
 {
 	m_cState = newState;
+	if (m_isInvulnerable==false)
 	ResetAnimation();
 }
 void Character::ResetAnimation()
