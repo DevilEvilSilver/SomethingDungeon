@@ -34,9 +34,9 @@ void AoeSkill::UpdateHit(float frameTime)
 		{
 
 
-			for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+			for (auto& enemy : StatePlay::GetInstance()->m_InRangeEnemy)
 			{
-				if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID))
+				
 					if (CollisionManager::CheckCollision(this, enemy))
 					{
 						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);

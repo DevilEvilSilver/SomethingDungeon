@@ -4,7 +4,7 @@
 #define SCREEN_W					1080.0f
 #define SCREEN_H					720.0f
 
-#define LIMIT_FPS					120
+#define LIMIT_FPS					200
 
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
@@ -37,6 +37,8 @@
 #define FILE_RECORD						"../Resources/record.txt"
 
 //MAP
+#define MAP_WIDTH					32
+#define MAP_HEIGHT					32
 #define MAP_MAX_TUNNEL				160
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					10
@@ -82,6 +84,10 @@
 #define MP_PO			"mpPo"
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
+
+#define MINIMAP_MAP		"minimap"
+#define MINIMAP_PLAYER	"minimapPlayer"
+#define MINIMAP_BOUND	"minimapBound"
 
 //SKILL
 #define	BULLET_SPEED	12

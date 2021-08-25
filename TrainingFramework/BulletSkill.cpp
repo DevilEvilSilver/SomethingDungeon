@@ -30,9 +30,9 @@ void BulletSkill::UpdateHit(float frameTime)
 		if (m_isPlayer)
 		{
 			
-			for (auto& enemy : StatePlay::GetInstance()->m_EnemyList)
+			for (auto& enemy : StatePlay::GetInstance()->m_InRangeEnemy)
 			{
-				if (StatePlay::GetInstance()->CheckInRange(enemy->m_RoomID)==true)
+
 					if (CollisionManager::CheckCollision(this, enemy))
 					{
 						//enemy->isAttacked
@@ -59,14 +59,13 @@ void BulletSkill::UpdateHit(float frameTime)
 		
 	}
 	
-	std::vector<Room*> roomList = StatePlay::GetInstance()->m_RoomList;
+	std::vector<Room*> roomList = StatePlay::GetInstance()->m_InRangeRoom;
 	for (auto& obj : roomList) {
-		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID))
 		if (obj->m_RoomType == WALL)
 		{
 			if (CollisionManager::CheckCollision(this, obj))
 			{
-				this->Remove();
+				isFinished = true;
 			}
 		}
 	}

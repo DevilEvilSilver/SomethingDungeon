@@ -2,6 +2,7 @@
 #include "Widget.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "StatePlay.h"
 
 Widget::Widget() {}
 

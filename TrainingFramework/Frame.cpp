@@ -12,6 +12,7 @@ Frame::Frame(unsigned int resourceID, const char* file, GLint tiling, float SPF)
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
 	// create CPU buffer and load it with the image data
+	
 	char *imageData = LoadTGA(file, &m_iWidth, &m_iHeight, &m_iBpp);
 	// load the image data into OpenGL ES texture resource
 	GLenum format = (m_iBpp == 24) ? GL_RGB : GL_RGBA;
@@ -38,5 +39,52 @@ void Frame::Bind(unsigned int slot) {
 }
 
 void Frame::Unbind() {
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
+{
+	int iPixelsPerWidthRoom = 5,
+		iPixelsPerHeightRoom = 5;
+	int iW = iPixelsPerWidthRoom * (int)size.x,
+		iH = iPixelsPerHeightRoom * (int)size.y;
+	int iBpp = 24;
+	char* imageData = new char[iW*iH*(iBpp/8)];
+	
+	for (int i = 0; i < iW; i++)
+	{
+		for (int j = 0; j < iH; j++)
+		{
+			if (roomType[ (i / iPixelsPerHeightRoom) *(int)size.x  + j / iPixelsPerWidthRoom] == WALL)
+			{
+				imageData[(j * iW + i) * 3 + 0] = 10;
+				imageData[(j * iW + i) * 3 + 1] = 10;
+				imageData[(j * iW + i) * 3 + 2] = 10;
+			}
+			else if(roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == END)
+			{
+				imageData[(j * iW + i) * 3 + 0] = -1;
+				imageData[(j * iW + i) * 3 + 1] = 0;
+				imageData[(j * iW + i) * 3 + 2] = 0;
+			}
+			else
+			{
+				imageData[(j * iW + i) * 3 + 0] = 0;
+				imageData[(j * iW + i) * 3 + 1] = -1;
+				imageData[(j * iW + i) * 3 + 2] = 0;
+			}
+			
+		}
+	}
+	
+	glGenTextures(1, &m_RendererID);
+	glBindTexture(GL_TEXTURE_2D, m_RendererID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iW, iH, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+	delete[]imageData;
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

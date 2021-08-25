@@ -186,8 +186,8 @@ void Character::UpdatePosition(float speed, float frameTime)
 }
 void Character::WallCollision(float frameTime)
 {
-	for (auto& obj : StatePlay::GetInstance()->m_RoomList) {
-		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID) && obj->m_RoomType == WALL)
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeRoom) {
+		if (obj->m_RoomType == WALL)
 			CollisionManager::CheckCollision(this, obj, frameTime);
 	}
 }
@@ -197,8 +197,7 @@ void Character::PlayerCollision(float frameTime)
 }
 void Character::EnemyCollision(float frameTime)
 {
-	for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {
-		if (StatePlay::GetInstance()->CheckInRange(obj->m_RoomID))
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeEnemy) {
 			if (this != obj)
 				CollisionManager::CheckCollision(this, obj, frameTime);
 	}

@@ -20,7 +20,7 @@ void MPPotion::OnCollision()
 	player->numMPText->setText("MP: " + std::to_string(player->m_currMP));
 
 	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
-	StatePlay::GetInstance()->RemoveDrop(this);
+	isPicked = true;
 }
 
 MPPotion::MPPotion(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
