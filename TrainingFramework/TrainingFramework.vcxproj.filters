@@ -227,7 +227,8 @@
     </ClCompile>
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.cpp">
       <Filter>Source Files\StateManager\States</Filter>
-    <ClCompile Include="MiniMap.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\MiniMap.cpp">
       <Filter>Source Files\Objects\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -369,7 +370,8 @@
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.h">
       <Filter>Header Files\StateManager\States</Filter>
-    <ClInclude Include="MiniMap.h">
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\MiniMap.h">
       <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
   </ItemGroup>

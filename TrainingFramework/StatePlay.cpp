@@ -425,6 +425,7 @@ void StatePlay::Render() {
 			m_DeathBanner->Render(this->m_Camera);
 		if (m_TransitionScreen != NULL)
 			m_TransitionScreen->Render(this->m_Camera);
+
 		//MiniMap
 		m_MiniMap->Render(m_Camera);
 	}
@@ -566,6 +567,8 @@ void StatePlay::Update(float frameTime) {
 				m_MpBar->Update(frameTime);
 				m_MpBar->Resize(m_Player->m_currMP);
 				m_MpText->setText(m_Player->GetMP());
+
+				m_MiniMap->Update(frameTime);
 
 				m_GoldIcon->Update(frameTime);
 				m_GoldText->setText(m_Player->GetGold());
