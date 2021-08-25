@@ -128,6 +128,7 @@ void StatePlay::Init() {
 	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH/2.0f, startRoom->GetPosY() - ROOM_HEIGHT/2, 0.0f);
 	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
 	translation.SetTranslation(m_Player->GetPosX() + 1, m_Player->GetPosY() + 1, 0);
+
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
 	float fLeft, fRight, fBottom, fTop;
@@ -151,7 +152,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_HpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -163,7 +164,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_HpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxHP, m_Player->m_currHP);
 	}
 
@@ -175,7 +176,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_MpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -187,7 +188,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_MpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxMP, m_Player->m_currMP);
 	}
 
@@ -199,7 +200,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_GoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -211,7 +212,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_PauseBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -223,7 +224,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonPause = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -235,7 +236,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonResume = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -247,7 +248,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 	//MiniMap
@@ -256,7 +257,7 @@ void StatePlay::Init() {
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 
 		m_MiniMap = new MiniMap(translation,(RoomType*)m_Map,m_Camera, m_Player);
 	}
@@ -420,14 +421,14 @@ void StatePlay::Render() {
 			m_ButtonResume->Render(m_Camera);
 			m_ButtonQuit->Render(m_Camera);
 		}
+		
+		//MiniMap
+		m_MiniMap->Render(m_Camera);
 
 		if (m_DeathBanner != NULL)
 			m_DeathBanner->Render(this->m_Camera);
 		if (m_TransitionScreen != NULL)
 			m_TransitionScreen->Render(this->m_Camera);
-
-		//MiniMap
-		m_MiniMap->Render(m_Camera);
 	}
 }
 void StatePlay::AddDrop(Drop* drop)

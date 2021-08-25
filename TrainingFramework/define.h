@@ -42,7 +42,7 @@
 //MAP
 #define MAP_WIDTH					22
 #define MAP_HEIGHT					22
-#define MAP_MAX_TUNNEL				50
+#define MAP_MAX_TUNNEL				65
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					10
 #define ROOM_HEIGHT					10

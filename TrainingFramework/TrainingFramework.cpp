@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <conio.h>
-#include <ctime>
+#include <chrono>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
@@ -16,7 +16,7 @@
 #include "StateManager.h"
 
 Text *FPSCountText;
-float fDeltaTime = 0.0f;
+double fDeltaTime = 0.0f;
 unsigned int frames = 0;
 
 int Init(ESContext* esContext) {
@@ -28,7 +28,7 @@ int Init(ESContext* esContext) {
 	InputManager::GetInstance();
 	StateManager::GetInstance();
 
-	FPSCountText = new Text("0", SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::GREEN, 0.0f, 20.0f, 1.0f);
+	FPSCountText = new Text("0", SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::GREEN, 5.0f, 20.0f, 1.0f);
 	
 	return 0;
 }
@@ -36,29 +36,27 @@ int Init(ESContext* esContext) {
 void Draw(ESContext* esContext)
 {
 	//fps
-	std::clock_t start;
-	start = std::clock();
+	auto start = std::chrono::high_resolution_clock::now();
 
 	//clear + render
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	StateManager::GetInstance()->Render();
-
 	Renderer::GetInstance()->DrawText2(FPSCountText);
 
 	//fps
-	DWORD frameTime = std::clock() - start;
-	fDeltaTime += frameTime;
+	double frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
 	frames++;
-	if (fDeltaTime > 1000.0f) {
+	if (fDeltaTime >= 1000.0f) {
 		FPSCountText->setText(std::to_string(frames));
 		frames = 0;
 		fDeltaTime -= 1000.0f;
 	}
-
+	printf("%f\n", fDeltaTime);
 	if (frameTime < 1000.0f / LIMIT_FPS) {
-		fDeltaTime += 1000.0f / LIMIT_FPS - frameTime;
 		Sleep(1000.0f / LIMIT_FPS - frameTime);
 	}
+
+	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
 
 	//display
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
@@ -68,6 +66,8 @@ void Draw(ESContext* esContext)
 void Update(ESContext* esContext, float deltaTime)
 {
 	StateManager::GetInstance()->Update(deltaTime);
+
+	//fDeltaTime += deltaTime * 1000;
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)
