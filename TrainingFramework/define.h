@@ -82,7 +82,7 @@
 #define MINIMAP_BOUND	"minimapBound"
 
 //SKILL
-#define	BULLET_SPEED	6.0f
+#define	BULLET_SPEED	7.0f
 
 //ANIMATION
 #define INIT_ANIM		"init"

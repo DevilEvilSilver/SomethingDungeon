@@ -208,7 +208,9 @@ void Character::EnemyCollision(float frameTime)
 
 void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float frameTime)
 {
-	m_iDmgTaken = damage;
+	int dmg = damage - m_DEF;
+	
+	m_iDmgTaken = (dmg <= 0.0f)?1:dmg;
 	m_isKnockBack = isKnockBack;
 	m_sourcePos = pos;
 	if (m_isInvincible == false)

@@ -23,7 +23,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	m_maxHP = 100;
 	m_currHP = 100;
 
-	m_ATK = 3;
+	m_ATK = 7;
 	m_DEF = 3;
 
 	m_strState = IDLE_LEFT;
@@ -63,7 +63,7 @@ void RobotKnight::Normal(float frameTime)
 {
 	m_strState=MOVE;
 
-	if (FixedMove(ranDir, 0.0f, 0.75f, frameTime) == true)
+	if (FixedMove(ranDir, 0.0f, 0.15f, frameTime) == true)
 	{
 		
 
@@ -80,14 +80,14 @@ void RobotKnight::Normal(float frameTime)
 		{
 			if (distance > 7.0f)
 			{
-				if (rand() % 100 <=35)
+				if (rand() % 10 <=5)
 					SetBS(BS_CHARGE);
 				else SetBS(BS_ATTACK1);
 
 			}
 			else
 			{
-				if (rand() % 100 <= 35)
+				if (rand() % 10 <= 4)
 					SetBS(BS_GUARD);
 				else SetBS(BS_ATTACK2);
 			}
@@ -121,12 +121,12 @@ void RobotKnight::Charge(float frameTime)
 				if (CollisionManager::CheckCollision(StatePlay::GetInstance()->m_Player, this, 0.0f) == true)
 				{
 					currAtkCD = totalAtkCD;
-					StatePlay::GetInstance()->m_Player->UpdateGotHit(5, m_isKnockBack, GetPos(), frameTime);
+					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, m_isKnockBack, GetPos(), frameTime);
 				}
 					
 			}
 
-			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 2.0f, frameTime) == true)
+			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.75f, frameTime) == true)
 			{
 				i++;
 			}
@@ -146,7 +146,7 @@ void RobotKnight::Charge(float frameTime)
 
 void RobotKnight::Attack1(float frameTime)
 {
-	float duration = 3.0f;
+	float duration = 1.5f;
 	m_strState = ATTACK;
 
 	if (start == false)
@@ -174,8 +174,8 @@ void RobotKnight::Attack1(float frameTime)
 			Vector2 skillWidth = ranDir - GetPos();
 			skillWidth.Normalize();
 			skillWidth = Vector2(skillWidth.y, -skillWidth.x);
-			float widthRange = 2.5f;
-			int pelletRank = 3;
+			float widthRange = 1.5f;
+			int pelletRank = 4;
 			int bulletWave = 4;
 			
 
@@ -274,19 +274,31 @@ void RobotKnight::Guard(float frameTime)
 		start = true;
 		ranDir = StatePlay::GetInstance()->m_Player->GetPos();
 		m_isInvincible = true;
+
+		i = 0;
 	}
 	
 	if (start == true)
 	{
-		if (FixedMove(ranDir, 0.0f, 3.0f, frameTime) == true)
+
+		switch (i)
 		{
-
-			m_isInvincible = false;
-
-			SetBS(BS_CHARGE);
-			start = false;
+		case 0:
+			if (FixedMove(ranDir, 0.0f, 0.5f, frameTime) == true)
+			{
+				i++;
+				m_isInvincible = false;
+			}
+			break;
+		case 1:
+			if (FixedMove(ranDir, 0.0f, 1.0f, frameTime) == true)
+			{
+				SetBS(BS_CHARGE);
+				start = false;
+			}
+			break;
 		}
-		
+
 		
 	}
 	
