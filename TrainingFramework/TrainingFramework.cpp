@@ -118,7 +118,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	ESContext esContext;
 	esInitContext(&esContext);
 	esCreateWindow(&esContext, "CrossDungeon", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	
+
 	if (Init(&esContext) != 0) return 0;
 
 	//draw

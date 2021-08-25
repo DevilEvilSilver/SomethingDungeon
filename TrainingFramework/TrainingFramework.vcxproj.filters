@@ -374,11 +374,11 @@
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\MiniMap.h">
       <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\Sound.txt">
-      <Filter>Resources</Filter>
-    </Text>
     <Text Include="..\Resources\States\R_LOGO.txt">
       <Filter>Resources\States</Filter>
     </Text>
@@ -417,5 +417,15 @@
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\TrainingFramework.rc">
+      <Filter>Win32Res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\logo.ico">
+      <Filter>Win32Res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

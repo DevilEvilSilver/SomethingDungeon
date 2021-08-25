@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\MiniMap.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\resource.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AoeSkill.h" />
@@ -202,7 +203,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\Sound.txt" />
     <Text Include="..\Resources\States\R_LOGO.txt" />
     <Text Include="..\Resources\States\R_PLAY.txt" />
     <Text Include="..\Resources\States\R_WELCOME.txt" />
@@ -217,6 +217,12 @@
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\Sprite.vs" />
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.fs" />
     <None Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\Shaders\TextShader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\TrainingFramework.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

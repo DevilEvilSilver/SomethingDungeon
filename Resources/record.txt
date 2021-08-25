@@ -1,2 +1,2 @@
-LOSE
-SCORE: 0
+WIN
+SCORE: 5
