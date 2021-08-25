@@ -44,7 +44,6 @@ void Draw(ESContext* esContext)
 	StateManager::GetInstance()->Render();
 
 	Renderer::GetInstance()->DrawText2(FPSCountText);
-	printf("fps: %s\n", FPSCountText->m_text.c_str());
 
 	//fps
 	DWORD frameTime = std::clock() - start;

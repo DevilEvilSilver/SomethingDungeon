@@ -30,6 +30,9 @@
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
 #define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
 #define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
+#define FILE_S_SHOP						"../Resources/States/S_SHOP.txt"
+#define FILE_R_SHOP						"../Resources/States/R_SHOP.txt"
+#define FILE_SD_SHOP					"../Resources/States/SD_SHOP.txt"
 #define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
@@ -141,6 +144,8 @@
 
 #define WIN_BGM				400
 #define LOSE_BGM			401
+
+#define SHOP_BGM			500
 
 #define BUTTON_SFX			900
 #define COIN				901

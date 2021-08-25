@@ -8,6 +8,7 @@ enum GameState {
 		GS_STATE_LOGO,
 		GS_STATE_WELCOME,
 		GS_STATE_PLAY,
+		GS_STATE_SHOP,
 		GS_STATE_RESULT
 };
 

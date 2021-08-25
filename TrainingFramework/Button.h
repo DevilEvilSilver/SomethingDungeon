@@ -3,6 +3,7 @@
 
 class Button : public Widget {
 public:
+	bool m_wasPressed;
 	bool m_isAvailble;
 
 	Button();
