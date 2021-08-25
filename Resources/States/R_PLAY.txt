@@ -1,4 +1,4 @@
-#PREFAB_COUNT 25
+#PREFAB_COUNT 28
 ID mainChar
 MODEL 0
 SHADER 0
@@ -303,6 +303,39 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/transition/static/sprite.txt
+
+ID treasure
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID chest
+FILE ../Resources/Animation/chest/static/sprite.txt
+
+ID tower
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID arrowTower
+FILE ../Resources/Animation/arrowTower/static/sprite.txt
+
+ID arrow
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID ar_static
+FILE ../Resources/Animation/arrow/static/sprite.txt
 
 #MODEL_GEN 1
 ID 0
