@@ -1,0 +1,4 @@
+SoundNum 2
+
+#ID 400 ../Resources/Sounds/bgm.wav
+#ID 401 ../Resources/Sounds/bgm.wav

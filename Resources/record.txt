@@ -1,2 +1,2 @@
-WIN
+LOSE
 SCORE: 0

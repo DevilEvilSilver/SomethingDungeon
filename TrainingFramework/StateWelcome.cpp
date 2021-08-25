@@ -28,6 +28,7 @@ StateWelcome::~StateWelcome() {
 
 void StateWelcome::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
+	SoundEngine::GetInstance()->Init(FILE_SD_WELCOME);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_WELCOME, "r");
@@ -146,6 +147,7 @@ void StateWelcome::UpdateControl(float frameTime)
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 
 			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
 			return;

@@ -28,23 +28,25 @@ StateResult::~StateResult() {
 
 void StateResult::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_RESULT);
+	SoundEngine::GetInstance()->Init(FILE_SD_RESULT);
 
 	// read file record
-		FILE* resultFile;
-	resultFile = fopen(FILE_RECORD, "r");
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "r");
 
 	char strisWin[50];
-	fscanf(resultFile, "%s\n", &strisWin);
+	fscanf(recordFile, "%s\n", &strisWin);
 	if (!strcmp(strisWin, "WIN"))
 		m_isWin = true;
 	else
 		m_isWin = false;
 
 	unsigned int score;
-	fscanf(resultFile, "SCORE: %d\n", &score);
+	fscanf(recordFile, "SCORE: %d\n", &score);
 
-	fclose(resultFile);
+	fclose(recordFile);
 
+	//read data file
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_RESULT, "r");
 
@@ -171,6 +173,7 @@ void StateResult::UpdateControl(float frameTime)
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 
 			StateManager::GetInstance()->CloseState();
 			return;

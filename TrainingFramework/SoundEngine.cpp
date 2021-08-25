@@ -4,8 +4,7 @@
 #include "SoundEngine.h"
 
 SoundEngine::SoundEngine() {
-	Init();
-	
+
 }
 
 
@@ -17,10 +16,9 @@ SoundEngine::~SoundEngine() {
 	m_SoundList.clear();
 
 	m_soloud.deinit();
-	
 }
 
-void SoundEngine::Init() 
+void SoundEngine::Init(std::string soundFile)
 {
 	//READ FROM FILE
 	FILE* fp;
@@ -29,7 +27,7 @@ void SoundEngine::Init()
 	Sound *sound;
 
 
-	fp = fopen(FILE_SE, "r");
+	fp = fopen(soundFile.c_str(), "r");
 	if (fp == NULL) {
 		printf("can not open file");
 	}
@@ -48,7 +46,8 @@ void SoundEngine::Init()
 
 
 	//INIT SOLOUD
-	m_soloud.init();
+	if (m_soloud.mAudioThreadMutex == NULL)
+		m_soloud.init();
 }
 
 int SoundEngine::PlayOnly(int soundID)

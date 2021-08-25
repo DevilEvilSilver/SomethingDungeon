@@ -20,15 +20,19 @@
 //INIT STATE
 #define FILE_S_LOAD						"../Resources/States/S_LOAD.txt"
 #define FILE_R_LOAD						"../Resources/States/R_LOAD.txt"
+#define FILE_SD_LOAD					"../Resources/States/SD_LOAD.txt"
 #define FILE_S_LOGO						"../Resources/States/S_LOGO.txt"
 #define FILE_R_LOGO						"../Resources/States/R_LOGO.txt"
+#define FILE_SD_LOGO					"../Resources/States/SD_LOGO.txt"
 #define FILE_S_WELCOME					"../Resources/States/S_WELCOME.txt"
 #define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
+#define FILE_SD_WELCOME					"../Resources/States/SD_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
 #define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
+#define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
 #define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
-#define FILE_SE							"../Resources/Sound.txt"
+#define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
 
 #define FILE_RECORD						"../Resources/record.txt"
 
@@ -114,21 +118,21 @@
 #define LOSE_TITLE		"loseTitle"
 
 //SOUND
-#define WELCOME_BGM			0
-#define LOGO_SFX			1
-#define BUTTON_SFX			2
+#define LOGO_SFX			100
 
-#define PLAY_BGM			11
-#define COIN				3
-#define LOSE				4
-#define PEWPEW				5
-#define REGEN				6
-#define WIN					7
-#define HIT					8
-#define BOMB				9
-#define WHOOSH				10
-#define DEATH_SFX			12
-#define TELEPORT_SFX		13
+#define WELCOME_BGM			200
 
-#define WIN_BGM				14
-#define LOSE_BGM			15
+#define PLAY_BGM			300
+
+#define WIN_BGM				400
+#define LOSE_BGM			401
+
+#define BUTTON_SFX			900
+#define COIN				901
+#define PEWPEW				902
+#define REGEN				903
+#define HIT					904
+#define BOMB				905
+#define WHOOSH				906
+#define DEATH_SFX			907
+#define TELEPORT_SFX		908

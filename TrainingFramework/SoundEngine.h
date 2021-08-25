@@ -16,7 +16,7 @@ public:
 	SoundEngine();
 	~SoundEngine();
 
-	void Init();
+	void Init(std::string soundFile);
 	
 	int PlayOnly(int soundID);
 	int PlayVolume(int soundID, float volume);

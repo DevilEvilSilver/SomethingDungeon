@@ -105,6 +105,7 @@ StatePlay::~StatePlay() {
 
 void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+	SoundEngine::GetInstance()->Init(FILE_SD_PLAY);
 
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room *startRoom = GetRoomByType(START, m_RoomList);
@@ -681,7 +682,9 @@ void StatePlay::UpdatePause(float frameTime) {
 		if (m_fNextStateFrame < 0) {
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
+
 			StateManager::GetInstance()->CloseState();
 			return;
 		}
@@ -717,6 +720,7 @@ void StatePlay::UpdateResult(float frameTime) {
 
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
 			
 			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);
@@ -731,7 +735,8 @@ void StatePlay::UpdateResult(float frameTime) {
 			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 2.0f);
 
-			//Add teleport sfx !!!!!!!!!
+			//TELEPORT ANIMATION !!!!!
+			SoundEngine::GetInstance()->Play(TELEPORT_SFX, 3.0f, 1.0f, true);
 			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
 		}
 
@@ -740,6 +745,7 @@ void StatePlay::UpdateResult(float frameTime) {
 
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);

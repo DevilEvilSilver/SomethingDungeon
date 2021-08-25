@@ -43,6 +43,7 @@ StateLoad::~StateLoad() {
 
 void StateLoad::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_LOAD);
+	SoundEngine::GetInstance()->Init(FILE_SD_LOAD);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOAD, "r");
@@ -144,6 +145,7 @@ void StateLoad::UpdateControl(float frameTime)
 
 		if (m_fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
+			InputManager::GetInstance()->ResetInput();
 			//ResetResource();   //error
 
 			StateManager::GetInstance()->CloseState();

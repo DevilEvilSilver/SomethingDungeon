@@ -19,10 +19,11 @@ int Init(ESContext* esContext) {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	ResourceManager::GetInstance();
+	SoundEngine::GetInstance();
 	Renderer::GetInstance();
 	InputManager::GetInstance();
 	StateManager::GetInstance();
-	SoundEngine::GetInstance();
+	
 	return 0;
 }
 
