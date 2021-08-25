@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <conio.h>
+#include <ctime>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
@@ -14,6 +15,9 @@
 #include "InputManager.h"
 #include "StateManager.h"
 
+Text *FPSCountText;
+float fDeltaTime = 0.0f;
+unsigned int frames = 0;
 
 int Init(ESContext* esContext) {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -23,6 +27,8 @@ int Init(ESContext* esContext) {
 	Renderer::GetInstance();
 	InputManager::GetInstance();
 	StateManager::GetInstance();
+
+	FPSCountText = new Text("0", SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::GREEN, 0.0f, 20.0f, 1.0f);
 	
 	return 0;
 }
@@ -30,18 +36,30 @@ int Init(ESContext* esContext) {
 void Draw(ESContext* esContext)
 {
 	//fps
-	DWORD start, end;
-	start = GetTickCount();
+	std::clock_t start;
+	start = std::clock();
 
 	//clear + render
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	StateManager::GetInstance()->Render();
 
+	Renderer::GetInstance()->DrawText2(FPSCountText);
+	printf("fps: %s\n", FPSCountText->m_text.c_str());
+
 	//fps
-	end = GetTickCount();
-	DWORD frameTime = end - start;
-	if (frameTime < 1000.0f/ LIMIT_FPS)
+	DWORD frameTime = std::clock() - start;
+	fDeltaTime += frameTime;
+	frames++;
+	if (fDeltaTime > 1000.0f) {
+		FPSCountText->setText(std::to_string(frames));
+		frames = 0;
+		fDeltaTime -= 1000.0f;
+	}
+
+	if (frameTime < 1000.0f / LIMIT_FPS) {
+		fDeltaTime += 1000.0f / LIMIT_FPS - frameTime;
 		Sleep(1000.0f / LIMIT_FPS - frameTime);
+	}
 
 	//display
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
@@ -99,6 +117,8 @@ void CleanUp()
 	SoundEngine::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
 	ResourceManager::GetInstance()->ResetInstance();
+
+	delete FPSCountText;
 }
 
 void memoryDumpLeak() {

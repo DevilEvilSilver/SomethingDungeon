@@ -67,6 +67,15 @@
 #define Y_EPSILON			        0.5
 #define X_EPSILON			        0.1
 
+//FONT
+#define FONT_ARIAL				0
+#define FONT_FUTURE				1
+#define FONT_TIMES				2
+
+//SHADER
+#define SHADER_SPRITE			0
+#define SHADER_TEXT				1
+
 //PREFAB
 #define DEATH_BANNER	"deathBanner"
 #define TRANSISTION		"transition"

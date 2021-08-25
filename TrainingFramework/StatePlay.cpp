@@ -280,9 +280,9 @@ void StatePlay::Init() {
 	m_TransitionScreen = NULL;
 
 	//INIT TEXT
-	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
-	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
-	m_GoldText = new Text(m_Player->GetGold(), 1, 1, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
+	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {

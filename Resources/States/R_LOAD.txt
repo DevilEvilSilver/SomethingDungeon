@@ -36,7 +36,15 @@ FILE ../Resources/Animation/transition/static/sprite.txt
 ID 10
 SIZE 1.0 x 1.0
 
-#SHADER_COUNT 2
+#SHADER_COUNT 3
+ID 1
+VS ../Resources/Shaders/TextShader.vs
+FS ../Resources/Shaders/TextShader.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
 ID 10
 VS ../Resources/Shaders/Sprite.vs
 FS ../Resources/Shaders/Sprite.fs
@@ -53,4 +61,12 @@ GL_DEPTH_TEST 1
 GL_CULL_FACE 0
 GL_BLEND 1
 
-#FONT_COUNT 0
+#FONT_COUNT 3
+ID 0
+FILE ../Resources/Fonts/arial.ttf
+
+ID 1
+FILE ../Resources/Fonts/kenvector_future.ttf
+
+ID 2
+FILE ../Resources/Fonts/times.ttf
