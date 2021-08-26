@@ -70,6 +70,7 @@ public:
 	bool m_isStartUp;
 	bool m_isQuit;
 	float m_fNextStateFrame;
+	
 
 	//INIT
 	void Init();

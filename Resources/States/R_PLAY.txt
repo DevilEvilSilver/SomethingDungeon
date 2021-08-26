@@ -125,11 +125,11 @@ ID meleeSoldier
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.3, 0.5, 0.9, 1.0
-SIZE 1.5 x 1.5
+COORD 0.8, 1.5, 0.4, 0.5
+SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 4
-ID idle
+ANIMATION_COUNT 5
+ID idleLeft
 FILE ../Resources/Animation/meleeSoldier/idle/sprite.txt
 ID move
 FILE ../Resources/Animation/meleeSoldier/move/sprite.txt
@@ -137,6 +137,8 @@ ID attack
 FILE ../Resources/Animation/meleeSoldier/attack/sprite.txt
 ID death
 FILE ../Resources/Animation/meleeSoldier/death/sprite.txt
+ID gothit
+FILE ../Resources/Animation/meleeSoldier/idle/sprite.txt
 
 ID skill
 MODEL 0

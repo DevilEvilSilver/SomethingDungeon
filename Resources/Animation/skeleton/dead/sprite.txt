@@ -1,4 +1,4 @@
-#FRAME_COUNT 7
+#FRAME_COUNT 8
 ID 0
 SPF 0.1
 FILE ../Resources/Animation/skeleton/dead/1.tga
@@ -26,4 +26,8 @@ TILING GL_REPEAT
 ID 6
 SPF 0.1
 FILE ../Resources/Animation/skeleton/dead/7.tga
+TILING GL_REPEAT
+ID 7
+SPF -1
+FILE ../Resources/Animation/skeleton/dead/8.tga
 TILING GL_REPEAT

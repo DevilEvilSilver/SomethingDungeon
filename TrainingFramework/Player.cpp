@@ -141,12 +141,12 @@ Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 30;
-	m_currHP = 30;
+	m_maxHP = 50;
+	m_currHP = 50;
 	m_maxMP = 20;
 	m_currMP = 20;
-	m_ATK = 3;
-	m_DEF = 3;
+	m_ATK = 30;
+	m_DEF = 30;
 
 	atkDuration = 0.25f;
 

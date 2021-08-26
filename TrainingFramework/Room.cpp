@@ -68,7 +68,12 @@ void Room::RoomGenerate() {
 		else enemyNum = 0;
 
 		while (enemyNum--) {
-			AddEnemy(WITCH);
+			
+			int rNum = rand() % 100 + 1;
+
+			if (rNum <= 40) AddEnemy(SKELETON);
+			else if (rNum <= 70) AddEnemy(WITCH);
+			else AddEnemy(BEAR);
 
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
@@ -77,19 +82,31 @@ void Room::RoomGenerate() {
 	}
 	else if (m_RoomType == START)
 	{
-		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
-		Matrix translation;
+		
+		/*Matrix translation;
 
 		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
 		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
-		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);*/
 
 		//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
+		//RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
+		//Skeleton* enemy = new Skeleton(BEAR, m_RoomID, translation);
+		//Goblin* enemy = new Goblin(BEAR, m_RoomID, translation);
+
+		//StatePlay::GetInstance()->AddEnemy(enemy);
+
+		GenerateDeco();
+	}
+	else if (m_RoomType == END)
+	{
+		Prefab* enemyPrefab = GetResource(B_ROBOTKNIGHT, ResourceManager::GetInstance()->m_PrefabList);
+		Matrix translation;
+		translation.SetTranslation(GetPosX() + ROOM_WIDTH/2-enemyPrefab->m_fWidth/2, GetPosY()- ROOM_HEIGHT / 2 + enemyPrefab->m_fHeight/2, 0.0f);
+
 		RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
 
 		StatePlay::GetInstance()->AddEnemy(enemy);
-
-		GenerateDeco();
 	}
 }
 
@@ -215,14 +232,20 @@ void Room::AddEnemy(std::string prefabName)
 	{
 		bool error = false;
 
-		unsigned int randPosX = 1+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-2.0f);
-		unsigned int randPosY = 1+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 2.0f);
+		unsigned int randPosX = 2+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-3.0f);
+		unsigned int randPosY = 2+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 3.0f);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 
 		
 		Enemy* result = nullptr;
 		if (prefabName==WITCH) 
 			result= new Witch(prefabName, m_RoomID, translation);
+		else 
+			if (prefabName == BEAR)
+			result = new Goblin(prefabName, m_RoomID, translation);
+		else
+			if (prefabName == SKELETON)
+				result = new Skeleton(prefabName, m_RoomID, translation);
 
 		if (error == false)
 			for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {

@@ -16,6 +16,6 @@ SPF 0.1
 FILE ../Resources/Animation/meleeSoldier/death/4.tga
 TILING GL_REPEAT
 ID 4
-SPF 0.1
+SPF -1
 FILE ../Resources/Animation/meleeSoldier/death/5.tga
 TILING GL_REPEAT

@@ -26,7 +26,8 @@ Goblin::Goblin(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 3.0f;
+	atkDuration = 1.3f;
+	m_MOVESPEED = 1.5f;
 }
 
 void Goblin::UniqueUpdate(float frameTime)
@@ -40,13 +41,21 @@ void Goblin::UniqueUpdate(float frameTime)
 
 	float totalCD = 5.0f;
 	//move behavior
+
+	m_MOVESPEED = 1.5f;
 	
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	{
 		if (distance < 10.0f)
 		{
 			if (currCD <= 0.0f) {
-				if (distance > 2.5f) Chase(delta);
+				if (distance >= 0.9f)
+				{
+					if (distance > 2.0f) m_MOVESPEED = 1.5f;
+					else m_MOVESPEED = 2.0f;
+
+					Chase(delta);
+				}
 				else {
 					Melee(plyPos);
 					currCD = totalCD;
@@ -55,7 +64,10 @@ void Goblin::UniqueUpdate(float frameTime)
 
 			else
 			{
+				m_MOVESPEED = 2.5f;
 				MoveRandom(frameTime);
+				if (StatePlay::GetInstance()->m_Player->GetPosX() > GetPosX()) m_isFacingLeft = false;
+				else m_isFacingLeft = true;
 				currCD -= frameTime;
 			}
 		}

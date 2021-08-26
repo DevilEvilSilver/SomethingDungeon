@@ -46,6 +46,7 @@ void Character::Update(float frameTime)
 		if (m_cState != CS_DEATH)
 		{
 			ResetAnimation();
+			m_isInvincible = true;
 			SetCS(CS_DEATH);
 		}
 		

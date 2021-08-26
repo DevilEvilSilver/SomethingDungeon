@@ -26,7 +26,9 @@ Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatri
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 3.0f;
+	m_MOVESPEED = 1.0f;
+
+	atkDuration = 1.0f;
 }
 
 
@@ -39,9 +41,9 @@ void Skeleton::UniqueUpdate(float frameTime)
 	Vector2 delta = plyPos - enmyPos;
 	float distance = delta.Length();
 
-	float totalCD = 5.0f;
+	float totalCD = 2.5f;
 
-	m_MOVESPEED = 3.0f;
+	
 	//move behavior
 
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
@@ -49,7 +51,14 @@ void Skeleton::UniqueUpdate(float frameTime)
 		if (distance < 10.0f)
 		{
 			if (currCD <= 0.0f) {
-				if (distance > 2.5f) Chase(delta);
+				if (distance >= 0.9f)
+				{
+					if (distance>2.0f) m_MOVESPEED = 1.0f;
+					else m_MOVESPEED = 1.75f;
+
+					Chase(delta);
+				}
+					
 				else {
 					Melee(plyPos);
 					currCD = totalCD;
@@ -58,7 +67,7 @@ void Skeleton::UniqueUpdate(float frameTime)
 
 			else
 			{
-				m_MOVESPEED = 5.0f;
+				m_MOVESPEED = 2.0f;
 				KeepDistance(delta);
 				currCD -= frameTime;
 			}
