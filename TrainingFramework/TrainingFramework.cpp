@@ -50,8 +50,8 @@ void Draw(ESContext* esContext)
 	//fps
 	end = GetTickCount();
 	DWORD frameTime = end - start;
-	if (frameTime < 1000.0f / LIMIT_FPS)
-		Sleep(1000.0f / LIMIT_FPS - frameTime);
+	//if (frameTime < 1000.0f / LIMIT_FPS)
+	//	Sleep(1000.0f / LIMIT_FPS - frameTime);
 
 	//display
 	if (eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface))

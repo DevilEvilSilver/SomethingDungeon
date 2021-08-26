@@ -148,6 +148,7 @@
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Glyph.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\MiniMap.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\resource.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.h" />
