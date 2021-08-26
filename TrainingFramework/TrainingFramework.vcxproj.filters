@@ -383,6 +383,9 @@
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateShop.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\States\R_LOGO.txt">

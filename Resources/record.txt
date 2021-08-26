@@ -1,2 +1,2 @@
 WIN
-SCORE: 0
+SCORE: 1040

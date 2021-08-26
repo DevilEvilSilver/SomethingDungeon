@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include <conio.h>
-#include <chrono>
 #include "../Utilities/utilities.h" // if you use STL, please include this line AFTER all other include
 #include "define.h"
 #include "Vertex.h"
@@ -14,13 +13,10 @@
 #include "StatePlay.h"
 #include "InputManager.h"
 #include "StateManager.h"
+#include "Timer.h"
 
 Text *FPSCountText;
-DWORD fDeltaTime = 0;
-unsigned int frames = 0;
-std::chrono::high_resolution_clock::time_point 
-	start, 
-	end = std::chrono::high_resolution_clock::now();
+CTimer timer;
 
 int Init(ESContext* esContext) {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -32,51 +28,39 @@ int Init(ESContext* esContext) {
 	StateManager::GetInstance();
 
 	FPSCountText = new Text("0", SHADER_TEXT, FONT_BANK, TEXT_COLOR::GREEN, 2.0f, 20.0f, 1.0f);
-	
+	timer.Init();
+
 	return 0;
 }
 
 void Draw(ESContext* esContext)
 {
 	//fps
-	start = std::chrono::high_resolution_clock::now();
-
-	//duration outside draw call
-	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); 
-	DWORD frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); 
+	DWORD start, end;
+	start = GetTickCount();
 
 	//clear + render
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	StateManager::GetInstance()->Render();
+
+	//fps counter
+	FPSCountText->setText(std::to_string((unsigned int)timer.GetFPS()));
 	Renderer::GetInstance()->DrawText2(FPSCountText);
 
 	//fps
-	end = std::chrono::high_resolution_clock::now();
-	frameTime += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-	frames++;
-	if (fDeltaTime >= 1000.0f) {
-		FPSCountText->setText(std::to_string(frames));
-		frames = 0;
-		fDeltaTime -= 1000.0f;
-	}
-
-	//if (frameTime < 1000.0f / LIMIT_FPS) {
-	//	Sleep(1000.0f / LIMIT_FPS - frameTime);
-	//}
-
-	end = std::chrono::high_resolution_clock::now();
-	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+	end = GetTickCount();
+	DWORD frameTime = end - start;
+	if (frameTime < 1000.0f / LIMIT_FPS)
+		Sleep(1000.0f / LIMIT_FPS - frameTime);
 
 	//display
-	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
-
+	if (eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface))
+		timer.Update();
 }
 
 void Update(ESContext* esContext, float deltaTime)
 {
 	StateManager::GetInstance()->Update(deltaTime);
-
-	//fDeltaTime += deltaTime * 1000;
 }
 
 void Key(ESContext* esContext, unsigned char key, bool bIsPressed)

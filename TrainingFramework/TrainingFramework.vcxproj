@@ -152,6 +152,7 @@
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\resource.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateResult.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateShop.h" />
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Timer.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AoeSkill.h" />
     <ClInclude Include="Bar.h" />

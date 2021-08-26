@@ -4,7 +4,7 @@
 #define SCREEN_W					1080.0f
 #define SCREEN_H					720.0f
 
-#define LIMIT_FPS					60
+#define LIMIT_FPS					120
 
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
