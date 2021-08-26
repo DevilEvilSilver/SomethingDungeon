@@ -1,4 +1,4 @@
 SoundNum 2
 
-#ID 500 ../Resources/Sounds/bgm.wav
+#ID 500 ../Resources/Sounds/shop_bgm.wav
 #ID 900 ../Resources/Sounds/button_sfx.wav

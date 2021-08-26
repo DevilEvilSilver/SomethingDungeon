@@ -1,4 +1,4 @@
 SoundNum 2
 
-#ID 400 ../Resources/Sounds/bgm.wav
-#ID 401 ../Resources/Sounds/bgm.wav
+#ID 400 ../Resources/Sounds/win_bgm.wav
+#ID 401 ../Resources/Sounds/lose_bgm.wav

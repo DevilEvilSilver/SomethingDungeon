@@ -8,9 +8,9 @@ SIZE 30.0 x 20.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 2
 ID winBG
-FILE ../Resources/Animation/backgroundMenu/static/sprite.txt
+FILE ../Resources/Animation/backgroundResult/win/sprite.txt
 ID loseBG
-FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+FILE ../Resources/Animation/backgroundResult/lose/sprite.txt
 
 ID title
 MODEL 0

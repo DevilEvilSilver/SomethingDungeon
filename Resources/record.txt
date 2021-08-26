@@ -1,6 +1,6 @@
-FLOOR_2
-CurrHP 27
-MaxHP 30
+LOSE
+CurrHP -2
+MaxHP 1
 CurrMP 20
 MaxMP 20
 ATK 3

@@ -45,7 +45,7 @@
 #define FLOOR_BOSS						"FLOOR_BOSS"
 #define RECORD_WIN						"WIN"
 #define RECORD_LOSE						"LOSE"
-#define INIT_PLAYER_HP					30
+#define INIT_PLAYER_HP					1
 #define INIT_PLAYER_MP					20
 #define INIT_PLAYER_ATK					3
 #define INIT_PLAYER_DEF					3
