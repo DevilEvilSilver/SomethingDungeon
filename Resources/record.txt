@@ -1,2 +1,2 @@
 WIN
-SCORE: 15
+SCORE: 5

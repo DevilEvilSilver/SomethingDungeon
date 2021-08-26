@@ -18,6 +18,9 @@
 Text *FPSCountText;
 double fDeltaTime = 0.0f;
 unsigned int frames = 0;
+std::chrono::high_resolution_clock::time_point 
+	start, 
+	end = std::chrono::high_resolution_clock::now();
 
 int Init(ESContext* esContext) {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -36,7 +39,9 @@ int Init(ESContext* esContext) {
 void Draw(ESContext* esContext)
 {
 	//fps
-	auto start = std::chrono::high_resolution_clock::now();
+	start = std::chrono::high_resolution_clock::now();
+
+	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); //duration outside draw call
 
 	//clear + render
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -44,19 +49,21 @@ void Draw(ESContext* esContext)
 	Renderer::GetInstance()->DrawText2(FPSCountText);
 
 	//fps
-	double frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+	end = std::chrono::high_resolution_clock::now();
+	double frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 	frames++;
 	if (fDeltaTime >= 1000.0f) {
 		FPSCountText->setText(std::to_string(frames));
 		frames = 0;
 		fDeltaTime -= 1000.0f;
 	}
-	printf("%f\n", fDeltaTime);
+
 	if (frameTime < 1000.0f / LIMIT_FPS) {
 		Sleep(1000.0f / LIMIT_FPS - frameTime);
 	}
 
-	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+	end = std::chrono::high_resolution_clock::now();
+	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
 	//display
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
