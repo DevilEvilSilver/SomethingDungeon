@@ -24,7 +24,7 @@ void Player::ShootChicken(Vector2 target)
 		Matrix m;
 		m.SetTranslation(target.x, target.y, 0);
 
-		BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
+		BulletSkill* bskill = new BulletSkill(target, this, SKILL_2, this->m_RoomID, m);
 		StatePlay::GetInstance()->AddSkill(bskill);
 
 		m_currMP -= ChickenMPCost;
@@ -97,7 +97,7 @@ bool Player::Dash(float frameTime)
 			i++;
 			break;
 		case 1:
-			if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.25f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, m_MOVESPEED*1.5f, 0.5f, frameTime) == false) return false;
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
 			SetPS(P_CS);
@@ -147,6 +147,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_currMP = 20;
 	m_ATK = 3;
 	m_DEF = 3;
+
+	atkDuration = 0.25f;
 
 	m_MOVESPEED = 3.0f;
 

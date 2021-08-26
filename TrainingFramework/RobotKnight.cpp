@@ -53,7 +53,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 		SetBS(BS_ATTACK2);*/
 
 	
-	printf("robot hp:%d\n", m_currHP);
+	//printf("robot hp:%d\n", m_currHP);
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -78,16 +78,16 @@ void RobotKnight::Normal(float frameTime)
 
 		if (distance < 20.0f)
 		{
-			if (distance > 7.0f)
+			if (distance > 5.0f)
 			{
-				if (rand() % 10 <=5)
+				if (rand() % 10 <=4)
 					SetBS(BS_CHARGE);
 				else SetBS(BS_ATTACK1);
 
 			}
 			else
 			{
-				if (rand() % 10 <= 4)
+				if (rand() % 10 <= 3)
 					SetBS(BS_GUARD);
 				else SetBS(BS_ATTACK2);
 			}
@@ -122,8 +122,7 @@ void RobotKnight::Charge(float frameTime)
 				{
 					currAtkCD = totalAtkCD;
 					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, m_isKnockBack, GetPos(), frameTime);
-				}
-					
+				}					
 			}
 
 			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.75f, frameTime) == true)
@@ -174,7 +173,7 @@ void RobotKnight::Attack1(float frameTime)
 			Vector2 skillWidth = ranDir - GetPos();
 			skillWidth.Normalize();
 			skillWidth = Vector2(skillWidth.y, -skillWidth.x);
-			float widthRange = 1.75f;
+			float widthRange = 2.75f;
 			int pelletRank = 4;
 			int bulletWave = 3;
 			
@@ -236,7 +235,7 @@ void RobotKnight::Attack2(float frameTime)
 				Matrix m;
 				m.SetTranslation(ranDir.x, ranDir.y, 0);
 
-				int bulletNum = 50;
+				int bulletNum = 25;
 
 				Vector2 dir=Vector2(1, 0);
 
@@ -273,7 +272,7 @@ void RobotKnight::Guard(float frameTime)
 	{
 		start = true;
 		ranDir = StatePlay::GetInstance()->m_Player->GetPos();
-		m_isInvincible = true;
+		//m_isInvincible = true;
 
 		i = 0;
 	}
@@ -287,7 +286,7 @@ void RobotKnight::Guard(float frameTime)
 			if (FixedMove(ranDir, 0.0f, 0.5f, frameTime) == true)
 			{
 				i++;
-				m_isInvincible = false;
+				//m_isInvincible = false;
 			}
 			break;
 		case 1:

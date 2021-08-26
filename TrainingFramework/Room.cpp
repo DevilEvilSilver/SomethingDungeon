@@ -14,6 +14,7 @@
 
 #include "RobotKnight.h"
 
+#include "CollisionManager.h"
 template <class T>
 T GetResource(std::string id, std::vector<T> objList) {
 	for (auto& obj : objList) {
@@ -56,6 +57,8 @@ void Room::RoomGenerate() {
 			GenObj(SPIKE_TRAP, (int)random / 2);
 		}
 
+		
+
 		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
 		Matrix translation;
 		unsigned int enemyNum = 0;
@@ -65,17 +68,12 @@ void Room::RoomGenerate() {
 		else enemyNum = 0;
 
 		while (enemyNum--) {
-			unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
-			unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
-			translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-			//Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
-
-			//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
+			AddEnemy(WITCH);
 
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
-			//StatePlay::GetInstance()->AddEnemy(enemy);
 		}
+		if (rand()%5<=1)	GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{
@@ -83,13 +81,199 @@ void Room::RoomGenerate() {
 		Matrix translation;
 
 		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
-		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - 2.0f * enemyPrefab->m_fHeight);
+		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 
 		//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
 		RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
 
 		StatePlay::GetInstance()->AddEnemy(enemy);
+
+		GenerateDeco();
+	}
+}
+
+void Room::GenerateDeco()
+{
+	int i = rand() % 2 + 1;
+	//i = 2;
+	while (i>0)
+	{
+		int randomNum = rand() % 100 + 1;
+		
+		if (randomNum >= 80)
+		{
+			if (rand() % 100 >= 60)
+				AddDeco(DOUBLE_BARRELS);
+			else
+				AddDeco(TRIO_BARRELS);
+		}
+		else if (randomNum >= 15)
+		{
+			if (rand() % 100 >= 75)
+				AddDeco(POLE_1);
+			else
+				if (rand() % 100 >= 50)
+					AddDeco(POLE_2);
+				else
+					if (rand() % 100 >= 25)
+						AddDeco(POLE_3);
+					else
+						if (rand() % 100 >= 0)
+							AddDeco(POLE_4);
+		}
+		else AddDeco(BROKEN_WALL);
+
+
+		i--;
+	}
+}
+
+void Room::AddDeco(std::string prefabName)
+{
+	Prefab* ObjPrefab = GetResource(prefabName, ResourceManager::GetInstance()->m_PrefabList);
+	Vector2 size=Vector2(ObjPrefab->m_fWidth,ObjPrefab->m_fHeight);
+	Matrix translation;
+
+	
+
+	bool isDone = false;
+	while (isDone==false)
+	{
+		bool error = false;
+
+		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH- size.x);
+		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT-size.y-1.0f);
+		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+
+		Decorations* result = new Decorations(prefabName, m_RoomID, translation);
+
+		if (error == false)
+		for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {
+			if (obj->m_RoomID.x==m_RoomID.x&& obj->m_RoomID.y == m_RoomID.y)
+				if (CollisionManager::CheckCollision(result, obj,0.0f) == true)
+				{
+					error = true;
+				}
+		}
+
+
+		if (error==false)
+		for (auto& obj : StatePlay::GetInstance()->m_DropList) {
+			if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+				if (CollisionManager::CheckCollision(result, obj,0.0f) == true)
+				{
+					error = true;
+				}
+		}
+
+		if (error == false)
+		for (auto& obj : StatePlay::GetInstance()->m_TrapList) {
+			if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+				if (CollisionManager::CheckCollision(result, obj,0.0f) == true)
+				{
+					error = true;
+				}
+		}
+		
+		if (error == false)
+		for (auto& obj : StatePlay::GetInstance()->m_DecorationList) {
+			if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+				if (CollisionManager::CheckCollision(result, obj,0.0f) == true)
+				{
+					error = true;
+				}
+		}
+		
+
+		if (error == false)
+		{
+			isDone = true;
+			StatePlay::GetInstance()->AddDecoration(result);
+		}
+		else {
+			//printf("hey1\n");
+			delete result;
+			isDone = true;
+		}
+		
+			
+	}
+
+}
+
+void Room::AddEnemy(std::string prefabName)
+{
+	Prefab* ObjPrefab = GetResource(prefabName, ResourceManager::GetInstance()->m_PrefabList);
+	Vector2 size = Vector2(ObjPrefab->m_fWidth, ObjPrefab->m_fHeight);
+	Matrix translation;
+
+
+
+	bool isDone = false;
+	while (isDone == false)
+	{
+		bool error = false;
+
+		unsigned int randPosX = 1+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-2.0f);
+		unsigned int randPosY = 1+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 2.0f);
+		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
+
+		
+		Enemy* result = nullptr;
+		if (prefabName==WITCH) 
+			result= new Witch(prefabName, m_RoomID, translation);
+
+		if (error == false)
+			for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {
+				if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+					if (CollisionManager::CheckCollision(result, obj, 0.0f) == true)
+					{
+						error = true;
+					}
+			}
+
+
+		if (error == false)
+			for (auto& obj : StatePlay::GetInstance()->m_DropList) {
+				if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+					if (CollisionManager::CheckCollision(result, obj, 0.0f) == true)
+					{
+						error = true;
+					}
+			}
+
+		if (error == false)
+			for (auto& obj : StatePlay::GetInstance()->m_TrapList) {
+				if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+					if (CollisionManager::CheckCollision(result, obj, 0.0f) == true)
+					{
+						error = true;
+					}
+			}
+
+		if (error == false)
+			for (auto& obj : StatePlay::GetInstance()->m_DecorationList) {
+				if (obj->m_RoomID.x == m_RoomID.x && obj->m_RoomID.y == m_RoomID.y)
+					if (CollisionManager::CheckCollision(result, obj, 0.0f) == true)
+					{
+						error = true;
+					}
+			}
+
+
+		if (error == false)
+		{
+			isDone = true;
+			StatePlay::GetInstance()->AddEnemy(result);
+		}
+		else {
+			//printf("hey1\n");
+			delete result;
+			isDone = true;
+		}
+
+
 	}
 }
 

@@ -62,17 +62,38 @@
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
 #define SKILL			"skill"
+#define SKILL_2			"skill2"
 #define BULLET_SKILL	"skill"
 #define AOE_SKILL		"aoeskill"
+
 #define NORMAL_ROOM		"normalRoom"
+#define NORMAL_ROOM_1	"normalRoom1"
+#define NORMAL_ROOM_2	"normalRoom2"
+#define NORMAL_ROOM_3	"normalRoom3"
+#define NORMAL_ROOM_4	"normalRoom4"
+#define NORMAL_ROOM_5	"normalRoom5"
+
 #define WALL_ROOM		"wallRoom"
+
 #define BORDER_ROOM		"borderRoom"
+#define BORDER_ROOM_1_1	"borderRoom_1_1"
+#define BORDER_ROOM_1_2	"borderRoom_1_2"
+#define BORDER_ROOM_1_3	"borderRoom_1_3"
+#define BORDER_ROOM_1_4	"borderRoom_1_4"
+
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
 
+#define DOUBLE_BARRELS  "doubleBarrels"
+#define TRIO_BARRELS	"trioBarrels"
+#define BROKEN_WALL		"brokenWall"
+#define POLE_1			"pole_1"
+#define POLE_2			"pole_2"
+#define POLE_3			"pole_3"
+#define POLE_4			"pole_4"
 //ENEMY
 #define WITCH			"violetWitch"
 #define B_ROBOTKNIGHT	"robotKnight"

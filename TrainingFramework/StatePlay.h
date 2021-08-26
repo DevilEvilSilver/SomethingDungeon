@@ -15,6 +15,7 @@
 #include "SpikeTrap.h"
 #include "BombTrap.h"
 #include "MiniMap.h"
+#include "Decorations.h"
 
 
 class StatePlay :public StateBase<StatePlay>
@@ -31,6 +32,8 @@ public:
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
 
+	std::vector<Decorations*> m_DecorationList;
+
 	//FOR UPDATE
 	std::vector<Room*> m_InRangeRoom;
 	std::vector<Enemy*> m_InRangeEnemy;
@@ -38,6 +41,7 @@ public:
 	std::vector<Drop*> m_InRangeDrop;
 	std::vector<Trap*> m_InRangeTrap;
 
+	std::vector<Decorations*> m_InRangeDecoration;
 
 	Player *m_Player;
 
@@ -75,6 +79,7 @@ public:
 	void AddObject(Object* object);
 	void AddRoom(Room* room);
 	void AddEnemy(Enemy* enemy);
+	void AddDecoration(Decorations* decoration);
 
 	void AddDrop(Drop* drop);
 	void AddTrap(Trap* trap);
@@ -108,5 +113,6 @@ public:
 	void RemoveTrap(Trap* trap);
 	void RemoveEnemy(Enemy* enemy);
 	void RemoveSkill(Skill* skill);
+	void RemoveDecoration(Decorations* deco);
 	
 };

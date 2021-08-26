@@ -240,6 +240,9 @@
     <ClCompile Include="RobotKnight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Decorations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -390,6 +393,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RobotKnight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Decorations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

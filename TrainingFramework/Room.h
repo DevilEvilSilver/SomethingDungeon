@@ -17,6 +17,9 @@ public:
 	~Room();
 
 	void RoomGenerate();
+	void GenerateDeco();
+	void AddDeco(std::string prefabName);
+	void AddEnemy(std::string prefabName);
 	void Update(float frameTime);
 	void Render(Camera *camera);
 	void GenObj(std::string prefabId, int num);

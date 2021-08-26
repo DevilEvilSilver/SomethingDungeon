@@ -53,6 +53,8 @@ void AoeSkill::UpdateHit(float frameTime)
 				StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 				StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
 			}
+
+
 	}
 	else 
 	{

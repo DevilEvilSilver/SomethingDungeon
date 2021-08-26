@@ -1,4 +1,4 @@
-#PREFAB_COUNT 27
+#PREFAB_COUNT 44
 ID mainChar
 MODEL 0
 SHADER 0
@@ -94,6 +94,17 @@ ANIMATION_COUNT 1
 ID idleLeft
 FILE ../Resources/Animation/skill/idleLeft/sprite.txt
 
+ID skill2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.35, 0.35
+SIZE 0.35 x 0.35
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/skill/idleLeft/sprite2.txt
+
 ID aoeskill
 MODEL 0
 SHADER 0
@@ -116,6 +127,62 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/terrain/static/sprite.txt
 
+ID normalRoom2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom/room2.txt
+
+ID normalRoom1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom/room1.txt
+
+ID normalRoom3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom/room3.txt
+
+ID normalRoom4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom/room4.txt
+
+ID normalRoom5
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom/room5.txt
+
+
 ID wallRoom
 MODEL 0
 SHADER 0
@@ -136,7 +203,51 @@ SIZE 9.0 x 6.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/wallBorder/static/sprite.txt
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_1.txt
+
+ID borderRoom_1_1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_1.txt
+
+ID borderRoom_1_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_2.txt
+
+ID borderRoom_1_3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_3.txt
+
+ID borderRoom_1_4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_4.txt
 
 ID gold
 MODEL 0
@@ -181,6 +292,83 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID spike
 FILE ../Resources/Animation/spikeTrap/dynamic/sprite.txt
+
+ID doubleBarrels
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, -0.6, 2.0, 0.6
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/doubleBarrels.txt
+
+ID trioBarrels
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, -0.6, 2.0, 1.2
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/trioBarrels.txt
+
+ID brokenWall
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 1.0, -2.0, 2.0, 1.0
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/brokenWall.txt
+
+ID pole_1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 1.0, -2.0, 1.0, 0.3
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/pole_1.txt
+
+ID pole_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 1.0, -2.0, 1.0, 0.3
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/pole_2.txt
+
+ID pole_3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, -2.6, 2.0, 0.4
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/pole_3.txt
+
+ID pole_4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 1.0, -2.6, 2.0, 0.4
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/pole_4.txt
 
 ID bombTrap
 MODEL 0

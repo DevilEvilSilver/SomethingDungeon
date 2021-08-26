@@ -16,7 +16,7 @@
 
 template <class T>
 T GetRoomByType(RoomType id, std::vector<T> objList) {
-	for (auto&obj : objList) {
+	for (auto& obj : objList) {
 		if (id == obj->m_RoomType)
 			return obj;
 	}
@@ -25,7 +25,7 @@ T GetRoomByType(RoomType id, std::vector<T> objList) {
 
 template <class T>
 T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
-	for (auto&obj : objList) {
+	for (auto& obj : objList) {
 		if (roomID.x == obj->m_RoomID.x && roomID.y == obj->m_RoomID.y)
 			return obj;
 	}
@@ -68,6 +68,13 @@ StatePlay::~StatePlay() {
 	}
 	m_TrapList.clear();
 
+	for (auto& object : m_DecorationList) {
+		if (object != NULL) {
+			delete object;
+		}
+	}
+	m_DecorationList.clear();
+
 	delete m_Player;
 	delete m_Camera;
 
@@ -95,13 +102,7 @@ void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
 
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
-	/*Room* Room1 = GetRoomByID(Vector2(1, 2), m_RoomList);
-	int x1 = Room1->GetPosX(),
-		y1 = Room1->GetPosY();
-	Room* Room2 = GetRoomByID(Vector2(2, 2), m_RoomList);
-	int x2 = Room2->GetPosX(),
-		y2 = Room2->GetPosY();*/
-	Room *startRoom = GetRoomByType(START, m_RoomList);
+	Room* startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_PLAY, "r");
@@ -111,7 +112,7 @@ void StatePlay::Init() {
 	char strPrefab[50];
 	fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 	Matrix translation;
-	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH/2.0f, startRoom->GetPosY() - ROOM_HEIGHT/2, 0.0f);
+	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH / 2.0f, startRoom->GetPosY() - ROOM_HEIGHT / 2, 0.0f);
 	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
 	translation.SetTranslation(m_Player->GetPosX() + 1, m_Player->GetPosY() + 1, 0);
 	//Camera
@@ -126,7 +127,7 @@ void StatePlay::Init() {
 	fscanf(dataFile, "MOVING SPEED %f\n", &fMovingSpeed);
 	float fRotationSpeed;
 	fscanf(dataFile, "ROTATION SPEED %f\n", &fRotationSpeed);
-	m_Camera = new Camera(startRoom->GetPosX() + (startRoom->m_fWidth / 2), startRoom->GetPosY() - (startRoom->m_fHeight / 2), 
+	m_Camera = new Camera(startRoom->GetPosX() + (startRoom->m_fWidth / 2), startRoom->GetPosY() - (startRoom->m_fHeight / 2),
 		fLeft, fRight, fBottom, fTop, fNear, fFar, fMovingSpeed, fRotationSpeed);
 
 	//HP Holder
@@ -244,7 +245,7 @@ void StatePlay::Init() {
 		Matrix translation;
 		translation.SetTranslation(x, y, 0.0f);
 
-		m_MiniMap = new MiniMap(translation,(RoomType*)m_Map,m_Camera, m_Player);
+		m_MiniMap = new MiniMap(translation, (RoomType*)m_Map, m_Camera, m_Player);
 	}
 
 	fclose(dataFile);
@@ -286,7 +287,7 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				break;
 			}
 			else {
-				if (m_Map[currPosX][currPosY] != START) 
+				if (m_Map[currPosX][currPosY] != START)
 					m_Map[currPosX][currPosY] = NORMAL;
 				currPosX += directions[randDirection].x;
 				currPosY += directions[randDirection].y;
@@ -301,26 +302,63 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 			Matrix translation;
 			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
-				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, NORMAL);
+				Room* room;
+				switch (rand() % 5 + 1)
+				{
+				case 1:
+					room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, NORMAL);
+
+					break;
+				case 2:
+					room = new Room(NORMAL_ROOM_2, Vector2(i, j), translation, NORMAL);
+					break;
+				case 3:
+					room = new Room(NORMAL_ROOM_3, Vector2(i, j), translation, NORMAL);
+					break;
+				case 4:
+					room = new Room(NORMAL_ROOM_4, Vector2(i, j), translation, NORMAL);
+					break;
+				case 5:
+					room = new Room(NORMAL_ROOM_5, Vector2(i, j), translation, NORMAL);
+					break;
+				}
+				if (rand() % 2 == 0) room->m_isFacingLeft = false;
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == WALL) {
 				if (m_Map[i][j - 1] == WALL) {
-					Room *room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
-					AddRoom(room);
-				} 
-				else {
-					Room *room = new Room(BORDER_ROOM, Vector2(i, j), translation, WALL);
+					Room* room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
+
 					AddRoom(room);
 				}
-				
+				else {
+					Room* room;
+					switch (rand() % 4 + 1)
+					{
+					case 1:
+						room = new Room(BORDER_ROOM_1_1, Vector2(i, j), translation, WALL);
+						break;
+					case 2:
+						room = new Room(BORDER_ROOM_1_2, Vector2(i, j), translation, WALL);
+						break;
+					case 3:
+						room = new Room(BORDER_ROOM_1_3, Vector2(i, j), translation, WALL);
+						break;
+					case 4:
+						room = new Room(BORDER_ROOM_1_4, Vector2(i, j), translation, WALL);
+						break;
+					}
+					if (rand() % 2 == 0) room->m_isFacingLeft = false;
+					AddRoom(room);
+				}
+
 			}
 			else if (m_Map[i][j] == START) {
-				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, START);
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, START);
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == END) {
-				Room *room = new Room(NORMAL_ROOM, Vector2(i, j), translation, END);
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, END);
 				AddRoom(room);
 			}
 		}
@@ -328,11 +366,11 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 }
 
 void StatePlay::RoomsGenerate() {
-	static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
-	for (auto& obj : m_RoomList) {
-		
-		obj->RoomGenerate();
-	}
+	//static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
+		for (auto& obj : m_RoomList) {
+
+			obj->RoomGenerate();
+		}
 }
 
 void StatePlay::Render() {
@@ -341,26 +379,26 @@ void StatePlay::Render() {
 	//RENDER ROOM
 	{
 		for (auto& obj : m_InRangeRoom) {
-				obj->Render(this->m_Camera);
+			obj->Render(this->m_Camera);
 		}
 	}
 
 	//RENDER TRAP
 	for (auto& obj : m_InRangeTrap) {
-		
-			obj->Render(this->m_Camera);
+
+		obj->Render(this->m_Camera);
 	}
 
 	//RENDER DROP
 	for (auto& obj : m_InRangeDrop) {
-			obj->Render(this->m_Camera);
+		obj->Render(this->m_Camera);
 	}
 
 
 	//RENDER OBJECT
 	{
 		for (auto& obj : m_ObjectList) {
-				obj->Render(this->m_Camera);
+			obj->Render(this->m_Camera);
 		}
 	}
 	m_ObjectList.clear();
@@ -445,6 +483,18 @@ void StatePlay::Remove()
 		}
 	}
 
+	for (auto& obj : m_DecorationList)
+	{
+		if (obj->hp <= 0)
+		{
+
+			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 2.0f, false);
+			RemoveDecoration(obj);
+
+		}
+	}
+
+
 }
 void StatePlay::RemoveDrop(Drop* drop)
 {
@@ -455,7 +505,7 @@ void StatePlay::RemoveDrop(Drop* drop)
 
 	delete m_DropList[id];
 	m_DropList[id] = m_DropList[m_DropList.size() - 1];
-	
+
 	m_DropList.resize(m_DropList.size() - 1);
 }
 void StatePlay::RemoveTrap(Trap* trap)
@@ -485,13 +535,18 @@ void StatePlay::Update(float frameTime) {
 			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
 			m_isStartUp = true;
 		}
-		
+
 		Remove();
 
 		UpdateInRange();
-		
-
 		UpdateRoomID();
+
+		for (auto& obj : m_InRangeRoom) {
+
+			obj->Update(frameTime);
+
+		}
+
 		m_Player->Update(frameTime);
 		for (auto& obj : m_InRangeEnemy) {
 
@@ -499,13 +554,13 @@ void StatePlay::Update(float frameTime) {
 
 		}
 		for (auto& obj : m_InRangeSkill) {
-				obj->Update(frameTime);
+			obj->Update(frameTime);
 		}
 		for (auto& obj : m_InRangeTrap) {
-				obj->Update(frameTime);
+			obj->Update(frameTime);
 		}
 		for (auto& obj : m_InRangeDrop) {
-				obj->Update(frameTime);
+			obj->Update(frameTime);
 		}
 
 
@@ -515,7 +570,7 @@ void StatePlay::Update(float frameTime) {
 		//follow camera
 		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
 		m_Camera->Update(frameTime);
-		
+
 		//Update UI
 		m_ButtonPause->Update(frameTime);
 
@@ -528,9 +583,9 @@ void StatePlay::Update(float frameTime) {
 		m_MpBar->Update(frameTime);
 		m_MpBar->Resize(m_Player->m_currMP);
 		m_MpText->setText(m_Player->GetMP());
-		
+
 		m_MiniMap->Update(frameTime);
-	
+
 		m_GoldIcon->Update(frameTime);
 		m_GoldText->setText(m_Player->GetGold());
 	}
@@ -548,6 +603,7 @@ void StatePlay::UpdateInRange()
 	for (auto& obj : m_DropList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDrop.push_back(obj);
 	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeTrap.push_back(obj);
 	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
+	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDecoration.push_back(obj);
 }
 
 void StatePlay::ClearInRange()
@@ -557,6 +613,7 @@ void StatePlay::ClearInRange()
 	m_InRangeEnemy.clear();
 	m_InRangeSkill.clear();
 	m_InRangeTrap.clear();
+	m_InRangeDecoration.clear();
 }
 
 void StatePlay::UpdateRoomID() {
@@ -580,20 +637,20 @@ void StatePlay::UpdateRoomID() {
 	for (auto& obj : m_InRangeEnemy) {
 
 		{
-			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
-			for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
-				if (i > 31)
-					continue;
-
-				for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
-					if (j > 31)
+			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
+				for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
+					if (i > 31)
 						continue;
-					if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
-						obj->m_RoomID = Vector2(i, j);
-						break;
+
+					for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
+						if (j > 31)
+							continue;
+						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
+							obj->m_RoomID = Vector2(i, j);
+							break;
+						}
 					}
 				}
-			}
 		}
 	}
 
@@ -615,7 +672,7 @@ void StatePlay::UpdateControl(float frameTime)
 		return;
 	}
 	m_ButtonPause->isHover(this->m_Camera);
-	
+
 	//PLAYER
 	{
 		if ((newKeyPressed & KEY_W))
@@ -636,7 +693,7 @@ void StatePlay::UpdateControl(float frameTime)
 			m_Player->PlayerMove(m_Player->RIGHT);
 		}
 	}
-	
+
 
 	//CAMERA
 	{
@@ -657,17 +714,17 @@ void StatePlay::UpdateControl(float frameTime)
 			m_Camera->MoveRight(frameTime);
 		}
 	}
-	
+
 	//USING SPACE	~	TEST
 	m_Player->UseAttack();
-	
-		if (newKeyPressed & KEY_SPACE)
-		{
-			m_Player->Dash(frameTime);
-		}
-		
-		
+
+	if (newKeyPressed & KEY_SPACE)
+	{
+		m_Player->Dash(frameTime);
 	}
+
+
+}
 
 
 void StatePlay::UpdateControlPause(float frameTime) {
@@ -712,14 +769,18 @@ void StatePlay::UpdateControlPause(float frameTime) {
 	}
 }
 
-void StatePlay::AddObject(Object *object) {
+void StatePlay::AddObject(Object* object) {
 	m_ObjectList.push_back(object);
 }
-void StatePlay::AddRoom(Room *room) {
+void StatePlay::AddRoom(Room* room) {
 	m_RoomList.push_back(room);
 }
-void StatePlay::AddEnemy(Enemy *enemy) {
+void StatePlay::AddEnemy(Enemy* enemy) {
 	m_EnemyList.push_back(enemy);
+}
+void StatePlay::AddDecoration(Decorations* decoration)
+{
+	m_DecorationList.push_back(decoration);
 }
 void StatePlay::AddSkill(Skill* skill)
 {
@@ -731,9 +792,9 @@ bool StatePlay::CheckInRange(Vector2 roomID) {
 	int delta = 2;
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - delta || roomID.x > currRoom.x + delta ||
-		roomID.y < currRoom.y - delta|| roomID.y > currRoom.y + delta)
+		roomID.y < currRoom.y - delta || roomID.y > currRoom.y + delta)
 		return false;
-	else 
+	else
 		return true;
 }
 void StatePlay::GetRenderOrder() {
@@ -742,9 +803,14 @@ void StatePlay::GetRenderOrder() {
 	}
 	m_ObjectList.push_back(m_Player);
 
-	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object *a, Object *b) -> bool {
+	for (auto a : m_InRangeDecoration) {
+		m_ObjectList.push_back(a);
+	}
+
+
+	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object* a, Object* b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) > (b->GetPosY() - b->m_fHeight));
-	});
+		});
 }
 
 void StatePlay::RemoveEnemy(Enemy* enemy) {
@@ -772,4 +838,16 @@ void StatePlay::RemoveSkill(Skill* skill)
 	delete m_SkillList[id];
 	m_SkillList[id] = m_SkillList[m_SkillList.size() - 1];
 	m_SkillList.resize(m_SkillList.size() - 1);
+}
+
+void StatePlay::RemoveDecoration(Decorations* deco)
+{
+	int id;
+	for (int i = 0; i < m_DecorationList.size(); i++) {
+		if (m_DecorationList[i] == deco)  id = i;
+	}
+
+	delete m_DecorationList[id];
+	m_DecorationList[id] = m_DecorationList[m_DecorationList.size() - 1];
+	m_DecorationList.resize(m_DecorationList.size() - 1);
 }

@@ -109,6 +109,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Decorations.cpp" />
     <ClCompile Include="Drop.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Fader.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Decorations.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Drop.h" />
     <ClInclude Include="Enemy.h" />

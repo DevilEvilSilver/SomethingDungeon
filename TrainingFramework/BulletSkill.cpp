@@ -37,7 +37,7 @@ void BulletSkill::UpdateHit(float frameTime)
 					{
 						//enemy->isAttacked
 						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
-						
+						isFinished = true;
 						currCD = totalCD;
 					}
 
@@ -69,6 +69,17 @@ void BulletSkill::UpdateHit(float frameTime)
 			}
 		}
 	}
+
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeDecoration) {
+		{
+			if (CollisionManager::CheckCollision(this, obj))
+			{
+				obj->hp--;
+				isFinished = true;
+			}
+		}
+	}
+
 }
 void BulletSkill::Init(Vector2 mousePos)
 {

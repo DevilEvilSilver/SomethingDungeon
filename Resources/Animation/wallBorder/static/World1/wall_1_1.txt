@@ -1,0 +1,15 @@
+#FRAME_COUNT 3
+ID 0
+SPF 0.25
+FILE ../Resources/Animation/wallBorder/static/World1/tga/wall_1_1_1.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.25
+FILE ../Resources/Animation/wallBorder/static/World1/tga/wall_1_1_2.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.25
+FILE ../Resources/Animation/wallBorder/static/World1/tga/wall_1_1_3.tga
+TILING GL_REPEAT
+
+

@@ -197,6 +197,10 @@ void Character::WallCollision(float frameTime)
 		if (obj->m_RoomType == WALL)
 			CollisionManager::CheckCollision(this, obj, frameTime);
 	}
+
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeDecoration) {
+			CollisionManager::CheckCollision(this, obj, frameTime);
+	}
 }
 void Character::PlayerCollision(float frameTime)
 {
