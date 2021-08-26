@@ -28,12 +28,14 @@ public:
 	Text *m_ItemName3;
 	Text *m_ItemDescription3;
 	Text *m_ItemPrice3;
+	Widget *m_ItemGoldIcon;
 
 	Text *m_StatHP;
 	Text *m_StatMP;
 	Text *m_StatATK;
 	Text *m_StatDEF;
 	Text *m_PlayerGold;
+	Widget *m_PlayerGoldIcon;
 
 	Fader *m_TransitionScreen;
 

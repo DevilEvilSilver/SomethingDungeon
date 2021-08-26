@@ -33,12 +33,14 @@ StateShop::~StateShop() {
 	//delete m_ItemName3;
 	//delete m_ItemDescription3;
 	//delete m_ItemPrice3;
+	delete m_ItemGoldIcon;
 
 	delete m_StatHP;
 	delete m_StatMP;
 	delete m_StatATK;
 	delete m_StatDEF;
 	delete m_PlayerGold;
+	delete m_PlayerGoldIcon;
 
 	delete m_Player;
 	delete m_Camera;
@@ -92,6 +94,30 @@ void StateShop::Init() {
 		m_ButtonStart = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Item Gold Icon
+	{
+		fscanf(dataFile, "#ITEM_GOLD_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ItemGoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Player Gold Icon
+	{
+		fscanf(dataFile, "#PLAYER_GOLD_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_PlayerGoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
 
 	//Player 
@@ -104,7 +130,7 @@ void StateShop::Init() {
 	m_StatMP = new Text("MANA: " + m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 280.0f, 1.0f);
 	m_StatATK = new Text("ATTACK: " + std::to_string(m_Player->m_ATK), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 350.0f, 1.0f);
 	m_StatDEF = new Text("DEFENCE: " + std::to_string(m_Player->m_DEF), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 420.f, 1.0f);
-	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1005.0f, 510.0f, 1.0f);
+	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1005.0f, 520.0f, 1.0f);
 
 	m_isStartUp = false;
 	m_isPLayState = false;
@@ -116,11 +142,32 @@ void StateShop::Render() {
 	m_Background->Render(this->m_Camera);
 	m_ButtonStart->Render(this->m_Camera);
 
+	//m_ButtonItem1->Render(this->m_Camera);
+	//m_ButtonItem2->Render(this->m_Camera);
+	//m_ButtonItem3->Render(this->m_Camera);
+
+	//if (!strcmp(m_ButtonItem1->m_strState.c_str(), B_HOVER)) {
+	//	Renderer::GetInstance()->DrawText2(m_ItemName1);
+	//	Renderer::GetInstance()->DrawText2(m_ItemDescription1);
+	//	m_ItemGoldIcon->Render(this->m_Camera);
+	//}
+	//if (!strcmp(m_ButtonItem2->m_strState.c_str(), B_HOVER)) {
+	//	Renderer::GetInstance()->DrawText2(m_ItemName2);
+	//	Renderer::GetInstance()->DrawText2(m_ItemDescription2);
+	//	m_ItemGoldIcon->Render(this->m_Camera);
+	//}
+	//if (!strcmp(m_ButtonItem3->m_strState.c_str(), B_HOVER)) {
+	//	Renderer::GetInstance()->DrawText2(m_ItemName3);
+	//	Renderer::GetInstance()->DrawText2(m_ItemDescription3);
+	//	m_ItemGoldIcon->Render(this->m_Camera);
+	//}
+	m_ItemGoldIcon->Render(this->m_Camera);
 	Renderer::GetInstance()->DrawText2(m_StatHP);
 	Renderer::GetInstance()->DrawText2(m_StatMP);
 	Renderer::GetInstance()->DrawText2(m_StatATK);
 	Renderer::GetInstance()->DrawText2(m_StatDEF);
 	Renderer::GetInstance()->DrawText2(m_PlayerGold);
+	m_PlayerGoldIcon->Render(this->m_Camera);
 
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Render(this->m_Camera);
@@ -140,11 +187,14 @@ void StateShop::Update(float frameTime) {
 	m_Background->Update(frameTime);
 	m_ButtonStart->Update(frameTime);
 
+	m_ItemGoldIcon->Update(frameTime);
+
 	m_StatHP->setText("HEALTH: " + m_Player->GetHP());
 	m_StatMP->setText("MANA: " + m_Player->GetMP());
 	m_StatATK->setText("ATTACK: " + std::to_string(m_Player->m_ATK));
 	m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
 	m_PlayerGold->setText(m_Player->GetGold());
+	m_PlayerGoldIcon->Update(frameTime);
 	
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Update(frameTime);
