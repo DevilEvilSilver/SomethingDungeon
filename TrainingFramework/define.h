@@ -97,6 +97,9 @@
 //ENEMY
 #define WITCH			"violetWitch"
 #define B_ROBOTKNIGHT	"robotKnight"
+#define SKELETON		"skeleton"
+#define PLANT			"carnivorousPlant"
+#define BEAR			"meleeSoldier"
 
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
