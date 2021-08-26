@@ -20,6 +20,11 @@ StateShop::~StateShop() {
 	delete m_Background;
 	delete m_ButtonStart;
 
+	delete m_ButtonPause;
+	delete m_PauseBox;
+	delete m_ButtonResume;
+	delete m_ButtonQuit;
+
 	for (auto& object : m_ButtonItemList) {
 		delete object;
 	}
@@ -121,6 +126,54 @@ void StateShop::Init() {
 		m_PlayerGoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Pause Box
+	{
+		fscanf(dataFile, "#PAUSE_BOX\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_PauseBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Pause
+	{
+		fscanf(dataFile, "#BUTTON_PAUSE\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonPause = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Resume
+	{
+		fscanf(dataFile, "#BUTTON_RESUME\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonResume = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Quit
+	{
+		fscanf(dataFile, "#BUTTON_QUIT\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	fclose(dataFile);
 
 	//Player 
@@ -143,8 +196,10 @@ void StateShop::Init() {
 	m_ButtonItemList[1]->m_fCameraPosX = -7.7778f; m_ButtonItemList[1]->m_fCameraPosY = 1.1111f;
 	m_ButtonItemList[2]->m_fCameraPosX = -1.6667f; m_ButtonItemList[2]->m_fCameraPosY = 1.1111f;
 
+	//INIT LOGIC
 	m_isStartUp = false;
 	m_isPLayState = false;
+	m_isQuit = false;
 	m_fNextStateFrame = 1.0f;
 	m_TransitionScreen = NULL;
 }
@@ -198,7 +253,7 @@ void StateShop::GenerateItem() {
 
 void StateShop::Render() {
 	m_Background->Render(this->m_Camera);
-	m_ButtonStart->Render(this->m_Camera);
+	m_ButtonStart->Render(this->m_Camera);	
 
 	for (auto& obj : m_ButtonItemList)
 	{
@@ -221,6 +276,13 @@ void StateShop::Render() {
 	Renderer::GetInstance()->DrawText2(m_PlayerGold);
 	m_PlayerGoldIcon->Render(this->m_Camera);
 
+	m_ButtonPause->Render(m_Camera);
+	if (m_isPause) {
+		m_PauseBox->Render(m_Camera);
+		m_ButtonResume->Render(m_Camera);
+		m_ButtonQuit->Render(m_Camera);
+	}
+
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Render(this->m_Camera);
 }
@@ -231,29 +293,51 @@ void StateShop::Update(float frameTime) {
 
 		m_isStartUp = true;
 	}
+	else {
+		if (m_isPause) {
+			m_PauseBox->Update(frameTime);
+			m_ButtonResume->Update(frameTime);
+			m_ButtonQuit->Update(frameTime);
 
-	UpdateControl(frameTime);
+			UpdatePause(frameTime);
+		}
+		else {
+			UpdateControl(frameTime);
 
-	m_Camera->Update(frameTime);
+			m_Camera->Update(frameTime);
 
-	m_Background->Update(frameTime);
-	m_ButtonStart->Update(frameTime);
+			m_Background->Update(frameTime);
+			m_ButtonStart->Update(frameTime);
 
-	m_ItemGoldIcon->Update(frameTime);
+			m_ItemGoldIcon->Update(frameTime);
 
-	m_StatHP->setText("HEALTH: " + m_Player->GetHP());
-	m_StatMP->setText("MANA: " + m_Player->GetMP());
-	m_StatATK->setText("ATTACK: " + std::to_string(m_Player->m_ATK));
-	m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
-	m_PlayerGold->setText(m_Player->GetGold());
-	m_PlayerGoldIcon->Update(frameTime);
-	
+			m_StatHP->setText("HEALTH: " + m_Player->GetHP());
+			m_StatMP->setText("MANA: " + m_Player->GetMP());
+			m_StatATK->setText("ATTACK: " + std::to_string(m_Player->m_ATK));
+			m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
+			m_PlayerGold->setText(m_Player->GetGold());
+			m_PlayerGoldIcon->Update(frameTime);
+		}
+	}
+
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Update(frameTime);
 }
 
 void StateShop::UpdateControl(float frameTime)
 {
+	//BUTTON PAUSE
+	if (m_ButtonPause->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(true);
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = true;
+		return;
+	}
+	if (m_ButtonPause->isPressed(this->m_Camera)) {
+		return;
+	}
+	m_ButtonPause->isHover(this->m_Camera);
+
 	//Button Start
 	if (m_ButtonStart->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
@@ -298,6 +382,51 @@ void StateShop::UpdateControl(float frameTime)
 			SoundEngine::GetInstance()->ResetInstance();
 
 			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
+			return;
+		}
+	}
+}
+
+void StateShop::UpdatePause(float frameTime) {
+	//Button Resume
+	if (m_ButtonResume->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(false);
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isPause = false;
+		return;
+	}
+	m_ButtonResume->isPressed(this->m_Camera);
+	m_ButtonResume->isHover(this->m_Camera);
+
+	//Button Quit
+	if (m_ButtonQuit->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isQuit = true;
+		m_ButtonResume->m_isAvailble = false;
+		m_ButtonQuit->m_isAvailble = false;
+	}
+	m_ButtonQuit->isPressed(this->m_Camera);
+	m_ButtonQuit->isHover(this->m_Camera);
+
+	//Play State
+	if (m_isQuit) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
+
+			StateManager::GetInstance()->CloseState();
 			return;
 		}
 	}

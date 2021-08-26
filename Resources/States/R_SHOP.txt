@@ -1,4 +1,4 @@
-#PREFAB_COUNT 9
+#PREFAB_COUNT 13
 ID mainChar
 MODEL 0
 SHADER 0
@@ -116,6 +116,68 @@ ID hover
 FILE ../Resources/Animation/buttonPause/hover/sprite.txt
 ID unavailable
 FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+
+ID buttonPause
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+
+ID buttonResume
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 6.0, 2.0
+SIZE 6.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+
+ID buttonQuit
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 6.0, 2.0
+SIZE 6.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+
+ID pauseBox
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 10.0
+SIZE 10.0 x 10.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
 
 ID transition
 MODEL 0

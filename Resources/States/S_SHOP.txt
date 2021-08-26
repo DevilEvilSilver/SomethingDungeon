@@ -20,3 +20,19 @@ PREFAB goldIcon
 #PLAYER_GOLD_ICON
 POS 13.6667, -3.9444
 PREFAB goldIcon
+
+#PAUSE_BOX
+POS -5.0, 5.0
+PREFAB pauseBox
+
+#BUTTON_PAUSE
+POS -14.5, 9.5
+PREFAB buttonPause
+
+#BUTTON_RESUME
+POS -3.0, 3.0
+PREFAB buttonResume
+
+#BUTTON_QUIT
+POS -3.0, -1.0
+PREFAB buttonQuit

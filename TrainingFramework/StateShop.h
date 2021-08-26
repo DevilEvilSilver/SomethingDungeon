@@ -15,6 +15,11 @@ public:
 	Widget *m_Background;
 	Button *m_ButtonStart;
 
+	Button *m_ButtonPause;
+	Widget *m_PauseBox;
+	Button *m_ButtonResume;
+	Button *m_ButtonQuit;
+
 	std::vector<Button*> m_ButtonItemList;
 	std::vector<Text*> m_ItemNameList;
 	std::vector<Text*> m_ItemDescriptionList;
@@ -37,6 +42,7 @@ public:
 	//LOGIC
 	bool m_isStartUp;
 	bool m_isPLayState;
+	bool m_isQuit;
 	float m_fNextStateFrame;
 
 	StateShop();
@@ -53,6 +59,7 @@ public:
 	void Update(float frameTime);
 
 	void UpdateControl(float frameTime);
+	void UpdatePause(float frameTime);
 	void UpdateItemLogic(unsigned int itemIndex);
 
 	void Render();
