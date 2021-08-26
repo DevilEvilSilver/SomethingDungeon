@@ -749,6 +749,8 @@ void StatePlay::UpdatePause(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
+			//DONT SAVE RECORD HERE
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
@@ -785,14 +787,14 @@ void StatePlay::UpdateResult(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
-			SetRecord(false, m_Player->m_GOLD);
+			SetRecord(false);
 
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
 			
-			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);
+			StateManager::GetInstance()->ClosenLoadState(GS_STATE_RESULT);
 			return;
 		}
 	}
@@ -810,32 +812,51 @@ void StatePlay::UpdateResult(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
-			SetRecord(true, m_Player->m_GOLD);
+			SetRecord(true);
 
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
 
-			StateManager::GetInstance()->ClosenAddState(GS_STATE_RESULT);
+			StateManager::GetInstance()->ClosenLoadState(GS_STATE_SHOP);
 			return;
 		}
 	}
 }
 
-void StatePlay::SetRecord(bool isWin, unsigned int score) {
-	FILE* resultFile;
-	resultFile = fopen(FILE_RECORD, "w");
+void StatePlay::SetRecord(bool isWin) {
+	FILE* recordFile;
+
+	//read
+	recordFile = fopen(FILE_RECORD, "r");
+	char strFloor[50];
+	fscanf(recordFile, "%s\n", &strFloor);
+	fclose(recordFile);
+
+	//write
+	recordFile = fopen(FILE_RECORD, "w");
 
 	if (isWin) {
-		fprintf(resultFile, "WIN\n");
+		if (!strcmp(strFloor, FLOOR_1))
+			fprintf(recordFile, "%s\n", FLOOR_2);
+		else if (!strcmp(strFloor, FLOOR_2))
+			fprintf(recordFile, "%s\n", FLOOR_3);
+		else 
+			fprintf(recordFile, "%s\n", FLOOR_BOSS);
 	}
 	else {
-		fprintf(resultFile, "LOSE\n");
+		fprintf(recordFile, "%s\n", RECORD_LOSE);
 	}
-	fprintf(resultFile, "SCORE: %d\n", score);
+	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
+	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
+	fprintf(recordFile, "CurrMP %d\n", m_Player->m_currMP);
+	fprintf(recordFile, "MaxMP %d\n", m_Player->m_maxMP);
+	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
+	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
+	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
 
-	fclose(resultFile);
+	fclose(recordFile);
 }
 
 void StatePlay::AddObject(Object *object) {

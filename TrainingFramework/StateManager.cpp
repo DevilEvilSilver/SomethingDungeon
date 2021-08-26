@@ -80,9 +80,6 @@ void StateManager::AddState(GameState addedState)
 		ResetState(m_GameStateStack.back());
 	}
 	m_GameStateStack.push_back(addedState);
-
-	if (addedState == GS_STATE_PLAY) 
-		StatePlay::GetInstance()->RoomsGenerate();
 }
 
 void StateManager::AddLoadState(GameState addedState) {
@@ -108,6 +105,15 @@ void StateManager::ClosenAddState(GameState addedState)
 
 	if (addedState == GS_STATE_PLAY)
 		StatePlay::GetInstance()->RoomsGenerate();
+}
+
+void StateManager::ClosenLoadState(GameState addedState)
+{
+	CloseState();
+	m_GameStateStack.push_back(addedState);
+	m_GameStateStack.push_back(GS_STATE_LOAD);
+
+	StateLoad::GetInstance()->m_isNextState = addedState;
 }
 
 void StateManager::ResetState(GameState state) {

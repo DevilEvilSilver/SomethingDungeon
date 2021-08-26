@@ -37,7 +37,19 @@
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
 
+	//FILE RECORD
 #define FILE_RECORD						"../Resources/record.txt"
+#define FLOOR_1							"FLOOR_1"
+#define FLOOR_2							"FLOOR_2"
+#define FLOOR_3							"FLOOR_3"
+#define FLOOR_BOSS						"FLOOR_BOSS"
+#define RECORD_WIN						"WIN"
+#define RECORD_LOSE						"LOSE"
+#define INIT_PLAYER_HP					30
+#define INIT_PLAYER_MP					20
+#define INIT_PLAYER_ATK					3
+#define INIT_PLAYER_DEF					3
+#define INIT_PLAYER_GOLD				0
 
 //MAP
 #define MAP_WIDTH					22

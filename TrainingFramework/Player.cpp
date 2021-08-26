@@ -124,13 +124,16 @@ Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 30;
-	m_currHP = 30;
-	m_maxMP = 20;
-	m_currMP = 20;
-	m_ATK = 3;
-	m_DEF = 3;
-	m_GOLD = 1000;
+	//m_maxHP = 30;
+	//m_currHP = 30;
+	//m_maxMP = 20;
+	//m_currMP = 20;
+	//m_ATK = 3;
+	//m_DEF = 3;
+	//m_GOLD = 1000;
+
+	// read file record
+	LoadData();
 	m_MOVESPEED = 6.0f;
 
 	isWallCollision = true;
@@ -138,6 +141,23 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 }
 Player::~Player() {
 
+}
+
+void Player::LoadData() {
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "r");
+
+	fscanf(recordFile, "%s\n");
+
+	fscanf(recordFile, "CurrHP %d\n", &m_currHP);
+	fscanf(recordFile, "MaxHP %d\n", &m_maxHP);
+	fscanf(recordFile, "CurrMP %d\n", &m_currMP);
+	fscanf(recordFile, "MaxMP %d\n", &m_maxMP);
+	fscanf(recordFile, "ATK %d\n", &m_ATK);
+	fscanf(recordFile, "DEF %d\n", &m_DEF);
+	fscanf(recordFile, "Gold %d\n", &m_GOLD);
+
+	fclose(recordFile);
 }
 
 void Player::Attack(int x, int y)

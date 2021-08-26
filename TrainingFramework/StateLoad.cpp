@@ -99,7 +99,7 @@ void StateLoad::Init() {
 
 	m_isNextState = false;
 	m_fNextStateFrame = 1.0f;
-	m_fStartUpFrame = 0.2f;
+	m_fStartUpFrame = 1.0f;
 	m_TransitionScreen = NULL;
 }
 
@@ -114,22 +114,22 @@ void StateLoad::Render() {
 }
 
 void StateLoad::Update(float frameTime) {
-	m_Background->Update(frameTime);
-	m_LoadIcon->Update(frameTime);
-
-	if (m_TransitionScreen != NULL)
-		m_TransitionScreen->Update(frameTime);
-
-	m_Camera->Update(frameTime);
-
-	UpdateControl(frameTime);
-
-	if (!m_isNextState) {
+	if (m_fStartUpFrame > 0.0f) {
 		m_fStartUpFrame -= frameTime;
 
 		if (m_fStartUpFrame <= 0.0f)
 			LoadState();
 	}
+	else {
+		m_Background->Update(frameTime);
+		m_LoadIcon->Update(frameTime);
+
+		UpdateControl(frameTime);
+		m_Camera->Update(frameTime);
+	}
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 }
 
 void StateLoad::UpdateControl(float frameTime)

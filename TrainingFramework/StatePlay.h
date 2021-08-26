@@ -95,7 +95,7 @@ public:
 	void UpdateControl(float frameTime);			//CONTROL PLAYER
 	void UpdatePause(float frameTime);				//HANDLE INPUT WHILE PAUSE
 	void UpdateResult(float frameTime);				//UPDATE NEXT STATE 
-	void SetRecord(bool isWin, unsigned int score);	//SAVE PLAY RECORD
+	void SetRecord(bool isWin);						//SAVE PLAY RECORD
 
 	/////////////////////////////////////////////////////////
 

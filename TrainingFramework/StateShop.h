@@ -61,6 +61,7 @@ public:
 	void UpdateControl(float frameTime);
 	void UpdatePause(float frameTime);
 	void UpdateItemLogic(unsigned int itemIndex);
+	void SetRecord();
 
 	void Render();
 

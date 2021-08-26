@@ -28,6 +28,7 @@ public:
 	void AddLoadState(GameState addedState);
 	void CloseState();
 	void ClosenAddState(GameState addedState);
+	void ClosenLoadState(GameState addedState);
 	void ResetState(GameState addedState);
 
 };

@@ -132,7 +132,7 @@ void StateWelcome::UpdateControl(float frameTime)
 	m_ButtonStart->isPressed(this->m_Camera);
 	m_ButtonStart->isHover(this->m_Camera);
 
-	//Play State
+	//New game
 	if (m_isPLayState) {
 		m_fNextStateFrame -= frameTime;
 
@@ -145,6 +145,8 @@ void StateWelcome::UpdateControl(float frameTime)
 		}
 
 		if (m_fNextStateFrame < 0) {
+			InitRecord();
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
@@ -153,6 +155,22 @@ void StateWelcome::UpdateControl(float frameTime)
 			return;
 		}
 	}
+}
+
+void StateWelcome::InitRecord() {
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "w");
+
+	fprintf(recordFile, "%s\n", FLOOR_1);
+	fprintf(recordFile, "CurrHP %d\n", INIT_PLAYER_HP);
+	fprintf(recordFile, "MaxHP %d\n", INIT_PLAYER_HP);
+	fprintf(recordFile, "CurrMP %d\n", INIT_PLAYER_MP);
+	fprintf(recordFile, "MaxMP %d\n", INIT_PLAYER_MP);
+	fprintf(recordFile, "ATK %d\n", INIT_PLAYER_ATK);
+	fprintf(recordFile, "DEF %d\n", INIT_PLAYER_DEF);
+	fprintf(recordFile, "Gold %d\n", INIT_PLAYER_GOLD);
+
+	fclose(recordFile);
 }
 
 void StateWelcome::GetRenderOrder() {}

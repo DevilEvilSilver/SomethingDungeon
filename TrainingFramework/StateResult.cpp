@@ -36,7 +36,7 @@ void StateResult::Init() {
 
 	char strisWin[50];
 	fscanf(recordFile, "%s\n", &strisWin);
-	if (!strcmp(strisWin, "WIN"))
+	if (!strcmp(strisWin, RECORD_WIN))
 		m_isWin = true;
 	else
 		m_isWin = false;

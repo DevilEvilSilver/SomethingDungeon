@@ -74,6 +74,7 @@ public:
 	Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix);
 	~Player();
 	
+	void LoadData();
 	virtual void Attack(int x, int y);
 
 

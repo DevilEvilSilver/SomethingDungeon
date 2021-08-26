@@ -261,7 +261,8 @@ void StateShop::Render() {
 	}
 
 	for (unsigned int i = 0; i < ITEM_SELL; i++) {
-		if (!strcmp(m_ButtonItemList[i]->m_strState.c_str(), B_HOVER)) {
+		if (!strcmp(m_ButtonItemList[i]->m_strState.c_str(), B_HOVER) ||
+			!strcmp(m_ButtonItemList[i]->m_strState.c_str(), B_PRESSED)) {
 			Renderer::GetInstance()->DrawText2(m_ItemNameList[i]);
 			Renderer::GetInstance()->DrawText2(m_ItemDescriptionList[i]);
 			Renderer::GetInstance()->DrawText2(m_ItemPriceList[i]);
@@ -357,8 +358,6 @@ void StateShop::UpdateControl(float frameTime)
 			SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 			
 			UpdateItemLogic(i);
-
-			m_ButtonItemList[i]->m_isAvailble = false;
 		}
 		m_ButtonItemList[i]->isPressed(this->m_Camera);
 		m_ButtonItemList[i]->isHover(this->m_Camera);
@@ -377,11 +376,13 @@ void StateShop::UpdateControl(float frameTime)
 		}
 
 		if (m_fNextStateFrame < 0) {
+			SetRecord();
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 
-			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
+			StateManager::GetInstance()->ClosenLoadState(GS_STATE_PLAY);
 			return;
 		}
 	}
@@ -408,7 +409,7 @@ void StateShop::UpdatePause(float frameTime) {
 	m_ButtonQuit->isPressed(this->m_Camera);
 	m_ButtonQuit->isHover(this->m_Camera);
 
-	//Play State
+	//Quit
 	if (m_isQuit) {
 		m_fNextStateFrame -= frameTime;
 
@@ -421,6 +422,8 @@ void StateShop::UpdatePause(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
+			SetRecord();
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
@@ -452,7 +455,33 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_DEF)) {
 			m_Player->m_DEF += 1;
 		}
+
+		m_ButtonItemList[itemIndex]->m_isAvailble = false;
 	}
+}
+
+void StateShop::SetRecord() {
+	FILE* recordFile;
+
+	//read
+	recordFile = fopen(FILE_RECORD, "r");
+	char strFloor[50];
+	fscanf(recordFile, "%s\n", &strFloor);
+	fclose(recordFile);
+
+	//write
+	recordFile = fopen(FILE_RECORD, "w");
+
+	fprintf(recordFile, "%s\n", strFloor);
+	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
+	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
+	fprintf(recordFile, "CurrMP %d\n", m_Player->m_currMP);
+	fprintf(recordFile, "MaxMP %d\n", m_Player->m_maxMP);
+	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
+	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
+	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
+
+	fclose(recordFile);
 }
 
 void StateShop::AddItemButton(Button* button)
