@@ -15,19 +15,11 @@ public:
 	Widget *m_Background;
 	Button *m_ButtonStart;
 
-	Button *m_ButtonItem1;
-	Button *m_ButtonItem2;
-	Button *m_ButtonItem3;
+	std::vector<Button*> m_ButtonItemList;
+	std::vector<Text*> m_ItemNameList;
+	std::vector<Text*> m_ItemDescriptionList;
+	std::vector<Text*> m_ItemPriceList;
 
-	Text *m_ItemName1;
-	Text *m_ItemDescription1;
-	Text *m_ItemPrice1;
-	Text *m_ItemName2;
-	Text *m_ItemDescription2;
-	Text *m_ItemPrice2;
-	Text *m_ItemName3;
-	Text *m_ItemDescription3;
-	Text *m_ItemPrice3;
 	Widget *m_ItemGoldIcon;
 
 	Text *m_StatHP;
@@ -51,10 +43,17 @@ public:
 	~StateShop();
 
 	void Init();
+	void GenerateItem();
+
+	void AddItemButton(Button* button);
+	void AddItemName(Text* name);
+	void AddItemDescription(Text* description);
+	void AddItemPrice(Text* price);
 
 	void Update(float frameTime);
 
 	void UpdateControl(float frameTime);
+	void UpdateItemLogic(unsigned int itemIndex);
 
 	void Render();
 

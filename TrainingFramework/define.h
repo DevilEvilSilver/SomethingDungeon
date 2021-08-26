@@ -158,3 +158,32 @@
 #define WHOOSH				906
 #define DEATH_SFX			907
 #define TELEPORT_SFX		908
+
+
+//SHOP ITEMS
+#define ITEM_SELL				3
+#define ITEM_COUNT				4
+	//HP
+#define ITEM_HP					1
+#define BUTTON_ITEM_HP			"buttonItemHP"
+#define ITEM_NAME_HP			"Heart Stone"
+#define ITEM_DESCRIPTION_HP		"Bonus XX HP for player"
+#define ITEM_PRICE_HP			100
+	//MP
+#define ITEM_MP					2
+#define BUTTON_ITEM_MP			"buttonItemMP"
+#define ITEM_NAME_MP			"Mana Crystal"
+#define ITEM_DESCRIPTION_MP		"Bonus XX MP for player"
+#define ITEM_PRICE_MP			100
+	//ATK
+#define ITEM_ATK				3
+#define BUTTON_ITEM_ATK			"buttonItemATK"
+#define ITEM_NAME_ATK			"Hercules Fist"
+#define ITEM_DESCRIPTION_ATK	"Bonus XX ATK for player"
+#define ITEM_PRICE_ATK			200
+	//DEF
+#define ITEM_DEF				4
+#define BUTTON_ITEM_DEF			"buttonItemDEF"
+#define ITEM_NAME_DEF			"Athena Shield"
+#define ITEM_DESCRIPTION_DEF	"Bonus XX DEF for player"
+#define ITEM_PRICE_DEF			50

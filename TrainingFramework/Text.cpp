@@ -14,7 +14,18 @@ Text::Text(std::string text, GLint shaderId, GLint fontId, TEXT_COLOR color, flo
 
 	m_Vec2DPos.x = posX;
 	m_Vec2DPos.y = posY;
-	Set2DPosition(posX, posY);
+
+	switch (m_Align) {
+	case TEXT_ALIGN::LEFT:
+		Set2DPosition(m_Vec2DPos.x, m_Vec2DPos.y);
+		break;
+	case TEXT_ALIGN::CENTER:
+		Set2DPosition(m_Vec2DPos.x - getWidth() / 2, m_Vec2DPos.y);
+		break;
+	case TEXT_ALIGN::RIGHT:
+		Set2DPosition(m_Vec2DPos.x - getWidth(), m_Vec2DPos.y);
+		break;
+	}
 
 	m_scale = Vector2(size, size);
 }
@@ -23,9 +34,6 @@ Text::~Text()
 {
 	
 }
-
-
-
 
 Vector4 Text::EnumToVector(TEXT_COLOR color)
 {
@@ -88,11 +96,12 @@ void Text::setText(std::string text) {
 
 	switch (m_Align) {
 	case TEXT_ALIGN::LEFT:
-		return;
+		break;
 	case TEXT_ALIGN::CENTER:
 		Set2DPosition(m_Vec2DPos.x - getWidth() / 2, m_Vec2DPos.y);
-		return;
+		break;
 	case TEXT_ALIGN::RIGHT:
 		Set2DPosition(m_Vec2DPos.x - getWidth(), m_Vec2DPos.y);
+		break;
 	}
 }

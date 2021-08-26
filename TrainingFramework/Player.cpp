@@ -27,7 +27,6 @@ void Player::ShootChicken(Vector2 target)
 		StatePlay::GetInstance()->AddSkill(bskill);
 
 		m_currMP -= ChickenMPCost;
-		numMPText->setText("MP: " + std::to_string(m_currMP));
 
 		SoundEngine::GetInstance()->Play(PEWPEW, 1.0f, 1.0f, false);
 	}
@@ -131,28 +130,14 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_currMP = 20;
 	m_ATK = 3;
 	m_DEF = 3;
-
+	m_GOLD = 1000;
 	m_MOVESPEED = 6.0f;
 
 	isWallCollision = true;
 	m_strState = IDLE_LEFT;
-
-	m_GOLD = 0;
-	std::string goldText = "Gold: " + std::to_string(m_GOLD);
-	numGoldText = new Text(goldText, 1, 1, TEXT_COLOR::YELLOW, 20, 40, 1.0f);
-
-	m_currHP = m_maxHP;
-	std::string Hptext = "HP: " + std::to_string(m_currHP);
-	numHPText = new Text(Hptext, 1, 1, TEXT_COLOR::RED, 20, 60, 1.0f);
-
-	m_currMP = m_maxMP;
-	std::string Mptext = "MP: " + std::to_string(m_currMP);
-	numMPText = new Text(Mptext, 1, 1, TEXT_COLOR::BLUE, 20, 80, 1.0f);
 }
 Player::~Player() {
-	delete numGoldText;
-	delete numHPText;
-	delete numMPText;
+
 }
 
 void Player::Attack(int x, int y)
