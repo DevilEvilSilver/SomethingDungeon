@@ -29,7 +29,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
 	isPlayerCollision = false;
-	isEnemyCollision = true;
+	isEnemyCollision = false;
 
 	m_MOVESPEED = 3.0f;
 
@@ -78,6 +78,7 @@ void RobotKnight::Normal(float frameTime)
 
 		if (distance < 20.0f)
 		{
+			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 2.0f, false);
 			if (distance > 5.0f)
 			{
 				if (rand() % 10 <=4)
@@ -106,6 +107,7 @@ void RobotKnight::Charge(float frameTime)
 		ranDir = StatePlay::GetInstance()->m_Player->GetPos() - GetPos();
 		ranDir.x -= m_fWidth / 2.0f+ StatePlay::GetInstance()->m_Player->m_fWidth/2.0f;
 		ranDir.y += m_fHeight / 2.0f - StatePlay::GetInstance()->m_Player->m_fHeight / 2.0f;
+		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 0.5f, false);
 	}
 	
 	if (start==true)

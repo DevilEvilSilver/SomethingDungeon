@@ -488,7 +488,7 @@ void StatePlay::Remove()
 		if (obj->hp <= 0)
 		{
 
-			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 2.0f, false);
+			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 1.5f, false);
 			RemoveDecoration(obj);
 
 		}

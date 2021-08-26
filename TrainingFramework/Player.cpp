@@ -97,7 +97,7 @@ bool Player::Dash(float frameTime)
 			i++;
 			break;
 		case 1:
-			if (FixedMove(m_lastMoveDir, m_MOVESPEED*1.5f, 0.5f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, m_MOVESPEED*1.0f, 0.5f, frameTime) == false) return false;
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
 			SetPS(P_CS);
@@ -145,8 +145,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_currHP = 50;
 	m_maxMP = 20;
 	m_currMP = 20;
-	m_ATK = 30;
-	m_DEF = 30;
+	m_ATK = 5;
+	m_DEF = 5;
 
 	atkDuration = 0.25f;
 
