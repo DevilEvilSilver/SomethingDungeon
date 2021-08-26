@@ -1,4 +1,15 @@
-#PREFAB_COUNT 3
+#PREFAB_COUNT 4
+ID mainChar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.3, 0.5, 0.7, 0.5
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
+
 ID backgroundShop
 MODEL 0
 SHADER 0
@@ -67,7 +78,7 @@ GL_DEPTH_TEST 1
 GL_CULL_FACE 0
 GL_BLEND 1
 
-#FONT_COUNT 3
+#FONT_COUNT 5
 ID 0
 FILE ../Resources/Fonts/arial.ttf
 
@@ -76,3 +87,9 @@ FILE ../Resources/Fonts/kenvector_future.ttf
 
 ID 2
 FILE ../Resources/Fonts/times.ttf
+
+ID 3
+FILE ../Resources/Fonts/F25_Bank_Printer.ttf
+
+ID 4
+FILE ../Resources/Fonts/F25_Bank_Printer_Bold.ttf

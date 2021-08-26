@@ -281,9 +281,9 @@ void StatePlay::Init() {
 	m_TransitionScreen = NULL;
 
 	//INIT TEXT
-	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
-	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
-	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
+	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 700.0f, 1.0f, TEXT_ALIGN::RIGHT);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -651,6 +651,7 @@ void StatePlay::UpdateControl(float frameTime)
 
 	//BUTTON PAUSE
 	if (m_ButtonPause->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(true);
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = true;
 		return;
@@ -717,6 +718,7 @@ void StatePlay::UpdateControl(float frameTime)
 void StatePlay::UpdatePause(float frameTime) {
 	//Button Resume
 	if (m_ButtonResume->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(false);
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = false;
 		return;

@@ -3,17 +3,17 @@
 #include "define.h"
 #include "ResourceManager.h"
 
-Text::Text(std::string text, GLint shaderId, GLint fontId, TEXT_COLOR color, float posX, float posY, float size,
-	std::string text2, std::string text3)
+Text::Text(std::string text, GLint shaderId, GLint fontId, TEXT_COLOR color, float posX, float posY, float size, TEXT_ALIGN align)
 {
 	
 	m_text = text;
-	m_text2 = text2;
-	m_text3 = text3;
 	m_shaderId = shaderId;
 	m_fontId = fontId;
 	m_Color = EnumToVector(color);
+	m_Align = align;
 
+	m_Vec2DPos.x = posX;
+	m_Vec2DPos.y = posY;
 	Set2DPosition(posX, posY);
 
 	m_scale = Vector2(size, size);
@@ -62,22 +62,37 @@ Vector4 Text::EnumToVector(TEXT_COLOR color)
 
 void Text::Set2DPosition(GLfloat width, GLfloat height)
 {
-	m_Vec2DPos.x = width;
-	m_Vec2DPos.y = height;
-
-	float xx = (2.0 * m_Vec2DPos.x) / SCREEN_W - 1.0;
-	float yy = 1.0 - (2.0 * m_Vec2DPos.y) / SCREEN_H;
+	float xx = (2.0 * width) / SCREEN_W - 1.0;
+	float yy = 1.0 - (2.0 * height) / SCREEN_H;
 	m_Vec3Position = Vector3(xx, yy, 1.0);
 }
 
 void Text::Set2DPosition(Vector2 pos)
 {
-	m_Vec2DPos = pos;
-
-	float xx = (2.0 * m_Vec2DPos.x) / SCREEN_W - 1.0;
-	float yy = 1.0 - (2.0 * m_Vec2DPos.y) / SCREEN_H;
+	float xx = (2.0 * pos.x) / SCREEN_W - 1.0;
+	float yy = 1.0 - (2.0 * pos.y) / SCREEN_H;
 	m_Vec3Position = Vector3(xx, yy, 1.0);
 }
 
+unsigned int Text::getWidth() {
+	switch (m_fontId) {
+	case FONT_BANK:
+		return m_text.size() * 16;
+	default:
+		return m_text.size() * 16;
+	}
+}
 
+void Text::setText(std::string text) {
+	m_text = text;
 
+	switch (m_Align) {
+	case TEXT_ALIGN::LEFT:
+		return;
+	case TEXT_ALIGN::CENTER:
+		Set2DPosition(m_Vec2DPos.x - getWidth() / 2, m_Vec2DPos.y);
+		return;
+	case TEXT_ALIGN::RIGHT:
+		Set2DPosition(m_Vec2DPos.x - getWidth(), m_Vec2DPos.y);
+	}
+}

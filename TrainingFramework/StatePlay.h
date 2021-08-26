@@ -30,6 +30,9 @@ public:
 	std::vector<Skill*> m_SkillList;
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
+	
+	Player *m_Player;
+	Object *m_Gate;
 
 	//FOR UPDATE
 	std::vector<Room*> m_InRangeRoom;
@@ -37,10 +40,6 @@ public:
 	std::vector<Skill*> m_InRangeSkill;
 	std::vector<Drop*> m_InRangeDrop;
 	std::vector<Trap*> m_InRangeTrap;
-
-
-	Player *m_Player;
-	Object *m_Gate;
 
 	//SOUND
 	int m_iHandleBGM;

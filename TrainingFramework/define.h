@@ -4,7 +4,7 @@
 #define SCREEN_W					1080.0f
 #define SCREEN_H					720.0f
 
-#define LIMIT_FPS					200
+#define LIMIT_FPS					60
 
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
@@ -74,6 +74,8 @@
 #define FONT_ARIAL				0
 #define FONT_FUTURE				1
 #define FONT_TIMES				2
+#define FONT_BANK				3
+#define FONT_BANK_BOLD			4
 
 //SHADER
 #define SHADER_SPRITE			0

@@ -16,7 +16,7 @@
 #include "StateManager.h"
 
 Text *FPSCountText;
-double fDeltaTime = 0.0f;
+DWORD fDeltaTime = 0;
 unsigned int frames = 0;
 std::chrono::high_resolution_clock::time_point 
 	start, 
@@ -31,7 +31,7 @@ int Init(ESContext* esContext) {
 	InputManager::GetInstance();
 	StateManager::GetInstance();
 
-	FPSCountText = new Text("0", SHADER_TEXT, FONT_FUTURE, TEXT_COLOR::GREEN, 5.0f, 20.0f, 1.0f);
+	FPSCountText = new Text("0", SHADER_TEXT, FONT_BANK, TEXT_COLOR::GREEN, 2.0f, 20.0f, 1.0f);
 	
 	return 0;
 }
@@ -41,7 +41,9 @@ void Draw(ESContext* esContext)
 	//fps
 	start = std::chrono::high_resolution_clock::now();
 
-	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); //duration outside draw call
+	//duration outside draw call
+	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); 
+	DWORD frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(start - end).count(); 
 
 	//clear + render
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -50,7 +52,7 @@ void Draw(ESContext* esContext)
 
 	//fps
 	end = std::chrono::high_resolution_clock::now();
-	double frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+	frameTime += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 	frames++;
 	if (fDeltaTime >= 1000.0f) {
 		FPSCountText->setText(std::to_string(frames));
@@ -58,9 +60,9 @@ void Draw(ESContext* esContext)
 		fDeltaTime -= 1000.0f;
 	}
 
-	if (frameTime < 1000.0f / LIMIT_FPS) {
-		Sleep(1000.0f / LIMIT_FPS - frameTime);
-	}
+	//if (frameTime < 1000.0f / LIMIT_FPS) {
+	//	Sleep(1000.0f / LIMIT_FPS - frameTime);
+	//}
 
 	end = std::chrono::high_resolution_clock::now();
 	fDeltaTime += std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();

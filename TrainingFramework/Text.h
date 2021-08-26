@@ -17,6 +17,11 @@ enum class TEXT_COLOR {
 	BLACK
 };
 
+enum class TEXT_ALIGN {
+	LEFT = 0,
+	CENTER,
+	RIGHT
+};
 
 class Text {
 private:
@@ -28,16 +33,14 @@ private:
 
 public:
 	std::string		m_text;
-	std::string		m_text2;
-	std::string		m_text3;
 	Vector4			m_Color;
+	TEXT_ALIGN		m_Align;
 	Vector2 m_Vec2DPos;
 	Vector3 m_Vec3Position;
 
 
 	Text() {}
-	Text(std::string text, GLint shaderId, GLint fontId, TEXT_COLOR color, float posX, float posY, float size,
-		std::string tex2 = " ",	std::string tex3 = " ");
+	Text(std::string text, GLint shaderId, GLint fontId, TEXT_COLOR color, float posX, float posY, float size, TEXT_ALIGN align = TEXT_ALIGN::LEFT);
 	~Text();
 	
 
@@ -52,11 +55,12 @@ public:
 	
 	Vector4 getColor() { return m_Color; }
 	Vector2 getScale() { return m_scale; }
-	std::string		getText() {return	m_text;}
+	std::string		getText() { return m_text; }
+	unsigned int getWidth();
 	GLint getShaderId() { return m_shaderId; }
 	GLint getFontId() { return m_fontId; }
 
-	void setText(std::string text) { m_text = text; }
+	void setText(std::string text);
 	void setColor(TEXT_COLOR color) { m_Color = EnumToVector(color); }
 	void setScale(Vector2 scale) { m_scale = scale; }
 };
