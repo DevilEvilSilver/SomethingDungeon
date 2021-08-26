@@ -1,4 +1,4 @@
-#PREFAB_COUNT 46
+#PREFAB_COUNT 47
 ID mainChar
 MODEL 0
 SHADER 0
@@ -111,15 +111,15 @@ SIZE 1.5 x 1.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 5
 ID idle
-FILE ../Resources/Animation/skeleton/idle/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/idle/sprite.txt
 ID move
-FILE ../Resources/Animation/skeleton/jump/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/jump/sprite.txt
 ID attack
-FILE ../Resources/Animation/skeleton/attack/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/attack/sprite.txt
 ID death
-FILE ../Resources/Animation/skeleton/dead/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/dead/sprite.txt
 ID rangeAttack
-FILE ../Resources/Animation/skeleton/rangeAttack/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/rangeAttack/sprite.txt
 
 ID meleeSoldier
 MODEL 0

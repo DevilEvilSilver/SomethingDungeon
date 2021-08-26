@@ -366,7 +366,7 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 }
 
 void StatePlay::RoomsGenerate() {
-	//static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
+	static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
 		for (auto& obj : m_RoomList) {
 
 			obj->RoomGenerate();
