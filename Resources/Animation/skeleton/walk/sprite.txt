@@ -1,0 +1,17 @@
+#FRAME_COUNT 4
+ID 0
+SPF 0.1
+FILE ../Resources/Animation/skeleton/walk/1.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.1
+FILE ../Resources/Animation/skeleton/walk/2.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.1
+FILE ../Resources/Animation/skeleton/walk/3.tga
+TILING GL_REPEAT
+ID 3
+SPF 0.1
+FILE ../Resources/Animation/skeleton/walk/4.tga
+TILING GL_REPEAT
