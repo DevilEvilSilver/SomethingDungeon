@@ -9,7 +9,7 @@ AoeSkill::AoeSkill(Vector2 mousePos, Character* owner, std::string prefabID, Vec
 	:Skill(owner, prefabID, roomID, translationMatrix)
 {
 	mp_fAoeRadius = 2.0f;
-	m_percentDamage = 150.0f;
+	m_percentDamage = 250.0f;
 	m_totalExsitingTime = 500.0f;//ms
 
 	Init(mousePos);

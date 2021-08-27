@@ -72,12 +72,21 @@ void Room::RoomGenerate() {
 			
 			int rNum = rand() % 100 + 1;
 
-			if (rNum <= 15) AddEnemy(SKELETON);
-			else if (rNum <= 30) AddEnemy(C_PLANT);
-			else if (rNum <= 45) AddEnemy(FROGMAN);
-			else if (rNum <= 70) AddEnemy(ORCMAN);
-			else if (rNum <= 80) AddEnemy(WITCH);
-			else AddEnemy(BEAR);
+			if (rNum <= 40) AddEnemy(SKELETON);
+			else if (rNum <= 70)
+			{
+				if (rand()%10+1<=6) 
+					AddEnemy(WITCH);
+				else AddEnemy(C_PLANT);
+			}
+			else
+			{
+				if (rNum <= 85) AddEnemy(BEAR);
+				else AddEnemy(ORCMAN);
+			}
+				
+			if (rand()%10+1 <= 1) 
+			AddEnemy(FROGMAN);
 
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 

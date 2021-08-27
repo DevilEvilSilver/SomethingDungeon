@@ -28,6 +28,6 @@ SPF 0.1
 FILE ../Resources/Animation/carnivorousPlant/dead/7.tga
 TILING GL_REPEAT
 ID 7
-SPF 0.1
+SPF -1
 FILE ../Resources/Animation/carnivorousPlant/dead/8.tga
 TILING GL_REPEAT

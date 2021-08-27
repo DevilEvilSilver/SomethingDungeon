@@ -1,8 +1,8 @@
-FLOOR_1
-CurrHP 100
+LOSE
+CurrHP -3
 MaxHP 100
-CurrMP 20
+CurrMP 0
 MaxMP 20
-ATK 3
+ATK 5
 DEF 3
-Gold 0
+Gold 60

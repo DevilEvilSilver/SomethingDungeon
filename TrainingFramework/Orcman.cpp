@@ -27,7 +27,7 @@ Orcman::Orcman(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	atkDuration = 6.5f;
+	atkDuration = 0.65f;
 	m_MOVESPEED = 1.5f;
 }
 
