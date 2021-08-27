@@ -86,6 +86,8 @@
 #define MP_PO			"mpPo"
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
+#define TREASURE		"treasure"
+#define TOWER			"tower"
 
 #define DOUBLE_BARRELS  "doubleBarrels"
 #define TRIO_BARRELS	"trioBarrels"
@@ -134,7 +136,8 @@
 #define BOMB_INIT		"bombInit"
 #define BOOMED			"boomed"
 #define SPIKE			"spike"
-
+#define CHEST			"chest"
+#define ARROW_TOWER		"arrowTower"
 
 //SOUND
 #define WELCOME_BGM			0
