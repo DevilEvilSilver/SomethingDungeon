@@ -113,6 +113,12 @@
 
 #define WALL_ROOM		"wallRoom"
 #define BORDER_ROOM		"borderRoom"
+
+#define BORDER_ROOM_1_1	"borderRoom_1_1"
+#define BORDER_ROOM_1_2	"borderRoom_1_2"
+#define BORDER_ROOM_1_3	"borderRoom_1_3"
+#define BORDER_ROOM_1_4	"borderRoom_1_4"
+
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"
