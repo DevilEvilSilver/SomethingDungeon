@@ -141,6 +141,9 @@
 #define SKELETON		"skeleton"
 #define PLANT			"carnivorousPlant"
 #define BEAR			"meleeSoldier"
+#define FROGMAN			"frogman"
+#define ORCMAN			"orcman"
+#define C_PLANT			"carnivorousPlant"
 
 #define CHEST			"chest"
 #define ARROW_TOWER		"arrowTower"
