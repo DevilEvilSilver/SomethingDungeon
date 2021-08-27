@@ -18,6 +18,7 @@
 #define VERTEX_OFFSET_UV			(4 * sizeof(Vector3))
 
 //INIT STATE
+	//STATES FILE
 #define FILE_S_LOAD						"../Resources/States/S_LOAD.txt"
 #define FILE_R_LOAD						"../Resources/States/R_LOAD.txt"
 #define FILE_SD_LOAD					"../Resources/States/SD_LOAD.txt"
@@ -45,11 +46,11 @@
 #define FLOOR_BOSS						"FLOOR_BOSS"
 #define RECORD_WIN						"WIN"
 #define RECORD_LOSE						"LOSE"
-#define INIT_PLAYER_HP					1
-#define INIT_PLAYER_MP					20
+#define INIT_PLAYER_HP					100
+#define INIT_PLAYER_MP					50
 #define INIT_PLAYER_ATK					3
 #define INIT_PLAYER_DEF					3
-#define INIT_PLAYER_GOLD				0
+#define INIT_PLAYER_GOLD				1000
 
 //MAP
 #define MAP_WIDTH					22

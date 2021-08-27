@@ -28,7 +28,7 @@ void ArrowTower::Update(float frameTime) {
 	float totalCD = 1.0f;
 	if (currCD <= 0.0f) {
 		currCD = totalCD;
-		createArrow();
+		//createArrow();
 	}
 	else {
 		currCD -= frameTime;
