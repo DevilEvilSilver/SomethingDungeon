@@ -64,8 +64,8 @@ void Room::RoomGenerate() {
 		Matrix translation;
 		unsigned int enemyNum = 0;
 
-		if (random >= 80) enemyNum = 2;
-		else if (random >= 50)	enemyNum = 1;
+		if (random >= 90) enemyNum = 2;
+		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
 		while (enemyNum--) {
