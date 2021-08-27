@@ -1,16 +1,12 @@
 #pragma once
 #include "Object.h"
 #include "vector"
-
-struct SkillID {
-	std::string prefabID;
-	int  iCoolDownTime;
-	float fcurrCoolDownTime = 0;
-};
+#include "SkillId.h"
 class Character : public Object {
 protected:
 	float m_atk;
-	std::vector<SkillID*> m_SkillIDList;
+	std::vector<SkillID*> m_SkillList;
+	std::string m_currentSkillId;
 public:
 
 	//STATE
@@ -21,7 +17,9 @@ public:
 			CS_MOVE,
 			CS_ATTACK,
 			CS_GOTHIT,
-			CS_DEATH
+			CS_DEATH,
+			CS_USESKILL,
+			CS_DASH
 		};
 		//currState
 		CharacterState m_cState = CS_IDLE;
@@ -31,22 +29,21 @@ public:
 			m_currHP,
 			m_ATK,
 			m_DEF;
-
-
-	
+		//STATS
+		int m_maxMP,
+			m_currMP;
 	//MOVE
 		//speed
-		float m_MOVESPEED = 10.0f;
+		float m_MOVESPEED;
 		//dir
-		Vector2 m_moveDir=Vector2(0.0f,0.0f);
-		Vector2 m_lastMoveDir = Vector2(-1.0f, 0.0f);
+		Vector2 m_moveDir;
+		Vector2 m_lastMoveDir ;
 		//collision
-		bool isWallCollision = false;
-		bool isPlayerCollision = false;
-		bool isEnemyCollision = false;
+		bool isWallCollision;
+		bool isPlayerCollision ;
+		bool isEnemyCollision;
 		//FixedMove
-		float currTime = 0.0f;
-
+		float currTime;
 	//GOTHIT
 		//source causing knockback
 		bool m_isInvincible = false;
@@ -70,9 +67,12 @@ public:
 	//STATE
 	void Idle(float frameTime);
 	void Move(float frameTime);
-	virtual void Attack(float frameTime);
+	virtual void UseSkill(float frameTime);
 	virtual bool GotHit(float frameTime);
 	virtual void Death(float frameTime);
+
+	//Update CoolDownTime
+	virtual void UpdateCurrentCDTime(float frameTime);
 
 	//UNIQUE STM :v
 	virtual void UniqueUpdate(float frameTime);
@@ -102,4 +102,7 @@ public:
 	//RENDER
 	void Render(Camera *camera);
 
+	//SKILL
+	virtual void AddSkill(std::string prefabId);
+	virtual void UpdateChangeSkill(float frameTime); // change current skill
 };

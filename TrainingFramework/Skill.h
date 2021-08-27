@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Character.h"
+#include "SkillId.h"
 
 class Skill :
     public Object
@@ -13,28 +14,26 @@ protected:
 
     //DMG
     //SkillDamage m_percentDamage;
-    float m_percentDamage;
+    SkillDamage m_SkillDamage;
     float m_damage;
 
     //EXIST TIME
     float m_currExistingTime;
-    float m_totalExsitingTime;
-    //SkillExistingTime m_totalExsitingTime;
+    SkillExistingTime m_ExsitingTime;
 
     //KNOCKBACK
-    bool m_isKnockBack = false;
-    
-    //HIT CD
-    float totalCD = 1.0f;
-    float currCD = 0.0f;
+    bool m_isKnockBack;
 
-   
+    //hit flag
+    bool m_bHit;
+
 public:
     //MP COST
-    bool isFinished = false;
-    int mp_MPCost;
+    
+    // int mp_MPCost;
   
-    bool m_isPlayer;
+    // bool m_isPlayer;
+    bool isFinished;
 
     Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
     virtual ~Skill();
@@ -45,11 +44,8 @@ public:
     void UpdateMove(float frameTime);         //Init Position and velocity
     virtual void UpdateHit(float frameTime);    // Hit-> Collison and Self Destruct
     void UpdateExistingTime(float frameTime);   // Self Destruct
-    
-   
+
+
     void Render(Camera* camera);
-
-    
-
 };
 

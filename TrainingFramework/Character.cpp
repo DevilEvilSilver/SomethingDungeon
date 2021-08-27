@@ -2,17 +2,41 @@
 #include "Character.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-
+#include "InputManager.h"
 #include "define.h"
 #include "StatePlay.h"
 #include "CollisionManager.h"
-
+#include "Skill.h"
+#include "AoeSkill.h"
+#include "BulletSkill.h"
 #include "SoundEngine.h"
 
 Character::Character() {}
 
 Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: Object(prefabID, roomID, translationMatrix) {
+	: Object(prefabID, roomID, translationMatrix) 
+{
+	m_maxMP = 10000;
+	m_currMP = 10000;
+	//speed
+	m_MOVESPEED = 10.0f;
+	//dir
+	m_moveDir = Vector2(0.0f, 0.0f);
+	m_lastMoveDir = Vector2(-1.0f, 0.0f);
+	//collision
+	isWallCollision = false;
+	isPlayerCollision = false;
+	isEnemyCollision = false;
+	//FixedMove
+	currTime = 0.0f;
+
+	//GOTHIT
+		//source causing knockback
+	 m_isKnockBack = false;
+	m_sourcePos = Vector2(0.0f, 0.0f);
+	//dmg
+	m_iDmgTaken = 0;
+	i = 0;
 
 }
 
@@ -35,9 +59,12 @@ void Character::Update(float frameTime)
 		GotHit(frameTime);
 		break;
 	case CS_DEATH:
-		
 		Death(frameTime);
 		break;
+	case CS_USESKILL:
+		UseSkill(frameTime);
+			break;
+	}
 
 	}
 
@@ -53,6 +80,10 @@ void Character::Update(float frameTime)
 	}
 	else UniqueUpdate(frameTime);
 
+	
+	//UseSkill(frameTime);
+	//UniqueUpdate(frameTime);
+	UpdateCurrentCDTime(frameTime);
 	//ANIMATION
 	m_fCurrFrameTime += frameTime;
 
@@ -239,11 +270,15 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 
 
 
-Character::~Character() {}
-
-
-
-
+Character::~Character()
+{
+	for (auto& obj : m_SkillList)
+	{
+		delete obj;
+		obj = NULL;
+	}
+	m_SkillList.clear();
+}
 void Character::SetCS(CharacterState newState)
 {
 	m_cState = newState;
@@ -259,4 +294,35 @@ void Character::ResetAnimation()
 void Character::Render(Camera* camera)
 {
 	Renderer::GetInstance()->DrawAnimated(this, camera);
+}
+void Character::AddSkill(std::string prefabId)
+{
+	SkillID* skillID;
+	if (prefabId == AOE_SKILL)
+	{
+		skillID = new SkillID(AOE_SKILL, SkillCoolDownTime::AOE_CDTIME, SkillMPCost::AOE_MPCOST);
+		m_SkillList.push_back(skillID);
+	}
+	else if (prefabId == BULLET_SKILL)
+	{
+		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_ENEMY_CDTIME, SkillMPCost::BULLET_MPCOST);
+		m_SkillList.push_back(skillID);
+	}
+	
+	//more skill here
+}
+void Character::UpdateChangeSkill(float frameTime) // change current skill
+{
+
+}
+void Character::UseSkill(float frameTime)
+{
+	
+}
+void Character::UpdateCurrentCDTime(float frameTime)
+{
+	for (auto& obj : m_SkillList)
+	{
+		obj->m_fCurrCoolDownTime -= (frameTime * 1000);
+	}
 }

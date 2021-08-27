@@ -78,13 +78,17 @@ StatePlay::~StatePlay() {
 	m_TrapList.clear();
 
 	for (auto& object : m_DecorationList) {
+		m_DecorationList.clear();
+
+	delete m_Gate;
+	for (auto& object : m_EffectList) {
 		if (object != NULL) {
 			delete object;
 		}
 	}
-	m_DecorationList.clear();
+	
+	m_EffectList.clear();
 
-	delete m_Gate;
 	delete m_Player;
 	delete m_Camera;
 
@@ -462,6 +466,11 @@ void StatePlay::Render() {
 			obj->Render(this->m_Camera);
 	}
 
+	//RENDER EFFECT
+	for (auto& obj : m_InRangeEffect)
+	{
+		obj->Render(this->m_Camera);
+	}
 	//RENDER UI
 	{
 		m_HpHolder->Render(m_Camera);
@@ -499,6 +508,10 @@ void StatePlay::AddTrap(Trap* trap)
 {
 	m_TrapList.push_back(trap);
 }
+void StatePlay::AddEffect(Effect* effect)
+{
+	m_EffectList.push_back(effect);
+}
 void StatePlay::Remove()
 {
 	//Kill enemy
@@ -533,6 +546,14 @@ void StatePlay::Remove()
 		if (obj->isFinished == true)
 		{
 			RemoveSkill(obj);
+		}
+	}
+	//delete effect
+	for (auto& obj : m_EffectList)
+	{
+		if (obj->mp_isFisnished == true)
+		{
+			RemoveEffect(obj);
 		}
 	}
 
@@ -624,6 +645,9 @@ void StatePlay::Update(float frameTime) {
 				for (auto& obj : m_InRangeDrop) {
 						obj->Update(frameTime);
 				}
+				for (auto& obj : m_InRangeEffect) {
+			obj->Update(frameTime);
+		}
 
 				UpdateControl(frameTime);
 
@@ -671,6 +695,7 @@ void StatePlay::UpdateInRange()
 	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true|| strcmp(typeid(obj).name(), "Arrow")==0) m_InRangeTrap.push_back(obj);
 	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
 	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDecoration.push_back(obj);
+	for (auto& obj : m_EffectList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEffect.push_back(obj);
 }
 
 void StatePlay::ClearInRange()
@@ -681,6 +706,7 @@ void StatePlay::ClearInRange()
 	m_InRangeSkill.clear();
 	m_InRangeTrap.clear();
 	m_InRangeDecoration.clear();
+	m_InRangeEffect.clear();
 }
 
 void StatePlay::UpdateRoomID() {
@@ -781,12 +807,12 @@ void StatePlay::UpdateControl(float frameTime)
 	}
 
 	//USING SPACE	~	TEST
-	m_Player->UseAttack();
+	//m_Player->UseAttack();
 
-	if (newKeyPressed & KEY_SPACE)
-	{
-		m_Player->Dash(frameTime);
-	}
+	// if (newKeyPressed & KEY_SPACE)
+	// {
+	// 	m_Player->Dash(frameTime);
+	// }
 }
 
 void StatePlay::UpdatePause(float frameTime) {
@@ -994,6 +1020,7 @@ void StatePlay::RemoveEnemy(Enemy* enemy) {
 	}
 
 	delete m_EnemyList[id];
+	m_EnemyList[id] = NULL;
 	m_EnemyList[id] = m_EnemyList[m_EnemyList.size() - 1];
 	m_EnemyList.resize(m_EnemyList.size() - 1);
 }
@@ -1020,4 +1047,15 @@ void StatePlay::RemoveDecoration(Decorations* deco)
 	delete m_DecorationList[id];
 	m_DecorationList[id] = m_DecorationList[m_DecorationList.size() - 1];
 	m_DecorationList.resize(m_DecorationList.size() - 1);
+}
+void StatePlay::RemoveEffect(Effect* effect)
+{
+	int id;
+	for (int i = 0; i < m_EffectList.size(); i++) {
+		if (m_EffectList[i] == effect)  id = i;
+	}
+
+	delete m_EffectList[id];
+	m_EffectList[id] = m_EffectList[m_EffectList.size() - 1];
+	m_EffectList.resize(m_EffectList.size() - 1);
 }

@@ -19,6 +19,7 @@
 #include "Arrow.h"
 #include "MiniMap.h"
 #include "Decorations.h"
+#include "Effect.h"
 
 
 class StatePlay :public StateBase<StatePlay>
@@ -39,6 +40,7 @@ public:
 	Object *m_Gate;
 
 	std::vector<Decorations*> m_DecorationList;
+	std::vector<Effect*> m_EffectList;
 
 	//FOR UPDATE
 	std::vector<Room*> m_InRangeRoom;
@@ -46,6 +48,7 @@ public:
 	std::vector<Skill*> m_InRangeSkill;
 	std::vector<Drop*> m_InRangeDrop;
 	std::vector<Trap*> m_InRangeTrap;
+	std::vector<Effect*> m_InRangeEffect;
 
 	std::vector<Decorations*> m_InRangeDecoration;
 
@@ -95,6 +98,7 @@ public:
 	void AddDrop(Drop* drop);
 	void AddTrap(Trap* trap);
 	void AddSkill(Skill* skill);
+	void AddEffect(Effect* effect);
 
 	//////////////////////////////////////////////////////////
 
@@ -127,5 +131,6 @@ public:
 	void RemoveEnemy(Enemy* enemy);
 	void RemoveSkill(Skill* skill);
 	void RemoveDecoration(Decorations* deco);
+	void RemoveEffect(Effect* effect);
 	
 };

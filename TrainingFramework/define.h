@@ -70,7 +70,6 @@
 #define KEY_LEFT	1<<5
 #define KEY_DOWN	1<<6
 #define KEY_RIGHT	1<<7
-
 #define KEY_SPACE	1<<8
 #define MOUSE_LEFT	1<<29
 #define MOUSE_RIGHT	1<<30
@@ -148,6 +147,19 @@
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
+
+//EFFECT
+#define EFFECT_SKILL_FREEZE1 "skillEffectFreeze1"
+#define EFFECT_SKILL_FREEZE2 "skillEffectFreeze2"
+#define EFFECT_SKILL_FREEZE3 "skillEffectFreeze3"
+#define EFFECT_SKILL_FIRE1 "skillEffectFire1"
+#define EFFECT_SKILL_FIRE2 "skillEffectFire2"
+#define EFFECT_SKILL_FIRE3 "skillEffectFire3"
+#define EFFECT_SKILL_WIND1 "skillEffectWind1"
+#define EFFECT_SKILL_WIND2 "skillEffectWind2"
+#define EFFECT_SKILL_WIND3 "skillEffectWinf3"
+#define EFFECT_SKILL_WIND4 "skillEffectWind4"
+
 
 //SKILL
 #define	BULLET_SPEED	10

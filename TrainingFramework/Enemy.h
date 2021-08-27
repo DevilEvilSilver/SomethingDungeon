@@ -25,14 +25,9 @@ public:
 
 
 	//SKILL
-	//--------------skill here----------------
-	float currCD = 0.0f;
-	virtual void Shoot(Vector2 target);
-	virtual void Melee(Vector2 target);
-    //----------------------------------------
+	virtual void UseSkill(float frameTime);
 	
-	void Death(float frameiIme);
-	////////////////////////////////////////////////
+	virtual void Death(float frameiIme);
 	
 
 	//OTHER
