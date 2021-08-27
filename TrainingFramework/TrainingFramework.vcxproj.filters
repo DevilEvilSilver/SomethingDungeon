@@ -258,6 +258,12 @@
     <ClCompile Include="StateResult.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Key.cpp">
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Gate.cpp">
+      <Filter>Source Files\Objects\Traps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -436,6 +442,12 @@
     </ClInclude>
     <ClInclude Include="Glyph.h">
       <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Key.h">
+      <Filter>Header Files\Objects\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\Gate.h">
+      <Filter>Header Files\Objects\Traps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

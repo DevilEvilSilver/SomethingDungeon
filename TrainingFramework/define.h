@@ -51,6 +51,7 @@
 #define INIT_PLAYER_ATK					3
 #define INIT_PLAYER_DEF					3
 #define INIT_PLAYER_GOLD				1000
+#define INIT_PLAYER_KEY					10
 
 //MAP
 #define MAP_WIDTH					22
@@ -120,6 +121,7 @@
 #define BORDER_ROOM_1_3	"borderRoom_1_3"
 #define BORDER_ROOM_1_4	"borderRoom_1_4"
 
+#define KEY				"key"
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"
@@ -171,11 +173,14 @@
 #define B_UNAVAILABLE		"unavailable"
 
 	//DROP
+#define KEY_SPIN		"keyspin"
 #define GOLD_SPIN		"goldspin"
 #define HP_POTION		"hpPotion"
 #define MP_POTION		"mpPotion"
 
 	//TRAP
+#define GATE_COLLIDE	"gateCollide"
+#define GATE_ACTIVE		"gateActive"
 #define BOMB_INIT		"bombInit"
 #define BOOMED			"boomed"
 #define SPIKE			"spike"

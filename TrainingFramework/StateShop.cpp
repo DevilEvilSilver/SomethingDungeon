@@ -480,6 +480,7 @@ void StateShop::SetRecord() {
 	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
 	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
+	fprintf(recordFile, "Key %d\n", m_Player->m_KEY);
 
 	fclose(recordFile);
 }

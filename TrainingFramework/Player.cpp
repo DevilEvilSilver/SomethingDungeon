@@ -151,7 +151,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	// read file record
 	LoadData();
 	atkDuration = 0.25f;
-	m_MOVESPEED = 3.0f;
+	m_MOVESPEED = 6.0f;
 
 	isWallCollision = true;
 
@@ -174,6 +174,7 @@ void Player::LoadData() {
 	fscanf(recordFile, "ATK %d\n", &m_ATK);
 	fscanf(recordFile, "DEF %d\n", &m_DEF);
 	fscanf(recordFile, "Gold %d\n", &m_GOLD);
+	fscanf(recordFile, "Key %d\n", &m_KEY);
 
 	fclose(recordFile);
 }
@@ -212,4 +213,8 @@ std::string Player::GetMP() {
 
 std::string Player::GetGold() {
 	return std::to_string(m_GOLD);
+}
+
+std::string Player::GetKey() {
+	return std::to_string(m_KEY);
 }

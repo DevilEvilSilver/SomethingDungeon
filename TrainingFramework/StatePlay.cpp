@@ -84,7 +84,6 @@ StatePlay::~StatePlay() {
 	}
 	m_DecorationList.clear();
 
-	delete m_Gate;
 	delete m_Player;
 	delete m_Camera;
 
@@ -102,6 +101,8 @@ StatePlay::~StatePlay() {
 	delete m_MpText;
 	delete m_GoldIcon;
 	delete m_GoldText;
+	delete m_KeyIcon;
+	delete m_KeyText;
 	delete m_MiniMap;
 
 	if (m_TransitionScreen != NULL)
@@ -205,6 +206,18 @@ void StatePlay::Init() {
 		m_GoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Key Icon
+	{
+		fscanf(dataFile, "#KEY_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_KeyIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Pause Box
 	{
 		fscanf(dataFile, "#PAUSE_BOX\n");
@@ -265,14 +278,8 @@ void StatePlay::Init() {
 
 	fclose(dataFile);
 
-	//GATE
-	Room *endRoom = GetRoomByType(END, m_RoomList);
-	Prefab *gatePrefab = GetResource(GATE, ResourceManager::GetInstance()->m_PrefabList);
-	translation.SetTranslation(endRoom->GetPosX() + ROOM_WIDTH / 2.0f - gatePrefab->m_fWidth / 2, 
-		endRoom->GetPosY() - ROOM_HEIGHT / 2 + gatePrefab->m_fHeight / 2, 0.0f);
-	m_Gate = new Object(GATE, endRoom->m_RoomID, translation);
-
 	//INIT LOGIC
+	m_isGateInstruct = false;
 	m_isNextState = false;
 	m_isDead = false;
 	m_isQuit = false;
@@ -285,6 +292,7 @@ void StatePlay::Init() {
 	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
 	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
 	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 700.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	m_KeyText = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 655.0f, 1.0f, TEXT_ALIGN::RIGHT);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
@@ -314,12 +322,21 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				break;
 			}
 			else {
-				if (m_Map[currPosX][currPosY] != START)
+				if (m_Map[currPosX][currPosY] != START &&
+					m_Map[currPosX][currPosY] != KEY_ROOM)
 					m_Map[currPosX][currPosY] = NORMAL;
 				currPosX += directions[randDirection].x;
 				currPosY += directions[randDirection].y;
 				lastDirection = randDirection;
 			}
+		}
+
+		switch (maxTunnel) {
+		case 20:
+		case 40:
+		case 60:
+			m_Map[currPosX][currPosY] = KEY_ROOM;
+			break;
 		}
 	}
 
@@ -390,6 +407,10 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, END);
 				AddRoom(room);
 			}
+			else if (m_Map[i][j] == KEY_ROOM) {
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, KEY_ROOM);
+				AddRoom(room);
+			}
 		}
 	}
 }
@@ -432,11 +453,6 @@ void StatePlay::Render() {
 	}
 	m_ObjectList.clear();
 
-	//CHECK IN RANGE !!!
-	if (CheckInRange(m_Gate->m_RoomID)) {
-		m_Gate->Render(this->m_Camera);
-	}
-
 	//RENDER SKILL
 	for (auto& obj : m_InRangeSkill)
 	{
@@ -455,6 +471,9 @@ void StatePlay::Render() {
 
 		m_GoldIcon->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_GoldText);
+
+		m_KeyIcon->Render(m_Camera);
+		Renderer::GetInstance()->DrawText2(m_KeyText);
 
 		m_ButtonPause->Render(m_Camera);
 		if (m_isPause) {
@@ -575,15 +594,6 @@ void StatePlay::Update(float frameTime) {
 				if (m_Player->m_currHP <= 0) {
 					m_isDead = true;
 				}
-
-				//CHECK IF PLAYER ENTER GATE
-				if (CheckInRange(m_Gate->m_RoomID)) {
-					m_Gate->Update(frameTime);
-
-					if (CollisionManager::CheckCollision(m_Player, m_Gate)) {
-						m_isNextState = true;
-					}
-				}
 		
 				Remove();
 				UpdateInRange();
@@ -629,6 +639,9 @@ void StatePlay::Update(float frameTime) {
 
 				m_GoldIcon->Update(frameTime);
 				m_GoldText->setText(m_Player->GetGold());
+
+				m_KeyIcon->Update(frameTime);
+				m_KeyText->setText(m_Player->GetKey());
 			}
 		}
 	}
@@ -910,6 +923,7 @@ void StatePlay::SetRecord(bool isWin) {
 	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
 	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
+	fprintf(recordFile, "Key %d\n", m_Player->m_KEY);
 
 	fclose(recordFile);
 }

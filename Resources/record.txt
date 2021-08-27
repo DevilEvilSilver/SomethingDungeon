@@ -1,8 +1,9 @@
-FLOOR_1
-CurrHP 100
+FLOOR_2
+CurrHP 94
 MaxHP 100
 CurrMP 50
 MaxMP 50
 ATK 3
 DEF 3
 Gold 1000
+Key 10

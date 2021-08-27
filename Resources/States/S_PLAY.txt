@@ -28,6 +28,10 @@ PREFAB mpBar
 POS 8.25, -5.25
 PREFAB goldIcon
 
+#KEY_ICON
+POS 8.25, -4.5
+PREFAB keyIcon
+
 #PAUSE_BOX
 POS -2.5, 2.5
 PREFAB pauseBox

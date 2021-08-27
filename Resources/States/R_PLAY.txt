@@ -1,4 +1,4 @@
-#PREFAB_COUNT 54
+#PREFAB_COUNT 56
 ID mainChar
 MODEL 0
 SHADER 0
@@ -340,6 +340,17 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/wallBorder/static/World1/wall_1_4.txt
 
+ID key
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID keyspin
+FILE ../Resources/Animation/key/static/sprite.txt
+
 ID gold
 MODEL 0
 SHADER 0
@@ -481,9 +492,13 @@ TYPE RECT
 COORD 0.0, 0.0, 6.0, 3.5
 SIZE 6.0 x 3.5
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 1
+ANIMATION_COUNT 3
 ID init
 FILE ../Resources/Animation/gate/static/sprite.txt
+ID gateCollide
+FILE ../Resources/Animation/gate/collide/sprite.txt
+ID gateActive
+FILE ../Resources/Animation/gate/active/sprite.txt
 
 ID hpHolder
 MODEL 0
@@ -539,6 +554,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID keyIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/key/static/sprite.txt
 
 ID minimap
 MODEL 0

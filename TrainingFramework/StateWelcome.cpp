@@ -169,6 +169,7 @@ void StateWelcome::InitRecord() {
 	fprintf(recordFile, "ATK %d\n", INIT_PLAYER_ATK);
 	fprintf(recordFile, "DEF %d\n", INIT_PLAYER_DEF);
 	fprintf(recordFile, "Gold %d\n", INIT_PLAYER_GOLD);
+	fprintf(recordFile, "Key %d\n", INIT_PLAYER_KEY);
 
 	fclose(recordFile);
 }

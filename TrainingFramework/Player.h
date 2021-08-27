@@ -27,9 +27,10 @@ public:
 	};
 
 	//STATS
-	 int m_maxMP,
+	int m_maxMP,
 		m_currMP,
-		m_GOLD;
+		m_GOLD,
+		m_KEY;
 
 	//STATE
 	PlayerState m_pState;
@@ -85,4 +86,5 @@ public:
 	std::string GetHP();
 	std::string GetMP();
 	std::string GetGold();
+	std::string GetKey();
 };
