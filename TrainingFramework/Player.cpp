@@ -150,7 +150,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	// read file record
 	LoadData();
-	atkDuration = 0.25f;
+	atkDuration = 0.1f;
 	m_MOVESPEED = 3.0f;
 
 	isWallCollision = true;
