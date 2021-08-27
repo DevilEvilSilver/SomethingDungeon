@@ -238,8 +238,8 @@ void Room::AddEnemy(std::string prefabName)
 	{
 		bool error = false;
 
-		unsigned int randPosX = 1+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-1.0f);
-		unsigned int randPosY = 1+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 1.0f);
+		unsigned int randPosX = 2+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-2.0f);
+		unsigned int randPosY = 2+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 2.0f);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 
 		

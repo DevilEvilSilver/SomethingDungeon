@@ -121,7 +121,7 @@ FILE ../Resources/Animation/carnivorousPlant/dead/sprite.txt
 ID gothit
 FILE ../Resources/Animation/carnivorousPlant/idle/sprite.txt
 ID dash
-FILE ../Resources/Animation/carnivorousPlant/idle/sprite.txt
+FILE ../Resources/Animation/carnivorousPlant/jump/sprite.txt
 
 ID meleeSoldier
 MODEL 0

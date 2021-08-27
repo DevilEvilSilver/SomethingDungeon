@@ -457,10 +457,7 @@ void StatePlay::Render() {
 		obj->Render(this->m_Camera);
 	}
 
-	for (auto& obj : m_InRangeRoom) {
-		if (obj->m_isRenderLast == true)
-			obj->Render(this->m_Camera);
-	}
+	
 
 	//RENDER UI
 	{
@@ -978,7 +975,12 @@ void StatePlay::GetRenderOrder() {
 		}
 	}
 
-	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object* a, Object* b) -> bool {
+	for (auto& obj : m_InRangeRoom) {
+		if (obj->m_isRenderLast == true)
+			m_ObjectList.push_back(obj);
+	}
+
+	std::stable_sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object* a, Object* b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) > (b->GetPosY() - b->m_fHeight));
 		});
 }
