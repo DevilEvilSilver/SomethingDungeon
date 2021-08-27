@@ -11,6 +11,8 @@ enum RoomType {
 class Room : public Object {
 public:
 	RoomType m_RoomType;
+	bool m_isRenderLast = false;
+
 
 	Room();
 	Room(std::string prefabID, Vector2 roomID, Matrix translationMatrix, RoomType roomType);

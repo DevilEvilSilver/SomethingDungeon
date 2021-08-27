@@ -39,7 +39,7 @@ void AoeSkill::UpdateHit(float frameTime)
 				
 					if (CollisionManager::CheckCollision(this, enemy))
 					{
-						enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+						enemy->UpdateGotHit(m_damage, true, curPos, frameTime);
 						
 
 						currCD = totalCD;

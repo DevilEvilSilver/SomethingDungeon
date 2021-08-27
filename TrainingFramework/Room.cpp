@@ -48,20 +48,13 @@ void Room::RoomGenerate() {
 		{
 			GenObj(MP_PO, 1);
 		}
-		else if (random >= 20 && random < 40)
+		else if (random >= 35 && random < 40)
 		{
-			GenObj(BOMB_TRAP, ((int)random - 20) / 10);
+			GenObj(TREASURE, 1);
 		}
-		else if (random >= 0 && random < 20)
+		else if (random >= 0 && random < 35)
 		{
-			GenObj(SPIKE_TRAP, (int)random / 2);
-		}
-
-		if (random >= 70) {
 			GenObj(TOWER, 1);
-		}
-		if (random >= 60) {
-			GenObj(TREASURE,1);
 		}
 
 		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
@@ -298,7 +291,7 @@ void Room::AddEnemy(std::string prefabName)
 		else {
 			//printf("hey1\n");
 			delete result;
-			isDone = true;
+			//isDone = true;
 		}
 
 
@@ -353,16 +346,6 @@ void Room::GenObj(std::string prefabId, int num)
 			Enemy* enemy = new Enemy(ENEMY, m_RoomID, translation);
 			StatePlay::GetInstance()->AddEnemy(enemy);
 		}
-		else if (prefabId == HP_PO)
-		{
-			HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
-			StatePlay::GetInstance()->AddDrop(hp);
-		}
-		else if (prefabId == MP_PO)
-		{
-			MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
-			StatePlay::GetInstance()->AddDrop(mp);
-		}
 		else if (prefabId == TREASURE) {
 			//Matrix translation2;
 			//translation2.SetTranslation(GetPosX() + randPosX + 4, GetPosY() - randPosY + 3, 0.0f);
@@ -370,9 +353,9 @@ void Room::GenObj(std::string prefabId, int num)
 			StatePlay::GetInstance()->AddTrap(chest);
 		}
 		else if (prefabId == TOWER) {
-			Matrix translation2;
-			translation2.SetTranslation(GetPosX(), GetPosY() - 1, 0.0f);
-			ArrowTower* tower = new ArrowTower(TOWER, m_RoomID, translation2);
+			ArrowTower* tower = new ArrowTower(TOWER, m_RoomID, translation);
+			if (rand()%2==0) tower->m_isFacingLeft = false;
+			else tower->m_isFacingLeft = true;
 			StatePlay::GetInstance()->AddTrap(tower);
 		}
 		

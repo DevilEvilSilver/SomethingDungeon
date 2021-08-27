@@ -28,7 +28,7 @@ Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Ene
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 2.0f;
+	m_MOVESPEED = 4.0f;
 
 	atkDuration = 1.0f;
 }
@@ -52,7 +52,7 @@ void Witch::UniqueUpdate(float frameTime)
 			if (distance < 4.0f && start == false)
 			{
 				KeepDistance(delta);
-				m_MOVESPEED = 4.0f;
+				m_MOVESPEED = 6.0f;
 			}
 			else
 				if (currCD <= 0.0f) {

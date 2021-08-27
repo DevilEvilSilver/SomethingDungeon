@@ -53,6 +53,7 @@ public:
 		bool m_isInvulnerable = false;
 		bool m_isKnockBack = false;
 		Vector2 m_sourcePos= Vector2(0.0f, 0.0f);
+		Vector2 m_knockBackDir = Vector2(0.0f, 0.0f);
 		//dmg
 		int m_iDmgTaken = 0;
 		int i = 0;

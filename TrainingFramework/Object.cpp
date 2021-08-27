@@ -82,6 +82,16 @@ Matrix Object::GetWorldMatrix() {
 		m_WorldMatrix.m[3][1] = y + m_fDeltaY;
 	}
 
+	void Object::SetDeltaY(float y)
+	{
+		m_fDeltaY = y;
+	}
+
+	void Object::SetPosY2(float y)
+	{
+		m_fCurrentPosY = y;
+	}
+
 //SET VELOCITY
 void Object::SetVelocityX(float vx)
 {

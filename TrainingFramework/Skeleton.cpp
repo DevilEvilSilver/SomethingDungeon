@@ -25,8 +25,8 @@ Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatri
 	isWallCollision = true;
 	isPlayerCollision = false;
 	isEnemyCollision = true;
-
-	m_MOVESPEED = 1.0f;
+	//m_isKnockBack=true;
+	m_MOVESPEED = 2.0f;
 
 	atkDuration = 1.0f;
 }
@@ -53,8 +53,8 @@ void Skeleton::UniqueUpdate(float frameTime)
 			if (currCD <= 0.0f) {
 				if (distance >= 0.9f)
 				{
-					if (distance>2.0f) m_MOVESPEED = 1.0f;
-					else m_MOVESPEED = 1.75f;
+					if (distance>2.0f) m_MOVESPEED = 2.0f;
+					else m_MOVESPEED = 3.75f;
 
 					Chase(delta);
 				}
@@ -67,7 +67,7 @@ void Skeleton::UniqueUpdate(float frameTime)
 
 			else
 			{
-				m_MOVESPEED = 2.0f;
+				m_MOVESPEED = 4.0f;
 				KeepDistance(delta);
 				currCD -= frameTime;
 			}

@@ -85,13 +85,13 @@ void Character::Attack(float frameTime)
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 {
-	Vector2 knockBackDir=Vector2(0.0f,0.0f);
+	
 
 	if (m_cState != CS_GOTHIT&&m_cState!=CS_DEATH)
 	{
 		m_currHP -= m_iDmgTaken;
 
-		knockBackDir = -(m_sourcePos - GetPos());
+		m_knockBackDir = -(m_sourcePos - GetPos());
 		SetCS(CS_GOTHIT);
 
 		if (auto* player = dynamic_cast<Player*>(this))
@@ -112,7 +112,10 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(knockBackDir, 5.5f, 0.25f, frameTime) == false) return false;
+			if (FixedMove(m_knockBackDir, 2.0f, 0.75f, frameTime) == false) {
+				//printf("knockDir:%f,%f\n", knockBackDir.x, knockBackDir.y);
+			 return false;
+			}
 			else i++;
 			break;
 		case 1:
@@ -201,6 +204,14 @@ void Character::WallCollision(float frameTime)
 
 	for (auto& obj : StatePlay::GetInstance()->m_InRangeDecoration) {
 			CollisionManager::CheckCollision(this, obj, frameTime);
+	}
+
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeTrap) {
+		if (strcmp(typeid(*obj).name(),"class ArrowTower")==0|| strcmp(typeid(*obj).name(), "class Chest")==0)
+		{
+			//printf("heyyyy: %s\n", typeid(*obj).name());
+			CollisionManager::CheckCollision(this, obj, frameTime);
+		}
 	}
 }
 void Character::PlayerCollision(float frameTime)

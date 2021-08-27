@@ -355,9 +355,16 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				AddRoom(room);
 			}
 			else if (m_Map[i][j] == WALL) {
+				
 				if (m_Map[i][j - 1] == WALL) {
+					
 					Room* room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
-
+					if (m_Map[i][j + 1] != WALL)
+					{
+						room->SetPosY2(room->GetPosY() - 0.2f);
+						room->m_fHeight - 0.2f;
+						room->m_isRenderLast = true;
+					}
 					AddRoom(room);
 				}
 				else {
@@ -378,9 +385,13 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 						break;
 					}
 					if (rand() % 2 == 0) room->m_isFacingLeft = false;
+					if (m_Map[i][j + 1] != WALL)
+					{
+						room->SetPosY2(room->GetPosY() - 0.4f);
+						room->m_isRenderLast = true;
+					}
 					AddRoom(room);
 				}
-
 			}
 			else if (m_Map[i][j] == START) {
 				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, START);
@@ -408,13 +419,18 @@ void StatePlay::Render() {
 	//RENDER ROOM
 	{
 		for (auto& obj : m_InRangeRoom) {
+			if (obj->m_isRenderLast==false)
 			obj->Render(this->m_Camera);
 		}
 	}
 
+	if (CheckInRange(m_Gate->m_RoomID)) {
+		m_Gate->Render(this->m_Camera);
+	}
+
 	//RENDER TRAP
 	for (auto& obj : m_InRangeTrap) {
-
+		if (strcmp(typeid(*obj).name(), "class ArrowTower") != 0 || strcmp(typeid(*obj).name(), "class Chest") != 0)
 		obj->Render(this->m_Camera);
 	}
 
@@ -433,14 +449,17 @@ void StatePlay::Render() {
 	m_ObjectList.clear();
 
 	//CHECK IN RANGE !!!
-	if (CheckInRange(m_Gate->m_RoomID)) {
-		m_Gate->Render(this->m_Camera);
-	}
+	
 
 	//RENDER SKILL
 	for (auto& obj : m_InRangeSkill)
 	{
 		obj->Render(this->m_Camera);
+	}
+
+	for (auto& obj : m_InRangeRoom) {
+		if (obj->m_isRenderLast == true)
+			obj->Render(this->m_Camera);
 	}
 
 	//RENDER UI
@@ -649,7 +668,7 @@ void StatePlay::UpdateInRange()
 	for (auto& obj : m_RoomList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeRoom.push_back(obj);
 	for (auto& obj : m_EnemyList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEnemy.push_back(obj);
 	for (auto& obj : m_DropList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDrop.push_back(obj);
-	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeTrap.push_back(obj);
+	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true|| strcmp(typeid(obj).name(), "Arrow")==0) m_InRangeTrap.push_back(obj);
 	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
 	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDecoration.push_back(obj);
 }
@@ -952,6 +971,12 @@ void StatePlay::GetRenderOrder() {
 		m_ObjectList.push_back(a);
 	}
 
+	for (auto& obj : StatePlay::GetInstance()->m_InRangeTrap) {
+		if (strcmp(typeid(*obj).name(), "class ArrowTower") == 0 || strcmp(typeid(*obj).name(), "class Chest") == 0)
+		{
+			m_ObjectList.push_back(obj);
+		}
+	}
 
 	std::sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object* a, Object* b) -> bool {
 		return ((a->GetPosY() - a->m_fHeight) > (b->GetPosY() - b->m_fHeight));

@@ -49,6 +49,8 @@ public:
 	Vector2 GetPos();
 	void SetPosX(float x);
 	void SetPosY(float y);
+	void SetDeltaY(float y);
+	void SetPosY2(float y);
 
 	//VELOCITY
 	void SetVelocityX(float vx);
