@@ -1,4 +1,4 @@
-#PREFAB_COUNT 47
+#PREFAB_COUNT 49
 ID mainChar
 MODEL 0
 SHADER 0
@@ -139,6 +139,40 @@ ID death
 FILE ../Resources/Animation/meleeSoldier/death/sprite.txt
 ID gothit
 FILE ../Resources/Animation/meleeSoldier/idle/sprite.txt
+
+ID frogman
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.8, 1.5, 0.4, 0.5
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID idleLeft
+FILE ../Resources/Animation/frogman/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/frogman/move/sprite.txt
+ID attack
+FILE ../Resources/Animation/frogman/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/frogman/death/sprite.txt
+
+ID orcman
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.8, 1.5, 0.4, 0.5
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID idleLeft
+FILE ../Resources/Animation/orcman/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/orcman/move/sprite.txt
+ID attack
+FILE ../Resources/Animation/orcman/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/orcman/death/sprite.txt
 
 ID skill
 MODEL 0
