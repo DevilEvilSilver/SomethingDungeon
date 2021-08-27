@@ -32,7 +32,7 @@ public:
     
     // int mp_MPCost;
   
-    // bool m_isPlayer;
+    bool m_isPlayer;
     bool isFinished;
 
     Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);

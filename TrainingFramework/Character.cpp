@@ -66,7 +66,7 @@ void Character::Update(float frameTime)
 			break;
 	}
 
-	}
+	
 
 	if (m_currHP <= 0)
 	{

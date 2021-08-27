@@ -17,9 +17,7 @@
 Player::Player() {}
 
 Player::~Player() {
-	delete numGoldText;
-	delete numHPText;
-	delete numMPText;
+
 	for (auto& obj : m_UniqueSkillList)
 	{
 		delete obj;
@@ -29,6 +27,8 @@ Player::~Player() {
 
 void Player::UniqueUpdate(float frameTime)
 {
+	m_isInvincible = true;
+
 	switch (m_cState)
 	{
 		case CS_DASH:
@@ -37,6 +37,10 @@ void Player::UniqueUpdate(float frameTime)
 			break;
 	}
 	UpdateChangeSkill(frameTime);
+}
+
+void Player::Attack(float frameTime)
+{
 }
 
 
@@ -59,7 +63,7 @@ bool Player::Dash(float frameTime)
 			if (FixedMove(m_lastMoveDir, m_MOVESPEED*1.0f, 0.5f, frameTime) == false) return false;
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
-			SetPS(P_CS);
+			//SetPS(P_CS);
 			break;
 		}
 
@@ -96,7 +100,7 @@ std::string Player::GetHP() {
 
 
 
-Player::Player(){}
+
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
@@ -111,7 +115,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	// read file record
 	LoadData();
 	atkDuration = 0.25f;
-	m_MOVESPEED = 3.0f;
+	m_MOVESPEED = 30.0f;
 
 	isWallCollision = true;
 
@@ -122,8 +126,9 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	AddSkill(DASH);
 	m_currentSkillId = AOE_SKILL;
 }
-Player::~Player() {
 
+void Player::UseAttack()
+{
 }
 
 void Player::LoadData() {
@@ -141,6 +146,7 @@ void Player::LoadData() {
 	fscanf(recordFile, "Gold %d\n", &m_GOLD);
 
 	fclose(recordFile);
+}
 std::string Player::GetMP() {
 	return std::to_string(m_currMP) + "/" + std::to_string(m_maxMP);
 }

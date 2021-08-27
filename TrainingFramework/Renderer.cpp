@@ -62,8 +62,8 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	scaleBySize[0][0] = 1.0f; scaleBySize[0][1] = 0.0f;
 	scaleBySize[1][0] = 0.0f; scaleBySize[1][1] = 1.0f;
 
-	/*if (object->m_isFacingLeft==false) scaleBySize[0][0] = -1.0f;
-	if (object->m_isFacingUp == false) scaleBySize[1][1] = -1.0f;*/
+	if (object->m_isFacingLeft==false) scaleBySize[0][0] = -1.0f;
+	if (object->m_isFacingUp == false) scaleBySize[1][1] = -1.0f;
 
 	if (prefab->m_isScaleBySize) {
 		scaleBySize[0][0] = prefab->m_fScaleX;

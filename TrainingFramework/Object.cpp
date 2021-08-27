@@ -36,7 +36,7 @@ Object::Object(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_fVx = 0;
 	m_fVy = 0;
 	m_fCurrentPosX =  m_WorldMatrix.m[3][0]+ prefab->m_fDeltaX;
-	m_fCurrentPosY =  m_WorldMatrix.m[3][1]+ prefab->m_fDeltaY;
+	m_fCurrentPosY =  m_WorldMatrix.m[3][1]- prefab->m_fDeltaY;
 }
 
 Object::~Object() {

@@ -21,8 +21,8 @@ public:
 	std::string m_strState;
 	unsigned int m_iCurrFrameIndex;
 	float m_fCurrFrameTime;
-	bool m_isFacingLeft=false;
-	bool m_isFacingUp = false;
+	bool m_isFacingLeft=true;
+	bool m_isFacingUp = true;
 
 	//HITBOX
 	unsigned int m_iType;			

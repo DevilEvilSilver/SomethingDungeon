@@ -57,7 +57,7 @@ public:
 
 	//ATTACK
 		float atkDuration = 1.5f;
-
+		float currCD=0.0f;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	
@@ -67,6 +67,7 @@ public:
 	//STATE
 	void Idle(float frameTime);
 	void Move(float frameTime);
+	virtual void Attack(float frameTime);
 	virtual void UseSkill(float frameTime);
 	virtual bool GotHit(float frameTime);
 	virtual void Death(float frameTime);

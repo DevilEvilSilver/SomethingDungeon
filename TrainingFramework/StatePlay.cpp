@@ -78,42 +78,46 @@ StatePlay::~StatePlay() {
 	m_TrapList.clear();
 
 	for (auto& object : m_DecorationList) {
-		m_DecorationList.clear();
-
-	delete m_Gate;
-	for (auto& object : m_EffectList) {
 		if (object != NULL) {
 			delete object;
 		}
+		m_DecorationList.clear();
 	}
-	
-	m_EffectList.clear();
+		delete m_Gate;
+		for (auto& object : m_EffectList) {
+			if (object != NULL) {
+				delete object;
+			}
+		}
 
-	delete m_Player;
-	delete m_Camera;
+		m_EffectList.clear();
 
-	//UI
-	delete m_ButtonPause;
-	delete m_PauseBox;
-	delete m_ButtonResume;
-	delete m_ButtonQuit;
+		delete m_Player;
+		delete m_Camera;
 
-	delete m_HpHolder;
-	delete m_HpBar;
-	delete m_HpText;
-	delete m_MpHolder;
-	delete m_MpBar;
-	delete m_MpText;
-	delete m_GoldIcon;
-	delete m_GoldText;
-	delete m_MiniMap;
+		//UI
+		delete m_ButtonPause;
+		delete m_PauseBox;
+		delete m_ButtonResume;
+		delete m_ButtonQuit;
 
-	if (m_TransitionScreen != NULL)
-		delete m_TransitionScreen;
+		delete m_HpHolder;
+		delete m_HpBar;
+		delete m_HpText;
+		delete m_MpHolder;
+		delete m_MpBar;
+		delete m_MpText;
+		delete m_GoldIcon;
+		delete m_GoldText;
+		delete m_MiniMap;
 
-	if (m_DeathBanner != NULL)
-		delete m_DeathBanner;
-}
+		if (m_TransitionScreen != NULL)
+			delete m_TransitionScreen;
+
+		if (m_DeathBanner != NULL)
+			delete m_DeathBanner;
+	}
+
 
 void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);

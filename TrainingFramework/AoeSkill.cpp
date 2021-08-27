@@ -21,6 +21,22 @@ AoeSkill::AoeSkill(Character* owner, std::string prefabID, Vector2 roomID, Matri
 	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
 	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = false;
 }
+AoeSkill::AoeSkill(Vector2 tar, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	:Skill(owner, prefabID, roomID, translationMatrix)
+{
+	mp_fAoeRadius = 10.0f;
+	m_SkillDamage = SkillDamage::AOE_DAMAGE;
+	m_ExsitingTime = SkillExistingTime::AOE_EXISTINGTIME;//ms
+
+	Init(tar);
+
+	if (m_fVx > 0) m_isFacingLeft = false;
+	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
+
+	m_isKnockBack = true;
+	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
+	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = false;
+}
 AoeSkill::~AoeSkill()
 {
 }
@@ -48,11 +64,8 @@ void AoeSkill::UpdateHit(float frameTime)
 				StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 			}
 
+		}
 	}
-
-
-
-
 }
 void AoeSkill::Init(Vector2 target)
 {

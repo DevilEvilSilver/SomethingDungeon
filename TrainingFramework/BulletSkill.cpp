@@ -12,7 +12,19 @@ BulletSkill::BulletSkill( Character* owner, std::string prefabID, Vector2 roomID
 {
 	m_SkillDamage = SkillDamage::BULLET_DAMAGE;
 	m_ExsitingTime = SkillExistingTime::BULLET_EXISTINGTIME;
-	Init();
+	Init(Vector2(0,0));
+	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
+	m_isKnockBack = true;
+	m_isFacingUp = false;
+	m_isFacingLeft = false;
+}
+BulletSkill::BulletSkill(Vector2 target, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
+	:Skill(owner, prefabID, roomID, translationMatrix)
+{
+
+	m_SkillDamage = SkillDamage::BULLET_DAMAGE;
+	m_ExsitingTime = SkillExistingTime::BULLET_EXISTINGTIME;
+	Init(target);
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 	m_isKnockBack = true;
 	m_isFacingUp = false;
@@ -80,17 +92,16 @@ void BulletSkill::UpdateHit(float frameTime)
 	}
 
 }
-void BulletSkill::Init()
+void BulletSkill::Init(Vector2 target)
 {
-	Vector2 target;
-	if (m_isPlayer)
+	/*if (m_isPlayer)
 		target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
 	else
 	{
 		Player* player = StatePlay::GetInstance()->m_Player;
 		target.x = player->GetPosX() + player->m_fWidth / 2;
 		target.y = player->GetPosY() - player->m_fHeight / 2;
-	}
+	}*/
 	float fminDis = 0.5f;
 	float* ownerData = m_owner->GetHitBoxCurrentData();
 	Vector2 c1(ownerData[0] / 2.0f + ownerData[2] / 2.0f, ownerData[1] / 2.0f + ownerData[3] / 2.0f);
