@@ -1,0 +1,13 @@
+#FRAME_COUNT 3
+ID 0
+SPF 0.1
+FILE ../Resources/Animation/orcman/death/1.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.1
+FILE ../Resources/Animation/orcman/death/2.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.1
+FILE ../Resources/Animation/orcman/death/3.tga
+TILING GL_REPEAT
