@@ -45,11 +45,11 @@ void Room::RoomGenerate() {
 
 		if (random >= 60 && random < 70)
 		{
-			GenObj(HP_PO, 1);
+			GenObj(BOMB_TRAP, 1);
 		}
 		else if (random >= 40 && random < 60)
 		{
-			GenObj(MP_PO, 1);
+			GenObj(SPIKE_TRAP, 1);
 		}
 		else if (random >= 35 && random < 40)
 		{
@@ -364,8 +364,8 @@ void Room::GenObj(std::string prefabId, int num)
 		}
 		else if (prefabId == BOMB_TRAP)
 		{
-			BombTrap* bombTrap = new BombTrap(BOMB_TRAP, m_RoomID, translation);
-			StatePlay::GetInstance()->AddTrap(bombTrap);
+			//BombTrap* bombTrap = new BombTrap(BOMB_TRAP, m_RoomID, translation);
+			//StatePlay::GetInstance()->AddTrap(bombTrap);
 		}
 		else if (prefabId == ENEMY)
 		{
