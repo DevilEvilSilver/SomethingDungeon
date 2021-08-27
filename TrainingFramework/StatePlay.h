@@ -14,6 +14,9 @@
 #include "MPPotion.h"
 #include "SpikeTrap.h"
 #include "BombTrap.h"
+#include "Chest.h"
+#include "ArrowTower.h"
+#include "Arrow.h"
 #include "MiniMap.h"
 #include "Decorations.h"
 
