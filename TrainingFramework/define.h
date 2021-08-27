@@ -4,7 +4,7 @@
 #define SCREEN_W					1080.0f
 #define SCREEN_H					720.0f
 
-#define LIMIT_FPS					200
+#define LIMIT_FPS					120
 
 #define PI							3.14159265f
 #define HALFPI						(PI/2.0f)
@@ -20,16 +20,41 @@
 //INIT STATE
 #define FILE_S_LOAD						"../Resources/States/S_LOAD.txt"
 #define FILE_R_LOAD						"../Resources/States/R_LOAD.txt"
+#define FILE_SD_LOAD					"../Resources/States/SD_LOAD.txt"
 #define FILE_S_LOGO						"../Resources/States/S_LOGO.txt"
 #define FILE_R_LOGO						"../Resources/States/R_LOGO.txt"
+#define FILE_SD_LOGO					"../Resources/States/SD_LOGO.txt"
 #define FILE_S_WELCOME					"../Resources/States/S_WELCOME.txt"
 #define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
+#define FILE_SD_WELCOME					"../Resources/States/SD_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
 #define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
-#define FILE_SE							"../Resources/Sound.txt"
+#define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
+#define FILE_S_SHOP						"../Resources/States/S_SHOP.txt"
+#define FILE_R_SHOP						"../Resources/States/R_SHOP.txt"
+#define FILE_SD_SHOP					"../Resources/States/SD_SHOP.txt"
+#define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
+#define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
+#define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
+
+	//FILE RECORD
+#define FILE_RECORD						"../Resources/record.txt"
+#define FLOOR_1							"FLOOR_1"
+#define FLOOR_2							"FLOOR_2"
+#define FLOOR_3							"FLOOR_3"
+#define FLOOR_BOSS						"FLOOR_BOSS"
+#define RECORD_WIN						"WIN"
+#define RECORD_LOSE						"LOSE"
+#define INIT_PLAYER_HP					1
+#define INIT_PLAYER_MP					20
+#define INIT_PLAYER_ATK					3
+#define INIT_PLAYER_DEF					3
+#define INIT_PLAYER_GOLD				0
 
 //MAP
-#define MAP_MAX_TUNNEL				160
+#define MAP_WIDTH					22
+#define MAP_HEIGHT					22
+#define MAP_MAX_TUNNEL				65
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					9
 #define ROOM_HEIGHT					6
@@ -57,8 +82,21 @@
 #define Y_EPSILON			        0.5
 #define X_EPSILON			        0.1
 
+//FONT
+#define FONT_ARIAL				0
+#define FONT_FUTURE				1
+#define FONT_TIMES				2
+#define FONT_BANK				3
+#define FONT_BANK_BOLD			4
+
+//SHADER
+#define SHADER_SPRITE			0
+#define SHADER_TEXT				1
+
 //PREFAB
+#define DEATH_BANNER	"deathBanner"
 #define TRANSISTION		"transition"
+#define GATE			"gate"
 #define PLAYER			"mainChar"
 #define ENEMY			"enemy"
 #define SKILL			"skill"
@@ -74,18 +112,13 @@
 #define NORMAL_ROOM_5	"normalRoom5"
 
 #define WALL_ROOM		"wallRoom"
-
 #define BORDER_ROOM		"borderRoom"
-#define BORDER_ROOM_1_1	"borderRoom_1_1"
-#define BORDER_ROOM_1_2	"borderRoom_1_2"
-#define BORDER_ROOM_1_3	"borderRoom_1_3"
-#define BORDER_ROOM_1_4	"borderRoom_1_4"
-
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
 #define MP_PO			"mpPo"
 #define SPIKE_TRAP		"spikeTrap"
 #define BOMB_TRAP		"bombTrap"
+
 #define TREASURE		"treasure"
 #define TOWER			"tower"
 
@@ -103,12 +136,15 @@
 #define PLANT			"carnivorousPlant"
 #define BEAR			"meleeSoldier"
 
+#define CHEST			"chest"
+#define ARROW_TOWER		"arrowTower"
+
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
 
 //SKILL
-#define	BULLET_SPEED	7.0f
+#define	BULLET_SPEED	7
 
 //ANIMATION
 #define INIT_ANIM		"init"
@@ -136,23 +172,60 @@
 #define BOMB_INIT		"bombInit"
 #define BOOMED			"boomed"
 #define SPIKE			"spike"
-#define CHEST			"chest"
-#define ARROW_TOWER		"arrowTower"
+
+	//RESULT
+#define WIN_BG			"winBG"
+#define WIN_TITLE		"winTitle"
+#define LOSE_BG			"loseBG"
+#define LOSE_TITLE		"loseTitle"
 
 //SOUND
-#define WELCOME_BGM			0
-#define LOGO_SFX			1
-#define BUTTON_SFX			2
+#define LOGO_SFX			100
 
-#define COIN				3
-#define LOSE				4
-#define PEWPEW				5
-#define REGEN				6
-#define WIN					7
-#define HIT					8
-#define BOMB				9
-#define WHOOSH				10
+#define WELCOME_BGM			200
 
-//MAP
-#define MAP_WIDTH			32
-#define MAP_HEIGHT			32
+#define PLAY_BGM			300
+
+#define WIN_BGM				400
+#define LOSE_BGM			401
+
+#define SHOP_BGM			500
+
+#define BUTTON_SFX			900
+#define COIN				901
+#define PEWPEW				902
+#define REGEN				903
+#define HIT					904
+#define BOMB				905
+#define WHOOSH				906
+#define DEATH_SFX			907
+#define TELEPORT_SFX		908
+
+
+//SHOP ITEMS
+#define ITEM_SELL				3
+#define ITEM_COUNT				4
+	//HP
+#define ITEM_HP					1
+#define BUTTON_ITEM_HP			"buttonItemHP"
+#define ITEM_NAME_HP			"Heart Stone"
+#define ITEM_DESCRIPTION_HP		"Bonus XX HP for player"
+#define ITEM_PRICE_HP			100
+	//MP
+#define ITEM_MP					2
+#define BUTTON_ITEM_MP			"buttonItemMP"
+#define ITEM_NAME_MP			"Mana Crystal"
+#define ITEM_DESCRIPTION_MP		"Bonus XX MP for player"
+#define ITEM_PRICE_MP			100
+	//ATK
+#define ITEM_ATK				3
+#define BUTTON_ITEM_ATK			"buttonItemATK"
+#define ITEM_NAME_ATK			"Hercules Fist"
+#define ITEM_DESCRIPTION_ATK	"Bonus XX ATK for player"
+#define ITEM_PRICE_ATK			200
+	//DEF
+#define ITEM_DEF				4
+#define BUTTON_ITEM_DEF			"buttonItemDEF"
+#define ITEM_NAME_DEF			"Athena Shield"
+#define ITEM_DESCRIPTION_DEF	"Bonus XX DEF for player"
+#define ITEM_PRICE_DEF			50

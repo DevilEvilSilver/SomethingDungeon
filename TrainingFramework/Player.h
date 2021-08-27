@@ -11,9 +11,6 @@ class Player : public Character {
 private:
 	
 public:
-	Text* numGoldText;
-	Text* numHPText;
-	Text* numMPText;
 
 	//ENUM
 	enum MoveDir {
@@ -78,6 +75,8 @@ public:
 	~Player();
 	
 	virtual void UseAttack();
+	void LoadData();
+	
 
 
 

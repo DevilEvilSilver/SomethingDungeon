@@ -32,6 +32,15 @@ T GetRoomByID(Vector2 roomID, std::vector<T> objList) {
 	return 0;
 }
 
+template <class T>
+T GetResource(std::string id, std::vector<T> objList) {
+	for (auto&obj : objList) {
+		if (!strcmp(id.c_str(), obj->m_strResourceID.c_str()))
+			return obj;
+	}
+	return 0;
+}
+
 StatePlay::StatePlay(void) {
 	this->Init();
 
@@ -75,6 +84,7 @@ StatePlay::~StatePlay() {
 	}
 	m_DecorationList.clear();
 
+	delete m_Gate;
 	delete m_Player;
 	delete m_Camera;
 
@@ -96,10 +106,14 @@ StatePlay::~StatePlay() {
 
 	if (m_TransitionScreen != NULL)
 		delete m_TransitionScreen;
+
+	if (m_DeathBanner != NULL)
+		delete m_DeathBanner;
 }
 
 void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+	SoundEngine::GetInstance()->Init(FILE_SD_PLAY);
 
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room* startRoom = GetRoomByType(START, m_RoomList);
@@ -115,6 +129,7 @@ void StatePlay::Init() {
 	translation.SetTranslation(startRoom->GetPosX() + ROOM_WIDTH / 2.0f, startRoom->GetPosY() - ROOM_HEIGHT / 2, 0.0f);
 	m_Player = new Player(strPrefab, startRoom->m_RoomID, translation);
 	translation.SetTranslation(m_Player->GetPosX() + 1, m_Player->GetPosY() + 1, 0);
+
 	//Camera
 	fscanf(dataFile, "#CAMERA\n");
 	float fLeft, fRight, fBottom, fTop;
@@ -138,7 +153,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_HpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -150,7 +165,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_HpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxHP, m_Player->m_currHP);
 	}
 
@@ -162,7 +177,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_MpHolder = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -174,7 +189,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_MpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxMP, m_Player->m_currMP);
 	}
 
@@ -186,7 +201,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_GoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -198,7 +213,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_PauseBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -210,7 +225,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonPause = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -222,7 +237,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonResume = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
@@ -234,7 +249,7 @@ void StatePlay::Init() {
 		char strPrefab[50];
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 	//MiniMap
@@ -243,28 +258,40 @@ void StatePlay::Init() {
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		Matrix translation;
-		translation.SetTranslation(x, y, 0.0f);
+		translation.SetTranslation(x, y, 1.0f);
 
 		m_MiniMap = new MiniMap(translation, (RoomType*)m_Map, m_Camera, m_Player);
 	}
 
 	fclose(dataFile);
 
+	//GATE
+	Room *endRoom = GetRoomByType(END, m_RoomList);
+	Prefab *gatePrefab = GetResource(GATE, ResourceManager::GetInstance()->m_PrefabList);
+	translation.SetTranslation(endRoom->GetPosX() + ROOM_WIDTH / 2.0f - gatePrefab->m_fWidth / 2, 
+		endRoom->GetPosY() - ROOM_HEIGHT / 2 + gatePrefab->m_fHeight / 2, 0.0f);
+	m_Gate = new Object(GATE, endRoom->m_RoomID, translation);
+
+	//INIT LOGIC
+	m_isNextState = false;
+	m_isDead = false;
 	m_isQuit = false;
 	m_isStartUp = false;
 	m_fNextStateFrame = 1.0f;
+	m_DeathBanner = NULL;
 	m_TransitionScreen = NULL;
 
-	m_HpText = new Text(m_Player->GetHP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
-	m_MpText = new Text(m_Player->GetMP(), 1, 1, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
-	m_GoldText = new Text(m_Player->GetGold(), 1, 1, TEXT_COLOR::WHILE, 1005.0f, 705.0f, 1.0f);
+	//INIT TEXT
+	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 700.0f, 1.0f, TEXT_ALIGN::RIGHT);
 }
 
 void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	std::fill_n(*m_Map, sizeof(m_Map) / sizeof(**m_Map), WALL);
 	srand(time(NULL));
-	unsigned int currPosX = rand() % 30 + 1;
-	unsigned int currPosY = rand() % 30 + 1;
+	unsigned int currPosX = rand() % (MAP_WIDTH - 2) + 1;
+	unsigned int currPosY = rand() % (MAP_HEIGHT - 2) + 1;
 	m_Map[currPosX][currPosY] = START;
 	Vector2 directions[4] = { Vector2(1, 0), Vector2(0, 1),  Vector2(-1, 0), Vector2(0, -1) };
 	unsigned int lastDirection = 0, randDirection = 0;
@@ -281,9 +308,9 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 
 		while (tunnelLength--) {
 			if ((currPosX == 1) && (directions[randDirection].x == -1) ||
-				(currPosX == 30) && (directions[randDirection].x == 1) ||
+				(currPosX == (MAP_WIDTH - 2)) && (directions[randDirection].x == 1) ||
 				(currPosY == 1) && (directions[randDirection].y == -1) ||
-				(currPosY == 30) && (directions[randDirection].y == 1)) {
+				(currPosY == (MAP_HEIGHT - 2)) && (directions[randDirection].y == 1)) {
 				break;
 			}
 			else {
@@ -299,8 +326,8 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 
 	m_Map[currPosX][currPosY] = END;
 
-	for (unsigned int i = 0; i < 32; i++) {
-		for (unsigned int j = 0; j < 32; j++) {
+	for (unsigned int i = 0; i < MAP_WIDTH; i++) {
+		for (unsigned int j = 0; j < MAP_HEIGHT; j++) {
 			Matrix translation;
 			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
 			if (m_Map[i][j] == NORMAL) {
@@ -405,8 +432,10 @@ void StatePlay::Render() {
 	}
 	m_ObjectList.clear();
 
-	//m_Player->Render(this->m_Camera);
-
+	//CHECK IN RANGE !!!
+	if (CheckInRange(m_Gate->m_RoomID)) {
+		m_Gate->Render(this->m_Camera);
+	}
 
 	//RENDER SKILL
 	for (auto& obj : m_InRangeSkill)
@@ -433,11 +462,14 @@ void StatePlay::Render() {
 			m_ButtonResume->Render(m_Camera);
 			m_ButtonQuit->Render(m_Camera);
 		}
-
-		if (m_TransitionScreen != NULL)
-			m_TransitionScreen->Render(this->m_Camera);
+		
 		//MiniMap
 		m_MiniMap->Render(m_Camera);
+
+		if (m_DeathBanner != NULL)
+			m_DeathBanner->Render(this->m_Camera);
+		if (m_TransitionScreen != NULL)
+			m_TransitionScreen->Render(this->m_Camera);
 	}
 }
 void StatePlay::AddDrop(Drop* drop)
@@ -524,74 +556,88 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
-	if (m_isPause) {
-		m_PauseBox->Update(frameTime);
-		m_ButtonResume->Update(frameTime);
-		m_ButtonQuit->Update(frameTime);
-
-		UpdateControlPause(frameTime);
-	}
-	else {
+	if (!m_isDead && !m_isNextState) {
 		if (!m_isStartUp) {
 			RoomsGenerate();
-			m_iHandleBGM = SoundEngine::GetInstance()->Play(11, 0.25f, 1.0f, true);
+			m_iHandleBGM = SoundEngine::GetInstance()->Play(PLAY_BGM, 0.25f, 1.0f, true);
 			m_isStartUp = true;
 		}
+		else {
+			if (m_isPause) {
+				m_PauseBox->Update(frameTime);
+				m_ButtonResume->Update(frameTime);
+				m_ButtonQuit->Update(frameTime);
 
-		Remove();
+				UpdatePause(frameTime);
+			}
+			else {
+				//CHECK IF PLAYER DEAD 
+				if (m_Player->m_currHP <= 0) {
+					m_isDead = true;
+				}
 
-		UpdateInRange();
-		UpdateRoomID();
+				//CHECK IF PLAYER ENTER GATE
+				if (CheckInRange(m_Gate->m_RoomID)) {
+					m_Gate->Update(frameTime);
 
-		for (auto& obj : m_InRangeRoom) {
+					if (CollisionManager::CheckCollision(m_Player, m_Gate)) {
+						m_isNextState = true;
+					}
+				}
+		
+				Remove();
+				UpdateInRange();
+				UpdateRoomID();
 
-			obj->Update(frameTime);
+				for (auto& obj : m_InRangeRoom) {
+					obj->Update(frameTime);
+				}
+				m_Player->Update(frameTime);
+				for (auto& obj : m_InRangeEnemy) {
+						obj->Update(frameTime);
+				}
+				for (auto& obj : m_InRangeSkill) {
+						obj->Update(frameTime);
+				}
+				for (auto& obj : m_InRangeTrap) {
+						obj->Update(frameTime);
+				}
+				for (auto& obj : m_InRangeDrop) {
+						obj->Update(frameTime);
+				}
 
+				UpdateControl(frameTime);
+
+				//follow camera
+				m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
+				m_Camera->Update(frameTime);
+
+				//Update UI
+				m_ButtonPause->Update(frameTime);
+
+				m_HpHolder->Update(frameTime);
+				m_HpBar->Update(frameTime);
+				m_HpBar->Resize(m_Player->m_currHP);
+				m_HpText->setText(m_Player->GetHP());
+
+				m_MpHolder->Update(frameTime);
+				m_MpBar->Update(frameTime);
+				m_MpBar->Resize(m_Player->m_currMP);
+				m_MpText->setText(m_Player->GetMP());
+
+				m_MiniMap->Update(frameTime);
+
+				m_GoldIcon->Update(frameTime);
+				m_GoldText->setText(m_Player->GetGold());
+			}
 		}
-
-		m_Player->Update(frameTime);
-		for (auto& obj : m_InRangeEnemy) {
-
-			obj->Update(frameTime);
-
-		}
-		for (auto& obj : m_InRangeSkill) {
-			obj->Update(frameTime);
-		}
-		for (auto& obj : m_InRangeTrap) {
-			obj->Update(frameTime);
-		}
-		for (auto& obj : m_InRangeDrop) {
-			obj->Update(frameTime);
-		}
-
-
-
-		UpdateControl(frameTime);
-
-		//follow camera
-		m_Camera->SetPosition(Vector3(m_Player->GetPosX(), m_Player->GetPosY(), m_Camera->GetPosition().z));
-		m_Camera->Update(frameTime);
-
-		//Update UI
-		m_ButtonPause->Update(frameTime);
-
-		m_HpHolder->Update(frameTime);
-		m_HpBar->Update(frameTime);
-		m_HpBar->Resize(m_Player->m_currHP);
-		m_HpText->setText(m_Player->GetHP());
-
-		m_MpHolder->Update(frameTime);
-		m_MpBar->Update(frameTime);
-		m_MpBar->Resize(m_Player->m_currMP);
-		m_MpText->setText(m_Player->GetMP());
-
-		m_MiniMap->Update(frameTime);
-
-		m_GoldIcon->Update(frameTime);
-		m_GoldText->setText(m_Player->GetGold());
+	}
+	else {
+		UpdateResult(frameTime);
 	}
 
+	if (m_DeathBanner != NULL)
+		m_DeathBanner->Update(frameTime);
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Update(frameTime);
 }
@@ -621,11 +667,11 @@ void StatePlay::ClearInRange()
 void StatePlay::UpdateRoomID() {
 	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
 		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
-			if (i > 31)
+			if (i > MAP_WIDTH - 1)
 				continue;
 
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
-				if (j > 31)
+				if (j > MAP_HEIGHT - 1)
 					continue;
 				if (CollisionManager::CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
 					m_Player->m_RoomID = Vector2(i, j);
@@ -639,14 +685,14 @@ void StatePlay::UpdateRoomID() {
 	for (auto& obj : m_InRangeEnemy) {
 
 		{
-			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
-				for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
-					if (i > 31)
-						continue;
+			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
+			for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+				if (i > MAP_WIDTH - 1)
+					continue;
 
-					for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
-						if (j > 31)
-							continue;
+				for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+					if (j > MAP_HEIGHT - 1)
+						continue;
 						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
 							obj->m_RoomID = Vector2(i, j);
 							break;
@@ -655,9 +701,6 @@ void StatePlay::UpdateRoomID() {
 				}
 		}
 	}
-
-
-
 }
 
 void StatePlay::UpdateControl(float frameTime)
@@ -666,6 +709,7 @@ void StatePlay::UpdateControl(float frameTime)
 
 	//BUTTON PAUSE
 	if (m_ButtonPause->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(true);
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = true;
 		return;
@@ -724,14 +768,12 @@ void StatePlay::UpdateControl(float frameTime)
 	{
 		m_Player->Dash(frameTime);
 	}
-
-
 }
 
-
-void StatePlay::UpdateControlPause(float frameTime) {
+void StatePlay::UpdatePause(float frameTime) {
 	//Button Resume
 	if (m_ButtonResume->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->SetPauseAll(false);
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPause = false;
 		return;
@@ -762,16 +804,117 @@ void StatePlay::UpdateControlPause(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
+			//DONT SAVE RECORD HERE
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
+
 			StateManager::GetInstance()->CloseState();
 			return;
 		}
 	}
 }
 
-void StatePlay::AddObject(Object* object) {
+void StatePlay::UpdateResult(float frameTime) {
+	//Death
+	if (m_isDead) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 6.0f && m_DeathBanner == NULL) {
+			Matrix translation;
+			float fTransY = GetResource(DEATH_BANNER, ResourceManager::GetInstance()->m_PrefabList)->m_fHeight / 2;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, fTransY, 2.0f);
+			m_DeathBanner = new Fader(DEATH_BANNER, Vector2(0.0f, 0.0f), translation, 3.0f, 1.5f);
+
+			m_fNextStateFrame += 5.0f;
+			SoundEngine::GetInstance()->Play(DEATH_SFX, 3.0f, 1.0f, true);
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 2.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SetRecord(false);
+
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
+			
+			StateManager::GetInstance()->ClosenLoadState(GS_STATE_RESULT);
+			return;
+		}
+	}
+	else {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 2.0f);
+
+			//TELEPORT ANIMATION !!!!!
+			SoundEngine::GetInstance()->Play(TELEPORT_SFX, 3.0f, 1.0f, true);
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SetRecord(true);
+
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
+
+			StateManager::GetInstance()->ClosenLoadState(GS_STATE_SHOP);
+			return;
+		}
+	}
+}
+
+void StatePlay::SetRecord(bool isWin) {
+	FILE* recordFile;
+
+	//read
+	recordFile = fopen(FILE_RECORD, "r");
+	char strFloor[50];
+	fscanf(recordFile, "%s\n", &strFloor);
+	fclose(recordFile);
+
+	//write
+	recordFile = fopen(FILE_RECORD, "w");
+
+	if (isWin) {
+		if (!strcmp(strFloor, FLOOR_1))
+			fprintf(recordFile, "%s\n", FLOOR_2);
+		else if (!strcmp(strFloor, FLOOR_2))
+			fprintf(recordFile, "%s\n", FLOOR_3);
+		else 
+			fprintf(recordFile, "%s\n", FLOOR_BOSS);
+	}
+	else {
+		fprintf(recordFile, "%s\n", RECORD_LOSE);
+	}
+	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
+	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
+	fprintf(recordFile, "CurrMP %d\n", m_Player->m_currMP);
+	fprintf(recordFile, "MaxMP %d\n", m_Player->m_maxMP);
+	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
+	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
+	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
+
+	fclose(recordFile);
+}
+
+void StatePlay::AddObject(Object *object) {
 	m_ObjectList.push_back(object);
 }
 void StatePlay::AddRoom(Room* room) {

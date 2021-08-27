@@ -28,6 +28,7 @@ StateWelcome::~StateWelcome() {
 
 void StateWelcome::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
+	SoundEngine::GetInstance()->Init(FILE_SD_WELCOME);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_WELCOME, "r");
@@ -131,7 +132,7 @@ void StateWelcome::UpdateControl(float frameTime)
 	m_ButtonStart->isPressed(this->m_Camera);
 	m_ButtonStart->isHover(this->m_Camera);
 
-	//Play State
+	//New game
 	if (m_isPLayState) {
 		m_fNextStateFrame -= frameTime;
 
@@ -141,19 +142,35 @@ void StateWelcome::UpdateControl(float frameTime)
 			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
 
 			SoundEngine::GetInstance()->Fader(m_iHandleBGM ,false, m_fNextStateFrame);
-
-
-
 		}
 
 		if (m_fNextStateFrame < 0) {
+			InitRecord();
+
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
 
 			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
 			return;
 		}
 	}
+}
+
+void StateWelcome::InitRecord() {
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "w");
+
+	fprintf(recordFile, "%s\n", FLOOR_1);
+	fprintf(recordFile, "CurrHP %d\n", INIT_PLAYER_HP);
+	fprintf(recordFile, "MaxHP %d\n", INIT_PLAYER_HP);
+	fprintf(recordFile, "CurrMP %d\n", INIT_PLAYER_MP);
+	fprintf(recordFile, "MaxMP %d\n", INIT_PLAYER_MP);
+	fprintf(recordFile, "ATK %d\n", INIT_PLAYER_ATK);
+	fprintf(recordFile, "DEF %d\n", INIT_PLAYER_DEF);
+	fprintf(recordFile, "Gold %d\n", INIT_PLAYER_GOLD);
+
+	fclose(recordFile);
 }
 
 void StateWelcome::GetRenderOrder() {}

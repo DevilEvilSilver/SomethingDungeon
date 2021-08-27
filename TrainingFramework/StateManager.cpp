@@ -8,6 +8,8 @@
 #include "StateLogo.h"
 #include "StateWelcome.h"
 #include "StatePlay.h"
+#include "StateShop.h"
+#include "StateResult.h"
 
 StateManager::StateManager()
 {
@@ -39,6 +41,12 @@ void StateManager::Update(float frameTime) {
 	case GS_STATE_PLAY:
 		StatePlay::GetInstance()->Update(frameTime);
 		break;
+	case GS_STATE_SHOP:
+		StateShop::GetInstance()->Update(frameTime);
+		break;
+	case GS_STATE_RESULT:
+		StateResult::GetInstance()->Update(frameTime);
+		break;
 	}
 }
 
@@ -57,6 +65,12 @@ void StateManager::Render()
 	case GS_STATE_PLAY:
 		StatePlay::GetInstance()->Render();
 		break;
+	case GS_STATE_SHOP:
+		StateShop::GetInstance()->Render();
+		break;
+	case GS_STATE_RESULT:
+		StateResult::GetInstance()->Render();
+		break;
 	}
 }
 
@@ -66,9 +80,6 @@ void StateManager::AddState(GameState addedState)
 		ResetState(m_GameStateStack.back());
 	}
 	m_GameStateStack.push_back(addedState);
-
-	if (addedState == GS_STATE_PLAY) 
-		StatePlay::GetInstance()->RoomsGenerate();
 }
 
 void StateManager::AddLoadState(GameState addedState) {
@@ -96,6 +107,15 @@ void StateManager::ClosenAddState(GameState addedState)
 		StatePlay::GetInstance()->RoomsGenerate();
 }
 
+void StateManager::ClosenLoadState(GameState addedState)
+{
+	CloseState();
+	m_GameStateStack.push_back(addedState);
+	m_GameStateStack.push_back(GS_STATE_LOAD);
+
+	StateLoad::GetInstance()->m_isNextState = addedState;
+}
+
 void StateManager::ResetState(GameState state) {
 	switch (state) {
 	case GS_STATE_LOAD:
@@ -109,6 +129,12 @@ void StateManager::ResetState(GameState state) {
 		break;
 	case GS_STATE_PLAY:
 		StatePlay::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_SHOP:
+		StateShop::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_RESULT:
+		StateResult::GetInstance()->ResetInstance();
 		break;
 	}
 }

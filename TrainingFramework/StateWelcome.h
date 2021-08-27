@@ -28,6 +28,7 @@ public:
 	void Update(float frameTime);
 
 	void UpdateControl(float frameTime);
+	void InitRecord();
 
 	void Render();
 

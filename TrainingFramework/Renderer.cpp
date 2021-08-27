@@ -112,7 +112,7 @@ void Renderer::DrawText2(Text* text) {
 	shader->Bind();
 
 	glBindBuffer(GL_ARRAY_BUFFER, font->getArrBuffer());
-
+	glActiveTexture(GL_TEXTURE0);
 
 	iTempShaderVaribleGLID = shader->GetAttribLocation((char*)"a_posL");
 	if (iTempShaderVaribleGLID != -1)
@@ -129,52 +129,36 @@ void Renderer::DrawText2(Text* text) {
 	iTempShaderVaribleGLID = shader->GetUniformLocation((char*)"u_texture");
 	if (iTempShaderVaribleGLID != -1)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, font->getTextFontAdd());
 		glUniform1i(iTempShaderVaribleGLID, 0);
 	}
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	float sx = 1.0f / SCREEN_W * text->getScale().x;
 	float sy = 1.0f / SCREEN_H * text->getScale().y;
 	float x = text->m_Vec3Position.x;
 	float y = text->m_Vec3Position.y;
 
-	FT_GlyphSlot glyphSlot = font->getFtGlyph();
 	for (const char* p = text->m_text.c_str(); *p; p++)
 	{
-		if (FT_Load_Char(font->getFtFace(), *p, FT_LOAD_RENDER))
-		{
-			continue;
-		}
-		glTexImage2D(
-			GL_TEXTURE_2D,
-			0,
-			GL_ALPHA,
-			glyphSlot->bitmap.width,
-			glyphSlot->bitmap.rows,
-			0,
-			GL_ALPHA,
-			GL_UNSIGNED_BYTE,
-			glyphSlot->bitmap.buffer
-		);
-		float x2 = x + glyphSlot->bitmap_left * sx;
-		float y2 = -y - glyphSlot->bitmap_top * sy;
-		float w = glyphSlot->bitmap.width * sx;
-		float h = glyphSlot->bitmap.rows * sy;
+		Glyph glyph = font->m_Glyphs[*p];
+
+		float x2 = x + glyph.Bearing.x * sx;
+		float y2 = -y - glyph.Bearing.y * sy;
+		float w = glyph.Size.x * sx;
+		float h = glyph.Size.y * sy;
 		GLfloat box[4][4] = {
 			{x2, -y2 , 0, 0},
 			{x2 + w, -y2 , 1, 0},
 			{x2, -y2 - h, 0, 1},
 			{x2 + w, -y2 - h, 1, 1},
 		};
+		
 		glBufferData(GL_ARRAY_BUFFER, sizeof(box), box, GL_DYNAMIC_DRAW);
+		glBindTexture(GL_TEXTURE_2D, glyph.TextureID);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		x += (glyphSlot->advance.x >> 6) * sx;
-		y += (glyphSlot->advance.y >> 6) * sy;
+		x += (glyph.AdvanceX >> 6) * sx;
+		y += (glyph.AdvanceY >> 6) * sy;
 	}
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	shader->Unbind();

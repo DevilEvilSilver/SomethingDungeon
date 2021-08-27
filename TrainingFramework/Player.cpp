@@ -28,7 +28,6 @@ void Player::ShootChicken(Vector2 target)
 		StatePlay::GetInstance()->AddSkill(bskill);
 
 		m_currMP -= ChickenMPCost;
-		numMPText->setText("MP: " + std::to_string(m_currMP));
 
 		SoundEngine::GetInstance()->Play(PEWPEW, 1.0f, 1.0f, false);
 	}
@@ -141,37 +140,42 @@ Player::Player(){}
 Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
-	m_maxHP = 50;
-	m_currHP = 50;
-	m_maxMP = 20;
-	m_currMP = 20;
-	m_ATK = 5;
-	m_DEF = 5;
+	//m_maxHP = 30;
+	//m_currHP = 30;
+	//m_maxMP = 20;
+	//m_currMP = 20;
+	//m_ATK = 3;
+	//m_DEF = 3;
+	//m_GOLD = 1000;
 
+	// read file record
+	LoadData();
 	atkDuration = 0.25f;
-
 	m_MOVESPEED = 3.0f;
 
 	isWallCollision = true;
 
 	m_strState = IDLE_LEFT;
-
-	m_GOLD = 0;
-	std::string goldText = "Gold: " + std::to_string(m_GOLD);
-	numGoldText = new Text(goldText, 1, 1, TEXT_COLOR::YELLOW, 20, 40, 1.0f);
-
-	m_currHP = m_maxHP;
-	std::string Hptext = "HP: " + std::to_string(m_currHP);
-	numHPText = new Text(Hptext, 1, 1, TEXT_COLOR::RED, 20, 60, 1.0f);
-
-	m_currMP = m_maxMP;
-	std::string Mptext = "MP: " + std::to_string(m_currMP);
-	numMPText = new Text(Mptext, 1, 1, TEXT_COLOR::BLUE, 20, 80, 1.0f);
 }
 Player::~Player() {
-	delete numGoldText;
-	delete numHPText;
-	delete numMPText;
+
+}
+
+void Player::LoadData() {
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "r");
+
+	fscanf(recordFile, "%s\n");
+
+	fscanf(recordFile, "CurrHP %d\n", &m_currHP);
+	fscanf(recordFile, "MaxHP %d\n", &m_maxHP);
+	fscanf(recordFile, "CurrMP %d\n", &m_currMP);
+	fscanf(recordFile, "MaxMP %d\n", &m_maxMP);
+	fscanf(recordFile, "ATK %d\n", &m_ATK);
+	fscanf(recordFile, "DEF %d\n", &m_DEF);
+	fscanf(recordFile, "Gold %d\n", &m_GOLD);
+
+	fclose(recordFile);
 }
 
 void Player::UseAttack()

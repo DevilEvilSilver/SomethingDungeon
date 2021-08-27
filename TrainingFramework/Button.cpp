@@ -7,7 +7,7 @@
 Button::Button() {}
 
 Button::Button(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
-	: Widget(prefabID, roomID, translationMatrix), m_isAvailble(true) {
+	: Widget(prefabID, roomID, translationMatrix), m_isAvailble(true), m_wasPressed(false) {
 	m_strState = B_NORMAL;
 }
 
@@ -18,7 +18,8 @@ Button::~Button() {
 void Button::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 	if (m_isAvailble) {
-		m_strState = B_NORMAL;
+		if (m_strState == B_UNAVAILABLE)
+			m_strState = B_NORMAL;
 	}
 	else {
 		m_strState = B_UNAVAILABLE;
@@ -40,6 +41,7 @@ bool Button::isPressed(Camera* camera) {
 		m_isAvailble) {
 
 		m_strState = B_PRESSED;
+		m_wasPressed = true;
 		return true;
 	}
 	else {
@@ -82,11 +84,12 @@ bool Button::isReleased(Camera* camera) {
 	Vector2 mousePos = InputManager::GetInstance()->
 		GetMousePosition(camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
 
-	if (!(keyPressed & MOUSE_LEFT) &&
+	if (!(keyPressed & MOUSE_LEFT) && m_wasPressed &&
 		(mousePos.x >= m_fCurrentPosX) && (mousePos.x <= m_fCurrentPosX + m_fWidth) &&
 		(mousePos.y <= m_fCurrentPosY) && (mousePos.y >= m_fCurrentPosY - m_fHeight) &&
 		m_isAvailble) {
 
+		m_wasPressed = false;
 		return true;
 	}
 	else

@@ -1,4 +1,4 @@
-#PREFAB_COUNT 52
+#PREFAB_COUNT 54
 ID mainChar
 MODEL 0
 SHADER 0
@@ -474,6 +474,17 @@ FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
 ID boomed
 FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
 
+ID gate
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 6.0, 3.5
+SIZE 6.0 x 3.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gate/static/sprite.txt
+
 ID hpHolder
 MODEL 0
 SHADER 0
@@ -667,6 +678,16 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID ar_static
 FILE ../Resources/Animation/arrow/static/sprite.txt
+ID deathBanner
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 18.0, 2.4
+SIZE 18.0 x 2.4
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/deathBanner/static/sprite.txt
 
 #MODEL_GEN 1
 ID 0
@@ -693,11 +714,11 @@ ID 2
 VS ../Resources/Shaders/Logo.vs
 FS ../Resources/Shaders/Logo.fs
 STATE_COUNT 3
-GL_DEPTH_TEST 1
+GL_DEPTH_TEST 0
 GL_CULL_FACE 0
 GL_BLEND 1
 
-#FONT_COUNT 3
+#FONT_COUNT 5
 ID 0
 FILE ../Resources/Fonts/arial.ttf
 
@@ -706,3 +727,9 @@ FILE ../Resources/Fonts/kenvector_future.ttf
 
 ID 2
 FILE ../Resources/Fonts/times.ttf
+
+ID 3
+FILE ../Resources/Fonts/F25_Bank_Printer.ttf
+
+ID 4
+FILE ../Resources/Fonts/F25_Bank_Printer_Bold.ttf

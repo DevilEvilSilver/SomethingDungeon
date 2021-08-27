@@ -1,0 +1,4 @@
+SoundNum 2
+
+#ID 200 ../Resources/Sounds/welcome_bgm.wav
+#ID 900 ../Resources/Sounds/button_sfx.wav

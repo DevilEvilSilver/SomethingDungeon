@@ -15,6 +15,8 @@
 #include "StateLogo.h"
 #include "StateWelcome.h"
 #include "StatePlay.h"
+#include "StateShop.h"
+#include "StateResult.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -42,6 +44,7 @@ StateLoad::~StateLoad() {
 
 void StateLoad::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_LOAD);
+	SoundEngine::GetInstance()->Init(FILE_SD_LOAD);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOAD, "r");
@@ -96,7 +99,7 @@ void StateLoad::Init() {
 
 	m_isNextState = false;
 	m_fNextStateFrame = 1.0f;
-	m_fStartUpFrame = 0.2f;
+	m_fStartUpFrame = 1.0f;
 	m_TransitionScreen = NULL;
 }
 
@@ -111,22 +114,22 @@ void StateLoad::Render() {
 }
 
 void StateLoad::Update(float frameTime) {
-	m_Background->Update(frameTime);
-	m_LoadIcon->Update(frameTime);
-
-	if (m_TransitionScreen != NULL)
-		m_TransitionScreen->Update(frameTime);
-
-	m_Camera->Update(frameTime);
-
-	UpdateControl(frameTime);
-
-	if (!m_isNextState) {
+	if (m_fStartUpFrame > 0.0f) {
 		m_fStartUpFrame -= frameTime;
 
 		if (m_fStartUpFrame <= 0.0f)
 			LoadState();
 	}
+	else {
+		m_Background->Update(frameTime);
+		m_LoadIcon->Update(frameTime);
+
+		UpdateControl(frameTime);
+		m_Camera->Update(frameTime);
+	}
+
+	if (m_TransitionScreen != NULL)
+		m_TransitionScreen->Update(frameTime);
 }
 
 void StateLoad::UpdateControl(float frameTime)
@@ -143,7 +146,8 @@ void StateLoad::UpdateControl(float frameTime)
 
 		if (m_fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
-			//ResetResource();
+			InputManager::GetInstance()->ResetInput();
+			//ResetResource();   //error
 
 			StateManager::GetInstance()->CloseState();
 			return;
@@ -161,6 +165,12 @@ void StateLoad::LoadState() {
 		break;
 	case GS_STATE_PLAY:
 		StatePlay::GetInstance();
+		break;
+	case GS_STATE_SHOP:
+		StateShop::GetInstance();
+		break;
+	case GS_STATE_RESULT:
+		StateResult::GetInstance();
 		break;
 	}
 

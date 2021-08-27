@@ -70,7 +70,6 @@ void BombTrap::Update(float frameTime) {
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
 			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_iAttack, true, curPos, frameTime);
-			StatePlay::GetInstance()->m_Player->numHPText->setText("HP: " + std::to_string(StatePlay::GetInstance()->m_Player->m_currHP));
 		}
 
 

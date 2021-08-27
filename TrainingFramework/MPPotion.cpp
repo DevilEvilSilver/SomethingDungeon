@@ -17,7 +17,6 @@ void MPPotion::OnCollision()
 
 	player->m_currMP = (player->m_currMP + this->getValue());
 	if (player->m_currMP>player->m_maxMP) player->m_currMP=player->m_maxMP;
-	player->numMPText->setText("MP: " + std::to_string(player->m_currMP));
 
 	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
 	isPicked = true;

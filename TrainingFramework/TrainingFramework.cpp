@@ -13,16 +13,23 @@
 #include "StatePlay.h"
 #include "InputManager.h"
 #include "StateManager.h"
+#include "Timer.h"
 
+Text *FPSCountText;
+CTimer timer;
 
 int Init(ESContext* esContext) {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	ResourceManager::GetInstance();
+	SoundEngine::GetInstance();
 	Renderer::GetInstance();
 	InputManager::GetInstance();
 	StateManager::GetInstance();
-	SoundEngine::GetInstance();
+
+	FPSCountText = new Text("0", SHADER_TEXT, FONT_BANK, TEXT_COLOR::GREEN, 2.0f, 20.0f, 1.0f);
+	timer.Init();
+
 	return 0;
 }
 
@@ -36,15 +43,19 @@ void Draw(ESContext* esContext)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	StateManager::GetInstance()->Render();
 
+	//fps counter
+	FPSCountText->setText(std::to_string((unsigned int)timer.GetFPS()));
+	Renderer::GetInstance()->DrawText2(FPSCountText);
+
 	//fps
 	end = GetTickCount();
 	DWORD frameTime = end - start;
-	if (frameTime < 1000.0f/ LIMIT_FPS)
-		Sleep(1000.0f / LIMIT_FPS - frameTime);
+	//if (frameTime < 1000.0f / LIMIT_FPS)
+	//	Sleep(1000.0f / LIMIT_FPS - frameTime);
 
 	//display
-	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
-
+	if (eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface))
+		timer.Update();
 }
 
 void Update(ESContext* esContext, float deltaTime)
@@ -98,6 +109,8 @@ void CleanUp()
 	SoundEngine::GetInstance()->ResetInstance();
 	Renderer::GetInstance()->ResetInstance();
 	ResourceManager::GetInstance()->ResetInstance();
+
+	delete FPSCountText;
 }
 
 void memoryDumpLeak() {
@@ -116,8 +129,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	ESContext esContext;
 	esInitContext(&esContext);
-	esCreateWindow(&esContext, "EmojiDungeon", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-	
+	esCreateWindow(&esContext, "CrossDungeon", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+
 	if (Init(&esContext) != 0) return 0;
 
 	//draw

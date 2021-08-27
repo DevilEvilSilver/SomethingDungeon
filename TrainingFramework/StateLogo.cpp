@@ -27,6 +27,7 @@ StateLogo::~StateLogo() {
 
 void StateLogo::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_LOGO);
+	SoundEngine::GetInstance()->Init(FILE_SD_LOGO);
 
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_LOGO, "r");
@@ -127,6 +128,8 @@ void StateLogo::UpdateControl(float frameTime)
 			isWelcomeState = true;
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
+			InputManager::GetInstance()->ResetInput();
 
 			StateManager::GetInstance()->ClosenAddState(GS_STATE_WELCOME);
 			return;

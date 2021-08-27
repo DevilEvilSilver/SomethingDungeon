@@ -25,7 +25,7 @@ class StatePlay :public StateBase<StatePlay>
 {
 public:
 	
-	RoomType m_Map[32][32];
+	RoomType m_Map[22][22];
 	
 	//DATA
 	std::vector<Object*> m_ObjectList;
@@ -34,6 +34,9 @@ public:
 	std::vector<Skill*> m_SkillList;
 	std::vector<Drop*> m_DropList;
 	std::vector<Trap*> m_TrapList;
+	
+	Player *m_Player;
+	Object *m_Gate;
 
 	std::vector<Decorations*> m_DecorationList;
 
@@ -46,7 +49,7 @@ public:
 
 	std::vector<Decorations*> m_InRangeDecoration;
 
-	Player *m_Player;
+
 
 	//SOUND
 	int m_iHandleBGM;
@@ -56,6 +59,7 @@ public:
 	Widget *m_PauseBox;
 	Button *m_ButtonResume;
 	Button *m_ButtonQuit;
+	
 	MiniMap* m_MiniMap;
 
 	Widget *m_HpHolder;
@@ -68,9 +72,12 @@ public:
 	Text *m_GoldText;
 
 	Fader *m_TransitionScreen;
+	Fader *m_DeathBanner;
 
 	//LOGIC
 	bool m_isStartUp;
+	bool m_isNextState;
+	bool m_isDead;
 	bool m_isQuit;
 	float m_fNextStateFrame;
 	
@@ -95,10 +102,12 @@ public:
 	
 	void UpdateInRange();
 	void ClearInRange();
-	bool CheckInRange(Vector2 roomID);			//ONLY UPDATE NEAR
-	void UpdateRoomID();						//UPDATE ROOM_ID FOR CHARACTER
-	void UpdateControl(float frameTime);		//CONTROL PLAYER
-	void UpdateControlPause(float frameTime);	//HANDLE INPUT WHILE PAUSE
+	bool CheckInRange(Vector2 roomID);				//ONLY UPDATE NEAR
+	void UpdateRoomID();							//UPDATE ROOM_ID FOR CHARACTER
+	void UpdateControl(float frameTime);			//CONTROL PLAYER
+	void UpdatePause(float frameTime);				//HANDLE INPUT WHILE PAUSE
+	void UpdateResult(float frameTime);				//UPDATE NEXT STATE 
+	void SetRecord(bool isWin);						//SAVE PLAY RECORD
 
 	/////////////////////////////////////////////////////////
 

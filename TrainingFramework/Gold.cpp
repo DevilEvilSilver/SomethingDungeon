@@ -15,7 +15,6 @@ void Gold::OnCollision()
 	Player* player = StatePlay::GetInstance()->m_Player;
 
 	player->m_GOLD+= this->getValue();
-	player->numGoldText->setText("Gold: " + std::to_string(player->m_GOLD));
 
 	SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 	isPicked = true;

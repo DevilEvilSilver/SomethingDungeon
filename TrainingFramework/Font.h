@@ -1,7 +1,9 @@
 #pragma once
 
 #include <string>
+#include <map>
 #include "../Utilities/utilities.h"
+#include "Glyph.h"
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
@@ -20,6 +22,8 @@ private:
 
 public:
 	unsigned int m_iResourceID;
+	std::map<char, Glyph> m_Glyphs;
+
 	~Font();
 
 	Font(unsigned int resourceID,const std::string& font);
