@@ -71,9 +71,10 @@ void Room::RoomGenerate() {
 			
 			int rNum = rand() % 100 + 1;
 
-			if (rNum <= 40) AddEnemy(SKELETON);
-			else if (rNum <= 70) AddEnemy(WITCH);
-			else AddEnemy(BEAR);
+			if (rNum <= 25) AddEnemy(SKELETON);
+			else if (rNum <= 50) AddEnemy(WITCH);
+			else if (rNum <=75)AddEnemy(BEAR);
+			//else if (rNum>=90)AddEnemy(B_ROBOTKNIGHT);
 
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
@@ -232,8 +233,8 @@ void Room::AddEnemy(std::string prefabName)
 	{
 		bool error = false;
 
-		unsigned int randPosX = 2+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-3.0f);
-		unsigned int randPosY = 2+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 3.0f);
+		unsigned int randPosX = 1+rand() % (unsigned int)((float)ROOM_WIDTH - size.x-1.0f);
+		unsigned int randPosY = 1+rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 1.0f);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 
 		
@@ -246,6 +247,8 @@ void Room::AddEnemy(std::string prefabName)
 		else
 			if (prefabName == SKELETON)
 				result = new Skeleton(prefabName, m_RoomID, translation);
+			else if (prefabName == B_ROBOTKNIGHT)
+				result = new RobotKnight(prefabName, m_RoomID, translation);
 
 		if (error == false)
 			for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {

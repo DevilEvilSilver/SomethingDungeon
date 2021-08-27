@@ -295,6 +295,8 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 			}
 		}
 	}
+
+
 	m_Map[currPosX][currPosY] = END;
 
 	for (unsigned int i = 0; i < 32; i++) {
