@@ -228,35 +228,35 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>Source Files\Objects\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Witch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Goblin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="RobotKnight.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Decorations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Arrow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArrowTower.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="Chest.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Traps</Filter>
     </ClCompile>
-    <ClCompile Include="StateResult.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ArrowTower.cpp">
+      <Filter>Source Files\Objects\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Source Files\Objects\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="Decorations.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="StateShop.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Witch.cpp">
+      <Filter>Source Files\Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="StateResult.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -398,44 +398,44 @@
     <ClInclude Include="MiniMap.h">
       <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Witch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Goblin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RobotKnight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Decorations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Arrow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArrowTower.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Chest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Glyph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateShop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrowTower.h">
+      <Filter>Header Files\Objects\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Header Files\Objects\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateResult.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Goblin.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotKnight.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Witch.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="StateShop.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Decorations.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Glyph.h">
+      <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
