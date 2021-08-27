@@ -1,6 +1,7 @@
 #pragma once
 #include "../Utilities/utilities.h"
 #include<vector>
+#include <string>
 #include "Singleton.h"
 #include "Sound.h"
 

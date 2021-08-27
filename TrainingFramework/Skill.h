@@ -9,7 +9,7 @@ protected:
 
     //USER
     Character* m_owner;
-    bool m_isPlayer;
+    
 
     //DMG
     //SkillDamage m_percentDamage;
@@ -34,6 +34,8 @@ public:
     bool isFinished = false;
     int mp_MPCost;
   
+    bool m_isPlayer;
+
     Skill(Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
     virtual ~Skill();
 

@@ -79,7 +79,6 @@ void Room::RoomGenerate() {
 			if (rNum <= 25) AddEnemy(SKELETON);
 			else if (rNum <= 50) AddEnemy(WITCH);
 			else if (rNum <=75)AddEnemy(BEAR);
-			//else if (rNum>=90)AddEnemy(B_ROBOTKNIGHT);
 
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
@@ -102,7 +101,7 @@ void Room::RoomGenerate() {
 
 		//StatePlay::GetInstance()->AddEnemy(enemy);
 
-		GenerateDeco();
+		//GenerateDeco();
 	}
 	else if (m_RoomType == END)
 	{
@@ -252,8 +251,6 @@ void Room::AddEnemy(std::string prefabName)
 		else
 			if (prefabName == SKELETON)
 				result = new Skeleton(prefabName, m_RoomID, translation);
-			else if (prefabName == B_ROBOTKNIGHT)
-				result = new RobotKnight(prefabName, m_RoomID, translation);
 
 		if (error == false)
 			for (auto& obj : StatePlay::GetInstance()->m_EnemyList) {

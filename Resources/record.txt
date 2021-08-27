@@ -1,8 +1,8 @@
-LOSE
-CurrHP -2
-MaxHP 1
-CurrMP 20
-MaxMP 20
-ATK 3
-DEF 3
-Gold 0
+FLOOR_2
+CurrHP 9994
+MaxHP 10000
+CurrMP 120
+MaxMP 120
+ATK 9
+DEF 5
+Gold 9300
