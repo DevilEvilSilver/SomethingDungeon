@@ -302,8 +302,8 @@ void StatePlay::Init() {
 	m_TransitionScreen = NULL;
 
 	//INIT TEXT
-	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 640.5f, 1.0f);
-	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 367.5f, 700.5f, 1.0f);
+	m_HpText = new Text(m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 330.0f, 654.0f, 1.0f);
+	m_MpText = new Text(m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 330.0f, 699.0f, 1.0f);
 	m_GoldText = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 700.0f, 1.0f, TEXT_ALIGN::RIGHT);
 	m_KeyText = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1025.0f, 655.0f, 1.0f, TEXT_ALIGN::RIGHT);
 }

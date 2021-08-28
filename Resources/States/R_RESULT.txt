@@ -34,13 +34,13 @@ SIZE 6.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
 
 ID transition
 MODEL 0

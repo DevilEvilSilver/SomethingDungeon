@@ -52,13 +52,13 @@ SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+FILE ../Resources/Animation/buttonReset/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+FILE ../Resources/Animation/buttonReset/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+FILE ../Resources/Animation/buttonReset/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonReset/unavailable/sprite.txt
 
 ID buttonItemHP
 MODEL 0
@@ -137,13 +137,13 @@ SIZE 4.0 x 4.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/unavailable/sprite.txt
 
 ID buttonPause
 MODEL 0
@@ -171,13 +171,13 @@ SIZE 6.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonResume/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonResume/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonResume/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonResume/unavailable/sprite.txt
 
 ID buttonQuit
 MODEL 0
@@ -188,13 +188,13 @@ SIZE 6.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
 
 ID pauseBox
 MODEL 0
@@ -205,7 +205,7 @@ SIZE 10.0 x 10.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
 
 ID transition
 MODEL 0

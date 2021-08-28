@@ -227,6 +227,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_LOAD.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_RESULT.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_SHOP.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOAD.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOGO.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_PLAY.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_RESULT.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_SHOP.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_WELCOME.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_LOAD.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_RESULT.txt" />
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_SHOP.txt" />
     <Text Include="..\Resources\States\R_LOGO.txt" />
     <Text Include="..\Resources\States\R_PLAY.txt" />
     <Text Include="..\Resources\States\R_WELCOME.txt" />

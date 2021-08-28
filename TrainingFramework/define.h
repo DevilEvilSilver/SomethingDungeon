@@ -245,3 +245,9 @@
 #define ITEM_NAME_DEF			"Athena Shield"
 #define ITEM_DESCRIPTION_DEF	"Bonus XX DEF for player"
 #define ITEM_PRICE_DEF			50
+	//HPPOTION
+#define ITEM_HPPOTION				5
+#define BUTTON_ITEM_HPPOTION		"buttonItemHPOTION"
+#define ITEM_NAME_HPPOTION			"Health Potion"
+#define ITEM_DESCRIPTION_HPPOTION	"Heal 50% HP for player"
+#define ITEM_PRICE_HPPOTION			25

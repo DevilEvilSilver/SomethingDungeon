@@ -504,8 +504,8 @@ ID hpHolder
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.625, 0.75
-SIZE 5.625 x 0.75
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -515,8 +515,8 @@ ID hpBar
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 4.0875, 0.6
-SIZE 4.0875 x 0.6
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -526,8 +526,8 @@ ID mpHolder
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.625, 0.75
-SIZE 5.625 x 0.75
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -537,8 +537,8 @@ ID mpBar
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 4.0875, 0.6
-SIZE 4.0875 x 0.6
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -636,13 +636,13 @@ SIZE 3.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonResume/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonResume/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonResume/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonResume/unavailable/sprite.txt
 
 ID buttonQuit
 MODEL 0
@@ -653,13 +653,13 @@ SIZE 3.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
 
 ID pauseBox
 MODEL 0
@@ -670,7 +670,7 @@ SIZE 5.0 x 5.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
 
 ID transition
 MODEL 0
