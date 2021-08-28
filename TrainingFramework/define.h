@@ -217,6 +217,10 @@
 //SHOP ITEMS
 #define ITEM_SELL				3
 #define ITEM_COUNT				4
+	//RESET BUTTON
+#define ITEM_NAME_RESET			"Reset Items"
+#define ITEM_DESCRIPTION_RESET	"Reset new items in the shop"
+#define ITEM_PRICE_RESET		1
 	//HP
 #define ITEM_HP					1
 #define BUTTON_ITEM_HP			"buttonItemHP"

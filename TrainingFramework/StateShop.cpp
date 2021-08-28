@@ -25,6 +25,12 @@ StateShop::~StateShop() {
 	delete m_ButtonResume;
 	delete m_ButtonQuit;
 
+	delete m_ButtonReset;
+	delete m_ResetName;
+	delete m_ResetDescription;
+	delete m_ResetPrice;
+	delete m_ItemKeyIcon;
+
 	for (auto& object : m_ButtonItemList) {
 		delete object;
 	}
@@ -49,6 +55,8 @@ StateShop::~StateShop() {
 	delete m_StatDEF;
 	delete m_PlayerGold;
 	delete m_PlayerGoldIcon;
+	delete m_PlayerKey;
+	delete m_PlayerKeyIcon;
 
 	delete m_Player;
 	delete m_Camera;
@@ -114,6 +122,18 @@ void StateShop::Init() {
 		m_ItemGoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Item Key Icon
+	{
+		fscanf(dataFile, "#ITEM_KEY_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ItemKeyIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Player Gold Icon
 	{
 		fscanf(dataFile, "#PLAYER_GOLD_ICON\n");
@@ -124,6 +144,30 @@ void StateShop::Init() {
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
 		m_PlayerGoldIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Player Key Icon
+	{
+		fscanf(dataFile, "#PLAYER_KEY_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_PlayerKeyIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Button Reset
+	{
+		fscanf(dataFile, "#BUTTON_RESET\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonReset = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
 	//Pause Box
@@ -187,6 +231,11 @@ void StateShop::Init() {
 	m_StatATK = new Text("ATTACK: " + std::to_string(m_Player->m_ATK), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 350.0f, 1.0f);
 	m_StatDEF = new Text("DEFENCE: " + std::to_string(m_Player->m_DEF), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 420.f, 1.0f);
 	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1022.0f, 520.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	m_PlayerKey = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1022.0f, 490.0f, 1.0f, TEXT_ALIGN::RIGHT);
+
+	m_ResetName = new Text(ITEM_NAME_RESET, SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 28.0f, 634.0f, 1.1f);
+	m_ResetDescription = new Text(ITEM_DESCRIPTION_RESET, SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 28.0f, 662.0f, 0.8f);
+	m_ResetPrice = new Text(std::to_string(ITEM_PRICE_RESET), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 842.0f, 690.0f, 1.0f, TEXT_ALIGN::RIGHT);
 
 	//INIT ITEMS
 	for (unsigned int i = 0; i < ITEM_SELL; i++) {
@@ -255,6 +304,16 @@ void StateShop::Render() {
 	m_Background->Render(this->m_Camera);
 	m_ButtonStart->Render(this->m_Camera);	
 
+	m_ButtonReset->Render(this->m_Camera);
+
+	if (!strcmp(m_ButtonReset->m_strState.c_str(), B_HOVER) ||
+		!strcmp(m_ButtonReset->m_strState.c_str(), B_PRESSED)) {
+		Renderer::GetInstance()->DrawText2(m_ResetName);
+		Renderer::GetInstance()->DrawText2(m_ResetDescription);
+		Renderer::GetInstance()->DrawText2(m_ResetPrice);
+		m_ItemKeyIcon->Render(this->m_Camera);
+	}
+
 	for (auto& obj : m_ButtonItemList)
 	{
 		obj->Render(this->m_Camera);
@@ -276,6 +335,8 @@ void StateShop::Render() {
 	Renderer::GetInstance()->DrawText2(m_StatDEF);
 	Renderer::GetInstance()->DrawText2(m_PlayerGold);
 	m_PlayerGoldIcon->Render(this->m_Camera);
+	Renderer::GetInstance()->DrawText2(m_PlayerKey);
+	m_PlayerKeyIcon->Render(this->m_Camera);
 
 	m_ButtonPause->Render(m_Camera);
 	if (m_isPause) {
@@ -311,6 +372,7 @@ void StateShop::Update(float frameTime) {
 			m_ButtonStart->Update(frameTime);
 
 			m_ItemGoldIcon->Update(frameTime);
+			m_ItemKeyIcon->Update(frameTime);
 
 			m_StatHP->setText("HEALTH: " + m_Player->GetHP());
 			m_StatMP->setText("MANA: " + m_Player->GetMP());
@@ -318,6 +380,8 @@ void StateShop::Update(float frameTime) {
 			m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
 			m_PlayerGold->setText(m_Player->GetGold());
 			m_PlayerGoldIcon->Update(frameTime);
+			m_PlayerKey->setText(m_Player->GetKey());
+			m_PlayerKeyIcon->Update(frameTime);
 		}
 	}
 
@@ -353,6 +417,46 @@ void StateShop::UpdateControl(float frameTime)
 	m_ButtonStart->isPressed(this->m_Camera);
 	m_ButtonStart->isHover(this->m_Camera);
 
+	//Button Reset
+	if (m_ButtonReset->isReleased(this->m_Camera)) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+
+		unsigned int itemPrice = std::stoi(m_ResetPrice->m_text);
+
+		if (itemPrice <= m_Player->m_KEY) {
+			m_Player->m_KEY -= itemPrice;
+
+			//Delete old items
+			for (auto& object : m_ButtonItemList) {
+				delete object;
+			}
+			m_ButtonItemList.clear();
+			for (auto& object : m_ItemNameList) {
+				delete object;
+			}
+			m_ItemNameList.clear();
+			for (auto& object : m_ItemDescriptionList) {
+				delete object;
+			}
+			m_ItemDescriptionList.clear();
+			for (auto& object : m_ItemPriceList) {
+				delete object;
+			}
+			m_ItemPriceList.clear();
+
+			//init new items
+			for (unsigned int i = 0; i < ITEM_SELL; i++) {
+				GenerateItem();
+			}
+			m_ButtonItemList[0]->m_fCameraPosX = -13.8889f; m_ButtonItemList[0]->m_fCameraPosY = 1.1111f;
+			m_ButtonItemList[1]->m_fCameraPosX = -7.7778f; m_ButtonItemList[1]->m_fCameraPosY = 1.1111f;
+			m_ButtonItemList[2]->m_fCameraPosX = -1.6667f; m_ButtonItemList[2]->m_fCameraPosY = 1.1111f;
+		}
+	}
+	m_ButtonReset->isPressed(this->m_Camera);
+	m_ButtonReset->isHover(this->m_Camera);
+
+	//Button Buy
 	for (unsigned int i = 0; i < ITEM_SELL; i++) {
 		if (m_ButtonItemList[i]->isReleased(this->m_Camera)) {
 			SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
@@ -480,7 +584,7 @@ void StateShop::SetRecord() {
 	fprintf(recordFile, "ATK %d\n", m_Player->m_ATK);
 	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
-	fprintf(recordFile, "Key %d\n", m_Player->m_KEY);
+	fprintf(recordFile, "Key %d\n", INIT_PLAYER_KEY);
 
 	fclose(recordFile);
 }
