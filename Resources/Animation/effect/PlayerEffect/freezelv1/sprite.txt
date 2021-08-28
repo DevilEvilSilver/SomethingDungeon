@@ -1,0 +1,13 @@
+#FRAME_COUNT 3
+ID 0
+SPF 0.09
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv1/0.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.09
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv1/1.tga
+TILING GL_REPEAT
+ID 2
+SPF -1
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv1/2.tga
+TILING GL_REPEAT

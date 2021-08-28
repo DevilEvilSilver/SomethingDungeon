@@ -2,16 +2,13 @@
 #include "Object.h"
 #include "Character.h"
 #include "SkillId.h"
-
 class Skill :
     public Object
 {
 protected:
-
+    std::string m_EffectID;
     //USER
     Character* m_owner;
-    
-
     //DMG
     //SkillDamage m_percentDamage;
     SkillDamage m_SkillDamage;
@@ -26,7 +23,7 @@ protected:
 
     //hit flag
     bool m_bHit;
-
+    void InitEffect(std::string prefabID);
 public:
     //MP COST
     
@@ -44,8 +41,6 @@ public:
     void UpdateMove(float frameTime);         //Init Position and velocity
     virtual void UpdateHit(float frameTime);    // Hit-> Collison and Self Destruct
     void UpdateExistingTime(float frameTime);   // Self Destruct
-
-
     void Render(Camera* camera);
 };
 

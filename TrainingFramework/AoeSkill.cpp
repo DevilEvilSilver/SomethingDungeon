@@ -18,8 +18,8 @@ AoeSkill::AoeSkill(Character* owner, std::string prefabID, Vector2 roomID, Matri
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 
 	m_isKnockBack = true;
-	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
-	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = false;
+	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = true;
+	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = true;
 }
 AoeSkill::AoeSkill(Vector2 tar, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)

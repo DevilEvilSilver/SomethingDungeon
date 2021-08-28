@@ -89,7 +89,6 @@ StatePlay::~StatePlay() {
 				delete object;
 			}
 		}
-
 		m_EffectList.clear();
 
 		delete m_Player;
@@ -649,9 +648,10 @@ void StatePlay::Update(float frameTime) {
 				for (auto& obj : m_InRangeDrop) {
 						obj->Update(frameTime);
 				}
-				for (auto& obj : m_InRangeEffect) {
-			obj->Update(frameTime);
-		}
+				for (auto& obj : m_InRangeEffect) 
+				{
+					obj->Update(frameTime);
+				}
 
 				UpdateControl(frameTime);
 
@@ -787,6 +787,11 @@ void StatePlay::UpdateControl(float frameTime)
 		{
 			m_Player->PlayerMove(m_Player->RIGHT);
 		}
+		else if (newKeyPressed & MOUSE_LEFT || newKeyPressed & MOUSE_RIGHT)
+		{
+			//m_Player->SetCS(Character::CS_ATTACK);
+		}
+		
 	}
 
 

@@ -28,8 +28,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_MOVESPEED = 3.0f;
 	isDead = false;
-	AddSkill(BULLET_SKILL);
-	m_currentSkillId = BULLET_SKILL;
+	
 }
 Enemy::~Enemy() {}
 void Enemy::UniqueUpdate(float frameTime)
@@ -154,38 +153,5 @@ void Enemy::createDrop()
 void Enemy::UseSkill(float frameTime)
 {
 	
-	Vector2 MousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
-	SkillID* skillID1;
-	Skill* NewSkill1;
-	Matrix T;
-	T.SetIdentity();
-	for (auto& obj : m_SkillList)
-	{
-		if (m_currentSkillId == obj->m_prefabID)
-			skillID1 = obj;
-	}
-	if ((float)skillID1->m_MPCost < this->m_currMP)
-	{
-		if ((float)skillID1->m_fCurrCoolDownTime <= 0)
-		{
-			if (skillID1->m_prefabID == AOE_SKILL)
-			{
-				NewSkill1 = new AoeSkill( this, AOE_SKILL, this->m_RoomID, T);
-				StatePlay::GetInstance()->AddSkill(NewSkill1);
-				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
-				//Sound
-				// Character animation 
-				// Character action
-			}
-			else if (skillID1->m_prefabID == BULLET_SKILL)
-			{
-				NewSkill1 = new BulletSkill(this, BULLET_SKILL, this->m_RoomID, T);
-				StatePlay::GetInstance()->AddSkill(NewSkill1);
-				skillID1->m_fCurrCoolDownTime = (float)skillID1->m_CoolDownTime;
-				//Sound
-				// Character animation 
-				// Character action
-			}
-		}
-	}
+	
 }

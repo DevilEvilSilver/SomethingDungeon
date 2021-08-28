@@ -5,8 +5,7 @@
 class Character : public Object {
 protected:
 	float m_atk;
-	std::vector<SkillID*> m_SkillList;
-	std::string m_currentSkillId;
+	
 public:
 
 	//STATE

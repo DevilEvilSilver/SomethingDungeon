@@ -6,7 +6,7 @@
 #include "Room.h"
 #include "define.h"
 #include "AoeSkill.h"
-#include "Effect.h"
+//#include "Effect.h"
 BulletSkill::BulletSkill( Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
 {
@@ -50,9 +50,9 @@ void BulletSkill::UpdateHit(float frameTime)
 					//enemy->isAttacked
 					m_bHit = false;
 					isFinished = true;
-					Matrix t; t.SetIdentity();
+					/*Matrix t; t.SetIdentity();
 					Effect* effect = new Effect(Vector2(0, 0), EffectExistingTime::SKILL_FREEZE3, EFFECT_SKILL_FIRE3, enemy->m_RoomID, t, enemy);
-					StatePlay::GetInstance()->AddEffect(effect);
+					StatePlay::GetInstance()->AddEffect(effect);*/
 					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 				}
 

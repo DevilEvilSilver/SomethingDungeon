@@ -61,13 +61,7 @@ void Character::Update(float frameTime)
 	case CS_DEATH:
 		Death(frameTime);
 		break;
-	case CS_USESKILL:
-		UseSkill(frameTime);
-			break;
 	}
-
-	
-
 	if (m_currHP <= 0)
 	{
 		if (m_cState != CS_DEATH)
@@ -78,7 +72,8 @@ void Character::Update(float frameTime)
 		}
 		
 	}
-	else UniqueUpdate(frameTime);
+	else 
+		UniqueUpdate(frameTime);
 
 	
 	//UseSkill(frameTime);
@@ -112,6 +107,7 @@ void Character::Attack(float frameTime)
 {
 	m_strState = ATTACK;
 	if (FixedMove(Vector2(0, 0), 0.0f, atkDuration, frameTime) == true) SetCS(CS_IDLE);
+	//UseSkill(frameTime);
 }
 
 bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
@@ -272,12 +268,7 @@ void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float fr
 
 Character::~Character()
 {
-	for (auto& obj : m_SkillList)
-	{
-		delete obj;
-		obj = NULL;
-	}
-	m_SkillList.clear();
+	
 }
 void Character::SetCS(CharacterState newState)
 {
@@ -297,19 +288,7 @@ void Character::Render(Camera* camera)
 }
 void Character::AddSkill(std::string prefabId)
 {
-	SkillID* skillID;
-	if (prefabId == AOE_SKILL)
-	{
-		skillID = new SkillID(AOE_SKILL, SkillCoolDownTime::AOE_CDTIME, SkillMPCost::AOE_MPCOST);
-		m_SkillList.push_back(skillID);
-	}
-	else if (prefabId == BULLET_SKILL)
-	{
-		skillID = new SkillID(BULLET_SKILL, SkillCoolDownTime::BULLET_ENEMY_CDTIME, SkillMPCost::BULLET_MPCOST);
-		m_SkillList.push_back(skillID);
-	}
 	
-	//more skill here
 }
 void Character::UpdateChangeSkill(float frameTime) // change current skill
 {
@@ -321,8 +300,5 @@ void Character::UseSkill(float frameTime)
 }
 void Character::UpdateCurrentCDTime(float frameTime)
 {
-	for (auto& obj : m_SkillList)
-	{
-		obj->m_fCurrCoolDownTime -= (frameTime * 1000);
-	}
+	
 }

@@ -102,6 +102,18 @@
 #define SKILL_2			"skill2"
 #define BULLET_SKILL	"skill"
 #define AOE_SKILL		"aoeskill"
+//SKILL PREFAB
+#define SKILL_WIND1		"skillWind1"
+#define SKILL_WIND2		"skillWind2"
+#define SKILL_WIND3		"skillWind3"
+
+#define SKILL_FIRE1		"skillFireLv1"
+#define SKILL_FIRE2		"skillFireLv2"
+#define SKILL_FIRE3		"skillFireLv3"
+
+#define SKILL_FREEZE1		"skillFreezeLv1"
+#define SKILL_FREEZE2		"skillFreezeLv2"
+#define SKILL_FREEZE3		"skillFreezeLv3"
 
 #define NORMAL_ROOM		"normalRoom"
 #define NORMAL_ROOM_1	"normalRoom1"

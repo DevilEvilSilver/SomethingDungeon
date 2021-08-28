@@ -9,7 +9,9 @@
 //#include "Skill.h"
 class Player : public Character {
 private:
-	std::vector<SkillID*> m_UniqueSkillList;
+	SkillID* m_RangeSkillID;
+	SkillID* m_CloseSkillID;
+	SkillID* m_Dash;
 public:
 
 	//ENUM
@@ -30,7 +32,6 @@ public:
 	//PLAYER SKILL
 	virtual void UseSkill(float frameTime);
 	virtual void AddSkill(std::string prefabId);
-	virtual void UpdateChangeSkill(float frameTime); // change current skill
 	bool Dash(float frameTime);
 	//Update CoolDownTime
 	virtual void UpdateCurrentCDTime(float frameTime);
