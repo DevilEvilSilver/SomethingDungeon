@@ -1,5 +1,5 @@
-FLOOR_2
-CurrHP 94
+FLOOR_1
+CurrHP 100
 MaxHP 100
 CurrMP 50
 MaxMP 50
