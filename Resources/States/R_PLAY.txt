@@ -1,4 +1,4 @@
-#PREFAB_COUNT 56
+#PREFAB_COUNT 57
 ID mainChar
 MODEL 0
 SHADER 0
@@ -598,6 +598,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/minimap/player/sprite.txt
+
+ID gateInstruct
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0, 1.0
+SIZE 4.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gate/instruct/sprite.txt
 
 ID buttonPause
 MODEL 0

@@ -73,6 +73,8 @@ public:
 	Widget *m_KeyIcon;
 	Text *m_KeyText;
 
+	Widget *m_GateInstruct;
+
 	Fader *m_TransitionScreen;
 	Fader *m_DeathBanner;
 

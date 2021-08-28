@@ -22,17 +22,17 @@ void Gate::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 	Player* player = StatePlay::GetInstance()->m_Player;
 
-	if (CheckCollide(player))
-		if (InputManager::GetInstance()->keyPressed & KEY_SPACE &&
-			player->m_KEY > 0) {
+	if (CheckAvailable(player))
+		if (InputManager::GetInstance()->keyPressed & KEY_SPACE) {
 			m_strState = GATE_ACTIVE;
 			player->m_KEY--;
 			StatePlay::GetInstance()->m_isNextState = true;
 		}
 }
 
-bool Gate::CheckCollide(Object *object) {
-	if (CollisionManager::CheckCollision(this, object)) {
+bool Gate::CheckAvailable(Player *player) {
+	if (CollisionManager::CheckCollision(this, player)  &&
+		player->m_KEY > 0) {
 		m_strState = GATE_COLLIDE;
 		StatePlay::GetInstance()->m_isGateInstruct = true;
 		return true;

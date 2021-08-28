@@ -15,5 +15,5 @@ public:
 
 	void Update(float frameTime);
 
-	bool CheckCollide(Object *object);
+	bool CheckAvailable(Player *player);
 };

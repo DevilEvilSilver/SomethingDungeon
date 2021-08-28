@@ -104,6 +104,7 @@ StatePlay::~StatePlay() {
 	delete m_KeyIcon;
 	delete m_KeyText;
 	delete m_MiniMap;
+	delete m_GateInstruct;
 
 	if (m_TransitionScreen != NULL)
 		delete m_TransitionScreen;
@@ -274,6 +275,18 @@ void StatePlay::Init() {
 		translation.SetTranslation(x, y, 1.0f);
 
 		m_MiniMap = new MiniMap(translation, (RoomType*)m_Map, m_Camera, m_Player);
+	}
+
+	//Gate Instruct
+	{
+		fscanf(dataFile, "#GATE_INSTRUCT\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_GateInstruct = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
 	fclose(dataFile);
@@ -485,6 +498,11 @@ void StatePlay::Render() {
 		//MiniMap
 		m_MiniMap->Render(m_Camera);
 
+		//Gate instruct
+		if (m_isGateInstruct) {
+			m_GateInstruct->Render(m_Camera);
+		}
+
 		if (m_DeathBanner != NULL)
 			m_DeathBanner->Render(this->m_Camera);
 		if (m_TransitionScreen != NULL)
@@ -635,13 +653,17 @@ void StatePlay::Update(float frameTime) {
 				m_MpBar->Resize(m_Player->m_currMP);
 				m_MpText->setText(m_Player->GetMP());
 
-				m_MiniMap->Update(frameTime);
-
 				m_GoldIcon->Update(frameTime);
 				m_GoldText->setText(m_Player->GetGold());
 
 				m_KeyIcon->Update(frameTime);
 				m_KeyText->setText(m_Player->GetKey());
+				
+				m_MiniMap->Update(frameTime);
+
+				if (m_isGateInstruct) {
+					m_GateInstruct->Update(frameTime);
+				}
 			}
 		}
 	}
