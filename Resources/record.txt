@@ -1,9 +1,10 @@
-FLOOR_1
-CurrHP 100
+FLOOR_BOSS
+CurrHP 50
 MaxHP 100
-CurrMP 150
-MaxMP 150
-ATK 6
+CurrMP 50
+MaxMP 100
+ATK 5
 DEF 5
-Gold 500
-Key 10
+Gold 9997
+Key 100
+Speed 4.000000

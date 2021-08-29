@@ -27,7 +27,7 @@ int Init(ESContext* esContext) {
 	InputManager::GetInstance();
 	StateManager::GetInstance();
 
-	FPSCountText = new Text("0", SHADER_TEXT, FONT_BANK, TEXT_COLOR::GREEN, 2.0f, 20.0f, 1.0f);
+	FPSCountText = new Text("0", SHADER_TEXT, FONT_SOLID, TEXT_COLOR::GREEN, 2.0f, 20.0f, 1.0f);
 	timer.Init();
 
 	return 0;

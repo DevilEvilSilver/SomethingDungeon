@@ -53,6 +53,7 @@ StateShop::~StateShop() {
 	delete m_StatMP;
 	delete m_StatATK;
 	delete m_StatDEF;
+	delete m_StatSPEED;
 	delete m_PlayerGold;
 	delete m_PlayerGoldIcon;
 	delete m_PlayerKey;
@@ -226,16 +227,18 @@ void StateShop::Init() {
 	m_Player = new Player(PLAYER, Vector2(0.0f, 0.0f), translation);
 
 	//INIT TEXT STAT
-	m_StatHP = new Text("HEALTH: " + m_Player->GetHP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 210.0f , 1.0f);
-	m_StatMP = new Text("MANA: " + m_Player->GetMP(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 280.0f, 1.0f);
-	m_StatATK = new Text("ATTACK: " + std::to_string(m_Player->m_ATK), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 350.0f, 1.0f);
-	m_StatDEF = new Text("DEFENCE: " + std::to_string(m_Player->m_DEF), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 750.0f, 420.f, 1.0f);
-	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1022.0f, 520.0f, 1.0f, TEXT_ALIGN::RIGHT);
-	m_PlayerKey = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 1022.0f, 490.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	m_StatHP = new Text("HEALTH: " + m_Player->GetHP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 206.0f , 1.0f);
+	m_StatMP = new Text("MANA: " + m_Player->GetMP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 272.0f, 1.0f);
+	m_StatATK = new Text("ATTACK: " + std::to_string(m_Player->m_ATK), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 338.0f, 1.0f);
+	m_StatDEF = new Text("DEFENCE: " + std::to_string(m_Player->m_DEF), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 404.f, 1.0f);
+	m_StatSPEED = new Text("SPEED: " + std::to_string(m_Player->m_MOVESPEED).
+		substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 470.f, 1.0f);
+	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 1022.0f, 520.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	m_PlayerKey = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 1022.0f, 490.0f, 1.0f, TEXT_ALIGN::RIGHT);
 
 	m_ResetName = new Text(ITEM_NAME_RESET, SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 28.0f, 634.0f, 1.1f);
-	m_ResetDescription = new Text(ITEM_DESCRIPTION_RESET, SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 28.0f, 662.0f, 0.8f);
-	m_ResetPrice = new Text(std::to_string(ITEM_PRICE_RESET), SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 842.0f, 690.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	m_ResetDescription = new Text(ITEM_DESCRIPTION_RESET, SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 28.0f, 662.0f, 0.8f);
+	m_ResetPrice = new Text(std::to_string(ITEM_PRICE_RESET), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 842.0f, 690.0f, 1.0f, TEXT_ALIGN::RIGHT);
 
 	//INIT ITEMS
 	for (unsigned int i = 0; i < ITEM_SELL; i++) {
@@ -255,33 +258,96 @@ void StateShop::Init() {
 
 void StateShop::GenerateItem() {
 	unsigned int item = rand() % ITEM_COUNT + 1;
-	std::string strButton, strName, strDescription, strPrice;
+	//unsigned int item = ITEM_KEY;
+	std::string strButton = BUTTON_ITEM_HEART_STONE,
+		strName = ITEM_NAME_HEART_STONE,
+		strDescription = ITEM_DESCRIPTION_HEART_STONE,
+		strPrice = std::to_string(ITEM_PRICE_MANA_CRYSTAL);
 	
 	switch (item) {
-	case ITEM_HP:
-		strButton = BUTTON_ITEM_HP;
-		strName = ITEM_NAME_HP;
-		strDescription = ITEM_DESCRIPTION_HP;
-		strPrice = std::to_string(ITEM_PRICE_HP);
+	case ITEM_HEART_STONE:
+		strButton = BUTTON_ITEM_HEART_STONE;
+		strName = ITEM_NAME_HEART_STONE;
+		strDescription = ITEM_DESCRIPTION_HEART_STONE;
+		strPrice = std::to_string(ITEM_PRICE_HEART_STONE);
 		break;
-	case ITEM_MP:
-		strButton = BUTTON_ITEM_MP;
-		strName = ITEM_NAME_MP;
-		strDescription = ITEM_DESCRIPTION_MP;
-		strPrice = std::to_string(ITEM_PRICE_MP);
+	case ITEM_MANA_CRYSTAL:
+		strButton = BUTTON_ITEM_MANA_CRYSTAL;
+		strName = ITEM_NAME_MANA_CRYSTAL;
+		strDescription = ITEM_DESCRIPTION_MANA_CRYSTAL;
+		strPrice = std::to_string(ITEM_PRICE_MANA_CRYSTAL);
 		break;
-	case ITEM_ATK:
-		strButton = BUTTON_ITEM_ATK;
-		strName = ITEM_NAME_ATK;
-		strDescription = ITEM_DESCRIPTION_ATK;
-		strPrice = std::to_string(ITEM_PRICE_ATK);
+	case ITEM_HERCULES_FIST:
+		strButton = BUTTON_ITEM_HERCULES_FIST;
+		strName = ITEM_NAME_HERCULES_FIST;
+		strDescription = ITEM_DESCRIPTION_HERCULES_FIST;
+		strPrice = std::to_string(ITEM_PRICE_HERCULES_FIST);
 		break;
-	case ITEM_DEF:
-	default:
-		strButton = BUTTON_ITEM_DEF;
-		strName = ITEM_NAME_DEF;
-		strDescription = ITEM_DESCRIPTION_DEF;
-		strPrice = std::to_string(ITEM_PRICE_DEF);
+	case ITEM_ATHENA_SHIELD:
+		strButton = BUTTON_ITEM_ATHENA_SHIELD;
+		strName = ITEM_NAME_ATHENA_SHIELD;
+		strDescription = ITEM_DESCRIPTION_ATHENA_SHIELD;
+		strPrice = std::to_string(ITEM_PRICE_ATHENA_SHIELD);
+		break;
+	case ITEM_CODEX_GIGAS:
+		strButton = BUTTON_ITEM_CODEX_GIGAS;
+		strName = ITEM_NAME_CODEX_GIGAS;
+		strDescription = ITEM_DESCRIPTION_CODEX_GIGAS;
+		strPrice = std::to_string(ITEM_PRICE_CODEX_GIGAS);
+		break;
+	case ITEM_HERMES_SHOE:
+		strButton = BUTTON_ITEM_HERMES_SHOE;
+		strName = ITEM_NAME_HERMES_SHOE;
+		strDescription = ITEM_DESCRIPTION_HERMES_SHOE;
+		strPrice = std::to_string(ITEM_PRICE_HERMES_SHOE);
+		break;
+	case ITEM_LIFE_STONE:
+		strButton = BUTTON_ITEM_LIFE_STONE;
+		strName = ITEM_NAME_LIFE_STONE;
+		strDescription = ITEM_DESCRIPTION_LIFE_STONE;
+		strPrice = std::to_string(ITEM_PRICE_LIFE_STONE);
+		break;
+	case ITEM_HEALTH_POTION:
+		strButton = BUTTON_ITEM_HEALTH_POTION;
+		strName = ITEM_NAME_HEALTH_POTION;
+		strDescription = ITEM_DESCRIPTION_HEALTH_POTION;
+		strPrice = std::to_string(ITEM_PRICE_HEALTH_POTION);
+		break;
+	case ITEM_MANA_POTION:
+		strButton = BUTTON_ITEM_MANA_POTION;
+		strName = ITEM_NAME_MANA_POTION;
+		strDescription = ITEM_DESCRIPTION_MANA_POTION;
+		strPrice = std::to_string(ITEM_PRICE_MANA_POTION);
+		break;
+	case ITEM_BLEEDING_FLOWER:
+		strButton = BUTTON_ITEM_BLEEDING_FLOWER;
+		strName = ITEM_NAME_BLEEDING_FLOWER;
+		strDescription = ITEM_DESCRIPTION_BLEEDING_FLOWER;
+		strPrice = std::to_string(ITEM_PRICE_BLEEDING_FLOWER);
+		break;
+	case ITEM_CORRUPTED_VINE:
+		strButton = BUTTON_ITEM_CORRUPTED_VINE;
+		strName = ITEM_NAME_CORRUPTED_VINE;
+		strDescription = ITEM_DESCRIPTION_CORRUPTED_VINE;
+		strPrice = std::to_string(ITEM_PRICE_CORRUPTED_VINE);
+		break;
+	case ITEM_ROTTEN_GINSENG:
+		strButton = BUTTON_ITEM_ROTTEN_GINSENG;
+		strName = ITEM_NAME_ROTTEN_GINSENG;
+		strDescription = ITEM_DESCRIPTION_ROTTEN_GINSENG;
+		strPrice = std::to_string(ITEM_PRICE_ROTTEN_GINSENG);
+		break;
+	case ITEM_TWILIGHT_BERRY:
+		strButton = BUTTON_ITEM_TWILIGHT_BERRY;
+		strName = ITEM_NAME_TWILIGHT_BERRY;
+		strDescription = ITEM_DESCRIPTION_TWILIGHT_BERRY;
+		strPrice = std::to_string(ITEM_PRICE_TWILIGHT_BERRY);
+		break;
+	case ITEM_KEY:
+		strButton = BUTTON_ITEM_KEY;
+		strName = ITEM_NAME_KEY;
+		strDescription = ITEM_DESCRIPTION_KEY;
+		strPrice = std::to_string(ITEM_PRICE_KEY);
 		break;
 	}
 
@@ -293,10 +359,10 @@ void StateShop::GenerateItem() {
 	Text* textName = new Text(strName, SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 28.0f, 634.0f, 1.1f);
 	AddItemName(textName);
 
-	Text* textDescription = new Text(strDescription, SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 28.0f, 662.0f, 0.8f);
+	Text* textDescription = new Text(strDescription, SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 28.0f, 662.0f, 0.8f);
 	AddItemDescription(textDescription);
 
-	Text* textPrice = new Text(strPrice, SHADER_TEXT, FONT_BANK, TEXT_COLOR::WHILE, 842.0f, 690.0f, 1.0f, TEXT_ALIGN::RIGHT);
+	Text* textPrice = new Text(strPrice, SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 842.0f, 690.0f, 1.0f, TEXT_ALIGN::RIGHT);
 	AddItemPrice(textPrice);
 }
 
@@ -333,6 +399,7 @@ void StateShop::Render() {
 	Renderer::GetInstance()->DrawText2(m_StatMP);
 	Renderer::GetInstance()->DrawText2(m_StatATK);
 	Renderer::GetInstance()->DrawText2(m_StatDEF);
+	Renderer::GetInstance()->DrawText2(m_StatSPEED);
 	Renderer::GetInstance()->DrawText2(m_PlayerGold);
 	m_PlayerGoldIcon->Render(this->m_Camera);
 	Renderer::GetInstance()->DrawText2(m_PlayerKey);
@@ -378,6 +445,8 @@ void StateShop::Update(float frameTime) {
 			m_StatMP->setText("MANA: " + m_Player->GetMP());
 			m_StatATK->setText("ATTACK: " + std::to_string(m_Player->m_ATK));
 			m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
+			m_StatSPEED->setText("SPEED: " + std::to_string(m_Player->m_MOVESPEED).
+				substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3));
 			m_PlayerGold->setText(m_Player->GetGold());
 			m_PlayerGoldIcon->Update(frameTime);
 			m_PlayerKey->setText(m_Player->GetKey());
@@ -545,19 +614,83 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 	if (itemPrice <= m_Player->m_GOLD) {
 		m_Player->m_GOLD -= itemPrice;
 
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HP)) {
-			m_Player->m_currHP += 50;
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEART_STONE)) {
 			m_Player->m_maxHP += 50;
+			m_Player->m_currHP += 50;
 		}
-		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MP)) {
-			m_Player->m_currMP += 50;
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_CRYSTAL)) {
 			m_Player->m_maxMP += 50;
+			m_Player->m_currMP += 50;
 		}
-		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ATK)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERCULES_FIST)) {
 			m_Player->m_ATK += 3;
 		}
-		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_DEF)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ATHENA_SHIELD)) {
+			m_Player->m_DEF += 3;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CODEX_GIGAS)) {
+			unsigned int currMaxMP = m_Player->m_maxMP;
+			m_Player->m_maxMP *= 1.1f;
+			m_Player->m_currMP += m_Player->m_maxMP - currMaxMP;
+
+			m_Player->m_maxHP *= 0.7f;
+			if (m_Player->m_maxHP < 1)
+				m_Player->m_maxHP = 1;
+			if (m_Player->m_maxHP < m_Player->m_currHP) {
+				m_Player->m_currHP = m_Player->m_maxHP;
+			}
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
+			m_Player->m_MOVESPEED *= 1.05;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_LIFE_STONE)) {
+			m_Player->m_maxHP += 50;
+			m_Player->m_currHP += 50;
+
 			m_Player->m_DEF += 1;
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEALTH_POTION)) {
+			m_Player->m_currHP += m_Player->m_maxHP * 0.5f;
+			if (m_Player->m_maxHP < m_Player->m_currHP) {
+				m_Player->m_currHP = m_Player->m_maxHP;
+			}
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_POTION)) {
+			m_Player->m_currMP += m_Player->m_maxMP * 0.5f;
+			if (m_Player->m_maxMP < m_Player->m_currMP) {
+				m_Player->m_currMP = m_Player->m_maxMP;
+			}
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BLEEDING_FLOWER)) {
+			m_Player->m_currHP = m_Player->m_maxHP;
+			
+			m_Player->m_DEF -= 1;
+			if (m_Player->m_DEF < 1)
+				m_Player->m_DEF = 1;
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CORRUPTED_VINE)) {
+			m_Player->m_currMP = m_Player->m_maxMP;
+
+			m_Player->m_DEF -= 1;
+			if (m_Player->m_DEF < 1)
+				m_Player->m_DEF = 1;
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
+			m_Player->m_currHP = m_Player->m_maxHP;
+
+			m_Player->m_MOVESPEED -= 1;
+			if (m_Player->m_MOVESPEED < 1)
+				m_Player->m_MOVESPEED = 1;
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TWILIGHT_BERRY)) {
+			m_Player->m_currMP = m_Player->m_maxMP;
+
+			m_Player->m_MOVESPEED -= 1;
+			if (m_Player->m_MOVESPEED < 1)
+				m_Player->m_MOVESPEED = 1;
+		}
+		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_KEY)) {
+			m_Player->m_KEY++;
 		}
 
 		m_ButtonItemList[itemIndex]->m_isAvailble = false;
@@ -585,6 +718,7 @@ void StateShop::SetRecord() {
 	fprintf(recordFile, "DEF %d\n", m_Player->m_DEF);
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
 	fprintf(recordFile, "Key %d\n", INIT_PLAYER_KEY);
+	fprintf(recordFile, "Speed %f\n", m_Player->m_MOVESPEED);
 
 	fclose(recordFile);
 }

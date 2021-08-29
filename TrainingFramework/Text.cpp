@@ -86,6 +86,9 @@ unsigned int Text::getWidth() {
 	switch (m_fontId) {
 	case FONT_BANK:
 		return m_text.size() * 16;
+	case FONT_DOGICA:
+	case FONT_DOGICA_BOLD:
+		return m_text.size() * 22;
 	default:
 		return m_text.size() * 16;
 	}

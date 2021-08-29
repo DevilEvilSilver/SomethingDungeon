@@ -36,6 +36,7 @@ public:
 	Text *m_StatMP;
 	Text *m_StatATK;
 	Text *m_StatDEF;
+	Text *m_StatSPEED;
 	Text *m_PlayerGold;
 	Widget *m_PlayerGoldIcon;
 	Text *m_PlayerKey;

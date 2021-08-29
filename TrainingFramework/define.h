@@ -47,11 +47,12 @@
 #define RECORD_WIN						"WIN"
 #define RECORD_LOSE						"LOSE"
 #define INIT_PLAYER_HP					100
-#define INIT_PLAYER_MP					50
-#define INIT_PLAYER_ATK					3
-#define INIT_PLAYER_DEF					3
-#define INIT_PLAYER_GOLD				1000
-#define INIT_PLAYER_KEY					10
+#define INIT_PLAYER_MP					100
+#define INIT_PLAYER_ATK					5
+#define INIT_PLAYER_DEF					5
+#define INIT_PLAYER_GOLD				10000
+#define INIT_PLAYER_KEY					100
+#define INIT_PLAYER_SPEED				4.0f
 
 //MAP
 #define MAP_WIDTH					22
@@ -85,9 +86,9 @@
 #define X_EPSILON			        0.1
 
 //FONT
-#define FONT_ARIAL				0
-#define FONT_FUTURE				1
-#define FONT_TIMES				2
+#define FONT_SOLID				1
+#define FONT_DOGICA				0
+#define FONT_DOGICA_BOLD		2
 #define FONT_BANK				3
 #define FONT_BANK_BOLD			4
 
@@ -215,39 +216,95 @@
 
 
 //SHOP ITEMS
-#define ITEM_SELL				3
-#define ITEM_COUNT				4
+#define ITEM_SELL							3
+#define ITEM_COUNT							4
 	//RESET BUTTON
-#define ITEM_NAME_RESET			"Reset Items"
-#define ITEM_DESCRIPTION_RESET	"Reset new items in the shop"
-#define ITEM_PRICE_RESET		1
-	//HP
-#define ITEM_HP					1
-#define BUTTON_ITEM_HP			"buttonItemHP"
-#define ITEM_NAME_HP			"Heart Stone"
-#define ITEM_DESCRIPTION_HP		"Bonus XX HP for player"
-#define ITEM_PRICE_HP			100
-	//MP
-#define ITEM_MP					2
-#define BUTTON_ITEM_MP			"buttonItemMP"
-#define ITEM_NAME_MP			"Mana Crystal"
-#define ITEM_DESCRIPTION_MP		"Bonus XX MP for player"
-#define ITEM_PRICE_MP			100
-	//ATK
-#define ITEM_ATK				3
-#define BUTTON_ITEM_ATK			"buttonItemATK"
-#define ITEM_NAME_ATK			"Hercules Fist"
-#define ITEM_DESCRIPTION_ATK	"Bonus XX ATK for player"
-#define ITEM_PRICE_ATK			200
-	//DEF
-#define ITEM_DEF				4
-#define BUTTON_ITEM_DEF			"buttonItemDEF"
-#define ITEM_NAME_DEF			"Athena Shield"
-#define ITEM_DESCRIPTION_DEF	"Bonus XX DEF for player"
-#define ITEM_PRICE_DEF			50
-	//HPPOTION
-#define ITEM_HPPOTION				5
-#define BUTTON_ITEM_HPPOTION		"buttonItemHPOTION"
-#define ITEM_NAME_HPPOTION			"Health Potion"
-#define ITEM_DESCRIPTION_HPPOTION	"Heal 50% HP for player"
-#define ITEM_PRICE_HPPOTION			25
+#define ITEM_NAME_RESET						"Reset Items"
+#define ITEM_DESCRIPTION_RESET				"Reset new items in the shop"
+#define ITEM_PRICE_RESET					1
+	//HEART_STONE
+#define ITEM_HEART_STONE					1
+#define BUTTON_ITEM_HEART_STONE				"buttonItemHeartStone"
+#define ITEM_NAME_HEART_STONE				"Heart Stone"
+#define ITEM_DESCRIPTION_HEART_STONE		"Increase 50 max HP"
+#define ITEM_PRICE_HEART_STONE				1
+	//MANA_CRYSTAL
+#define ITEM_MANA_CRYSTAL					2
+#define BUTTON_ITEM_MANA_CRYSTAL			"buttonItemManaCrystal"
+#define ITEM_NAME_MANA_CRYSTAL				"Mana Crystal"
+#define ITEM_DESCRIPTION_MANA_CRYSTAL		"Increase 50 max MP"
+#define ITEM_PRICE_MANA_CRYSTAL				1
+	//HERCULES_FIST
+#define ITEM_HERCULES_FIST					3
+#define BUTTON_ITEM_HERCULES_FIST			"buttonItemHerculesFist"
+#define ITEM_NAME_HERCULES_FIST				"Hercules Fist"
+#define ITEM_DESCRIPTION_HERCULES_FIST		"Increase 3 ATK"
+#define ITEM_PRICE_HERCULES_FIST			1
+	//ATHENA_SHIELD
+#define ITEM_ATHENA_SHIELD					4
+#define BUTTON_ITEM_ATHENA_SHIELD			"buttonItemAthenaShield"
+#define ITEM_NAME_ATHENA_SHIELD				"Athena Shield"
+#define ITEM_DESCRIPTION_ATHENA_SHIELD		"Increase 3 DEF"
+#define ITEM_PRICE_ATHENA_SHIELD			1
+	//CODEX_GIGAS
+#define ITEM_CODEX_GIGAS					5
+#define BUTTON_ITEM_CODEX_GIGAS				"buttonItemCodexGigas"
+#define ITEM_NAME_CODEX_GIGAS				"Codex Gigas"
+#define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 10% max MP & decrease 30% max HP"
+#define ITEM_PRICE_CODEX_GIGAS				1
+	//HERMES_SHOE
+#define ITEM_HERMES_SHOE					6
+#define BUTTON_ITEM_HERMES_SHOE				"buttonItemHermesShoe"
+#define ITEM_NAME_HERMES_SHOE				"Hermes Shoe"
+#define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 5% SPEED"
+#define ITEM_PRICE_HERMES_SHOE				1
+
+	//LIFE_STONE
+#define ITEM_LIFE_STONE						9
+#define BUTTON_ITEM_LIFE_STONE				"buttonItemLifeStone"
+#define ITEM_NAME_LIFE_STONE				"Life Stone"
+#define ITEM_DESCRIPTION_LIFE_STONE			"Increase 50 max HP & 1 DEF"
+#define ITEM_PRICE_LIFE_STONE				1
+
+	//HEALTH_POTION
+#define ITEM_HEALTH_POTION					15
+#define BUTTON_ITEM_HEALTH_POTION			"buttonItemHealthPotion"
+#define ITEM_NAME_HEALTH_POTION				"Health Potion"
+#define ITEM_DESCRIPTION_HEALTH_POTION		"Heal 50% HP"
+#define ITEM_PRICE_HEALTH_POTION			1
+	//MANA_POTION
+#define ITEM_MANA_POTION					16
+#define BUTTON_ITEM_MANA_POTION				"buttonItemManaPotion"
+#define ITEM_NAME_MANA_POTION				"Mana Potion"
+#define ITEM_DESCRIPTION_MANA_POTION		"Heal 50% MP"
+#define ITEM_PRICE_MANA_POTION				1
+	//BLEEDING_FLOWER
+#define ITEM_BLEEDING_FLOWER				17
+#define BUTTON_ITEM_BLEEDING_FLOWER			"buttonItemBleedingFlower"
+#define ITEM_NAME_BLEEDING_FLOWER			"Bleeding Flower"
+#define ITEM_DESCRIPTION_BLEEDING_FLOWER	"Heal 100% HP & decrease 1 DEF"
+#define ITEM_PRICE_BLEEDING_FLOWER			1
+	//CORRUPTED_VINE
+#define ITEM_CORRUPTED_VINE					18
+#define BUTTON_ITEM_CORRUPTED_VINE			"buttonItemCorruptedVine"
+#define ITEM_NAME_CORRUPTED_VINE			"Corrupted Vine"
+#define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP & decrease 1 DEF"
+#define ITEM_PRICE_CORRUPTED_VINE			1
+	//ROTTEN_GINSENG
+#define ITEM_ROTTEN_GINSENG					19
+#define BUTTON_ITEM_ROTTEN_GINSENG			"buttonItemRottenGinseng"
+#define ITEM_NAME_ROTTEN_GINSENG			"Rotten Ginseng"
+#define ITEM_DESCRIPTION_ROTTEN_GINSENG		"Heal 100% HP & decrease 1 SPEED"
+#define ITEM_PRICE_ROTTEN_GINSENG			1
+	//TWILIGHT_BERRY
+#define ITEM_TWILIGHT_BERRY					20
+#define BUTTON_ITEM_TWILIGHT_BERRY			"buttonItemTwilightBerry"
+#define ITEM_NAME_TWILIGHT_BERRY			"Twilight Berry"
+#define ITEM_DESCRIPTION_TWILIGHT_BERRY		"Heal 100% MP & decrease 1 SPEED"
+#define ITEM_PRICE_TWILIGHT_BERRY			1
+	//KEY
+#define ITEM_KEY							21
+#define BUTTON_ITEM_KEY						"buttonItemKey"
+#define ITEM_NAME_KEY						"Key"
+#define ITEM_DESCRIPTION_KEY				"Used for resetting new items in the shop"
+#define ITEM_PRICE_KEY						1
