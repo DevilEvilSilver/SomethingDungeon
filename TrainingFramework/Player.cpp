@@ -24,7 +24,7 @@ Player::~Player() {
 
 void Player::UniqueUpdate(float frameTime)
 {
-	m_isInvincible = true;
+	//m_isInvincible = true;
 	switch (m_cState)
 	{
 		case CS_DASH:
@@ -32,6 +32,7 @@ void Player::UniqueUpdate(float frameTime)
 		default:
 			break;
 	}
+	//if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	UseSkill(frameTime);
 }
 
@@ -120,8 +121,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 
-	AddSkill(SKILL_FIRE2);
-	AddSkill(SKILL_FREEZE2);
+	AddSkill(SKILL_FIRE1);
+	AddSkill(SKILL_FREEZE1);
 	AddSkill(DASH);
 	
 }
@@ -212,6 +213,7 @@ void Player::UseSkill(float frameTime)
 	Skill* NewSkill;
 	Matrix T;
 	T.SetIdentity();
+
 	if ((keyPressed & MOUSE_LEFT))
 	{
 		if ((float)m_CloseSkillID->m_MPCost < this->m_currMP)
@@ -289,15 +291,16 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
-	else if (keyPressed & KEY_SPACE)
+	else if (keyPressed & KEY_SPACE&&false)
 	{
 		if ((float)m_Dash->m_MPCost < this->m_currMP)
 		{
 			if ((float)m_Dash->m_fCurrCoolDownTime <= 0)
 			{
 				//Dash Skill Obj
-				SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
+				
 				SetCS(CS_DASH); //Character Action
+				Dash(frameTime);
 				//Character Animation
 			}
 		}
