@@ -16,7 +16,7 @@ BulletSkill::BulletSkill( Character* owner, std::string prefabID, Vector2 roomID
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 	m_isKnockBack = true;
 	m_isFacingUp = false;
-	m_isFacingLeft = false;
+	m_isFacingLeft = true;
 }
 BulletSkill::BulletSkill(Vector2 target, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
@@ -24,11 +24,9 @@ BulletSkill::BulletSkill(Vector2 target, Character* owner, std::string prefabID,
 
 	m_SkillDamage = SkillDamage::BULLET_DAMAGE;
 	m_ExsitingTime = SkillExistingTime::BULLET_EXISTINGTIME;
-	Init(target);
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 	m_isKnockBack = true;
-	m_isFacingUp = false;
-	m_isFacingLeft = false;
+	Init(target);
 }
 BulletSkill::~BulletSkill()
 {
@@ -50,9 +48,9 @@ void BulletSkill::UpdateHit(float frameTime)
 					//enemy->isAttacked
 					m_bHit = false;
 					isFinished = true;
-					/*Matrix t; t.SetIdentity();
-					Effect* effect = new Effect(Vector2(0, 0), EffectExistingTime::SKILL_FREEZE3, EFFECT_SKILL_FIRE3, enemy->m_RoomID, t, enemy);
-					StatePlay::GetInstance()->AddEffect(effect);*/
+					Matrix t; t.SetIdentity();
+					Effect* effect = new Effect(Vector2(0, 0), EffectExistingTime::EFFECT_SKILL_EXISTINGTIME, this->m_EffectID, enemy->m_RoomID, t, enemy);
+					StatePlay::GetInstance()->AddEffect(effect);
 					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
 				}
 
@@ -102,6 +100,10 @@ void BulletSkill::Init(Vector2 target)
 		target.x = player->GetPosX() + player->m_fWidth / 2;
 		target.y = player->GetPosY() - player->m_fHeight / 2;
 	}*/
+	if (m_owner->GetPosX() > target.x)
+		m_isFacingLeft = true;
+	else
+		m_isFacingLeft = false;
 	float fminDis = 0.5f;
 	float* ownerData = m_owner->GetHitBoxCurrentData();
 	Vector2 c1(ownerData[0] / 2.0f + ownerData[2] / 2.0f, ownerData[1] / 2.0f + ownerData[3] / 2.0f);

@@ -6,8 +6,8 @@ Effect::Effect(Vector2 pos, EffectExistingTime existTime, std::string prefabID, 
 {
 	m_strState = IDLE_LEFT;
 	mp_isFisnished = false;
-	m_isFacingUp = false;
-	m_isFacingLeft = false;
+	m_isFacingUp = true;
+	m_isFacingLeft = true;
 
 	m_fExistingTime = (float)existTime/1000;
 	m_fCurrExistingTime = 0;

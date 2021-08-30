@@ -9,7 +9,9 @@ enum class EffectExistingTime {
 
     EFFECT_EXISTINGTIME_FIRE1 = 300,
     EFFECT_EXISTINGTIME_FIRE2 = 300,
-    EFFECT_EXISTINGTIME_FIRE3 = 300
+    EFFECT_EXISTINGTIME_FIRE3 = 300,
+
+    EFFECT_SKILL_EXISTINGTIME = 450     //dung chung cho moi effect skill
 };
 class Effect :
     public Object

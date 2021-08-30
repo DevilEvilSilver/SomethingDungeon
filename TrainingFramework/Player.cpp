@@ -223,6 +223,7 @@ void Player::UseSkill(float frameTime)
 					NewSkill = new AoeSkill(this, SKILL_FIRE3, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill);
 					m_CloseSkillID->m_fCurrCoolDownTime = (float)m_CloseSkillID->m_CoolDownTime/1000;
+					
 					//Sound
 					//
 					// Character action state
@@ -251,7 +252,7 @@ void Player::UseSkill(float frameTime)
 	}
 	else if ((keyPressed & MOUSE_RIGHT))
 	{
-		if ((float)m_RangeSkillID->m_MPCost < this->m_currMP)
+		if ((float)m_RangeSkillID->m_MPCost <= this->m_currMP)
 		{
 			if ((float)m_RangeSkillID->m_fCurrCoolDownTime <= 0)
 			{
@@ -260,6 +261,7 @@ void Player::UseSkill(float frameTime)
 					NewSkill = new BulletSkill(MousePos,this, SKILL_FREEZE3, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill);
 					m_RangeSkillID->m_fCurrCoolDownTime = (float)m_RangeSkillID->m_CoolDownTime/1000;
+					m_currMP -= (float)m_RangeSkillID->m_MPCost;
 					//Sound
 					// Character animation 
 					// Character action
@@ -269,6 +271,7 @@ void Player::UseSkill(float frameTime)
 					NewSkill = new BulletSkill(MousePos,this, SKILL_FREEZE2, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill);
 					m_RangeSkillID->m_fCurrCoolDownTime = (float)m_RangeSkillID->m_CoolDownTime / 1000;
+					m_currMP -= (float)m_RangeSkillID->m_MPCost;
 					//Sound
 					// Character animation 
 					// Character action
@@ -278,6 +281,7 @@ void Player::UseSkill(float frameTime)
 					NewSkill = new BulletSkill(MousePos,this, SKILL_FREEZE1, this->m_RoomID, T);
 					StatePlay::GetInstance()->AddSkill(NewSkill);
 					m_RangeSkillID->m_fCurrCoolDownTime = (float)m_RangeSkillID->m_CoolDownTime / 1000;
+					m_currMP -= (float)m_RangeSkillID->m_MPCost;
 					//Sound
 					// Character animation 
 					// Character action

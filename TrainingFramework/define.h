@@ -101,7 +101,7 @@
 #define SKILL			"skill"
 #define SKILL_2			"skill2"
 #define BULLET_SKILL	"skill"
-#define AOE_SKILL		"aoeskill"
+#define AOE_SKILL		"enemyAoeskill"
 //SKILL PREFAB
 #define SKILL_WIND1		"skillWind1"
 #define SKILL_WIND2		"skillWind2"
@@ -167,10 +167,10 @@
 #define EFFECT_SKILL_FIRE1 "skillEffectFire1"
 #define EFFECT_SKILL_FIRE2 "skillEffectFire2"
 #define EFFECT_SKILL_FIRE3 "skillEffectFire3"
-#define EFFECT_SKILL_WIND1 "skillEffectWind1"
-#define EFFECT_SKILL_WIND2 "skillEffectWind2"
-#define EFFECT_SKILL_WIND3 "skillEffectWinf3"
-#define EFFECT_SKILL_WIND4 "skillEffectWind4"
+//#define EFFECT_SKILL_WIND1 "skillEffectWind1"
+//#define EFFECT_SKILL_WIND2 "skillEffectWind2"
+//#define EFFECT_SKILL_WIND3 "skillEffectWinf3"
+//#define EFFECT_SKILL_WIND4 "skillEffectWind4"
 
 
 //SKILL

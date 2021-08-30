@@ -48,6 +48,7 @@ public:
 	float GetPosY();
 	Vector2 GetPos();
 	Vector2 GetCenterPos();
+	Vector2 GetVelocity();
 	void SetPosX(float x);
 	void SetPosY(float y);
 	void SetDeltaY(float y);

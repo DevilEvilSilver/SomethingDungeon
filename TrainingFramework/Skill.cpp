@@ -80,10 +80,10 @@ void Skill::InitEffect(std::string prefabID)
 	else if (prefabID == SKILL_FREEZE3)
 		m_EffectID = EFFECT_SKILL_FREEZE3;
 	//WIND
-	else if (prefabID == SKILL_WIND1)
+	/*else if (prefabID == SKILL_WIND1)
 		m_EffectID = EFFECT_SKILL_WIND1;
 	else if (prefabID == SKILL_WIND2)
 		m_EffectID = EFFECT_SKILL_WIND2;
 	else if (prefabID == SKILL_WIND3)
-		m_EffectID = EFFECT_SKILL_WIND3;
+		m_EffectID = EFFECT_SKILL_WIND3;*/
 }

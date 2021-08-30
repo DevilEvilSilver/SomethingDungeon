@@ -3,6 +3,8 @@
 class AoeSkill :
     public Skill
 {
+private:
+    Vector2 m_offset;
 public:
     float mp_fAoeRadius;
 
@@ -11,5 +13,6 @@ public:
     ~AoeSkill();
     virtual void UpdateHit(float frameTime);
     virtual void Init(Vector2 target);
+    void UpdateCurrPos(float frameTime);
 };
 

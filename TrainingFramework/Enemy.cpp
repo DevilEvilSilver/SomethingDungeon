@@ -22,7 +22,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_DEF = 3;
 
 	m_strState = IDLE_LEFT;
-	isWallCollision = true;
+	isWallCollision = true; 
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 

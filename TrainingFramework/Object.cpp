@@ -72,7 +72,12 @@ Matrix Object::GetWorldMatrix() {
 	{
 		return Vector2(m_fCurrentPosX + m_fWidth/2, m_fCurrentPosY - m_fHeight/2);
 	}
+	Vector2 Object::GetVelocity()
+	{
+		return Vector2(m_fVx, m_fVy);
+	}
 	//SET
+
 	void Object::SetPosX(float x)
 	{
 
