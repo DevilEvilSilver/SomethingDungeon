@@ -217,7 +217,7 @@
 
 //SHOP ITEMS
 #define ITEM_SELL							3
-#define ITEM_COUNT							4
+#define ITEM_COUNT							21
 	//RESET BUTTON
 #define ITEM_NAME_RESET						"Reset Items"
 #define ITEM_DESCRIPTION_RESET				"Reset new items in the shop"
@@ -226,13 +226,13 @@
 #define ITEM_HEART_STONE					1
 #define BUTTON_ITEM_HEART_STONE				"buttonItemHeartStone"
 #define ITEM_NAME_HEART_STONE				"Heart Stone"
-#define ITEM_DESCRIPTION_HEART_STONE		"Increase 50 max HP"
+#define ITEM_DESCRIPTION_HEART_STONE		"Increase 75 max HP"
 #define ITEM_PRICE_HEART_STONE				1
 	//MANA_CRYSTAL
 #define ITEM_MANA_CRYSTAL					2
 #define BUTTON_ITEM_MANA_CRYSTAL			"buttonItemManaCrystal"
 #define ITEM_NAME_MANA_CRYSTAL				"Mana Crystal"
-#define ITEM_DESCRIPTION_MANA_CRYSTAL		"Increase 50 max MP"
+#define ITEM_DESCRIPTION_MANA_CRYSTAL		"Increase 75 max MP"
 #define ITEM_PRICE_MANA_CRYSTAL				1
 	//HERCULES_FIST
 #define ITEM_HERCULES_FIST					3
@@ -256,16 +256,56 @@
 #define ITEM_HERMES_SHOE					6
 #define BUTTON_ITEM_HERMES_SHOE				"buttonItemHermesShoe"
 #define ITEM_NAME_HERMES_SHOE				"Hermes Shoe"
-#define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 5% SPEED"
+#define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 3 SPEED"
 #define ITEM_PRICE_HERMES_SHOE				1
-
+	//TITAN_CHAIN
+#define ITEM_TITAN_CHAIN					7
+#define BUTTON_ITEM_TITAN_CHAIN				"buttonItemTitanChain"
+#define ITEM_NAME_TITAN_CHAIN				"Titan Chain"
+#define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 5 DEF & decrease 1 SPEED"
+#define ITEM_PRICE_TITAN_CHAIN				1
+	//ARES_BLADE
+#define ITEM_ARES_BLADE						8
+#define BUTTON_ITEM_ARES_BLADE				"buttonItemAresBlade"
+#define ITEM_NAME_ARES_BLADE				"Ares Blade"
+#define ITEM_DESCRIPTION_ARES_BLADE			"Increase 5 ATK & decrease 2 DEF"
+#define ITEM_PRICE_ARES_BLADE				1
 	//LIFE_STONE
 #define ITEM_LIFE_STONE						9
 #define BUTTON_ITEM_LIFE_STONE				"buttonItemLifeStone"
 #define ITEM_NAME_LIFE_STONE				"Life Stone"
 #define ITEM_DESCRIPTION_LIFE_STONE			"Increase 50 max HP & 1 DEF"
 #define ITEM_PRICE_LIFE_STONE				1
-
+	//OCEAN_SHARDS
+#define ITEM_OCEAN_SHARDS					10
+#define BUTTON_ITEM_OCEAN_SHARDS			"buttonItemOceanShards"
+#define ITEM_NAME_OCEAN_SHARDS				"Ocean Shards"
+#define ITEM_DESCRIPTION_OCEAN_SHARDS		"Increase 50 max MP & 1 DEF"
+#define ITEM_PRICE_OCEAN_SHARDS				1
+	//GIGANTIFICATION
+#define ITEM_GIGANTIFICATION				11
+#define BUTTON_ITEM_GIGANTIFICATION			"buttonItemGigantification"
+#define ITEM_NAME_GIGANTIFICATION			"Gigantification"
+#define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase 4 ATK & decrease 1 SPPED"
+#define ITEM_PRICE_GIGANTIFICATION			1
+	//ARTEMIS_BLESSING
+#define ITEM_ARTEMIS_BLESSING				12
+#define BUTTON_ITEM_ARTEMIS_BLESSING		"buttonItemArtemisBlessing"
+#define ITEM_NAME_ARTEMIS_BLESSING			"Artemis Blessing"
+#define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 1 SPEED, decrease 40% max MP"
+#define ITEM_PRICE_ARTEMIS_BLESSING			1
+	//BARBATOS_FAVOR
+#define ITEM_BARBATOS_FAVOR					13
+#define BUTTON_ITEM_BARBATOS_FAVOR			"buttonItemBarbatosFavor"
+#define ITEM_NAME_BARBATOS_FAVOR			"Barbatos Favor"
+#define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 150 max HP & decrease 1 ATK"
+#define ITEM_PRICE_BARBATOS_FAVOR			1
+	//AAMON_CONTRACT
+#define ITEM_AAMON_CONTRACT					14
+#define BUTTON_ITEM_AAMON_CONTRACT			"buttonItemAamonContract"
+#define ITEM_NAME_AAMON_CONTRACT			"Aamon Contract"
+#define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 150 max MP & decrease 1 ATK"
+#define ITEM_PRICE_AAMON_CONTRACT			1
 	//HEALTH_POTION
 #define ITEM_HEALTH_POTION					15
 #define BUTTON_ITEM_HEALTH_POTION			"buttonItemHealthPotion"

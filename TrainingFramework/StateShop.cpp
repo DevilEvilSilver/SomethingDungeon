@@ -258,7 +258,7 @@ void StateShop::Init() {
 
 void StateShop::GenerateItem() {
 	unsigned int item = rand() % ITEM_COUNT + 1;
-	//unsigned int item = ITEM_KEY;
+	//unsigned int item = ITEM_AAMON_CONTRACT;
 	std::string strButton = BUTTON_ITEM_HEART_STONE,
 		strName = ITEM_NAME_HEART_STONE,
 		strDescription = ITEM_DESCRIPTION_HEART_STONE,
@@ -301,11 +301,53 @@ void StateShop::GenerateItem() {
 		strDescription = ITEM_DESCRIPTION_HERMES_SHOE;
 		strPrice = std::to_string(ITEM_PRICE_HERMES_SHOE);
 		break;
+	case ITEM_TITAN_CHAIN:
+		strButton = BUTTON_ITEM_TITAN_CHAIN;
+		strName = ITEM_NAME_TITAN_CHAIN;
+		strDescription = ITEM_DESCRIPTION_TITAN_CHAIN;
+		strPrice = std::to_string(ITEM_PRICE_TITAN_CHAIN);
+		break;
+	case ITEM_ARES_BLADE:
+		strButton = BUTTON_ITEM_ARES_BLADE;
+		strName = ITEM_NAME_ARES_BLADE;
+		strDescription = ITEM_DESCRIPTION_ARES_BLADE;
+		strPrice = std::to_string(ITEM_PRICE_ARES_BLADE);
+		break;
 	case ITEM_LIFE_STONE:
 		strButton = BUTTON_ITEM_LIFE_STONE;
 		strName = ITEM_NAME_LIFE_STONE;
 		strDescription = ITEM_DESCRIPTION_LIFE_STONE;
 		strPrice = std::to_string(ITEM_PRICE_LIFE_STONE);
+		break;
+	case ITEM_OCEAN_SHARDS:
+		strButton = BUTTON_ITEM_OCEAN_SHARDS;
+		strName = ITEM_NAME_OCEAN_SHARDS;
+		strDescription = ITEM_DESCRIPTION_OCEAN_SHARDS;
+		strPrice = std::to_string(ITEM_PRICE_OCEAN_SHARDS);
+		break;
+	case ITEM_GIGANTIFICATION:
+		strButton = BUTTON_ITEM_GIGANTIFICATION;
+		strName = ITEM_NAME_GIGANTIFICATION;
+		strDescription = ITEM_DESCRIPTION_GIGANTIFICATION;
+		strPrice = std::to_string(ITEM_PRICE_GIGANTIFICATION);
+		break;
+	case ITEM_ARTEMIS_BLESSING:
+		strButton = BUTTON_ITEM_ARTEMIS_BLESSING;
+		strName = ITEM_NAME_ARTEMIS_BLESSING;
+		strDescription = ITEM_DESCRIPTION_ARTEMIS_BLESSING;
+		strPrice = std::to_string(ITEM_PRICE_ARTEMIS_BLESSING);
+		break;
+	case ITEM_BARBATOS_FAVOR:
+		strButton = BUTTON_ITEM_BARBATOS_FAVOR;
+		strName = ITEM_NAME_BARBATOS_FAVOR;
+		strDescription = ITEM_DESCRIPTION_BARBATOS_FAVOR;
+		strPrice = std::to_string(ITEM_PRICE_BARBATOS_FAVOR);
+		break;
+	case ITEM_AAMON_CONTRACT:
+		strButton = BUTTON_ITEM_AAMON_CONTRACT;
+		strName = ITEM_NAME_AAMON_CONTRACT;
+		strDescription = ITEM_DESCRIPTION_AAMON_CONTRACT;
+		strPrice = std::to_string(ITEM_PRICE_AAMON_CONTRACT);
 		break;
 	case ITEM_HEALTH_POTION:
 		strButton = BUTTON_ITEM_HEALTH_POTION;
@@ -615,12 +657,12 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		m_Player->m_GOLD -= itemPrice;
 
 		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEART_STONE)) {
-			m_Player->m_maxHP += 50;
-			m_Player->m_currHP += 50;
+			m_Player->m_maxHP += 75;
+			m_Player->m_currHP += 75;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_CRYSTAL)) {
-			m_Player->m_maxMP += 50;
-			m_Player->m_currMP += 50;
+			m_Player->m_maxMP += 75;
+			m_Player->m_currMP += 75;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERCULES_FIST)) {
 			m_Player->m_ATK += 3;
@@ -641,7 +683,21 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			}
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
-			m_Player->m_MOVESPEED *= 1.05;
+			m_Player->m_MOVESPEED += 3;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TITAN_CHAIN)) {
+			m_Player->m_DEF += 5;
+
+			m_Player->m_MOVESPEED -= 1;
+			if (m_Player->m_MOVESPEED < 1)
+				m_Player->m_MOVESPEED = 1;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
+			m_Player->m_ATK += 5;
+
+			m_Player->m_DEF -= 2;
+			if (m_Player->m_DEF < 1)
+				m_Player->m_DEF = 1;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_LIFE_STONE)) {
 			m_Player->m_maxHP += 50;
@@ -649,47 +705,90 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 
 			m_Player->m_DEF += 1;
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEALTH_POTION)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_OCEAN_SHARDS)) {
+			m_Player->m_maxMP += 50;
+			m_Player->m_currMP += 50;
+
+			m_Player->m_DEF += 1;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
+			m_Player->m_ATK += 4;
+
+			m_Player->m_MOVESPEED -= 1;
+			if (m_Player->m_MOVESPEED < 1)
+				m_Player->m_MOVESPEED = 1;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARTEMIS_BLESSING)) {
+			unsigned int currMaxHP = m_Player->m_maxHP;
+			m_Player->m_maxHP *= 1.25f;
+			m_Player->m_currHP += m_Player->m_maxHP - currMaxHP;
+
+			m_Player->m_MOVESPEED += 1;
+
+			m_Player->m_maxMP *= 0.6f;
+			if (m_Player->m_maxMP < 1)
+				m_Player->m_maxMP = 1;
+			if (m_Player->m_maxMP < m_Player->m_currMP) {
+				m_Player->m_currMP = m_Player->m_maxMP;
+			}
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BARBATOS_FAVOR)) {
+			m_Player->m_maxHP += 150;
+			m_Player->m_currHP += 150;
+
+			m_Player->m_ATK -= 1;
+			if (m_Player->m_ATK < 1)
+				m_Player->m_ATK = 1;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_AAMON_CONTRACT)) {
+			m_Player->m_maxMP += 150;
+			m_Player->m_currMP += 150;
+
+			m_Player->m_ATK -= 1;
+			if (m_Player->m_ATK < 1)
+				m_Player->m_ATK = 1;
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEALTH_POTION)) {
 			m_Player->m_currHP += m_Player->m_maxHP * 0.5f;
 			if (m_Player->m_maxHP < m_Player->m_currHP) {
 				m_Player->m_currHP = m_Player->m_maxHP;
 			}
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_POTION)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_POTION)) {
 			m_Player->m_currMP += m_Player->m_maxMP * 0.5f;
 			if (m_Player->m_maxMP < m_Player->m_currMP) {
 				m_Player->m_currMP = m_Player->m_maxMP;
 			}
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BLEEDING_FLOWER)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BLEEDING_FLOWER)) {
 			m_Player->m_currHP = m_Player->m_maxHP;
 			
 			m_Player->m_DEF -= 1;
 			if (m_Player->m_DEF < 1)
 				m_Player->m_DEF = 1;
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CORRUPTED_VINE)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CORRUPTED_VINE)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
 			m_Player->m_DEF -= 1;
 			if (m_Player->m_DEF < 1)
 				m_Player->m_DEF = 1;
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
 			m_Player->m_currHP = m_Player->m_maxHP;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
 				m_Player->m_MOVESPEED = 1;
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TWILIGHT_BERRY)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TWILIGHT_BERRY)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
 				m_Player->m_MOVESPEED = 1;
 		}
-		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_KEY)) {
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_KEY)) {
 			m_Player->m_KEY++;
 		}
 
