@@ -154,9 +154,6 @@ std::string Player::GetMP() {
 	return std::to_string(m_currMP) + "/" + std::to_string(m_maxMP);
 }
 
-std::string Player::GetGold() {
-	return std::to_string(m_GOLD);
-}
 void Player::AddSkill(std::string prefabId)
 {
 	// CLOSE SKILL
@@ -313,6 +310,7 @@ void Player::UpdateCurrentCDTime(float frameTime)
 	m_CloseSkillID->m_fCurrCoolDownTime -= frameTime;
 	m_RangeSkillID->m_fCurrCoolDownTime -= frameTime;
 	m_Dash->m_fCurrCoolDownTime -= frameTime;
+}
 
 std::string Player::GetGold() {
 	return std::to_string(m_GOLD);

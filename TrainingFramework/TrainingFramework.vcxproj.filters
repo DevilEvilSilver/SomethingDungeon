@@ -264,6 +264,21 @@
     <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
+    <ClCompile Include="CPlant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Frogman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Orcman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -451,6 +466,21 @@
     </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>Header Files\Objects\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Frogman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Orcman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
