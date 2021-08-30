@@ -1,4 +1,4 @@
-#PREFAB_COUNT 66
+#PREFAB_COUNT 69
 
 ID mainChar
 MODEL 0
@@ -479,6 +479,17 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/wallBorder/static/World1/wall_1_4.txt
 
+ID key
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID keyspin
+FILE ../Resources/Animation/key/static/sprite.txt
+
 ID gold
 MODEL 0
 SHADER 0
@@ -620,16 +631,20 @@ TYPE RECT
 COORD 0.0, 0.0, 6.0, 3.5
 SIZE 6.0 x 3.5
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 1
+ANIMATION_COUNT 3
 ID init
 FILE ../Resources/Animation/gate/static/sprite.txt
+ID gateCollide
+FILE ../Resources/Animation/gate/collide/sprite.txt
+ID gateActive
+FILE ../Resources/Animation/gate/active/sprite.txt
 
 ID hpHolder
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.625, 0.75
-SIZE 5.625 x 0.75
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -639,8 +654,8 @@ ID hpBar
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 4.0875, 0.6
-SIZE 4.0875 x 0.6
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -650,8 +665,8 @@ ID mpHolder
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.625, 0.75
-SIZE 5.625 x 0.75
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -661,8 +676,8 @@ ID mpBar
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 4.0875, 0.6
-SIZE 4.0875 x 0.6
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
@@ -678,6 +693,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID keyIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/key/static/sprite.txt
 
 ID minimap
 MODEL 0
@@ -712,6 +738,17 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/minimap/player/sprite.txt
 
+ID gateInstruct
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0, 1.0
+SIZE 4.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gate/instruct/sprite.txt
+
 ID buttonPause
 MODEL 0
 SHADER 0
@@ -738,13 +775,13 @@ SIZE 3.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonResume/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonResume/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonResume/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonResume/unavailable/sprite.txt
 
 ID buttonQuit
 MODEL 0
@@ -755,13 +792,13 @@ SIZE 3.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
 
 ID pauseBox
 MODEL 0
@@ -772,7 +809,7 @@ SIZE 5.0 x 5.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
 
 ID transition
 MODEL 0
@@ -860,13 +897,13 @@ GL_BLEND 1
 
 #FONT_COUNT 5
 ID 0
-FILE ../Resources/Fonts/arial.ttf
+FILE ../Resources/Fonts/dogica.ttf
 
 ID 1
-FILE ../Resources/Fonts/kenvector_future.ttf
+FILE ../Resources/Fonts/solid_mono.ttf
 
 ID 2
-FILE ../Resources/Fonts/times.ttf
+FILE ../Resources/Fonts/dogicabold.ttf
 
 ID 3
 FILE ../Resources/Fonts/F25_Bank_Printer.ttf

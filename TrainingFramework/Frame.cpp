@@ -47,7 +47,7 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 		iPixelsPerHeightRoom = 5;
 	int iW = iPixelsPerWidthRoom * (int)size.x,
 		iH = iPixelsPerHeightRoom * (int)size.y;
-	int iBpp = 24;
+	int iBpp = 32;
 	char* imageData = new char[iW*iH*(iBpp/8)];
 	
 	for (int i = 0; i < iW; i++)
@@ -56,21 +56,31 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 		{
 			if (roomType[ (i / iPixelsPerHeightRoom) *(int)size.x  + j / iPixelsPerWidthRoom] == WALL)
 			{
-				imageData[(j * iW + i) * 3 + 0] = 10;
-				imageData[(j * iW + i) * 3 + 1] = 10;
-				imageData[(j * iW + i) * 3 + 2] = 10;
+				imageData[(j * iW + i) * (iBpp / 8) + 0] = 10;
+				imageData[(j * iW + i) * (iBpp / 8) + 1] = 10;
+				imageData[(j * iW + i) * (iBpp / 8) + 2] = 10;
+				imageData[(j * iW + i) * (iBpp / 8) + 3] = 100;
 			}
 			else if(roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == END)
 			{
-				imageData[(j * iW + i) * 3 + 0] = -1;
-				imageData[(j * iW + i) * 3 + 1] = 0;
-				imageData[(j * iW + i) * 3 + 2] = 0;
+				imageData[(j * iW + i) * (iBpp / 8) + 0] = 176;
+				imageData[(j * iW + i) * (iBpp / 8) + 1] = 18;
+				imageData[(j * iW + i) * (iBpp / 8) + 2] = 10;
+				imageData[(j * iW + i) * (iBpp / 8) + 3] = 255;
+			}
+			else if (roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == KEY_ROOM)
+			{
+				imageData[(j * iW + i) * (iBpp / 8) + 0] = 255;
+				imageData[(j * iW + i) * (iBpp / 8) + 1] = 255;
+				imageData[(j * iW + i) * (iBpp / 8) + 2] = 59;
+				imageData[(j * iW + i) * (iBpp / 8) + 3] = 255;
 			}
 			else
 			{
-				imageData[(j * iW + i) * 3 + 0] = 0;
-				imageData[(j * iW + i) * 3 + 1] = -1;
-				imageData[(j * iW + i) * 3 + 2] = 0;
+				imageData[(j * iW + i) * (iBpp / 8) + 0] = 189;
+				imageData[(j * iW + i) * (iBpp / 8) + 1] = 189;
+				imageData[(j * iW + i) * (iBpp / 8) + 2] = 189;
+				imageData[(j * iW + i) * (iBpp / 8) + 3] = 255;
 			}
 			
 		}
@@ -78,7 +88,7 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 	
 	glGenTextures(1, &m_RendererID);
 	glBindTexture(GL_TEXTURE_2D, m_RendererID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iW, iH, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, iW, iH, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 	delete[]imageData;
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

@@ -1,0 +1,13 @@
+#FRAME_COUNT 3
+ID 0
+SPF 0.5
+FILE ../Resources/Animation/gate/instruct/gateInst1.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.5
+FILE ../Resources/Animation/gate/instruct/gateInst2.tga
+TILING GL_REPEAT
+ID 2
+SPF 0,75
+FILE ../Resources/Animation/gate/instruct/gateInst1.tga
+TILING GL_REPEAT

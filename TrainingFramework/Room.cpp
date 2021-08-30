@@ -3,6 +3,7 @@
 #include "Room.h"
 #include "Enemy.h"
 #include "Gold.h"
+#include "Key.h"
 #include "StatePlay.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
@@ -115,13 +116,25 @@ void Room::RoomGenerate() {
 	}
 	else if (m_RoomType == END)
 	{
-		Prefab* enemyPrefab = GetResource(B_ROBOTKNIGHT, ResourceManager::GetInstance()->m_PrefabList);
+		Prefab *gatePrefab = GetResource(GATE, ResourceManager::GetInstance()->m_PrefabList);
 		Matrix translation;
+		translation.SetTranslation(GetPosX() + ROOM_WIDTH / 2 - gatePrefab->m_fWidth / 2, GetPosY() - ROOM_HEIGHT / 2 + gatePrefab->m_fHeight / 2, 0.0f);
+		Gate* gate = new Gate(GATE, m_RoomID, translation);
+		StatePlay::GetInstance()->AddTrap(gate);
+
+		Prefab* enemyPrefab = GetResource(B_ROBOTKNIGHT, ResourceManager::GetInstance()->m_PrefabList);
 		translation.SetTranslation(GetPosX() + ROOM_WIDTH/2-enemyPrefab->m_fWidth/2, GetPosY()- ROOM_HEIGHT / 2 + enemyPrefab->m_fHeight/2, 0.0f);
-
 		RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
-
 		StatePlay::GetInstance()->AddEnemy(enemy);
+	}
+	else if (m_RoomType == KEY_ROOM) {
+		Prefab* keyPrefab = GetResource(KEY, ResourceManager::GetInstance()->m_PrefabList);
+		Matrix translation;
+		translation.SetTranslation(GetPosX() + ROOM_WIDTH / 2 - keyPrefab->m_fWidth / 2, GetPosY() - ROOM_HEIGHT / 2 + keyPrefab->m_fHeight / 2, 0.0f);
+
+		Key* key = new Key(KEY, m_RoomID, translation);
+
+		StatePlay::GetInstance()->AddDrop(key);
 	}
 }
 

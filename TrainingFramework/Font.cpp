@@ -5,6 +5,11 @@
 
 Font::~Font()
 {
+	for (unsigned char c = 0; c < 128; c++) {
+		glDeleteTextures(1, &m_Glyphs.at(c).TextureID);
+	}
+	glDeleteTextures(1, &_iTextID);
+
 	FT_Done_FreeType(m_library);
 }
 

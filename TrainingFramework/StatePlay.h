@@ -18,6 +18,7 @@
 #include "ArrowTower.h"
 #include "Arrow.h"
 #include "MiniMap.h"
+#include "Gate.h"
 #include "Decorations.h"
 #include "Effect.h"
 
@@ -37,7 +38,6 @@ public:
 	std::vector<Trap*> m_TrapList;
 	
 	Player *m_Player;
-	Object *m_Gate;
 
 	std::vector<Decorations*> m_DecorationList;
 	std::vector<Effect*> m_EffectList;
@@ -73,11 +73,16 @@ public:
 	Text *m_MpText;
 	Widget *m_GoldIcon;
 	Text *m_GoldText;
+	Widget *m_KeyIcon;
+	Text *m_KeyText;
+
+	Widget *m_GateInstruct;
 
 	Fader *m_TransitionScreen;
 	Fader *m_DeathBanner;
 
 	//LOGIC
+	bool m_isGateInstruct;
 	bool m_isStartUp;
 	bool m_isNextState;
 	bool m_isDead;

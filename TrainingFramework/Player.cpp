@@ -115,7 +115,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_RangeSkillID = NULL;
 	m_Dash = NULL;
 	atkDuration = 0.1f;
-	m_MOVESPEED = 3.0f;
+
 
 	isWallCollision = true;
 
@@ -145,6 +145,8 @@ void Player::LoadData() {
 	fscanf(recordFile, "ATK %d\n", &m_ATK);
 	fscanf(recordFile, "DEF %d\n", &m_DEF);
 	fscanf(recordFile, "Gold %d\n", &m_GOLD);
+	fscanf(recordFile, "Key %d\n", &m_KEY);
+	fscanf(recordFile, "Speed %f\n", &m_MOVESPEED);
 
 	fclose(recordFile);
 }
@@ -311,4 +313,11 @@ void Player::UpdateCurrentCDTime(float frameTime)
 	m_CloseSkillID->m_fCurrCoolDownTime -= frameTime;
 	m_RangeSkillID->m_fCurrCoolDownTime -= frameTime;
 	m_Dash->m_fCurrCoolDownTime -= frameTime;
+
+std::string Player::GetGold() {
+	return std::to_string(m_GOLD);
+}
+
+std::string Player::GetKey() {
+	return std::to_string(m_KEY);
 }

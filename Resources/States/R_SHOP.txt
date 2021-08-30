@@ -1,4 +1,4 @@
-#PREFAB_COUNT 13
+#PREFAB_COUNT 32
 ID mainChar
 MODEL 0
 SHADER 0
@@ -32,41 +32,35 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/gold/static/sprite.txt
 
-ID buttonItemHP
+ID keyIcon
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.5556, 4.6667
-SIZE 5.5556 x 4.6667
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
 SCALE_BY_SIZE 0
-ANIMATION_COUNT 4
-ID normal
-FILE ../Resources/Animation/buttonShop/HP/normal/sprite.txt
-ID pressed
-FILE ../Resources/Animation/buttonShop/HP/pressed/sprite.txt
-ID hover
-FILE ../Resources/Animation/buttonShop/HP/hover/sprite.txt
-ID unavailable
-FILE ../Resources/Animation/buttonShop/HP/unavailable/sprite.txt
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/key/static/sprite.txt
 
-ID buttonItemMP
+ID buttonReset
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 5.5556, 4.6667
-SIZE 5.5556 x 4.6667
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonShop/HP/normal/sprite.txt
+FILE ../Resources/Animation/buttonReset/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonShop/HP/pressed/sprite.txt
+FILE ../Resources/Animation/buttonReset/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonShop/HP/hover/sprite.txt
+FILE ../Resources/Animation/buttonReset/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonShop/HP/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonReset/unavailable/sprite.txt
 
-ID buttonItemATK
+ID buttonItemHeartStone
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -75,15 +69,15 @@ SIZE 5.5556 x 4.6667
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonShop/HP/normal/sprite.txt
+FILE ../Resources/Animation/buttonShop/HeartStone/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonShop/HP/pressed/sprite.txt
+FILE ../Resources/Animation/buttonShop/HeartStone/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonShop/HP/hover/sprite.txt
+FILE ../Resources/Animation/buttonShop/HeartStone/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonShop/HP/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonShop/HeartStone/unavailable/sprite.txt
 
-ID buttonItemDEF
+ID buttonItemManaCrystal
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -92,13 +86,336 @@ SIZE 5.5556 x 4.6667
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonShop/HP/normal/sprite.txt
+FILE ../Resources/Animation/buttonShop/ManaCrystal/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonShop/HP/pressed/sprite.txt
+FILE ../Resources/Animation/buttonShop/ManaCrystal/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonShop/HP/hover/sprite.txt
+FILE ../Resources/Animation/buttonShop/ManaCrystal/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonShop/HP/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonShop/ManaCrystal/unavailable/sprite.txt
+
+ID buttonItemHerculesFist
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/HerculesFist/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/HerculesFist/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/HerculesFist/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/HerculesFist/unavailable/sprite.txt
+
+ID buttonItemAthenaShield
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/AthenaShield/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/AthenaShield/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/AthenaShield/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/AthenaShield/unavailable/sprite.txt
+
+ID buttonItemCodexGigas
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/CodexGigas/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/CodexGigas/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/CodexGigas/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/CodexGigas/unavailable/sprite.txt
+
+ID buttonItemHermesShoe
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/HermesShoe/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/HermesShoe/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/HermesShoe/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/HermesShoe/unavailable/sprite.txt
+
+ID buttonItemTitanChain
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/TitanChain/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/TitanChain/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/TitanChain/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/TitanChain/unavailable/sprite.txt
+
+ID buttonItemAresBlade
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/AresBlade/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/AresBlade/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/AresBlade/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/AresBlade/unavailable/sprite.txt
+
+ID buttonItemLifeStone
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/LifeStone/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/LifeStone/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/LifeStone/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/LifeStone/unavailable/sprite.txt
+
+ID buttonItemOceanShards
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/OceanShards/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/OceanShards/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/OceanShards/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/OceanShards/unavailable/sprite.txt
+
+ID buttonItemGigantification
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/Gigantification/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/Gigantification/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/Gigantification/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/Gigantification/unavailable/sprite.txt
+
+ID buttonItemArtemisBlessing
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/ArtemisBlessing/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/ArtemisBlessing/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/ArtemisBlessing/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/ArtemisBlessing/unavailable/sprite.txt
+
+ID buttonItemBarbatosFavor
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/BarbatosFavor/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/BarbatosFavor/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/BarbatosFavor/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/BarbatosFavor/unavailable/sprite.txt
+
+ID buttonItemAamonContract
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/AamonContract/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/AamonContract/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/AamonContract/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/AamonContract/unavailable/sprite.txt
+
+ID buttonItemHealthPotion
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/HealthPotion/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/HealthPotion/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/HealthPotion/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/HealthPotion/unavailable/sprite.txt
+
+ID buttonItemManaPotion
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/ManaPotion/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/ManaPotion/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/ManaPotion/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/ManaPotion/unavailable/sprite.txt
+
+ID buttonItemBleedingFlower
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/BleedingFlower/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/BleedingFlower/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/BleedingFlower/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/BleedingFlower/unavailable/sprite.txt
+
+ID buttonItemCorruptedVine
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/CorruptedVine/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/CorruptedVine/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/CorruptedVine/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/CorruptedVine/unavailable/sprite.txt
+
+ID buttonItemRottenGinseng
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/RottenGinseng/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/RottenGinseng/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/RottenGinseng/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/RottenGinseng/unavailable/sprite.txt
+
+ID buttonItemTwilightBerry
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/TwilightBerry/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/TwilightBerry/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/TwilightBerry/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/TwilightBerry/unavailable/sprite.txt
+
+ID buttonItemKey
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/Key/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/Key/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/Key/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/Key/unavailable/sprite.txt
 
 ID buttonStart
 MODEL 0
@@ -109,13 +426,13 @@ SIZE 4.0 x 4.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonShop/start/unavailable/sprite.txt
 
 ID buttonPause
 MODEL 0
@@ -143,13 +460,13 @@ SIZE 6.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonResume/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonResume/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonResume/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonResume/unavailable/sprite.txt
 
 ID buttonQuit
 MODEL 0
@@ -160,13 +477,13 @@ SIZE 6.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
 
 ID pauseBox
 MODEL 0
@@ -177,7 +494,7 @@ SIZE 10.0 x 10.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/backgroundLogo/static/sprite.txt
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
 
 ID transition
 MODEL 0
@@ -221,13 +538,13 @@ GL_BLEND 1
 
 #FONT_COUNT 5
 ID 0
-FILE ../Resources/Fonts/arial.ttf
+FILE ../Resources/Fonts/dogica.ttf
 
 ID 1
-FILE ../Resources/Fonts/kenvector_future.ttf
+FILE ../Resources/Fonts/solid_mono.ttf
 
 ID 2
-FILE ../Resources/Fonts/times.ttf
+FILE ../Resources/Fonts/dogicabold.ttf
 
 ID 3
 FILE ../Resources/Fonts/F25_Bank_Printer.ttf

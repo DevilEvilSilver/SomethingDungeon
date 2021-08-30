@@ -22,7 +22,10 @@ public:
 		RIGHT
 	};
 	//STATS
-	int m_GOLD;
+	int m_maxMP,
+		m_currMP,
+		m_GOLD,
+		m_KEY;
 
 	//STATE
 	CharacterState m_pState;
@@ -52,4 +55,5 @@ public:
 	std::string GetHP();
 	std::string GetMP();
 	std::string GetGold();
+	std::string GetKey();
 };

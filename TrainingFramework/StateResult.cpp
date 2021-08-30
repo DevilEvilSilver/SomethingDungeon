@@ -41,9 +41,6 @@ void StateResult::Init() {
 	else
 		m_isWin = false;
 
-	unsigned int score;
-	fscanf(recordFile, "SCORE: %d\n", &score);
-
 	fclose(recordFile);
 
 	//read data file

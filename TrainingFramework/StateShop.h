@@ -20,19 +20,27 @@ public:
 	Button *m_ButtonResume;
 	Button *m_ButtonQuit;
 
+	Button *m_ButtonReset;
+	Text *m_ResetName;
+	Text *m_ResetDescription;
+	Text *m_ResetPrice;
+	Widget *m_ItemKeyIcon;
+
 	std::vector<Button*> m_ButtonItemList;
 	std::vector<Text*> m_ItemNameList;
 	std::vector<Text*> m_ItemDescriptionList;
 	std::vector<Text*> m_ItemPriceList;
-
 	Widget *m_ItemGoldIcon;
 
 	Text *m_StatHP;
 	Text *m_StatMP;
 	Text *m_StatATK;
 	Text *m_StatDEF;
+	Text *m_StatSPEED;
 	Text *m_PlayerGold;
 	Widget *m_PlayerGoldIcon;
+	Text *m_PlayerKey;
+	Widget *m_PlayerKeyIcon;
 
 	Fader *m_TransitionScreen;
 

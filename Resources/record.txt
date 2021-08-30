@@ -1,8 +1,10 @@
 FLOOR_1
 CurrHP 100
 MaxHP 100
-CurrMP 20
-MaxMP 20
+CurrMP 100
+MaxMP 100
 ATK 5
-DEF 3
-Gold 0
+DEF 5
+Gold 10000
+Key 100
+Speed 4.000000

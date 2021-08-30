@@ -6,6 +6,7 @@ enum RoomType {
 	WALL,
 	START,
 	END,
+	KEY_ROOM
 };
 
 class Room : public Object {
