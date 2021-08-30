@@ -136,7 +136,8 @@ void Player::LoadData() {
 	FILE* recordFile;
 	recordFile = fopen(FILE_RECORD, "r");
 
-	fscanf(recordFile, "%s\n");
+	char strFloor[50];
+	fscanf(recordFile, "%s\n", &strFloor);
 
 	fscanf(recordFile, "CurrHP %d\n", &m_currHP);
 	fscanf(recordFile, "MaxHP %d\n", &m_maxHP);
