@@ -3,6 +3,6 @@ CurrHP 100
 MaxHP 100
 CurrMP 20
 MaxMP 20
-ATK 3
+ATK 5
 DEF 3
 Gold 0

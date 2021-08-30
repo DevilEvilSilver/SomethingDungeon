@@ -113,8 +113,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_CloseSkillID = NULL;
 	m_RangeSkillID = NULL;
 	m_Dash = NULL;
-	atkDuration = 0.25f;
-	m_MOVESPEED = 8.0f;
+	atkDuration = 0.1f;
+	m_MOVESPEED = 3.0f;
 
 	isWallCollision = true;
 

@@ -47,7 +47,7 @@
 #define RECORD_LOSE						"LOSE"
 #define INIT_PLAYER_HP					100
 #define INIT_PLAYER_MP					20
-#define INIT_PLAYER_ATK					3
+#define INIT_PLAYER_ATK					5
 #define INIT_PLAYER_DEF					3
 #define INIT_PLAYER_GOLD				0
 
@@ -152,6 +152,9 @@
 #define SKELETON		"skeleton"
 #define PLANT			"carnivorousPlant"
 #define BEAR			"meleeSoldier"
+#define FROGMAN			"frogman"
+#define ORCMAN			"orcman"
+#define C_PLANT			"carnivorousPlant"
 
 #define CHEST			"chest"
 #define ARROW_TOWER		"arrowTower"

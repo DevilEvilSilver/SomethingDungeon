@@ -8,6 +8,6 @@ SPF 0.1
 FILE ../Resources/Animation/orcman/death/2.tga
 TILING GL_REPEAT
 ID 2
-SPF 0.1
+SPF -1
 FILE ../Resources/Animation/orcman/death/3.tga
 TILING GL_REPEAT
