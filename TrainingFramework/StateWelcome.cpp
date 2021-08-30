@@ -151,7 +151,7 @@ void StateWelcome::UpdateControl(float frameTime)
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 
-			StateManager::GetInstance()->AddState(GS_STATE_PLAY);
+			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
 			return;
 		}
 	}
