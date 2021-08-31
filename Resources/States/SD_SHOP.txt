@@ -1,4 +1,6 @@
-SoundNum 2
+SoundNum 4
 
 #ID 500 ../Resources/Sounds/shop_bgm.wav
 #ID 900 ../Resources/Sounds/button_sfx.wav
+#ID 909 ../Resources/Sounds/buy_success_sfx.wav
+#ID 910 ../Resources/Sounds/buy_fail_sfx.wav

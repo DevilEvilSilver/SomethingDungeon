@@ -37,6 +37,8 @@ public:
 	Text *m_StatATK;
 	Text *m_StatDEF;
 	Text *m_StatSPEED;
+	Text *m_StatMELEE;
+	Text *m_StatRANGE;
 	Text *m_PlayerGold;
 	Widget *m_PlayerGoldIcon;
 	Text *m_PlayerKey;
@@ -68,7 +70,7 @@ public:
 
 	void UpdateControl(float frameTime);
 	void UpdatePause(float frameTime);
-	void UpdateItemLogic(unsigned int itemIndex);
+	bool UpdateItemLogic(unsigned int itemIndex);
 	void SetRecord();
 
 	void Render();

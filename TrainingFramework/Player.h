@@ -51,7 +51,10 @@ public:
 	virtual void UseAttack();
 	void LoadData();
 
-	//UI
+	std::string GetCloseSkill();
+	std::string GetRangeSkill();
+	std::string GetCloseSkillName();
+	std::string GetRangeSkillName();
 	std::string GetHP();
 	std::string GetMP();
 	std::string GetGold();

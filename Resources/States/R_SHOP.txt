@@ -1,4 +1,4 @@
-#PREFAB_COUNT 32
+#PREFAB_COUNT 38
 ID mainChar
 MODEL 0
 SHADER 0
@@ -416,6 +416,108 @@ ID hover
 FILE ../Resources/Animation/buttonShop/Key/hover/sprite.txt
 ID unavailable
 FILE ../Resources/Animation/buttonShop/Key/unavailable/sprite.txt
+
+ID buttonItemFlameSword
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/FlameSword/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/FlameSword/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/FlameSword/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/FlameSword/unavailable/sprite.txt
+
+ID buttonItemPyroWave
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/PyroWave/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/PyroWave/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/PyroWave/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/PyroWave/unavailable/sprite.txt
+
+ID buttonItemSolarDescend
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/SolarDescend/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/SolarDescend/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/SolarDescend/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/SolarDescend/unavailable/sprite.txt
+
+ID buttonItemIceArrow
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/IceArrow/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/IceArrow/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/IceArrow/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/IceArrow/unavailable/sprite.txt
+
+ID buttonItemGlacialBlast
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/GlacialBlast/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/GlacialBlast/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/GlacialBlast/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/GlacialBlast/unavailable/sprite.txt
+
+ID buttonItemAbsoluteZero
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.5556, 4.6667
+SIZE 5.5556 x 4.6667
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonShop/AbsoluteZero/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonShop/AbsoluteZero/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonShop/AbsoluteZero/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonShop/AbsoluteZero/unavailable/sprite.txt
 
 ID buttonStart
 MODEL 0

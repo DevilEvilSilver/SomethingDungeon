@@ -171,6 +171,8 @@ void StateWelcome::InitRecord() {
 	fprintf(recordFile, "Gold %d\n", INIT_PLAYER_GOLD);
 	fprintf(recordFile, "Key %d\n", INIT_PLAYER_KEY);
 	fprintf(recordFile, "Speed %f\n", INIT_PLAYER_SPEED);
+	fprintf(recordFile, "Melee %s\n", INIT_PLAYER_MELEE);
+	fprintf(recordFile, "Range %s\n", INIT_PLAYER_RANGE);
 
 	fclose(recordFile);
 }

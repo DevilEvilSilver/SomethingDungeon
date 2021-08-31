@@ -996,6 +996,8 @@ void StatePlay::SetRecord(bool isWin) {
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
 	fprintf(recordFile, "Key %d\n", m_Player->m_KEY);
 	fprintf(recordFile, "Speed %f\n", m_Player->m_MOVESPEED);
+	fprintf(recordFile, "Melee %s\n", m_Player->GetCloseSkill().c_str());
+	fprintf(recordFile, "Range %s\n", m_Player->GetRangeSkill().c_str());
 
 	fclose(recordFile);
 }

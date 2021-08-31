@@ -52,7 +52,12 @@
 #define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				10000
 #define INIT_PLAYER_KEY					100
-#define INIT_PLAYER_SPEED				4.0f
+#define INIT_PLAYER_SPEED				9.0f
+#define INIT_PLAYER_MELEE				"skillFireLv1"
+#define INIT_PLAYER_RANGE				"skillFreezeLv1"
+#define PLAYER_ATK_MAX					10
+#define PLAYER_DEF_MAX					10
+#define PLAYER_SPEED_MAX				10
 
 //MAP
 #define MAP_WIDTH					22
@@ -240,11 +245,13 @@
 #define WHOOSH				906
 #define DEATH_SFX			907
 #define TELEPORT_SFX		908
+#define BUY_SUCCESS_SFX		909
+#define BUY_FAIL_SFX		910
 
 
 //SHOP ITEMS
 #define ITEM_SELL							3
-#define ITEM_COUNT							21
+#define ITEM_COUNT							27
 	//RESET BUTTON
 #define ITEM_NAME_RESET						"Reset Items"
 #define ITEM_DESCRIPTION_RESET				"Reset new items in the shop"
@@ -375,3 +382,39 @@
 #define ITEM_NAME_KEY						"Key"
 #define ITEM_DESCRIPTION_KEY				"Used for resetting new items in the shop"
 #define ITEM_PRICE_KEY						1
+	//FLAME_SWORD
+#define ITEM_FLAME_SWORD					22
+#define BUTTON_ITEM_FLAME_SWORD				"buttonItemFlameSword"
+#define ITEM_NAME_FLAME_SWORD				"Flame Sword (Melee Skill)"
+#define ITEM_DESCRIPTION_FLAME_SWORD		"..."
+#define ITEM_PRICE_FLAME_SWORD				1
+	//PYRO_WAVE
+#define ITEM_PYRO_WAVE						23
+#define BUTTON_ITEM_PYRO_WAVE				"buttonItemPyroWave"
+#define ITEM_NAME_PYRO_WAVE					"PyroWave (Melee Skill)"
+#define ITEM_DESCRIPTION_PYRO_WAVE			"..."
+#define ITEM_PRICE_PYRO_WAVE				1
+	//SOLAR_DESCEND
+#define ITEM_SOLAR_DESCEND					24
+#define BUTTON_ITEM_SOLAR_DESCEND			"buttonItemSolarDescend"
+#define ITEM_NAME_SOLAR_DESCEND				"Solar Descend (Melee Skill)"
+#define ITEM_DESCRIPTION_SOLAR_DESCEND		"..."
+#define ITEM_PRICE_SOLAR_DESCEND			1
+	//ICE_ARROW
+#define ITEM_ICE_ARROW						25
+#define BUTTON_ITEM_ICE_ARROW				"buttonItemIceArrow"
+#define ITEM_NAME_ICE_ARROW					"Ice Arrow (Ranged Skill)"
+#define ITEM_DESCRIPTION_ICE_ARROW			"..."
+#define ITEM_PRICE_ICE_ARROW				1
+	//GLACIAL_BLAST
+#define ITEM_GLACIAL_BLAST					26
+#define BUTTON_ITEM_GLACIAL_BLAST			"buttonItemGlacialBlast"
+#define ITEM_NAME_GLACIAL_BLAST				"Glacial Blast (Ranged Skill)"
+#define ITEM_DESCRIPTION_GLACIAL_BLAST		"..."
+#define ITEM_PRICE_GLACIAL_BLAST			1
+	//ABSOLUTE_ZERO
+#define ITEM_ABSOLUTE_ZERO					27
+#define BUTTON_ITEM_ABSOLUTE_ZERO			"buttonItemAbsoluteZero"
+#define ITEM_NAME_ABSOLUTE_ZERO				"Absolute Zero (Ranged Skill)"
+#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"..."
+#define ITEM_PRICE_ABSOLUTE_ZERO			1

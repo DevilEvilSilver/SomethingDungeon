@@ -502,6 +502,42 @@
     <Text Include="..\Resources\States\S_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOGO.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_PLAY.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_WELCOME.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TrainingFramework.rc">

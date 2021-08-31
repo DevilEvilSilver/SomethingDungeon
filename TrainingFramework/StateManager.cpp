@@ -13,8 +13,8 @@
 
 StateManager::StateManager()
 {
-	//AddState(GS_STATE_SHOP);
-	AddState(GS_STATE_LOGO);
+	AddState(GS_STATE_SHOP);
+	//AddState(GS_STATE_LOGO);
 }
 
 StateManager::~StateManager() {

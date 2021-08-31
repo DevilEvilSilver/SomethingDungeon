@@ -1,10 +1,12 @@
 FLOOR_1
-CurrHP 100
-MaxHP 100
-CurrMP 100
-MaxMP 100
-ATK 5
-DEF 5
-Gold 10000
+CurrHP 187
+MaxHP 187
+CurrMP 180
+MaxMP 180
+ATK 11
+DEF 9
+Gold 9986
 Key 100
-Speed 10.000000
+Speed 8.000000
+Melee skillFireLv2
+Range skillFreezeLv3
