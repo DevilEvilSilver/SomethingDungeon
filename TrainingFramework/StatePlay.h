@@ -111,7 +111,7 @@ public:
 	
 	void UpdateInRange();
 	void ClearInRange();
-	bool CheckInRange(Vector2 roomID);				//ONLY UPDATE NEAR
+	bool CheckInRange(Vector2 roomID,int delta=1);				//ONLY UPDATE NEAR
 	void UpdateRoomID();							//UPDATE ROOM_ID FOR CHARACTER
 	void UpdateControl(float frameTime);			//CONTROL PLAYER
 	void UpdatePause(float frameTime);				//HANDLE INPUT WHILE PAUSE

@@ -53,7 +53,7 @@ void AoeSkill::UpdateHit(float frameTime)
 			{
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
-					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+					enemy->UpdateGotHit(m_damage, m_isKnockBack, GetCenterPos(), frameTime);
 					Matrix t; t.SetIdentity();
 					Effect* effect = new Effect(Vector2(0, 0), EffectExistingTime::EFFECT_SKILL_EXISTINGTIME, this->m_EffectID, enemy->m_RoomID, t, enemy);
 					StatePlay::GetInstance()->AddEffect(effect);
@@ -70,6 +70,16 @@ void AoeSkill::UpdateHit(float frameTime)
 			}
 
 		}
+
+		for (auto& obj : StatePlay::GetInstance()->m_InRangeDecoration) {
+			{
+				if (CollisionManager::CheckCollision(this, obj))
+				{
+					obj->hp--;
+				}
+			}
+		}
+
 	}
 	UpdateCurrPos(frameTime);
 }

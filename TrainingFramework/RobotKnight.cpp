@@ -127,6 +127,7 @@ void RobotKnight::Charge(float frameTime)
 				}					
 			}
 
+
 			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.75f, frameTime) == true)
 			{
 				i++;
@@ -176,7 +177,7 @@ void RobotKnight::Attack1(float frameTime)
 			skillWidth.Normalize();
 			skillWidth = Vector2(skillWidth.y, -skillWidth.x);
 			float widthRange = 2.75f;
-			int pelletRank = 4;
+			int pelletRank = 3;
 			int bulletWave = 3;
 			
 

@@ -30,6 +30,7 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 	//FixedMove
 	currTime = 0.0f;
 
+	SetCS(CS_IDLE);
 	//GOTHIT
 		//source causing knockback
 	 m_isKnockBack = false;
@@ -42,8 +43,6 @@ Character::Character(std::string prefabID, Vector2 roomID, Matrix translationMat
 
 void Character::Update(float frameTime)
 {
-	
-
 	switch (m_cState)
 	{
 	case CS_IDLE:
@@ -64,6 +63,7 @@ void Character::Update(float frameTime)
 	}
 	if (m_currHP <= 0)
 	{
+		m_currHP == 0;
 		if (m_cState != CS_DEATH)
 		{
 			ResetAnimation();
@@ -139,14 +139,14 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(m_knockBackDir, 2.0f, 0.75f, frameTime) == false) {
+			if (FixedMove(m_knockBackDir, 1.5f, 0.25f, frameTime) == false) {
 				//printf("knockDir:%f,%f\n", knockBackDir.x, knockBackDir.y);
 			 return false;
 			}
 			else i++;
 			break;
 		case 1:
-			if (FixedMove(Vector2(1.0f, 0.0f), 0.0f, 0.75f, frameTime) == false) return false;
+			if (FixedMove(Vector2(1.0f, 0.0f), 0.0f, 0.25f, frameTime) == false) return false;
 			else i++;
 			break;
 		case 2:
@@ -178,6 +178,7 @@ void Character::UpdateMoveDirection(Vector2 dir)
 
 bool Character::FixedMove(Vector2 dir, float distance, float time, float frameTime)
 {
+
 	
 	float speed = distance / time;
 	currTime += frameTime;

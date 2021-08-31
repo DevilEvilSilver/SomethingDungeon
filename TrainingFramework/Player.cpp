@@ -25,15 +25,18 @@ Player::~Player() {
 void Player::UniqueUpdate(float frameTime)
 {
 	//m_isInvincible = true;
-	switch (m_cState)
+	switch (m_pState)
 	{
-		case CS_DASH:
+		case P_CS:
+			break;
+		case P_DASH:
 			Dash(frameTime);
+			break;
 		default:
 			break;
 	}
 	//if (m_cState == CS_IDLE || m_cState == CS_MOVE)
-	UseSkill(frameTime);
+	//UseSkill(frameTime);
 }
 
 void Player::Attack(float frameTime)
@@ -44,9 +47,7 @@ void Player::Attack(float frameTime)
 
 bool Player::Dash(float frameTime)
 {
-	if (m_cState == CS_DASH)
 	{
-		
 		m_strState = DASH;
 
 		switch (i)
@@ -57,15 +58,13 @@ bool Player::Dash(float frameTime)
 			i++;
 			break;
 		case 1:
-			if (FixedMove(m_lastMoveDir, m_MOVESPEED*1.0f, 0.5f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, m_MOVESPEED*0.75f, 0.25f, frameTime) == false) return false;
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
-			//SetPS(P_CS);
+			m_pState = P_CS;
 			break;
 		}
 
-		// if (FixedMove(m_lastMoveDir, m_MOVESPEED, 0.5f, frameTime) == false) return false;
-		// SetCS(CS_IDLE);
 	}
 	return true;
 }
@@ -120,6 +119,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	isWallCollision = true;
 
 	m_strState = IDLE_LEFT;
+	m_pState = P_CS;
 
 	AddSkill(SKILL_FIRE1);
 	AddSkill(SKILL_FREEZE1);
@@ -252,7 +252,7 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
-	else if ((keyPressed & MOUSE_RIGHT))
+	if ((keyPressed & MOUSE_RIGHT))
 	{
 		if ((float)m_RangeSkillID->m_MPCost <= this->m_currMP)
 		{
@@ -291,19 +291,21 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
-	else if (keyPressed & KEY_SPACE&&false)
+	if (keyPressed & KEY_SPACE)
 	{
-		if ((float)m_Dash->m_MPCost < this->m_currMP)
+		if (m_pState!=P_DASH&&(float)m_Dash->m_MPCost <= this->m_currMP&&(float)m_Dash->m_fCurrCoolDownTime <= 0)
 		{
-			if ((float)m_Dash->m_fCurrCoolDownTime <= 0)
-			{
-				//Dash Skill Obj
-				
-				SetCS(CS_DASH); //Character Action
-				Dash(frameTime);
-				//Character Animation
-			}
+			//Dash Skill Obj
+			SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
+			m_Dash->m_fCurrCoolDownTime = (float)m_Dash->m_CoolDownTime / 1000;
+			//Character Action
+			ResetAnimation();
+			m_pState = P_DASH;
+			i = 0;
+			Dash(frameTime);
+			//Character Animation
 		}
+		
 	}
 }
 void Player::UpdateCurrentCDTime(float frameTime)

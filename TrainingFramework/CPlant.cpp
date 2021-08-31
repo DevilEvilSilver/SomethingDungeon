@@ -18,14 +18,14 @@ CPlant::CPlant(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 	m_ATK = 2;
 	m_DEF = 3;
 
-	/*m_strState = IDLE_LEFT;
+	m_strState = IDLE_LEFT;
 	isWallCollision = true;
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
 	m_MOVESPEED = 2.0f;
 
-	atkDuration = 1.0f;*/
+	atkDuration = 1.0f;
 }
 
 void CPlant::UniqueUpdate(float frameTime)
@@ -37,7 +37,7 @@ void CPlant::UniqueUpdate(float frameTime)
 	Vector2 delta = plyPos - enmyPos;
 	float distance = delta.Length();
 
-	float totalCD = 4.0f;
+	float totalCD = 0.25f;
 
 	//move behavior
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
@@ -78,12 +78,9 @@ void CPlant::Shoot(Vector2 target)
 	Matrix m;
 	m.SetTranslation(target.x, target.y, 0);
 
-	BulletSkill* bskill1 = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
-	BulletSkill* bskill2 = new BulletSkill(target - Vector2(1, 1), this, SKILL, this->m_RoomID, m);
-	BulletSkill* bskill3 = new BulletSkill(target+ Vector2(1,1), this, SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill1);
-	StatePlay::GetInstance()->AddSkill(bskill2);
-	StatePlay::GetInstance()->AddSkill(bskill3);
+	BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
+	StatePlay::GetInstance()->AddSkill(bskill);
+	
 }
 
 void CPlant::Melee(Vector2 target)

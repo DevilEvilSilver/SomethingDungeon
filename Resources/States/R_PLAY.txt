@@ -4,7 +4,7 @@ ID mainChar
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.3, 0.5, 0.4, 0.5
+COORD 0.3, 0.35, 0.4, 0.65
 SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
@@ -88,7 +88,7 @@ ID skeleton
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.65, 1.1, 0.2, 0.3
+COORD 0.5, 1.0, 0.2, 0.6
 SIZE 1.5 x 1.5
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 5
@@ -107,7 +107,7 @@ ID carnivorousPlant
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.5, 1.0, 1, 0.6
+COORD 0.5, 0.8, 1.0, 0.8
 SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 6
@@ -212,7 +212,7 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
-FILE ../Resources/Animation/aoeskill/wind1/sprite.txt
+FILE ../Resources/Animation/aoeskill/slash/sprite.txt
 
 ID skillFireLv1
 MODEL 0
@@ -527,7 +527,7 @@ ID spikeTrap
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, -1.0, 2.0, 1.0
+COORD 0.0, 1.0, 2.0, 1.0
 SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1

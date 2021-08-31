@@ -21,7 +21,7 @@ void Effect::Init(Vector2 pos)
 		pos = m_Victim->GetCenterPos();
 	}
 	m_fCurrentPosX = pos.x - m_fWidth / 2;
-	m_fCurrentPosY = pos.y + m_fHeight / 2;
+	m_fCurrentPosY = pos.y - m_fHeight / 2;
 	m_WorldMatrix.m[3][0] = m_fCurrentPosX - m_fDeltaX;
 	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 }

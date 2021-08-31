@@ -69,6 +69,8 @@ void Room::RoomGenerate() {
 		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
+		
+
 		while (enemyNum--) {
 			
 			int rNum = rand() % 100 + 1;
@@ -350,7 +352,7 @@ void Room::GenObj(std::string prefabId, int num)
 {
 	Prefab* ObjPrefab = GetResource(prefabId, ResourceManager::GetInstance()->m_PrefabList);
 	unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - 2*ObjPrefab->m_fWidth)+ (unsigned int)ObjPrefab->m_fWidth;
-	unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - 2*ObjPrefab->m_fHeight) + (unsigned int)ObjPrefab->m_fHeight;
+	unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - 2*ObjPrefab->m_fHeight) - (unsigned int)ObjPrefab->m_fHeight;
 	Matrix translation;
 	
 	unsigned int random = rand() % 100 + 1;

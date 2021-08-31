@@ -28,7 +28,14 @@ public:
 		m_KEY;
 
 	//STATE
-	CharacterState m_pState;
+	enum PlayerState
+	{
+		P_DASH,
+		P_CS
+
+	};
+	
+	PlayerState m_pState=P_CS;
 
 	void UniqueUpdate(float frameTime);
 	void Attack(float frameTime);

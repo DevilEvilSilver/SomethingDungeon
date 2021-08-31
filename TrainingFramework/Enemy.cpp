@@ -130,7 +130,7 @@ void Enemy::createDrop()
 	unsigned int random = rand() % 100 + 1;
 
 	Matrix translation;
-	translation.SetTranslation(GetPosX()+m_fWidth/2.0f, GetPosY()-m_fHeight / 2.0f, 0.0f);
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
 
 	
 	if (random >= 75)

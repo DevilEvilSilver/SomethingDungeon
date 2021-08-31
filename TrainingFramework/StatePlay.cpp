@@ -396,12 +396,12 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				if (m_Map[i][j - 1] == WALL) {
 					
 					Room* room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
-					if (m_Map[i][j + 1] != WALL)
+					/*if (m_Map[i][j + 1] != WALL)
 					{
 						room->SetPosY2(room->GetPosY() - 0.2f);
 						room->m_fHeight - 0.2f;
 						room->m_isRenderLast = true;
-					}
+					}*/
 					AddRoom(room);
 				}
 				else {
@@ -422,11 +422,11 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 						break;
 					}
 					if (rand() % 2 == 0) room->m_isFacingLeft = false;
-					if (m_Map[i][j + 1] != WALL)
+					/*if (m_Map[i][j + 1] != WALL)
 					{
 						room->SetPosY2(room->GetPosY() - 0.4f);
 						room->m_isRenderLast = true;
-					}
+					}*/
 					AddRoom(room);
 				}
 			}
@@ -723,13 +723,34 @@ void StatePlay::UpdateInRange()
 {
 	ClearInRange();
 
-	for (auto& obj : m_RoomList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeRoom.push_back(obj);
-	for (auto& obj : m_EnemyList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEnemy.push_back(obj);
+	for (auto& obj : m_RoomList) if (CheckInRange(obj->m_RoomID,2) == true) m_InRangeRoom.push_back(obj);
+	for (auto& obj : m_EnemyList) if (CheckInRange(obj->m_RoomID,2) == true) m_InRangeEnemy.push_back(obj);
 	for (auto& obj : m_DropList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDrop.push_back(obj);
-	for (auto& obj : m_TrapList) if (CheckInRange(obj->m_RoomID) == true|| strcmp(typeid(obj).name(), "Arrow")==0) m_InRangeTrap.push_back(obj);
-	for (auto& obj : m_SkillList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeSkill.push_back(obj);
+
+	for (auto& obj : m_TrapList)
+		if (CheckInRange(obj->m_RoomID) == true/*|| strcmp(typeid(obj).name(), "Arrow")==0*/)
+			m_InRangeTrap.push_back(obj);
+		else if (strcmp(typeid(*obj).name(), "class Arrow") == 0)
+			obj->isExploded = true;
+	
+	for (auto& obj : m_SkillList)
+		if (CheckInRange(obj->m_RoomID) == true)
+			m_InRangeSkill.push_back(obj);
+		else obj->isFinished = true;
+				
 	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDecoration.push_back(obj);
-	for (auto& obj : m_EffectList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeEffect.push_back(obj);
+	for (auto& obj : m_EffectList) 
+		if (CheckInRange(obj->m_RoomID) == true) 
+			m_InRangeEffect.push_back(obj);
+		else obj->mp_isFisnished = true;
+	/*printf("Room Count:\t%d\n",m_InRangeRoom.size());
+	printf("Enemy Count:\t%d\n", m_InRangeEnemy.size());
+	printf("Drop Count:\t%d\n", m_InRangeDrop.size());
+	printf("Trap Count:\t%d\n", m_InRangeTrap.size());
+	printf("Skill Count:\t%d\n", m_InRangeSkill.size());
+	printf("DecorationCount:\t%d\n", m_InRangeDecoration.size());
+	printf("Effect Count:\t%d\n", m_InRangeEffect.size());
+	printf("\n\n\n");*/
 }
 
 void StatePlay::ClearInRange()
@@ -780,6 +801,45 @@ void StatePlay::UpdateRoomID() {
 				}
 		}
 	}
+
+	for (auto& obj : m_InRangeSkill) {
+		{
+			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
+				for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+					if (i > MAP_WIDTH - 1)
+						continue;
+
+					for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+						if (j > MAP_HEIGHT - 1)
+							continue;
+						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
+							obj->m_RoomID = Vector2(i, j);
+							break;
+						}
+					}
+				}
+		}
+	}
+
+	for (auto& obj : m_InRangeTrap) {
+		{
+			if (strcmp(typeid(*obj).name(), "class Arrow") == 0)
+			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
+				for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+					if (i > MAP_WIDTH - 1)
+						continue;
+
+					for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+						if (j > MAP_HEIGHT - 1)
+							continue;
+						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
+							obj->m_RoomID = Vector2(i, j);
+							break;
+						}
+					}
+				}
+		}
+	}
 }
 
 void StatePlay::UpdateControl(float frameTime)
@@ -799,6 +859,7 @@ void StatePlay::UpdateControl(float frameTime)
 	m_ButtonPause->isHover(this->m_Camera);
 
 	//PLAYER
+	if (m_Player->m_pState==m_Player->P_CS)
 	{
 		if ((newKeyPressed & KEY_W))
 		{
@@ -822,11 +883,13 @@ void StatePlay::UpdateControl(float frameTime)
 			//m_Player->SetCS(Character::CS_ATTACK);
 		}
 		
+		m_Player->UseSkill(frameTime);
 	}
 
+	
 
 	//CAMERA
-	{
+	/*{
 		if (newKeyPressed & KEY_UP)
 		{
 			m_Camera->MoveUp(frameTime);
@@ -843,7 +906,7 @@ void StatePlay::UpdateControl(float frameTime)
 		{
 			m_Camera->MoveRight(frameTime);
 		}
-	}
+	}*/
 
 	//USING SPACE	~	TEST
 	//m_Player->UseAttack();
@@ -1018,9 +1081,9 @@ void StatePlay::AddSkill(Skill* skill)
 	m_SkillList.push_back(skill);
 }
 
-bool StatePlay::CheckInRange(Vector2 roomID) {
+bool StatePlay::CheckInRange(Vector2 roomID,int delta) {
 
-	int delta = 2;
+	
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - delta || roomID.x > currRoom.x + delta ||
 		roomID.y < currRoom.y - delta || roomID.y > currRoom.y + delta)

@@ -83,8 +83,18 @@ void Witch::Shoot(Vector2 target)
 	Matrix m;
 	m.SetTranslation(target.x, target.y, 0);
 
-	BulletSkill* bskill = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
-	StatePlay::GetInstance()->AddSkill(bskill);
+	Vector2 skillWidth = target - GetPos();
+	skillWidth.Normalize();
+	skillWidth = Vector2(skillWidth.y, -skillWidth.x);
+
+	float widthRange = 2.75f;
+
+	BulletSkill* bskill1 = new BulletSkill(target, this, SKILL, this->m_RoomID, m);
+	BulletSkill* bskill2 = new BulletSkill(target - skillWidth * widthRange, this, SKILL, this->m_RoomID, m);
+	BulletSkill* bskill3 = new BulletSkill(target + skillWidth * widthRange, this, SKILL, this->m_RoomID, m);
+	StatePlay::GetInstance()->AddSkill(bskill1);
+	StatePlay::GetInstance()->AddSkill(bskill2);
+	StatePlay::GetInstance()->AddSkill(bskill3);
 }
 
 void Witch::Melee(Vector2 target)

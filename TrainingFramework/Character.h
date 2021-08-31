@@ -18,7 +18,6 @@ public:
 			CS_GOTHIT,
 			CS_DEATH,
 			CS_USESKILL,
-			CS_DASH
 		};
 		//currState
 		CharacterState m_cState = CS_IDLE;

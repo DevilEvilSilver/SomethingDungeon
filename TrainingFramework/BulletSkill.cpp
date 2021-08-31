@@ -51,7 +51,7 @@ void BulletSkill::UpdateHit(float frameTime)
 					Matrix t; t.SetIdentity();
 					Effect* effect = new Effect(Vector2(0, 0), EffectExistingTime::EFFECT_SKILL_EXISTINGTIME, this->m_EffectID, enemy->m_RoomID, t, enemy);
 					StatePlay::GetInstance()->AddEffect(effect);
-					enemy->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
+					enemy->UpdateGotHit(m_damage, m_isKnockBack, GetCenterPos(), frameTime);
 				}
 
 			}

@@ -29,7 +29,7 @@ void Arrow::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 	if (dir == -1) m_isFacingLeft = true;
 	else m_isFacingLeft = false;
-	SetPosX(m_WorldMatrix.m[3][0] + 10 * frameTime*dir);
+	SetPosX(m_WorldMatrix.m[3][0] + 10 * frameTime * dir);
 	//m_WorldMatrix.m[3][0] += 10* frameTime;
 
 	std::vector<Room*> roomList = StatePlay::GetInstance()->m_InRangeRoom;
@@ -38,7 +38,7 @@ void Arrow::Update(float frameTime) {
 		{
 			if (CollisionManager::CheckCollision(this, obj))
 			{
-				isExploded = true; 
+				isExploded = true;
 				break;
 			}
 		}
@@ -56,5 +56,6 @@ void Arrow::Update(float frameTime) {
 			enemy->UpdateGotHit(m_iAttack, true, Vector2(0.0f, 0.0f), frameTime);
 		}
 	}
+
 }
 
