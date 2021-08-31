@@ -109,9 +109,9 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	//m_GOLD = 1000;
 
 	// read file record
-	LoadData();
 	m_CloseSkillID = NULL;
 	m_RangeSkillID = NULL;
+	LoadData();
 	m_Dash = NULL;
 	atkDuration = 0.1f;
 
@@ -121,8 +121,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_strState = IDLE_LEFT;
 	m_pState = P_CS;
 
-	AddSkill(SKILL_FIRE1);
-	AddSkill(SKILL_FREEZE1);
+	//AddSkill(SKILL_FIRE1);
+	//AddSkill(SKILL_FREEZE1);
 	AddSkill(DASH);
 	
 }
@@ -148,6 +148,12 @@ void Player::LoadData() {
 	fscanf(recordFile, "Gold %d\n", &m_GOLD);
 	fscanf(recordFile, "Key %d\n", &m_KEY);
 	fscanf(recordFile, "Speed %f\n", &m_MOVESPEED);
+	char strPrefabMelee[50];
+	fscanf(recordFile, "Melee %s\n", &strPrefabMelee);
+	AddSkill(strPrefabMelee);
+	char strPrefabRange[50];
+	fscanf(recordFile, "Range %s\n", &strPrefabRange);
+	AddSkill(strPrefabRange);
 
 	fclose(recordFile);
 }
@@ -321,4 +327,64 @@ std::string Player::GetGold() {
 
 std::string Player::GetKey() {
 	return std::to_string(m_KEY);
+}
+
+std::string Player::GetCloseSkill() {
+	return m_CloseSkillID->m_prefabID;
+}
+
+std::string Player::GetRangeSkill() {
+	return m_RangeSkillID->m_prefabID;
+}
+
+std::string Player::GetCloseSkillName() {
+	std::string prefabId = m_CloseSkillID->m_prefabID;
+
+	if (prefabId == SKILL_FIRE1)
+	{
+		return "Flame Sword";
+	}
+	if (prefabId == SKILL_FIRE2)
+	{
+		return "Pyro Wave";
+	}
+	if (prefabId == SKILL_FIRE3)
+	{
+		return "Solar Descend";
+	}
+
+	return "";
+}
+
+std::string Player::GetRangeSkillName() {
+	std::string prefabId = m_RangeSkillID->m_prefabID;
+
+	if (prefabId == SKILL_FREEZE1)
+	{
+		return "Ice Arrow";
+	}
+	if (prefabId == SKILL_FREEZE2)
+	{
+		return "Glacial Blast";
+	}
+	if (prefabId == SKILL_FREEZE3)
+	{
+		return "Absolute Zero";
+	}
+
+	return "";
+}
+
+float Player::GetCloseSkillMaxCD() {
+	return(float)m_CloseSkillID->m_CoolDownTime / 1000;
+}
+float Player::GetRangeSkillMaxCD() {
+	return(float)m_RangeSkillID->m_CoolDownTime / 1000;
+}
+
+float Player::GetCloseSkillCurrCD() {
+	return(float)m_CloseSkillID->m_fCurrCoolDownTime;
+}
+float Player::GetRangeSkillCurrCD() {
+	return(float)m_RangeSkillID->m_fCurrCoolDownTime;
 }

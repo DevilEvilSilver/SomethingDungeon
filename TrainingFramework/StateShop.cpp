@@ -54,6 +54,8 @@ StateShop::~StateShop() {
 	delete m_StatATK;
 	delete m_StatDEF;
 	delete m_StatSPEED;
+	delete m_StatMELEE;
+	delete m_StatRANGE;
 	delete m_PlayerGold;
 	delete m_PlayerGoldIcon;
 	delete m_PlayerKey;
@@ -227,12 +229,17 @@ void StateShop::Init() {
 	m_Player = new Player(PLAYER, Vector2(0.0f, 0.0f), translation);
 
 	//INIT TEXT STAT
-	m_StatHP = new Text("HEALTH: " + m_Player->GetHP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 206.0f , 1.0f);
-	m_StatMP = new Text("MANA: " + m_Player->GetMP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 272.0f, 1.0f);
-	m_StatATK = new Text("ATTACK: " + std::to_string(m_Player->m_ATK), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 338.0f, 1.0f);
-	m_StatDEF = new Text("DEFENCE: " + std::to_string(m_Player->m_DEF), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 404.f, 1.0f);
-	m_StatSPEED = new Text("SPEED: " + std::to_string(m_Player->m_MOVESPEED).
-		substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 470.f, 1.0f);
+	m_StatHP = new Text("HEALTH:" + m_Player->GetHP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 183.0f , 1.0f);
+	m_StatMP = new Text("MANA:" + m_Player->GetMP(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 226.0f, 1.0f);
+	m_StatATK = new Text("ATTACK:" + std::to_string(m_Player->m_ATK) + " (MAX " + std::to_string(PLAYER_ATK_MAX) + ")", 
+		SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 269.0f, 1.0f);
+	m_StatDEF = new Text("DEFENCE:" + std::to_string(m_Player->m_DEF) + " (MAX " + std::to_string(PLAYER_DEF_MAX) + ")", 
+		SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 312.0f, 1.0f);
+	m_StatSPEED = new Text("SPEED:" + std::to_string(m_Player->m_MOVESPEED).
+		substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3) + " (MAX " + std::to_string(PLAYER_SPEED_MAX) + ")", 
+		SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 355.0f, 1.0f);
+	m_StatMELEE = new Text("MELEE:" + m_Player->GetCloseSkillName(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 398.0f, 1.0f);
+	m_StatRANGE = new Text("RANGE:" + m_Player->GetRangeSkillName(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 750.0f, 441.0f, 1.0f);
 	m_PlayerGold = new Text(m_Player->GetGold(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 1022.0f, 520.0f, 1.0f, TEXT_ALIGN::RIGHT);
 	m_PlayerKey = new Text(m_Player->GetKey(), SHADER_TEXT, FONT_SOLID, TEXT_COLOR::WHILE, 1022.0f, 490.0f, 1.0f, TEXT_ALIGN::RIGHT);
 
@@ -258,7 +265,7 @@ void StateShop::Init() {
 
 void StateShop::GenerateItem() {
 	unsigned int item = rand() % ITEM_COUNT + 1;
-	//unsigned int item = ITEM_AAMON_CONTRACT;
+	//unsigned int item = ITEM_SOLAR_DESCEND;
 	std::string strButton = BUTTON_ITEM_HEART_STONE,
 		strName = ITEM_NAME_HEART_STONE,
 		strDescription = ITEM_DESCRIPTION_HEART_STONE,
@@ -391,6 +398,42 @@ void StateShop::GenerateItem() {
 		strDescription = ITEM_DESCRIPTION_KEY;
 		strPrice = std::to_string(ITEM_PRICE_KEY);
 		break;
+	case ITEM_FLAME_SWORD:
+		strButton = BUTTON_ITEM_FLAME_SWORD;
+		strName = ITEM_NAME_FLAME_SWORD;
+		strDescription = ITEM_DESCRIPTION_FLAME_SWORD;
+		strPrice = std::to_string(ITEM_PRICE_FLAME_SWORD);
+		break;
+	case ITEM_PYRO_WAVE:
+		strButton = BUTTON_ITEM_PYRO_WAVE;
+		strName = ITEM_NAME_PYRO_WAVE;
+		strDescription = ITEM_DESCRIPTION_PYRO_WAVE;
+		strPrice = std::to_string(ITEM_PRICE_PYRO_WAVE);
+		break;
+	case ITEM_SOLAR_DESCEND:
+		strButton = BUTTON_ITEM_SOLAR_DESCEND;
+		strName = ITEM_NAME_SOLAR_DESCEND;
+		strDescription = ITEM_DESCRIPTION_SOLAR_DESCEND;
+		strPrice = std::to_string(ITEM_PRICE_SOLAR_DESCEND);
+		break;
+	case ITEM_ICE_ARROW:
+		strButton = BUTTON_ITEM_ICE_ARROW;
+		strName = ITEM_NAME_ICE_ARROW;
+		strDescription = ITEM_DESCRIPTION_ICE_ARROW;
+		strPrice = std::to_string(ITEM_PRICE_ICE_ARROW);
+		break;
+	case ITEM_GLACIAL_BLAST:
+		strButton = BUTTON_ITEM_GLACIAL_BLAST;
+		strName = ITEM_NAME_GLACIAL_BLAST;
+		strDescription = ITEM_DESCRIPTION_GLACIAL_BLAST;
+		strPrice = std::to_string(ITEM_PRICE_GLACIAL_BLAST);
+		break;
+	case ITEM_ABSOLUTE_ZERO:
+		strButton = BUTTON_ITEM_ABSOLUTE_ZERO;
+		strName = ITEM_NAME_ABSOLUTE_ZERO;
+		strDescription = ITEM_DESCRIPTION_ABSOLUTE_ZERO;
+		strPrice = std::to_string(ITEM_PRICE_ABSOLUTE_ZERO);
+		break;
 	}
 
 	Matrix translation;
@@ -442,6 +485,8 @@ void StateShop::Render() {
 	Renderer::GetInstance()->DrawText2(m_StatATK);
 	Renderer::GetInstance()->DrawText2(m_StatDEF);
 	Renderer::GetInstance()->DrawText2(m_StatSPEED);
+	Renderer::GetInstance()->DrawText2(m_StatMELEE);
+	Renderer::GetInstance()->DrawText2(m_StatRANGE);
 	Renderer::GetInstance()->DrawText2(m_PlayerGold);
 	m_PlayerGoldIcon->Render(this->m_Camera);
 	Renderer::GetInstance()->DrawText2(m_PlayerKey);
@@ -483,12 +528,12 @@ void StateShop::Update(float frameTime) {
 			m_ItemGoldIcon->Update(frameTime);
 			m_ItemKeyIcon->Update(frameTime);
 
-			m_StatHP->setText("HEALTH: " + m_Player->GetHP());
-			m_StatMP->setText("MANA: " + m_Player->GetMP());
-			m_StatATK->setText("ATTACK: " + std::to_string(m_Player->m_ATK));
-			m_StatDEF->setText("DEFENCE: " + std::to_string(m_Player->m_DEF));
-			m_StatSPEED->setText("SPEED: " + std::to_string(m_Player->m_MOVESPEED).
-				substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3));
+			m_StatHP->setText("HEALTH:" + m_Player->GetHP());
+			m_StatMP->setText("MANA:" + m_Player->GetMP());
+			m_StatATK->setText("ATTACK:" + std::to_string(m_Player->m_ATK) + " (MAX " + std::to_string(PLAYER_ATK_MAX) + ")");
+			m_StatDEF->setText("DEFENCE:" + std::to_string(m_Player->m_DEF) + " (MAX " + std::to_string(PLAYER_DEF_MAX) + ")");
+			m_StatSPEED->setText("SPEED:" + std::to_string(m_Player->m_MOVESPEED).
+				substr(0, std::to_string(m_Player->m_MOVESPEED).find(".") + 3) + " (MAX " + std::to_string(PLAYER_SPEED_MAX) + ")");
 			m_PlayerGold->setText(m_Player->GetGold());
 			m_PlayerGoldIcon->Update(frameTime);
 			m_PlayerKey->setText(m_Player->GetKey());
@@ -570,9 +615,10 @@ void StateShop::UpdateControl(float frameTime)
 	//Button Buy
 	for (unsigned int i = 0; i < ITEM_SELL; i++) {
 		if (m_ButtonItemList[i]->isReleased(this->m_Camera)) {
-			SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
-			
-			UpdateItemLogic(i);
+			if (UpdateItemLogic(i)) 
+				SoundEngine::GetInstance()->Play(BUY_SUCCESS_SFX, 1.0f, 1.0f, false);
+			else
+				SoundEngine::GetInstance()->Play(BUY_FAIL_SFX, 1.0f, 1.0f, false);
 		}
 		m_ButtonItemList[i]->isPressed(this->m_Camera);
 		m_ButtonItemList[i]->isHover(this->m_Camera);
@@ -650,12 +696,10 @@ void StateShop::UpdatePause(float frameTime) {
 	}
 }
 
-void StateShop::UpdateItemLogic(unsigned int itemIndex) {
+bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 	unsigned int itemPrice = std::stoi(m_ItemPriceList[itemIndex]->m_text);
 
 	if (itemPrice <= m_Player->m_GOLD) {
-		m_Player->m_GOLD -= itemPrice;
-
 		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEART_STONE)) {
 			m_Player->m_maxHP += 75;
 			m_Player->m_currHP += 75;
@@ -666,9 +710,13 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERCULES_FIST)) {
 			m_Player->m_ATK += 3;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ATHENA_SHIELD)) {
 			m_Player->m_DEF += 3;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CODEX_GIGAS)) {
 			unsigned int currMaxMP = m_Player->m_maxMP;
@@ -684,9 +732,13 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
 			m_Player->m_MOVESPEED += 3;
+			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TITAN_CHAIN)) {
 			m_Player->m_DEF += 5;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
@@ -694,6 +746,8 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
 			m_Player->m_ATK += 5;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_DEF -= 2;
 			if (m_Player->m_DEF < 1)
@@ -704,15 +758,21 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP += 50;
 
 			m_Player->m_DEF += 1;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_OCEAN_SHARDS)) {
 			m_Player->m_maxMP += 50;
 			m_Player->m_currMP += 50;
 
 			m_Player->m_DEF += 1;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
 			m_Player->m_ATK += 4;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
@@ -724,6 +784,8 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP += m_Player->m_maxHP - currMaxHP;
 
 			m_Player->m_MOVESPEED += 1;
+			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 
 			m_Player->m_maxMP *= 0.6f;
 			if (m_Player->m_maxMP < 1)
@@ -791,9 +853,49 @@ void StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_KEY)) {
 			m_Player->m_KEY++;
 		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_FLAME_SWORD)) {
+			if (m_Player->GetCloseSkill() == SKILL_FIRE1)
+				return false;
+			m_Player->AddSkill(SKILL_FIRE1);
+			m_StatMELEE->setText("MELEE:" + m_Player->GetCloseSkillName());
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_PYRO_WAVE)) {
+			if (m_Player->GetCloseSkill() == SKILL_FIRE2)
+				return false;
+			m_Player->AddSkill(SKILL_FIRE2);
+			m_StatMELEE->setText("MELEE:" + m_Player->GetCloseSkillName());
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_SOLAR_DESCEND)) {
+			if (m_Player->GetCloseSkill() == SKILL_FIRE3)
+				return false;
+			m_Player->AddSkill(SKILL_FIRE3);
+			m_StatMELEE->setText("MELEE:" + m_Player->GetCloseSkillName());
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ICE_ARROW)) {
+			if (m_Player->GetRangeSkill() == SKILL_FREEZE1)
+				return false;
+			m_Player->AddSkill(SKILL_FREEZE1);
+			m_StatRANGE->setText("RANGE:" + m_Player->GetRangeSkillName());
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GLACIAL_BLAST)) {
+			if (m_Player->GetRangeSkill() == SKILL_FREEZE2)
+				return false;
+			m_Player->AddSkill(SKILL_FREEZE2);
+			m_StatRANGE->setText("RANGE:" + m_Player->GetRangeSkillName());
+		}
+		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ABSOLUTE_ZERO)) {
+			if (m_Player->GetRangeSkill() == SKILL_FREEZE3)
+				return false;
+			m_Player->AddSkill(SKILL_FREEZE3);
+			m_StatRANGE->setText("RANGE:" + m_Player->GetRangeSkillName());
+		}
 
+		m_Player->m_GOLD -= itemPrice;
 		m_ButtonItemList[itemIndex]->m_isAvailble = false;
+		return true;
 	}
+	else 
+		return false;
 }
 
 void StateShop::SetRecord() {
@@ -818,6 +920,8 @@ void StateShop::SetRecord() {
 	fprintf(recordFile, "Gold %d\n", m_Player->m_GOLD);
 	fprintf(recordFile, "Key %d\n", INIT_PLAYER_KEY);
 	fprintf(recordFile, "Speed %f\n", m_Player->m_MOVESPEED);
+	fprintf(recordFile, "Melee %s\n", m_Player->GetCloseSkill().c_str());
+	fprintf(recordFile, "Range %s\n", m_Player->GetRangeSkill().c_str());
 
 	fclose(recordFile);
 }
