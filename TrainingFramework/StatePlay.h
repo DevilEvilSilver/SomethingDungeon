@@ -71,6 +71,10 @@ public:
 	Widget *m_MpHolder;
 	Bar *m_MpBar;
 	Text *m_MpText;
+	Widget *m_MeleeIcon;
+	Bar *m_MeleeBar;
+	Widget *m_RangeIcon;
+	Bar *m_RangeBar;
 	Widget *m_GoldIcon;
 	Text *m_GoldText;
 	Widget *m_KeyIcon;

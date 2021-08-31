@@ -1,4 +1,4 @@
-#PREFAB_COUNT 69
+#PREFAB_COUNT 73
 
 ID mainChar
 MODEL 0
@@ -678,6 +678,50 @@ SHADER 0
 TYPE RECT
 COORD 0.0, 0.0, 4.0, 0.3
 SIZE 4.0 x 0.3
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID meleeIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpHolder/static/sprite.txt
+
+ID meleeBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID rangeIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpHolder/static/sprite.txt
+
+ID rangeBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init

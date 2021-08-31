@@ -372,3 +372,17 @@ std::string Player::GetRangeSkillName() {
 
 	return "";
 }
+
+float Player::GetCloseSkillMaxCD() {
+	return(float)m_CloseSkillID->m_CoolDownTime / 1000;
+}
+float Player::GetRangeSkillMaxCD() {
+	return(float)m_RangeSkillID->m_CoolDownTime / 1000;
+}
+
+float Player::GetCloseSkillCurrCD() {
+	return(float)m_CloseSkillID->m_fCurrCoolDownTime;
+}
+float Player::GetRangeSkillCurrCD() {
+	return(float)m_RangeSkillID->m_fCurrCoolDownTime;
+}

@@ -24,6 +24,22 @@ PREFAB mpHolder
 POS -7.85, -5.35
 PREFAB mpBar
 
+#MELEE_ICON
+POS -8.75, -3.25
+PREFAB meleeIcon
+
+#MELEE_BAR
+POS -8.75, -3.25
+PREFAB meleeBar
+
+#RANGE_ICON
+POS -7.25, -3.25
+PREFAB rangeIcon
+
+#RANGE_BAR
+POS -7.25, -3.25
+PREFAB rangeBar
+
 #GOLD_ICON
 POS 8.25, -5.25
 PREFAB goldIcon

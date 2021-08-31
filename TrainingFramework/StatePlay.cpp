@@ -106,6 +106,10 @@ StatePlay::~StatePlay() {
 	delete m_MpHolder;
 	delete m_MpBar;
 	delete m_MpText;
+	delete m_MeleeIcon;
+	delete m_MeleeBar;
+	delete m_RangeIcon;
+	delete m_RangeBar;
 	delete m_GoldIcon;
 	delete m_GoldText;
 	delete m_MiniMap;
@@ -200,6 +204,54 @@ void StatePlay::Init() {
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
 		m_MpBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->m_maxMP, m_Player->m_currMP);
+	}
+
+	//Melee Icon
+	{
+		fscanf(dataFile, "#MELEE_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_MeleeIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Melee Bar
+	{
+		fscanf(dataFile, "#MELEE_BAR\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_MeleeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetCloseSkillMaxCD(), m_Player->GetCloseSkillCurrCD());
+	}
+
+	//Range Icon
+	{
+		fscanf(dataFile, "#RANGE_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_RangeIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
+	//Range Bar
+	{
+		fscanf(dataFile, "#RANGE_BAR\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_RangeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetRangeSkillMaxCD(), m_Player->GetRangeSkillCurrCD());
 	}
 
 	//Gold Icon
@@ -508,6 +560,12 @@ void StatePlay::Render() {
 		m_MpBar->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_MpText);
 
+		m_MeleeIcon->Render(m_Camera);
+		m_MeleeBar->Render(m_Camera);
+
+		m_RangeIcon->Render(m_Camera);
+		m_RangeBar->Render(m_Camera);
+
 		m_GoldIcon->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_GoldText);
 
@@ -694,6 +752,14 @@ void StatePlay::Update(float frameTime) {
 				m_MpBar->Update(frameTime);
 				m_MpBar->Resize(m_Player->m_currMP);
 				m_MpText->setText(m_Player->GetMP());
+
+				m_MeleeIcon->Update(frameTime);
+				m_MeleeBar->Update(frameTime);
+				m_MeleeBar->Resize(m_Player->GetCloseSkillCurrCD());
+
+				m_RangeIcon->Update(frameTime);
+				m_RangeBar->Update(frameTime);
+				m_RangeBar->Resize(m_Player->GetRangeSkillCurrCD());
 
 				m_GoldIcon->Update(frameTime);
 				m_GoldText->setText(m_Player->GetGold());
