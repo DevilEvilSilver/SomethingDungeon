@@ -265,7 +265,7 @@ void StateShop::Init() {
 
 void StateShop::GenerateItem() {
 	unsigned int item = rand() % ITEM_COUNT + 1;
-	//unsigned int item = ITEM_ABSOLUTE_ZERO;
+	//unsigned int item = ITEM_SOLAR_DESCEND;
 	std::string strButton = BUTTON_ITEM_HEART_STONE,
 		strName = ITEM_NAME_HEART_STONE,
 		strDescription = ITEM_DESCRIPTION_HEART_STONE,
@@ -710,9 +710,13 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERCULES_FIST)) {
 			m_Player->m_ATK += 3;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ATHENA_SHIELD)) {
 			m_Player->m_DEF += 3;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CODEX_GIGAS)) {
 			unsigned int currMaxMP = m_Player->m_maxMP;
@@ -728,9 +732,13 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
 			m_Player->m_MOVESPEED += 3;
+			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TITAN_CHAIN)) {
 			m_Player->m_DEF += 5;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
@@ -738,6 +746,8 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
 			m_Player->m_ATK += 5;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_DEF -= 2;
 			if (m_Player->m_DEF < 1)
@@ -748,15 +758,21 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP += 50;
 
 			m_Player->m_DEF += 1;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_OCEAN_SHARDS)) {
 			m_Player->m_maxMP += 50;
 			m_Player->m_currMP += 50;
 
 			m_Player->m_DEF += 1;
+			if (m_Player->m_DEF > PLAYER_DEF_MAX)
+				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
 			m_Player->m_ATK += 4;
+			if (m_Player->m_ATK > PLAYER_ATK_MAX)
+				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
 			if (m_Player->m_MOVESPEED < 1)
@@ -768,6 +784,8 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP += m_Player->m_maxHP - currMaxHP;
 
 			m_Player->m_MOVESPEED += 1;
+			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 
 			m_Player->m_maxMP *= 0.6f;
 			if (m_Player->m_maxMP < 1)

@@ -3,7 +3,7 @@ CurrHP 187
 MaxHP 187
 CurrMP 180
 MaxMP 180
-ATK 11
+ATK 8
 DEF 9
 Gold 9986
 Key 100
