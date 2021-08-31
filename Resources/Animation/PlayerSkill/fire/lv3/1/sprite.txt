@@ -1,0 +1,27 @@
+#FRAME_COUNT 6
+ID 0
+SPF 0.06
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/0.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.06
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/1.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.06
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/2.tga
+TILING GL_REPEAT
+ID 3
+SPF 0.06
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/3.tga
+TILING GL_REPEAT
+ID 4
+SPF 0.06
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/4.tga
+TILING GL_REPEAT
+ID 5
+SPF -1.0
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/5.tga
+TILING GL_REPEAT
+
+

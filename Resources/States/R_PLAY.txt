@@ -1,4 +1,4 @@
-#PREFAB_COUNT 94
+#PREFAB_COUNT 99
 
 ID mainChar
 MODEL 0
@@ -350,12 +350,67 @@ ID skillFireLv3
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 2.0, 0.6
-SIZE 2.0 x 0.6
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
-FILE ../Resources/Animation/PlayerSkill/fire/lv3/sprite.txt
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/0/sprite.txt
+
+ID skillFireLv30
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/0/sprite.txt
+
+ID skillFireLv31
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/sprite.txt
+
+ID skillFireLv32
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/2/sprite.txt
+
+ID skillFireLv33
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/3/sprite.txt
+
+ID skillFireLv34
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/4/sprite.txt
 
 ID skillFreezeLv1
 MODEL 0
