@@ -258,26 +258,26 @@
     <ClCompile Include="StateResult.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
-    <ClCompile Include="SkillID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
     <ClCompile Include="CPlant.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="Frogman.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="Orcman.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="Gate.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Traps</Filter>
     </ClCompile>
     <ClCompile Include="Key.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillID.cpp">
+      <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -452,9 +452,6 @@
     <ClInclude Include="StateShop.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="Decorations.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Glyph.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
@@ -468,19 +465,22 @@
       <Filter>Header Files\Objects\Skills</Filter>
     </ClInclude>
     <ClInclude Include="CPlant.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Frogman.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Orcman.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Decorations.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Gate.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Traps</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -502,40 +502,40 @@
     <Text Include="..\Resources\States\S_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_LOAD.txt">
+    <Text Include="..\Resources\States\R_LOAD.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_RESULT.txt">
+    <Text Include="..\Resources\States\R_RESULT.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_SHOP.txt">
+    <Text Include="..\Resources\States\R_SHOP.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_LOAD.txt">
+    <Text Include="..\Resources\States\S_LOAD.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_RESULT.txt">
+    <Text Include="..\Resources\States\S_RESULT.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\S_SHOP.txt">
+    <Text Include="..\Resources\States\S_SHOP.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOAD.txt">
+    <Text Include="..\Resources\States\SD_LOAD.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_LOGO.txt">
+    <Text Include="..\Resources\States\SD_LOGO.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_PLAY.txt">
+    <Text Include="..\Resources\States\SD_PLAY.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_RESULT.txt">
+    <Text Include="..\Resources\States\SD_RESULT.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_SHOP.txt">
+    <Text Include="..\Resources\States\SD_SHOP.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\SD_WELCOME.txt">
+    <Text Include="..\Resources\States\SD_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
   </ItemGroup>
@@ -543,5 +543,25 @@
     <ResourceCompile Include="TrainingFramework.rc">
       <Filter>Win32Res</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shaders\Logo.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\Logo.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\Sprite.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\Sprite.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\TextShader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\TextShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
