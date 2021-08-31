@@ -227,7 +227,7 @@ void StatePlay::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_MeleeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetCloseSkillMaxCD(), m_Player->GetCloseSkillCurrCD());
+		m_MeleeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetCloseSkillMaxCD(), m_Player->GetCloseSkillCurrCD(), false);
 	}
 
 	//Range Icon
@@ -251,7 +251,7 @@ void StatePlay::Init() {
 		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_RangeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetRangeSkillMaxCD(), m_Player->GetRangeSkillCurrCD());
+		m_RangeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetRangeSkillMaxCD(), m_Player->GetRangeSkillCurrCD(), false);
 	}
 
 	//Gold Icon
