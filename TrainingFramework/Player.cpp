@@ -121,8 +121,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 
-	AddSkill(SKILL_FIRE1);
-	AddSkill(SKILL_FREEZE1);
+	AddSkill(SKILL_FIRE2);
+	AddSkill(SKILL_FREEZE3);
 	AddSkill(DASH);
 	
 }
