@@ -12,7 +12,7 @@ public:
     AoeSkill(Vector2  tar, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
     ~AoeSkill();
     virtual void UpdateHit(float frameTime);
-    virtual void Init(Vector2 target);
+    virtual void Init(std::string ID,Vector2 target);
     void UpdateCurrPos(float frameTime);
 };
 

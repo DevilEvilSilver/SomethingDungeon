@@ -121,8 +121,8 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_strState = IDLE_LEFT;
 
-	AddSkill(SKILL_FIRE3);
-	AddSkill(SKILL_FREEZE3);
+	AddSkill(SKILL_FIRE1);
+	AddSkill(SKILL_FREEZE1);
 	AddSkill(DASH);
 	
 }
@@ -148,7 +148,7 @@ void Player::LoadData() {
 	fscanf(recordFile, "Gold %d\n", &m_GOLD);
 	fscanf(recordFile, "Key %d\n", &m_KEY);
 	fscanf(recordFile, "Speed %f\n", &m_MOVESPEED);
-
+	m_MOVESPEED = 8;
 	fclose(recordFile);
 }
 std::string Player::GetMP() {
