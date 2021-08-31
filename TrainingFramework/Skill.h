@@ -42,5 +42,6 @@ public:
     virtual void UpdateHit(float frameTime);    // Hit-> Collison and Self Destruct
     void UpdateExistingTime(float frameTime);   // Self Destruct
     void Render(Camera* camera);
+    std::string GetDirectionPrefab(Vector2 dir);
 };
 

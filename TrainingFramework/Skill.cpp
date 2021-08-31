@@ -87,3 +87,90 @@ void Skill::InitEffect(std::string prefabID)
 	else if (prefabID == SKILL_WIND3)
 		m_EffectID = EFFECT_SKILL_WIND3;*/
 }
+std::string Skill::GetDirectionPrefab(Vector2 dir)
+{
+	float L = sqrt(dir.x * dir.x + dir.y * dir.y);
+	float alpha = acos(dir.x / L);
+	if (dir.y < 0)
+	{
+		alpha = 2 * PI - alpha;
+	}
+	//FLIPP
+	if (dir.x >= 0)
+		m_isFacingLeft = false;
+	else
+		m_isFacingLeft = true;
+	if (dir.y >= 0)
+		m_isFacingUp = true;
+	else
+		m_isFacingUp = false;
+
+	//PREFAB
+	if ((0 <= alpha && alpha <= PI / 16) || (31 * PI / 16 <= alpha && alpha <= 32 * PI / 16))
+	{
+		m_strPrefabID = SKILL_FREEZE30;
+	}
+	else if (PI / 16 <= alpha && alpha <= 3*PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE31;
+	}
+	else if (3 * PI / 16 <= alpha && alpha <= 5 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE32;
+	}
+	else if (5 * PI / 16 <= alpha && alpha <= 7 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE33;
+	}
+	else if (7 * PI / 16 <= alpha && alpha <= 9 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE34;
+	}
+	else if (9 * PI / 16 <= alpha && alpha <= 11 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE33;
+	}
+	else if (11 * PI / 16 <= alpha && alpha <= 13 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE32;
+	}
+	else if (13 * PI / 16 <= alpha && alpha <= 15 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE31;
+	}
+	else if (15 * PI / 16 <= alpha && alpha <= 17 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE30;
+	}
+	else if (17 * PI / 16 <= alpha && alpha <= 19 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE31;
+	}
+	else if (19 * PI / 16 <= alpha && alpha <= 21 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE32;
+	}
+	else if (21 * PI / 16 <= alpha && alpha <= 23 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE33;
+	}
+	else if (23 * PI / 16 <= alpha && alpha <= 25 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE34;
+	}
+	else if (25 * PI / 16 <= alpha && alpha <= 27 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE33;
+	}
+	else if (27 * PI / 16 <= alpha && alpha <= 29 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE32;
+	}
+	else if (29 * PI / 16 <= alpha && alpha <= 31 * PI / 16)
+	{
+		m_strPrefabID = SKILL_FREEZE31;
+	}
+
+
+	return "t";
+}

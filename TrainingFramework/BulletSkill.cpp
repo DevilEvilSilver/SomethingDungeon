@@ -100,10 +100,15 @@ void BulletSkill::Init(Vector2 target)
 		target.x = player->GetPosX() + player->m_fWidth / 2;
 		target.y = player->GetPosY() - player->m_fHeight / 2;
 	}*/
-	if (m_owner->GetPosX() > target.x)
+	/*if (m_owner->GetPosX() > target.x)
 		m_isFacingLeft = true;
 	else
-		m_isFacingLeft = false;
+		m_isFacingLeft = false;*/
+	Player* player = StatePlay::GetInstance()->m_Player;
+	m_strPrefabID = SKILL_FREEZE34;
+	Vector2 dir = target - m_owner->GetCenterPos();
+	if(m_isPlayer)
+		GetDirectionPrefab(dir);
 	float fminDis = 0.5f;
 	float* ownerData = m_owner->GetHitBoxCurrentData();
 	Vector2 c1(ownerData[0] / 2.0f + ownerData[2] / 2.0f, ownerData[1] / 2.0f + ownerData[3] / 2.0f);

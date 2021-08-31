@@ -1,4 +1,4 @@
-#PREFAB_COUNT 69
+#PREFAB_COUNT 74
 
 ID mainChar
 MODEL 0
@@ -273,12 +273,67 @@ ID skillFreezeLv3
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 1.0, 0.75
-SIZE 1.0 x 0.75
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID idleLeft
-FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite.txt
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite0.txt
+
+ID skillFreezeLv30
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite0.txt
+
+ID skillFreezeLv31
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite1.txt
+
+ID skillFreezeLv32
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite2.txt
+
+ID skillFreezeLv33
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite3.txt
+
+ID skillFreezeLv34
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite4.txt
 
 ID skillEffectFire1
 MODEL 0

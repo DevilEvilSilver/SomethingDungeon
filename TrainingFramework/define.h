@@ -117,6 +117,11 @@
 #define SKILL_FREEZE1		"skillFreezeLv1"
 #define SKILL_FREEZE2		"skillFreezeLv2"
 #define SKILL_FREEZE3		"skillFreezeLv3"
+#define SKILL_FREEZE30		"skillFreezeLv30"
+#define SKILL_FREEZE31		"skillFreezeLv31"
+#define SKILL_FREEZE32		"skillFreezeLv32"
+#define SKILL_FREEZE33		"skillFreezeLv33"
+#define SKILL_FREEZE34		"skillFreezeLv34"
 
 #define NORMAL_ROOM		"normalRoom"
 #define NORMAL_ROOM_1	"normalRoom1"
