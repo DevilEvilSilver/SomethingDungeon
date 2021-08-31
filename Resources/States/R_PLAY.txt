@@ -1,4 +1,4 @@
-#PREFAB_COUNT 73
+#PREFAB_COUNT 76
 
 ID mainChar
 MODEL 0
@@ -683,7 +683,7 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/mpBar/static/sprite.txt
 
-ID meleeIcon
+ID meleeIcon1
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -692,9 +692,9 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/mpHolder/static/sprite.txt
+FILE ../Resources/Animation/skillIcon/meleeIcon1/sprite.txt
 
-ID meleeBar
+ID meleeIcon2
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -703,9 +703,9 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/mpBar/static/sprite.txt
+FILE ../Resources/Animation/skillIcon/meleeIcon2/sprite.txt
 
-ID rangeIcon
+ID meleeIcon3
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -714,9 +714,9 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/mpHolder/static/sprite.txt
+FILE ../Resources/Animation/skillIcon/meleeIcon3/sprite.txt
 
-ID rangeBar
+ID rangeIcon1
 MODEL 0
 SHADER 0
 TYPE RECT
@@ -725,7 +725,40 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/mpBar/static/sprite.txt
+FILE ../Resources/Animation/skillIcon/rangeIcon1/sprite.txt
+
+ID rangeIcon2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/rangeIcon2/sprite.txt
+
+ID rangeIcon3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/rangeIcon3/sprite.txt
+
+ID cooldownBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/cooldownBar/static/sprite.txt
 
 ID goldIcon
 MODEL 0

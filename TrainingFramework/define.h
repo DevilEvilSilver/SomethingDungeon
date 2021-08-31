@@ -110,7 +110,7 @@
 #define SKILL_2			"skill2"
 #define BULLET_SKILL	"skill"
 #define AOE_SKILL		"enemyAoeskill"
-//SKILL PREFAB
+	//SKILL PREFAB
 #define SKILL_WIND1		"skillWind1"
 #define SKILL_WIND2		"skillWind2"
 #define SKILL_WIND3		"skillWind3"
@@ -122,7 +122,7 @@
 #define SKILL_FREEZE1		"skillFreezeLv1"
 #define SKILL_FREEZE2		"skillFreezeLv2"
 #define SKILL_FREEZE3		"skillFreezeLv3"
-
+	//ROOM
 #define NORMAL_ROOM		"normalRoom"
 #define NORMAL_ROOM_1	"normalRoom1"
 #define NORMAL_ROOM_2	"normalRoom2"
@@ -137,7 +137,7 @@
 #define BORDER_ROOM_1_2	"borderRoom_1_2"
 #define BORDER_ROOM_1_3	"borderRoom_1_3"
 #define BORDER_ROOM_1_4	"borderRoom_1_4"
-
+	//OBJECT
 #define KEY				"key"
 #define GOLD			"gold"
 #define HP_PO			"hpPo"
@@ -155,7 +155,7 @@
 #define POLE_2			"pole_2"
 #define POLE_3			"pole_3"
 #define POLE_4			"pole_4"
-//ENEMY
+	//ENEMY
 #define WITCH			"violetWitch"
 #define B_ROBOTKNIGHT	"robotKnight"
 #define SKELETON		"skeleton"
@@ -167,12 +167,19 @@
 
 #define CHEST			"chest"
 #define ARROW_TOWER		"arrowTower"
+	//UI
+#define ICON_FLAME_SWORD	"meleeIcon1"
+#define ICON_PYRO_WAVE		"meleeIcon2"
+#define ICON_SOLAR_DESCEND	"meleeIcon3"
+#define ICON_ICE_ARROW		"rangeIcon1"
+#define ICON_GLACIAL_BLAST	"rangeIcon2"
+#define ICON_ABSOLUTE_ZERO	"rangeIcon3"
 
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"
 #define MINIMAP_BOUND	"minimapBound"
 
-//EFFECT
+	//EFFECT
 #define EFFECT_SKILL_FREEZE1 "skillEffectFreeze1"
 #define EFFECT_SKILL_FREEZE2 "skillEffectFreeze2"
 #define EFFECT_SKILL_FREEZE3 "skillEffectFreeze3"

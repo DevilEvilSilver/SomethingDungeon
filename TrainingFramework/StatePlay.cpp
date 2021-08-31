@@ -211,11 +211,14 @@ void StatePlay::Init() {
 		fscanf(dataFile, "#MELEE_ICON\n");
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
-		char strPrefab[50];
-		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_MeleeIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		if (!strcmp(m_Player->GetCloseSkill().c_str(), SKILL_FIRE1))
+			m_MeleeIcon = new Widget(ICON_FLAME_SWORD, Vector2(0.0f, 0.0f), translation);
+		else if (!strcmp(m_Player->GetCloseSkill().c_str(), SKILL_FIRE2))
+			m_MeleeIcon = new Widget(ICON_PYRO_WAVE, Vector2(0.0f, 0.0f), translation);
+		else 
+			m_MeleeIcon = new Widget(ICON_SOLAR_DESCEND, Vector2(0.0f, 0.0f), translation);
 	}
 
 	//Melee Bar
@@ -235,11 +238,14 @@ void StatePlay::Init() {
 		fscanf(dataFile, "#RANGE_ICON\n");
 		GLfloat x, y;
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
-		char strPrefab[50];
-		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_RangeIcon = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+		if (!strcmp(m_Player->GetRangeSkill().c_str(), SKILL_FREEZE1))
+			m_RangeIcon = new Widget(ICON_ICE_ARROW, Vector2(0.0f, 0.0f), translation);
+		else if (!strcmp(m_Player->GetRangeSkill().c_str(), SKILL_FREEZE2))
+			m_RangeIcon = new Widget(ICON_GLACIAL_BLAST, Vector2(0.0f, 0.0f), translation);
+		else
+			m_RangeIcon = new Widget(ICON_ABSOLUTE_ZERO, Vector2(0.0f, 0.0f), translation);
 	}
 
 	//Range Bar
