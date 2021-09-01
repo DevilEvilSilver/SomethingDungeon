@@ -13,6 +13,9 @@ private:
 	SkillID* m_CloseSkillID;
 	SkillID* m_Dash;
 public:
+	unsigned int m_iTmpTime;
+	unsigned int m_iTmpKill;
+	unsigned int m_iTmpGold;
 
 	//ENUM
 	enum MoveDir {

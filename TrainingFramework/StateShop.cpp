@@ -911,6 +911,9 @@ void StateShop::SetRecord() {
 	recordFile = fopen(FILE_RECORD, "w");
 
 	fprintf(recordFile, "%s\n", strFloor);
+	fprintf(recordFile, "Time %d\n", m_Player->m_iTmpTime);
+	fprintf(recordFile, "Kills %d\n", m_Player->m_iTmpKill);
+	fprintf(recordFile, "Golds %d\n", m_Player->m_iTmpGold);
 	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
 	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
 	fprintf(recordFile, "CurrMP %d\n", m_Player->m_currMP);

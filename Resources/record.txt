@@ -1,5 +1,8 @@
-FLOOR_1
-CurrHP 100
+WIN
+Time 1344
+Kills 700
+Golds 1000000
+CurrHP 98
 MaxHP 100
 CurrMP 100
 MaxMP 100

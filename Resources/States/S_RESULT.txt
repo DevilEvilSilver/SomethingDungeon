@@ -9,6 +9,10 @@ ROTATION SPEED 90.0
 POS -15.0, 10.0
 PREFAB backgroundResult
 
+#RESULT_BOX
+POS -4.0, 1.25
+PREFAB resultBox
+
 #TITLE
 POS -13.25, 6.5
 PREFAB title

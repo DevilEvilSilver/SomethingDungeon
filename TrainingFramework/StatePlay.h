@@ -90,6 +90,7 @@ public:
 	Fader *m_TransitionScreen;
 	Fader *m_DeathBanner;
 	FloorIdentify m_floorID;
+
 	//LOGIC
 	bool m_isGateInstruct;
 	bool m_isStartUp;
@@ -97,7 +98,11 @@ public:
 	bool m_isDead;
 	bool m_isQuit;
 	float m_fNextStateFrame;
-	
+
+	float m_TotalTime;
+	unsigned int m_TotalKill;
+	unsigned int m_TotalGold;
+	unsigned int m_StartUpGold;
 
 	//INIT
 	void InitFloorID();

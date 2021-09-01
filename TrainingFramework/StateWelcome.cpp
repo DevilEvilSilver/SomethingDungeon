@@ -332,6 +332,9 @@ void StateWelcome::InitRecord() {
 	recordFile = fopen(FILE_RECORD, "w");
 
 	fprintf(recordFile, "%s\n", FLOOR_1);
+	fprintf(recordFile, "Time %d\n", 0);
+	fprintf(recordFile, "Kills %d\n", 0);
+	fprintf(recordFile, "Golds %d\n", INIT_PLAYER_GOLD);
 	fprintf(recordFile, "CurrHP %d\n", INIT_PLAYER_HP);
 	fprintf(recordFile, "MaxHP %d\n", INIT_PLAYER_HP);
 	fprintf(recordFile, "CurrMP %d\n", INIT_PLAYER_MP);

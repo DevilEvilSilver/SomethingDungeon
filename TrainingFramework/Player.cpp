@@ -138,8 +138,11 @@ void Player::LoadData() {
 	recordFile = fopen(FILE_RECORD, "r");
 
 	char strFloor[50];
+	unsigned int tmpInt;
 	fscanf(recordFile, "%s\n", &strFloor);
-
+	fscanf(recordFile, "Time %d\n", &m_iTmpTime);
+	fscanf(recordFile, "Kills %d\n", &m_iTmpKill);
+	fscanf(recordFile, "Golds %d\n", &m_iTmpGold);
 	fscanf(recordFile, "CurrHP %d\n", &m_currHP);
 	fscanf(recordFile, "MaxHP %d\n", &m_maxHP);
 	fscanf(recordFile, "CurrMP %d\n", &m_currMP);
