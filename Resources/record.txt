@@ -7,7 +7,6 @@ ATK 5
 DEF 5
 Gold 10000
 Key 100
-Speed 4.000000
+Speed 9.000000
 Melee skillFireLv1
 Range skillFreezeLv1
-

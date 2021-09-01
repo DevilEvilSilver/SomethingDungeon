@@ -1,0 +1,9 @@
+#FRAME_COUNT 2
+ID 0
+SPF 0.5
+FILE ../Resources/Animation/decorations/w2_pole_4_1.tga
+TILING GL_REPEAT
+ID 1
+SPF 0.5
+FILE ../Resources/Animation/decorations/w2_pole_4_2.tga
+TILING GL_REPEAT

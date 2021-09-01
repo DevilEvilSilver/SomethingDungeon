@@ -58,7 +58,7 @@ void Room::RoomGenerate() {
 		}
 		else if (random >= 0 && random < 35)
 		{
-			GenObj(TOWER, 1);
+			//GenObj(TOWER, 1);
 		}
 
 		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
@@ -69,7 +69,7 @@ void Room::RoomGenerate() {
 		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
-		
+		enemyNum = 0;
 
 		while (enemyNum--) {
 			
@@ -144,10 +144,41 @@ void Room::GenerateDeco()
 {
 	int i = rand() % 2 + 1;
 	//i = 2;
-	while (i>0)
+	/*while (i>0)
 	{
 		int randomNum = rand() % 100 + 1;
 		
+		if (randomNum >= 80)
+		{
+			if (rand() % 100 >= 60)
+				AddDeco(DOUBLE_BARRELS);
+			else
+				AddDeco(TRIO_BARRELS);
+		}
+		else if (randomNum >= 15)
+		{
+			if (rand() % 100 >= 75)
+				AddDeco(POLE_1);
+			else
+				if (rand() % 100 >= 50)
+					AddDeco(POLE_2);
+				else
+					if (rand() % 100 >= 25)
+						AddDeco(POLE_3);
+					else
+						if (rand() % 100 >= 0)
+							AddDeco(POLE_4);
+		}
+		else AddDeco(BROKEN_WALL);
+
+
+		i--;
+	}*/
+
+	while (i > 0)
+	{
+		int randomNum = rand() % 100 + 1;
+
 		if (randomNum >= 80)
 		{
 			if (rand() % 100 >= 60)

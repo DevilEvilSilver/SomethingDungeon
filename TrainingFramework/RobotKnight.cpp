@@ -39,7 +39,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 
 void RobotKnight::UniqueUpdate(float frameTime)
 {
-	//printf("boss hp:%d\n", m_currHP);
+	printf("boss hp:%d\n", m_currHP);
 
 	switch (m_bState)
 	{
