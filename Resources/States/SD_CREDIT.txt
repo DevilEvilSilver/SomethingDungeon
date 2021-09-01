@@ -1,4 +1,4 @@
 SoundNum 2
 
-#ID 400 ../Resources/Sounds/win_bgm.wav
+#ID 700 ../Resources/Sounds/credit_bgm.wav
 #ID 900 ../Resources/Sounds/button_sfx.wav

@@ -89,7 +89,7 @@ void StateInstruction::Render() {
 
 void StateInstruction::Update(float frameTime) {
 	if (!m_isStartUp) {
-		//m_iHandleBGM = SoundEngine::GetInstance()->Play(WIN_BGM, 1.0f, 1.0f, true);
+		m_iHandleBGM = SoundEngine::GetInstance()->Play(INSTRUCTION_BGM, 1.0f, 1.0f, true);
 
 		m_isStartUp = true;
 	}
