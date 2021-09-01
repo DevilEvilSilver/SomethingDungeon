@@ -22,7 +22,12 @@
 #include "Decorations.h"
 #include "Effect.h"
 
-
+enum class FloorIdentify {
+	FLOOR_1_ID,
+	FLOOR_2_ID,
+	FLOOR_3_ID,
+	FLOOR_BOSS_ID
+};
 class StatePlay :public StateBase<StatePlay>
 {
 public:
@@ -80,7 +85,7 @@ public:
 
 	Fader *m_TransitionScreen;
 	Fader *m_DeathBanner;
-
+	FloorIdentify m_floorID;
 	//LOGIC
 	bool m_isGateInstruct;
 	bool m_isStartUp;
@@ -91,6 +96,7 @@ public:
 	
 
 	//INIT
+	void InitFloorID();
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
 	void RoomsGenerate();

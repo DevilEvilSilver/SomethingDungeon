@@ -85,17 +85,20 @@ void AoeSkill::UpdateCurrPos(float frameTime)
 void AoeSkill::Init(std::string ID, Vector2 target)
 {
 	Vector2 dir;
-	if (m_isPlayer)
+	if (target.x == 0 && target.y == 0)
 	{
-		target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
-		dir = target - m_owner->GetCenterPos();
 		if (m_isPlayer)
-			DirectionPrefab(ID, dir);
-	}
-	else
-	{
-		Player* player = StatePlay::GetInstance()->m_Player;
-		target = player->GetCenterPos();
+		{
+			target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+			dir = target - m_owner->GetCenterPos();
+			if (m_isPlayer)
+				DirectionPrefab(ID, dir);
+		}
+		else
+		{
+			Player* player = StatePlay::GetInstance()->m_Player;
+			target = player->GetCenterPos();
+		}
 	}
 	Vector2 c1 = m_owner->GetCenterPos();
 	if ((target - c1).Length() > mp_fAoeRadius)
