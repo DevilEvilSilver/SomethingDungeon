@@ -1,9 +1,5 @@
-#FRAME_COUNT 2
+#FRAME_COUNT 1
 ID 0
-SPF 0.5
-FILE ../Resources/Animation/decorations/w2_pole_3_1.tga
-TILING GL_REPEAT
-ID 1
-SPF 0.5
-FILE ../Resources/Animation/decorations/w2_pole_3_2.tga
+SPF -1
+FILE ../Resources/Animation/decorations/w2_pole_3.tga
 TILING GL_REPEAT

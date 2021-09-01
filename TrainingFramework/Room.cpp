@@ -58,7 +58,7 @@ void Room::RoomGenerate() {
 		}
 		else if (random >= 0 && random < 35)
 		{
-			//GenObj(TOWER, 1);
+			GenObj(TOWER, 1);
 		}
 
 		Prefab* enemyPrefab = GetResource(ENEMY, ResourceManager::GetInstance()->m_PrefabList);
@@ -69,7 +69,7 @@ void Room::RoomGenerate() {
 		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
-		enemyNum = 0;
+		//enemyNum = 0;
 
 		while (enemyNum--) {
 			
@@ -142,7 +142,7 @@ void Room::RoomGenerate() {
 
 void Room::GenerateDeco()
 {
-	int i = rand() % 2 + 1;
+	int i = rand() % 3 + 1;
 	//i = 2;
 	/*while (i>0)
 	{
@@ -181,27 +181,45 @@ void Room::GenerateDeco()
 
 		if (randomNum >= 80)
 		{
-			if (rand() % 100 >= 60)
-				AddDeco(DOUBLE_BARRELS);
+			randomNum = rand() % 100 + 1;
+			if (randomNum>= 66)
+				AddDeco(F2_TOMB_1);
 			else
-				AddDeco(TRIO_BARRELS);
-		}
-		else if (randomNum >= 15)
-		{
-			if (rand() % 100 >= 75)
-				AddDeco(POLE_1);
-			else
-				if (rand() % 100 >= 50)
-					AddDeco(POLE_2);
+				if (randomNum >= 33)
+					AddDeco(F2_TOMB_2);
 				else
-					if (rand() % 100 >= 25)
-						AddDeco(POLE_3);
-					else
-						if (rand() % 100 >= 0)
-							AddDeco(POLE_4);
+					if (randomNum >= 0)
+						AddDeco(F2_WELL);
 		}
-		else AddDeco(BROKEN_WALL);
+		else if (randomNum >= 10)
+		{
+			randomNum = rand() % 100 + 1;
+			if (randomNum >= 66)
+				AddDeco(F2_TREE_1);
+			else
+				if (randomNum >= 33)
+					AddDeco(F2_TREE_2);
+				else
+					if (randomNum >= 0)
+						AddDeco(F2_TREE_3);
+		}
+		else AddDeco(F2_ROCK);
 
+		if (rand() % 10 <= 7)
+		{
+			randomNum = rand() % 100 + 1;
+			if (randomNum >= 75)
+				AddDeco(F2_POLE_1);
+			else
+				if (randomNum >= 50)
+					AddDeco(F2_POLE_2);
+				else
+					if (randomNum >= 25)
+						AddDeco(F2_POLE_3);
+					else
+						if (randomNum >= 0)
+							AddDeco(F2_POLE_4);
+		}
 
 		i--;
 	}
@@ -211,6 +229,7 @@ void Room::AddDeco(std::string prefabName)
 {
 	Prefab* ObjPrefab = GetResource(prefabName, ResourceManager::GetInstance()->m_PrefabList);
 	Vector2 size=Vector2(ObjPrefab->m_fWidth,ObjPrefab->m_fHeight);
+	Vector2 delta = Vector2(ObjPrefab->m_fDeltaX, ObjPrefab->m_fDeltaY);
 	Matrix translation;
 
 	
@@ -220,8 +239,8 @@ void Room::AddDeco(std::string prefabName)
 	{
 		bool error = false;
 
-		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH- size.x);
-		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT-size.y-1.0f);
+		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - size.x);
+		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - size.y - 1.0f);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
 
 		Decorations* result = new Decorations(prefabName, m_RoomID, translation);
@@ -262,6 +281,15 @@ void Room::AddDeco(std::string prefabName)
 					error = true;
 				}
 		}
+
+		if (error == false)
+			for (auto& obj : StatePlay::GetInstance()->m_RoomList) {
+				if (obj->m_RoomType==WALL)
+					if (CollisionManager::CheckCollision(result, obj, 0.0f) == true)
+					{
+						error = true;
+					}
+			}
 		
 
 		if (error == false)

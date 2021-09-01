@@ -1,4 +1,4 @@
-#PREFAB_COUNT 106
+#PREFAB_COUNT 110
 
 ID mainChar
 MODEL 0
@@ -864,82 +864,126 @@ ANIMATION_COUNT 1
 ID spike
 FILE ../Resources/Animation/spikeTrap/dynamic/sprite.txt
 
-ID doubleBarrels
+ID rock
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 1.5, 2.0, 0.5
+COORD 0.0, 1.6, 1.8, 0.4
 SIZE 2.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/decorations/w2_rock1.txt
 
-ID trioBarrels
+ID tomb_1
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.6, 2.0, 1.2
-SIZE 2.0 x 2.0
-SCALE_BY_SIZE 0
-ANIMATION_COUNT 1
-ID init
-FILE ../Resources/Animation/decorations/trioBarrels.txt
-
-ID brokenWall
-MODEL 0
-SHADER 0
-TYPE RECT
-COORD 0.5, 2.0, 2.5, 1.0
+COORD 1.0, 1.8, 1.0, 0.5
 SIZE 3.0 x 3.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/decorations/brokenWall.txt
+FILE ../Resources/Animation/decorations/w2_tomb1.txt
+
+ID tomb_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 1.0, 1.8, 1.0, 0.5
+SIZE 3.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/w2_tomb2.txt
+
+ID well
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.4, 0.7, 1.2, 1.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/w2_brokenWell.txt
 
 ID pole_1
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 2.0, 1.0, 1.0
+COORD 1.0, 2.0, 1.0, 1.0
 SIZE 3.0 x 3.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/decorations/pole_1.txt
+FILE ../Resources/Animation/decorations/w2_pole_1.txt
 
 ID pole_2
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 1.0, 2.0, 1.0, 0.3
+COORD 1.0, 2.0, 1.0, 1.0
 SIZE 3.0 x 3.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/decorations/pole_2.txt
+FILE ../Resources/Animation/decorations/w2_pole_2.txt
 
 ID pole_3
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 2.6, 2.0, 0.4
+COORD 1.0, 2.0, 1.0, 0.5
 SIZE 3.0 x 3.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/decorations/pole_3.txt
+FILE ../Resources/Animation/decorations/w2_pole_3.txt
 
 ID pole_4
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 1.0, 2.6, 2.0, 0.4
+COORD 1.0, 2.0, 1.0, 0.5
 SIZE 3.0 x 3.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
-FILE ../Resources/Animation/decorations/pole_4.txt
+FILE ../Resources/Animation/decorations/w2_pole_4.txt
+
+ID tree_1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 2.0, 4.0, 1.0, 1.0
+SIZE 5.0 x 5.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/w2_tree_1.txt
+
+ID tree_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 2.0, 4.0, 1.0, 1.0
+SIZE 5.0 x 5.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/w2_tree_2.txt
+
+ID tree_3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 2.0, 4.0, 1.0, 1.0
+SIZE 5.0 x 5.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations/w2_tree_3.txt
 
 ID bombTrap
 MODEL 0
@@ -1249,7 +1293,7 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID arrowTower
-FILE ../Resources/Animation/arrowTower/static/sprite.txt
+FILE ../Resources/Animation/arrowTower/static/w2_sprite.txt
 
 ID arrow
 MODEL 0

@@ -194,6 +194,15 @@
 //FLR 2
 #define F2_ROCK			"rock"
 #define F2_POLE_1		"pole_1"
+#define F2_POLE_2		"pole_2"
+#define F2_POLE_3		"pole_3"
+#define F2_POLE_4		"pole_4"
+#define F2_TOMB_1		"tomb_1"
+#define F2_TOMB_2		"tomb_2"
+#define F2_WELL			"well"
+#define F2_TREE_1		"tree_1"
+#define F2_TREE_2		"tree_2"
+#define F2_TREE_3		"tree_3"
 
 
 	//ENEMY

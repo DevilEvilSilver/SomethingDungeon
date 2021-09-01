@@ -578,13 +578,14 @@ void StatePlay::Render() {
 		obj->Render(this->m_Camera);
 	}
 
-	
-
-	//RENDER EFFECT
 	for (auto& obj : m_InRangeEffect)
 	{
 		obj->Render(this->m_Camera);
 	}
+	
+
+	//RENDER EFFECT
+	
 	//RENDER UI
 	{
 		m_HpHolder->Render(m_Camera);
@@ -839,7 +840,7 @@ void StatePlay::UpdateInRange()
 			m_InRangeSkill.push_back(obj);
 		else obj->isFinished = true;
 				
-	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID) == true) m_InRangeDecoration.push_back(obj);
+	for (auto& obj : m_DecorationList) if (CheckInRange(obj->m_RoomID,2) == true) m_InRangeDecoration.push_back(obj);
 	for (auto& obj : m_EffectList) 
 		if (CheckInRange(obj->m_RoomID) == true) 
 			m_InRangeEffect.push_back(obj);
@@ -1209,11 +1210,6 @@ void StatePlay::GetRenderOrder() {
 		{
 			m_ObjectList.push_back(obj);
 		}
-	}
-
-	for (auto& obj : m_InRangeRoom) {
-		if (obj->m_isRenderLast == true)
-			m_ObjectList.push_back(obj);
 	}
 
 	std::stable_sort(m_ObjectList.begin(), m_ObjectList.end(), [](Object* a, Object* b) -> bool {
