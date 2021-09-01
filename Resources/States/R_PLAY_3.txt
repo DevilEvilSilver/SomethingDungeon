@@ -1,0 +1,1319 @@
+#PREFAB_COUNT 106
+
+ID mainChar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.3, 0.35, 0.4, 0.65
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID idleLeft
+FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
+ID move
+FILE ../Resources/Animation/mainChar/move/sprite.txt
+ID dash
+FILE ../Resources/Animation/mainChar/dash/sprite.txt
+ID attack
+FILE ../Resources/Animation/mainChar/idleLeft/sprite.txt
+
+ID enemy
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 6
+ID idleLeft
+FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
+ID move
+FILE ../Resources/Animation/enemy/move/sprite.txt
+ID dash
+FILE ../Resources/Animation/enemy/dash/sprite.txt
+ID gothit
+FILE ../Resources/Animation/enemy/gothit/sprite.txt
+ID death
+FILE ../Resources/Animation/enemy/gothit/sprite.txt
+ID attack
+FILE ../Resources/Animation/enemy/idleLeft/sprite.txt
+
+ID robotKnight
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.5, 2.5, 2.0
+SIZE 3.5 x 3.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 8
+ID guard
+FILE ../Resources/Animation/robot_knight/guard/sprite.txt
+ID charge
+FILE ../Resources/Animation/robot_knight/charge/sprite.txt
+ID idleLeft
+FILE ../Resources/Animation/robot_knight/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/robot_knight/walk/sprite.txt
+ID gothit
+FILE ../Resources/Animation/robot_knight/walk/sprite.txt
+ID attack
+FILE ../Resources/Animation/robot_knight/attack/sprite.txt
+ID attack2
+FILE ../Resources/Animation/robot_knight/attack2/sprite.txt
+ID death
+FILE ../Resources/Animation/robot_knight/die/sprite.txt
+
+ID violetWitch
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.25, 0.5, 1.0, 1.0
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 6
+ID idleLeft
+FILE ../Resources/Animation/violet_witch/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/violet_witch/walk/sprite.txt
+ID attack
+FILE ../Resources/Animation/violet_witch/attack/sprite.txt
+ID gothit
+FILE ../Resources/Animation/violet_witch/gotHit/sprite.txt
+ID death
+FILE ../Resources/Animation/violet_witch/die/sprite.txt
+ID dash
+FILE ../Resources/Animation/violet_witch/fly/sprite.txt
+
+ID skeleton
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.0, 0.2, 0.6
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 5
+ID idleLeft
+FILE ../Resources/Animation/skeleton/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/skeleton/walk/sprite.txt
+ID attack
+FILE ../Resources/Animation/skeleton/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/skeleton/dead/sprite.txt
+ID gothit
+FILE ../Resources/Animation/skeleton/transform/sprite.txt
+
+ID carnivorousPlant
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 0.8, 1.0, 0.8
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 6
+ID idleLeft
+FILE ../Resources/Animation/carnivorousPlant/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/carnivorousPlant/jump/sprite.txt
+ID attack
+FILE ../Resources/Animation/carnivorousPlant/rangeAttack/sprite.txt
+ID death
+FILE ../Resources/Animation/carnivorousPlant/dead/sprite.txt
+ID gothit
+FILE ../Resources/Animation/carnivorousPlant/idle/sprite.txt
+ID dash
+FILE ../Resources/Animation/carnivorousPlant/jump/sprite.txt
+
+ID meleeSoldier
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.75, 1.3, 0.5, 0.7
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 5
+ID idleLeft
+FILE ../Resources/Animation/meleeSoldier/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/meleeSoldier/move/sprite.txt
+ID attack
+FILE ../Resources/Animation/meleeSoldier/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/meleeSoldier/death/sprite.txt
+ID gothit
+FILE ../Resources/Animation/meleeSoldier/idle/sprite.txt
+
+ID frogman
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.7, 1.6, 0.6, 0.4
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 5
+ID idleLeft
+FILE ../Resources/Animation/frogman/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/frogman/move/sprite.txt
+ID attack
+FILE ../Resources/Animation/frogman/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/frogman/death/sprite.txt
+ID gothit
+FILE ../Resources/Animation/frogman/idle/sprite.txt
+
+ID orcman
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.0, 0.5, 0.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 5
+ID idleLeft
+FILE ../Resources/Animation/orcman/idle/sprite.txt
+ID move
+FILE ../Resources/Animation/orcman/move/sprite.txt
+ID attack
+FILE ../Resources/Animation/orcman/attack/sprite.txt
+ID death
+FILE ../Resources/Animation/orcman/death/sprite.txt
+ID gothit
+FILE ../Resources/Animation/orcman/idle/sprite.txt
+
+ID skill
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.35, 0.35
+SIZE 0.35 x 0.35
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/skill/idleLeft/sprite.txt
+
+ID skill2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.35, 0.35
+SIZE 0.35 x 0.35
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/skill/idleLeft/sprite2.txt
+
+ID enemyAoeskill
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/aoeskill/slash/sprite.txt
+
+ID skillFireLv1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/0/sprite.txt
+
+ID skillFireLv10
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/0/sprite.txt
+
+ID skillFireLv11
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/2/sprite.txt
+
+ID skillFireLv12
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/2/sprite.txt
+
+ID skillFireLv13
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/2/sprite.txt
+
+ID skillFireLv14
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/sprite.txt
+
+ID skillFireLv2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/0/sprite.txt
+
+ID skillFireLv20
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/0/sprite.txt
+
+ID skillFireLv21
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/1/sprite.txt
+
+ID skillFireLv22
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/2/sprite.txt
+
+ID skillFireLv23
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/3/sprite.txt
+
+ID skillFireLv24
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.5, 1.5
+SIZE 1.5 x 1.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv2/4/sprite.txt
+
+ID skillFireLv3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/0/sprite.txt
+
+ID skillFireLv30
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/0/sprite.txt
+
+ID skillFireLv31
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/1/sprite.txt
+
+ID skillFireLv32
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/2/sprite.txt
+
+ID skillFireLv33
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/3/sprite.txt
+
+ID skillFireLv34
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 2.0, 2.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/fire/lv3/4/sprite.txt
+
+ID skillFreezeLv1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite0.txt
+
+ID skillFreezeLv10
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite0.txt
+
+ID skillFreezeLv11
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite1.txt
+
+ID skillFreezeLv12
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite2.txt
+
+ID skillFreezeLv13
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite3.txt
+
+ID skillFreezeLv14
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv1/sprite4.txt
+
+ID skillFreezeLv2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite0.txt
+
+ID skillFreezeLv20
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite0.txt
+
+ID skillFreezeLv21
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite1.txt
+
+ID skillFreezeLv22
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite2.txt
+
+ID skillFreezeLv23
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite3.txt
+
+ID skillFreezeLv24
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.8, 0.8
+SIZE 0.8 x 0.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv2/sprite4.txt
+
+ID skillFreezeLv3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite0.txt
+
+ID skillFreezeLv30
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite0.txt
+
+ID skillFreezeLv31
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite1.txt
+
+ID skillFreezeLv32
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite2.txt
+
+ID skillFreezeLv33
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite3.txt
+
+ID skillFreezeLv34
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/sprite4.txt
+
+ID skillEffectFire1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/firelv1/sprite.txt
+
+ID skillEffectFire2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.6, 0.0, 1.0, 1.0
+SIZE 2.4 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/firelv2/sprite.txt
+
+ID skillEffectFire3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 2.0, 1.0, 1.0
+SIZE 2.0 x 3.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/firelv3/sprite.txt
+
+ID skillEffectFreeze1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 0.85
+SIZE 1.0 x 0.85
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv1/sprite.txt
+
+ID skillEffectFreeze2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.1, 1.0, 1.0
+SIZE 2.0 x 2.1
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv2/sprite.txt
+
+ID skillEffectFreeze3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 1.8, 1.1, 1.0
+SIZE 2.1 x 2.8
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID idleLeft
+FILE ../Resources/Animation/effect/PlayerEffect/freezelv3/sprite.txt
+
+ID normalRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 1
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/sprite.txt
+
+ID normalRoom2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom3/room2.txt
+
+ID normalRoom1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom3/room1.txt
+
+ID normalRoom3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom3/room3.txt
+
+ID normalRoom4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom3/room4.txt
+
+ID normalRoom5
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/terrain/static/NormalRoom3/room5.txt
+
+
+ID wallRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 1
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wall/floor3/sprite.txt
+
+ID borderRoom
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World1/wall_1_1.txt
+
+ID borderRoom_1_1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World3/wall_1_1.txt
+
+ID borderRoom_1_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World3/wall_1_2.txt
+
+ID borderRoom_1_3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World3/wall_1_3.txt
+
+ID borderRoom_1_4
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 9.0, 6.0
+SIZE 9.0 x 6.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/wallBorder/static/World3/wall_1_4.txt
+
+ID key
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID keyspin
+FILE ../Resources/Animation/key/static/sprite.txt
+
+ID gold
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID goldspin
+FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID hpPo
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID hpPotion
+FILE ../Resources/Animation/hp/static/sprite.txt
+
+ID mpPo
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID mpPotion
+FILE ../Resources/Animation/mp/static/sprite.txt
+
+ID spikeTrap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 1.0, 2.0, 1.0
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID spike
+FILE ../Resources/Animation/spikeTrap/dynamic/sprite.txt
+
+ID box
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0625, 1.5, 1.9375, 0.5
+SIZE 2.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/box.txt
+
+ID brokenCoffin
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.625, 1.5, 2.3125, 0.5
+SIZE 4.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/brokencoffin.txt
+
+ID brokenCoffin2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.625, 1.5, 2.3125, 0.5
+SIZE 4.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/brokencoffin2.txt
+
+ID normalVase
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 0.75, 0.5, 0.25
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/normalvase.txt
+
+ID brokenVase
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.5, 0.25, 0.5, 0.25
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/brokenvase.txt
+
+ID pole_1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 3.5, 2.0, 0.5
+SIZE 2.0 x 4.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/pole_1.txt
+
+ID pole_2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 3.5, 2.0, 0.5
+SIZE 2.0 x 4.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/decorations3/pole_2.txt
+
+ID bombTrap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 2
+ID bombInit
+FILE ../Resources/Animation/bombTrap/dynamic/sprite1.txt
+ID boomed
+FILE ../Resources/Animation/bombTrap/dynamic/sprite2.txt
+
+ID gate
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 6.0, 3.5
+SIZE 6.0 x 3.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 3
+ID init
+FILE ../Resources/Animation/gate/static/sprite.txt
+ID gateCollide
+FILE ../Resources/Animation/gate/collide/sprite.txt
+ID gateActive
+FILE ../Resources/Animation/gate/active/sprite.txt
+
+ID hpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpHolder/static/sprite.txt
+
+ID hpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/hpBar/static/sprite.txt
+
+ID mpHolder
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.0, 0.5
+SIZE 5.0 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpHolder/static/sprite.txt
+
+ID mpBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0, 0.3
+SIZE 4.0 x 0.3
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID meleeIcon1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/meleeIcon1/sprite.txt
+
+ID meleeIcon2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/meleeIcon2/sprite.txt
+
+ID meleeIcon3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/meleeIcon3/sprite.txt
+
+ID rangeIcon1
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/rangeIcon1/sprite.txt
+
+ID rangeIcon2
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/rangeIcon2/sprite.txt
+
+ID rangeIcon3
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/rangeIcon3/sprite.txt
+
+ID cooldownBar
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/cooldownBar/static/sprite.txt
+
+ID goldIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gold/static/sprite.txt
+
+ID keyIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.5, 0.5
+SIZE 0.5 x 0.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/key/static/sprite.txt
+
+ID minimap
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1, 0.6
+SIZE 2.5 x 2.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/minimap/minimap/sprite.txt
+
+ID minimapBound
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1, 0.6
+SIZE 2.5 x 2.5
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/minimap/bound/sprite.txt
+
+ID minimapPlayer
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 0.1, 0.1
+SIZE 0.1 x 0.1
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/minimap/player/sprite.txt
+
+ID gateInstruct
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 4.0, 1.0
+SIZE 4.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/gate/instruct/sprite.txt
+
+ID buttonPause
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonPause/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonPause/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonPause/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonPause/unavailable/sprite.txt
+
+ID buttonResume
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 3.0, 1.0
+SIZE 3.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonResume/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonResume/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonResume/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonResume/unavailable/sprite.txt
+
+ID buttonQuit
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 3.0, 1.0
+SIZE 3.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonQuit/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonQuit/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonQuit/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonQuit/unavailable/sprite.txt
+
+ID pauseBox
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 5.0, 5.0
+SIZE 5.0 x 5.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
+
+ID transition
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 30.0, 20.0
+SIZE 30.0 x 20.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/transition/static/sprite.txt
+
+ID treasure
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.6, 1.0, 0.4
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID chest
+FILE ../Resources/Animation/chest/static/sprite.txt
+
+ID tower
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.2, 0.6, 0.6, 0.4
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID arrowTower
+FILE ../Resources/Animation/arrowTower/static/sprite.txt
+
+ID arrow
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID ar_static
+FILE ../Resources/Animation/arrow/static/sprite.txt
+
+ID deathBanner
+MODEL 0
+SHADER 2
+TYPE RECT
+COORD 0.0, 0.0, 18.0, 2.4
+SIZE 18.0 x 2.4
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/deathBanner/static/sprite.txt
+
+#MODEL_GEN 1
+ID 0
+SIZE 1.0 x 1.0
+
+#SHADER_COUNT 3
+ID 0
+VS ../Resources/Shaders/Sprite.vs
+FS ../Resources/Shaders/Sprite.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+ID 1
+VS ../Resources/Shaders/TextShader.vs
+FS ../Resources/Shaders/TextShader.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+ID 2
+VS ../Resources/Shaders/Logo.vs
+FS ../Resources/Shaders/Logo.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+#FONT_COUNT 5
+ID 0
+FILE ../Resources/Fonts/dogica.ttf
+
+ID 1
+FILE ../Resources/Fonts/solid_mono.ttf
+
+ID 2
+FILE ../Resources/Fonts/dogicabold.ttf
+
+ID 3
+FILE ../Resources/Fonts/F25_Bank_Printer.ttf
+
+ID 4
+FILE ../Resources/Fonts/F25_Bank_Printer_Bold.ttf

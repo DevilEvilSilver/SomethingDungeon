@@ -131,7 +131,7 @@ void StatePlay::InitFloorID()
 	fclose(recordFile);
 
 	//write
-	recordFile = fopen(FILE_RECORD, "w");
+	//recordFile = fopen(FILE_RECORD, "w");
 	if (!strcmp(strFloor, FLOOR_1) || !strcmp(strFloor, RECORD_LOSE))
 		m_floorID = FloorIdentify::FLOOR_1_ID;
 	else if (!strcmp(strFloor, FLOOR_2))
@@ -143,7 +143,20 @@ void StatePlay::InitFloorID()
 }
 
 void StatePlay::Init() {
-	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+	InitFloorID();
+	switch (m_floorID) {
+	case FloorIdentify::FLOOR_1_ID:
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+		break;
+	case FloorIdentify::FLOOR_2_ID:
+	default:
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+		break;
+	case FloorIdentify::FLOOR_3_ID:
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
+		break;
+	}
+
 	SoundEngine::GetInstance()->Init(FILE_SD_PLAY);
 	/*InitFloorID();
 	switch (m_floorID)
@@ -157,7 +170,10 @@ void StatePlay::Init() {
 	case FloorIdentify::FLOOR_BOSS_ID:
 		break;
 	}*/
-	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
+	if (m_floorID != FloorIdentify::FLOOR_BOSS_ID)
+		MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
+	else
+		MapBossGenerate();
 	Room* startRoom = GetRoomByType(START, m_RoomList);
 
 	FILE* dataFile;
@@ -533,6 +549,96 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 	}
 }
 
+void StatePlay::MapBossGenerate() {
+	m_Map[0][0] = WALL; m_Map[0][1] = WALL; m_Map[0][2] = WALL; m_Map[0][3] = WALL; m_Map[0][4] = WALL; m_Map[0][5] = WALL;
+	m_Map[1][0] = WALL; m_Map[1][1] = WALL; m_Map[1][2] = NORMAL; m_Map[1][3] = NORMAL; m_Map[1][4] = NORMAL; m_Map[1][5] = WALL;
+	m_Map[2][0] = WALL; m_Map[2][1] = WALL; m_Map[2][2] = START; m_Map[2][3] = NORMAL; m_Map[2][4] = END; m_Map[2][5] = WALL;
+	m_Map[3][0] = WALL; m_Map[3][1] = WALL; m_Map[3][2] = NORMAL; m_Map[3][3] = NORMAL; m_Map[3][4] = NORMAL; m_Map[3][5] = WALL;
+	m_Map[4][0] = WALL; m_Map[4][1] = WALL; m_Map[4][2] = WALL; m_Map[4][3] = WALL; m_Map[4][4] = WALL; m_Map[4][5] = WALL;
+
+	for (unsigned int i = 0; i < 5; i++) {
+		for (unsigned int j = 0; j < 6; j++) {
+			Matrix translation;
+			translation.SetTranslation(i * ROOM_WIDTH, (j + 1) * ROOM_HEIGHT, -1.0f);
+			if (m_Map[i][j] == NORMAL) {
+				Room* room;
+				switch (rand() % 5 + 1)
+				{
+				case 1:
+					room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, NORMAL);
+
+					break;
+				case 2:
+					room = new Room(NORMAL_ROOM_2, Vector2(i, j), translation, NORMAL);
+					break;
+				case 3:
+					room = new Room(NORMAL_ROOM_3, Vector2(i, j), translation, NORMAL);
+					break;
+				case 4:
+					room = new Room(NORMAL_ROOM_4, Vector2(i, j), translation, NORMAL);
+					break;
+				case 5:
+					room = new Room(NORMAL_ROOM_5, Vector2(i, j), translation, NORMAL);
+					break;
+				}
+				if (rand() % 2 == 0) room->m_isFacingLeft = false;
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == WALL) {
+
+				if (m_Map[i][j - 1] == WALL) {
+
+					Room* room = new Room(WALL_ROOM, Vector2(i, j), translation, WALL);
+					/*if (m_Map[i][j + 1] != WALL)
+					{
+						room->SetPosY2(room->GetPosY() - 0.2f);
+						room->m_fHeight - 0.2f;
+						room->m_isRenderLast = true;
+					}*/
+					AddRoom(room);
+				}
+				else {
+					Room* room;
+					switch (rand() % 4 + 1)
+					{
+					case 1:
+						room = new Room(BORDER_ROOM_1_1, Vector2(i, j), translation, WALL);
+						break;
+					case 2:
+						room = new Room(BORDER_ROOM_1_2, Vector2(i, j), translation, WALL);
+						break;
+					case 3:
+						room = new Room(BORDER_ROOM_1_3, Vector2(i, j), translation, WALL);
+						break;
+					case 4:
+						room = new Room(BORDER_ROOM_1_4, Vector2(i, j), translation, WALL);
+						break;
+					}
+					if (rand() % 2 == 0) room->m_isFacingLeft = false;
+					/*if (m_Map[i][j + 1] != WALL)
+					{
+						room->SetPosY2(room->GetPosY() - 0.4f);
+						room->m_isRenderLast = true;
+					}*/
+					AddRoom(room);
+				}
+			}
+			else if (m_Map[i][j] == START) {
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, START);
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == END) {
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, END);
+				AddRoom(room);
+			}
+			else if (m_Map[i][j] == KEY_ROOM) {
+				Room* room = new Room(NORMAL_ROOM_1, Vector2(i, j), translation, KEY_ROOM);
+				AddRoom(room);
+			}
+		}
+	}
+}
+
 void StatePlay::RoomsGenerate() {
 	//static bool once = false; if (once == false) once = true;  else		//when load directly stateplay
 		for (auto& obj : m_RoomList) {
@@ -615,7 +721,8 @@ void StatePlay::Render() {
 		}
 		
 		//MiniMap
-		m_MiniMap->Render(m_Camera);
+		if (m_floorID != FloorIdentify::FLOOR_BOSS_ID)
+			m_MiniMap->Render(m_Camera);
 
 		//Gate instruct
 		if (m_isGateInstruct) {
@@ -802,7 +909,8 @@ void StatePlay::Update(float frameTime) {
 				m_KeyIcon->Update(frameTime);
 				m_KeyText->setText(m_Player->GetKey());
 				
-				m_MiniMap->Update(frameTime);
+				if (m_floorID != FloorIdentify::FLOOR_BOSS_ID)
+					m_MiniMap->Update(frameTime);
 
 				if (m_isGateInstruct) {
 					m_GateInstruct->Update(frameTime);
@@ -1115,20 +1223,22 @@ void StatePlay::UpdateResult(float frameTime) {
 		}
 
 		if (m_fNextStateFrame < 0) {
-			SetRecord(true);
-
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 			InputManager::GetInstance()->ResetInput();
 
-			StateManager::GetInstance()->ClosenLoadState(GS_STATE_SHOP);
+			if (!SetRecord(true))
+				StateManager::GetInstance()->ClosenLoadState(GS_STATE_SHOP);
+			else
+				StateManager::GetInstance()->ClosenLoadState(GS_STATE_RESULT);
 			return;
 		}
 	}
 }
 
-void StatePlay::SetRecord(bool isWin) {
+bool StatePlay::SetRecord(bool isWin) {
+	bool isEndGame = false;
 	FILE* recordFile;
 
 	//read
@@ -1145,11 +1255,16 @@ void StatePlay::SetRecord(bool isWin) {
 			fprintf(recordFile, "%s\n", FLOOR_2);
 		else if (!strcmp(strFloor, FLOOR_2))
 			fprintf(recordFile, "%s\n", FLOOR_3);
-		else 
+		else if (!strcmp(strFloor, FLOOR_3))
 			fprintf(recordFile, "%s\n", FLOOR_BOSS);
+		else {
+			fprintf(recordFile, "%s\n", RECORD_WIN);
+			isEndGame = true;
+		}
 	}
 	else {
 		fprintf(recordFile, "%s\n", RECORD_LOSE);
+		isEndGame = true;
 	}
 	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
 	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
@@ -1164,6 +1279,8 @@ void StatePlay::SetRecord(bool isWin) {
 	fprintf(recordFile, "Range %s\n", m_Player->GetRangeSkill().c_str());
 
 	fclose(recordFile);
+
+	return isEndGame;
 }
 
 void StatePlay::AddObject(Object *object) {

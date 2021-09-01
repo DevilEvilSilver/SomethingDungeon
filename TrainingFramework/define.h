@@ -30,6 +30,7 @@
 #define FILE_SD_WELCOME					"../Resources/States/SD_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
 #define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
+#define FILE_R_PLAY_3					"../Resources/States/R_PLAY_3.txt"
 #define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
 #define FILE_S_SHOP						"../Resources/States/S_SHOP.txt"
 #define FILE_R_SHOP						"../Resources/States/R_SHOP.txt"
@@ -181,7 +182,7 @@
 
 #define TREASURE		"treasure"
 #define TOWER			"tower"
-
+	//DECO
 #define DOUBLE_BARRELS  "doubleBarrels"
 #define TRIO_BARRELS	"trioBarrels"
 #define BROKEN_WALL		"brokenWall"
@@ -189,6 +190,14 @@
 #define POLE_2			"pole_2"
 #define POLE_3			"pole_3"
 #define POLE_4			"pole_4"
+
+#define BOX				"box"
+#define BROKEN_COFFIN	"brokenCoffin"
+#define BROKEN_COFFIN_2	"brokenCoffin2"
+#define NORMAL_VASE		"normalVase"
+#define BROKEN_VASE		"brokenVase"
+#define FLOOR3_POLE_1	"pole_1"
+#define FLORR3_POLE_2	"pole_2"
 	//ENEMY
 #define WITCH			"violetWitch"
 #define B_ROBOTKNIGHT	"robotKnight"

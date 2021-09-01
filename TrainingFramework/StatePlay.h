@@ -103,6 +103,7 @@ public:
 	void InitFloorID();
 	void Init();
 	void MapGenerate(unsigned int maxTunnel, unsigned int maxLength);
+	void MapBossGenerate();
 	void RoomsGenerate();
 
 	void AddObject(Object* object);
@@ -126,7 +127,7 @@ public:
 	void UpdateControl(float frameTime);			//CONTROL PLAYER
 	void UpdatePause(float frameTime);				//HANDLE INPUT WHILE PAUSE
 	void UpdateResult(float frameTime);				//UPDATE NEXT STATE 
-	void SetRecord(bool isWin);						//SAVE PLAY RECORD
+	bool SetRecord(bool isWin);						//SAVE PLAY RECORD
 
 	/////////////////////////////////////////////////////////
 

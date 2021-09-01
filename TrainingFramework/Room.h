@@ -20,6 +20,10 @@ public:
 	~Room();
 
 	void RoomGenerate();
+	void Floor1Generate();
+	void Floor2Generate();
+	void Floor3Generate();
+	void FloorBossGenerate();
 	void GenerateDeco();
 	void AddDeco(std::string prefabName);
 	void AddEnemy(std::string prefabName);

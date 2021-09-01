@@ -1,0 +1,6 @@
+#FRAME_COUNT 1
+ID 0
+SPF -1.0
+FILE ../Resources/Animation/wallBorder/static/World3/tga/wall_2.tga
+TILING GL_REPEAT
+
