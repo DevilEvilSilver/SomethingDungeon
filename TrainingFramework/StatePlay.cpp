@@ -146,13 +146,15 @@ void StatePlay::Init() {
 	InitFloorID();
 	switch (m_floorID) {
 	case FloorIdentify::FLOOR_1_ID:
-		ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_1);
 		break;
 	case FloorIdentify::FLOOR_2_ID:
-	default:
-		ResourceManager::GetInstance()->Init(FILE_R_PLAY);
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_2);
 		break;
 	case FloorIdentify::FLOOR_3_ID:
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
+		break;
+	default:
 		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
 		break;
 	}

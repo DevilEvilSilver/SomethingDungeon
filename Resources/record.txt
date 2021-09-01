@@ -1,11 +1,11 @@
-FLOOR_2
-CurrHP 84
+FLOOR_1
+CurrHP 100
 MaxHP 100
-CurrMP 89
+CurrMP 100
 MaxMP 100
 ATK 5
 DEF 5
-Gold 9999
+Gold 10000
 Key 100
 Speed 9.000000
 Melee skillFireLv1

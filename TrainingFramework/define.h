@@ -29,9 +29,11 @@
 #define FILE_R_WELCOME					"../Resources/States/R_WELCOME.txt"
 #define FILE_SD_WELCOME					"../Resources/States/SD_WELCOME.txt"
 #define FILE_S_PLAY						"../Resources/States/S_PLAY.txt"
-#define FILE_R_PLAY						"../Resources/States/R_PLAY.txt"
-#define FILE_R_PLAY_3					"../Resources/States/R_PLAY_3.txt"
+
 #define FILE_R_PLAY_1					"../Resources/States/R_PLAY_1.txt"
+#define FILE_R_PLAY_2					"../Resources/States/R_PLAY_2.txt"
+#define FILE_R_PLAY_3					"../Resources/States/R_PLAY_3.txt"
+
 #define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
 #define FILE_S_SHOP						"../Resources/States/S_SHOP.txt"
 #define FILE_R_SHOP						"../Resources/States/R_SHOP.txt"
