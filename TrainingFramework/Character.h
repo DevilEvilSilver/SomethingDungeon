@@ -60,7 +60,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	//STM :v
-	void Update(float frameTime);
+	virtual void Update(float frameTime);
 
 	//STATE
 	void Idle(float frameTime);
@@ -99,7 +99,7 @@ public:
 	virtual ~Character();
 
 	//RENDER
-	void Render(Camera *camera);
+	virtual void Render(Camera *camera);
 
 	//SKILL
 	virtual void AddSkill(std::string prefabId);

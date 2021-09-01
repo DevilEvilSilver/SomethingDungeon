@@ -32,6 +32,7 @@ Goblin::Goblin(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 
 void Goblin::UniqueUpdate(float frameTime)
 {
+	UpdateHpMob(frameTime);
 	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
@@ -75,6 +76,7 @@ void Goblin::UniqueUpdate(float frameTime)
 
 		if (start == true) m_strState = MOVE;
 	}
+
 
 	
 }

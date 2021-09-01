@@ -114,6 +114,9 @@
 #define SKILL_2			"skill2"
 #define BULLET_SKILL	"skill"
 #define AOE_SKILL		"enemyAoeskill"
+//ENEMY HP MOB
+#define ENEMY_HPMOB		"enemyHpMob"
+#define ENEMY_HPMOB_BOUND	"enemyHpMobBound"
 	//SKILL PREFAB
 #define SKILL_WIND1		"skillWind1"
 #define SKILL_WIND2		"skillWind2"

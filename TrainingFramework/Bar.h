@@ -17,4 +17,5 @@ public:
 	void Render(Camera *camera);
 
 	void Resize(float value);
+	virtual Matrix GetWorldMatrix(Camera* camera);
 };

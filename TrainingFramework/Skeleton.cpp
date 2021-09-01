@@ -34,6 +34,7 @@ Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatri
 
 void Skeleton::UniqueUpdate(float frameTime)
 {
+	UpdateHpMob(frameTime);
 	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
@@ -76,6 +77,8 @@ void Skeleton::UniqueUpdate(float frameTime)
 
 		if (start == true) m_strState = MOVE;
 	}
+
+	
 }
 
 void Skeleton::Shoot(Vector2 target)

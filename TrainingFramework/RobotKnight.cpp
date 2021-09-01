@@ -14,11 +14,14 @@
 #include "SoundEngine.h"
 
 
+
 #define A_CHARGE		"charge"
 #define A_GUARD			"guard"
 #define A_ATTACK2		"attack2"
 
-RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Enemy(prefabID, roomID, translationMatrix)
+RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translationMatrix) 
+	:Enemy(prefabID, roomID, translationMatrix)
+
 {
 	m_maxHP = 100;
 	m_currHP = 100;
@@ -35,12 +38,19 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 
 	m_isInvulnerable = true;
 	atkDuration = 1.0f;
+	m_fLastCurrHp = m_maxHP;
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP,3.5);
+	}
+
 }
 
 void RobotKnight::UniqueUpdate(float frameTime)
 {
 	//printf("boss hp:%d\n", m_currHP);
-
+	UpdateHpMob(frameTime);
 	switch (m_bState)
 	{
 	case BS_NORMAL:Normal(frameTime); break;

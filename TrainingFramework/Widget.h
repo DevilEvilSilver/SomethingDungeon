@@ -12,5 +12,5 @@ public:
 	virtual void Update(float frameTime);
 	virtual void Render(Camera *camera);
 
-	Matrix GetWorldMatrix(Camera *camera);
+	virtual Matrix GetWorldMatrix(Camera *camera);
 };
