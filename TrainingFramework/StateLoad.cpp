@@ -17,6 +17,7 @@
 #include "StatePlay.h"
 #include "StateShop.h"
 #include "StateResult.h"
+#include "StateInstruction.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -171,6 +172,9 @@ void StateLoad::LoadState() {
 		break;
 	case GS_STATE_RESULT:
 		StateResult::GetInstance();
+		break;
+	case GS_STATE_INSTRUCTION:
+		StateInstruction::GetInstance();
 		break;
 	}
 

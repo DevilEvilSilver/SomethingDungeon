@@ -38,6 +38,9 @@
 #define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
+#define FILE_S_INSTRUCTION				"../Resources/States/S_INSTRUCTION.txt"
+#define FILE_R_INSTRUCTION				"../Resources/States/R_INSTRUCTION.txt"
+#define FILE_SD_INSTRUCTION				"../Resources/States/SD_INSTRUCTION.txt"
 
 	//FILE RECORD
 #define FILE_RECORD						"../Resources/record.txt"
