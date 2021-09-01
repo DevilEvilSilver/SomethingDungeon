@@ -130,8 +130,6 @@ void StatePlay::InitFloorID()
 	fscanf(recordFile, "%s\n", &strFloor);
 	fclose(recordFile);
 
-	//write
-	recordFile = fopen(FILE_RECORD, "w");
 	if (!strcmp(strFloor, FLOOR_1) || !strcmp(strFloor, RECORD_LOSE))
 		m_floorID = FloorIdentify::FLOOR_1_ID;
 	else if (!strcmp(strFloor, FLOOR_2))

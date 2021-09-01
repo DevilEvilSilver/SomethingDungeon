@@ -35,6 +35,7 @@ Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Ene
 
 void Witch::UniqueUpdate(float frameTime)
 {
+	UpdateHpMob(frameTime);
 	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
@@ -72,6 +73,7 @@ void Witch::UniqueUpdate(float frameTime)
 
 		if (start == true) m_strState = DASH;
 	}
+
 	
 	
 }

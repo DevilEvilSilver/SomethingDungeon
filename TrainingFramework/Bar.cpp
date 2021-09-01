@@ -40,3 +40,9 @@ void Bar::Resize(float value) {
 		m_fCameraPosY = m_fInitPosY - (1- ratio) * m_fBarSize;
 	}
 }
+
+Matrix Bar::GetWorldMatrix(Camera* camera) {
+	SetPosX(m_fCameraPosX + camera->GetPosition().x);
+	SetPosY(m_fCameraPosY + camera->GetPosition().y);
+	return m_WorldMatrix;
+}

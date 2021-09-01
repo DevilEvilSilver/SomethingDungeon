@@ -33,6 +33,7 @@ Orcman::Orcman(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 
 void Orcman::UniqueUpdate(float frameTime)
 {
+	UpdateHpMob(frameTime);
 	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
@@ -77,6 +78,7 @@ void Orcman::UniqueUpdate(float frameTime)
 		if (start == true) m_strState = MOVE;
 	}
 
+	
 
 }
 

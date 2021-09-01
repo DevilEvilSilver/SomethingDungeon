@@ -68,6 +68,7 @@ void CPlant::UniqueUpdate(float frameTime)
 
 	if (m_lastMoveDir.x > 0) m_isFacingLeft = true;
 	else m_isFacingLeft = false;
+	UpdateHpMob(frameTime);
 
 }
 

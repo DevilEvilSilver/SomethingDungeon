@@ -15,6 +15,8 @@ Enemy::Enemy() {}
 Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Character(prefabID, roomID, translationMatrix) {
 
+	m_fcurrCDTimeHpMob = 0;
+	m_CDTimeHpmob = 3;
 	m_maxHP = 10;
 	m_currHP = 10;
 
@@ -28,9 +30,14 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	m_MOVESPEED = 3.0f;
 	isDead = false;
+	m_fLastCurrHp = m_maxHP;
+	
+	m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP);
 	
 }
-Enemy::~Enemy() {}
+Enemy::~Enemy() {
+	delete m_HpMob;
+}
 void Enemy::UniqueUpdate(float frameTime)
 {
 	Player* plyr = StatePlay::GetInstance()->m_Player;
@@ -61,7 +68,21 @@ void Enemy::UniqueUpdate(float frameTime)
 	
 
 }
-
+void Enemy::UpdateHpMob(float frameTime)
+{
+	m_fcurrCDTimeHpMob -= frameTime;
+	m_HpMob->Update(frameTime);
+	m_HpMob->SetWorldPos(Vector2(m_fCurrentPosX -m_fDeltaX/2, m_fCurrentPosY + m_fDeltaY));
+	if (m_fLastCurrHp - m_currHP)
+		m_fcurrCDTimeHpMob = m_CDTimeHpmob;
+	if (isDead == true)
+	{
+		m_HpMob->Resize(0);
+	}
+	else
+		m_HpMob->Resize(m_currHP);
+	m_fLastCurrHp = m_currHP;
+}
 //ACTION
 void Enemy::Chase(Vector2 delta)
 {
@@ -122,7 +143,13 @@ void Enemy::Death(float frameTime)
 
 //OTHER
 
+void Enemy::Render(Camera* camera)
+{
 
+	Renderer::GetInstance()->DrawAnimated(this, camera);
+	if(m_fcurrCDTimeHpMob > 0)
+		m_HpMob->Render(camera);
+}
 
 
 void Enemy::createDrop()

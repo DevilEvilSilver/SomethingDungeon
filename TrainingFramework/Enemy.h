@@ -1,10 +1,14 @@
 #pragma once
 #include "Character.h"
 #include"Gold.h"
+#include "EnemyHpMob.h"
 
 class Enemy : public Character {
-private:
-
+protected:
+	EnemyHpMob *m_HpMob;
+	float m_fcurrCDTimeHpMob;
+	float m_CDTimeHpmob;
+	float m_fLastCurrHp;
 public:
 
 	/////////////////////////////////////////////////
@@ -36,8 +40,8 @@ public:
 	~Enemy();
 
 
+	virtual void Render(Camera* camera);
 
-
-
+	void UpdateHpMob(float frameTime);
 	virtual void createDrop();
 };

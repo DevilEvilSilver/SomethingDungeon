@@ -72,8 +72,7 @@ void Character::Update(float frameTime)
 		}
 		
 	}
-	else 
-		UniqueUpdate(frameTime);
+	UniqueUpdate(frameTime);
 
 	
 	//UseSkill(frameTime);

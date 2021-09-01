@@ -32,6 +32,8 @@ Frogman::Frogman(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 void Frogman::UniqueUpdate(float frameTime)
 {
+
+	UpdateHpMob(frameTime);
 	Player* plyr = StatePlay::GetInstance()->m_Player;
 	Vector2 plyPos = plyr->GetPos();
 	Vector2 enmyPos = GetPos();
