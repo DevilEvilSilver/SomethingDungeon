@@ -282,6 +282,9 @@
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateInstruction.cpp">
       <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateCredit.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -486,6 +489,9 @@
       <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateInstruction.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateCredit.h">
       <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
   </ItemGroup>

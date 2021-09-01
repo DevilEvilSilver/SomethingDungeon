@@ -100,6 +100,7 @@
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateCredit.cpp" />
     <ClCompile Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateInstruction.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AoeSkill.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Witch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateCredit.h" />
     <ClInclude Include="..\..\..\%40Thực tập\SomethingDungeon\TrainingFramework\StateInstruction.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AoeSkill.h" />

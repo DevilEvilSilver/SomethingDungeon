@@ -18,6 +18,7 @@
 #include "StateShop.h"
 #include "StateResult.h"
 #include "StateInstruction.h"
+#include "StateCredit.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -175,6 +176,9 @@ void StateLoad::LoadState() {
 		break;
 	case GS_STATE_INSTRUCTION:
 		StateInstruction::GetInstance();
+		break;
+	case GS_STATE_CREDIT:
+		StateCredit::GetInstance();
 		break;
 	}
 

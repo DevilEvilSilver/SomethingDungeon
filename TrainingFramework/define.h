@@ -41,6 +41,9 @@
 #define FILE_S_INSTRUCTION				"../Resources/States/S_INSTRUCTION.txt"
 #define FILE_R_INSTRUCTION				"../Resources/States/R_INSTRUCTION.txt"
 #define FILE_SD_INSTRUCTION				"../Resources/States/SD_INSTRUCTION.txt"
+#define FILE_S_CREDIT					"../Resources/States/S_CREDIT.txt"
+#define FILE_R_CREDIT					"../Resources/States/R_CREDIT.txt"
+#define FILE_SD_CREDIT					"../Resources/States/SD_CREDIT.txt"
 
 	//FILE RECORD
 #define FILE_RECORD						"../Resources/record.txt"
