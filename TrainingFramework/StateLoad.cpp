@@ -138,11 +138,11 @@ void StateLoad::UpdateControl(float frameTime)
 	if (m_isNextState) {
 		m_fNextStateFrame -= frameTime;
 
-		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
-			Matrix translation;
-			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
-			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
-		}
+		//if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+		//	Matrix translation;
+		//	translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+		//	m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+		//}
 
 		if (m_fNextStateFrame < 0.0f) {
 			SoundEngine::GetInstance()->StopAll();
