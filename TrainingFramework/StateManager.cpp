@@ -16,7 +16,7 @@
 StateManager::StateManager()
 {
 	//AddState(GS_STATE_PLAY);
-	AddState(GS_STATE_CREDIT);
+	AddState(GS_STATE_WELCOME);
 }
 
 StateManager::~StateManager() {
