@@ -1,4 +1,4 @@
-#PREFAB_COUNT 106
+#PREFAB_COUNT 108
 
 ID mainChar
 MODEL 0
@@ -1272,6 +1272,29 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/deathBanner/static/sprite.txt
+
+ID enemyHpMob
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 0.2
+SIZE 1.0 x 0.2
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/EnemyHpMob/hpmob/sprite.txt
+
+ID enemyHpMobBound
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 0.2
+SIZE 1.0 x 0.2
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/EnemyHpMob/bound/sprite.txt
+
 
 #MODEL_GEN 1
 ID 0

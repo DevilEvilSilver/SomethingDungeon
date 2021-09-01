@@ -373,6 +373,7 @@ void Room::FloorBossGenerate() {
 		Prefab* enemyPrefab = GetResource(B_ROBOTKNIGHT, ResourceManager::GetInstance()->m_PrefabList);
 		translation.SetTranslation(GetPosX() + ROOM_WIDTH / 2 - enemyPrefab->m_fWidth / 2, GetPosY() - ROOM_HEIGHT / 2 + enemyPrefab->m_fHeight / 2, 0.0f);
 		RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
+
 		StatePlay::GetInstance()->AddEnemy(enemy);
 	}
 }

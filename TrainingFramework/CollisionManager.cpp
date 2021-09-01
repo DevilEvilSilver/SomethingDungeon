@@ -26,12 +26,13 @@ void CollisionManager::UpdateCollision(float frameTime)
 }
 bool CollisionManager::CheckCollision(Object* o1, Object* o2, float frameTime)
 {
+	if (o2!=nullptr)
 	if ((o1->m_iType == RECTANGLE && o2->m_iType == RECTANGLE) && CheckRectRectCollision(o1, o2, frameTime))
 	{
 		return true;
 	}
-	else
-		return false;
+	
+	return false;
 }
 bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* staticObj, float frameTime)
 {

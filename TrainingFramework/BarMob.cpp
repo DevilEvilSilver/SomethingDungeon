@@ -12,7 +12,7 @@ BarMob::BarMob(std::string prefabID, Vector2 roomID, Matrix translationMatrix, f
 	m_strState = INIT_ANIM;
 	m_fMaxValue = maxValue;
 	m_WorldMatrix.m[0][0] *= barSize;
-	m_WorldMatrix.m[1][1] *= barSize;
+	m_WorldMatrix.m[1][1] *= 1;
 	m_fBarSize = m_WorldMatrix.m[0][0];
 	Resize(currValue);
 }

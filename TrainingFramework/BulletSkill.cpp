@@ -58,6 +58,7 @@ void BulletSkill::UpdateHit(float frameTime)
 		}
 		else
 		{
+
 			if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 			{
 				StatePlay::GetInstance()->m_Player->UpdateGotHit(m_damage, m_isKnockBack, curPos, frameTime);
@@ -70,6 +71,7 @@ void BulletSkill::UpdateHit(float frameTime)
 		for (auto& obj : roomList) {
 			if (obj->m_RoomType == WALL)
 			{
+
 				if (CollisionManager::CheckCollision(this, obj))
 				{
 					isFinished = true;

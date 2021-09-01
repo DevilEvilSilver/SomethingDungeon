@@ -44,7 +44,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 		delete m_HpMob;
 		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP,3.5);
 	}
-
+	SetCS(CS_IDLE);
 }
 
 void RobotKnight::UniqueUpdate(float frameTime)
@@ -59,11 +59,8 @@ void RobotKnight::UniqueUpdate(float frameTime)
 	case BS_ATTACK2:Attack2(frameTime); break;
 	case BS_GUARD:Guard(frameTime); break;
 	}
-	/*if (m_bState != BS_ATTACK2)
-		SetBS(BS_ATTACK2);*/
 
-	
-	//printf("robot hp:%d\n", m_currHP);
+	//if (m_bState != BS_ATTACK1) SetBS(BS_ATTACK1);
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -71,6 +68,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 
 void RobotKnight::Normal(float frameTime)
 {
+	SetCS(CS_IDLE);
 	m_strState=MOVE;
 
 	if (FixedMove(ranDir, 0.0f, 0.15f, frameTime) == true)
@@ -109,7 +107,7 @@ void RobotKnight::Normal(float frameTime)
 
 void RobotKnight::Charge(float frameTime)
 {
-
+	m_strState = A_CHARGE;
 	if (start == false)
 	{
 		start = true;
@@ -117,7 +115,7 @@ void RobotKnight::Charge(float frameTime)
 		ranDir = StatePlay::GetInstance()->m_Player->GetPos() - GetPos();
 		ranDir.x -= m_fWidth / 2.0f+ StatePlay::GetInstance()->m_Player->m_fWidth/2.0f;
 		ranDir.y += m_fHeight / 2.0f - StatePlay::GetInstance()->m_Player->m_fHeight / 2.0f;
-		SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 0.5f, false);
+		//SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 0.5f, false);
 	}
 	
 	if (start==true)
@@ -125,15 +123,15 @@ void RobotKnight::Charge(float frameTime)
 		switch (i)
 		{
 		case 0:
-			m_strState = A_CHARGE;
+			
 
 			if (currAtkCD <= 0.0f)
 			{
 				
-				if (CollisionManager::CheckCollision(StatePlay::GetInstance()->m_Player, this, 0.0f) == true)
+				if (CollisionManager::CheckCollision(this,StatePlay::GetInstance()->m_Player))
 				{
 					currAtkCD = totalAtkCD;
-					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, m_isKnockBack, GetPos(), frameTime);
+					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, m_isKnockBack, GetCenterPos(), frameTime);
 				}					
 			}
 
@@ -187,7 +185,7 @@ void RobotKnight::Attack1(float frameTime)
 			skillWidth.Normalize();
 			skillWidth = Vector2(skillWidth.y, -skillWidth.x);
 			float widthRange = 2.75f;
-			int pelletRank = 3;
+			int pelletRank = 2;
 			int bulletWave = 3;
 			
 
@@ -248,7 +246,7 @@ void RobotKnight::Attack2(float frameTime)
 				Matrix m;
 				m.SetTranslation(ranDir.x, ranDir.y, 0);
 
-				int bulletNum = 25;
+				int bulletNum = 20;
 
 				Vector2 dir=Vector2(1, 0);
 

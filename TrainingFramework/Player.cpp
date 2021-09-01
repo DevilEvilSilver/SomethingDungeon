@@ -222,7 +222,7 @@ void Player::UseSkill(float frameTime)
 
 	if ((keyPressed & MOUSE_LEFT))
 	{
-		if ((float)m_CloseSkillID->m_MPCost < this->m_currMP)
+		if ((float)m_CloseSkillID->m_MPCost <= this->m_currMP)
 		{
 			if ((float)m_CloseSkillID->m_fCurrCoolDownTime <= 0)
 			{

@@ -279,6 +279,12 @@
     <ClCompile Include="SkillID.cpp">
       <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
+    <ClCompile Include="BarMob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHpMob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -481,6 +487,12 @@
     </ClInclude>
     <ClInclude Include="Key.h">
       <Filter>Header Files\Objects\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="BarMob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHpMob.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
