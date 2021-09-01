@@ -10,3 +10,4 @@ Key 100
 Speed 4.000000
 Melee skillFireLv1
 Range skillFreezeLv1
+

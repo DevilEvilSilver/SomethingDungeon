@@ -122,12 +122,41 @@ StatePlay::~StatePlay() {
 	if (m_DeathBanner != NULL)
 		delete m_DeathBanner;
 	}
+void StatePlay::InitFloorID()
+{
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "r");
+	char strFloor[50];
+	fscanf(recordFile, "%s\n", &strFloor);
+	fclose(recordFile);
 
+	//write
+	recordFile = fopen(FILE_RECORD, "w");
+	if (!strcmp(strFloor, FLOOR_1) || !strcmp(strFloor, RECORD_LOSE))
+		m_floorID = FloorIdentify::FLOOR_1_ID;
+	else if (!strcmp(strFloor, FLOOR_2))
+		m_floorID = FloorIdentify::FLOOR_2_ID;
+	else if (!strcmp(strFloor, FLOOR_3))
+		m_floorID = FloorIdentify::FLOOR_3_ID;
+	else if (!strcmp(strFloor, FLOOR_BOSS))
+		m_floorID = FloorIdentify::FLOOR_BOSS_ID;
+}
 
 void StatePlay::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_PLAY);
 	SoundEngine::GetInstance()->Init(FILE_SD_PLAY);
-
+	/*InitFloorID();
+	switch (m_floorID)
+	{
+	case FloorIdentify::FLOOR_1_ID:
+		break;
+	case FloorIdentify::FLOOR_2_ID:
+		break;
+	case FloorIdentify::FLOOR_3_ID:
+		break;
+	case FloorIdentify::FLOOR_BOSS_ID:
+		break;
+	}*/
 	MapGenerate(MAP_MAX_TUNNEL, TUNNEL_MAX_LENGTH);
 	Room* startRoom = GetRoomByType(START, m_RoomList);
 

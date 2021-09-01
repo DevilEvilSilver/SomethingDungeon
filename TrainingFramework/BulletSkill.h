@@ -9,6 +9,6 @@ public:
     BulletSkill(Vector2 target, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix);
     ~BulletSkill();
     virtual void UpdateHit(float frameTime);
-    virtual void Init(Vector2 tar);
+    virtual void Init(std::string ID,Vector2 tar);
 };
 

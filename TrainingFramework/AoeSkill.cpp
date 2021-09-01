@@ -11,14 +11,14 @@ AoeSkill::AoeSkill(Character* owner, std::string prefabID, Vector2 roomID, Matri
 	mp_fAoeRadius = 1.0f;
 	m_SkillDamage = SkillDamage::AOE_DAMAGE;
 	m_ExsitingTime = SkillExistingTime::AOE_EXISTINGTIME;//ms
-	Init(target);
+	Init(prefabID,target);
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 
 	m_isKnockBack = true;
-	if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
+	/*if (GetPosX() >= owner->GetPosX()) m_isFacingLeft = false;
 	else
 		m_isFacingLeft = true;
-	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = true;
+	if (GetPosY() >= owner->GetPosY()) m_isFacingUp = true;*/
 }
 AoeSkill::AoeSkill(Vector2 tar, Character* owner, std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	:Skill(owner, prefabID, roomID, translationMatrix)
@@ -27,16 +27,16 @@ AoeSkill::AoeSkill(Vector2 tar, Character* owner, std::string prefabID, Vector2 
 	m_SkillDamage = SkillDamage::AOE_DAMAGE;
 	m_ExsitingTime = SkillExistingTime::AOE_EXISTINGTIME;//ms
 
-	Init(tar);
+	Init(prefabID,tar);
 
 	if (m_fVx > 0) m_isFacingLeft = false;
 	m_damage = owner->m_ATK * (float)m_SkillDamage / 100;
 
 	m_isKnockBack = true;
-	if (tar.x >= owner->GetPosX()) m_isFacingLeft = false;
+	/*if (tar.x >= owner->GetPosX()) m_isFacingLeft = false;
 	else
 		m_isFacingLeft = true;
-	if (tar.y >= owner->GetPosY()) m_isFacingUp = false;
+	if (tar.y >= owner->GetPosY()) m_isFacingUp = false;*/
 }
 AoeSkill::~AoeSkill()
 {
@@ -92,22 +92,25 @@ void AoeSkill::UpdateCurrPos(float frameTime)
 	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 
 }
-void AoeSkill::Init(Vector2 target)
+void AoeSkill::Init(std::string ID, Vector2 target)
 {
-	if (target.x == 0 || target.y == 0)
+	Vector2 dir;
+	if (target.x == 0 && target.y == 0)
 	{
 		if (m_isPlayer)
+		{
 			target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+			dir = target - m_owner->GetCenterPos();
+			if (m_isPlayer)
+				DirectionPrefab(ID, dir);
+		}
 		else
 		{
 			Player* player = StatePlay::GetInstance()->m_Player;
-			target.x = player->GetPosX() + player->m_fWidth / 2;
-			target.y = player->GetPosY() - player->m_fHeight / 2;
+			target = player->GetCenterPos();
 		}
 	}
-	
-	float* data1 = m_owner->GetHitBoxCurrentData();
-	Vector2 c1(data1[0] + m_owner->m_fWidth / 2, data1[1] - m_owner->m_fHeight / 2);
+	Vector2 c1 = m_owner->GetCenterPos();
 	if ((target - c1).Length() > mp_fAoeRadius)
 		target = c1 + (target - c1).Normalize() * mp_fAoeRadius;
 	m_offset = target - m_owner->GetCenterPos();
@@ -117,5 +120,4 @@ void AoeSkill::Init(Vector2 target)
 	m_WorldMatrix.m[3][1] = m_fCurrentPosY + m_fDeltaY;
 	m_fVx = 0;
 	m_fVy = 0;
-	delete[] data1;
 }

@@ -24,6 +24,8 @@ protected:
     //hit flag
     bool m_bHit;
     void InitEffect(std::string prefabID);
+    std::string DirectionPrefab(std::string ID,Vector2 dir);
+    void SetDirectionPrefab(std::string ID, int index);
 public:
     //MP COST
     
@@ -42,5 +44,6 @@ public:
     virtual void UpdateHit(float frameTime);    // Hit-> Collison and Self Destruct
     void UpdateExistingTime(float frameTime);   // Self Destruct
     void Render(Camera* camera);
+    
 };
 

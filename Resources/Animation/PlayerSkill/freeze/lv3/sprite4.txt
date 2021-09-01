@@ -1,0 +1,7 @@
+#FRAME_COUNT 1
+ID 0
+SPF -1
+FILE ../Resources/Animation/PlayerSkill/freeze/lv3/4.tga
+TILING GL_REPEAT
+
+

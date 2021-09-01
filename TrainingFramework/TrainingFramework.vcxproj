@@ -14,7 +14,7 @@
     <ProjectGuid>{FC024EC8-32F4-4657-A2CB-14D2B3A931F8}</ProjectGuid>
     <RootNamespace>TrainingFramework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -25,7 +25,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -238,35 +238,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\States\R_LOAD.txt" />
     <Text Include="..\Resources\States\R_LOGO.txt" />
     <Text Include="..\Resources\States\R_PLAY.txt" />
-    <Text Include="..\Resources\States\R_RESULT.txt" />
-    <Text Include="..\Resources\States\R_SHOP.txt" />
     <Text Include="..\Resources\States\R_WELCOME.txt" />
-    <Text Include="..\Resources\States\SD_LOAD.txt" />
-    <Text Include="..\Resources\States\SD_LOGO.txt" />
-    <Text Include="..\Resources\States\SD_PLAY.txt" />
-    <Text Include="..\Resources\States\SD_RESULT.txt" />
-    <Text Include="..\Resources\States\SD_SHOP.txt" />
-    <Text Include="..\Resources\States\SD_WELCOME.txt" />
-    <Text Include="..\Resources\States\S_LOAD.txt" />
     <Text Include="..\Resources\States\S_LOGO.txt" />
     <Text Include="..\Resources\States\S_PLAY.txt" />
-    <Text Include="..\Resources\States\S_RESULT.txt" />
-    <Text Include="..\Resources\States\S_SHOP.txt" />
     <Text Include="..\Resources\States\S_WELCOME.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TrainingFramework.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\Shaders\Logo.fs" />
-    <None Include="..\Resources\Shaders\Logo.vs" />
-    <None Include="..\Resources\Shaders\Sprite.fs" />
-    <None Include="..\Resources\Shaders\Sprite.vs" />
-    <None Include="..\Resources\Shaders\TextShader.fs" />
-    <None Include="..\Resources\Shaders\TextShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

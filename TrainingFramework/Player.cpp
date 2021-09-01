@@ -121,8 +121,9 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	m_strState = IDLE_LEFT;
 	m_pState = P_CS;
 
-	//AddSkill(SKILL_FIRE1);
-	//AddSkill(SKILL_FREEZE1);
+
+	//AddSkill(SKILL_FIRE2);
+	//AddSkill(SKILL_FREEZE2);
 	AddSkill(DASH);
 	
 }
@@ -154,7 +155,6 @@ void Player::LoadData() {
 	char strPrefabRange[50];
 	fscanf(recordFile, "Range %s\n", &strPrefabRange);
 	AddSkill(strPrefabRange);
-
 	fclose(recordFile);
 }
 std::string Player::GetMP() {

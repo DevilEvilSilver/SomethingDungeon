@@ -115,14 +115,48 @@
 #define SKILL_WIND2		"skillWind2"
 #define SKILL_WIND3		"skillWind3"
 
-#define SKILL_FIRE1		"skillFireLv1"
-#define SKILL_FIRE2		"skillFireLv2"
-#define SKILL_FIRE3		"skillFireLv3"
+#define SKILL_FIRE1			"skillFireLv1"
+#define SKILL_FIRE10		"skillFireLv10"
+#define SKILL_FIRE11		"skillFireLv11"
+#define SKILL_FIRE12		"skillFireLv12"
+#define SKILL_FIRE13		"skillFireLv13"
+#define SKILL_FIRE14		"skillFireLv14"
+
+#define SKILL_FIRE2			"skillFireLv2"
+#define SKILL_FIRE20		"skillFireLv20"
+#define SKILL_FIRE21		"skillFireLv21"
+#define SKILL_FIRE22		"skillFireLv22"
+#define SKILL_FIRE23		"skillFireLv23"
+#define SKILL_FIRE24		"skillFireLv24"
+
+#define SKILL_FIRE3			"skillFireLv3"
+#define SKILL_FIRE30		"skillFireLv30"
+#define SKILL_FIRE31		"skillFireLv31"
+#define SKILL_FIRE32		"skillFireLv32"
+#define SKILL_FIRE33		"skillFireLv33"
+#define SKILL_FIRE34		"skillFireLv34"
 
 #define SKILL_FREEZE1		"skillFreezeLv1"
+#define SKILL_FREEZE10		"skillFreezeLv10"
+#define SKILL_FREEZE11		"skillFreezeLv11"
+#define SKILL_FREEZE12		"skillFreezeLv12"
+#define SKILL_FREEZE13		"skillFreezeLv13"
+#define SKILL_FREEZE14		"skillFreezeLv14"
+
 #define SKILL_FREEZE2		"skillFreezeLv2"
-#define SKILL_FREEZE3		"skillFreezeLv3"
-	//ROOM
+#define SKILL_FREEZE20		"skillFreezeLv20"
+#define SKILL_FREEZE21		"skillFreezeLv21"
+#define SKILL_FREEZE22		"skillFreezeLv22"
+#define SKILL_FREEZE23		"skillFreezeLv23"
+#define SKILL_FREEZE24		"skillFreezeLv24"
+
+#define SKILL_FREEZE3		"skillFreezeLv3"	//notprefabId, to distinguish to the others
+#define SKILL_FREEZE30		"skillFreezeLv30"
+#define SKILL_FREEZE31		"skillFreezeLv31"
+#define SKILL_FREEZE32		"skillFreezeLv32"
+#define SKILL_FREEZE33		"skillFreezeLv33"
+#define SKILL_FREEZE34		"skillFreezeLv34"
+
 #define NORMAL_ROOM		"normalRoom"
 #define NORMAL_ROOM_1	"normalRoom1"
 #define NORMAL_ROOM_2	"normalRoom2"
