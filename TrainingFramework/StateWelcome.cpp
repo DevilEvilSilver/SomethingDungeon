@@ -19,6 +19,7 @@ StateWelcome::StateWelcome(void) {
 StateWelcome::~StateWelcome() {
 	delete m_Background;
 	delete m_Title;
+	delete m_ButtonContinue;
 	delete m_ButtonStart;
 	delete m_ButtonInstruction;
 	delete m_ButtonCredit;
@@ -32,6 +33,21 @@ void StateWelcome::Init() {
 	ResourceManager::GetInstance()->Init(FILE_R_WELCOME);
 	SoundEngine::GetInstance()->Init(FILE_SD_WELCOME);
 
+	// read file record
+	FILE* recordFile;
+	recordFile = fopen(FILE_RECORD, "r");
+
+	char strisWin[50];
+	fscanf(recordFile, "%s\n", &strisWin);
+	if (strcmp(strisWin, RECORD_WIN) && 
+		strcmp(strisWin, RECORD_LOSE))
+		m_isContinueable = true;
+	else 
+		m_isContinueable = false;
+
+	fclose(recordFile);
+
+	//data file
 	FILE* dataFile;
 	dataFile = fopen(FILE_S_WELCOME, "r");
 
@@ -73,6 +89,18 @@ void StateWelcome::Init() {
 		m_Title = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Continue Button
+	{
+		fscanf(dataFile, "#BUTTON_CONTINUE\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_ButtonContinue = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Start Button
 	{
 		fscanf(dataFile, "#BUTTON_START\n");
@@ -112,6 +140,7 @@ void StateWelcome::Init() {
 	fclose(dataFile);
 
 	m_isStartUp = false;
+	m_isLoadData = false;
 	m_isPLayState = false;
 	m_isInstructionState = false;
 	m_isCreditState = false;
@@ -124,6 +153,8 @@ void StateWelcome::Render() {
 	
 	m_Background->Render(this->m_Camera);
 	m_Title->Render(this->m_Camera);
+	if (m_isContinueable)
+		m_ButtonContinue->Render(this->m_Camera);
 	m_ButtonStart->Render(this->m_Camera);
 	m_ButtonInstruction->Render(this->m_Camera);
 	m_ButtonCredit->Render(this->m_Camera);
@@ -141,6 +172,8 @@ void StateWelcome::Update(float frameTime) {
 
 	m_Background->Update(frameTime);
 	m_Title->Update(frameTime);
+	if (m_isContinueable)
+		m_ButtonContinue->Update(frameTime);
 	m_ButtonStart->Update(frameTime);
 	m_ButtonInstruction->Update(frameTime);
 	m_ButtonCredit->Update(frameTime);
@@ -155,10 +188,23 @@ void StateWelcome::Update(float frameTime) {
 
 void StateWelcome::UpdateControl(float frameTime)
 {
+	//Button Continue
+	if (m_ButtonContinue->isReleased(this->m_Camera) && m_isContinueable) {
+		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
+		m_isLoadData = true;
+		m_ButtonContinue->m_isAvailble = false;
+		m_ButtonStart->m_isAvailble = false;
+		m_ButtonInstruction->m_isAvailble = false;
+		m_ButtonCredit->m_isAvailble = false;
+	}
+	m_ButtonContinue->isPressed(this->m_Camera);
+	m_ButtonContinue->isHover(this->m_Camera);
+
 	//Button Start
 	if (m_ButtonStart->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isPLayState = true;
+		m_ButtonContinue->m_isAvailble = false;
 		m_ButtonStart->m_isAvailble = false;
 		m_ButtonInstruction->m_isAvailble = false;
 		m_ButtonCredit->m_isAvailble = false;
@@ -170,6 +216,7 @@ void StateWelcome::UpdateControl(float frameTime)
 	if (m_ButtonInstruction->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isInstructionState = true;
+		m_ButtonContinue->m_isAvailble = false;
 		m_ButtonStart->m_isAvailble = false;
 		m_ButtonInstruction->m_isAvailble = false;
 		m_ButtonCredit->m_isAvailble = false;
@@ -181,12 +228,35 @@ void StateWelcome::UpdateControl(float frameTime)
 	if (m_ButtonCredit->isReleased(this->m_Camera)) {
 		SoundEngine::GetInstance()->Play(BUTTON_SFX, 1.0f, 1.0f, false);
 		m_isCreditState = true;
+		m_ButtonContinue->m_isAvailble = false;
 		m_ButtonStart->m_isAvailble = false;
 		m_ButtonInstruction->m_isAvailble = false;
 		m_ButtonCredit->m_isAvailble = false;
 	}
 	m_ButtonCredit->isPressed(this->m_Camera);
 	m_ButtonCredit->isHover(this->m_Camera);
+
+	//Continue
+	if (m_isLoadData) {
+		m_fNextStateFrame -= frameTime;
+
+		if (m_fNextStateFrame < 1.0f && m_TransitionScreen == NULL) {
+			Matrix translation;
+			translation.SetTranslation(-m_Camera->GetViewScale().x / 2, m_Camera->GetViewScale().y / 2, 2.0f);
+			m_TransitionScreen = new Fader(TRANSISTION, Vector2(0.0f, 0.0f), translation, 1.0f, 1.0f);
+
+			SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, m_fNextStateFrame);
+		}
+
+		if (m_fNextStateFrame < 0) {
+			SoundEngine::GetInstance()->StopAll();
+			ResourceManager::GetInstance()->ResetInstance();
+			SoundEngine::GetInstance()->ResetInstance();
+
+			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
+			return;
+		}
+	}
 
 	//New game
 	if (m_isPLayState) {
@@ -225,8 +295,6 @@ void StateWelcome::UpdateControl(float frameTime)
 		}
 
 		if (m_fNextStateFrame < 0) {
-			InitRecord();
-
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
@@ -249,8 +317,6 @@ void StateWelcome::UpdateControl(float frameTime)
 		}
 
 		if (m_fNextStateFrame < 0) {
-			InitRecord();
-
 			SoundEngine::GetInstance()->StopAll();
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
