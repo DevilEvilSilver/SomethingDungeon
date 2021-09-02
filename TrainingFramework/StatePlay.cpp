@@ -1110,7 +1110,7 @@ void StatePlay::UpdateControl(float frameTime)
 	m_ButtonPause->isHover(this->m_Camera);
 
 	//PLAYER
-	if (m_Player->m_pState==m_Player->P_CS)
+	//if (m_Player->m_pState==m_Player->P_CS)
 	{
 		if ((newKeyPressed & KEY_W))
 		{
