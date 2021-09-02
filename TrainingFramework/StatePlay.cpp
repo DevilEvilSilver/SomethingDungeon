@@ -152,19 +152,23 @@ void StatePlay::Init() {
 	switch (m_floorID) {
 	case FloorIdentify::FLOOR_1_ID:
 		ResourceManager::GetInstance()->Init(FILE_R_PLAY_1);
+		SoundEngine::GetInstance()->Init(FILE_SD_PLAY_1);
 		break;
 	case FloorIdentify::FLOOR_2_ID:
 		ResourceManager::GetInstance()->Init(FILE_R_PLAY_2);
+		SoundEngine::GetInstance()->Init(FILE_SD_PLAY_2);
 		break;
 	case FloorIdentify::FLOOR_3_ID:
 		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
+		SoundEngine::GetInstance()->Init(FILE_SD_PLAY_3);
 		break;
+	case FloorIdentify::FLOOR_BOSS_ID:
 	default:
-		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_BOSS);
+		SoundEngine::GetInstance()->Init(FILE_SD_PLAY_BOSS);
 		break;
 	}
 
-	SoundEngine::GetInstance()->Init(FILE_SD_PLAY);
 	/*InitFloorID();
 	switch (m_floorID)
 	{
@@ -868,7 +872,7 @@ void StatePlay::Update(float frameTime) {
 	if (!m_isDead && !m_isNextState) {
 		if (!m_isStartUp) {
 			RoomsGenerate();
-			m_iHandleBGM = SoundEngine::GetInstance()->Play(PLAY_BGM, 0.25f, 1.0f, true);
+			m_iHandleBGM = SoundEngine::GetInstance()->Play(PLAY_BGM, 0.5f, 1.0f, true);
 			m_isStartUp = true;
 		}
 		else {

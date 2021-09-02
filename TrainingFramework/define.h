@@ -33,8 +33,13 @@
 #define FILE_R_PLAY_1					"../Resources/States/R_PLAY_1.txt"
 #define FILE_R_PLAY_2					"../Resources/States/R_PLAY_2.txt"
 #define FILE_R_PLAY_3					"../Resources/States/R_PLAY_3.txt"
+#define FILE_R_PLAY_BOSS				"../Resources/States/R_PLAY_BOSS.txt"
 
-#define FILE_SD_PLAY					"../Resources/States/SD_PLAY.txt"
+#define FILE_SD_PLAY_1					"../Resources/States/SD_PLAY_1.txt"
+#define FILE_SD_PLAY_2					"../Resources/States/SD_PLAY_2.txt"
+#define FILE_SD_PLAY_3					"../Resources/States/SD_PLAY_3.txt"
+#define FILE_SD_PLAY_BOSS				"../Resources/States/SD_PLAY_BOSS.txt"
+
 #define FILE_S_SHOP						"../Resources/States/S_SHOP.txt"
 #define FILE_R_SHOP						"../Resources/States/R_SHOP.txt"
 #define FILE_SD_SHOP					"../Resources/States/SD_SHOP.txt"
@@ -62,7 +67,7 @@
 #define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				0
 #define INIT_PLAYER_KEY					100
-#define INIT_PLAYER_SPEED				3.0f
+#define INIT_PLAYER_SPEED				30.0f
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
 #define PLAYER_ATK_MIN					15

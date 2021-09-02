@@ -42,7 +42,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	if (m_HpMob != NULL)
 	{
 		delete m_HpMob;
-		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP,3.5);
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 5.0f);
 	}
 	SetCS(CS_IDLE);
 }

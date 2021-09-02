@@ -1,0 +1,12 @@
+SoundNum 10
+
+#ID 300 ../Resources/Sounds/play_2_bgm.wav
+#ID 900 ../Resources/Sounds/button_sfx.wav
+#ID 901 ../Resources/Sounds/coin.wav
+#ID 902 ../Resources/Sounds/pewpew.wav
+#ID 903 ../Resources/Sounds/regen.wav
+#ID 904 ../Resources/Sounds/hit.wav
+#ID 905 ../Resources/Sounds/bomb.wav
+#ID 906 ../Resources/Sounds/dash.wav
+#ID 907 ../Resources/Sounds/death_sfx.wav
+#ID 908 ../Resources/Sounds/death_sfx.wav
