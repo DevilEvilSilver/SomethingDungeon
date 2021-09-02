@@ -18,6 +18,8 @@ ArrowTower::ArrowTower(std::string prefabID, Vector2 roomID, Matrix translationM
 	if (rand() % 2 == 0) m_isFacingLeft = false;
 	else m_isFacingLeft = true;
 	m_strState = ARROW_TOWER;
+
+	currCD = 0.5f;
 }
 
 

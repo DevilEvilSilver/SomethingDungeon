@@ -1110,7 +1110,7 @@ void StatePlay::UpdateControl(float frameTime)
 	m_ButtonPause->isHover(this->m_Camera);
 
 	//PLAYER
-	if (m_Player->m_pState==m_Player->P_CS)
+	//if (m_Player->m_pState==m_Player->P_CS)
 	{
 		if ((newKeyPressed & KEY_W))
 		{
@@ -1129,11 +1129,6 @@ void StatePlay::UpdateControl(float frameTime)
 		{
 			m_Player->PlayerMove(m_Player->RIGHT);
 		}
-		else if (newKeyPressed & MOUSE_LEFT || newKeyPressed & MOUSE_RIGHT)
-		{
-			//m_Player->SetCS(Character::CS_ATTACK);
-		}
-		
 		m_Player->UseSkill(frameTime);
 	}
 

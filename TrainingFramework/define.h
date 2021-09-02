@@ -63,20 +63,20 @@
 #define RECORD_LOSE						"LOSE"
 #define INIT_PLAYER_HP					200
 #define INIT_PLAYER_MP					200
-#define INIT_PLAYER_ATK					5
+#define INIT_PLAYER_ATK					8
 #define INIT_PLAYER_DEF					5
-#define INIT_PLAYER_GOLD				0
-#define INIT_PLAYER_KEY					0
+#define INIT_PLAYER_GOLD				1000
+#define INIT_PLAYER_KEY					1000
 #define INIT_PLAYER_SPEED				3.5f
 
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
-#define PLAYER_ATK_MIN					15
+#define PLAYER_ATK_MIN					1
 #define PLAYER_DEF_MIN					0
 #define PLAYER_SPEED_MIN				2.0
-#define PLAYER_ATK_MAX					100
-#define PLAYER_DEF_MAX					15
-#define PLAYER_SPEED_MAX				8
+#define PLAYER_ATK_MAX					10
+#define PLAYER_DEF_MAX					10
+#define PLAYER_SPEED_MAX				6
 
 //STAT ENEMIES
 #define WITCH_HP						135
@@ -103,9 +103,9 @@
 #define CPLANT_ATK						5
 #define CPLANT_DEF						1
 
-#define RB_HP						1000
+#define RB_HP						2000
 #define RB_ATK						5
-#define RB_DEF						5
+#define RB_DEF						8
 
 #define TRAP_ARROW_ATK				5
 #define TRAP_SPIKE_ATK				6
@@ -406,7 +406,7 @@
 #define ITEM_CODEX_GIGAS					5
 #define BUTTON_ITEM_CODEX_GIGAS				"buttonItemCodexGigas"
 #define ITEM_NAME_CODEX_GIGAS				"Codex Gigas"
-#define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 20% max MP & decrease 30% max HP"
+#define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 20% max MP & decrease 50% max HP"
 #define ITEM_PRICE_CODEX_GIGAS				40
 	//HERMES_SHOE
 #define ITEM_HERMES_SHOE					6
@@ -418,7 +418,7 @@
 #define ITEM_TITAN_CHAIN					7
 #define BUTTON_ITEM_TITAN_CHAIN				"buttonItemTitanChain"
 #define ITEM_NAME_TITAN_CHAIN				"Titan Chain"
-#define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 2 DEF & decrease 1 SPEED"
+#define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 2 DEF & decrease 3 ATTACK"
 #define ITEM_PRICE_TITAN_CHAIN				40
 	//ARES_BLADE
 #define ITEM_ARES_BLADE						8
@@ -442,25 +442,25 @@
 #define ITEM_GIGANTIFICATION				11
 #define BUTTON_ITEM_GIGANTIFICATION			"buttonItemGigantification"
 #define ITEM_NAME_GIGANTIFICATION			"Gigantification"
-#define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase 3 ATK & decrease 1.5 SPPED"
+#define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase 5 ATK & decrease all DEF"
 #define ITEM_PRICE_GIGANTIFICATION			75
 	//ARTEMIS_BLESSING
 #define ITEM_ARTEMIS_BLESSING				12
 #define BUTTON_ITEM_ARTEMIS_BLESSING		"buttonItemArtemisBlessing"
 #define ITEM_NAME_ARTEMIS_BLESSING			"Artemis Blessing"
-#define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 2 SPEED, decrease 40% max MP"
+#define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 0.5 SPEED, decrease 70% max MP"
 #define ITEM_PRICE_ARTEMIS_BLESSING			80
 	//BARBATOS_FAVOR
 #define ITEM_BARBATOS_FAVOR					13
 #define BUTTON_ITEM_BARBATOS_FAVOR			"buttonItemBarbatosFavor"
 #define ITEM_NAME_BARBATOS_FAVOR			"Barbatos Favor"
-#define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 100 max HP & decrease 1 ATK"
+#define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 75 max HP & decrease 2 DEF"
 #define ITEM_PRICE_BARBATOS_FAVOR			80
 	//AAMON_CONTRACT
 #define ITEM_AAMON_CONTRACT					14
 #define BUTTON_ITEM_AAMON_CONTRACT			"buttonItemAamonContract"
 #define ITEM_NAME_AAMON_CONTRACT			"Aamon Contract"
-#define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 100 max MP & decrease 1 ATK"
+#define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 75 max MP & decrease 2 ATK"
 #define ITEM_PRICE_AAMON_CONTRACT			80
 	//HEALTH_POTION
 #define ITEM_HEALTH_POTION					15
@@ -484,7 +484,7 @@
 #define ITEM_CORRUPTED_VINE					18
 #define BUTTON_ITEM_CORRUPTED_VINE			"buttonItemCorruptedVine"
 #define ITEM_NAME_CORRUPTED_VINE			"Corrupted Vine"
-#define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP & decrease 1 DEF"
+#define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP & decrease 1 ATK"
 #define ITEM_PRICE_CORRUPTED_VINE			30
 	//ROTTEN_GINSENG
 #define ITEM_ROTTEN_GINSENG					19
@@ -503,7 +503,7 @@
 #define BUTTON_ITEM_KEY						"buttonItemKey"
 #define ITEM_NAME_KEY						"Key"
 #define ITEM_DESCRIPTION_KEY				"Used for resetting new items in the shop"
-#define ITEM_PRICE_KEY						0
+#define ITEM_PRICE_KEY						25
 	//FLAME_SWORD
 #define ITEM_FLAME_SWORD					22
 #define BUTTON_ITEM_FLAME_SWORD				"buttonItemFlameSword"
@@ -514,29 +514,29 @@
 #define ITEM_PYRO_WAVE						23
 #define BUTTON_ITEM_PYRO_WAVE				"buttonItemPyroWave"
 #define ITEM_NAME_PYRO_WAVE					"PyroWave (Melee Skill)"
-#define ITEM_DESCRIPTION_PYRO_WAVE			"MELEE SKILL:  DMG:60%ATK  CD: 0.5s."
+#define ITEM_DESCRIPTION_PYRO_WAVE			"MELEE SKILL:   DMG:60%ATK   CD: 0.5s."
 #define ITEM_PRICE_PYRO_WAVE				80
 	//SOLAR_DESCEND
 #define ITEM_SOLAR_DESCEND					24
 #define BUTTON_ITEM_SOLAR_DESCEND			"buttonItemSolarDescend"
 #define ITEM_NAME_SOLAR_DESCEND				"Solar Descend (Melee Skill)"
-#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:  DMG:130%ATK  CD: 0.7s."
+#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:150%ATK   CD: 1.0s."
 #define ITEM_PRICE_SOLAR_DESCEND			150
 	//ICE_ARROW
 #define ITEM_ICE_ARROW						25
 #define BUTTON_ITEM_ICE_ARROW				"buttonItemIceArrow"
 #define ITEM_NAME_ICE_ARROW					"Ice Arrow (Ranged Skill)"
-#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:		DMG:150%ATK		CD: 1.0s		COST:5 MP"
+#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:   DMG:150%ATK   CD: 1.0s   COST:5 MP"
 #define ITEM_PRICE_ICE_ARROW				60
 	//GLACIAL_BLAST
 #define ITEM_GLACIAL_BLAST					26
 #define BUTTON_ITEM_GLACIAL_BLAST			"buttonItemGlacialBlast"
 #define ITEM_NAME_GLACIAL_BLAST				"Glacial Blast (Ranged Skill)"
-#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:		DMG:170%ATK		CD: 1.0s		COST:6 MP"
+#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:   DMG:170%ATK   CD: 1.0s   COST:6 MP"
 #define ITEM_PRICE_GLACIAL_BLAST			80
 	//ABSOLUTE_ZERO
 #define ITEM_ABSOLUTE_ZERO					27
 #define BUTTON_ITEM_ABSOLUTE_ZERO			"buttonItemAbsoluteZero"
 #define ITEM_NAME_ABSOLUTE_ZERO				"Absolute Zero (Ranged Skill)"
-#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:		DMG:200%ATK		CD: 2.0s		COST:8 MP"
+#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:200%ATK   CD: 2.0s   COST:8 MP"
 #define ITEM_PRICE_ABSOLUTE_ZERO			150

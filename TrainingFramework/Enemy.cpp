@@ -34,6 +34,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	
 	m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP);
 	
+	currCD = 5.0f;
 }
 Enemy::~Enemy() {
 	delete m_HpMob;
@@ -134,7 +135,7 @@ void Enemy::Death(float frameTime)
 {
 	m_strState = DEATH;
 	
-	if (FixedMove(Vector2(0,0),0.0f,2.0f, frameTime) == true) {
+	if (FixedMove(Vector2(0,0),0.0f,1.0f, frameTime) == true) {
 		SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 		isDead = true;
 		createDrop();

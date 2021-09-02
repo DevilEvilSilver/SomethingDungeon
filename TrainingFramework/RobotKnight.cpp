@@ -13,7 +13,7 @@
 
 #include "SoundEngine.h"
 
-
+#include "Key.h"
 
 #define A_CHARGE		"charge"
 #define A_GUARD			"guard"
@@ -23,11 +23,11 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	:Enemy(prefabID, roomID, translationMatrix)
 
 {
-	m_maxHP = 100;
-	m_currHP = 100;
+	m_maxHP = RB_HP;
+	m_currHP = RB_HP;
 
-	m_ATK = 7;
-	m_DEF = 3;
+	m_ATK = RB_ATK;
+	m_DEF = RB_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
@@ -35,7 +35,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	isEnemyCollision = false;
 
 	m_MOVESPEED = 3.0f;
-
+	
 	m_isInvulnerable = true;
 	atkDuration = 1.0f;
 	m_fLastCurrHp = m_maxHP;
@@ -61,7 +61,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 	case BS_GUARD:Guard(frameTime); break;
 	}
 
-	//if (m_bState != BS_ATTACK1) SetBS(BS_ATTACK1);
+	//if (m_bState != BS_ATTACK2) SetBS(BS_ATTACK2);
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -88,7 +88,7 @@ void RobotKnight::Normal(float frameTime)
 		if (distance < 20.0f)
 		{
 			SoundEngine::GetInstance()->Play(BOMB, 1.0f, 2.0f, false);
-			if (distance > 5.0f)
+			if (distance > 7.0f)
 			{
 				if (rand() % 10 <=4)
 					SetBS(BS_CHARGE);
@@ -132,12 +132,12 @@ void RobotKnight::Charge(float frameTime)
 				if (CollisionManager::CheckCollision(this,StatePlay::GetInstance()->m_Player))
 				{
 					currAtkCD = totalAtkCD;
-					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, m_isKnockBack, GetCenterPos(), frameTime);
+					StatePlay::GetInstance()->m_Player->UpdateGotHit(m_ATK*1.2f, true, GetCenterPos(), frameTime);
 				}					
 			}
 
 
-			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.75f, frameTime) == true)
+			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.35f, frameTime) == true)
 			{
 				i++;
 			}
@@ -236,6 +236,7 @@ void RobotKnight::Attack2(float frameTime)
 		if (FixedMove(ranDir, 0.0f, duration, frameTime) == true)
 		{	
 			start = false;
+			if (rand() % 100 <= 60) SetBS(BS_ATTACK2);
 			SetBS(BS_NORMAL);
 		}
 		else
@@ -251,7 +252,7 @@ void RobotKnight::Attack2(float frameTime)
 
 				Vector2 dir=Vector2(1, 0);
 
-				Vector2 startPos = Vector2(GetPosX() + m_fWidth / 2, GetPosY() - m_fWidth / 2);
+				Vector2 startPos = GetCenterPos();//Vector2(GetPosX() + m_fWidth / 2, GetPosY() - m_fWidth / 2);
 
 				int currNum = bulletNum;
 				while (currNum > 0)
@@ -295,14 +296,14 @@ void RobotKnight::Guard(float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(ranDir, 0.0f, 0.5f, frameTime) == true)
+			if (FixedMove(ranDir, 0.0f, 0.25f, frameTime) == true)
 			{
 				i++;
 				//m_isInvincible = false;
 			}
 			break;
 		case 1:
-			if (FixedMove(ranDir, 0.0f, 1.0f, frameTime) == true)
+			if (FixedMove(ranDir, 0.0f, 0.25f, frameTime) == true)
 			{
 				SetBS(BS_CHARGE);
 				start = false;
@@ -331,4 +332,13 @@ void RobotKnight::Shoot(Vector2 target)
 
 void RobotKnight::Melee(Vector2 target)
 {
+}
+
+void RobotKnight::createDrop()
+{
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+	Key* gold = new Key(KEY, m_RoomID, translation);
+	StatePlay::GetInstance()->AddDrop(gold);
 }

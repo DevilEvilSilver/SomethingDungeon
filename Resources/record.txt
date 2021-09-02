@@ -1,15 +1,15 @@
-LOSE
-Time 148
+FLOOR_BOSS
+Time 0
 Kills 0
-Golds 0
+Golds 1000
 CurrHP 200
 MaxHP 200
 CurrMP 200
 MaxMP 200
-ATK 5
+ATK 8
 DEF 5
-Gold 0
-Key 100
+Gold 1000
+Key 1000
 Speed 3.500000
 Melee skillFireLv1
 Range skillFreezeLv1

@@ -38,7 +38,7 @@ void Player::UniqueUpdate(float frameTime)
 	m_regenCurrCD -= frameTime;
 	if (m_currMP < m_maxMP && m_regenCurrCD <= 0.0f)
 	{
-		m_currMP++;
+		m_currMP+=ceil(m_currMP*0.01f);
 		m_regenCurrCD = m_regenCD;
 	}
 		
@@ -60,10 +60,10 @@ bool Player::Dash(float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(m_lastMoveDir, 0.0f, 0.0f, frameTime) == false) return false;
+			//if (FixedMove(m_lastMoveDir, 0.0f, 0.0f, frameTime) == false) return false;
 			m_isInvincible = true;
 			i++;
-			break;
+			//break;
 		case 1:
 			if (FixedMove(m_lastMoveDir, 3.5f, 0.25f, frameTime) == false) return false;
 

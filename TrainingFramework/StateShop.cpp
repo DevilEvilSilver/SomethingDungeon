@@ -740,9 +740,9 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			if (m_Player->m_DEF > PLAYER_DEF_MAX)
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 
-			m_Player->m_MOVESPEED -= 1;
-			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
-				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
+			m_Player->m_ATK -= 3;
+			if (m_Player->m_ATK < PLAYER_ATK_MIN)
+				m_Player->m_ATK = PLAYER_ATK_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
 			m_Player->m_ATK += 2;
@@ -770,24 +770,22 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
-			m_Player->m_ATK += 3;
+			m_Player->m_ATK += 5;
 			if (m_Player->m_ATK > PLAYER_ATK_MAX)
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 
-			m_Player->m_MOVESPEED -= 1.5;
-			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
-				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
+			m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARTEMIS_BLESSING)) {
 			unsigned int currMaxHP = m_Player->m_maxHP;
 			m_Player->m_maxHP *= 1.25f;
 			m_Player->m_currHP += m_Player->m_maxHP - currMaxHP;
 
-			m_Player->m_MOVESPEED += 2;
+			m_Player->m_MOVESPEED += 0.5;
 			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 
-			m_Player->m_maxMP *= 0.6f;
+			m_Player->m_maxMP *= 0.3f;
 			if (m_Player->m_maxMP < 1)
 				m_Player->m_maxMP = 1;
 			if (m_Player->m_maxMP < m_Player->m_currMP) {
@@ -795,16 +793,16 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			}
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BARBATOS_FAVOR)) {
-			m_Player->m_maxHP += 100;
-			m_Player->m_currHP += 100;
+			m_Player->m_maxHP += 75;
+			m_Player->m_currHP += 75;
 
-			m_Player->m_ATK -= 1;
-			if (m_Player->m_ATK < PLAYER_ATK_MIN)
-				m_Player->m_ATK = PLAYER_ATK_MIN;
+			m_Player->m_DEF -= 1;
+			if (m_Player->m_ATK < PLAYER_DEF_MIN)
+				m_Player->m_ATK = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_AAMON_CONTRACT)) {
-			m_Player->m_maxMP += 100;
-			m_Player->m_currMP += 100;
+			m_Player->m_maxMP += 75;
+			m_Player->m_currMP += 75;
 
 			m_Player->m_ATK -= 1;
 			if (m_Player->m_ATK < PLAYER_ATK_MIN)
@@ -832,9 +830,9 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CORRUPTED_VINE)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
-			m_Player->m_DEF -= 1;
-			if (m_Player->m_DEF < PLAYER_DEF_MIN)
-				m_Player->m_DEF = PLAYER_DEF_MIN;
+			m_Player->m_ATK -= 1;
+			if (m_Player->m_ATK < PLAYER_ATK_MIN)
+				m_Player->m_ATK = PLAYER_ATK_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
 			m_Player->m_currHP = m_Player->m_maxHP;
