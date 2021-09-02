@@ -91,7 +91,7 @@ void RobotKnight::Normal(float frameTime)
 			if (distance > 7.0f)
 			{
 				if (rand() % 10 <=4)
-					SetBS(BS_CHARGE);
+					SetBS(BS_GUARD);
 				else SetBS(BS_ATTACK1);
 
 			}
@@ -145,6 +145,8 @@ void RobotKnight::Charge(float frameTime)
 		case 1:
 			
 			start = false;
+			if (rand() % 100 <= 60) SetBS(BS_CHARGE);
+			
 			SetBS(BS_NORMAL);
 			break;
 		}
