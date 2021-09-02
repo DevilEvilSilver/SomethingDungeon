@@ -61,7 +61,7 @@
 #define INIT_PLAYER_ATK					5
 #define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				0
-#define INIT_PLAYER_KEY					100
+#define INIT_PLAYER_KEY					0
 #define INIT_PLAYER_SPEED				3.5f
 
 #define INIT_PLAYER_MELEE				"skillFireLv1"
