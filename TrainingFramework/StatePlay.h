@@ -80,6 +80,8 @@ public:
 	Bar *m_MeleeBar;
 	Widget *m_RangeIcon;
 	Bar *m_RangeBar;
+	Widget* m_DashIcon;
+	Bar* m_DashBar;
 	Widget *m_GoldIcon;
 	Text *m_GoldText;
 	Widget *m_KeyIcon;

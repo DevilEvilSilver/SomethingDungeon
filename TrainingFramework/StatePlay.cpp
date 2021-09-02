@@ -110,6 +110,8 @@ StatePlay::~StatePlay() {
 	delete m_MeleeBar;
 	delete m_RangeIcon;
 	delete m_RangeBar;
+	delete m_DashBar;
+	delete m_DashIcon;
 	delete m_GoldIcon;
 	delete m_GoldText;
 	delete m_MiniMap;
@@ -309,7 +311,27 @@ void StatePlay::Init() {
 		translation.SetTranslation(x, y, 1.0f);
 		m_RangeBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetRangeSkillMaxCD(), m_Player->GetRangeSkillCurrCD(), false);
 	}
+	//DASH ICON
+	{
+		fscanf(dataFile, "#DASH_ICON\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_DashIcon = new Widget(ICON_ABSOLUTE_ZERO, Vector2(0.0f, 0.0f), translation);
+	}
 
+	//DASH BAR
+	{
+		fscanf(dataFile, "#DASH_BAR\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 1.0f);
+		m_DashBar = new Bar(strPrefab, Vector2(0.0f, 0.0f), translation, m_Player->GetDashSkillMaxCD(), m_Player->GetDashSkillCurrCD(), false);
+	}
 	//Gold Icon
 	{
 		fscanf(dataFile, "#GOLD_ICON\n");
@@ -714,6 +736,9 @@ void StatePlay::Render() {
 		m_RangeIcon->Render(m_Camera);
 		m_RangeBar->Render(m_Camera);
 
+		m_DashIcon->Render(m_Camera);
+		m_DashBar->Render(m_Camera);
+
 		m_GoldIcon->Render(m_Camera);
 		Renderer::GetInstance()->DrawText2(m_GoldText);
 
@@ -907,6 +932,10 @@ void StatePlay::Update(float frameTime) {
 				m_MeleeIcon->Update(frameTime);
 				m_MeleeBar->Update(frameTime);
 				m_MeleeBar->Resize(m_Player->GetCloseSkillCurrCD());
+
+				m_DashIcon->Update(frameTime);
+				m_DashBar->Update(frameTime);
+				m_DashBar->Resize(m_Player->GetDashSkillCurrCD());
 
 				m_RangeIcon->Update(frameTime);
 				m_RangeBar->Update(frameTime);
