@@ -741,8 +741,8 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
-			if (m_Player->m_MOVESPEED < 1)
-				m_Player->m_MOVESPEED = 1;
+			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
 			m_Player->m_ATK += 5;
@@ -750,8 +750,8 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_DEF -= 2;
-			if (m_Player->m_DEF < 1)
-				m_Player->m_DEF = 1;
+			if (m_Player->m_DEF < PLAYER_DEF_MIN)
+				m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_LIFE_STONE)) {
 			m_Player->m_maxHP += 50;
@@ -775,8 +775,8 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 
 			m_Player->m_MOVESPEED -= 1;
-			if (m_Player->m_MOVESPEED < 1)
-				m_Player->m_MOVESPEED = 1;
+			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARTEMIS_BLESSING)) {
 			unsigned int currMaxHP = m_Player->m_maxHP;
@@ -799,16 +799,16 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP += 150;
 
 			m_Player->m_ATK -= 1;
-			if (m_Player->m_ATK < 1)
-				m_Player->m_ATK = 1;
+			if (m_Player->m_ATK < PLAYER_ATK_MIN)
+				m_Player->m_ATK = PLAYER_ATK_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_AAMON_CONTRACT)) {
 			m_Player->m_maxMP += 150;
 			m_Player->m_currMP += 150;
 
 			m_Player->m_ATK -= 1;
-			if (m_Player->m_ATK < 1)
-				m_Player->m_ATK = 1;
+			if (m_Player->m_ATK < PLAYER_ATK_MIN)
+				m_Player->m_ATK = PLAYER_ATK_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEALTH_POTION)) {
 			m_Player->m_currHP += m_Player->m_maxHP * 0.5f;
@@ -826,29 +826,29 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_currHP = m_Player->m_maxHP;
 			
 			m_Player->m_DEF -= 1;
-			if (m_Player->m_DEF < 1)
-				m_Player->m_DEF = 1;
+			if (m_Player->m_DEF < PLAYER_DEF_MIN)
+				m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CORRUPTED_VINE)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
 			m_Player->m_DEF -= 1;
-			if (m_Player->m_DEF < 1)
-				m_Player->m_DEF = 1;
+			if (m_Player->m_DEF < PLAYER_DEF_MIN)
+				m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
 			m_Player->m_currHP = m_Player->m_maxHP;
 
 			m_Player->m_MOVESPEED -= 1;
-			if (m_Player->m_MOVESPEED < 1)
-				m_Player->m_MOVESPEED = 1;
+			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TWILIGHT_BERRY)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
 			m_Player->m_MOVESPEED -= 1;
-			if (m_Player->m_MOVESPEED < 1)
-				m_Player->m_MOVESPEED = 1;
+			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
+				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_KEY)) {
 			m_Player->m_KEY++;
