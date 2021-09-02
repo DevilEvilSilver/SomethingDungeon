@@ -24,9 +24,9 @@ enum class SkillMPCost {
     SKILL_FIRE_LV2_MPCOST = 0,
     SKILL_FIRE_LV3_MPCOST = 0,
 
-    SKILL_FREEZE_LV1_MPCOST = 10,
-    SKILL_FREEZE_LV2_MPCOST = 13,
-    SKILL_FREEZE_LV3_MPCOST = 16
+    SKILL_FREEZE_LV1_MPCOST = 5,
+    SKILL_FREEZE_LV2_MPCOST = 6,
+    SKILL_FREEZE_LV3_MPCOST = 8
 };
 enum class SkillExistingTime {
     //ms
