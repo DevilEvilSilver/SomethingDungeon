@@ -36,7 +36,12 @@ void Player::UniqueUpdate(float frameTime)
 			break;
 	}
 	m_regenCurrCD -= frameTime;
-	if (m_currMP<m_maxMP&&m_regenCurrCD <= 0.0f) m_currMP++;
+	if (m_currMP < m_maxMP && m_regenCurrCD <= 0.0f)
+	{
+		m_currMP++;
+		m_regenCurrCD = m_regenCD;
+	}
+		
 	//if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	//UseSkill(frameTime);
 }
