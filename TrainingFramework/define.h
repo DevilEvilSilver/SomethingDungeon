@@ -372,7 +372,7 @@
 	//RESET BUTTON
 #define ITEM_NAME_RESET						"Reset Items"
 #define ITEM_DESCRIPTION_RESET				"Reset new items in the shop"
-#define ITEM_PRICE_RESET					10
+#define ITEM_PRICE_RESET					1
 	//HEART_STONE
 #define ITEM_HEART_STONE					1
 #define BUTTON_ITEM_HEART_STONE				"buttonItemHeartStone"
