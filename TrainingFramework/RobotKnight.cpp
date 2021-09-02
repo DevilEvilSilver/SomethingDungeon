@@ -145,7 +145,7 @@ void RobotKnight::Charge(float frameTime)
 		case 1:
 			
 			start = false;
-			if (rand() % 100 <= 60) SetBS(BS_CHARGE);
+			if (rand() % 100 <= 80) SetBS(BS_CHARGE);
 			
 			SetBS(BS_NORMAL);
 			break;
@@ -198,10 +198,10 @@ void RobotKnight::Attack1(float frameTime)
 				{
 					while (pelletRank >= 0)
 					{
-						BulletSkill* bskill = new BulletSkill(ranDir + skillWidth * widthRange * pelletRank, this, SKILL, this->m_RoomID, m);
+						BulletSkill* bskill = new BulletSkill(ranDir + skillWidth * widthRange * pelletRank, this, SKILL_2, this->m_RoomID, m);
 						StatePlay::GetInstance()->AddSkill(bskill);
 
-						bskill = new BulletSkill(ranDir - skillWidth * widthRange * pelletRank, this, SKILL, this->m_RoomID, m);
+						bskill = new BulletSkill(ranDir - skillWidth * widthRange * pelletRank, this, SKILL_2, this->m_RoomID, m);
 						StatePlay::GetInstance()->AddSkill(bskill);
 
 						pelletRank--;
@@ -265,7 +265,7 @@ void RobotKnight::Attack2(float frameTime)
 
 					
 
-					BulletSkill* bskill = new BulletSkill(startPos+dir, this, SKILL, this->m_RoomID, m);
+					BulletSkill* bskill = new BulletSkill(startPos+dir, this, SKILL_2, this->m_RoomID, m);
 					StatePlay::GetInstance()->AddSkill(bskill);
 
 					currNum--;
@@ -298,14 +298,14 @@ void RobotKnight::Guard(float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(ranDir, 0.0f, 0.25f, frameTime) == true)
+			if (FixedMove(ranDir, 0.0f, 0.0f, frameTime) == true)
 			{
 				i++;
 				//m_isInvincible = false;
 			}
-			break;
+			//break;
 		case 1:
-			if (FixedMove(ranDir, 0.0f, 0.25f, frameTime) == true)
+			if (FixedMove(ranDir, 0.0f, 1.0f, frameTime) == true)
 			{
 				SetBS(BS_CHARGE);
 				start = false;

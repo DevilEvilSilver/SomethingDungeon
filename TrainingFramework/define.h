@@ -103,7 +103,7 @@
 #define CPLANT_ATK						5
 #define CPLANT_DEF						1
 
-#define RB_HP						2000
+#define RB_HP						4000
 #define RB_ATK						5
 #define RB_DEF						8
 
