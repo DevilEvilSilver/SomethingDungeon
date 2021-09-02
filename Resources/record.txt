@@ -1,15 +1,15 @@
-FLOOR_1
-Time 0
-Kills 0
-Golds 0
-CurrHP 150
-MaxHP 150
-CurrMP 100
-MaxMP 100
-ATK 30
-DEF 5
-Gold 0
-Key 100
+LOSE
+Time 355
+Kills 15
+Golds 195
+CurrHP 0
+MaxHP 375
+CurrMP 13
+MaxMP 60
+ATK 33
+DEF 8
+Gold 189
+Key 101
 Speed 3.000000
-Melee skillFireLv1
-Range skillFreezeLv1
+Melee skillFireLv3
+Range skillFreezeLv3
