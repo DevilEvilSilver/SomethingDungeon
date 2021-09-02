@@ -80,7 +80,6 @@ bool Player::Dash(float frameTime)
 
 void Player::PlayerMove(MoveDir dir)
 {
-	if (m_pState == m_Player->P_CS)
 	if (m_cState!=CS_MOVE&&m_cState != CS_GOTHIT&&m_cState!=CS_DEATH&&m_cState!=CS_ATTACK) SetCS(CS_MOVE);
 
 	switch (dir) {
