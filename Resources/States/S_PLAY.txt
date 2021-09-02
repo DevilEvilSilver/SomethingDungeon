@@ -38,6 +38,13 @@ POS -7.25, -3.25
 POS -7.25, -3.25
 PREFAB cooldownBar
 
+#DASH_ICON
+POS -5.75, -3.25
+
+#DASH_BAR
+POS -5.75, -3.25
+PREFAB cooldownBar
+
 #GOLD_ICON
 POS 8.25, -5.25
 PREFAB goldIcon

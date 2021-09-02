@@ -19,6 +19,9 @@ public:
 	//DROP
 	bool isDead ;
 
+	//ATTACK DELAY
+	float delayTime = 0.1f;
+
 	//OPTION
 	void Chase(Vector2 delta);
 	void KeepDistance(Vector2 delta);

@@ -279,6 +279,7 @@
 #define ICON_ICE_ARROW		"rangeIcon1"
 #define ICON_GLACIAL_BLAST	"rangeIcon2"
 #define ICON_ABSOLUTE_ZERO	"rangeIcon3"
+#define ICON_DASH			"dashIcon"
 
 #define MINIMAP_MAP		"minimap"
 #define MINIMAP_PLAYER	"minimapPlayer"

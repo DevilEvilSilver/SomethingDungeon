@@ -71,6 +71,8 @@ public:
 	std::string GetRangeSkillName();
 	float GetCloseSkillMaxCD();
 	float GetRangeSkillMaxCD();
+	float GetDashSkillMaxCD();
+	float GetDashSkillCurrCD();
 	float GetCloseSkillCurrCD();
 	float GetRangeSkillCurrCD();
 	std::string GetHP();
