@@ -54,6 +54,7 @@ void CPlant::UniqueUpdate(float frameTime)
 			{
 				KeepDistance(delta);
 				m_MOVESPEED = 4.0f;
+				currTime = 0.0f;
 			}
 			else
 				if (currCD <= 0.0f) {

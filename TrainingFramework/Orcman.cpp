@@ -61,7 +61,7 @@ void Orcman::UniqueUpdate(float frameTime)
 				{
 					if (distance > 2.0f) m_MOVESPEED = 1.5f;
 					else m_MOVESPEED = 2.0f;
-
+					currTime = 0.0f;
 					Chase(delta);
 				}
 				else {

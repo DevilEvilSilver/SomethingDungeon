@@ -62,7 +62,7 @@ void Skeleton::UniqueUpdate(float frameTime)
 				{
 					if (distance>2.0f) m_MOVESPEED = 2.0f;
 					else m_MOVESPEED = 3.75f;
-
+					currTime = 0.0f;
 					Chase(delta);
 				}
 					
