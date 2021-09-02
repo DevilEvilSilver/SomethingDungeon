@@ -58,8 +58,11 @@ void Goblin::UniqueUpdate(float frameTime)
 					Chase(delta);
 				}
 				else {
-					Melee(plyPos);
-					currCD = totalCD;
+					if (FixedMove(m_lastMoveDir, 0.0f, 0.5f, frameTime) == true)
+					{
+						Melee(plyPos);
+						currCD = totalCD;
+					}
 				}
 			}
 

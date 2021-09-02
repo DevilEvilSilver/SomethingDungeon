@@ -53,7 +53,7 @@ bool Player::Dash(float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(m_lastMoveDir, 0.0f, 0.1f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, 0.0f, 0.0f, frameTime) == false) return false;
 			m_isInvincible = true;
 			i++;
 			break;

@@ -58,10 +58,11 @@ void Witch::UniqueUpdate(float frameTime)
 			else
 				if (currCD <= 0.0f) {
 
-					currCD = totalCD;
-					Shoot(plyPos);
-
-
+					if (FixedMove(m_lastMoveDir, 0.0f, 0.5f, frameTime) == true)
+					{
+						currCD = totalCD;
+						Shoot(plyPos);
+					}
 				}
 				else {
 
