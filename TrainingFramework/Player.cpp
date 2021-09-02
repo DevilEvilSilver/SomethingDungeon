@@ -261,12 +261,14 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
-	if ((keyPressed & MOUSE_RIGHT))
+	if (keyPressed & MOUSE_RIGHT)
 	{
+		if (m_isUseRanged == false)
 		if ((float)m_RangeSkillID->m_MPCost <= this->m_currMP)
 		{
 			if ((float)m_RangeSkillID->m_fCurrCoolDownTime <= 0)
 			{
+				m_isUseRanged = true;
 				if (m_RangeSkillID->m_prefabID == SKILL_FREEZE3)
 				{
 					NewSkill = new BulletSkill(MousePos,this, SKILL_FREEZE3, this->m_RoomID, T);
@@ -300,6 +302,8 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
+	else m_isUseRanged = false;
+
 	if (keyPressed & KEY_SPACE)
 	{
 		if (m_pState!=P_DASH&&(float)m_Dash->m_MPCost <= this->m_currMP&&(float)m_Dash->m_fCurrCoolDownTime <= 0)

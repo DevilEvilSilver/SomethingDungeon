@@ -17,11 +17,11 @@
 
 Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Enemy( prefabID,  roomID, translationMatrix)
 {
-	m_maxHP = 100;
-	m_currHP = 100;
+	m_maxHP = WITCH_HP;
+	m_currHP = WITCH_HP;
 	
-	m_ATK = 10;
-	m_DEF = 5;
+	m_ATK = WITCH_ATK;
+	m_DEF = WITCH_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;

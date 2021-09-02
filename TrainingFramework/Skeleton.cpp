@@ -15,11 +15,11 @@
 
 Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Enemy(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 120;
-	m_currHP = 120;
+	m_maxHP = SKELETON_HP;
+	m_currHP = SKELETON_HP;
 
-	m_ATK = 15;
-	m_DEF = 10;
+	m_ATK = SKELETON_ATK;
+	m_DEF = SKELETON_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;

@@ -72,6 +72,35 @@
 #define PLAYER_DEF_MAX					15
 #define PLAYER_SPEED_MAX				8.0
 
+//STAT ENEMIES
+#define WITCH_HP						100
+#define WITCH_ATK						10
+#define WITCH_DEF						5
+
+#define SKELETON_HP						120
+#define SKELETON_ATK					15
+#define SKELETON_DEF					10
+
+#define ORCMAN_HP						300
+#define ORCMAN_ATK						18
+#define ORCMAN_DEF						15
+
+#define GOBLIN_HP						200
+#define GOBLIN_ATK						15
+#define GOBLIN_DEF						15
+
+#define FROGMAN_HP						500
+#define	FROGMAN_ATK						8
+#define FROGMAN_DEF						0
+
+#define CPLANT_HP						80
+#define CPLANT_ATK						13
+#define CPLANT_DEF						5
+
+#define RB_HP						3000
+#define RB_ATK						30
+#define RB_DEF						15
+
 //MAP
 #define MAP_WIDTH					22
 #define MAP_HEIGHT					22

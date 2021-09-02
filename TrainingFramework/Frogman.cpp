@@ -15,11 +15,11 @@
 
 Frogman::Frogman(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Goblin(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 500;
-	m_currHP = 500;
+	m_maxHP = FROGMAN_HP;
+	m_currHP = FROGMAN_HP;
 
-	m_ATK = 8;
-	m_DEF = 0;
+	m_ATK = FROGMAN_ATK;
+	m_DEF = FROGMAN_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;

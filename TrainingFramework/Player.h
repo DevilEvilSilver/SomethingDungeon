@@ -38,6 +38,8 @@ public:
 
 	};
 	
+	bool m_isUseRanged = false;
+
 	PlayerState m_pState=P_CS;
 
 	void UniqueUpdate(float frameTime);

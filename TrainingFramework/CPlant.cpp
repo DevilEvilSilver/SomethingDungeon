@@ -12,11 +12,11 @@
 
 CPlant::CPlant(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Witch(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 80;
-	m_currHP = 80;
+	m_maxHP = CPLANT_HP;
+	m_currHP = CPLANT_HP;
 
-	m_ATK = 13;
-	m_DEF = 5;
+	m_ATK = CPLANT_ATK;
+	m_DEF = CPLANT_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
