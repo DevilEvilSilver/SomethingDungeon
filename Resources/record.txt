@@ -1,4 +1,4 @@
-FLOOR_BOSS
+FLOOR_1
 Time 0
 Kills 0
 Golds 0
@@ -11,5 +11,5 @@ DEF 5
 Gold 0
 Key 100
 Speed 3.000000
-Melee skillFireLv3
-Range skillFreezeLv3
+Melee skillFireLv1
+Range skillFreezeLv1

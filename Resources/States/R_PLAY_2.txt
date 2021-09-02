@@ -1,4 +1,4 @@
-#PREFAB_COUNT 110
+#PREFAB_COUNT 111
 
 ID mainChar
 MODEL 0
@@ -1034,6 +1034,17 @@ SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/mpBar/static/sprite.txt
+
+ID dashIcon
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 1.0, 1.0
+SIZE 1.0 x 1.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/skillIcon/dashIcon/sprite.txt
 
 ID meleeIcon1
 MODEL 0
