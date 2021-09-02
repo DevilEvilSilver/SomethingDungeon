@@ -52,6 +52,9 @@
 #define FILE_S_CREDIT					"../Resources/States/S_CREDIT.txt"
 #define FILE_R_CREDIT					"../Resources/States/R_CREDIT.txt"
 #define FILE_SD_CREDIT					"../Resources/States/SD_CREDIT.txt"
+#define FILE_S_INTRO					"../Resources/States/S_INTRO.txt"
+#define FILE_R_INTRO					"../Resources/States/R_INTRO.txt"
+#define FILE_SD_INTRO					"../Resources/States/SD_INTRO.txt"
 
 	//FILE RECORD
 #define FILE_RECORD						"../Resources/record.txt"
@@ -357,6 +360,8 @@
 #define INSTRUCTION_BGM		600
 
 #define CREDIT_BGM			700
+
+#define INTRO_BGM			800
 
 #define BUTTON_SFX			900
 #define COIN				901

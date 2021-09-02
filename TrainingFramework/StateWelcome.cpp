@@ -277,7 +277,7 @@ void StateWelcome::UpdateControl(float frameTime)
 			ResourceManager::GetInstance()->ResetInstance();
 			SoundEngine::GetInstance()->ResetInstance();
 
-			StateManager::GetInstance()->AddLoadState(GS_STATE_PLAY);
+			StateManager::GetInstance()->AddLoadState(GS_STATE_INTRO);
 			return;
 		}
 	}
@@ -331,7 +331,7 @@ void StateWelcome::InitRecord() {
 	FILE* recordFile;
 	recordFile = fopen(FILE_RECORD, "w");
 
-	fprintf(recordFile, "%s\n", FLOOR_BOSS);
+	fprintf(recordFile, "%s\n", FLOOR_1);
 	fprintf(recordFile, "Time %d\n", 0);
 	fprintf(recordFile, "Kills %d\n", 0);
 	fprintf(recordFile, "Golds %d\n", INIT_PLAYER_GOLD);
