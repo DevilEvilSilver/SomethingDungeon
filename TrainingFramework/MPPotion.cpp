@@ -15,7 +15,8 @@ void MPPotion::OnCollision()
 {
 	Player* player = StatePlay::GetInstance()->m_Player;
 
-	player->m_currMP = (player->m_currMP + this->getValue());
+	//player->m_currMP = (player->m_currMP + this->getValue());
+	player->m_currMP *= 1.05;
 	if (player->m_currMP>player->m_maxMP) player->m_currMP=player->m_maxMP;
 
 	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
