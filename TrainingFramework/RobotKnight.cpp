@@ -51,6 +51,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 {
 	//printf("boss hp:%d\n", m_currHP);
 	UpdateHpMob(frameTime);
+	if (m_currHP>0)
 	switch (m_bState)
 	{
 	case BS_NORMAL:Normal(frameTime); break;

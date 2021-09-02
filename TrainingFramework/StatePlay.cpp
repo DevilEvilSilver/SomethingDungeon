@@ -160,7 +160,7 @@ void StatePlay::Init() {
 		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
 		break;
 	default:
-		ResourceManager::GetInstance()->Init(FILE_R_PLAY_1);
+		ResourceManager::GetInstance()->Init(FILE_R_PLAY_3);
 		break;
 	}
 
