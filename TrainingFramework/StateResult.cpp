@@ -134,7 +134,10 @@ void StateResult::Init() {
 }
 
 std::string StateResult::GetTime(unsigned int second) {
-	return std::to_string((int)second / 60) + ":" + std::to_string((int)second % 60);
+	if ((int)(second % 60) < 10)
+		return std::to_string((int)second / 60) + ":0" + std::to_string((int)second % 60);
+	else
+		return std::to_string((int)second / 60) + ":" + std::to_string((int)second % 60);
 }
 
 void StateResult::Render() {
