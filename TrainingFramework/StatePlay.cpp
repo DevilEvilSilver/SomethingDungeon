@@ -318,7 +318,7 @@ void StatePlay::Init() {
 		fscanf(dataFile, "POS %f, %f\n", &x, &y);
 		Matrix translation;
 		translation.SetTranslation(x, y, 1.0f);
-		m_DashIcon = new Widget(ICON_ABSOLUTE_ZERO, Vector2(0.0f, 0.0f), translation);
+		m_DashIcon = new Widget(ICON_DASH, Vector2(0.0f, 0.0f), translation);
 	}
 
 	//DASH BAR

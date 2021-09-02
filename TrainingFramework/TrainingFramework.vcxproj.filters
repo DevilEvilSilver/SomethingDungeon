@@ -511,9 +511,6 @@
     <Text Include="..\Resources\States\R_LOGO.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\Resources\States\R_PLAY.txt">
-      <Filter>Resources\States</Filter>
-    </Text>
     <Text Include="..\Resources\States\R_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
@@ -526,7 +523,67 @@
     <Text Include="..\Resources\States\S_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_PLAY_3.txt">
+    <Text Include="..\Resources\States\R_CREDIT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_INSTRUCTION.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_PLAY_1.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_PLAY_2.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_PLAY_3.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\R_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_CREDIT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_INSTRUCTION.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\S_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_CREDIT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_INSTRUCTION.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_LOAD.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_LOGO.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_PLAY.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_RESULT.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_SHOP.txt">
+      <Filter>Resources\States</Filter>
+    </Text>
+    <Text Include="..\Resources\States\SD_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
   </ItemGroup>
