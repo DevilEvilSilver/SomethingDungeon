@@ -91,13 +91,14 @@ void Room::Floor1Generate() {
 
 			int rNum = rand() % 100 + 1;
 
-			if (rNum <= 50) AddEnemy(SKELETON);
-			else if (rNum <= 80)
+			if (rNum <= 40) AddEnemy(SKELETON);
+			else if (rNum <= 55)
 			{
 				AddEnemy(WITCH);
 			}
 			else 
 			{
+				if (rNum <= 70)
 				AddEnemy(C_PLANT);
 			}
 
@@ -167,31 +168,23 @@ void Room::Floor2Generate() {
 		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
+		int rNum = rand() % 100 + 1;
 
-
-		while (enemyNum--) {
-
-			int rNum = rand() % 100 + 1;
-
-			if (rNum <= 40) AddEnemy(SKELETON);
-			else if (rNum <= 70)
-			{
-				if (rand() % 10 + 1 <= 6)
-					AddEnemy(WITCH);
-				else AddEnemy(C_PLANT);
-			}
-			else
-			{
-				if (rNum <= 85) AddEnemy(BEAR);
-				else AddEnemy(ORCMAN);
-			}
-
-			if (rand() % 10 + 1 <= 1)
-				AddEnemy(FROGMAN);
-
-			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
-
+		if (rNum <= 40) AddEnemy(SKELETON);
+		else if (rNum <= 70)
+		{
+			AddEnemy(BEAR);
 		}
+		else
+		{
+			if (rNum <= 85)
+			AddEnemy(WITCH);
+		}
+
+		if (rand() % 10 + 1 <= 1)
+			AddEnemy(FROGMAN);
+
+		
 		if (rand() % 5 <= 1)	GenerateDeco();
 	}
 	else if (m_RoomType == START)
@@ -263,8 +256,8 @@ void Room::Floor3Generate() {
 		Matrix translation;
 		unsigned int enemyNum = 0;
 
-		if (random >= 90) enemyNum = 2;
-		else if (random >= 70)	enemyNum = 1;
+		if (random >= 90) enemyNum = 3;
+		else if (random >= 70)	enemyNum = 2;
 		else enemyNum = 0;
 
 

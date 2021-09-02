@@ -29,6 +29,12 @@ Orcman::Orcman(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 
 	atkDuration = 0.65f;
 	m_MOVESPEED = 1.5f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 void Orcman::UniqueUpdate(float frameTime)

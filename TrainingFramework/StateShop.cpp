@@ -701,26 +701,26 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 
 	if (itemPrice <= m_Player->m_GOLD) {
 		if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HEART_STONE)) {
-			m_Player->m_maxHP += 75;
-			m_Player->m_currHP += 75;
+			m_Player->m_maxHP += 25;
+			m_Player->m_currHP += 25;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_MANA_CRYSTAL)) {
-			m_Player->m_maxMP += 75;
-			m_Player->m_currMP += 75;
+			m_Player->m_maxMP += 25;
+			m_Player->m_currMP += 25;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERCULES_FIST)) {
-			m_Player->m_ATK += 3;
+			m_Player->m_ATK += 1;
 			if (m_Player->m_ATK > PLAYER_ATK_MAX)
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ATHENA_SHIELD)) {
-			m_Player->m_DEF += 3;
+			m_Player->m_DEF += 1;
 			if (m_Player->m_DEF > PLAYER_DEF_MAX)
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_CODEX_GIGAS)) {
 			unsigned int currMaxMP = m_Player->m_maxMP;
-			m_Player->m_maxMP *= 1.1f;
+			m_Player->m_maxMP *= 1.2f;
 			m_Player->m_currMP += m_Player->m_maxMP - currMaxMP;
 
 			m_Player->m_maxHP *= 0.7f;
@@ -731,12 +731,12 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			}
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
-			m_Player->m_MOVESPEED += 3;
+			m_Player->m_MOVESPEED += 0.5;
 			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TITAN_CHAIN)) {
-			m_Player->m_DEF += 5;
+			m_Player->m_DEF += 2;
 			if (m_Player->m_DEF > PLAYER_DEF_MAX)
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 
@@ -745,36 +745,36 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARES_BLADE)) {
-			m_Player->m_ATK += 5;
+			m_Player->m_ATK += 2;
 			if (m_Player->m_ATK > PLAYER_ATK_MAX)
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 
-			m_Player->m_DEF -= 2;
+			m_Player->m_DEF -= 3;
 			if (m_Player->m_DEF < PLAYER_DEF_MIN)
 				m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_LIFE_STONE)) {
-			m_Player->m_maxHP += 50;
-			m_Player->m_currHP += 50;
+			m_Player->m_maxHP += 15;
+			m_Player->m_currHP += 15;
 
 			m_Player->m_DEF += 1;
 			if (m_Player->m_DEF > PLAYER_DEF_MAX)
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_OCEAN_SHARDS)) {
-			m_Player->m_maxMP += 50;
-			m_Player->m_currMP += 50;
+			m_Player->m_maxMP += 15;
+			m_Player->m_currMP += 15;
 
 			m_Player->m_DEF += 1;
 			if (m_Player->m_DEF > PLAYER_DEF_MAX)
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
-			m_Player->m_ATK += 4;
+			m_Player->m_ATK += 3;
 			if (m_Player->m_ATK > PLAYER_ATK_MAX)
 				m_Player->m_ATK = PLAYER_ATK_MAX;
 
-			m_Player->m_MOVESPEED -= 1;
+			m_Player->m_MOVESPEED -= 1.5;
 			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
@@ -783,7 +783,7 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			m_Player->m_maxHP *= 1.25f;
 			m_Player->m_currHP += m_Player->m_maxHP - currMaxHP;
 
-			m_Player->m_MOVESPEED += 1;
+			m_Player->m_MOVESPEED += 2;
 			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 
@@ -795,16 +795,16 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			}
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_BARBATOS_FAVOR)) {
-			m_Player->m_maxHP += 150;
-			m_Player->m_currHP += 150;
+			m_Player->m_maxHP += 100;
+			m_Player->m_currHP += 100;
 
 			m_Player->m_ATK -= 1;
 			if (m_Player->m_ATK < PLAYER_ATK_MIN)
 				m_Player->m_ATK = PLAYER_ATK_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_AAMON_CONTRACT)) {
-			m_Player->m_maxMP += 150;
-			m_Player->m_currMP += 150;
+			m_Player->m_maxMP += 100;
+			m_Player->m_currMP += 100;
 
 			m_Player->m_ATK -= 1;
 			if (m_Player->m_ATK < PLAYER_ATK_MIN)
@@ -839,14 +839,14 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ROTTEN_GINSENG)) {
 			m_Player->m_currHP = m_Player->m_maxHP;
 
-			m_Player->m_MOVESPEED -= 1;
+			m_Player->m_MOVESPEED -= 0.25;
 			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_TWILIGHT_BERRY)) {
 			m_Player->m_currMP = m_Player->m_maxMP;
 
-			m_Player->m_MOVESPEED -= 1;
+			m_Player->m_MOVESPEED -= 0.25;
 			if (m_Player->m_MOVESPEED < PLAYER_SPEED_MIN)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MIN;
 		}

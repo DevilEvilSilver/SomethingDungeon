@@ -15,7 +15,7 @@ SpikeTrap::SpikeTrap(std::string prefabID, Vector2 roomID, Matrix translationMat
 	m_strState = SPIKE;
 	m_fTotalCoolDownTime = 2.0f;//theo animation
 	m_fCurrFrameTime = 0.0f;
-	
+	m_iAttack = TRAP_SPIKE_ATK;
 }
 
 

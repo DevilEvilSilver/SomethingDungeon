@@ -28,6 +28,12 @@ Goblin::Goblin(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 
 	atkDuration = 1.3f;
 	m_MOVESPEED =4.0f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 void Goblin::UniqueUpdate(float frameTime)

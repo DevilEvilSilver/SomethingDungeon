@@ -17,7 +17,7 @@ void HPPotion::OnCollision()
 	Player* player = StatePlay::GetInstance()->m_Player;
 
 	//player->m_currHP = (player->m_currHP + this->getValue());
-	player->m_currHP += player->m_maxHP * 0.05;
+	player->m_currHP += player->m_maxHP * 0.33;
 	if (player->m_currHP > player->m_maxHP) player->m_currHP = player->m_maxHP;
 	SoundEngine::GetInstance()->Play(REGEN, 1.0f, 1.0f, false);
 	isPicked = true;

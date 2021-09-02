@@ -124,9 +124,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 		if (auto* player = dynamic_cast<Player*>(this))
 		SoundEngine::GetInstance()->PlayInTSec(HIT, 2.25f);
 		else SoundEngine::GetInstance()->Play(PEWPEW, 0.25f, 0.5f, false);
-	}
-		
-	
+	}	
 
 	if (m_cState == CS_GOTHIT && m_isKnockBack == true&&m_isInvulnerable==false)
 	{
@@ -256,7 +254,7 @@ void Character::EnemyCollision(float frameTime)
 
 void Character::UpdateGotHit(int damage, bool isKnockBack, Vector2 pos, float frameTime)
 {
-	int dmg = damage - m_DEF;
+	int dmg = damage*1000.0f/(100.0f+15.0f*m_DEF);
 	
 	m_iDmgTaken = (dmg <= 0.0f)?1:dmg;
 	m_isKnockBack = isKnockBack;

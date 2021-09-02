@@ -40,13 +40,14 @@ void Chest::createDrop()
 	Matrix translation;
 	translation.SetTranslation(GetPosX(), GetPosY(), 0.0f);
 
+	Player* plyr = StatePlay::GetInstance()->m_Player;
 
-	if (random >= 75)
+	if (plyr->m_currHP <= plyr->m_maxHP*0.5f)
 	{
 		HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
 		StatePlay::GetInstance()->AddDrop(hp);
 	}
-	else if (random >= 50)
+	else if (plyr->m_currMP <= plyr->m_maxMP * 0.5f)
 	{
 		MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
 		StatePlay::GetInstance()->AddDrop(mp);
