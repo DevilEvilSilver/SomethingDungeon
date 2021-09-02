@@ -1,5 +1,5 @@
-LOSE
-Time 148
+FLOOR_1
+Time 0
 Kills 0
 Golds 0
 CurrHP 200
@@ -9,7 +9,7 @@ MaxMP 200
 ATK 5
 DEF 5
 Gold 0
-Key 100
+Key 0
 Speed 3.500000
 Melee skillFireLv1
 Range skillFreezeLv1
