@@ -15,11 +15,11 @@
 
 Goblin::Goblin(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Enemy(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 10;
-	m_currHP = 10;
+	m_maxHP = GOBLIN_HP;
+	m_currHP = GOBLIN_HP;
 
-	m_ATK = 3;
-	m_DEF = 3;
+	m_ATK = GOBLIN_ATK;
+	m_DEF = GOBLIN_DEF;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;

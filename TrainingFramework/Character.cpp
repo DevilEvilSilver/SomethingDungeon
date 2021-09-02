@@ -116,6 +116,7 @@ bool Character::GotHit(/*int damage, Vector2 sourcePos,*/float frameTime)
 	if (m_cState != CS_GOTHIT&&m_cState!=CS_DEATH)
 	{
 		m_currHP -= m_iDmgTaken;
+		if (m_currHP < 0) m_currHP = 0;
 
 		m_knockBackDir = -(m_sourcePos - GetPos());
 		SetCS(CS_GOTHIT);

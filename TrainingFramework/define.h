@@ -56,18 +56,50 @@
 #define FLOOR_BOSS						"FLOOR_BOSS"
 #define RECORD_WIN						"WIN"
 #define RECORD_LOSE						"LOSE"
-#define INIT_PLAYER_HP					10
-#define INIT_PLAYER_MP					10
-#define INIT_PLAYER_ATK					4
-#define INIT_PLAYER_DEF					4
-#define INIT_PLAYER_GOLD				10
-#define INIT_PLAYER_KEY					0
+#define INIT_PLAYER_HP					150
+#define INIT_PLAYER_MP					100
+#define INIT_PLAYER_ATK					30
+#define INIT_PLAYER_DEF					5
+#define INIT_PLAYER_GOLD				0
+#define INIT_PLAYER_KEY					100
 #define INIT_PLAYER_SPEED				3.0f
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
-#define PLAYER_ATK_MAX					10
-#define PLAYER_DEF_MAX					10
-#define PLAYER_SPEED_MAX				10
+#define PLAYER_ATK_MIN					15
+#define PLAYER_DEF_MIN					0
+#define PLAYER_SPEED_MIN				2.0
+#define PLAYER_ATK_MAX					100
+#define PLAYER_DEF_MAX					15
+#define PLAYER_SPEED_MAX				8.0
+
+//STAT ENEMIES
+#define WITCH_HP						100
+#define WITCH_ATK						10
+#define WITCH_DEF						5
+
+#define SKELETON_HP						120
+#define SKELETON_ATK					15
+#define SKELETON_DEF					10
+
+#define ORCMAN_HP						300
+#define ORCMAN_ATK						18
+#define ORCMAN_DEF						15
+
+#define GOBLIN_HP						200
+#define GOBLIN_ATK						15
+#define GOBLIN_DEF						15
+
+#define FROGMAN_HP						500
+#define	FROGMAN_ATK						8
+#define FROGMAN_DEF						0
+
+#define CPLANT_HP						80
+#define CPLANT_ATK						13
+#define CPLANT_DEF						5
+
+#define RB_HP						3000
+#define RB_ATK						30
+#define RB_DEF						15
 
 //MAP
 #define MAP_WIDTH					22
