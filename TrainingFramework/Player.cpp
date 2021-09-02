@@ -65,7 +65,7 @@ bool Player::Dash(float frameTime)
 			i++;
 			//break;
 		case 1:
-			if (FixedMove(m_lastMoveDir, 3.5f, 0.25f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, m_MOVESPEED*0.75f, 0.25f, frameTime) == false) return false;
 
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
@@ -231,12 +231,18 @@ void Player::UseSkill(float frameTime)
 	Matrix T;
 	T.SetIdentity();
 
+	
+
 	if ((keyPressed & MOUSE_LEFT))
 	{
+		if (MousePos.x > GetCenterPos().x) m_isFacingLeft = false;
+		else m_isFacingLeft = true;
+		if (m_isUseMelee == false)
 		if ((float)m_CloseSkillID->m_MPCost <= this->m_currMP)
 		{
 			if ((float)m_CloseSkillID->m_fCurrCoolDownTime <= 0)
 			{
+				m_isUseMelee = true;
 				if (m_CloseSkillID->m_prefabID == SKILL_FIRE3)
 				{
 					NewSkill = new AoeSkill(this, SKILL_FIRE3, this->m_RoomID, T);
@@ -269,8 +275,12 @@ void Player::UseSkill(float frameTime)
 			}
 		}
 	}
+	else m_isUseMelee = false;
+
 	if (keyPressed & MOUSE_RIGHT)
 	{
+		if (MousePos.x > GetCenterPos().x) m_isFacingLeft = false;
+		else m_isFacingLeft = true;
 		if (m_isUseRanged == false)
 		if ((float)m_RangeSkillID->m_MPCost <= this->m_currMP)
 		{
@@ -314,8 +324,10 @@ void Player::UseSkill(float frameTime)
 
 	if (keyPressed & KEY_SPACE)
 	{
+		if (m_isUseDash == false)
 		if (m_pState!=P_DASH&&(float)m_Dash->m_MPCost <= this->m_currMP&&(float)m_Dash->m_fCurrCoolDownTime <= 0)
 		{
+			m_isUseDash = true;
 			//Dash Skill Obj
 			SoundEngine::GetInstance()->Play(WHOOSH, 1.0f, 2.0f, false);
 			m_Dash->m_fCurrCoolDownTime = (float)m_Dash->m_CoolDownTime / 1000;
@@ -327,7 +339,7 @@ void Player::UseSkill(float frameTime)
 			//Character Animation
 		}
 		
-	}
+	}else m_isUseDash = false;
 }
 void Player::UpdateCurrentCDTime(float frameTime)
 {

@@ -117,7 +117,7 @@ void Frogman::createDrop()
 	Matrix translation;
 	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
 
-	Gold* gold = new Gold(GOLD, m_RoomID, translation, 40, false);
+	Gold* gold = new Gold(GOLD, m_RoomID, translation, 10, false);
 	StatePlay::GetInstance()->AddDrop(gold);
 
 }

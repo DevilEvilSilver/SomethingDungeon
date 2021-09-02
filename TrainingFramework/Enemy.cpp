@@ -34,7 +34,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	
 	m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP);
 	
-	currCD = 5.0f;
+	currCD = 1.25f;
 }
 Enemy::~Enemy() {
 	delete m_HpMob;
@@ -173,7 +173,7 @@ void Enemy::createDrop()
 	}
 	else
 	{
-		Gold* gold = new Gold(GOLD, m_RoomID, translation, 5, false);
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 1, false);
 		StatePlay::GetInstance()->AddDrop(gold);
 	}
 		

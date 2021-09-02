@@ -63,10 +63,10 @@
 #define RECORD_LOSE						"LOSE"
 #define INIT_PLAYER_HP					200
 #define INIT_PLAYER_MP					200
-#define INIT_PLAYER_ATK					8
+#define INIT_PLAYER_ATK					5
 #define INIT_PLAYER_DEF					5
-#define INIT_PLAYER_GOLD				1000
-#define INIT_PLAYER_KEY					1000
+#define INIT_PLAYER_GOLD				0
+#define INIT_PLAYER_KEY					0
 #define INIT_PLAYER_SPEED				3.5f
 
 #define INIT_PLAYER_MELEE				"skillFireLv1"
@@ -103,7 +103,7 @@
 #define CPLANT_ATK						5
 #define CPLANT_DEF						1
 
-#define RB_HP						4000
+#define RB_HP						3000
 #define RB_ATK						5
 #define RB_DEF						8
 

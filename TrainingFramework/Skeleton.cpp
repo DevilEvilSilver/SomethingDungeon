@@ -120,7 +120,7 @@ void Skeleton::createDrop()
 	}
 	else
 	{
-		Gold* gold = new Gold(GOLD, m_RoomID, translation, 5, false);
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 1, false);
 		StatePlay::GetInstance()->AddDrop(gold);
 	}
 

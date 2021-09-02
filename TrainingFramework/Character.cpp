@@ -217,6 +217,7 @@ void Character::UpdatePosition(float speed, float frameTime)
 		SetVelocityY(0.0f);
 
 		//update face direction
+		if (m_lastMoveDir.x != 0)
 		if (m_lastMoveDir.x < 0) m_isFacingLeft = true;
 		else m_isFacingLeft = false;
 	}

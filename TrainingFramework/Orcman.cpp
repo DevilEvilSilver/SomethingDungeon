@@ -112,3 +112,23 @@ void Orcman::Melee(Vector2 target)
 	AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
 	StatePlay::GetInstance()->AddSkill(bskill);
 }
+
+void Orcman::createDrop()
+{
+	unsigned int random = rand() % 100 + 1;
+
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+
+	if (random >= 75)
+	{
+		HPPotion* mp = new HPPotion(HP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(mp);
+	}
+	else
+	{
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 3, false);
+		StatePlay::GetInstance()->AddDrop(gold);
+	}
+}

@@ -137,7 +137,7 @@ void RobotKnight::Charge(float frameTime)
 			}
 
 
-			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.35f, frameTime) == true)
+			if (FixedMove(ranDir, m_MOVESPEED*5.0f, 1.15f, frameTime) == true)
 			{
 				i++;
 			}
@@ -221,7 +221,7 @@ void RobotKnight::Attack1(float frameTime)
 
 void RobotKnight::Attack2(float frameTime)
 {
-	float duration = 2.0f;
+	float duration = 1.5f;
 	m_strState = A_ATTACK2;
 	if (start == false)
 	{
@@ -243,7 +243,7 @@ void RobotKnight::Attack2(float frameTime)
 		}
 		else
 		{
-			if (i == 0&&currTime>=1.0f)
+			if (i == 0&&currTime>=0.5f)
 			{
 				i++;
 
@@ -305,7 +305,7 @@ void RobotKnight::Guard(float frameTime)
 			}
 			//break;
 		case 1:
-			if (FixedMove(ranDir, 0.0f, 1.0f, frameTime) == true)
+			if (FixedMove(ranDir, 0.0f, 0.75f, frameTime) == true)
 			{
 				SetBS(BS_CHARGE);
 				start = false;

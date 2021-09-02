@@ -271,6 +271,11 @@ void StateShop::GenerateItem() {
 		strDescription = ITEM_DESCRIPTION_HEART_STONE,
 		strPrice = std::to_string(ITEM_PRICE_MANA_CRYSTAL);
 	
+	//srand(time(0));
+	item = RandomItem();
+
+	//item rate
+	item = RandomItem();
 	switch (item) {
 	case ITEM_HEART_STONE:
 		strButton = BUTTON_ITEM_HEART_STONE;
@@ -925,6 +930,147 @@ void StateShop::SetRecord() {
 	fprintf(recordFile, "Range %s\n", m_Player->GetRangeSkill().c_str());
 
 	fclose(recordFile);
+}
+
+int StateShop::RandomItem()
+{
+	int item = 21;
+	int randomNum = 1 + rand() % 100;
+	if (randomNum <= 40)
+	{
+		//UPGRADE
+		randomNum = 1 + rand() % 100;
+		if (randomNum <= 40)
+		{
+			//Tier 1
+			randomNum = 1 + rand() % 5;
+			switch (randomNum)
+			{
+			case 1:
+				item = 1;
+				break;
+			case 2:
+				item = 2;
+				break;
+			case 3:
+				item = 3;
+				break;
+			case 4:
+				item = 4;
+				break;
+			case 5:
+				item = 6;
+				break;
+			}
+
+		}//tier 1
+		else if (randomNum <= 70)
+		{
+			randomNum = 1 + rand() % 4;
+			switch (randomNum)
+			{
+			case 1:
+				item = 5;
+				break;
+			case 2:
+				item = 12;
+				break;
+			case 3:
+				item = 13;
+				break;
+			case 4:
+				item = 14;
+				break;
+			}
+
+		}//tier 2
+		else if (randomNum <= 85)
+		{
+			randomNum = 1 + rand() % 3;
+			switch (randomNum)
+			{
+			case 1:
+				item = 7;
+				break;
+			case 2:
+				item = 8;
+				break;
+			case 3:
+				item = 12;
+				break;
+			}
+		}//tier 3
+		else if (randomNum <= 100)
+		{
+			randomNum = 1 + rand() % 3;
+			switch (randomNum)
+			{
+			case 1:
+				item = 9;
+				break;
+			case 2:
+				item = 10;
+				break;
+			case 3:
+				item = 11;
+				break;
+			}
+		}//tier 4
+	}//upgrade
+	else if (randomNum <= 60)
+	{
+		//HEAL
+		randomNum = 1 + rand() % 6;
+		switch (randomNum)
+		{
+		case 1:
+			item = 15;
+			break;
+		case 2:
+			item = 16;
+			break;
+		case 3:
+			item = 17;
+			break;
+		case 4:
+			item = 18;
+			break;
+		case 5:
+			item = 19;
+			break;
+		case 6:
+			item = 20;
+			break;
+		}
+
+	}//heal
+	else if (randomNum <= 90)
+	{
+		//SKILL
+		randomNum = 1 + rand() % 100;
+		//if (randomNum <= 30)
+		//{
+		//	if (rand() % 100 >= 50) item = 22;
+		//	else item = 25;
+		//}else 
+		if (randomNum <= 70)
+		{
+			if (rand() % 100 >= 50) item = 23;
+			else item = 26;
+		}
+		else if (randomNum <= 100)
+		{
+			if (rand() % 100 >= 50) item = 24;
+			else item = 27;
+		}
+	}//skill
+	else if (randomNum <= 100)
+	{
+		//KEY
+		item = 21;
+	}//key
+
+	return item;
 }
 
 void StateShop::AddItemButton(Button* button)

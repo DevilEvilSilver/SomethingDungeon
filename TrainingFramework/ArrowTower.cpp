@@ -15,11 +15,11 @@ ArrowTower::~ArrowTower() {}
 ArrowTower::ArrowTower(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	: Trap(prefabID, roomID, translationMatrix) {
 
-	if (rand() % 2 == 0) m_isFacingLeft = false;
-	else m_isFacingLeft = true;
+	/*if (rand() % 2 == 0) m_isFacingLeft = false;
+	else m_isFacingLeft = true;*/
 	m_strState = ARROW_TOWER;
 
-	currCD = 0.5f;
+	currCD = 1.0f;
 }
 
 

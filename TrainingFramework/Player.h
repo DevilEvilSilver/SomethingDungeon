@@ -39,6 +39,9 @@ public:
 	};
 	
 	bool m_isUseRanged = false;
+	bool m_isUseMelee = false;
+	bool m_isUseDash = false;
+
 	float m_regenCD = 3.0f;
 	float m_regenCurrCD = 0.0f;
 

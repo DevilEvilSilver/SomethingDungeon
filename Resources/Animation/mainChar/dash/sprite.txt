@@ -1,4 +1,4 @@
-#FRAME_COUNT 2
+#FRAME_COUNT 4
 ID 0
 SPF 0.1
 FILE ../Resources/Animation/mainChar/dash/0.tga
@@ -6,4 +6,12 @@ TILING GL_REPEAT
 ID 1
 SPF 0.1
 FILE ../Resources/Animation/mainChar/dash/1.tga
+TILING GL_REPEAT
+ID 2
+SPF 0.1
+FILE ../Resources/Animation/mainChar/dash/2.tga
+TILING GL_REPEAT
+ID 3
+SPF 0.1
+FILE ../Resources/Animation/mainChar/dash/3.tga
 TILING GL_REPEAT

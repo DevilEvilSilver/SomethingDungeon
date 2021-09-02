@@ -185,7 +185,8 @@ void Room::Floor2Generate() {
 			AddEnemy(FROGMAN);
 
 		
-		if (rand() % 5 <= 1)	GenerateDeco();
+		GenerateDeco();
+		if (rand() % 5 <= 3) GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{
@@ -285,7 +286,8 @@ void Room::Floor3Generate() {
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
 		}
-		if (rand() % 5 <= 1)	GenerateDeco();
+		if (rand() % 5 <= 3)	GenerateDeco();
+		if (rand() % 5 <= 3)	GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{
@@ -360,7 +362,7 @@ void Room::GenerateDeco()
 
 	switch (StatePlay::GetInstance()->m_floorID) {
 	case FloorIdentify::FLOOR_2_ID:
-		
+		i *= 2;
 		while (i > 0)
 		{
 			int randomNum = rand() % 100 + 1;
@@ -378,16 +380,17 @@ void Room::GenerateDeco()
 				}
 				else if (randomNum >= 15)
 				{
+					randomNum = rand() % 100 + 1;
 					if (rand() % 100 >= 75)
 						AddDeco(POLE_1);
 					else
-						if (rand() % 100 >= 50)
+						if (randomNum >= 50)
 							AddDeco(POLE_2);
 						else
-							if (rand() % 100 >= 25)
+							if (randomNum >= 25)
 								AddDeco(POLE_3);
 							else
-								if (rand() % 100 >= 0)
+								if (randomNum >= 0)
 									AddDeco(POLE_4);
 				}
 				else AddDeco(BROKEN_WALL);
@@ -713,9 +716,14 @@ void Room::GenObj(std::string prefabId, int num)
 		}
 		else if (prefabId == TOWER) {
 			ArrowTower* tower = new ArrowTower(TOWER, m_RoomID, translation);
-			if (rand()%2==0) tower->m_isFacingLeft = false;
-			else tower->m_isFacingLeft = true;
+			/*if (rand()%2==0) tower->m_isFacingLeft = false;
+			else tower->m_isFacingLeft = true;*/
+
+			
 			StatePlay::GetInstance()->AddTrap(tower);
+
+			if (tower->GetCenterPos().x > this->GetCenterPos().x) tower->m_isFacingLeft = true;
+			else tower->m_isFacingLeft = false;
 		}
 		
 

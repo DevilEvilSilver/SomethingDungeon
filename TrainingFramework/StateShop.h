@@ -73,6 +73,8 @@ public:
 	bool UpdateItemLogic(unsigned int itemIndex);
 	void SetRecord();
 
+	int RandomItem();
+
 	void Render();
 
 	void GetRenderOrder();

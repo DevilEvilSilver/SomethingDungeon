@@ -126,7 +126,7 @@ void Witch::createDrop()
 	}
 	else
 	{
-		Gold* gold = new Gold(GOLD, m_RoomID, translation, 20, false);
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 3, false);
 		StatePlay::GetInstance()->AddDrop(gold);
 	}
 
