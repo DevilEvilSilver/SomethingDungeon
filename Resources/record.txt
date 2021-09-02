@@ -1,15 +1,15 @@
-FLOOR_BOSS
-Time 0
-Kills 0
-Golds 1000
-CurrHP 200
-MaxHP 200
-CurrMP 200
-MaxMP 200
-ATK 8
-DEF 5
-Gold 1000
+WIN
+Time 1414
+Kills 206
+Golds 3215
+CurrHP 39
+MaxHP 593
+CurrMP 19
+MaxMP 19
+ATK 10
+DEF 4
+Gold 2150
 Key 1000
-Speed 3.500000
-Melee skillFireLv1
-Range skillFreezeLv1
+Speed 5.250000
+Melee skillFireLv3
+Range skillFreezeLv3
