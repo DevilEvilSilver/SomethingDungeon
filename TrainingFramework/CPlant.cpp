@@ -37,7 +37,7 @@ void CPlant::UniqueUpdate(float frameTime)
 	Vector2 delta = plyPos - enmyPos;
 	float distance = delta.Length();
 
-	float totalCD = 0.25f;
+	float totalCD = 1.0f;
 
 	//move behavior
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)

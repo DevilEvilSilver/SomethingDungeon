@@ -59,7 +59,7 @@ void Orcman::UniqueUpdate(float frameTime)
 					Chase(delta);
 				}
 				else {
-					if (FixedMove(m_lastMoveDir, 0.0f, 0.5f, frameTime) == true)
+					if (FixedMove(m_lastMoveDir, 0.0f, delayTime, frameTime) == true)
 					{
 						Melee(plyPos);
 						currCD = totalCD;

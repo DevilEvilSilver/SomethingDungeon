@@ -62,7 +62,7 @@
 #define INIT_PLAYER_DEF					4
 #define INIT_PLAYER_GOLD				10
 #define INIT_PLAYER_KEY					0
-#define INIT_PLAYER_SPEED				3.5f
+#define INIT_PLAYER_SPEED				3.0f
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
 #define PLAYER_ATK_MAX					10

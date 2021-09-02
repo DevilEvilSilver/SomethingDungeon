@@ -58,7 +58,7 @@ bool Player::Dash(float frameTime)
 			i++;
 			break;
 		case 1:
-			if (FixedMove(m_lastMoveDir, m_MOVESPEED*0.75f, 0.25f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, 2.5f, 0.25f, frameTime) == false) return false;
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
 			m_pState = P_CS;
