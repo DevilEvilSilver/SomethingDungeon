@@ -285,6 +285,12 @@
     <ClCompile Include="EnemyHpMob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StateCredit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateInstruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -492,6 +498,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHpMob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateInstruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCredit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
