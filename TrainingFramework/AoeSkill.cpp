@@ -99,7 +99,7 @@ void AoeSkill::Init(std::string ID, Vector2 target)
 	{
 		if (m_isPlayer)
 		{
-			target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseLX, InputManager::GetInstance()->mouseLY);
+			target = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
 			dir = target - m_owner->GetCenterPos();
 			if (m_isPlayer)
 				DirectionPrefab(ID, dir);

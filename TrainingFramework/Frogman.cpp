@@ -15,11 +15,11 @@
 
 Frogman::Frogman(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Goblin(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 10;
-	m_currHP = 10;
+	m_maxHP = 500;
+	m_currHP = 500;
 
-	m_ATK = 5;
-	m_DEF = 3;
+	m_ATK = 8;
+	m_DEF = 0;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
@@ -28,6 +28,12 @@ Frogman::Frogman(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 
 	atkDuration = 1.3f;
 	m_MOVESPEED = 1.5f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 void Frogman::UniqueUpdate(float frameTime)
@@ -101,4 +107,14 @@ void Frogman::Melee(Vector2 target)
 
 	AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
 	StatePlay::GetInstance()->AddSkill(bskill);
+}
+
+void Frogman::createDrop()
+{
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+	Gold* gold = new Gold(GOLD, m_RoomID, translation, 40, false);
+	StatePlay::GetInstance()->AddDrop(gold);
+
 }

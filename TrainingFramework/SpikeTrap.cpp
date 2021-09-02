@@ -35,7 +35,7 @@ void SpikeTrap::Update(float frameTime) {
 
 				if (CollisionManager::CheckCollision(this, enemy))
 				{
-					enemy->UpdateGotHit(m_iAttack, true, curPos, frameTime);
+					enemy->UpdateGotHit(getValueAttack(), true, curPos, frameTime);
 					
 				}
 
@@ -43,7 +43,7 @@ void SpikeTrap::Update(float frameTime) {
 
 		if (CollisionManager::CheckCollision(this, StatePlay::GetInstance()->m_Player))
 		{
-			StatePlay::GetInstance()->m_Player->UpdateGotHit(m_iAttack, true, curPos, frameTime);
+			StatePlay::GetInstance()->m_Player->UpdateGotHit(getValueAttack(), true, curPos, frameTime);
 		}
 
 		

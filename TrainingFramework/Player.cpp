@@ -53,7 +53,7 @@ bool Player::Dash(float frameTime)
 		switch (i)
 		{
 		case 0:
-			if (FixedMove(m_lastMoveDir, 0.0f, 0.1f, frameTime) == false) return false;
+			if (FixedMove(m_lastMoveDir, 0.0f, 0.0f, frameTime) == false) return false;
 			m_isInvincible = true;
 			i++;
 			break;
@@ -218,7 +218,7 @@ void Player::AddSkill(std::string prefabId)
 void Player::UseSkill(float frameTime)
 {
 	int keyPressed = InputManager::GetInstance()->keyPressed;
-	Vector2 MousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseRX, InputManager::GetInstance()->mouseRY);
+	Vector2 MousePos = InputManager::GetInstance()->GetMousePosition(StatePlay::GetInstance()->m_Camera, InputManager::GetInstance()->mouseX, InputManager::GetInstance()->mouseY);
 	Skill* NewSkill;
 	Matrix T;
 	T.SetIdentity();

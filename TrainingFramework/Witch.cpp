@@ -17,20 +17,26 @@
 
 Witch::Witch(std::string prefabID, Vector2 roomID, Matrix translationMatrix):Enemy( prefabID,  roomID, translationMatrix)
 {
-	m_maxHP = 10;
-	m_currHP = 10;
+	m_maxHP = 100;
+	m_currHP = 100;
 	
-	m_ATK = 3;
-	m_DEF = 3;
+	m_ATK = 10;
+	m_DEF = 5;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
 	isPlayerCollision = false;
 	isEnemyCollision = true;
 
-	m_MOVESPEED = 4.0f;
+	m_MOVESPEED = 3.5f;
 
 	atkDuration = 1.0f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 void Witch::UniqueUpdate(float frameTime)
@@ -101,4 +107,25 @@ void Witch::Shoot(Vector2 target)
 
 void Witch::Melee(Vector2 target)
 {
+}
+
+void Witch::createDrop()
+{
+	unsigned int random = rand() % 100 + 1;
+
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+
+	if (random >= 75)
+	{
+		MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(mp);
+	}
+	else
+	{
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 20, false);
+		StatePlay::GetInstance()->AddDrop(gold);
+	}
+
 }

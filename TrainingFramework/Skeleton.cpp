@@ -15,11 +15,11 @@
 
 Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Enemy(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 10;
-	m_currHP = 10;
+	m_maxHP = 120;
+	m_currHP = 120;
 
-	m_ATK = 3;
-	m_DEF = 3;
+	m_ATK = 15;
+	m_DEF = 10;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
@@ -29,6 +29,12 @@ Skeleton::Skeleton(std::string prefabID, Vector2 roomID, Matrix translationMatri
 	m_MOVESPEED = 2.0f;
 
 	atkDuration = 1.0f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 
@@ -94,4 +100,25 @@ void Skeleton::Melee(Vector2 target)
 
 	AoeSkill* bskill = new AoeSkill(target, this, AOE_SKILL, this->m_RoomID, m);
 	StatePlay::GetInstance()->AddSkill(bskill);
+}
+
+void Skeleton::createDrop()
+{
+	unsigned int random = rand() % 100 + 1;
+
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+
+	if (random >= 75)
+	{
+		HPPotion* hp = new HPPotion(HP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(hp);
+	}
+	else
+	{
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 5, false);
+		StatePlay::GetInstance()->AddDrop(gold);
+	}
+
 }

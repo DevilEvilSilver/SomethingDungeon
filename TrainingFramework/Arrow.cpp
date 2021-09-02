@@ -22,7 +22,7 @@ Arrow::Arrow(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	else dir = 1;
 
 		
-	m_iAttack = 5;
+	m_iAttack = 15;
 }
 
 void Arrow::Update(float frameTime) {

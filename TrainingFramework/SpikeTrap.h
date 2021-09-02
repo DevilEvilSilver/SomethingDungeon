@@ -4,7 +4,7 @@
 
 class SpikeTrap : public Trap {
 private:
-	int m_iAttack=3;
+	int m_iAttack=25;
 
 public:
 	float m_fTotalCoolDownTime=2.0f;

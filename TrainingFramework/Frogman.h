@@ -12,5 +12,6 @@ public:
     void Shoot(Vector2 target);
     void Melee(Vector2 target);
 
+	void createDrop();
 }
 ;

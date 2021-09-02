@@ -12,11 +12,11 @@
 
 CPlant::CPlant(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :Witch(prefabID, roomID, translationMatrix)
 {
-	m_maxHP = 8;
-	m_currHP = 8;
+	m_maxHP = 80;
+	m_currHP = 80;
 
-	m_ATK = 2;
-	m_DEF = 3;
+	m_ATK = 13;
+	m_DEF = 5;
 
 	m_strState = IDLE_LEFT;
 	isWallCollision = true;
@@ -26,6 +26,12 @@ CPlant::CPlant(std::string prefabID, Vector2 roomID, Matrix translationMatrix) :
 	m_MOVESPEED = 2.0f;
 
 	atkDuration = 1.0f;
+
+	if (m_HpMob != NULL)
+	{
+		delete m_HpMob;
+		m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP, 1.0f);
+	}
 }
 
 void CPlant::UniqueUpdate(float frameTime)
@@ -37,7 +43,7 @@ void CPlant::UniqueUpdate(float frameTime)
 	Vector2 delta = plyPos - enmyPos;
 	float distance = delta.Length();
 
-	float totalCD = 0.25f;
+	float totalCD = 5.0f;
 
 	//move behavior
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
@@ -86,4 +92,25 @@ void CPlant::Shoot(Vector2 target)
 
 void CPlant::Melee(Vector2 target)
 {
+}
+
+void CPlant::createDrop()
+{
+	unsigned int random = rand() % 100 + 1;
+
+	Matrix translation;
+	translation.SetTranslation(GetCenterPos().x, GetCenterPos().y, 0.0f);
+
+
+	if (random >= 75)
+	{
+		MPPotion* mp = new MPPotion(MP_PO, m_RoomID, translation);
+		StatePlay::GetInstance()->AddDrop(mp);
+	}
+	else
+	{
+		Gold* gold = new Gold(GOLD, m_RoomID, translation, 15, false);
+		StatePlay::GetInstance()->AddDrop(gold);
+	}
+
 }

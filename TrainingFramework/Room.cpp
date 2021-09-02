@@ -57,7 +57,7 @@ void Room::RoomGenerate() {
 	
 }
 
-void Room::Floor2Generate() {
+void Room::Floor1Generate() {
 	if (m_RoomType == NORMAL) {
 		unsigned int random = rand() % 100 + 1;
 
@@ -91,17 +91,14 @@ void Room::Floor2Generate() {
 
 			int rNum = rand() % 100 + 1;
 
-			if (rNum <= 40) AddEnemy(SKELETON);
-			else if (rNum <= 70)
+			if (rNum <= 50) AddEnemy(SKELETON);
+			else if (rNum <= 80)
 			{
-				if (rand() % 10 + 1 <= 6)
-					AddEnemy(WITCH);
-				else AddEnemy(C_PLANT);
+				AddEnemy(WITCH);
 			}
-			else
+			else 
 			{
-				if (rNum <= 85) AddEnemy(BEAR);
-				else AddEnemy(ORCMAN);
+				AddEnemy(C_PLANT);
 			}
 
 			if (rand() % 10 + 1 <= 1)
@@ -121,16 +118,6 @@ void Room::Floor2Generate() {
 		unsigned int randPosX = rand() % (unsigned int)((float)ROOM_WIDTH - enemyPrefab->m_fWidth);
 		unsigned int randPosY = rand() % (unsigned int)((float)ROOM_HEIGHT - enemyPrefab->m_fHeight);
 		translation.SetTranslation(GetPosX() + randPosX, GetPosY() - randPosY, 0.0f);
-
-		//Witch* enemy = new Witch(WITCH, m_RoomID, translation);
-		//RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
-		//Skeleton* enemy = new Skeleton(BEAR, m_RoomID, translation);
-		//Goblin* enemy = new Goblin(C_PLANT, m_RoomID, translation);
-		//CPlant* enemy = new CPlant(C_PLANT, m_RoomID, translation);
-		//Orcman* enemy = new Orcman(ORCMAN, m_RoomID, translation);
-		//StatePlay::GetInstance()->AddEnemy(enemy);
-
-		//GenerateDeco();
 	}
 	else if (m_RoomType == END)
 	{
@@ -139,11 +126,6 @@ void Room::Floor2Generate() {
 		translation.SetTranslation(GetPosX() + ROOM_WIDTH / 2 - gatePrefab->m_fWidth / 2, GetPosY() - ROOM_HEIGHT / 2 + gatePrefab->m_fHeight / 2, 0.0f);
 		Gate* gate = new Gate(GATE, m_RoomID, translation);
 		StatePlay::GetInstance()->AddTrap(gate);
-
-		//Prefab* enemyPrefab = GetResource(B_ROBOTKNIGHT, ResourceManager::GetInstance()->m_PrefabList);
-		//translation.SetTranslation(GetPosX() + ROOM_WIDTH / 2 - enemyPrefab->m_fWidth / 2, GetPosY() - ROOM_HEIGHT / 2 + enemyPrefab->m_fHeight / 2, 0.0f);
-		//RobotKnight* enemy = new RobotKnight(B_ROBOTKNIGHT, m_RoomID, translation);
-		//StatePlay::GetInstance()->AddEnemy(enemy);
 	}
 	else if (m_RoomType == KEY_ROOM) {
 		Prefab* keyPrefab = GetResource(KEY, ResourceManager::GetInstance()->m_PrefabList);
@@ -156,7 +138,7 @@ void Room::Floor2Generate() {
 	}
 }
 
-void Room::Floor1Generate() {
+void Room::Floor2Generate() {
 	if (m_RoomType == NORMAL) {
 		unsigned int random = rand() % 100 + 1;
 

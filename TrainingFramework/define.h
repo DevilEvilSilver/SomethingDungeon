@@ -56,18 +56,21 @@
 #define FLOOR_BOSS						"FLOOR_BOSS"
 #define RECORD_WIN						"WIN"
 #define RECORD_LOSE						"LOSE"
-#define INIT_PLAYER_HP					100
+#define INIT_PLAYER_HP					150
 #define INIT_PLAYER_MP					100
-#define INIT_PLAYER_ATK					3
-#define INIT_PLAYER_DEF					3
+#define INIT_PLAYER_ATK					30
+#define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				0
 #define INIT_PLAYER_KEY					100
-#define INIT_PLAYER_SPEED				3.5f
+#define INIT_PLAYER_SPEED				4.0f
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
-#define PLAYER_ATK_MAX					10
-#define PLAYER_DEF_MAX					10
-#define PLAYER_SPEED_MAX				10
+#define PLAYER_ATK_MIN					15
+#define PLAYER_DEF_MIN					0
+#define PLAYER_SPEED_MIN				2.0
+#define PLAYER_ATK_MAX					100
+#define PLAYER_DEF_MAX					15
+#define PLAYER_SPEED_MAX				8.0
 
 //MAP
 #define MAP_WIDTH					22
