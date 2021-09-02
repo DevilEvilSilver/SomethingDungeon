@@ -35,6 +35,8 @@ void Player::UniqueUpdate(float frameTime)
 		default:
 			break;
 	}
+	m_regenCurrCD -= frameTime;
+	if (m_currMP<m_maxMP&&m_regenCurrCD <= 0.0f) m_currMP++;
 	//if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	//UseSkill(frameTime);
 }
@@ -58,11 +60,8 @@ bool Player::Dash(float frameTime)
 			i++;
 			break;
 		case 1:
-<<<<<<< Updated upstream
-			if (FixedMove(m_lastMoveDir, m_MOVESPEED*0.75f, 0.25f, frameTime) == false) return false;
-=======
 			if (FixedMove(m_lastMoveDir, 3.5f, 0.25f, frameTime) == false) return false;
->>>>>>> Stashed changes
+
 			m_isInvincible = false;
 			SetCS(CS_IDLE);
 			m_pState = P_CS;

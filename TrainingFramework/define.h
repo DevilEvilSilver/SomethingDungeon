@@ -62,11 +62,8 @@
 #define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				0
 #define INIT_PLAYER_KEY					100
-<<<<<<< Updated upstream
-#define INIT_PLAYER_SPEED				4.0f
-=======
 #define INIT_PLAYER_SPEED				3.5f
->>>>>>> Stashed changes
+
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
 #define PLAYER_ATK_MIN					15

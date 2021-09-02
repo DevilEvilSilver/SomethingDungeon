@@ -39,6 +39,8 @@ public:
 	};
 	
 	bool m_isUseRanged = false;
+	float m_regenCD = 3.0f;
+	float m_regenCurrCD = 0.0f;
 
 	PlayerState m_pState=P_CS;
 
