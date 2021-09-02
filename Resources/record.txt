@@ -1,12 +1,12 @@
-LOSE
-CurrHP 0
-MaxHP 10
-CurrMP 0
-MaxMP 10
+FLOOR_1
+CurrHP 100
+MaxHP 100
+CurrMP 100
+MaxMP 100
 ATK 3
 DEF 3
-Gold 82
+Gold 10
 Key 0
-Speed 3.000000
+Speed 8.000000
 Melee skillFireLv3
 Range skillFreezeLv3

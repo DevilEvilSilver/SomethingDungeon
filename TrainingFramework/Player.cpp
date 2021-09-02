@@ -388,3 +388,11 @@ float Player::GetCloseSkillCurrCD() {
 float Player::GetRangeSkillCurrCD() {
 	return(float)m_RangeSkillID->m_fCurrCoolDownTime;
 }
+float Player::GetDashSkillMaxCD()
+{
+	return (float)m_Dash->m_CoolDownTime / 1000;
+}
+float Player::GetDashSkillCurrCD()
+{
+	return(float)m_Dash->m_fCurrCoolDownTime;
+}
