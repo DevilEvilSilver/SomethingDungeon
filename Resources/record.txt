@@ -1,5 +1,5 @@
-FLOOR_1
-Time 0
+LOSE
+Time 148
 Kills 0
 Golds 0
 CurrHP 200
