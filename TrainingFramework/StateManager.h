@@ -9,7 +9,10 @@ enum GameState {
 		GS_STATE_WELCOME,
 		GS_STATE_PLAY,
 		GS_STATE_SHOP,
-		GS_STATE_RESULT
+		GS_STATE_RESULT,
+		GS_STATE_INSTRUCTION,
+		GS_STATE_CREDIT,
+		GS_STATE_INTRO
 };
 
 class StateManager:public Singleton<StateManager> 

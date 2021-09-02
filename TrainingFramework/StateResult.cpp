@@ -18,8 +18,12 @@ StateResult::StateResult(void) {
 
 StateResult::~StateResult() {
 	delete m_Background;
+	delete m_ResultBox;
 	delete m_Title;
 	delete m_ButtonQuit;
+	delete m_TotalTimeText;
+	delete m_TotalKillText;
+	delete m_TotalGoldText;
 	delete m_Camera;
 
 	if (m_TransitionScreen != NULL)
@@ -40,6 +44,9 @@ void StateResult::Init() {
 		m_isWin = true;
 	else
 		m_isWin = false;
+	fscanf(recordFile, "Time %d\n", &m_TotalTime);
+	fscanf(recordFile, "Kills %d\n", &m_TotalKill);
+	fscanf(recordFile, "Golds %d\n", &m_TotalGold);
 
 	fclose(recordFile);
 
@@ -76,6 +83,18 @@ void StateResult::Init() {
 			m_Background = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation, LOSE_BG);
 	}
 
+	//Result Box
+	{
+		fscanf(dataFile, "#RESULT_BOX\n");
+		GLfloat x, y;
+		fscanf(dataFile, "POS %f, %f\n", &x, &y);
+		char strPrefab[50];
+		fscanf(dataFile, "PREFAB %s\n", &strPrefab);
+		Matrix translation;
+		translation.SetTranslation(x, y, 0.0f);
+		m_ResultBox = new Widget(strPrefab, Vector2(0.0f, 0.0f), translation);
+	}
+
 	//Title
 	{
 		fscanf(dataFile, "#TITLE\n");
@@ -103,18 +122,32 @@ void StateResult::Init() {
 		m_ButtonQuit = new Button(strPrefab, Vector2(0.0f, 0.0f), translation);
 	}
 
+	//Init Text
+	m_TotalTimeText = new Text("Time: " + GetTime(m_TotalTime), SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 540.0f, 380.0f, 1.0f, TEXT_ALIGN::CENTER);
+	m_TotalKillText = new Text("Kills: " + std::to_string(m_TotalKill), SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 540.0f, 460.0f, 1.0f, TEXT_ALIGN::CENTER);
+	m_TotalGoldText = new Text("Golds: " + std::to_string(m_TotalGold), SHADER_TEXT, FONT_BANK_BOLD, TEXT_COLOR::WHILE, 540.0f, 540.0f, 1.0f, TEXT_ALIGN::CENTER);
+
 	m_isStartUp = false;
 	m_isWelcomeState = false;
 	m_fNextStateFrame = 1.0f;
 	m_TransitionScreen = NULL;
 }
 
+std::string StateResult::GetTime(unsigned int second) {
+	return std::to_string((int)second / 60) + ":" + std::to_string((int)second % 60);
+}
+
 void StateResult::Render() {
 	//GetRenderOrder();
 
 	m_Background->Render(this->m_Camera);
+	m_ResultBox->Render(this->m_Camera);
 	m_Title->Render(this->m_Camera);
 	m_ButtonQuit->Render(this->m_Camera);
+
+	Renderer::GetInstance()->DrawText2(m_TotalTimeText);
+	Renderer::GetInstance()->DrawText2(m_TotalKillText);
+	Renderer::GetInstance()->DrawText2(m_TotalGoldText);
 
 	if (m_TransitionScreen != NULL)
 		m_TransitionScreen->Render(this->m_Camera);
@@ -133,6 +166,7 @@ void StateResult::Update(float frameTime) {
 	}
 
 	m_Background->Update(frameTime);
+	m_ResultBox->Update(frameTime);
 	m_Title->Update(frameTime);
 	m_ButtonQuit->Update(frameTime);
 

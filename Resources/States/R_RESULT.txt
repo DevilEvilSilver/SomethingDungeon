@@ -1,4 +1,4 @@
-#PREFAB_COUNT 4
+#PREFAB_COUNT 5
 ID backgroundResult
 MODEL 0
 SHADER 0
@@ -11,6 +11,17 @@ ID winBG
 FILE ../Resources/Animation/backgroundResult/win/sprite.txt
 ID loseBG
 FILE ../Resources/Animation/backgroundResult/lose/sprite.txt
+
+ID resultBox
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 8.0, 8.0
+SIZE 8.0 x 8.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 1
+ID init
+FILE ../Resources/Animation/pauseBox/static/sprite.txt
 
 ID title
 MODEL 0

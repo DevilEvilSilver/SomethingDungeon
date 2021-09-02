@@ -41,6 +41,12 @@
 #define FILE_S_RESULT					"../Resources/States/S_RESULT.txt"
 #define FILE_R_RESULT					"../Resources/States/R_RESULT.txt"
 #define FILE_SD_RESULT					"../Resources/States/SD_RESULT.txt"
+#define FILE_S_INSTRUCTION				"../Resources/States/S_INSTRUCTION.txt"
+#define FILE_R_INSTRUCTION				"../Resources/States/R_INSTRUCTION.txt"
+#define FILE_SD_INSTRUCTION				"../Resources/States/SD_INSTRUCTION.txt"
+#define FILE_S_CREDIT					"../Resources/States/S_CREDIT.txt"
+#define FILE_R_CREDIT					"../Resources/States/R_CREDIT.txt"
+#define FILE_SD_CREDIT					"../Resources/States/SD_CREDIT.txt"
 
 	//FILE RECORD
 #define FILE_RECORD						"../Resources/record.txt"
@@ -305,6 +311,10 @@
 #define LOSE_BGM			401
 
 #define SHOP_BGM			500
+
+#define INSTRUCTION_BGM		600
+
+#define CREDIT_BGM			700
 
 #define BUTTON_SFX			900
 #define COIN				901

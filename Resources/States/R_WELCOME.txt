@@ -1,4 +1,4 @@
-#PREFAB_COUNT 4
+#PREFAB_COUNT 7
 ID backgroundMenu
 MODEL 0
 SHADER 0
@@ -21,22 +21,73 @@ ANIMATION_COUNT 1
 ID init
 FILE ../Resources/Animation/title/static/sprite.txt
 
+ID buttonContinue
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 2.0
+SIZE 10.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonContinue/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonContinue/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonContinue/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonContinue/unavailable/sprite.txt
+
 ID buttonStart
 MODEL 0
 SHADER 0
 TYPE RECT
-COORD 0.0, 0.0, 6.0, 2.0
-SIZE 6.0 x 2.0
+COORD 0.0, 0.0, 10.0, 2.0
+SIZE 10.0 x 2.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 4
 ID normal
-FILE ../Resources/Animation/buttonStart/normal/sprite.txt
+FILE ../Resources/Animation/buttonNewGame/normal/sprite.txt
 ID pressed
-FILE ../Resources/Animation/buttonStart/pressed/sprite.txt
+FILE ../Resources/Animation/buttonNewGame/pressed/sprite.txt
 ID hover
-FILE ../Resources/Animation/buttonStart/hover/sprite.txt
+FILE ../Resources/Animation/buttonNewGame/hover/sprite.txt
 ID unavailable
-FILE ../Resources/Animation/buttonStart/unavailable/sprite.txt
+FILE ../Resources/Animation/buttonNewGame/unavailable/sprite.txt
+
+ID buttonInstruction
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 2.0
+SIZE 10.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonInstruction/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonInstruction/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonInstruction/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonInstruction/unavailable/sprite.txt
+
+ID buttonCredit
+MODEL 0
+SHADER 0
+TYPE RECT
+COORD 0.0, 0.0, 10.0, 2.0
+SIZE 10.0 x 2.0
+SCALE_BY_SIZE 0
+ANIMATION_COUNT 4
+ID normal
+FILE ../Resources/Animation/buttonCredit/normal/sprite.txt
+ID pressed
+FILE ../Resources/Animation/buttonCredit/pressed/sprite.txt
+ID hover
+FILE ../Resources/Animation/buttonCredit/hover/sprite.txt
+ID unavailable
+FILE ../Resources/Animation/buttonCredit/unavailable/sprite.txt
 
 ID transition
 MODEL 0

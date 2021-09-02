@@ -1,4 +1,5 @@
-SoundNum 2
+SoundNum 3
 
 #ID 400 ../Resources/Sounds/win_bgm.wav
 #ID 401 ../Resources/Sounds/lose_bgm.wav
+#ID 900 ../Resources/Sounds/button_sfx.wav

@@ -128,6 +128,11 @@ void StatePlay::InitFloorID()
 	recordFile = fopen(FILE_RECORD, "r");
 	char strFloor[50];
 	fscanf(recordFile, "%s\n", &strFloor);
+	unsigned int iTotalTime;
+	fscanf(recordFile, "Time %d\n", &iTotalTime);
+	m_TotalTime = (float)iTotalTime;
+	fscanf(recordFile, "Kills %d\n", &m_TotalKill);
+	fscanf(recordFile, "Golds %d\n", &m_TotalGold);
 	fclose(recordFile);
 
 	if (!strcmp(strFloor, FLOOR_1) || !strcmp(strFloor, RECORD_LOSE))
@@ -408,6 +413,7 @@ void StatePlay::Init() {
 	m_isQuit = false;
 	m_isStartUp = false;
 	m_fNextStateFrame = 1.0f;
+	m_StartUpGold = std::stoi(m_Player->GetGold());
 	m_DeathBanner = NULL;
 	m_TransitionScreen = NULL;
 
@@ -832,6 +838,8 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
+	m_TotalTime += frameTime;
+
 	if (!m_isDead && !m_isNextState) {
 		if (!m_isStartUp) {
 			RoomsGenerate();
@@ -1239,6 +1247,8 @@ void StatePlay::UpdateResult(float frameTime) {
 }
 
 bool StatePlay::SetRecord(bool isWin) {
+	m_TotalGold += std::stoi(m_Player->GetGold()) - m_StartUpGold;
+
 	bool isEndGame = false;
 	FILE* recordFile;
 
@@ -1267,6 +1277,9 @@ bool StatePlay::SetRecord(bool isWin) {
 		fprintf(recordFile, "%s\n", RECORD_LOSE);
 		isEndGame = true;
 	}
+	fprintf(recordFile, "Time %d\n", (int)m_TotalTime);
+	fprintf(recordFile, "Kills %d\n", m_TotalKill);
+	fprintf(recordFile, "Golds %d\n", m_TotalGold);
 	fprintf(recordFile, "CurrHP %d\n", m_Player->m_currHP);
 	fprintf(recordFile, "MaxHP %d\n", m_Player->m_maxHP);
 	fprintf(recordFile, "CurrMP %d\n", m_Player->m_currMP);
@@ -1336,7 +1349,7 @@ void StatePlay::GetRenderOrder() {
 
 void StatePlay::RemoveEnemy(Enemy* enemy) {
 
-
+	m_TotalKill++;
 
 	//enemy->getGold()->m_isDisplay = true;
 	int id;

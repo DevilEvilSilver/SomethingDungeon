@@ -1,0 +1,4 @@
+SoundNum 2
+
+#ID 700 ../Resources/Sounds/credit_bgm.wav
+#ID 900 ../Resources/Sounds/button_sfx.wav

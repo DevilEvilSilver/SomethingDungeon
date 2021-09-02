@@ -10,11 +10,13 @@
 #include "StatePlay.h"
 #include "StateShop.h"
 #include "StateResult.h"
+#include "StateInstruction.h"
+#include "StateCredit.h"
 
 StateManager::StateManager()
 {
 	//AddState(GS_STATE_PLAY);
-	AddState(GS_STATE_LOGO);
+	AddState(GS_STATE_WELCOME);
 }
 
 StateManager::~StateManager() {
@@ -47,6 +49,12 @@ void StateManager::Update(float frameTime) {
 	case GS_STATE_RESULT:
 		StateResult::GetInstance()->Update(frameTime);
 		break;
+	case GS_STATE_INSTRUCTION:
+		StateInstruction::GetInstance()->Update(frameTime);
+		break;
+	case GS_STATE_CREDIT:
+		StateCredit::GetInstance()->Update(frameTime);
+		break;
 	}
 }
 
@@ -70,6 +78,12 @@ void StateManager::Render()
 		break;
 	case GS_STATE_RESULT:
 		StateResult::GetInstance()->Render();
+		break;
+	case GS_STATE_INSTRUCTION:
+		StateInstruction::GetInstance()->Render();
+		break;
+	case GS_STATE_CREDIT:
+		StateCredit::GetInstance()->Render();
 		break;
 	}
 }
@@ -135,6 +149,12 @@ void StateManager::ResetState(GameState state) {
 		break;
 	case GS_STATE_RESULT:
 		StateResult::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_INSTRUCTION:
+		StateInstruction::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_CREDIT:
+		StateCredit::GetInstance()->ResetInstance();
 		break;
 	}
 }
