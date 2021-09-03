@@ -287,7 +287,7 @@ void Room::Floor3Generate() {
 
 		}
 		if (rand() % 5 <= 3)	GenerateDeco();
-		if (rand() % 5 <= 3)	GenerateDeco();
+		if (rand() % 5 <= 1)	GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{

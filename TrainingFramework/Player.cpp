@@ -38,7 +38,9 @@ void Player::UniqueUpdate(float frameTime)
 	m_regenCurrCD -= frameTime;
 	if (m_currMP < m_maxMP && m_regenCurrCD <= 0.0f)
 	{
-		m_currMP+=ceil(m_currMP*0.01f);
+		
+		m_currMP += ceil(m_maxMP * 0.01f);
+		
 		m_regenCurrCD = m_regenCD;
 	}
 		

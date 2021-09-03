@@ -1260,7 +1260,7 @@ SIZE 1.0 x 1.0
 SCALE_BY_SIZE 0
 ANIMATION_COUNT 1
 ID arrowTower
-FILE ../Resources/Animation/arrowTower/static/sprite.txt
+FILE ../Resources/Animation/arrowTower/static/w3_sprite.txt
 
 ID arrow
 MODEL 0

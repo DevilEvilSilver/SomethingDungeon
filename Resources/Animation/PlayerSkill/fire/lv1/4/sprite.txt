@@ -1,18 +1,22 @@
-#FRAME_COUNT 4
+#FRAME_COUNT 5
 ID 0
-SPF 0.06
+SPF 0.05
 FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/0.tga
 TILING GL_REPEAT
 ID 1
-SPF 0.06
+SPF 0.05
 FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/1.tga
 TILING GL_REPEAT
 ID 2
-SPF 0.06
+SPF 0.05
 FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/2.tga
 TILING GL_REPEAT
 ID 3
-SPF -1.0
+SPF 0.05
 FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/3.tga
+TILING GL_REPEAT
+ID 4
+SPF -1
+FILE ../Resources/Animation/PlayerSkill/fire/lv1/4/4.tga
 TILING GL_REPEAT
 
