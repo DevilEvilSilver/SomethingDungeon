@@ -12,6 +12,7 @@
 #include "StateResult.h"
 #include "StateInstruction.h"
 #include "StateCredit.h"
+#include "StateIntro.h"
 
 StateManager::StateManager()
 {
@@ -55,6 +56,9 @@ void StateManager::Update(float frameTime) {
 	case GS_STATE_CREDIT:
 		StateCredit::GetInstance()->Update(frameTime);
 		break;
+	case GS_STATE_INTRO:
+		StateIntro::GetInstance()->Update(frameTime);
+		break;
 	}
 }
 
@@ -84,6 +88,9 @@ void StateManager::Render()
 		break;
 	case GS_STATE_CREDIT:
 		StateCredit::GetInstance()->Render();
+		break;
+	case GS_STATE_INTRO:
+		StateIntro::GetInstance()->Render();
 		break;
 	}
 }
@@ -155,6 +162,9 @@ void StateManager::ResetState(GameState state) {
 		break;
 	case GS_STATE_CREDIT:
 		StateCredit::GetInstance()->ResetInstance();
+		break;
+	case GS_STATE_INTRO:
+		StateIntro::GetInstance()->ResetInstance();
 		break;
 	}
 }

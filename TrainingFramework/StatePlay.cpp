@@ -433,6 +433,7 @@ void StatePlay::Init() {
 	fclose(dataFile);
 
 	//INIT LOGIC
+	m_isWinSFX = false;
 	m_isGateInstruct = false;
 	m_isNextState = false;
 	m_isDead = false;
@@ -951,7 +952,14 @@ void StatePlay::Update(float frameTime) {
 				m_KeyIcon->Update(frameTime);
 				m_KeyText->setText(m_Player->GetKey());
 				
-				if (m_floorID != FloorIdentify::FLOOR_BOSS_ID)
+				if (m_floorID == FloorIdentify::FLOOR_BOSS_ID) {
+					if (m_EnemyList.size() < 1 && !m_isWinSFX) {
+						SoundEngine::GetInstance()->Fader(m_iHandleBGM, false, 0.5f);
+						m_iHandleBGM = SoundEngine::GetInstance()->Play(WIN_SFX, 0.5f, 1.0f, false);
+						m_isWinSFX = true;
+					}
+				}
+				else
 					m_MiniMap->Update(frameTime);
 
 				if (m_isGateInstruct) {
