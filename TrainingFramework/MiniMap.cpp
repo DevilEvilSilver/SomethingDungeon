@@ -17,6 +17,8 @@ T GetResource(std::string id, std::vector<T> objList) {
 }
 MiniMap::MiniMap(Matrix translation, RoomType* mapType, Camera* camera, Player* player)
 {
+	m_playerPos.x = 0;
+	m_playerPos.y = 0;
 	m_camera = camera;
 	m_player = player;
 	m_fCameraPosX = translation.m[3][0];
@@ -62,7 +64,7 @@ void MiniMap::Update(float framTime)
 }
 void MiniMap::Render(Camera* camera)
 {
-	m_MiniMapWidget->Render(camera);
+	m_MiniMapWidget->Render(camera,m_playerPos);
 	m_PlayerWidget->Render(camera);
 	m_BoundWidget->Render(camera);
 }
@@ -74,5 +76,6 @@ void MiniMap::UpdatePlayerWidgetPos(float frameTime)
 		m_player->GetPosY() * fMiniMapHeight / (m_mapHeight * ROOM_HEIGHT));
 	m_PlayerWidget->m_fCameraPosX = m_fCameraPosX + playerPos.x - m_PlayerWidget->GetWorldMatrix(m_camera).m[0][0] / 2;
 	m_PlayerWidget->m_fCameraPosY = m_fCameraPosY - (fMiniMapHeight - playerPos.y) + m_PlayerWidget->GetWorldMatrix(m_camera).m[1][1] / 2;
-	
+	m_playerPos.x = playerPos.x;
+	m_playerPos.y = fMiniMapHeight - playerPos.y;
 }

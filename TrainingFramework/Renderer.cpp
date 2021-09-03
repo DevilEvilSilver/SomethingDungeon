@@ -38,7 +38,7 @@ void Renderer::Init() {
 	
 }
 
-void Renderer::DrawAnimated(Object *object, Camera *camera) {
+void Renderer::DrawAnimated(Object *object, Camera *camera, Vector2 playerWidgetPos) {
 	Prefab *prefab = GetResource(object->m_strPrefabID, ResourceManager::GetInstance()->m_PrefabList);
 	Model *model = GetResource(prefab->m_iModelID, ResourceManager::GetInstance()->m_ModelList);
 	Shaders *shader = GetResource(prefab->m_iShaderID, ResourceManager::GetInstance()->m_ShaderList);
@@ -74,6 +74,11 @@ void Renderer::DrawAnimated(Object *object, Camera *camera) {
 	if (auto* widget = dynamic_cast<Widget*>(object)) {
 		Matrix wvpMatrix = widget->GetWorldMatrix(camera) * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 		glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
+		if (!(playerWidgetPos.x && playerWidgetPos.y))
+		{
+			glUniform1f(shader->playerPosXUniform, playerWidgetPos.x);
+			glUniform1f(shader->playerPosYUniform, playerWidgetPos.y);
+		}
 	} 
 	else {
 		Matrix wvpMatrix = object->GetWorldMatrix() * camera->GetViewMatrix() * camera->GetProjectionMatrix();

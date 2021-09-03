@@ -10,7 +10,7 @@ public:
 	virtual ~Widget();
 
 	virtual void Update(float frameTime);
-	virtual void Render(Camera *camera);
+	virtual void Render(Camera* camera, Vector2 playerPos = {0,0});
 
 	virtual Matrix GetWorldMatrix(Camera *camera);
 };

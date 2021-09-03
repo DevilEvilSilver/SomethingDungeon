@@ -1,8 +1,8 @@
-FLOOR_1
-Time 0
+LOSE
+Time 100
 Kills 0
 Golds 0
-CurrHP 200
+CurrHP 0
 MaxHP 200
 CurrMP 200
 MaxMP 200

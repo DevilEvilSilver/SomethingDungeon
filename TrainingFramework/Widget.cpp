@@ -24,8 +24,8 @@ void Widget::Update(float frameTime) {
 	m_fCurrFrameTime += frameTime;
 }
 
-void Widget::Render(Camera* camera) {
-	Renderer::GetInstance()->DrawAnimated(this, camera);
+void Widget::Render(Camera* camera, Vector2 playerPos) {
+	Renderer::GetInstance()->DrawAnimated(this, camera,playerPos);
 }
 
 Matrix Widget::GetWorldMatrix(Camera *camera) {
