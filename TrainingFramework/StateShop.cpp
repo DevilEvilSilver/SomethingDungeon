@@ -736,7 +736,7 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 			}
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_HERMES_SHOE)) {
-			m_Player->m_MOVESPEED += 0.5;
+			m_Player->m_MOVESPEED += 1.0;
 			if (m_Player->m_MOVESPEED > PLAYER_SPEED_MAX)
 				m_Player->m_MOVESPEED = PLAYER_SPEED_MAX;
 		}
@@ -775,10 +775,7 @@ bool StateShop::UpdateItemLogic(unsigned int itemIndex) {
 				m_Player->m_DEF = PLAYER_DEF_MAX;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_GIGANTIFICATION)) {
-			m_Player->m_ATK += 5;
-			if (m_Player->m_ATK > PLAYER_ATK_MAX)
-				m_Player->m_ATK = PLAYER_ATK_MAX;
-
+			m_Player->m_ATK = PLAYER_ATK_MAX;
 			m_Player->m_DEF = PLAYER_DEF_MIN;
 		}
 		else if (!strcmp(m_ButtonItemList[itemIndex]->m_strPrefabID.c_str(), BUTTON_ITEM_ARTEMIS_BLESSING)) {

@@ -279,17 +279,20 @@
     <ClCompile Include="SkillID.cpp">
       <Filter>Source Files\Objects\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="BarMob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyHpMob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StateCredit.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateManager\States</Filter>
     </ClCompile>
     <ClCompile Include="StateInstruction.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateIntro.cpp">
+      <Filter>Source Files\StateManager\States</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHpMob.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BarMob.cpp">
+      <Filter>Source Files\Objects\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -494,17 +497,20 @@
     <ClInclude Include="Key.h">
       <Filter>Header Files\Objects\Drops</Filter>
     </ClInclude>
-    <ClInclude Include="BarMob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyHpMob.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StateCredit.h">
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
     <ClInclude Include="StateInstruction.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\StateManager\States</Filter>
     </ClInclude>
-    <ClInclude Include="StateCredit.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="StateIntro.h">
+      <Filter>Header Files\StateManager\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHpMob.h">
+      <Filter>Header Files\Objects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BarMob.h">
+      <Filter>Header Files\Objects\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

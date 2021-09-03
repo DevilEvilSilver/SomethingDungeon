@@ -106,8 +106,8 @@
 #define CPLANT_ATK						5
 #define CPLANT_DEF						1
 
-#define RB_HP						3000
-#define RB_ATK						5
+#define RB_HP						2500
+#define RB_ATK						4
 #define RB_DEF						8
 
 #define TRAP_ARROW_ATK				5
@@ -418,7 +418,7 @@
 #define ITEM_HERMES_SHOE					6
 #define BUTTON_ITEM_HERMES_SHOE				"buttonItemHermesShoe"
 #define ITEM_NAME_HERMES_SHOE				"Hermes Shoe"
-#define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 0.5 SPEED"
+#define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 1.0 SPEED"
 #define ITEM_PRICE_HERMES_SHOE				50
 	//TITAN_CHAIN
 #define ITEM_TITAN_CHAIN					7
@@ -448,7 +448,7 @@
 #define ITEM_GIGANTIFICATION				11
 #define BUTTON_ITEM_GIGANTIFICATION			"buttonItemGigantification"
 #define ITEM_NAME_GIGANTIFICATION			"Gigantification"
-#define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase 5 ATK & decrease all DEF"
+#define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase Max ATK & decrease all DEF"
 #define ITEM_PRICE_GIGANTIFICATION			75
 	//ARTEMIS_BLESSING
 #define ITEM_ARTEMIS_BLESSING				12
