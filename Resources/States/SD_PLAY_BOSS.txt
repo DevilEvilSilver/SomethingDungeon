@@ -1,4 +1,4 @@
-SoundNum 10
+SoundNum 11
 
 #ID 300 ../Resources/Sounds/play_boss_bgm.wav
 #ID 900 ../Resources/Sounds/button_sfx.wav
@@ -10,3 +10,4 @@ SoundNum 10
 #ID 906 ../Resources/Sounds/dash.wav
 #ID 907 ../Resources/Sounds/death_sfx.wav
 #ID 908 ../Resources/Sounds/death_sfx.wav
+#ID 911 ../Resources/Sounds/win_sfx.wav

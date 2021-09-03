@@ -94,6 +94,7 @@ public:
 	FloorIdentify m_floorID;
 
 	//LOGIC
+	bool m_isWinSFX;
 	bool m_isGateInstruct;
 	bool m_isStartUp;
 	bool m_isNextState;

@@ -374,6 +374,7 @@
 #define TELEPORT_SFX		908
 #define BUY_SUCCESS_SFX		909
 #define BUY_FAIL_SFX		910
+#define WIN_SFX				911
 
 
 //SHOP ITEMS
