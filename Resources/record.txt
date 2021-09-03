@@ -1,0 +1,15 @@
+WIN
+Time 166
+Kills 1
+Golds 0
+CurrHP 51
+MaxHP 300
+CurrMP 9
+MaxMP 220
+ATK 6
+DEF 7
+Gold 0
+Key 1
+Speed 3.500000
+Melee skillFireLv3
+Range skillFreezeLv3

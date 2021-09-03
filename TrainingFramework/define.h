@@ -106,8 +106,8 @@
 #define CPLANT_ATK						5
 #define CPLANT_DEF						1
 
-#define RB_HP						2500
-#define RB_ATK						4
+#define RB_HP						2200
+#define RB_ATK						3
 #define RB_DEF						8
 
 #define TRAP_ARROW_ATK				5
@@ -526,7 +526,7 @@
 #define ITEM_SOLAR_DESCEND					24
 #define BUTTON_ITEM_SOLAR_DESCEND			"buttonItemSolarDescend"
 #define ITEM_NAME_SOLAR_DESCEND				"Solar Descend (Melee Skill)"
-#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:150%ATK   CD: 1.0s."
+#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:220%ATK   CD: 1.0s."
 #define ITEM_PRICE_SOLAR_DESCEND			150
 	//ICE_ARROW
 #define ITEM_ICE_ARROW						25
@@ -544,5 +544,5 @@
 #define ITEM_ABSOLUTE_ZERO					27
 #define BUTTON_ITEM_ABSOLUTE_ZERO			"buttonItemAbsoluteZero"
 #define ITEM_NAME_ABSOLUTE_ZERO				"Absolute Zero (Ranged Skill)"
-#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:200%ATK   CD: 2.0s   COST:8 MP"
+#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:250%ATK   CD: 2.0s   COST:8 MP"
 #define ITEM_PRICE_ABSOLUTE_ZERO			150

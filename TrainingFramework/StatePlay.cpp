@@ -868,7 +868,7 @@ void StatePlay::RemoveTrap(Trap* trap)
 }
 
 void StatePlay::Update(float frameTime) {
-	m_TotalTime += frameTime;
+	
 
 	if (!m_isDead && !m_isNextState) {
 		if (!m_isStartUp) {
@@ -881,10 +881,11 @@ void StatePlay::Update(float frameTime) {
 				m_PauseBox->Update(frameTime);
 				m_ButtonResume->Update(frameTime);
 				m_ButtonQuit->Update(frameTime);
-
+				
 				UpdatePause(frameTime);
 			}
 			else {
+				m_TotalTime += frameTime;
 				//CHECK IF PLAYER DEAD 
 				if (m_Player->m_currHP <= 0) {
 					m_isDead = true;
