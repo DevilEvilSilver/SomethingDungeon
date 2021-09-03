@@ -22,6 +22,9 @@ public:
 	//ATTACK DELAY
 	float delayTime = 0.1f;
 
+	//Death Time
+	float deathTime = 1.0f;
+
 	//OPTION
 	void Chase(Vector2 delta);
 	void KeepDistance(Vector2 delta);

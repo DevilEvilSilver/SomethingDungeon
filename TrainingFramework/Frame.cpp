@@ -61,13 +61,13 @@ void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 				imageData[(j * iW + i) * (iBpp / 8) + 2] = 10;
 				imageData[(j * iW + i) * (iBpp / 8) + 3] = 100;
 			}
-			else if(roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == END)
+			/*else if(roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == END)
 			{
 				imageData[(j * iW + i) * (iBpp / 8) + 0] = 176;
 				imageData[(j * iW + i) * (iBpp / 8) + 1] = 18;
 				imageData[(j * iW + i) * (iBpp / 8) + 2] = 10;
 				imageData[(j * iW + i) * (iBpp / 8) + 3] = 255;
-			}
+			}*/
 			/*else if (roomType[(i / iPixelsPerHeightRoom) * (int)size.x + j / iPixelsPerWidthRoom] == KEY_ROOM)
 			{
 				imageData[(j * iW + i) * (iBpp / 8) + 0] = 255;

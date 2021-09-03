@@ -258,7 +258,7 @@ void Room::Floor3Generate() {
 		unsigned int enemyNum = 0;
 
 		if (random >= 90) enemyNum = 3;
-		else if (random >= 70)	enemyNum = 2;
+		else if (random >= 70)	enemyNum = 1;
 		else enemyNum = 0;
 
 

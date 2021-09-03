@@ -38,6 +38,7 @@ RobotKnight::RobotKnight(std::string prefabID, Vector2 roomID, Matrix translatio
 	
 	m_isInvulnerable = true;
 	atkDuration = 1.0f;
+	deathTime = 2.4f;
 	m_fLastCurrHp = m_maxHP;
 	if (m_HpMob != NULL)
 	{
@@ -60,6 +61,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 	case BS_ATTACK2:Attack2(frameTime); break;
 	case BS_GUARD:Guard(frameTime); break;
 	}
+	
 
 	//if (m_bState != BS_ATTACK2) SetBS(BS_ATTACK2);
 

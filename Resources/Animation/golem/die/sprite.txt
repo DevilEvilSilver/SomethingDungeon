@@ -52,6 +52,6 @@ SPF 0.1
 FILE ../Resources/Animation/golem/death13.tga
 TILING GL_REPEAT
 ID 13
-SPF 0.1
+SPF -1
 FILE ../Resources/Animation/golem/death14.tga
 TILING GL_REPEAT

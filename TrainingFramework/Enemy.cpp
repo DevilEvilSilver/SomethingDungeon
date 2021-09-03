@@ -135,7 +135,7 @@ void Enemy::Death(float frameTime)
 {
 	m_strState = DEATH;
 	
-	if (FixedMove(Vector2(0,0),0.0f,1.0f, frameTime) == true) {
+	if (FixedMove(Vector2(0,0),0.0f,deathTime, frameTime) == true) {
 		SoundEngine::GetInstance()->Play(COIN, 1.0f, 1.0f, false);
 		isDead = true;
 		createDrop();
