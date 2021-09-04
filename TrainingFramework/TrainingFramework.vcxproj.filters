@@ -535,4 +535,12 @@
       <Filter>Win32Res</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shaders\Minimap.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\Minimap.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+  </ItemGroup>
 </Project>

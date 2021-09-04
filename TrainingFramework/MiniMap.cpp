@@ -64,7 +64,7 @@ void MiniMap::Update(float framTime)
 }
 void MiniMap::Render(Camera* camera)
 {
-	m_MiniMapWidget->Render(camera,m_playerPos);
+	m_MiniMapWidget->Render(camera,Vector2(m_PlayerWidget->GetPosX(),m_PlayerWidget->GetPosY()));
 	m_PlayerWidget->Render(camera);
 	m_BoundWidget->Render(camera);
 }
