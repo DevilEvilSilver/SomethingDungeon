@@ -114,10 +114,10 @@
 #define TRAP_SPIKE_ATK				6
 
 //MAP
-#define MAP_WIDTH					17
-#define MAP_HEIGHT					17
-#define MAP_MAX_TUNNEL				45
-#define TUNNEL_MAX_LENGTH			6
+#define MAP_WIDTH					22
+#define MAP_HEIGHT					22
+#define MAP_MAX_TUNNEL				65
+#define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					9
 #define ROOM_HEIGHT					6
 #define PLAYER_START_POSX			10.0
