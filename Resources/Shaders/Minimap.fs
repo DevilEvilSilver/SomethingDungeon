@@ -11,7 +11,8 @@ void main()
 	vec2 pos =v_pos;
 	float dis = length(pos - playerPos);
 	vec4 defaults = vec4(0.0,0.0,0.0,1.0);
-	float lerpValue  = clamp((dis - 0.1)/1.0,0.0,1.0);
+	float lerpValue  = clamp((dis - 0.01)/0.1,0.0,1.0);
 	vec4 results = texture2D(u_texture, u_spriteScale * v_uv);
 	gl_FragColor = lerpValue*defaults + (1.0- lerpValue)*results;//vec4(1,0,0,1); 
+	//gl_FragColor = mix(results, defaults, lerpVal);
 }

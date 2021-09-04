@@ -192,23 +192,30 @@ Model* LoadModel(unsigned int id, char* file) {
 }
 
 Model* GenModel(unsigned int id, float width, float height) {
-	Vertex *vertices = new Vertex[4];
+	Vertex *vertices = new Vertex[(width + 1) * (height + 1)];
+	for (unsigned int i = 0; i < (width + 1) * (height + 1); i++) {
+		vertices[i].pos.x = (float)((int)(i % ((int)width + 1))) / width;
+		vertices[i].pos.y = (float)-((int)(i / ((int)height + 1))) / height;
+		vertices[i].pos.z = 0.0f;
+		vertices[i].uv.x = (float)((int)(i % ((int)width + 1))) / width;
+		vertices[i].uv.y = (float)-((int)(i / ((int)height + 1))) / height;
+	}
 
-	vertices[0].pos.x = 0.0f; vertices[0].pos.y = -height; vertices[0].pos.z = 0.0f;
-	vertices[0].uv.x = 0.0f; vertices[0].uv.y = 0.0f;
-	vertices[1].pos.x = 0.0f; vertices[1].pos.y = 0.0f; vertices[1].pos.z = 0.0f;
-	vertices[1].uv.x = 0.0f; vertices[1].uv.y = 1.0f;
-	vertices[2].pos.x = width; vertices[2].pos.y = 0.0f; vertices[2].pos.z = 0.0f;
-	vertices[2].uv.x = 1.0f; vertices[2].uv.y = 1.0f;
-	vertices[3].pos.x = width; vertices[3].pos.y = -height; vertices[3].pos.z = 0.0f;
-	vertices[3].uv.x = 1.0f; vertices[3].uv.y = 0.0f;
-	
-	GLuint *indices = new GLuint[6];
+	GLuint *indices = new GLuint[(width * height) * 6];
+	unsigned int index = 0;
+	for (unsigned int i = 0; i < width; i++) {
+		for (unsigned int j = 0; j < height; j++) {
+			indices[index] = (j * (height + 1)) + i;
+			indices[index + 1] = ((j + 1) * (height + 1)) + i;
+			indices[index + 2] = ((j + 1) * (height + 1)) + i + 1;
+			indices[index + 3] = (j * (height + 1)) + i;
+			indices[index + 4] = ((j + 1) * (height + 1)) + i + 1;
+			indices[index + 5] = (j * (height + 1)) + i + 1;
+			index += 6;
+		}
+	}
 
-	indices[0] = 0; indices[1] = 2; indices[2] = 1;
-	indices[3] = 0; indices[4] = 3; indices[5] = 2;
-
-	Model *model = new Model(id, vertices, sizeof(Vertex) * 4, indices, 6);
+	Model *model = new Model(id, vertices, sizeof(Vertex) * (width + 1) * (height + 1), indices, (width * height) * 6);
 	delete[]vertices;
 	delete[]indices;
 

@@ -8,6 +8,6 @@ void main()
 	vec4 posL = u_wvp * vec4(a_posL, 1.0);
 	gl_Position = posL;
 	v_uv = a_uv;
-	v_pos = vec2(posL.x,posL.y);
+	v_pos = vec2(a_posL.x,a_posL.y);
 }
    

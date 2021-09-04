@@ -74,7 +74,7 @@ void Renderer::DrawAnimated(Object *object, Camera *camera, Vector2 playerWidget
 	if (auto* widget = dynamic_cast<Widget*>(object)) {
 		Matrix wvpMatrix = widget->GetWorldMatrix(camera) * camera->GetViewMatrix() * camera->GetProjectionMatrix();
 		glUniformMatrix4fv(shader->wvpUniform, 1, GL_FALSE, (const GLfloat*)wvpMatrix.m);
-		if (!(playerWidgetPos.x && playerWidgetPos.y))
+		if ((playerWidgetPos.x && playerWidgetPos.y))
 		{
 			glUniform1f(shader->playerPosXUniform, playerWidgetPos.x);
 			glUniform1f(shader->playerPosYUniform, playerWidgetPos.y);

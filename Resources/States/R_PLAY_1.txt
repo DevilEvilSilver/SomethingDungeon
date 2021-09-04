@@ -1168,7 +1168,7 @@ ID init
 FILE ../Resources/Animation/key/static/sprite.txt
 
 ID minimap
-MODEL 0
+MODEL 1
 SHADER 3
 TYPE RECT
 COORD 0.0, 0.0, 1, 0.6
@@ -1350,9 +1350,12 @@ ID init
 FILE ../Resources/Animation/EnemyHpMob/bound/sprite.txt
 
 
-#MODEL_GEN 1
+#MODEL_GEN 2
 ID 0
 SIZE 1.0 x 1.0
+
+ID 1
+SIZE 50.0 x 50.0
 
 #SHADER_COUNT 4
 ID 0
