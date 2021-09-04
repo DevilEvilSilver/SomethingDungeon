@@ -70,7 +70,7 @@
 #define INIT_PLAYER_DEF					5
 #define INIT_PLAYER_GOLD				0
 #define INIT_PLAYER_KEY					0
-#define INIT_PLAYER_SPEED				3.5f
+#define INIT_PLAYER_SPEED				4.0f
 
 #define INIT_PLAYER_MELEE				"skillFireLv1"
 #define INIT_PLAYER_RANGE				"skillFreezeLv1"
@@ -114,9 +114,9 @@
 #define TRAP_SPIKE_ATK				6
 
 //MAP
-#define MAP_WIDTH					20
-#define MAP_HEIGHT					20
-#define MAP_MAX_TUNNEL				65
+#define MAP_WIDTH					17
+#define MAP_HEIGHT					17
+#define MAP_MAX_TUNNEL				40
 #define TUNNEL_MAX_LENGTH			7
 #define ROOM_WIDTH					9
 #define ROOM_HEIGHT					6
@@ -412,7 +412,7 @@
 #define ITEM_CODEX_GIGAS					5
 #define BUTTON_ITEM_CODEX_GIGAS				"buttonItemCodexGigas"
 #define ITEM_NAME_CODEX_GIGAS				"Codex Gigas"
-#define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 20% max MP & decrease 50% max HP"
+#define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 20% max MP & decrease 5% max HP"
 #define ITEM_PRICE_CODEX_GIGAS				20
 	//HERMES_SHOE
 #define ITEM_HERMES_SHOE					6
@@ -424,14 +424,14 @@
 #define ITEM_TITAN_CHAIN					7
 #define BUTTON_ITEM_TITAN_CHAIN				"buttonItemTitanChain"
 #define ITEM_NAME_TITAN_CHAIN				"Titan Chain"
-#define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 2 DEF & decrease 3 ATTACK"
-#define ITEM_PRICE_TITAN_CHAIN				20
+#define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 3 DEF & decrease 1 ATTACK"
+#define ITEM_PRICE_TITAN_CHAIN				30
 	//ARES_BLADE
 #define ITEM_ARES_BLADE						8
 #define BUTTON_ITEM_ARES_BLADE				"buttonItemAresBlade"
 #define ITEM_NAME_ARES_BLADE				"Ares Blade"
-#define ITEM_DESCRIPTION_ARES_BLADE			"Increase 2 ATK & decrease 3 DEF"
-#define ITEM_PRICE_ARES_BLADE				20
+#define ITEM_DESCRIPTION_ARES_BLADE			"Increase 3 ATK & decrease 1 DEF"
+#define ITEM_PRICE_ARES_BLADE				30
 	//LIFE_STONE
 #define ITEM_LIFE_STONE						9
 #define BUTTON_ITEM_LIFE_STONE				"buttonItemLifeStone"
@@ -454,19 +454,19 @@
 #define ITEM_ARTEMIS_BLESSING				12
 #define BUTTON_ITEM_ARTEMIS_BLESSING		"buttonItemArtemisBlessing"
 #define ITEM_NAME_ARTEMIS_BLESSING			"Artemis Blessing"
-#define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 0.5 SPEED, decrease 70% max MP"
+#define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 0.5 SPEED, decrease 30% max MP"
 #define ITEM_PRICE_ARTEMIS_BLESSING			40
 	//BARBATOS_FAVOR
 #define ITEM_BARBATOS_FAVOR					13
 #define BUTTON_ITEM_BARBATOS_FAVOR			"buttonItemBarbatosFavor"
 #define ITEM_NAME_BARBATOS_FAVOR			"Barbatos Favor"
-#define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 75 max HP & decrease 2 DEF"
+#define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 75 max HP & decrease 1 DEF"
 #define ITEM_PRICE_BARBATOS_FAVOR			40
 	//AAMON_CONTRACT
 #define ITEM_AAMON_CONTRACT					14
 #define BUTTON_ITEM_AAMON_CONTRACT			"buttonItemAamonContract"
 #define ITEM_NAME_AAMON_CONTRACT			"Aamon Contract"
-#define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 75 max MP & decrease 2 ATK"
+#define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 75 max MP & decrease 1 ATK"
 #define ITEM_PRICE_AAMON_CONTRACT			40
 	//HEALTH_POTION
 #define ITEM_HEALTH_POTION					15
@@ -484,26 +484,26 @@
 #define ITEM_BLEEDING_FLOWER				17
 #define BUTTON_ITEM_BLEEDING_FLOWER			"buttonItemBleedingFlower"
 #define ITEM_NAME_BLEEDING_FLOWER			"Bleeding Flower"
-#define ITEM_DESCRIPTION_BLEEDING_FLOWER	"Heal 100% HP & decrease 1 DEF"
-#define ITEM_PRICE_BLEEDING_FLOWER			15
+#define ITEM_DESCRIPTION_BLEEDING_FLOWER	"Heal 100% HP"
+#define ITEM_PRICE_BLEEDING_FLOWER			45
 	//CORRUPTED_VINE
 #define ITEM_CORRUPTED_VINE					18
 #define BUTTON_ITEM_CORRUPTED_VINE			"buttonItemCorruptedVine"
 #define ITEM_NAME_CORRUPTED_VINE			"Corrupted Vine"
-#define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP & decrease 1 ATK"
-#define ITEM_PRICE_CORRUPTED_VINE			15
+#define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP"
+#define ITEM_PRICE_CORRUPTED_VINE			45
 	//ROTTEN_GINSENG
 #define ITEM_ROTTEN_GINSENG					19
 #define BUTTON_ITEM_ROTTEN_GINSENG			"buttonItemRottenGinseng"
 #define ITEM_NAME_ROTTEN_GINSENG			"Rotten Ginseng"
 #define ITEM_DESCRIPTION_ROTTEN_GINSENG		"Heal 100% HP & decrease 0.25 SPEED"
-#define ITEM_PRICE_ROTTEN_GINSENG			15
+#define ITEM_PRICE_ROTTEN_GINSENG			10
 	//TWILIGHT_BERRY
 #define ITEM_TWILIGHT_BERRY					20
 #define BUTTON_ITEM_TWILIGHT_BERRY			"buttonItemTwilightBerry"
 #define ITEM_NAME_TWILIGHT_BERRY			"Twilight Berry"
 #define ITEM_DESCRIPTION_TWILIGHT_BERRY		"Heal 100% MP & decrease 0.25 SPEED"
-#define ITEM_PRICE_TWILIGHT_BERRY			15
+#define ITEM_PRICE_TWILIGHT_BERRY			10
 	//KEY
 #define ITEM_KEY							21
 #define BUTTON_ITEM_KEY						"buttonItemKey"
@@ -526,23 +526,23 @@
 #define ITEM_SOLAR_DESCEND					24
 #define BUTTON_ITEM_SOLAR_DESCEND			"buttonItemSolarDescend"
 #define ITEM_NAME_SOLAR_DESCEND				"Solar Descend (Melee Skill)"
-#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:220%ATK   CD: 1.0s."
+#define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:250%ATK   CD: 0.7s."
 #define ITEM_PRICE_SOLAR_DESCEND			70
 	//ICE_ARROW
 #define ITEM_ICE_ARROW						25
 #define BUTTON_ITEM_ICE_ARROW				"buttonItemIceArrow"
 #define ITEM_NAME_ICE_ARROW					"Ice Arrow (Ranged Skill)"
-#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:   DMG:150%ATK   CD: 0.7s   COST:3 MP"
+#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:   DMG:80%ATK   CD: 0.7s   COST:3 MP"
 #define ITEM_PRICE_ICE_ARROW				30
 	//GLACIAL_BLAST
 #define ITEM_GLACIAL_BLAST					26
 #define BUTTON_ITEM_GLACIAL_BLAST			"buttonItemGlacialBlast"
 #define ITEM_NAME_GLACIAL_BLAST				"Glacial Blast (Ranged Skill)"
-#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:   DMG:170%ATK   CD: 0.7s   COST:4 MP"
+#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:   DMG:120%ATK   CD: 0.7s   COST:4 MP"
 #define ITEM_PRICE_GLACIAL_BLAST			40
 	//ABSOLUTE_ZERO
 #define ITEM_ABSOLUTE_ZERO					27
 #define BUTTON_ITEM_ABSOLUTE_ZERO			"buttonItemAbsoluteZero"
 #define ITEM_NAME_ABSOLUTE_ZERO				"Absolute Zero (Ranged Skill)"
-#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:250%ATK   CD: 1.2s   COST:6 MP"
+#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:200%ATK   CD: 1.2s   COST:6 MP"
 #define ITEM_PRICE_ABSOLUTE_ZERO			70

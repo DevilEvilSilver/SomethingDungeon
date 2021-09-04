@@ -41,7 +41,7 @@ void SoundEngine::Init(std::string soundFile)
 
 	}
 
-	printf("Done reading file Sound.txt\n");
+	//printf("Done reading file Sound.txt\n");
 	fclose(fp);
 
 

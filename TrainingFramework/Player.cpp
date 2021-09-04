@@ -40,6 +40,7 @@ void Player::UniqueUpdate(float frameTime)
 	{
 		
 		m_currMP += ceil(m_maxMP * 0.01f);
+		if (m_currMP > m_maxMP) m_currMP = m_maxMP;
 		
 		m_regenCurrCD = m_regenCD;
 	}
@@ -136,6 +137,7 @@ Player::Player(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	//AddSkill(SKILL_FREEZE2);
 	AddSkill(DASH);
 	
+	//m_isInvincible = true;
 }
 
 void Player::UseAttack()

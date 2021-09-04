@@ -249,9 +249,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_PLAY_3.txt" />
     <Text Include="..\Resources\States\R_LOGO.txt" />
-    <Text Include="..\Resources\States\R_PLAY.txt" />
+    <Text Include="..\Resources\States\R_PLAY_1.txt" />
+    <Text Include="..\Resources\States\R_PLAY_2.txt" />
+    <Text Include="..\Resources\States\R_PLAY_3.txt" />
     <Text Include="..\Resources\States\R_WELCOME.txt" />
     <Text Include="..\Resources\States\S_LOGO.txt" />
     <Text Include="..\Resources\States\S_PLAY.txt" />

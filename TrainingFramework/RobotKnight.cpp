@@ -63,7 +63,7 @@ void RobotKnight::UniqueUpdate(float frameTime)
 	}
 	
 
-	//if (m_bState != BS_ATTACK2) SetBS(BS_ATTACK2);
+	//if (m_bState != BS_ATTACK1) SetBS(BS_ATTACK1);
 
 	if (currAtkCD>0.0f)
 	currAtkCD -= frameTime;
@@ -257,14 +257,15 @@ void RobotKnight::Attack2(float frameTime)
 				Vector2 dir=Vector2(1, 0);
 
 				Vector2 startPos = GetCenterPos();//Vector2(GetPosX() + m_fWidth / 2, GetPosY() - m_fWidth / 2);
-
 				int currNum = bulletNum;
+				float rotate = 360.0f / (float)bulletNum * PI / 180.0f;
 				while (currNum > 0)
 				{
+					float currRotate = (float)currNum * rotate;
 					
-					dir.x = 1.0f * cos(currNum*360.0f/bulletNum);
-					dir.y = 1.0f * sin(currNum*360.0f/bulletNum);
 
+					dir.x = 1.0f * cos(currRotate);
+					dir.y = 1.0f * sin(currRotate);
 					
 
 					BulletSkill* bskill = new BulletSkill(startPos+dir, this, SKILL_2, this->m_RoomID, m);

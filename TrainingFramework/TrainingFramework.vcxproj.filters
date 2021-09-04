@@ -517,9 +517,6 @@
     <Text Include="..\Resources\States\R_LOGO.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\Resources\States\R_PLAY.txt">
-      <Filter>Resources\States</Filter>
-    </Text>
     <Text Include="..\Resources\States\R_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
@@ -532,21 +529,13 @@
     <Text Include="..\Resources\States\S_WELCOME.txt">
       <Filter>Resources\States</Filter>
     </Text>
-    <Text Include="..\..\..\%40Thực tập\SomethingDungeon\Resources\States\R_PLAY_3.txt">
-      <Filter>Resources\States</Filter>
-    </Text>
+    <Text Include="..\Resources\States\R_PLAY_1.txt" />
+    <Text Include="..\Resources\States\R_PLAY_2.txt" />
+    <Text Include="..\Resources\States\R_PLAY_3.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TrainingFramework.rc">
       <Filter>Win32Res</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\Shaders\Minimap.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\Minimap.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -79,7 +79,7 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 			tempDisC1C2 = tempC1 - C2;
 			if ((abs(tempDisC1C2.x) > ((w1 + w2) / 2) || abs(tempDisC1C2.y) > ((h1 + h2) / 2)))
 				break;
-			if (i == 30)
+			if (i == 90)
 			{
 				tempDis.x = v1x * frameTime;
 				tempDis.y = v1y * frameTime;

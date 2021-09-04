@@ -185,7 +185,7 @@ void Room::Floor2Generate() {
 			AddEnemy(FROGMAN);
 
 		
-		GenerateDeco();
+		if (rand() % 5 <= 3)	GenerateDeco();
 		if (rand() % 5 <= 3) GenerateDeco();
 	}
 	else if (m_RoomType == START)

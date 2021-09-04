@@ -165,7 +165,7 @@ void StateWelcome::Render() {
 
 void StateWelcome::Update(float frameTime) {
 	if (!m_isStartUp) {
-		m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 1.0f, 1.0f, true);
+		m_iHandleBGM = SoundEngine::GetInstance()->Play(WELCOME_BGM, 0.6f, 1.0f, true);
 
 		m_isStartUp = true;
 	}
