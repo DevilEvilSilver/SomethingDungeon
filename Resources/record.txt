@@ -1,14 +1,14 @@
-FLOOR_1
-Time 0
-Kills 0
-Golds 0
-CurrHP 200
+WIN
+Time 88
+Kills 12
+Golds 11
+CurrHP 99
 MaxHP 200
-CurrMP 200
+CurrMP 190
 MaxMP 200
 ATK 5
 DEF 5
-Gold 0
+Gold 11
 Key 0
 Speed 4.000000
 Melee skillFireLv1
