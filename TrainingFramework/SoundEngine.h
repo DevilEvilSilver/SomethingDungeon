@@ -13,6 +13,7 @@ public:
 	SoLoud::Soloud m_soloud;
 	std::vector<Sound*> m_SoundList;
 
+	int m_CurrVolume = 0.2f;
 
 	SoundEngine();
 	~SoundEngine();

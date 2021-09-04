@@ -103,10 +103,10 @@
 #define FROGMAN_DEF						0
 
 #define CPLANT_HP						120
-#define CPLANT_ATK						5
+#define CPLANT_ATK						4
 #define CPLANT_DEF						1
 
-#define RB_HP						2200
+#define RB_HP						1800
 #define RB_ATK						3
 #define RB_DEF						8
 
@@ -114,10 +114,10 @@
 #define TRAP_SPIKE_ATK				6
 
 //MAP
-#define MAP_WIDTH					22
-#define MAP_HEIGHT					22
-#define MAP_MAX_TUNNEL				65
-#define TUNNEL_MAX_LENGTH			7
+#define MAP_WIDTH					17
+#define MAP_HEIGHT					17
+#define MAP_MAX_TUNNEL				45
+#define TUNNEL_MAX_LENGTH			6
 #define ROOM_WIDTH					9
 #define ROOM_HEIGHT					6
 #define PLAYER_START_POSX			10.0
@@ -389,160 +389,160 @@
 #define BUTTON_ITEM_HEART_STONE				"buttonItemHeartStone"
 #define ITEM_NAME_HEART_STONE				"Heart Stone"
 #define ITEM_DESCRIPTION_HEART_STONE		"Increase 25 max HP"
-#define ITEM_PRICE_HEART_STONE				30
+#define ITEM_PRICE_HEART_STONE				15
 	//MANA_CRYSTAL
 #define ITEM_MANA_CRYSTAL					2
 #define BUTTON_ITEM_MANA_CRYSTAL			"buttonItemManaCrystal"
 #define ITEM_NAME_MANA_CRYSTAL				"Mana Crystal"
 #define ITEM_DESCRIPTION_MANA_CRYSTAL		"Increase 25 max MP"
-#define ITEM_PRICE_MANA_CRYSTAL				30
+#define ITEM_PRICE_MANA_CRYSTAL				15
 	//HERCULES_FIST
 #define ITEM_HERCULES_FIST					3
 #define BUTTON_ITEM_HERCULES_FIST			"buttonItemHerculesFist"
 #define ITEM_NAME_HERCULES_FIST				"Hercules Fist"
 #define ITEM_DESCRIPTION_HERCULES_FIST		"Increase 1 ATK"
-#define ITEM_PRICE_HERCULES_FIST			50
+#define ITEM_PRICE_HERCULES_FIST			25
 	//ATHENA_SHIELD
 #define ITEM_ATHENA_SHIELD					4
 #define BUTTON_ITEM_ATHENA_SHIELD			"buttonItemAthenaShield"
 #define ITEM_NAME_ATHENA_SHIELD				"Athena Shield"
 #define ITEM_DESCRIPTION_ATHENA_SHIELD		"Increase 1 DEF"
-#define ITEM_PRICE_ATHENA_SHIELD			50
+#define ITEM_PRICE_ATHENA_SHIELD			25
 	//CODEX_GIGAS
 #define ITEM_CODEX_GIGAS					5
 #define BUTTON_ITEM_CODEX_GIGAS				"buttonItemCodexGigas"
 #define ITEM_NAME_CODEX_GIGAS				"Codex Gigas"
 #define ITEM_DESCRIPTION_CODEX_GIGAS		"Increase 20% max MP & decrease 50% max HP"
-#define ITEM_PRICE_CODEX_GIGAS				40
+#define ITEM_PRICE_CODEX_GIGAS				20
 	//HERMES_SHOE
 #define ITEM_HERMES_SHOE					6
 #define BUTTON_ITEM_HERMES_SHOE				"buttonItemHermesShoe"
 #define ITEM_NAME_HERMES_SHOE				"Hermes Shoe"
 #define ITEM_DESCRIPTION_HERMES_SHOE		"Increase 1.0 SPEED"
-#define ITEM_PRICE_HERMES_SHOE				50
+#define ITEM_PRICE_HERMES_SHOE				25
 	//TITAN_CHAIN
 #define ITEM_TITAN_CHAIN					7
 #define BUTTON_ITEM_TITAN_CHAIN				"buttonItemTitanChain"
 #define ITEM_NAME_TITAN_CHAIN				"Titan Chain"
 #define ITEM_DESCRIPTION_TITAN_CHAIN		"Increase 2 DEF & decrease 3 ATTACK"
-#define ITEM_PRICE_TITAN_CHAIN				40
+#define ITEM_PRICE_TITAN_CHAIN				20
 	//ARES_BLADE
 #define ITEM_ARES_BLADE						8
 #define BUTTON_ITEM_ARES_BLADE				"buttonItemAresBlade"
 #define ITEM_NAME_ARES_BLADE				"Ares Blade"
 #define ITEM_DESCRIPTION_ARES_BLADE			"Increase 2 ATK & decrease 3 DEF"
-#define ITEM_PRICE_ARES_BLADE				40
+#define ITEM_PRICE_ARES_BLADE				20
 	//LIFE_STONE
 #define ITEM_LIFE_STONE						9
 #define BUTTON_ITEM_LIFE_STONE				"buttonItemLifeStone"
 #define ITEM_NAME_LIFE_STONE				"Life Stone"
 #define ITEM_DESCRIPTION_LIFE_STONE			"Increase 15 max HP & 1 DEF"
-#define ITEM_PRICE_LIFE_STONE				75
+#define ITEM_PRICE_LIFE_STONE				35
 	//OCEAN_SHARDS
 #define ITEM_OCEAN_SHARDS					10
 #define BUTTON_ITEM_OCEAN_SHARDS			"buttonItemOceanShards"
 #define ITEM_NAME_OCEAN_SHARDS				"Ocean Shards"
 #define ITEM_DESCRIPTION_OCEAN_SHARDS		"Increase 15 max MP & 1 DEF"
-#define ITEM_PRICE_OCEAN_SHARDS				75
+#define ITEM_PRICE_OCEAN_SHARDS				35
 	//GIGANTIFICATION
 #define ITEM_GIGANTIFICATION				11
 #define BUTTON_ITEM_GIGANTIFICATION			"buttonItemGigantification"
 #define ITEM_NAME_GIGANTIFICATION			"Gigantification"
 #define ITEM_DESCRIPTION_GIGANTIFICATION	"Increase Max ATK & decrease all DEF"
-#define ITEM_PRICE_GIGANTIFICATION			75
+#define ITEM_PRICE_GIGANTIFICATION			35
 	//ARTEMIS_BLESSING
 #define ITEM_ARTEMIS_BLESSING				12
 #define BUTTON_ITEM_ARTEMIS_BLESSING		"buttonItemArtemisBlessing"
 #define ITEM_NAME_ARTEMIS_BLESSING			"Artemis Blessing"
 #define ITEM_DESCRIPTION_ARTEMIS_BLESSING	"Increase 25% max HP & 0.5 SPEED, decrease 70% max MP"
-#define ITEM_PRICE_ARTEMIS_BLESSING			80
+#define ITEM_PRICE_ARTEMIS_BLESSING			40
 	//BARBATOS_FAVOR
 #define ITEM_BARBATOS_FAVOR					13
 #define BUTTON_ITEM_BARBATOS_FAVOR			"buttonItemBarbatosFavor"
 #define ITEM_NAME_BARBATOS_FAVOR			"Barbatos Favor"
 #define ITEM_DESCRIPTION_BARBATOS_FAVOR		"Increase 75 max HP & decrease 2 DEF"
-#define ITEM_PRICE_BARBATOS_FAVOR			80
+#define ITEM_PRICE_BARBATOS_FAVOR			40
 	//AAMON_CONTRACT
 #define ITEM_AAMON_CONTRACT					14
 #define BUTTON_ITEM_AAMON_CONTRACT			"buttonItemAamonContract"
 #define ITEM_NAME_AAMON_CONTRACT			"Aamon Contract"
 #define ITEM_DESCRIPTION_AAMON_CONTRACT		"Increase 75 max MP & decrease 2 ATK"
-#define ITEM_PRICE_AAMON_CONTRACT			80
+#define ITEM_PRICE_AAMON_CONTRACT			40
 	//HEALTH_POTION
 #define ITEM_HEALTH_POTION					15
 #define BUTTON_ITEM_HEALTH_POTION			"buttonItemHealthPotion"
 #define ITEM_NAME_HEALTH_POTION				"Health Potion"
 #define ITEM_DESCRIPTION_HEALTH_POTION		"Heal 50% HP"
-#define ITEM_PRICE_HEALTH_POTION			30
+#define ITEM_PRICE_HEALTH_POTION			15
 	//MANA_POTION
 #define ITEM_MANA_POTION					16
 #define BUTTON_ITEM_MANA_POTION				"buttonItemManaPotion"
 #define ITEM_NAME_MANA_POTION				"Mana Potion"
 #define ITEM_DESCRIPTION_MANA_POTION		"Heal 50% MP"
-#define ITEM_PRICE_MANA_POTION				30
+#define ITEM_PRICE_MANA_POTION				15
 	//BLEEDING_FLOWER
 #define ITEM_BLEEDING_FLOWER				17
 #define BUTTON_ITEM_BLEEDING_FLOWER			"buttonItemBleedingFlower"
 #define ITEM_NAME_BLEEDING_FLOWER			"Bleeding Flower"
 #define ITEM_DESCRIPTION_BLEEDING_FLOWER	"Heal 100% HP & decrease 1 DEF"
-#define ITEM_PRICE_BLEEDING_FLOWER			30
+#define ITEM_PRICE_BLEEDING_FLOWER			15
 	//CORRUPTED_VINE
 #define ITEM_CORRUPTED_VINE					18
 #define BUTTON_ITEM_CORRUPTED_VINE			"buttonItemCorruptedVine"
 #define ITEM_NAME_CORRUPTED_VINE			"Corrupted Vine"
 #define ITEM_DESCRIPTION_CORRUPTED_VINE		"Heal 100% MP & decrease 1 ATK"
-#define ITEM_PRICE_CORRUPTED_VINE			30
+#define ITEM_PRICE_CORRUPTED_VINE			15
 	//ROTTEN_GINSENG
 #define ITEM_ROTTEN_GINSENG					19
 #define BUTTON_ITEM_ROTTEN_GINSENG			"buttonItemRottenGinseng"
 #define ITEM_NAME_ROTTEN_GINSENG			"Rotten Ginseng"
 #define ITEM_DESCRIPTION_ROTTEN_GINSENG		"Heal 100% HP & decrease 0.25 SPEED"
-#define ITEM_PRICE_ROTTEN_GINSENG			30
+#define ITEM_PRICE_ROTTEN_GINSENG			15
 	//TWILIGHT_BERRY
 #define ITEM_TWILIGHT_BERRY					20
 #define BUTTON_ITEM_TWILIGHT_BERRY			"buttonItemTwilightBerry"
 #define ITEM_NAME_TWILIGHT_BERRY			"Twilight Berry"
 #define ITEM_DESCRIPTION_TWILIGHT_BERRY		"Heal 100% MP & decrease 0.25 SPEED"
-#define ITEM_PRICE_TWILIGHT_BERRY			30
+#define ITEM_PRICE_TWILIGHT_BERRY			15
 	//KEY
 #define ITEM_KEY							21
 #define BUTTON_ITEM_KEY						"buttonItemKey"
 #define ITEM_NAME_KEY						"Key"
 #define ITEM_DESCRIPTION_KEY				"Used for resetting new items in the shop"
-#define ITEM_PRICE_KEY						25
+#define ITEM_PRICE_KEY						10
 	//FLAME_SWORD
 #define ITEM_FLAME_SWORD					22
 #define BUTTON_ITEM_FLAME_SWORD				"buttonItemFlameSword"
 #define ITEM_NAME_FLAME_SWORD				"Flame Sword (Melee Skill)"
 #define ITEM_DESCRIPTION_FLAME_SWORD		"MELEE SKILL:  DMG: 100 %ATK  CD: 0.7s."
-#define ITEM_PRICE_FLAME_SWORD				60
+#define ITEM_PRICE_FLAME_SWORD				30
 	//PYRO_WAVE
 #define ITEM_PYRO_WAVE						23
 #define BUTTON_ITEM_PYRO_WAVE				"buttonItemPyroWave"
 #define ITEM_NAME_PYRO_WAVE					"PyroWave (Melee Skill)"
 #define ITEM_DESCRIPTION_PYRO_WAVE			"MELEE SKILL:   DMG:60%ATK   CD: 0.5s."
-#define ITEM_PRICE_PYRO_WAVE				80
+#define ITEM_PRICE_PYRO_WAVE				40
 	//SOLAR_DESCEND
 #define ITEM_SOLAR_DESCEND					24
 #define BUTTON_ITEM_SOLAR_DESCEND			"buttonItemSolarDescend"
 #define ITEM_NAME_SOLAR_DESCEND				"Solar Descend (Melee Skill)"
 #define ITEM_DESCRIPTION_SOLAR_DESCEND		"MELEE SKILL:   DMG:220%ATK   CD: 1.0s."
-#define ITEM_PRICE_SOLAR_DESCEND			150
+#define ITEM_PRICE_SOLAR_DESCEND			70
 	//ICE_ARROW
 #define ITEM_ICE_ARROW						25
 #define BUTTON_ITEM_ICE_ARROW				"buttonItemIceArrow"
 #define ITEM_NAME_ICE_ARROW					"Ice Arrow (Ranged Skill)"
-#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:   DMG:150%ATK   CD: 1.0s   COST:5 MP"
-#define ITEM_PRICE_ICE_ARROW				60
+#define ITEM_DESCRIPTION_ICE_ARROW			"RANGED SKILL:   DMG:150%ATK   CD: 0.7s   COST:3 MP"
+#define ITEM_PRICE_ICE_ARROW				30
 	//GLACIAL_BLAST
 #define ITEM_GLACIAL_BLAST					26
 #define BUTTON_ITEM_GLACIAL_BLAST			"buttonItemGlacialBlast"
 #define ITEM_NAME_GLACIAL_BLAST				"Glacial Blast (Ranged Skill)"
-#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:   DMG:170%ATK   CD: 1.0s   COST:6 MP"
-#define ITEM_PRICE_GLACIAL_BLAST			80
+#define ITEM_DESCRIPTION_GLACIAL_BLAST		"RANGED SKILL:   DMG:170%ATK   CD: 0.7s   COST:4 MP"
+#define ITEM_PRICE_GLACIAL_BLAST			40
 	//ABSOLUTE_ZERO
 #define ITEM_ABSOLUTE_ZERO					27
 #define BUTTON_ITEM_ABSOLUTE_ZERO			"buttonItemAbsoluteZero"
 #define ITEM_NAME_ABSOLUTE_ZERO				"Absolute Zero (Ranged Skill)"
-#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:250%ATK   CD: 2.0s   COST:8 MP"
-#define ITEM_PRICE_ABSOLUTE_ZERO			150
+#define ITEM_DESCRIPTION_ABSOLUTE_ZERO		"RANGED SKILL:   DMG:250%ATK   CD: 1.2s   COST:6 MP"
+#define ITEM_PRICE_ABSOLUTE_ZERO			70

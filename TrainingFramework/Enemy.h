@@ -20,7 +20,7 @@ public:
 	bool isDead ;
 
 	//ATTACK DELAY
-	float delayTime = 0.1f;
+	float delayTime = 0.25f;
 
 	//Death Time
 	float deathTime = 1.0f;

@@ -486,11 +486,11 @@ void StatePlay::MapGenerate(unsigned int maxTunnel, unsigned int maxLength) {
 				lastDirection = randDirection;
 			}
 		}
-
+		
 		switch (maxTunnel) {
-		case 20:
-		case 40:
-		case 60:
+		case (MAP_MAX_TUNNEL-5) / 3:
+		case (MAP_MAX_TUNNEL - 5) / 3 *2:
+		case (MAP_MAX_TUNNEL - 5) / 3 *3:
 			m_Map[currPosX][currPosY] = KEY_ROOM;
 			break;
 		}

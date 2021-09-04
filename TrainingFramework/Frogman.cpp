@@ -27,7 +27,7 @@ Frogman::Frogman(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	isEnemyCollision = true;
 
 	atkDuration = 1.3f;
-	m_MOVESPEED = 1.5f;
+	m_MOVESPEED = 3.5f;
 
 	if (m_HpMob != NULL)
 	{
@@ -50,13 +50,13 @@ void Frogman::UniqueUpdate(float frameTime)
 	float totalCD = 5.0f;
 	//move behavior
 
-	m_MOVESPEED = 1.5f;
+	
 
 	if (m_cState == CS_IDLE || m_cState == CS_MOVE)
 	{
-		if (distance < 10.0f)
+		if (distance < 9.0f)
 		{
-			if (currCD <= 0.0f) {
+			/*if (currCD <= 0.0f) {
 				if (distance >= 0.9f)
 				{
 					if (distance > 2.0f) m_MOVESPEED = 1.5f;
@@ -80,7 +80,12 @@ void Frogman::UniqueUpdate(float frameTime)
 				if (StatePlay::GetInstance()->m_Player->GetPosX() > GetPosX()) m_isFacingLeft = false;
 				else m_isFacingLeft = true;
 				currCD -= frameTime;
-			}
+			}*/
+
+
+
+
+			KeepDistance(delta);
 		}
 		else SetCS(CS_IDLE);
 

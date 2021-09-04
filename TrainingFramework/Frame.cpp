@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "../Utilities/TGA.h"
 #include "Frame.h"
-
+#include "define.h"
 Frame::Frame() {
 
 }
@@ -43,8 +43,8 @@ void Frame::Unbind() {
 }
 void Frame::ReInitMiniMapFrame(RoomType* roomType, Vector2 size)
 {
-	int iPixelsPerWidthRoom = 5,
-		iPixelsPerHeightRoom = 5;
+	int iPixelsPerWidthRoom = 100/(MAP_WIDTH-2),//5
+		iPixelsPerHeightRoom = 100/(MAP_HEIGHT-2);//5
 	int iW = iPixelsPerWidthRoom * (int)size.x,
 		iH = iPixelsPerHeightRoom * (int)size.y;
 	int iBpp = 32;

@@ -22,6 +22,7 @@
 #include "Decorations.h"
 #include "Effect.h"
 
+#include "define.h"
 enum class FloorIdentify {
 	FLOOR_1_ID,
 	FLOOR_2_ID,
@@ -32,7 +33,7 @@ class StatePlay :public StateBase<StatePlay>
 {
 public:
 	
-	RoomType m_Map[22][22];
+	RoomType m_Map[MAP_HEIGHT][MAP_WIDTH];
 	
 	//DATA
 	std::vector<Object*> m_ObjectList;

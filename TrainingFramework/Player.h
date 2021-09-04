@@ -42,7 +42,7 @@ public:
 	bool m_isUseMelee = false;
 	bool m_isUseDash = false;
 
-	float m_regenCD = 3.0f;
+	float m_regenCD = 5.0f;
 	float m_regenCurrCD = 0.0f;
 
 	PlayerState m_pState=P_CS;

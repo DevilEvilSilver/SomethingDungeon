@@ -34,7 +34,7 @@ Enemy::Enemy(std::string prefabID, Vector2 roomID, Matrix translationMatrix)
 	
 	m_HpMob = new EnemyHpMob(roomID, translationMatrix, m_maxHP, m_currHP);
 	
-	currCD = 1.25f;
+	currCD = 0.5f;
 }
 Enemy::~Enemy() {
 	delete m_HpMob;
