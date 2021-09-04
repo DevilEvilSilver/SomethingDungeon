@@ -18,6 +18,8 @@ public:
 	GLint timeUniform;
 	GLint fadeUniform;
 	GLint wvpUniform;
+	GLint playerPosXUniform;
+	GLint playerPosYUniform;
 
 	Shaders(unsigned int resourceID, char * fileVertexShader, char * fileFragmentShader, bool isDepthTest, bool isCulling, bool isBlend);
 	int Init(char * fileVertexShader, char * fileFragmentShader);

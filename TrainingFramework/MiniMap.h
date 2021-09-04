@@ -16,6 +16,7 @@ private:
     Widget* m_MiniMapWidget;
     Widget* m_BoundWidget;
     Widget* m_PlayerWidget;
+    Vector2 m_playerPos;
 public:
     MiniMap(Matrix translation, RoomType* mapType, Camera* camera, Player* player);
     ~MiniMap();

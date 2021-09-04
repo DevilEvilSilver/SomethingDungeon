@@ -1168,8 +1168,8 @@ ID init
 FILE ../Resources/Animation/key/static/sprite.txt
 
 ID minimap
-MODEL 0
-SHADER 0
+MODEL 1
+SHADER 3
 TYPE RECT
 COORD 0.0, 0.0, 1, 0.6
 SIZE 2.5 x 2.5
@@ -1350,11 +1350,14 @@ ID init
 FILE ../Resources/Animation/EnemyHpMob/bound/sprite.txt
 
 
-#MODEL_GEN 1
+#MODEL_GEN 2
 ID 0
 SIZE 1.0 x 1.0
 
-#SHADER_COUNT 3
+ID 1
+SIZE 50.0 x 50.0
+
+#SHADER_COUNT 4
 ID 0
 VS ../Resources/Shaders/Sprite.vs
 FS ../Resources/Shaders/Sprite.fs
@@ -1374,6 +1377,14 @@ GL_BLEND 1
 ID 2
 VS ../Resources/Shaders/Logo.vs
 FS ../Resources/Shaders/Logo.fs
+STATE_COUNT 3
+GL_DEPTH_TEST 0
+GL_CULL_FACE 0
+GL_BLEND 1
+
+ID 3
+VS ../Resources/Shaders/Minimap.vs
+FS ../Resources/Shaders/Minimap.fs
 STATE_COUNT 3
 GL_DEPTH_TEST 0
 GL_CULL_FACE 0

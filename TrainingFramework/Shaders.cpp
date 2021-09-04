@@ -32,6 +32,13 @@ int Shaders::Init(char * fileVertexShader, char * fileFragmentShader)
 	timeUniform = glGetUniformLocation(program, "u_time");
 	fadeUniform = glGetUniformLocation(program, "u_fade");
 	wvpUniform = glGetUniformLocation(program, "u_wvp");
+	playerPosXUniform = glGetUniformLocation(program, "u_playerPosX");
+	playerPosYUniform = glGetUniformLocation(program, "u_playerPosY");
+
+
+
+
+	
 
 	return 0;
 }
