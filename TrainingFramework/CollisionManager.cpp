@@ -65,8 +65,8 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 	if (status && frameTime)
 	{
 		float dx = 0, dy = 0;
-		Vector2 C1(x1Current + w1 / 2, y1Current - h1 / 2);
-		Vector2 C2(x2 + w2 / 2, y2 - h2 / 2);
+		Vector2 C1(x1Current + w1 / 2.0f, y1Current - h1 / 2.0f);
+		Vector2 C2(x2 + w2 / 2.0f, y2 - h2 / 2.0f);
 		Vector2 tempDis(x1 - x1Current, y1 - y1Current);
 		Vector2 tempC1 = C1 + tempDis;
 		Vector2 tempDisC1C2 = tempC1 - C2;
@@ -79,15 +79,15 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 			tempDisC1C2 = tempC1 - C2;
 			if ((abs(tempDisC1C2.x) > ((w1 + w2) / 2) || abs(tempDisC1C2.y) > ((h1 + h2) / 2)))
 				break;
-			if (i == 90)
+			if (i == 30)
 			{
 				tempDis.x = v1x * frameTime;
 				tempDis.y = v1y * frameTime;
-				if (abs(C1.x - C2.x) < ((w1 + w2) / 2)) {
-					tempDis.y = 0;
+				if (abs(C1.x - C2.x) <= ((w1 + w2) / 2)) {
+					tempDis.y = 0.0f;
 				}
-				if (abs(C1.y - C2.y) < ((h1 + h2) / 2)) {
-					tempDis.x = 0;
+				if (abs(C1.y - C2.y) <= ((h1 + h2) / 2)) {
+					tempDis.x = 0.0f;
 				}
 
 				break;

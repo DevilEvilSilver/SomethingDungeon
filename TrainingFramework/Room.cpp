@@ -185,8 +185,8 @@ void Room::Floor2Generate() {
 			AddEnemy(FROGMAN);
 
 		
-		if (rand() % 5 <= 3)	GenerateDeco();
-		if (rand() % 5 <= 3) GenerateDeco();
+		if (rand() % 5 <= 2)	GenerateDeco();
+		//if (rand() % 5 <= 3) GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{
@@ -286,8 +286,8 @@ void Room::Floor3Generate() {
 			//Skeleton* enemy = new Skeleton(ENEMY, m_RoomID, translation);
 
 		}
-		if (rand() % 5 <= 3)	GenerateDeco();
-		if (rand() % 5 <= 1)	GenerateDeco();
+		if (rand() % 5 <= 2)	GenerateDeco();
+		//if (rand() % 5 <= 1)	GenerateDeco();
 	}
 	else if (m_RoomType == START)
 	{
@@ -357,12 +357,12 @@ void Room::FloorBossGenerate() {
 
 void Room::GenerateDeco()
 {
-	int i = rand() % 3 + 1;
+	int i = rand() % 2 + 1;
 	//i = 2;
 
 	switch (StatePlay::GetInstance()->m_floorID) {
 	case FloorIdentify::FLOOR_2_ID:
-		i *= 2;
+		//i *= 2;
 		while (i > 0)
 		{
 			int randomNum = rand() % 100 + 1;
@@ -432,7 +432,7 @@ void Room::GenerateDeco()
 			}
 			else AddDeco(F2_ROCK);
 
-			if (rand() % 10 <= 7)
+			if (rand() % 10 <= 5)
 			{
 				randomNum = rand() % 100 + 1;
 				if (randomNum >= 75)

@@ -203,9 +203,10 @@ void Character::UpdatePosition(float speed, float frameTime)
 		SetVelocityX(speed * m_moveDir.x);
 	
 		//check collision
-		if (isWallCollision == true) WallCollision(frameTime);
+		
 		if (isPlayerCollision == true) PlayerCollision(frameTime);
 		if (isEnemyCollision == true) EnemyCollision(frameTime);
+		if (isWallCollision == true) WallCollision(frameTime);
 
 		//change position
 		SetPosX(GetPosX() + m_fVx * frameTime);

@@ -1026,13 +1026,13 @@ void StatePlay::ClearInRange()
 
 void StatePlay::UpdateRoomID() {
 	if (!CollisionManager::CheckCollision(m_Player, GetRoomByID(m_Player->m_RoomID, m_RoomList))) {
-		for (unsigned int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
-			if (i > MAP_WIDTH - 1)
-				continue;
+		for (int i = m_Player->m_RoomID.x - 1; i <= m_Player->m_RoomID.x + 1; i++) {
+			/*if (i > MAP_WIDTH - 1)
+				continue;*/
 
 			for (unsigned int j = m_Player->m_RoomID.y - 1; j <= m_Player->m_RoomID.y + 1; j++) {
-				if (j > MAP_HEIGHT - 1)
-					continue;
+				/*if (j > MAP_HEIGHT - 1)
+					continue;*/
 				if (CollisionManager::CheckCollision(m_Player, GetRoomByID(Vector2(i, j), m_RoomList))) {
 					m_Player->m_RoomID = Vector2(i, j);
 					break;
@@ -1046,13 +1046,13 @@ void StatePlay::UpdateRoomID() {
 
 		{
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList))) 
-			for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
-				if (i > MAP_WIDTH - 1)
-					continue;
+			for (int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+				/*if (i > MAP_WIDTH - 1)
+					continue;*/
 
-				for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
-					if (j > MAP_HEIGHT - 1)
-						continue;
+				for (int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+					/*if (j > MAP_HEIGHT - 1)
+						continue;*/
 						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
 							obj->m_RoomID = Vector2(i, j);
 							break;
@@ -1065,13 +1065,13 @@ void StatePlay::UpdateRoomID() {
 	for (auto& obj : m_InRangeSkill) {
 		{
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
-				for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
-					if (i > MAP_WIDTH - 1)
-						continue;
+				for (int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+					/*if (i > MAP_WIDTH - 1)
+						continue;*/
 
-					for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
-						if (j > MAP_HEIGHT - 1)
-							continue;
+					for (int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+						/*if (j > MAP_HEIGHT - 1)
+							continue;*/
 						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
 							obj->m_RoomID = Vector2(i, j);
 							break;
@@ -1085,13 +1085,13 @@ void StatePlay::UpdateRoomID() {
 		{
 			if (strcmp(typeid(*obj).name(), "class Arrow") == 0)
 			if (!CollisionManager::CheckCollision(obj, GetRoomByID(obj->m_RoomID, m_RoomList)))
-				for (unsigned int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
-					if (i > MAP_WIDTH - 1)
-						continue;
+				for (int i = obj->m_RoomID.x - 1; i <= obj->m_RoomID.x + 1; i++) {
+					/*if (i > MAP_WIDTH - 1)
+						continue;*/
 
-					for (unsigned int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
-						if (j > MAP_HEIGHT - 1)
-							continue;
+					for (int j = obj->m_RoomID.y - 1; j <= obj->m_RoomID.y + 1; j++) {
+						/*if (j > MAP_HEIGHT - 1)
+							continue;*/
 						if (CollisionManager::CheckCollision(obj, GetRoomByID(Vector2(i, j), m_RoomList))) {
 							obj->m_RoomID = Vector2(i, j);
 							break;
@@ -1353,7 +1353,6 @@ void StatePlay::AddSkill(Skill* skill)
 }
 
 bool StatePlay::CheckInRange(Vector2 roomID,int delta) {
-
 	
 	Vector2 currRoom = m_Player->m_RoomID;
 	if (roomID.x < currRoom.x - delta || roomID.x > currRoom.x + delta ||
