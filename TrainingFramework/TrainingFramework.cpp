@@ -44,8 +44,8 @@ void Draw(ESContext* esContext)
 	StateManager::GetInstance()->Render();
 
 	//fps counter
-	//FPSCountText->setText(std::to_string((unsigned int)timer.GetFPS()));
-	//Renderer::GetInstance()->DrawText2(FPSCountText);
+	/*FPSCountText->setText(std::to_string((unsigned int)timer.GetFPS()));
+	Renderer::GetInstance()->DrawText2(FPSCountText);*/
 
 	//fps
 	end = GetTickCount();

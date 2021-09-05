@@ -76,19 +76,33 @@ bool CollisionManager::CheckRectRectCollision(Object* dynamicObj, Object* static
 			i++;
 			tempDis = tempDis * 0.9f;
 			tempC1 = C1 + tempDis;
-			tempDisC1C2 = tempC1 - C2;
-			if ((abs(tempDisC1C2.x) > ((w1 + w2) / 2) || abs(tempDisC1C2.y) > ((h1 + h2) / 2)))
-				break;
+			//tempDisC1C2 = tempC1 - C2;
+			/*if ((abs(tempDisC1C2.x) > ((w1 + w2) / 2) || abs(tempDisC1C2.y) > ((h1 + h2) / 2)))
+				break;*/
+			x1 = tempC1.x - w1 / 2.0f;
+			x2 = C2.x - w2 / 2.0f;
+			y1 = tempC1.y + h1 / 2.0f;
+			y2 = C2.y + h2 / 2.0f;
+
+			if (x1 <= x2 + w2 &&
+				x2 <= x1 + w1 &&
+				y1 >= y2 - h2 &&
+				y2 >= y1 - h1)
+			{
+				status = true;
+			}
+			else break;
+
 			if (i == 30)
 			{
-				tempDis.x = v1x * frameTime;
-				tempDis.y = v1y * frameTime;
-				if (abs(C1.x - C2.x) <= ((w1 + w2) / 2)) {
-					tempDis.y = 0.0f;
-				}
-				if (abs(C1.y - C2.y) <= ((h1 + h2) / 2)) {
-					tempDis.x = 0.0f;
-				}
+				/*tempDis.x = v1x * frameTime;
+				tempDis.y = v1y * frameTime;*/
+				//if (abs(C1.x - C2.x) <= ((w1 + w2) / 2)) {
+				tempDis.y = 0.0f;
+				//}
+				//if (abs(C1.y - C2.y) <= ((h1 + h2) / 2)) {
+				tempDis.x = 0.0f;
+				//}
 
 				break;
 			}
