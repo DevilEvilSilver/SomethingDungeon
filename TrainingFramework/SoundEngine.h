@@ -36,5 +36,5 @@ public:
 
 	int Play(int soundID, float volume, float speed, bool isLoop);
 
-
+	void ResetInstance();
 };

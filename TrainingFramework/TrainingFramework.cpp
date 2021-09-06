@@ -106,7 +106,7 @@ void CleanUp()
 {
 	StateManager::GetInstance()->ResetInstance();
 	InputManager::GetInstance()->ResetInstance();
-	SoundEngine::GetInstance()->ResetInstance();
+	SoundEngine::GetInstance()->ResetInstance2();
 	Renderer::GetInstance()->ResetInstance();
 	ResourceManager::GetInstance()->ResetInstance();
 

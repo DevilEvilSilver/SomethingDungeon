@@ -4,7 +4,6 @@
 #include "SoundEngine.h"
 
 SoundEngine::SoundEngine() {
-
 }
 
 
@@ -150,6 +149,16 @@ int SoundEngine::Play(int soundID, float volume, float speed,bool isLoop)
 		}
 	}
 	return NULL;
+}
+
+void SoundEngine::ResetInstance()
+{
+	for (Sound* s : m_SoundList) {
+		delete s;
+	}
+	m_SoundList.clear();
+
+	//m_soloud.deinit();
 }
 
 void SoundEngine::Stop(int handle)

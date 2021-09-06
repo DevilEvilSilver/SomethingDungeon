@@ -24,6 +24,9 @@ public:
 		s_instance.reset();
 	}
 
+	void ResetInstance2() {
+		s_instance.reset();
+	}
 };
 
 template <class T> std::shared_ptr<T> Singleton<T>::s_instance = nullptr;
