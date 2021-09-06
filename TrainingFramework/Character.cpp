@@ -227,7 +227,7 @@ void Character::WallCollision(float frameTime)
 {
 	for (auto& obj : StatePlay::GetInstance()->m_InRangeRoom) {
 		if (obj->m_RoomType == WALL)
-			CollisionManager::CheckCollision(this, obj, frameTime);
+			CollisionManager::CheckRectRectCollision2(this, obj, frameTime);
 	}
 
 	for (auto& obj : StatePlay::GetInstance()->m_InRangeDecoration) {
